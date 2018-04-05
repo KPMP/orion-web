@@ -1,0 +1,31 @@
+#outerContainer {
+	#navbar {
+		margin-left: -30px;
+		margin-right: -30px;
+	}
+
+	#content {
+		padding-top: 15px;
+		margin-right: 15px;
+		form {
+			label {
+				font-weight: 600;
+				width: 175px;
+				padding-right: 15px;
+			}
+		}
+	}
+
+	.dropzone {
+	    border-radius: 5px;
+	    background-color: #E1E1E1;
+	    border: 2px dashed #C7C7C7;
+	    height: 100px;
+	    width: 500px;
+	}
+
+	#uploadStatus {
+		border: 2px dashed #C7C7C7;
+	}
+}
+
