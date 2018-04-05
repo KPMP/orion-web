@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WholeSlideImageForm from './UploadForms/WholeSlideImageForm';
 
 class UploadPage extends Component {
 	
@@ -13,7 +14,9 @@ class UploadPage extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col-sm-8"></div>
+					<div className="col-sm-8">
+						<WholeSlideImageForm/>
+					</div>
 					<div className="col-sm-4">status</div>
 				</div>
 			HI</div>);
