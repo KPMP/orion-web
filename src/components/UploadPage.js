@@ -19,7 +19,7 @@ class UploadPage extends Component {
 					</div>
 					<div className="col-sm-4">status</div>
 				</div>
-			HI</div>);
+			</div>);
 	}
 }
 
