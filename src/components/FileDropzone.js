@@ -6,12 +6,12 @@ class FileDropzone extends Component {
 	
 	render() {
 		var componentConfig = {
-		    iconFiletypes: ['.jpg', '.png', '.gif'],
-		    showFiletypeIcon: true,
-		    postUrl: '/uploadHandler'
+		    postUrl: '/'
 		};
 		return (
-			<DropzoneComponent config={componentConfig} />
+			<DropzoneComponent config={componentConfig} >
+				<div className="dz-message">Drag and drop, or click to browse.</div>
+			</DropzoneComponent>
         );
 	}
 }
