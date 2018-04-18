@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Dropzone from 'react-dropzone';
 
 class FileDropzone extends Component {
@@ -11,7 +10,7 @@ class FileDropzone extends Component {
 			<div>
 				<Dropzone
 					name={field.input.name}
-					onDrop={( filesToUpload, e ) => {console.log(filesToUpload); field.input.onChange(filesToUpload)}}>
+					onDrop={( filesToUpload, e ) => {field.input.onChange(filesToUpload)}}>
 					<div>Try dropping some files here, or click to select files to upload.</div>
 				</Dropzone>
 			 	{field.meta.touched && field.meta.error &&

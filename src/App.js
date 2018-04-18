@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UploadPage from './components/UploadPage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import appReducer from './reducers';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';

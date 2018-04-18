@@ -21,11 +21,9 @@ class UploadPage extends Component {
 							<div className="col-sm-6">
 								<UploadFormContainer/>
 							</div>
-							<div className="col-sm-6" id="uploadStatus">Upload Status</div>
 						</div>
 					</div>
 				</div>
-				
 			</div>);
 	}
 }
