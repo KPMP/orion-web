@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import UploadPage from './components/UploadPage';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import loadedState from './initialState';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+
+const initialState = (sessionStorage["redux-store"]) ?
+    JSON.parse(sessionStorage["redux-store"]) :
+    loadedState;
+
+let store = applyMiddleware(thunk)(createStore)(rootReducer, initialState);
+const saveState = () => {
+  sessionStorage["redux-store"] = JSON.stringify(store.getState());
+};
+
+store.subscribe(function(){console.log(store.getState())});
+store.subscribe(saveState);
+window.store = store;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+    		<Provider store={store}>
+    			<UploadPage/>
+    		</Provider>
     );
   }
 }
