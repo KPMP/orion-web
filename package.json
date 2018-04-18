@@ -15,10 +15,12 @@
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
+    "react-dropzone": "^4.2.9",
     "react-dropzone-component": "^3.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-form": "^7.3.0"
+    "redux-form": "^7.3.0",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start-js": "react-scripts start",
