@@ -10,11 +10,14 @@ export const updateUploadResponse = (response) => {
 export const uploadFile = (data) => {
     let url = "http://localhost:3030/upload";
     let body = new FormData();
-    console.log(data);
+    //console.log(data);
     Object.keys(data).forEach(( key ) => {
-        body.append(key, data[ key ]);
+        if (key === "files") {
+            data[ key ].forEach((file) => body.append("files", file))
+        } else {
+            body.append(key, data[ key ]);
+        }
     });
-    console.log('POST', body, data);
     return (dispatch) => {
         fetch(url, {
             method: 'POST',

@@ -4,24 +4,26 @@ import Dropzone from 'react-dropzone';
 
 class FileDropzone extends Component {
 
-	onChange(files) {
-		if (this.props.input) {
-			const {input: {onChange}} = this.props;
-			onChange(files[0]);
-		}
-		else if(this.props.onChange){
-			this.props.onChange(files[0]);
-		}
-		else{
-			console.warn('redux-form-dropzone => Forgot to pass onChange props ?');
-		}
-	}
-
 	render() {
+		let field = this.props;
+		let files = this.props.input.value;
 		return (
-			<Dropzone onDrop={ this.onChange } {...this.props} />
-		)
-	}
+			<div>
+				<Dropzone
+					name={field.input.name}
+					onDrop={( filesToUpload, e ) => {console.log(filesToUpload); field.input.onChange(filesToUpload)}}>
+					<div>Try dropping some files here, or click to select files to upload.</div>
+				</Dropzone>
+			 	{field.meta.touched && field.meta.error &&
+					<span className="error">{field.meta.error}</span> }
+			 	{files && Array.isArray(files) && (
+					 <ul>
+					  { files.map((file, i) => <li key={i}>{file.name}</li>) }
+					 </ul>
+			 	)}
+			</div>
+		);
+	};
 }
 
 export default FileDropzone;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WholeSlideImageFormContainer from './UploadForms/WholeSlideImageFormContainer';
+import UploadFormContainer from './UploadForms/UploadFormContainer';
 
 class UploadPage extends Component {
 	
@@ -19,7 +19,7 @@ class UploadPage extends Component {
 					<div className="container-fluid" id="content">
 						<div className="row">
 							<div className="col-sm-6">
-								<WholeSlideImageFormContainer/>
+								<UploadFormContainer/>
 							</div>
 							<div className="col-sm-6" id="uploadStatus">Upload Status</div>
 						</div>

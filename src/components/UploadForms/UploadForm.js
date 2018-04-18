@@ -1,39 +1,14 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import FileDropzone from '../FileDropzone';
-//import Dropzone from 'react-dropzone';
 
-class WholeSlideImageForm extends Component {
-
-	//renderDropzoneInput = (field) => {
-	//	const files = field.input.value;
-	//	console.log(field.input.value);
-	//	return (
-	//		<div>
-	//			<Dropzone
-	//				name={field.name}
-	//				onDrop={( filesToUpload, e ) => {console.log(filesToUpload); field.input.onChange(filesToUpload)}}
-	//			>
-	//				<div>Try dropping some files here, or click to select files to upload.</div>
-	//			</Dropzone>
-     // {field.meta.touched &&
-	//  field.meta.error &&
-	//  <span className="error">{field.meta.error}</span>}
-     // {files && Array.isArray(files) && (
-	//	  <ul>
-     //     { files.map((file, i) => <li key={i}>{file.name}</li>) }
-	//	  </ul>
-	//  )}
-	//		</div>
-	//	);
-	//};
+class UploadForm extends Component {
 
 	onSubmit = (data) => {
-		console.log(data);
 		this.props.handleUpload(data);
 	};
 
-		render() {
+	render() {
 		const { handleSubmit } = this.props;
 		return (
 			<form onSubmit={handleSubmit(this.onSubmit)} name="fileUploadForm">
@@ -56,10 +31,10 @@ class WholeSlideImageForm extends Component {
 					<Field name="lastName" component="input" type="text" placeholder="Last Name"/>
 				</div>
 				<div>
-		        		<label>First Name</label>
-	        			<Field name="firstName" component="input" type="text" placeholder="First Name"/>
-		        	</div>
-	        		<div><label>WSI File Format</label>
+						<label>First Name</label>
+						<Field name="firstName" component="input" type="text" placeholder="First Name"/>
+					</div>
+					<div><label>WSI File Format</label>
 					<Field name="fileFormat" component="select">
 						<option value="Aperio">Aperio / Leica SVS format</option>
 						<option value="Phillips">Phillips iSyntax format</option>
@@ -137,18 +112,17 @@ class WholeSlideImageForm extends Component {
 					</Field>
 				</div>
 				<div>
-					<Field
-						name="files"
-						component={FileDropzone}
-						{...this.props.files}
-					/>
+					<Field name="files" component={FileDropzone} />
 				</div>
-				<button type="submit">Submit</button>
+				<div>
+					{this.props.uploadResponse.message}
+				</div>
+				<input type="Submit"/>
 			</form>
 		);
 	}
 }
 
 export default reduxForm({
-  form: 'wholeSlideImageForm' // a unique identifier for this form
-})(WholeSlideImageForm);
+  form: 'fileUploadForm'
+})(UploadForm);

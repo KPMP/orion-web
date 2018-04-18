@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { uploadFile } from '../../actions/UploadForm/uploadFormAction';
-import WholeSlideImageForm from './WholeSlideImageForm';
+import UploadForm from './UploadForm';
 
 const mapStateToProps = (state, props) =>
     ({
-
+        uploadResponse: state.uploadResponse
     });
 
 const mapDispatchToProps = (dispatch, props) =>
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch, props) =>
         }
     });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WholeSlideImageForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UploadForm);

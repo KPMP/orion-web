@@ -1,4 +1,6 @@
 {
-  "uploadResponse": {},
+  "uploadResponse": {
+    "message": ""
+  },
   "fileFormat": ""
 }
