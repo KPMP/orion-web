@@ -4,7 +4,6 @@ class FileList extends Component {
 
     render() {
         let fileList = this.props.files.map((file, i) => {
-            console.log(file)
             return <tr key={i}><td>{file.fileName}</td><td>{file.description}</td></tr>
         });
         return (
