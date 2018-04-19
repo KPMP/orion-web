@@ -3,5 +3,7 @@
     "message": ""
   },
   "fileFormat": "",
-  "filesToUpload": []
+  "filesToUpload": [],
+  "fileList": [],
+  "fileDescription": "Please enter a file description"
 }

@@ -36,9 +36,13 @@ class UploadTab extends Component {
         let files = uploaderDropzone.methods.getUploads();
         files.forEach((file) => {
             uploaderFinal.methods.addFiles([uploaderDropzone.methods.getFile(file.id)]);
-            uploaderFinal.methods.setParams({description: "file description"}, file.id);
+            uploaderFinal.methods.setParams({description: this.props.fileDescription}, file.id);
+            this.props.appendToFileList(file.id, file.name, this.props.fileDescription);
         });
-        this.props.updateFilesToUpload(uploaderFinal.methods.getUploads());
+    };
+
+    handleFileDescriptionChange = (event) => {
+        this.props.updateFileDescription(event.target.value);
     };
 
     render() {
@@ -56,10 +60,11 @@ class UploadTab extends Component {
                             </TabPanel>
                             <TabPanel>
                                 <div>
+                                    <h3>Select File(s)</h3>
                                     <Gallery uploader={ uploaderDropzone } />
                                     <div>
                                         <label htmlFor="fileDescription">Description</label>
-                                        <textarea cols="63" row="6" defaultValue="Please describe this file" id="fileDescription" name="fileDescription"></textarea>
+                                        <textarea cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription">{this.props.fileDescription}</textarea>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-12 text-center">
@@ -68,7 +73,7 @@ class UploadTab extends Component {
                                     </div>
                                     <div>
                                         <span>Attached Files</span>
-                                        <FileList files={this.props.filesToUpload}/>
+                                        <FileList files={this.props.fileList} />
                                     </div>
                                 </div>
                                 <hr/>

@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
 import { filesToUpload } from './actions/UploadForm/filesToUploadReducer';
+import { fileDescription } from './actions/UploadForm/fileDescriptionReducer';
+import { fileList } from './actions/UploadForm/fileListReducer';
+
 
 import actionNames from './actions/actionNames';
 import loadedState from './initialState';
@@ -11,6 +14,8 @@ const appReducer = combineReducers({
     uploadResponse,
     form: formReducer,
     filesToUpload,
+    fileDescription,
+    fileList
 });
 
 const rootReducer = (state, action) => {
