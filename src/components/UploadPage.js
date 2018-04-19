@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import UploadFormContainer from './UploadForms/UploadFormContainer';
+import UploadTabContainer from './UploadForms/UploadTabContainer';
+
 
 class UploadPage extends Component {
 	
@@ -16,13 +18,7 @@ class UploadPage extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="container-fluid" id="content">
-						<div className="row">
-							<div className="col-sm-6">
-								<UploadFormContainer/>
-							</div>
-						</div>
-					</div>
+					<UploadTabContainer/>
 				</div>
 			</div>);
 	}
