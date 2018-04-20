@@ -14,6 +14,9 @@ const uploader = new FineUploaderTraditional({
         },
         request: {
             endpoint: 'http://localhost:3030/upload'
+        },
+        retry: {
+            enableAuto: false
         }
     }
 });
@@ -38,8 +41,10 @@ class UploadTab extends Component {
         console.log('files', files);
 
         if (files.length) {
+            var file = files.pop();
             uploader.methods.cancelAll();
-            this.props.appendToFileList(files.pop(), this.props.fileDescription);
+            file.description = this.props.fileDescription;
+            this.props.appendToFileList(file);
             this.props.updateFileDescription("");
             return;
         }
@@ -49,6 +54,17 @@ class UploadTab extends Component {
 
     handleFileDescriptionChange = (event) => {
         this.props.updateFileDescription(event.target.value);
+    };
+
+    processUpload = () => {
+        var files = this.props.fileList.map((file) => {
+            return file.file;
+        });
+        console.log('files', files);
+        uploader.methods.reset();
+        uploader.methods.addFiles(files);
+        console.log(uploader.methods.getUploads());
+        uploader.methods.uploadStoredFiles();
     };
 
     render() {
@@ -98,7 +114,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={() => uploader.methods.uploadStoredFiles()}>Upload</Button>
+                                <Button type="submit" bsStyle="primary" onClick={this.processUpload}>Upload</Button>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

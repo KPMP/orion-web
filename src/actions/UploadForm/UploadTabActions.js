@@ -14,9 +14,9 @@ export const updateFileDescription = (description) => {
     }
 };
 
-export const appendToFileList = (file, fileDescription) => {
+export const appendToFileList = (file) => {
     return {
         type: actionNames.APPEND_TO_FILE_LIST,
-        payload: {file: file, description: fileDescription}
+        payload: file
     }
 };
