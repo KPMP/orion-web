@@ -10,7 +10,6 @@ const cacheStore = window.sessionStorage.getItem("redux-store");
 const initialState = cacheStore ?
     JSON.parse(cacheStore) :
     loadedState;
-
 const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState);
 const saveState = () => {
   window.sessionStorage["redux-store"] = JSON.stringify(store.getState());
