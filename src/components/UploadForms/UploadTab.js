@@ -64,7 +64,7 @@ class UploadTab extends Component {
                                     <Gallery uploader={ uploaderDropzone } />
                                     <div>
                                         <label htmlFor="fileDescription">Description</label>
-                                        <textarea cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription">{this.props.fileDescription}</textarea>
+                                        <textarea cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" defaultValue={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-12 text-center">

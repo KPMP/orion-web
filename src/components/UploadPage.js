@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UploadFormContainer from './UploadForms/UploadFormContainer';
+// import UploadFormContainer from './UploadForms/UploadFormContainer';
 import UploadTabContainer from './UploadForms/UploadTabContainer';
 
 
