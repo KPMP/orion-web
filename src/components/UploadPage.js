@@ -18,7 +18,7 @@ class UploadPage extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<UploadTabContainer/>
+					<UploadTabContainer />
 				</div>
 			</div>);
 	}

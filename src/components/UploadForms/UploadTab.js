@@ -1,44 +1,50 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers'
+import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 
-const uploaderDropzone = new FineUploaderTraditional({
+const uploader = new FineUploaderTraditional({
     options: {
-        autoUpload: false
-    }
-});
-
-const uploaderFinal = new FineUploaderTraditional({
-    options: {
+        autoUpload: false,
         chunking: {
             enabled: true
         },
-        deleteFile: {
-            enabled: false,
-            endpoint: '/uploads'
-        },
         request: {
             endpoint: 'http://localhost:3030/upload'
-        },
-        retry: {
-            enableAuto: false
-        },
-        autoUpload: false
+        }
     }
 });
 
 class UploadTab extends Component {
 
-    moveFiles = () => {
-        let files = uploaderDropzone.methods.getUploads();
-        files.forEach((file) => {
-            uploaderFinal.methods.addFiles([uploaderDropzone.methods.getFile(file.id)]);
-            uploaderFinal.methods.setParams({description: this.props.fileDescription}, file.id);
-            this.props.appendToFileList(file.id, file.name, this.props.fileDescription);
+    componentDidMount() {
+        uploader.on('submit', (id, name) => {
+            if (uploader.methods.getUploads({
+                    status: qq.status.SUBMITTING
+                }).length > 1) {
+                alert("Please upload and attach one file at a time.");
+                uploader.methods.cancelAll();
+            }
         });
+    }
+
+    attachFiles = () => {
+        var files = uploader.methods.getUploads({
+            status: qq.status.SUBMITTED
+        });
+        console.log('files', files);
+
+        if (files.length) {
+            uploader.methods.cancelAll();
+            this.props.appendToFileList(files.pop(), this.props.fileDescription);
+            this.props.updateFileDescription("");
+            return;
+        }
+        
+        alert("Please add another file to attach.");
     };
 
     handleFileDescriptionChange = (event) => {
@@ -61,14 +67,14 @@ class UploadTab extends Component {
                             <TabPanel>
                                 <div>
                                     <h3>Select File(s)</h3>
-                                    <Gallery uploader={ uploaderDropzone } />
-                                    <div>
+                                    <Gallery fileInput-multiple={ false } uploader={ uploader } />
+                                    <div className="form-group">
                                         <label htmlFor="fileDescription">Description</label>
-                                        <textarea cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" defaultValue={this.props.fileDescription}></textarea>
+                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please enter a file description..." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-12 text-center">
-                                            <Button type="submit" bsStyle="primary" onClick={() => this.moveFiles()}>Attach</Button>
+                                            <Button type="submit" bsStyle="primary" onClick={() => this.attachFiles()}>Attach</Button>
                                         </div>
                                     </div>
                                     <div>
@@ -83,16 +89,16 @@ class UploadTab extends Component {
                                             <Button bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
                                         </div>
                                         <div className="col-md-6 pull-right">
-                                            <Button type="submit" bsStyle="primary">Back</Button>
+                                            <Button bsStyle="primary">Back</Button>
                                         &nbsp;
-                                            <Button type="submit" bsStyle="primary">Next</Button>
+                                            <Button bsStyle="primary">Next</Button>
 
                                         </div>
                                     </div>
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={() => uploaderFinal.methods.uploadStoredFiles()}>Upload</Button>
+                                <Button type="submit" bsStyle="primary" onClick={() => uploader.methods.uploadStoredFiles()}>Upload</Button>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
