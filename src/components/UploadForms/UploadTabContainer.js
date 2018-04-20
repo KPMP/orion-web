@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateFilesToUpload, updateFileDescription, appendToFileList } from '../../actions/UploadForm/uploadTabActions';
+import { updateFilesToUpload, updateFileDescription, appendToFileList } from '../../actions/UploadForm/UploadTabActions';
 import UploadTab from './UploadTab';
 
 const mapStateToProps = (state, props) =>

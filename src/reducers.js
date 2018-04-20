@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
 import { filesToUpload } from './actions/UploadForm/filesToUploadReducer';
 import { fileDescription } from './actions/UploadForm/fileDescriptionReducer';
 import { fileList } from './actions/UploadForm/fileListReducer';
+import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
 
 
 import actionNames from './actions/actionNames';
@@ -26,4 +26,3 @@ const rootReducer = (state, action) => {
 }
 
 export default rootReducer;
-;

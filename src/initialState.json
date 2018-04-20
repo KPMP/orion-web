@@ -1,9 +1,8 @@
 {
-  "uploadResponse": {
-    "message": ""
-  },
-  "fileFormat": "",
   "filesToUpload": [],
   "fileList": [],
-  "fileDescription": "Please enter a file description"
+  "fileDescription": "Please enter a file description",
+  "uploadResponse": {
+    "message": ""
+  }
 }

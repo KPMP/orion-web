@@ -6,13 +6,14 @@ import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-const initialState = (sessionStorage["redux-store"]) ?
-    JSON.parse(sessionStorage["redux-store"]) :
+const cacheStore = window.sessionStorage.getItem("redux-store");
+const initialState = cacheStore ?
+    JSON.parse(cacheStore) :
     loadedState;
 
-let store = applyMiddleware(thunk)(createStore)(rootReducer, initialState);
+const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState);
 const saveState = () => {
-  sessionStorage["redux-store"] = JSON.stringify(store.getState());
+  window.sessionStorage["redux-store"] = JSON.stringify(store.getState());
 };
 
 store.subscribe(function(){console.log(store.getState())});
