@@ -20,3 +20,22 @@ export const appendToFileList = (file) => {
         payload: file
     }
 };
+
+export const uploadPackageInfo = (data) => {
+    const url = "http://localhost:3030/upload/packageInfo";
+
+    return (dispatch) => {
+        fetch(url, {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+            }
+        )
+            .catch(err => console.error(err));
+    };
+
+};

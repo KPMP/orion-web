@@ -5,6 +5,8 @@ import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
+import UploadPackageInfoForm from './UploadPackageInfoForm';
+
 
 const uploader = new FineUploaderTraditional({
     options: {
@@ -65,6 +67,7 @@ class UploadTab extends Component {
         uploader.methods.addFiles(files);
         console.log(uploader.methods.getUploads());
         uploader.methods.uploadStoredFiles();
+        this.props.processUpload();
     };
 
     render() {
@@ -79,6 +82,7 @@ class UploadTab extends Component {
                                 <Tab>Review Upload</Tab>
                             </TabList>
                             <TabPanel>
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo}/>
                             </TabPanel>
                             <TabPanel>
                                 <div>

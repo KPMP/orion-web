@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import { updateFilesToUpload, updateFileDescription, appendToFileList } from '../../actions/UploadForm/UploadTabActions';
+import { updateFilesToUpload, updateFileDescription, appendToFileList, uploadPackageInfo } from '../../actions/UploadForm/UploadTabActions';
 import UploadTab from './UploadTab';
+import { submit } from 'redux-form'
 
 const mapStateToProps = (state, props) =>
     ({
@@ -19,6 +20,12 @@ const mapDispatchToProps = (dispatch, props) =>
         },
         appendToFileList(fileID, fileName, description) {
             dispatch(appendToFileList(fileID, fileName, description))
+        },
+        processUpload() {
+            dispatch(submit('uploadPackageInfoForm'))
+        },
+        uploadPackageInfo(formData) {
+            dispatch(uploadPackageInfo(formData))
         }
     });
 
