@@ -4,15 +4,10 @@ import { FormControl, ControlLabel } from 'react-bootstrap';
 import { Modal, Button } from 'react-bootstrap';
 
 class UploadPackageInfoForm extends Component {
-
-    onSubmit = (data) => {
-        this.props.uploadPackageInfo(data);
-    };
-
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, onSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.onSubmit)} name="uploadPackageInfoForm">
+            <form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
                 <div>Upload Information</div>
                 <div>
                         <div>

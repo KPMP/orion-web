@@ -28,7 +28,7 @@ const uploader = new FineUploaderTraditional({
 class UploadTab extends Component {
     constructor() {
         super();
-        this.state = { tabIndex: 1 };
+        this.state = { tabIndex: 0 };
     }
 
     componentDidMount() {
@@ -63,6 +63,12 @@ class UploadTab extends Component {
         });
     }
 
+    componentDidUpdate() {
+        if (this.props.storedFiles.length) {
+            console.log(this.props.storedFiles)
+        }
+    }
+
     attachFiles = () => {
         var files = uploader.methods.getUploads({
             status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
@@ -70,7 +76,7 @@ class UploadTab extends Component {
 
         if (files.length) {
             var file = files.pop();
-            file.description = this.props.fileDescription;
+            file.fileMetadata = this.props.fileDescription;
             uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
@@ -85,12 +91,13 @@ class UploadTab extends Component {
     };
 
     processUpload = () => {
-        var files = this.props.fileList.map((file) => {
-            return file.file;
-        });
-        uploader.methods.reset();
-        uploader.methods.addFiles(files);
-        this.props.processUpload(() => uploader.methods.uploadStoredFiles());
+        // var files = this.props.fileList.map((file) => {
+        //     return file.file;
+        // });
+        // uploader.methods.reset();
+        // uploader.methods.addFiles(files);
+        // uploader.methods.uploadStoredFiles();
+        this.props.processUpload();
     };
 
     render() {
@@ -98,14 +105,14 @@ class UploadTab extends Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex: tabIndex })}>
+                        <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex: tabIndex })} forceRenderTabPanel={true}>
                             <TabList>
                                 <Tab>Define Upload</Tab>
                                 <Tab>Attach Files</Tab>
                                 <Tab>Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo}/>
+                                <UploadPackageInfoForm onSubmit={this.props.uploadPackageInfo} uploadPackageInfo={this.props.uploadPackageInfo} />
                             </TabPanel>
                             <TabPanel>
                                 <div>

@@ -7,7 +7,8 @@ const mapStateToProps = (state, props) =>
     ({
         filesToUpload: state.filesToUpload,
         fileDescription: state.fileDescription,
-        fileList: state.fileList
+        fileList: state.fileList,
+        storedFiles: state.storedFiles
     });
 
 const mapDispatchToProps = (dispatch, props) =>
@@ -22,9 +23,11 @@ const mapDispatchToProps = (dispatch, props) =>
             dispatch(appendToFileList(file))
         },
         processUpload() {
+            console.log('processUpload');
             dispatch(submit('uploadPackageInfoForm'))
         },
         uploadPackageInfo(formData) {
+            console.log('uploadPackageInfo');
             dispatch(uploadPackageInfo(formData))
         }
     });

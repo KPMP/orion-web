@@ -14,6 +14,13 @@ export const updateFileDescription = (description) => {
     }
 };
 
+export const uploadStoredFiles = (data) => {
+    return {
+        type: actionNames.UPLOAD_STORED_FILES,
+        payload: data
+    }
+};
+
 export const appendToFileList = (file) => {
     return {
         type: actionNames.APPEND_TO_FILE_LIST,
@@ -30,9 +37,8 @@ export const uploadPackageInfo = (data) => {
             mode: "cors",
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
             .then(res => {
-                console.log(res);
+                dispatch(uploadStoredFiles(res.json()));
             }
         )
             .catch(err => console.error(err));
