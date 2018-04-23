@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
@@ -105,14 +105,15 @@ class UploadTab extends Component {
                                 <hr/>
                                 <div>
                                     <div className="row">
-                                        <div className="col-md-6 pull-left">
-                                            <Button bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+                                        <div className="col-6 float-left">
+                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
                                         </div>
-                                        <div className="col-md-6 pull-right">
-                                            <Button bsStyle="primary">Back</Button>
-                                        &nbsp;
-                                            <Button bsStyle="primary">Next</Button>
-
+                                        <div className="col-6">
+                                        		<ButtonGroup className="float-right">
+                                        			<Button className="btn-outline-dark" >Back</Button>
+                                        			&nbsp;
+                                        			<Button bsStyle="primary">Next</Button>
+                                            	</ButtonGroup>
                                         </div>
                                     </div>
                                 </div>

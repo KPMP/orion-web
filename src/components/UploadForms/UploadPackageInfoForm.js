@@ -27,8 +27,7 @@ class UploadPackageInfoForm extends Component {
 
                             <ControlLabel>Site</ControlLabel>
                         <Field name="institutionName" component={props => <FormControl
-                            componentClass={"select"}
-                           >
+                            componentClass={"select"}>
                             <option selected="" value="- select -">- select -</option>
                             <option value="Broad (Michigan/Broad/Princeton TIS)">Broad (Michigan/Broad/Princeton TIS)</option>
                             <option value="EMBL (UTHSA/EMBL/PNNL/UCSD TIS)">EMBL (UTHSA/EMBL/PNNL/UCSD TIS)</option>
@@ -47,7 +46,22 @@ class UploadPackageInfoForm extends Component {
                             </div>
                                 <div>
                             <ControlLabel>Package Type</ControlLabel>
-                            <Field name="packageType" component={props => <FormControl  type={"text"}/>}/>
+                            <Field name="packageType" component={props => <FormControl
+                                    componentClass={"select"}>
+                                    <option selected="" value="- select -">- select -</option>
+                                    <option value="Sub-segment RNAseq">Sub-segment RNAseq</option>
+                                    <option value="Single-cell RNAseq">Single-cell RNAseq</option>
+                                    <option value="Single-nucleus RNAseq">Single-nucleus RNAseq</option>
+                                    <option value="Bulk RNAseq">Bulk RNAseq</option>
+                                    <option value="DNA Methylation">DNA Methylation</option>
+                                    <option value="Segmental miRNA">Segmental miRNA</option>
+                                    <option value="Multiplex ISH">Multiplex ISH</option>
+                                    <option value="Sub-segmental Proteomics">Sub-segmental Proteomics</option>
+                                    <option value="Near-single-cell Proteomics">Near-single-cell Proteomics</option>
+                                    <option value="3-D tissue imaging">3-D tissue imaging</option>
+                                    <option value="Spatial Metabolomics">Spatial Metabolomics</option>
+                                    <option value="Inflammatory Cells">Inflammatory Cells</option>
+                                    <option value="Other">Other</option></FormControl>}/>
                         </div>
                         <div style={{textAlign: "center", fontWeight:"bold"}}>-OR-</div>
                         <div>
@@ -63,12 +77,12 @@ class UploadPackageInfoForm extends Component {
                             <Field name="experimentDate" component={props => <FormControl  type={"text"}/>}/>
                         </div>
                     </div>
-                <div className="row">
-                    <div className="col-md-6 pull-left">
-                        <Button bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+                <div className="row buttonRow">
+                    <div className="col-6 float-left">
+                        <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
-                    <div className="col-md-6 pull-right">
-                        <Button bsStyle="primary">Next</Button>
+                    <div className="col-6 float-right">
+                        <Button bsStyle="primary" className="float-right">Next</Button>
 
                     </div>
                 </div>
