@@ -51,14 +51,12 @@
 
 
 .fine-uploader-dropzone-container {
-	min-height: 75px !important;
-}
-
-.react-fine-uploader-gallery-file-input-container {
-	display: none !important;
+	min-height: 100px !important;
 }
 
 .react-fine-uploader-gallery-dropzone-content {
-	top: 15% !important;
+	top: 25% !important;
+	text-align: right !important;
+	padding-right: 15px;
 }
 

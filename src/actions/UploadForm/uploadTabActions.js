@@ -1,5 +1,13 @@
 import actionNames from '../actionNames'
 
+export const changeUploadTab = (tabIndex) => {
+	console.log(tabIndex);
+	return {
+		type: actionNames.CHANGE_UPLOAD_TAB,
+		payload: tabIndex
+	}
+}
+
 export const updateFilesToUpload = (files) => {
     return {
         type: actionNames.UPDATE_FILES_TO_UPLOAD,

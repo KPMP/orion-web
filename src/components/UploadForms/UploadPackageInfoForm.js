@@ -11,6 +11,7 @@ class UploadPackageInfoForm extends Component {
 
     render() {
         const { handleSubmit } = this.props;
+        console.log(this.props);
         return (
             <form onSubmit={handleSubmit(this.onSubmit)} name="uploadPackageInfoForm">
                 <div className="modalTitle">Upload Information</div>
@@ -82,7 +83,7 @@ class UploadPackageInfoForm extends Component {
                         <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
                     <div className="col-6 float-right">
-                        <Button bsStyle="primary" className="float-right">Next</Button>
+                        <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)}>Next</Button>
 
                     </div>
                 </div>

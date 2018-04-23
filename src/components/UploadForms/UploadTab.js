@@ -10,7 +10,9 @@ import UploadPackageInfoForm from './UploadPackageInfoForm';
 
 const uploader = new FineUploaderTraditional({
     options: {
-        autoUpload: false,
+        debug: true,
+        autoUpload: true,
+        maxConnections: 3,
         chunking: {
             enabled: true
         },
@@ -28,24 +30,43 @@ class UploadTab extends Component {
     componentDidMount() {
         uploader.on('submit', (id, name) => {
             if (uploader.methods.getUploads({
-                    status: qq.status.SUBMITTING
-                }).length > 1) {
+                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
+            }).length > 1 && this.state.tabIndex === 1) {
                 alert("Please upload and attach one file at a time.");
-                uploader.methods.cancelAll();
+                return false;
             }
+
+            if (this.state.tabIndex === 2) {
+                console.log('submitting to queue...');
+            }
+
+            return true;
+        });
+        uploader.on('submitted', () => {
+            console.log(uploader.methods.getUploads({
+                status: qq.status.SUBMITTED
+            }));
+        });
+        uploader.on('upload', (id, name) => {
+            if (this.state.tabIndex === 2) {
+                uploader.methods.setParams({ description: this.props.fileList[id].description }, id);
+                console.log('uploading...');
+                return true;
+            }
+
+            return { pause: true };
         });
     }
 
     attachFiles = () => {
         var files = uploader.methods.getUploads({
-            status: qq.status.SUBMITTED
+            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
         });
-        console.log('files', files);
 
         if (files.length) {
             var file = files.pop();
-            uploader.methods.cancelAll();
             file.description = this.props.fileDescription;
+            uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
             return;
@@ -62,12 +83,9 @@ class UploadTab extends Component {
         var files = this.props.fileList.map((file) => {
             return file.file;
         });
-        console.log('files', files);
         uploader.methods.reset();
         uploader.methods.addFiles(files);
-        console.log(uploader.methods.getUploads());
-        uploader.methods.uploadStoredFiles();
-        this.props.processUpload();
+        this.props.processUpload(() => uploader.methods.uploadStoredFiles());
     };
 
     render() {
@@ -75,14 +93,14 @@ class UploadTab extends Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs defaultIndex={0}>
+                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)}>
                             <TabList>
                                 <Tab>1: Define Upload</Tab>
                                 <Tab>2: Attach Files</Tab>
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo}/>
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab}/>
                             </TabPanel>
                             <TabPanel>
                                 <div>
@@ -110,9 +128,9 @@ class UploadTab extends Component {
                                         </div>
                                         <div className="col-6">
                                         		<ButtonGroup className="float-right">
-                                        			<Button className="btn-outline-dark" >Back</Button>
+                                        			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
                                         			&nbsp;
-                                        			<Button bsStyle="primary">Next</Button>
+                                        			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
                                             	</ButtonGroup>
                                         </div>
                                     </div>
@@ -125,8 +143,8 @@ class UploadTab extends Component {
                             			</div>
                             			<div className="col-6">
                             				<ButtonGroup className="float-right">
-	                            				<Button className="btn-outline-dark">Back</Button> &nbsp;
-	                            				<Button type="submit" bsStyle="primary" onClick={this.processUpload}>Start Upload</Button>
+	                            				<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(1)}>Back</Button> &nbsp;
+	                            				<Button type="submit" bsStyle="primary" onClick={() => this.processUpload()}>Start Upload</Button>
                             				</ButtonGroup>
                                 		</div>
                                 </div>
