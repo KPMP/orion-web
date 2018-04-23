@@ -10,7 +10,9 @@ import UploadPackageInfoForm from './UploadPackageInfoForm';
 
 const uploader = new FineUploaderTraditional({
     options: {
-        autoUpload: false,
+        debug: true,
+        autoUpload: true,
+        maxConnections: 3,
         chunking: {
             enabled: true
         },
@@ -24,28 +26,52 @@ const uploader = new FineUploaderTraditional({
 });
 
 class UploadTab extends Component {
+    constructor() {
+        super();
+        this.state = { tabIndex: 1 };
+    }
 
     componentDidMount() {
+        console.log('didMount');
         uploader.on('submit', (id, name) => {
             if (uploader.methods.getUploads({
-                    status: qq.status.SUBMITTING
-                }).length > 1) {
+                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
+            }).length > 1 && this.state.tabIndex === 1) {
                 alert("Please upload and attach one file at a time.");
-                uploader.methods.cancelAll();
+                return false;
             }
+
+            if (this.state.tabIndex === 2) {
+                console.log('submitting to queue...');
+            }
+
+            return true;
+        });
+        uploader.on('submitted', () => {
+            console.log(uploader.methods.getUploads({
+                status: qq.status.SUBMITTED
+            }));
+        });
+        uploader.on('upload', (id, name) => {
+            if (this.state.tabIndex === 2) {
+                uploader.methods.setParams({ description: this.props.fileList[id].description }, id);
+                console.log('uploading...');
+                return true;
+            }
+
+            return { pause: true };
         });
     }
 
     attachFiles = () => {
         var files = uploader.methods.getUploads({
-            status: qq.status.SUBMITTED
+            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
         });
-        console.log('files', files);
 
         if (files.length) {
             var file = files.pop();
-            uploader.methods.cancelAll();
             file.description = this.props.fileDescription;
+            uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
             return;
@@ -62,12 +88,9 @@ class UploadTab extends Component {
         var files = this.props.fileList.map((file) => {
             return file.file;
         });
-        console.log('files', files);
         uploader.methods.reset();
         uploader.methods.addFiles(files);
-        console.log(uploader.methods.getUploads());
-        uploader.methods.uploadStoredFiles();
-        this.props.processUpload();
+        this.props.processUpload(() => uploader.methods.uploadStoredFiles());
     };
 
     render() {
@@ -75,7 +98,7 @@ class UploadTab extends Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs defaultIndex={1}>
+                        <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex: tabIndex })}>
                             <TabList>
                                 <Tab>Define Upload</Tab>
                                 <Tab>Attach Files</Tab>
@@ -118,7 +141,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={this.processUpload}>Upload</Button>
+                                <Button type="submit" bsStyle="primary" onClick={() => this.processUpload()}>Upload</Button>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

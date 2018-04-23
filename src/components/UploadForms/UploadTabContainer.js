@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch, props) =>
         updateFileDescription(description) {
             dispatch(updateFileDescription(description))
         },
-        appendToFileList(fileID, fileName, description) {
-            dispatch(appendToFileList(fileID, fileName, description))
+        appendToFileList(file) {
+            dispatch(appendToFileList(file))
         },
         processUpload() {
             dispatch(submit('uploadPackageInfoForm'))
