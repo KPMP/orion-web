@@ -101,7 +101,7 @@ class UploadTab extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab}/>
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal}/>
                             </TabPanel>
                             <TabPanel>
                                 <div>
@@ -125,7 +125,7 @@ class UploadTab extends Component {
                                 <div>
                                     <div className="row">
                                         <div className="col-6 float-left">
-                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
                                         </div>
                                         <div className="col-6">
                                         		<ButtonGroup className="float-right">
@@ -138,7 +138,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                            		<ReviewUpload changeUploadTab={this.props.changeUploadTab} cancel={this.props.cancel}/>
+                            		<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

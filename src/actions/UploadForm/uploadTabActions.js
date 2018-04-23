@@ -1,7 +1,13 @@
 import actionNames from '../actionNames'
 
+export const showUploadModalAction = (show) => {
+	return {
+		type: actionNames.SHOW_UPLOAD_MODAL,
+		payload: show
+	}
+}
+
 export const changeUploadTab = (tabIndex) => {
-	console.log(tabIndex);
 	return {
 		type: actionNames.CHANGE_UPLOAD_TAB,
 		payload: tabIndex

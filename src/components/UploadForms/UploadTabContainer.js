@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { updateFilesToUpload, updateFileDescription, appendToFileList, uploadPackageInfo, changeUploadTab } from '../../actions/UploadForm/uploadTabActions';
+import { updateFilesToUpload, updateFileDescription, appendToFileList, uploadPackageInfo, 
+	changeUploadTab, showUploadModalAction } from '../../actions/UploadForm/uploadTabActions';
 import UploadTab from './UploadTab';
-import { submit } from 'redux-form'
+import { submit } from 'redux-form';
 
 const mapStateToProps = (state, props) =>
     ({
@@ -30,6 +31,9 @@ const mapDispatchToProps = (dispatch, props) =>
         },
         changeUploadTab(newTabIndex) {
         		dispatch(changeUploadTab(newTabIndex));
+        },
+        showUploadModal(visible) {
+        		dispatch(showUploadModalAction(visible));
         }
     });
 

@@ -13,7 +13,7 @@ class ReviewUpload extends Component {
 				</div>
 				<div className="row buttonRow">
 		    			<div className="col-6 float-left">
-		    				<Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+		    				<Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
 		    			</div>
 		    			<div className="col-6">
 		    				<ButtonGroup className="float-right">
