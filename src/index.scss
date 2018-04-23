@@ -32,9 +32,33 @@
 	#uploadStatus {
 		border: 2px dashed #C7C7C7;
 	}
+
+	.buttonRow {
+		padding-top: 15px;
+	}
+
+	.modalTitle {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	.control-label {
+		font-size: 14px;
+		margin-top: 5px;
+		margin-bottom: 0px;
+	}
 }
 
-.buttonRow {
-	padding-top: 15px;
+
+.fine-uploader-dropzone-container {
+	min-height: 75px !important;
+}
+
+.react-fine-uploader-gallery-file-input-container {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-dropzone-content {
+	top: 15% !important;
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, ButtonGroup } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
@@ -75,26 +75,26 @@ class UploadTab extends Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs defaultIndex={1}>
+                        <Tabs defaultIndex={0}>
                             <TabList>
-                                <Tab>Define Upload</Tab>
-                                <Tab>Attach Files</Tab>
-                                <Tab>Review Upload</Tab>
+                                <Tab>1: Define Upload</Tab>
+                                <Tab>2: Attach Files</Tab>
+                                <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
                                 <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo}/>
                             </TabPanel>
                             <TabPanel>
                                 <div>
-                                    <h3>Select File(s)</h3>
+                                    <div className="modalTitle">Select File(s)</div>
                                     <Gallery fileInput-multiple={ false } uploader={ uploader } />
                                     <div className="form-group">
-                                        <label htmlFor="fileDescription">Description</label>
+                                        <ControlLabel htmlFor="fileDescription">Description</ControlLabel>
                                         <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please enter a file description..." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
-                                        <div className="col-md-12 text-center">
-                                            <Button type="submit" bsStyle="primary" onClick={() => this.attachFiles()}>Attach</Button>
+                                        <div className="col-12 text-center">
+                                            <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
                                         </div>
                                     </div>
                                     <div>
@@ -119,7 +119,17 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={this.processUpload}>Upload</Button>
+                            		<div className="row">
+                            			<div className="col-6 float-left">
+                            				<Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+                            			</div>
+                            			<div className="col-6">
+                            				<ButtonGroup className="float-right">
+	                            				<Button className="btn-outline-dark">Back</Button> &nbsp;
+	                            				<Button type="submit" bsStyle="primary" onClick={this.processUpload}>Start Upload</Button>
+                            				</ButtonGroup>
+                                		</div>
+                                </div>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

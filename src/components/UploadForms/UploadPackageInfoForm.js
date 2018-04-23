@@ -13,7 +13,7 @@ class UploadPackageInfoForm extends Component {
         const { handleSubmit } = this.props;
         return (
             <form onSubmit={handleSubmit(this.onSubmit)} name="uploadPackageInfoForm">
-                <div>Upload Information</div>
+                <div className="modalTitle">Upload Information</div>
                 <div>
                         <div>
                             <ControlLabel>First</ControlLabel>
