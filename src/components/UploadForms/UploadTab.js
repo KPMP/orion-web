@@ -108,8 +108,8 @@ class UploadTab extends Component {
                                     <div className="modalTitle">Select File(s)</div>
                                     <Gallery fileInput-multiple={ false } uploader={ uploader } />
                                     <div className="form-group">
-                                        <ControlLabel htmlFor="fileDescription">Description</ControlLabel>
-                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please enter a file description..." value={this.props.fileDescription}></textarea>
+                                        <ControlLabel htmlFor="fileDescription">Description* <i>(each file requires a description)</i></ControlLabel>
+                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
                                         <div className="col-12 text-center">
