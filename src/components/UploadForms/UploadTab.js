@@ -6,6 +6,7 @@ import Gallery from 'react-fine-uploader'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadPackageInfoForm from './UploadPackageInfoForm';
+import ReviewUpload from './ReviewUpload';
 
 
 const uploader = new FineUploaderTraditional({
@@ -137,17 +138,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                            		<div className="row">
-                            			<div className="col-6 float-left">
-                            				<Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
-                            			</div>
-                            			<div className="col-6">
-                            				<ButtonGroup className="float-right">
-	                            				<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(1)}>Back</Button> &nbsp;
-	                            				<Button type="submit" bsStyle="primary" onClick={() => this.processUpload()}>Start Upload</Button>
-                            				</ButtonGroup>
-                                		</div>
-                                </div>
+                            		<ReviewUpload changeUploadTab={this.props.changeUploadTab} cancel={this.props.cancel}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
