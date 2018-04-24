@@ -11,7 +11,7 @@ class FileList extends Component {
                     </thead>
                     <tbody>
                         {this.props.files.map((row, i) => {
-                            return <tr key={i}><td>{row.name}</td><td>{row.description}</td></tr>
+                            return <tr key={i}><td>{row.name}</td><td>{row.fileMetadata}</td></tr>
                         })}
                     </tbody>
                 </table>

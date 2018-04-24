@@ -9,6 +9,7 @@ const mapStateToProps = (state, props) =>
         filesToUpload: state.filesToUpload,
         fileDescription: state.fileDescription,
         fileList: state.fileList,
+        packageInfo: state.packageInfo,
         currentTab: state.currentTab
     });
 

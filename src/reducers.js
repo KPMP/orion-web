@@ -3,6 +3,7 @@ import { filesToUpload } from './actions/UploadForm/filesToUploadReducer';
 import { fileDescription } from './actions/UploadForm/fileDescriptionReducer';
 import { fileList } from './actions/UploadForm/fileListReducer';
 import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
+import { packageInfo } from './actions/UploadForm/setPackageInfoReducer';
 import { currentTab } from './actions/UploadForm/currentTabReducer';
 import { showUploadModal } from './actions/UploadForm/showUploadModalReducer';
 import actionNames from './actions/actionNames';
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
 	currentTab,
 	fileDescription,
     filesToUpload,
+    packageInfo,
     fileList,
     form: formReducer,
     showUploadModal,

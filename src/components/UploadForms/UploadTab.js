@@ -32,31 +32,33 @@ class UploadTab extends Component {
         uploader.on('submit', (id, name) => {
             if (uploader.methods.getUploads({
                 status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
-            }).length > 1 && this.state.tabIndex === 1) {
+            }).length > 1 && this.props.currentTab === 1) {
                 alert("Please upload and attach one file at a time.");
                 return false;
             }
 
-            if (this.state.tabIndex === 2) {
-                console.log('submitting to queue...');
-            }
-
             return true;
         });
-        uploader.on('submitted', () => {
-            console.log(uploader.methods.getUploads({
-                status: qq.status.SUBMITTED
-            }));
-        });
         uploader.on('upload', (id, name) => {
-            if (this.state.tabIndex === 2) {
-                uploader.methods.setParams({ description: this.props.fileList[id].description }, id);
-                console.log('uploading...');
+            if (this.props.currentTab === 2) {
                 return true;
             }
 
             return { pause: true };
         });
+    }
+
+    componentDidUpdate() {
+        if (this.props.packageInfo) {
+            uploader.methods.reset();
+
+            this.props.fileList.forEach((file, id) => {
+                uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
+                uploader.methods.addFiles([this.props.fileList[id].file]);
+            });
+
+            uploader.methods.uploadStoredFiles();
+        }
     }
 
     attachFiles = () => {
@@ -66,10 +68,12 @@ class UploadTab extends Component {
 
         if (files.length) {
             var file = files.pop();
-            file.description = this.props.fileDescription;
+
+            file.fileMetadata = this.props.fileDescription;
             uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
+
             return;
         }
         
@@ -80,28 +84,19 @@ class UploadTab extends Component {
         this.props.updateFileDescription(event.target.value);
     };
 
-    processUpload = () => {
-        var files = this.props.fileList.map((file) => {
-            return file.file;
-        });
-        uploader.methods.reset();
-        uploader.methods.addFiles(files);
-        this.props.processUpload(() => uploader.methods.uploadStoredFiles());
-    };
-
     render() {
         return (
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)}>
+                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
                                 <Tab>1: Define Upload</Tab>
                                 <Tab>2: Attach Files</Tab>
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal}/>
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
@@ -138,7 +133,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                            		<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal}/>
+                            	<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} processUpload={this.props.processUpload} />
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
