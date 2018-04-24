@@ -32,7 +32,6 @@ class UploadTab extends Component {
     }
 
     componentDidMount() {
-        console.log('didMount');
         uploader.on('submit', (id, name) => {
             if (uploader.methods.getUploads({
                 status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
@@ -54,7 +53,6 @@ class UploadTab extends Component {
         });
         uploader.on('upload', (id, name) => {
             if (this.state.tabIndex === 2) {
-                uploader.methods.setParams({ description: this.props.fileList[id].description }, id);
                 console.log('uploading...');
                 return true;
             }
@@ -64,8 +62,20 @@ class UploadTab extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.storedFiles.length) {
-            console.log(this.props.storedFiles)
+        console.log("in did update: " + this.props.packageInfo);
+        if (this.props.packageInfo) {
+            console.log(this.props.packageInfo);
+
+            console.log("after setting params");
+            uploader.methods.reset();
+
+            this.props.fileList.forEach((file, id) => {
+                uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
+                uploader.methods.addFiles([this.props.fileList[id].file]);
+            });
+
+            uploader.methods.uploadStoredFiles();
+            console.log("after upload");
         }
     }
 
@@ -76,10 +86,12 @@ class UploadTab extends Component {
 
         if (files.length) {
             var file = files.pop();
+
             file.fileMetadata = this.props.fileDescription;
             uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
+
             return;
         }
         
@@ -88,16 +100,6 @@ class UploadTab extends Component {
 
     handleFileDescriptionChange = (event) => {
         this.props.updateFileDescription(event.target.value);
-    };
-
-    processUpload = () => {
-        // var files = this.props.fileList.map((file) => {
-        //     return file.file;
-        // });
-        // uploader.methods.reset();
-        // uploader.methods.addFiles(files);
-        // uploader.methods.uploadStoredFiles();
-        this.props.processUpload();
     };
 
     render() {
@@ -148,7 +150,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={() => this.processUpload()}>Upload</Button>
+                                <Button type="submit" bsStyle="primary" onClick={() => this.props.processUpload()}>Upload</Button>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

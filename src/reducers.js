@@ -3,7 +3,7 @@ import { filesToUpload } from './actions/UploadForm/filesToUploadReducer';
 import { fileDescription } from './actions/UploadForm/fileDescriptionReducer';
 import { fileList } from './actions/UploadForm/fileListReducer';
 import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
-import { storedFiles } from './actions/UploadForm/uploadStoredFilesReducer';
+import { packageInfo } from './actions/UploadForm/setPackageInfoReducer';
 
 
 import actionNames from './actions/actionNames';
@@ -17,7 +17,7 @@ const appReducer = combineReducers({
     filesToUpload,
     fileDescription,
     fileList,
-    storedFiles
+    packageInfo
 });
 
 const rootReducer = (state, action) => {

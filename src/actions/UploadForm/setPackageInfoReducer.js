@@ -1,10 +1,10 @@
 import actionNames from '../actionNames';
 
-export const storedFiles = (state = [], action) => {
+export const packageInfo = (state = null, action) => {
     switch(action.type) {
-        case actionNames.UPLOAD_STORED_FILES:
+        case actionNames.SET_PACKAGE_INFO:
             return action.payload;
         default:
             return state;
     }
-}
+};

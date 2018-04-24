@@ -15,9 +15,9 @@ export const updateFileDescription = (description) => {
     }
 };
 
-export const uploadStoredFiles = (data) => {
+export const setPackageInfo = (data) => {
     return {
-        type: actionNames.UPLOAD_STORED_FILES,
+        type: actionNames.SET_PACKAGE_INFO,
         payload: data
     }
 };
@@ -37,7 +37,7 @@ export const uploadPackageInfo = (data) => {
         api.post('/upload/packageInfo', data)
           .then((res) => {
             console.log(res.data)
-            // dispatch(uploadStoredFiles(res.data));
+            dispatch(setPackageInfo(res.data));
           })
           .catch((err) => {
             console.log(err)
