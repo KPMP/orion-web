@@ -1,4 +1,5 @@
 import actionNames from '../actionNames'
+import Api from '../../helpers/Api'
 
 export const updateFilesToUpload = (files) => {
     return {
@@ -29,19 +30,18 @@ export const appendToFileList = (file) => {
 };
 
 export const uploadPackageInfo = (data) => {
+    const api = Api.getInstance()
     const url = "http://localhost:3030/upload/packageInfo";
 
     return (dispatch) => {
-        fetch(url, {
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(data)
-        })
-            .then(res => {
-                dispatch(uploadStoredFiles(res.json()));
-            }
-        )
-            .catch(err => console.error(err));
+        api.post('/upload/packageInfo', data)
+          .then((res) => {
+            console.log(res.data)
+            // dispatch(uploadStoredFiles(res.data));
+          })
+          .catch((err) => {
+            console.log(err)
+          })
     };
 
 };

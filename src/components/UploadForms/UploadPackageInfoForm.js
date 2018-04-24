@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { FormControl, ControlLabel } from 'react-bootstrap';
-import { Modal, Button } from 'react-bootstrap';
+import {  ControlLabel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class UploadPackageInfoForm extends Component {
     render() {
         const { handleSubmit, onSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>Upload Information</div>
                 <div>
                         <div>
