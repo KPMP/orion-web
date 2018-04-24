@@ -112,7 +112,7 @@ class UploadTab extends Component {
                                 <Tab>Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm onSubmit={this.props.uploadPackageInfo} uploadPackageInfo={this.props.uploadPackageInfo} />
+                                <UploadPackageInfoForm onSubmit={data => {console.log('data', data); this.props.uploadPackageInfo(data)}} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
