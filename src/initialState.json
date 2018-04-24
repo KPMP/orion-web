@@ -5,5 +5,7 @@
   "uploadResponse": {
     "message": ""
   },
-  "packageInfo": null
+  "packageInfo": null,
+  "currentTab": 0,
+  "showUploadModal": false
 }

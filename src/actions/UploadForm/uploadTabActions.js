@@ -1,6 +1,20 @@
 import actionNames from '../actionNames'
 import Api from '../../helpers/Api'
 
+export const showUploadModalAction = (show) => {
+	return {
+		type: actionNames.SHOW_UPLOAD_MODAL,
+		payload: show
+	}
+}
+
+export const changeUploadTab = (tabIndex) => {
+	return {
+		type: actionNames.CHANGE_UPLOAD_TAB,
+		payload: tabIndex
+	}
+}
+
 export const updateFilesToUpload = (files) => {
     return {
         type: actionNames.UPDATE_FILES_TO_UPLOAD,

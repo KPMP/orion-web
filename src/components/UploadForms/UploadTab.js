@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadPackageInfoForm from './UploadPackageInfoForm';
+import ReviewUpload from './ReviewUpload';
 
 
 const uploader = new FineUploaderTraditional({
@@ -26,16 +27,12 @@ const uploader = new FineUploaderTraditional({
 });
 
 class UploadTab extends Component {
-    constructor() {
-        super();
-        this.state = { tabIndex: 0 };
-    }
 
     componentDidMount() {
         uploader.on('submit', (id, name) => {
             if (uploader.methods.getUploads({
                 status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
-            }).length > 1 && this.state.tabIndex === 1) {
+            }).length > 1 && this.props.currentTab === 1) {
                 alert("Please upload and attach one file at a time.");
                 return false;
             }
@@ -43,7 +40,7 @@ class UploadTab extends Component {
             return true;
         });
         uploader.on('upload', (id, name) => {
-            if (this.state.tabIndex === 2) {
+            if (this.props.currentTab === 2) {
                 return true;
             }
 
@@ -92,26 +89,26 @@ class UploadTab extends Component {
             <div className="static-modal">
                 <Modal.Dialog>
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex: tabIndex })} forceRenderTabPanel={true}>
+                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
-                                <Tab>Define Upload</Tab>
-                                <Tab>Attach Files</Tab>
-                                <Tab>Review Upload</Tab>
+                                <Tab>1: Define Upload</Tab>
+                                <Tab>2: Attach Files</Tab>
+                                <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm onSubmit={data => { this.props.uploadPackageInfo(data) }} />
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
-                                    <h3>Select File(s)</h3>
+                                    <div className="modalTitle">Select File(s)</div>
                                     <Gallery fileInput-multiple={ false } uploader={ uploader } />
                                     <div className="form-group">
-                                        <label htmlFor="fileDescription">Description</label>
-                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please enter a file description..." value={this.props.fileDescription}></textarea>
+                                        <ControlLabel htmlFor="fileDescription">Description* <i>(each file requires a description)</i></ControlLabel>
+                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
-                                        <div className="col-md-12 text-center">
-                                            <Button type="submit" bsStyle="primary" onClick={() => this.attachFiles()}>Attach</Button>
+                                        <div className="col-12 text-center">
+                                            <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
                                         </div>
                                     </div>
                                     <div>
@@ -122,20 +119,21 @@ class UploadTab extends Component {
                                 <hr/>
                                 <div>
                                     <div className="row">
-                                        <div className="col-md-6 pull-left">
-                                            <Button bsStyle="default" onClick={() => this.props.cancel()}>Cancel</Button>
+                                        <div className="col-6 float-left">
+                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
                                         </div>
-                                        <div className="col-md-6 pull-right">
-                                            <Button bsStyle="primary">Back</Button>
-                                        &nbsp;
-                                            <Button bsStyle="primary">Next</Button>
-
+                                        <div className="col-6">
+                                        		<ButtonGroup className="float-right">
+                                        			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
+                                        			&nbsp;
+                                        			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
+                                            	</ButtonGroup>
                                         </div>
                                     </div>
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <Button type="submit" bsStyle="primary" onClick={() => this.props.processUpload()}>Upload</Button>
+                            	<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} processUpload={this.props.processUpload} />
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

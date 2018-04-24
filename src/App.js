@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UploadPage from './components/UploadPage';
+import UploadPageContainer from './components/UploadPageContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
     		<Provider store={store}>
-    			<UploadPage/>
+    			<UploadPageContainer/>
     		</Provider>
     );
   }

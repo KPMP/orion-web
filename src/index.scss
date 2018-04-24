@@ -2,6 +2,7 @@
 	#navbar {
 		margin-left: -30px;
 		margin-right: -30px;
+		padding-bottom: 15px;
 	}
 
 	#content {
@@ -32,5 +33,35 @@
 	#uploadStatus {
 		border: 2px dashed #C7C7C7;
 	}
+
+	.buttonRow {
+		padding-top: 15px;
+	}
+
+	.modalTitle {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	.control-label {
+		font-size: 14px;
+		margin-top: 5px;
+		margin-bottom: 0px;
+	}
+
+	.uploadButton {
+		float: right;
+	}
+}
+
+
+.fine-uploader-dropzone-container {
+	min-height: 100px !important;
+}
+
+.react-fine-uploader-gallery-dropzone-content {
+	top: 25% !important;
+	text-align: right !important;
+	padding-right: 15px;
 }
 
