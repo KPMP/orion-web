@@ -40,20 +40,10 @@ class UploadTab extends Component {
                 return false;
             }
 
-            if (this.state.tabIndex === 2) {
-                console.log('submitting to queue...');
-            }
-
             return true;
-        });
-        uploader.on('submitted', () => {
-            console.log(uploader.methods.getUploads({
-                status: qq.status.SUBMITTED
-            }));
         });
         uploader.on('upload', (id, name) => {
             if (this.state.tabIndex === 2) {
-                console.log('uploading...');
                 return true;
             }
 
@@ -62,11 +52,7 @@ class UploadTab extends Component {
     }
 
     componentDidUpdate() {
-        console.log("in did update: " + this.props.packageInfo);
         if (this.props.packageInfo) {
-            console.log(this.props.packageInfo);
-
-            console.log("after setting params");
             uploader.methods.reset();
 
             this.props.fileList.forEach((file, id) => {
@@ -75,7 +61,6 @@ class UploadTab extends Component {
             });
 
             uploader.methods.uploadStoredFiles();
-            console.log("after upload");
         }
     }
 
@@ -114,7 +99,7 @@ class UploadTab extends Component {
                                 <Tab>Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm onSubmit={data => {console.log('data', data); this.props.uploadPackageInfo(data)}} />
+                                <UploadPackageInfoForm onSubmit={data => { this.props.uploadPackageInfo(data) }} />
                             </TabPanel>
                             <TabPanel>
                                 <div>

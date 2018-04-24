@@ -30,17 +30,15 @@ export const appendToFileList = (file) => {
 };
 
 export const uploadPackageInfo = (data) => {
-    const api = Api.getInstance()
-    const url = "http://localhost:3030/upload/packageInfo";
+    const api = Api.getInstance();
 
     return (dispatch) => {
         api.post('/upload/packageInfo', data)
           .then((res) => {
-            console.log(res.data)
             dispatch(setPackageInfo(res.data));
           })
           .catch((err) => {
-            console.log(err)
+            console.error(err);
           })
     };
 
