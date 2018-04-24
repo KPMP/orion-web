@@ -1,0 +1,67 @@
+#outerContainer {
+	#navbar {
+		margin-left: -30px;
+		margin-right: -30px;
+		padding-bottom: 15px;
+	}
+
+	#content {
+		padding-top: 15px;
+		margin-right: 15px;
+		form {
+			label {
+				font-weight: 600;
+				width: 175px;
+				padding-right: 15px;
+			}
+		}
+	}
+
+	.dropzone {
+	    border-radius: 5px;
+	    background-color: #E1E1E1;
+	    border: 2px dashed #C7C7C7;
+	    height: 100px;
+	    width: 500px;
+	    
+	    .dz-message {
+	    		text-align: center;
+	    		margin: 2em 0em 2em 0em;
+	    	} 
+	}
+
+	#uploadStatus {
+		border: 2px dashed #C7C7C7;
+	}
+
+	.buttonRow {
+		padding-top: 15px;
+	}
+
+	.modalTitle {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	.control-label {
+		font-size: 14px;
+		margin-top: 5px;
+		margin-bottom: 0px;
+	}
+
+	.uploadButton {
+		float: right;
+	}
+}
+
+
+.fine-uploader-dropzone-container {
+	min-height: 100px !important;
+}
+
+.react-fine-uploader-gallery-dropzone-content {
+	top: 25% !important;
+	text-align: right !important;
+	padding-right: 15px;
+}
+
