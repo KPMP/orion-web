@@ -9,33 +9,42 @@ import UploadPackageInfoForm from './UploadPackageInfoForm';
 import ReviewUpload from './ReviewUpload';
 
 
-const uploader = new FineUploaderTraditional({
-    options: {
-        debug: true,
-        autoUpload: true,
-        maxConnections: 3,
-        chunking: {
-            enabled: true
-        },
-        request: {
-            endpoint: 'http://localhost:3030/upload'
-        },
-        retry: {
-            enableAuto: false
-        },
-        callbacks: {
-        		onAllComplete: function(succeeded, failed) {
-        			this.props.showUploadModal(false);
-        		}
-        }
-    }
-});
+
 
 class UploadTab extends Component {
 
+	constructor(props) {
+		super();
+		this.uploader = new FineUploaderTraditional({
+		    options: {
+		        debug: true,
+		        autoUpload: true,
+		        maxConnections: 3,
+		        chunking: {
+		            enabled: true
+		        },
+		        request: {
+		            endpoint: 'http://localhost:3030/upload'
+		        },
+		        retry: {
+		            enableAuto: false
+		        },
+		        callbacks: {
+		        		onAllComplete: function(success, failure) {
+		        			props.showUploadModal(false);
+		        			props.viewUploadedFiles();
+		        		},
+		        		onError: function(fileId, filename, errorReason, xhr) {
+		        			alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
+		        		}
+		        }
+		    }
+		});
+	}
+	
     componentDidMount() {
-        uploader.on('submit', (id, name) => {
-            if (uploader.methods.getUploads({
+        this.uploader.on('submit', (id, name) => {
+            if (this.uploader.methods.getUploads({
                 status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
             }).length > 1 && this.props.currentTab === 1) {
                 alert("Please upload and attach one file at a time.");
@@ -44,7 +53,7 @@ class UploadTab extends Component {
 
             return true;
         });
-        uploader.on('upload', (id, name) => {
+        this.uploader.on('upload', (id, name) => {
             if (this.props.currentTab === 2) {
                 return true;
             }
@@ -55,20 +64,20 @@ class UploadTab extends Component {
 
     componentDidUpdate() {
         if (this.props.packageInfo) {
-            uploader.methods.reset();
+            this.uploader.methods.reset();
 
             this.props.fileList.forEach((file, id) => {
-                uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
-                uploader.methods.addFiles([this.props.fileList[id].file]);
+                this.uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
+                this.uploader.methods.addFiles([this.props.fileList[id].file]);
             });
 
-            uploader.methods.uploadStoredFiles();
+            this.uploader.methods.uploadStoredFiles();
            
         }
     }
 
     attachFiles = () => {
-        var files = uploader.methods.getUploads({
+        var files = this.uploader.methods.getUploads({
             status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
         });
 
@@ -76,7 +85,7 @@ class UploadTab extends Component {
             var file = files.pop();
 
             file.fileMetadata = this.props.fileDescription;
-            uploader.methods.cancel(file.id);
+            this.uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
 
@@ -89,6 +98,14 @@ class UploadTab extends Component {
     handleFileDescriptionChange = (event) => {
         this.props.updateFileDescription(event.target.value);
     };
+    
+    cancel = (uploader, props) => {
+    		uploader.methods.cancelAll();
+    		uploader.methods.clearStoredFiles(); 
+    		uploader.methods.reset(); 
+    		this.props.showUploadModal(false);
+    		this.props.clearFileList();
+    }
 
     render() {
         return (
@@ -102,12 +119,12 @@ class UploadTab extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} />
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} uploader={this.uploader} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
                                     <div className="modalTitle">Select File(s)</div>
-                                    <Gallery fileInput-multiple={ false } uploader={ uploader } />
+                                    <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
                                     <div className="form-group">
                                         <ControlLabel htmlFor="fileDescription">Description* <i>(each file requires a description)</i></ControlLabel>
                                         <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
@@ -126,7 +143,7 @@ class UploadTab extends Component {
                                 <div>
                                     <div className="row">
                                         <div className="col-6 float-left">
-                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
+                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.cancel(this.uploader, this.props)}>Cancel</Button>
                                         </div>
                                         <div className="col-6">
                                         		<ButtonGroup className="float-right">
