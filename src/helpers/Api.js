@@ -6,7 +6,7 @@ export default class Api {
 	static getInstance() {
 		return axios.create({
 		  baseURL: BASE_URL,
-		  timeout: 1000,
+		  timeout: 10000,
 		})
 	}
 }
