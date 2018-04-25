@@ -6,6 +6,7 @@ import { submit } from 'redux-form';
 
 const mapStateToProps = (state, props) =>
     ({
+        form: state.form,
         filesToUpload: state.filesToUpload,
         fileDescription: state.fileDescription,
         fileList: state.fileList,
