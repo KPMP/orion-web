@@ -35,7 +35,13 @@ class UploadTab extends Component {
 		        			props.viewUploadedFiles();
 		        		},
 		        		onError: function(fileId, filename, errorReason, xhr) {
-		        			alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
+		        			// for some reason we always get an undefined file here, so we are just ignoring it for now.
+		        			if (filename !== undefined) {
+		        				alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
+		        				this.methods.clearStoredFiles();
+		        				this.methods.reset();
+		        				props.showUploadModal(false);
+		        			}
 		        		}
 		        }
 		    }

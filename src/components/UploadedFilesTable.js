@@ -10,6 +10,7 @@ class UploadedFilesTable extends Component {
 		      { key: 'researcher', name: 'Name' },
 		      { key: 'institution', name: 'Site' },
 		      { key: 'packageType', name: 'Type' },
+		      { key: 'filename', name: 'File Name'},
 		      { key: 'subjectId', name:'Subject Id'},
 		      { key: 'experimentId', name:'Experiment Id'},
 		      { key: 'experimentDate', name: 'Experiment Date'}];
