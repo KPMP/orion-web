@@ -26,6 +26,80 @@ const uploader = new FineUploaderTraditional({
     }
 });
 
+const ReviewPanel = ({ props }) => {
+    const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
+
+    if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
+        return '';
+    }
+
+    const values = form.uploadPackageInfoForm.values;
+ 
+    return (
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-12">
+                    <div className="modalTitle">Review Upload</div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Name:</strong>
+                </div>
+                <div className="col-8">
+                    <span>{ values.firstName} { values.lastName }</span>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Institution:</strong>
+                </div>
+                <div className="col-8">
+                    { values.institutionName }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Package Type:</strong>
+                </div>
+                <div className="col-8">
+                    { values.packageType }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Experiment #:</strong>
+                </div>
+                <div className="col-8">
+                    { values.experimentId }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Subject #:</strong>
+                </div>
+                <div className="col-8">
+                    { values.subjectId }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-4">
+                    <strong>Experiment Date:</strong>
+                </div>
+                <div className="col-8">
+                    { values.experimentDate }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <FileList files={ fileList } />
+                </div>
+            </div>
+            <ReviewUpload changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} />
+        </div>
+    );
+};
+
 class UploadTab extends Component {
 
     componentDidMount() {
@@ -133,7 +207,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                            	<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} processUpload={this.props.processUpload} />
+                                <ReviewPanel props={ this.props } />
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
