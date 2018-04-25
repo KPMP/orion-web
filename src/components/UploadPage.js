@@ -12,7 +12,7 @@ class UploadPage extends Component {
 					<div className="col-12">
 						<nav className="navbar navbar-dark bg-primary">
 							<div className="container-fluid">
-								<a className="navbar-brand" href="#">KPMP Data Lake Uploader</a>
+								<a className="navbar-brand" href="/">KPMP Data Lake Uploader</a>
 							</div>
 						</nav>
 					</div>

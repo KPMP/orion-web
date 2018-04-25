@@ -18,7 +18,7 @@ class ReviewUpload extends Component {
 		    			<div className="col-6">
 		    				<ButtonGroup className="float-right">
 		        				<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(1)}>Back</Button> &nbsp;
-		        				<Button type="submit" bsStyle="primary" onClick={() => this.processUpload()}>Start Upload</Button>
+		        				<Button type="submit" bsStyle="primary" onClick={() => this.props.processUpload()}>Start Upload</Button>
 		    				</ButtonGroup>
 		        		</div>
 		        </div>
