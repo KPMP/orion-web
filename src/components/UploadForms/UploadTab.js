@@ -8,7 +8,7 @@ import FileList from './FileList';
 import UploadPackageInfoForm from './UploadPackageInfoForm';
 import ReviewUpload from './ReviewUpload';
 
-const BASE_URL = (process.env.NODE_ENV === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
+const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
 const uploader = new FineUploaderTraditional({
     options: {
