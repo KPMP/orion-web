@@ -1,10 +1,15 @@
-import actionNames from '../actionNames'
+import actionNames from '../actionNames';
+import { viewUploadedFiles } from './uploadTabActions';
 
 export const updateUploadResponse = (response) => {
     return {
         type: actionNames.UPDATE_UPLOAD_RESPONSE,
         payload: response
     }
+}
+
+export const doUpdate = (response) => {
+	updateUploadResponse(response);
 }
 
 export const uploadFile = (data) => {
@@ -29,7 +34,7 @@ export const uploadFile = (data) => {
         .then(res => res.json())
         .then(res => {
                 console.log(res);
-                dispatch(updateUploadResponse(res));
+                dispatch(doUpdate(res));
             }
         )
         .catch(err => console.error(err));

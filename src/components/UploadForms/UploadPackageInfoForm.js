@@ -11,15 +11,15 @@ class UploadPackageInfoForm extends Component {
                 <div className="modalTitle">Upload Information</div>
                 <div>
                     <div className="form-group">
-                        <ControlLabel>First</ControlLabel>
+                        <ControlLabel>First Name</ControlLabel>
                         <Field name="firstName" className="form-control" component="input" type="text" />
                     </div>
                     <div className="form-group">
-                        <ControlLabel>Last</ControlLabel>
+                        <ControlLabel>Last Name</ControlLabel>
                         <Field name="lastName" className="form-control" component="input" type="text" />
                     </div>
                     <div className="form-group">
-                        <ControlLabel>Site</ControlLabel>
+                        <ControlLabel>Site Name</ControlLabel>
                         <Field name="institutionName" className="form-control" component="select">
                             <option defaultValue="- select -">- select -</option>
                             <option value="Broad (Michigan/Broad/Princeton TIS)">Broad (Michigan/Broad/Princeton TIS)</option>
@@ -38,7 +38,7 @@ class UploadPackageInfoForm extends Component {
                         </Field>
                     </div>
                     <div className="form-group">
-                        <ControlLabel>Package Type</ControlLabel>
+                        <ControlLabel>Package Type Name</ControlLabel>
                         <Field name="packageType" className="form-control" component="select">
                             <option defaultValue="- select -">- select -</option>
                             <option value="Sub-segment RNAseq">Sub-segment RNAseq</option>
@@ -72,7 +72,7 @@ class UploadPackageInfoForm extends Component {
                 </div>
                 <div className="row buttonRow">
                     <div className="col-6 float-left">
-                        <Button className="btn-outline-dark" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
+                        <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
                     <div className="col-6 float-right">
                         <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)}>Next</Button>

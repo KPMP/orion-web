@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+import { viewUploadedFiles } from './actions/UploadForm/uploadTabActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -20,13 +21,18 @@ store.subscribe(function(){console.log(store.getState())});
 store.subscribe(saveState);
 
 class App extends Component {
-  render() {
-    return (
-    		<Provider store={store}>
-    			<UploadPageContainer/>
-    		</Provider>
-    );
-  }
+  
+	componentWillMount() {
+		viewUploadedFiles()(store.dispatch);
+	}
+	
+	render() {
+	    return (
+	    		<Provider store={store}>
+	    			<UploadPageContainer/>
+	    		</Provider>
+	    );
+	  }
 }
 
 export default App;
