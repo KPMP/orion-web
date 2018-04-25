@@ -35,6 +35,13 @@ export const appendToFileList = (file) => {
     }
 };
 
+export const setUploadedFilesList = (uploadedFiles) => {
+	return {
+		type: actionNames.SET_UPLOADED_FILES_LIST,
+		payload: uploadedFiles
+	}
+}
+
 export const uploadPackageInfo = (data) => {
     const url = "http://localhost:3030/upload/packageInfo";
 
@@ -53,3 +60,20 @@ export const uploadPackageInfo = (data) => {
     };
 
 };
+
+export const viewUploadedFiles = () => {
+	const url = "http://localhost:3030/viewUploads";
+	return (dispatch) => {
+		fetch(url, {
+			method: "GET",
+			mode: "cors",
+			enctype: "multipart/form-data"
+		})
+		.then(res => res.json())
+		.then(res => {
+			dispatch(setUploadedFilesList(res));
+		}
+		)
+		.catch(err => console.error(err));
+	};
+}

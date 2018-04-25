@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import UploadTabContainer from './UploadForms/UploadTabContainer';
 import { Button } from 'react-bootstrap';
-
+import UploadedFilesTableContainer from './UploadedFilesTableContainer';
 
 class UploadPage extends Component {
 	
 	render() {
-		console.log(this.props);
 		return (
 			<div className="container-fluid" id="outerContainer">
 				<div className="row" id="navbar">
@@ -26,6 +25,7 @@ class UploadPage extends Component {
 						<UploadTabContainer />
 					}
 				</div>
+					<UploadedFilesTableContainer/>
 			</div>);
 	}
 }
