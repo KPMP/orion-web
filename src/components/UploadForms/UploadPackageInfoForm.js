@@ -56,11 +56,11 @@ class UploadPackageInfoForm extends Component {
                                 <option value="Other">Other</option>
                             </Field>
                         </div>
-                        <div style={{textAlign: "center", fontWeight:"bold"}}>-OR-</div>
                         <div>
                             <ControlLabel>Subject # (optional)</ControlLabel>
                             <Field name="subjectId" className="form-control" component="input" type="text" />
                         </div>
+                            <div style={{textAlign: "center", fontWeight:"bold"}}>-OR-</div>
                         <div>
                             <ControlLabel>Experiment # (optional)</ControlLabel>
                             <Field name="experimentId" className="form-control" component="input" type="text" />

@@ -22,6 +22,11 @@ const uploader = new FineUploaderTraditional({
         },
         retry: {
             enableAuto: false
+        },
+        callbacks: {
+        		onAllComplete: function(succeeded, failed) {
+        			this.props.showUploadModal(false);
+        		}
         }
     }
 });
@@ -58,6 +63,7 @@ class UploadTab extends Component {
             });
 
             uploader.methods.uploadStoredFiles();
+           
         }
     }
 

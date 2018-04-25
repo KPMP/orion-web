@@ -1,4 +1,5 @@
-import actionNames from '../actionNames'
+import actionNames from '../actionNames';
+import Api from '../../helpers/Api';
 
 export const showUploadModalAction = (show) => {
 	return {
@@ -28,6 +29,13 @@ export const updateFileDescription = (description) => {
     }
 };
 
+export const setPackageInfo = (data) => {
+    return {
+        type: actionNames.SET_PACKAGE_INFO,
+        payload: data
+    }
+};
+
 export const appendToFileList = (file) => {
     return {
         type: actionNames.APPEND_TO_FILE_LIST,
@@ -43,23 +51,18 @@ export const setUploadedFilesList = (uploadedFiles) => {
 }
 
 export const uploadPackageInfo = (data) => {
-    const url = "http://localhost:3030/upload/packageInfo";
+    const api = Api.getInstance();
 
     return (dispatch) => {
-        fetch(url, {
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(res => {
-                console.log(res);
-            }
-        )
-            .catch(err => console.error(err));
+        api.post('/upload/packageInfo', data)
+          .then((res) => {
+            dispatch(setPackageInfo(res.data));
+          })
+          .catch((err) => {
+            console.error(err);
+          })
     };
-
-};
+}
 
 export const viewUploadedFiles = () => {
 	const url = "http://localhost:3030/viewUploads";
