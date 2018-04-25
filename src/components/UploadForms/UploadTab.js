@@ -99,10 +99,10 @@ class UploadTab extends Component {
         this.props.updateFileDescription(event.target.value);
     };
     
-    cancel = (uploader, props) => {
-    		uploader.methods.cancelAll();
-    		uploader.methods.clearStoredFiles(); 
-    		uploader.methods.reset(); 
+    cancel = () => {
+    		this.uploader.methods.cancelAll();
+    		this.uploader.methods.clearStoredFiles(); 
+    		this.uploader.methods.reset(); 
     		this.props.showUploadModal(false);
     		this.props.clearFileList();
     }
@@ -119,7 +119,7 @@ class UploadTab extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} uploader={this.uploader} />
+                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
@@ -156,7 +156,7 @@ class UploadTab extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                            	<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} processUpload={this.props.processUpload} />
+                            	<ReviewUpload changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} processUpload={this.props.processUpload} cancel={this.cancel} />
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>

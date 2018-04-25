@@ -72,7 +72,7 @@ class UploadPackageInfoForm extends Component {
                     </div>
                 <div className="row buttonRow">
                     <div className="col-6 float-left">
-                        <Button className="btn-outline-dark" onClick={() => this.props.showUploadModal(false)}>Cancel</Button>
+                        <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
                     <div className="col-6 float-right">
                         <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)}>Next</Button>
