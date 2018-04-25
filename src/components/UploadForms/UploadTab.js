@@ -8,6 +8,7 @@ import FileList from './FileList';
 import UploadPackageInfoForm from './UploadPackageInfoForm';
 import ReviewUpload from './ReviewUpload';
 
+const BASE_URL = (process.env.NODE_ENV === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
 const uploader = new FineUploaderTraditional({
     options: {
@@ -18,7 +19,7 @@ const uploader = new FineUploaderTraditional({
             enabled: true
         },
         request: {
-            endpoint: 'http://localhost:3030/upload'
+            endpoint: BASE_URL + '/upload'
         },
         retry: {
             enableAuto: false
@@ -30,7 +31,7 @@ const ReviewPanel = ({ props }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
-        return '';
+        return (<p><em>Please define your upload first and then attach files.</em></p>);
     }
 
     const values = form.uploadPackageInfoForm.values;
