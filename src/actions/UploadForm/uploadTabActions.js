@@ -47,14 +47,14 @@ export const clearFileList = () => {
 	return {
 		type: actionNames.CLEAR_FILE_LIST
 	}
-}
+};
 
 export const setUploadedFilesList = (uploadedFiles) => {
 	return {
 		type: actionNames.SET_UPLOADED_FILES_LIST,
 		payload: uploadedFiles
 	}
-}
+};
 
 export const uploadPackageInfo = (data) => {
     const api = Api.getInstance();
