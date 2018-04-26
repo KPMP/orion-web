@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { filesToUpload } from './actions/UploadForm/filesToUploadReducer';
 import { fileDescription } from './actions/UploadForm/fileDescriptionReducer';
 import { fileList } from './actions/UploadForm/fileListReducer';
-import { uploadResponse } from './actions/UploadForm/uploadResponseReducer';
 import { packageInfo } from './actions/UploadForm/setPackageInfoReducer';
 import { currentTab } from './actions/UploadForm/currentTabReducer';
 import { showUploadModal } from './actions/UploadForm/showUploadModalReducer';
@@ -20,8 +19,7 @@ const appReducer = combineReducers({
     fileList,
     form: formReducer,
     showUploadModal,
-    uploadedFiles,
-    uploadResponse
+    uploadedFiles
 });
 
 const rootReducer = (state, action) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UploadTabContainer from './UploadForms/UploadTabContainer';
+import UploadTabContainer from './UploadModal/UploadModalContainer';
 import { Button } from 'react-bootstrap';
 import UploadedFilesTableContainer from './UploadedFilesTableContainer';
 
