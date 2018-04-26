@@ -34,11 +34,11 @@ class UploadedFilesTable extends Component {
 			<div className="row">
 				<div className="col-sm-12">
 					<div className="uploadTable">
-						<ReactDataGrid
+						{this.state.rows.length && <ReactDataGrid
 							columns={this._columns}
 							rowGetter={this.rowGetter}
 							rowsCount={this.state.rows.length}
-							minHeight={500} />
+							minHeight={500} />}
 					</div>		
 				</div>
 			</div>
