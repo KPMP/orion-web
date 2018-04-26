@@ -5,8 +5,7 @@ import qq from 'fine-uploader/lib/core'
 import Gallery from 'react-fine-uploader'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
-import UploadPackageInfoForm from './UploadPackageInfoForm';
-import ReviewUpload from './ReviewUpload';
+import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
@@ -98,7 +97,7 @@ const ReviewPanel = ({ props }) => {
     );
 };
 
-class UploadTab extends Component {
+class UploadModal extends Component {
 
 	constructor(props) {
 		super();
@@ -216,7 +215,7 @@ class UploadTab extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
+                                <UploadModalPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
                                 <div>
@@ -263,4 +262,4 @@ class UploadTab extends Component {
     }
 }
 
-export default UploadTab
+export default UploadModal

@@ -3,7 +3,7 @@ import { Form, Field, reduxForm } from 'redux-form';
 import {  ControlLabel } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 
-class UploadPackageInfoForm extends Component {
+class UploadModalPackageInfoForm extends Component {
     render() {
         const { handleSubmit, onSubmit } = this.props;
         return (
@@ -86,4 +86,4 @@ class UploadPackageInfoForm extends Component {
 
 export default reduxForm({
     form: 'uploadPackageInfoForm'
-})(UploadPackageInfoForm);
+})(UploadModalPackageInfoForm);
