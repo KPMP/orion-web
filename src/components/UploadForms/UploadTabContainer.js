@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch, props) =>
             dispatch(appendToFileList(file));
         },
         processUpload() {
-        		dispatch(submit('uploadPackageInfoForm'));
-            dispatch(viewUploadedFiles());
+        	dispatch(submit('uploadPackageInfoForm'));
+            // dispatch(viewUploadedFiles());
         },
         uploadPackageInfo(formData) {
             dispatch(uploadPackageInfo(formData));

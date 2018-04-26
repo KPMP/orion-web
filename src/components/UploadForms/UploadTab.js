@@ -10,6 +10,20 @@ import ReviewUpload from './ReviewUpload';
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
+const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => (
+    <div className="row buttonRow">
+        <div className="col-6 float-left">
+            <Button className="btn-outline-dark" bsStyle="default" onClick={() => showUploadModal(false)}>Cancel</Button>
+        </div>
+        <div className="col-6">
+            <ButtonGroup className="float-right">
+                <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
+                <Button type="submit" bsStyle="primary" onClick={() => processUpload()}>Start Upload</Button>
+            </ButtonGroup>
+        </div>
+    </div>
+);
+
 const ReviewPanel = ({ props }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList, cancel } = props;
 
@@ -31,7 +45,7 @@ const ReviewPanel = ({ props }) => {
                     <strong>Name:</strong>
                 </div>
                 <div className="col-8">
-                    <span>{ values.firstName} { values.lastName }</span>
+                    <span>{ values.firstName } { values.lastName }</span>
                 </div>
             </div>
             <div className="row">
@@ -79,7 +93,7 @@ const ReviewPanel = ({ props }) => {
                     <FileList files={ fileList } />
                 </div>
             </div>
-            <ReviewUpload changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} />
+            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} />
         </div>
     );
 };
@@ -88,6 +102,7 @@ class UploadTab extends Component {
 
 	constructor(props) {
 		super();
+
 		this.uploader = new FineUploaderTraditional({
 		    options: {
 		        debug: true,
@@ -101,21 +116,6 @@ class UploadTab extends Component {
 		        },
 		        retry: {
 		            enableAuto: false
-		        },
-		        callbacks: {
-		        		onAllComplete: function(success, failure) {
-		        			props.showUploadModal(false);
-		        			props.viewUploadedFiles();
-		        		},
-		        		onError: function(fileId, filename, errorReason, xhr) {
-		        			// for some reason we always get an undefined file here, so we are just ignoring it for now.
-		        			if (filename !== undefined) {
-		        				alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
-		        				this.methods.clearStoredFiles();
-		        				this.methods.reset();
-		        				props.showUploadModal(false);
-		        			}
-		        		}
 		        }
 		    }
 		});
@@ -139,6 +139,25 @@ class UploadTab extends Component {
 
             return { pause: true };
         });
+        this.uploader.on('allComplete', (success, failure) => {
+            // @FIXME: this is a redux daisy chain that is creating race conditions
+            // this.uploader.methods.cancelAll();
+            // this.uploader.methods.clearStoredFiles();
+            // this.uploader.methods.reset();
+            // this.props.showUploadModal(false);
+            // this.props.viewUploadedFiles();
+
+            // replace when daisy chain is fixed
+            window.location.reload();
+        });
+        this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
+            // for some reason we always get an undefined file here, so we are just ignoring it for now.
+            if (filename !== undefined) {
+                alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
+                // just becasue the back end had trouble doesn't mean we need to toss the queue
+                this.props.changeUploadTab(1);
+            }
+        });
     }
 
     componentDidUpdate() {
@@ -151,7 +170,6 @@ class UploadTab extends Component {
             });
 
             this.uploader.methods.uploadStoredFiles();
-           
         }
     }
 

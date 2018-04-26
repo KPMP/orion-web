@@ -77,6 +77,9 @@ export const viewUploadedFiles = () => {
 			.then(res => {
 				dispatch(setUploadedFilesList(res.data));
 			})
-			.catch(err => console.error(err));
+			.catch(err => {
+                alert("Cannot connect to KPMP Data Lake File Repository");
+                console.error(err);
+            });
 	};
 }
