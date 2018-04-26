@@ -1,6 +1,8 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 
+const api = Api.getInstance();
+
 export const showUploadModalAction = (show) => {
 	return {
 		type: actionNames.SHOW_UPLOAD_MODAL,
@@ -57,8 +59,6 @@ export const setUploadedFilesList = (uploadedFiles) => {
 };
 
 export const uploadPackageInfo = (data) => {
-    const api = Api.getInstance();
-
     return (dispatch) => {
         api.post('/upload/packageInfo', data)
           .then((res) => {
@@ -72,18 +72,11 @@ export const uploadPackageInfo = (data) => {
 }
 
 export const viewUploadedFiles = () => {
-	const url = "http://localhost:3030/viewUploads";
 	return (dispatch) => {
-		fetch(url, {
-			method: "GET",
-			mode: "cors",
-			enctype: "multipart/form-data"
-		})
-		.then(res => res.json())
-		.then(res => {
-			dispatch(setUploadedFilesList(res));
-		}
-		)
-		.catch(err => console.error(err));
+		api.get('/viewUploads')
+			.then(res => {
+				dispatch(setUploadedFilesList(res.data));
+			})
+			.catch(err => console.error(err));
 	};
 }

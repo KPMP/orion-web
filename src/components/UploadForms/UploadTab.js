@@ -97,7 +97,7 @@ class UploadTab extends Component {
 		            enabled: true
 		        },
 		        request: {
-		            endpoint: 'http://localhost:3030/upload'
+		            endpoint: BASE_URL + '/upload'
 		        },
 		        retry: {
 		            enableAuto: false
