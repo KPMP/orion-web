@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import { Label, Button, ControlLabel } from 'react-bootstrap';
+import { Button, ControlLabel } from 'react-bootstrap';
 
 class UploadModalPackageInfoForm extends Component {
     render() {

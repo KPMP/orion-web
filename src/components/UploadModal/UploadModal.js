@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
-import FineUploaderTraditional from 'fine-uploader-wrappers'
-import qq from 'fine-uploader/lib/core'
-import Gallery from 'react-fine-uploader'
+import FineUploaderTraditional from 'fine-uploader-wrappers';
+import qq from 'fine-uploader/lib/core';
+import Gallery from 'react-fine-uploader';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
-const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, uploadReady }) => (
+const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, uploadDisabled }) => (
     <div className="row buttonRow">
         <div className="col-6 float-left">
             <Button className="btn-outline-dark" bsStyle="default" onClick={() => showUploadModal(false)}>Cancel</Button>
@@ -17,29 +17,29 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, uploa
         <div className="col-6">
             <ButtonGroup className="float-right">
                 <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
-                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={!uploadReady?"disabled":""}>Start Upload</Button>
+                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={uploadDisabled}>Start Upload</Button>
             </ButtonGroup>
         </div>
     </div>
 );
 
-const ReviewPanel = ({ props }) => {
+const ReviewPanel = ({ props, uploader }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList, cancel } = props;
 
     let showPackageInfo = true;
     let values = {};
-    let uploadReady = true;
+    let uploadDisabled = false;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
         showPackageInfo = false;
-        uploadReady = false;
+        uploadDisabled = true;
     } else {
         values = form.uploadPackageInfoForm.values;
     }
 
     return (
         <div className="container-fluid">
-            {showPackageInfo &&
+            {showPackageInfo ?
                 <div id="packageInfo">
                 <div id="packageDescription">
                     <div className="row">
@@ -102,9 +102,8 @@ const ReviewPanel = ({ props }) => {
                     </div>
                 </div>
                 </div>
-            }
-            <div className="dotted">Please define your upload first and then attach files.</div>
-            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadReady={uploadReady}/>
+            : <div className="dotted">Please define your upload first and then attach files.</div>}
+            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );
 };
@@ -265,7 +264,7 @@ class UploadModal extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <ReviewPanel props={ this.props } />
+                                <ReviewPanel props={ this.props } uploader={this.uploader}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
