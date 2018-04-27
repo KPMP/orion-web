@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
 
+class DateFormatter extends React.Component {
+
+	render() {
+		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleDateString("en-US") : "";
+		return (
+			<div>
+				<div>
+          			{formattedDate}
+				</div>
+			</div>);
+	}
+}
+
 class UploadedFilesTable extends Component {
 
 	constructor(props) { 
@@ -13,7 +26,7 @@ class UploadedFilesTable extends Component {
 		      { key: 'filename', name: 'File Name'},
 		      { key: 'subjectId', name:'Subject Id'},
 		      { key: 'experimentId', name:'Experiment Id'},
-		      { key: 'experimentDate', name: 'Experiment Date'}];
+		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter}];
 		this.state = { rows: props.uploadedFiles };
 	}
 	  
@@ -27,7 +40,7 @@ class UploadedFilesTable extends Component {
 	
 	rowGetter = (i) => {
 		return this.state.rows[i];
-	};
+	};z
 
 	render() {
 		return(
@@ -45,5 +58,7 @@ class UploadedFilesTable extends Component {
 		);
 	}
 }
+
+
 
 export default UploadedFilesTable;
