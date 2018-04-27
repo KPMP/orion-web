@@ -67,7 +67,7 @@ class UploadModalPackageInfoForm extends Component {
                     </div>
                     <div className="form-group">
                         <ControlLabel>Experiment Date (optional)</ControlLabel>
-                        <Field name="experimentDate" className="form-control" component="input" type="text" />
+                        <Field name="experimentDate" className="form-control" component="input" type="date" />
                     </div>
                 </div>
                 <div className="row buttonRow">
