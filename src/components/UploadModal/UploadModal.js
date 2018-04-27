@@ -103,7 +103,7 @@ const ReviewPanel = ({ props }) => {
                 </div>
                 </div>
             }
-            <p><em>Please define your upload first and then attach files.</em></p>
+            <div className="dotted">Please define your upload first and then attach files.</div>
             <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadReady={uploadReady}/>
         </div>
     );
