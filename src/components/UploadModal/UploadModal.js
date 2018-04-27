@@ -9,7 +9,7 @@ import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
-const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => (
+const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, uploadReady }) => (
     <div className="row buttonRow">
         <div className="col-6 float-left">
             <Button className="btn-outline-dark" bsStyle="default" onClick={() => showUploadModal(false)}>Cancel</Button>
@@ -17,7 +17,7 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => 
         <div className="col-6">
             <ButtonGroup className="float-right">
                 <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
-                <Button type="submit" bsStyle="primary" onClick={() => processUpload()}>Start Upload</Button>
+                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={!uploadReady?"disabled":""}>Start Upload</Button>
             </ButtonGroup>
         </div>
     </div>
@@ -26,73 +26,85 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => 
 const ReviewPanel = ({ props }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList, cancel } = props;
 
+    let showPackageInfo = true;
+    let values = {};
+    let uploadReady = true;
+
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
-        return (<p><em>Please define your upload first and then attach files.</em></p>);
+        showPackageInfo = false;
+        uploadReady = false;
+    } else {
+        values = form.uploadPackageInfoForm.values;
     }
 
-    const values = form.uploadPackageInfoForm.values;
- 
     return (
         <div className="container-fluid">
-            <div className="row">
-                <div className="col-12">
-                    <div className="modalTitle">Review Upload</div>
+            {showPackageInfo &&
+                <div id="packageInfo">
+                <div id="packageDescription">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="modalTitle">Review Upload</div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Name:</strong>
+                        </div>
+                        <div className="col-8">
+                            <span>{ values.firstName } { values.lastName }</span>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Institution:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.institutionName }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Package Type:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.packageType }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Experiment #:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.experimentId }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Subject #:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.subjectId }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Experiment Date:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.experimentDate }
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Name:</strong>
+                <div className="row">
+                    <div className="col-12">
+                        <FileList files={ fileList } />
+                    </div>
                 </div>
-                <div className="col-8">
-                    <span>{ values.firstName } { values.lastName }</span>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Institution:</strong>
-                </div>
-                <div className="col-8">
-                    { values.institutionName }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Package Type:</strong>
-                </div>
-                <div className="col-8">
-                    { values.packageType }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Experiment #:</strong>
-                </div>
-                <div className="col-8">
-                    { values.experimentId }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Subject #:</strong>
-                </div>
-                <div className="col-8">
-                    { values.subjectId }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Experiment Date:</strong>
-                </div>
-                <div className="col-8">
-                    { values.experimentDate }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12">
-                    <FileList files={ fileList } />
-                </div>
-            </div>
-            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} />
+            }
+            <p><em>Please define your upload first and then attach files.</em></p>
+            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadReady={uploadReady}/>
         </div>
     );
 };
@@ -221,8 +233,8 @@ class UploadModal extends Component {
                                 <div>
                                     <div className="modalTitle">Select File(s)</div>
                                     <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
-                                    <div className="form-group">
-                                        <ControlLabel htmlFor="fileDescription">Description* <i>(each file requires a description)</i></ControlLabel>
+                                    <div id="fileDescription" className="form-group">
+                                        <ControlLabel htmlFor="fileDescription"><span style={{fontWeight: "bold"}}>Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
                                         <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
@@ -230,8 +242,9 @@ class UploadModal extends Component {
                                             <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <span>Attached Files</span>
+                                    <hr/>
+                                    <div id="attachedFiles">
+                                        <span style={{fontWeight: "bold"}}>Attached Files</span>
                                         <FileList files={this.props.fileList} />
                                     </div>
                                 </div>

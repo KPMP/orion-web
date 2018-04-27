@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import {  ControlLabel } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Label, Button, ControlLabel } from 'react-bootstrap';
 
 class UploadModalPackageInfoForm extends Component {
     render() {
         const { handleSubmit, onSubmit } = this.props;
         return (
             <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
-                <div className="modalTitle">Upload Information</div>
+                <div className="modalTitle" id="uploadInfoHeader">Upload Information</div>
+                <span className="badge badge-danger">All fields are required unless otherwise noted</span>
                 <div>
                     <div className="form-group">
                         <ControlLabel>First Name</ControlLabel>
@@ -56,11 +56,11 @@ class UploadModalPackageInfoForm extends Component {
                             <option value="Other">Other</option>
                         </Field>
                     </div>
-                    <div style={{textAlign: "center", fontWeight:"bold"}}>-OR-</div>
                     <div className="form-group">
                         <ControlLabel>Subject # (optional)</ControlLabel>
                         <Field name="subjectId" className="form-control" component="input" type="text" />
                     </div>
+                    <div className="centerBold">-OR-</div>
                     <div className="form-group">
                         <ControlLabel>Experiment # (optional)</ControlLabel>
                         <Field name="experimentId" className="form-control" component="input" type="text" />
@@ -76,7 +76,6 @@ class UploadModalPackageInfoForm extends Component {
                     </div>
                     <div className="col-6 float-right">
                         <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)}>Next</Button>
-
                     </div>
                 </div>
             </Form>
