@@ -231,10 +231,10 @@ class UploadModal extends Component {
                             </TabPanel>
                             <TabPanel>
                                 <div>
-                                    <div className="modalTitle">Select File(s)</div>
+                                    <div className="modalTitle">Select File</div>
                                     <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
                                     <div id="fileDescription" className="form-group">
-                                        <ControlLabel htmlFor="fileDescription"><span style={{fontWeight: "bold"}}>Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
+                                        <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
                                         <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
