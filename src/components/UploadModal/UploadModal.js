@@ -203,7 +203,7 @@ class UploadModal extends Component {
     		this.props.clearFileList();
     }
 
-    render() {
+    render = () => {
         return (
             <div className="static-modal">
                 <Modal.Dialog>
