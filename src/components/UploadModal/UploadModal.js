@@ -3,6 +3,8 @@ import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
 import Gallery from 'react-fine-uploader';
+import Status from 'react-fine-uploader/status';
+import ProgressBar from 'react-fine-uploader/progress-bar';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
@@ -98,7 +100,7 @@ const ReviewPanel = ({ props, uploader }) => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <FileList files={ fileList } />
+                        <FileList files={ fileList } uploader={ uploader } />
                     </div>
                 </div>
                 </div>
