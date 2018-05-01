@@ -8,7 +8,12 @@ import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
 
-const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
+const BASE_URL = 'http://localhost:3030';
+if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+	BASE_URL = 'http://upload.kpmp.org:3030';
+} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
+	BASE_URL = 'http://141.214.4.23:3000/';
+}
 
 const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cancel, uploadDisabled }) => (
     <div className="row buttonRow">
