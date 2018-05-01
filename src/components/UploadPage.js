@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UploadTabContainer from './UploadModal/UploadModalContainer';
+import UploadModalContainer from './UploadModal/UploadModalContainer';
 import { Button } from 'react-bootstrap';
 import UploadedFilesTableContainer from './UploadedFilesTableContainer';
 
@@ -22,7 +22,7 @@ class UploadPage extends Component {
 						<Button bsStyle="primary" className="uploadButton" onClick={() => this.props.showUploadModalAction() }>New Upload</Button>
 					</div>
 					{this.props.shouldShowUploadModal &&
-						<UploadTabContainer />
+						<UploadModalContainer />
 					}
 				</div>
 					<UploadedFilesTableContainer/>

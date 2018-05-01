@@ -75,3 +75,40 @@
 	padding-right: 15px;
 }
 
+.form-group {
+	margin-bottom: 0.5rem;
+}
+
+.modal-content {
+	height: 725px;
+}
+
+.centerBold {
+	text-align: center;
+	font-weight: bold;
+}
+
+.fileList thead {
+	border-top: none;
+}
+
+#attachedFiles {
+	margin-top: 10px;
+}
+
+#fileDescription {
+	margin-top: 10px;
+}
+
+#packageDescription {
+	margin-botton: 10px;
+}
+
+.dotted {
+	margin-top: 15px;
+	border: 3px dashed #ccc;
+	border-style: dashed;
+	padding: 5px;
+	border-radius: 5px;
+	font-style: italic;
+}
