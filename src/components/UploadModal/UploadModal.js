@@ -8,7 +8,7 @@ import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
 
-const BASE_URL = 'http://localhost:3030';
+let BASE_URL = 'http://localhost:3030';
 if (process.env.REACT_APP_ENVIRONMENT === 'production') {
 	BASE_URL = 'http://upload.kpmp.org:3030';
 } else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
