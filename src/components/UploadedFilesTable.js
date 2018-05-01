@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
 
+
+const CELL_CLASS = "uploadCell";
+
 class DateFormatter extends React.Component {
 
 	render() {
 		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleDateString("en-US") : "";
 		return (
 			<div>
-				<div>
+				<div className={CELL_CLASS}>
           			{formattedDate}
 				</div>
 			</div>);
@@ -20,8 +23,20 @@ class DateFormatterTime extends React.Component {
 		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleString("en-US", { timeZone: 'UTC' }) : "";
 		return (
 			<div>
-				<div>
-          			{formattedDate}
+				<div className={CELL_CLASS}>
+          			<span>{formattedDate}</span>
+				</div>
+			</div>);
+	}
+}
+
+class DefaultFormatter extends React.Component {
+
+	render() {
+		return (
+			<div>
+				<div className={CELL_CLASS}>
+					<span>{this.props.value}</span>
 				</div>
 			</div>);
 	}
@@ -33,12 +48,12 @@ class UploadedFilesTable extends Component {
 		super();
 		
 		this._columns = [
-		      { key: 'researcher', name: 'Name', resizable: true, sortable: true },
-		      { key: 'institution', name: 'Site', resizable: true, sortable: true },
-		      { key: 'packageType', name: 'Type', resizable: true, sortable: true },
-		      { key: 'filename', name: 'File Name', resizable: true, sortable: true },
-		      { key: 'subjectId', name:'Subject Id', resizable: true, sortable: true },
-		      { key: 'experimentId', name:'Experiment Id', resizable: true, sortable: true },
+		      { key: 'researcher', name: 'Name', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'institution', name: 'Site', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'packageType', name: 'Type', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'filename', name: 'File Name', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'subjectId', name:'Subject Id', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'experimentId', name:'Experiment Id', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter, resizable: true, sortable: true},
 			  { key: 'createdAt', name: 'Added On', formatter: DateFormatterTime, resizable: true, sortable: true} ];
 		this.state = { rows: props.uploadedFiles };
