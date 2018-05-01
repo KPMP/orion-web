@@ -6,6 +6,7 @@ import Gallery from 'react-fine-uploader';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
+import FileProgressModal from "../FileProgressModal/FileProgressModal";
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
@@ -97,7 +98,7 @@ const ReviewPanel = ({ props, cancel }) => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <FileList files={ fileList } />
+                        <FileList files={ fileList }/>
                     </div>
                 </div>
                 </div>
@@ -129,7 +130,7 @@ class UploadModal extends Component {
 		    }
 		});
 	}
-	
+
     componentDidMount() {
         this.uploader.on('submit', (id, name) => {
             if (this.uploader.methods.getUploads({
@@ -156,8 +157,7 @@ class UploadModal extends Component {
             // this.props.showUploadModal(false);
             // this.props.viewUploadedFiles();
 
-            // replace when daisy chain is fixed
-            window.location.reload();
+            this.props.updateUploadStatus("complete");
         });
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
@@ -170,14 +170,14 @@ class UploadModal extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.packageInfo) {
+        if (this.props.packageInfo && !this.props.showFileProgressModal) {
             this.uploader.methods.reset();
 
             this.props.fileList.forEach((file, id) => {
                 this.uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
                 this.uploader.methods.addFiles([this.props.fileList[id].file]);
             });
-
+            this.props.showFileProgress(true);
             this.uploader.methods.uploadStoredFiles();
         }
     }
@@ -208,15 +208,16 @@ class UploadModal extends Component {
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
-    		this.uploader.methods.reset(); 
-    		this.props.showUploadModal(false);
+    		this.uploader.methods.reset();
+            this.props.resetModals();
     		this.props.clearFileList();
-    }
+    };
 
     render = () => {
         return (
-            <div className="static-modal">
-                <Modal.Dialog>
+            ( this.props.showFileProgressModal ? <FileProgressModal uploader={ this.uploader } fileList= { this.props.fileList } cancel={ this.cancel } uploadStatus={ this.props.uploadStatus }/> :
+            <div className="uploadFilesModal static-modal">
+                <Modal.Dialog className="uploadFilesModal">
                     <Modal.Body className="uploadFilesContainer">
                         <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
@@ -253,22 +254,23 @@ class UploadModal extends Component {
                                             <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.cancel(this.uploader, this.props)}>Cancel</Button>
                                         </div>
                                         <div className="col-6">
-                                        		<ButtonGroup className="float-right">
+                                        		<div className="float-right">
                                         			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
                                         			&nbsp;
                                         			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
-                                            	</ButtonGroup>
+                                            	</div>
                                         </div>
                                     </div>
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <ReviewPanel props={ this.props } cancel={this.cancel} uploader={this.uploader}/>
+                                <ReviewPanel props={ this.props } cancel={this.cancel}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
                 </Modal.Dialog>
             </div>
+                )
         )
     }
 }
