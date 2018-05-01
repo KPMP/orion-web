@@ -14,6 +14,19 @@ class DateFormatter extends React.Component {
 	}
 }
 
+class DateFormatterTime extends React.Component {
+
+	render() {
+		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleString("en-US", { timeZone: 'UTC' }) : "";
+		return (
+			<div>
+				<div>
+          			{formattedDate}
+				</div>
+			</div>);
+	}
+}
+
 class UploadedFilesTable extends Component {
 
 	constructor(props) { 
@@ -26,7 +39,8 @@ class UploadedFilesTable extends Component {
 		      { key: 'filename', name: 'File Name'},
 		      { key: 'subjectId', name:'Subject Id'},
 		      { key: 'experimentId', name:'Experiment Id'},
-		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter}];
+		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter},
+			  { key: 'createdAt', name: 'Added On', formatter: DateFormatterTime} ];
 		this.state = { rows: props.uploadedFiles };
 	}
 	  
