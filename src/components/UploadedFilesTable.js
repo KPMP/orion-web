@@ -1,46 +1,6 @@
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
-
-
-const CELL_CLASS = "uploadCell";
-
-class DateFormatter extends React.Component {
-
-	render() {
-		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleDateString("en-US") : "";
-		return (
-			<div>
-				<div className={CELL_CLASS}>
-          			{formattedDate}
-				</div>
-			</div>);
-	}
-}
-
-class DateFormatterTime extends React.Component {
-
-	render() {
-		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleString("en-US", { timeZone: 'UTC' }) : "";
-		return (
-			<div>
-				<div className={CELL_CLASS}>
-          			<span>{formattedDate}</span>
-				</div>
-			</div>);
-	}
-}
-
-class DefaultFormatter extends React.Component {
-
-	render() {
-		return (
-			<div>
-				<div className={CELL_CLASS}>
-					<span>{this.props.value}</span>
-				</div>
-			</div>);
-	}
-}
+import {DefaultFormatter, DateFormatter, DateTimeFormatter} from './tableCellFormatters';
 
 class UploadedFilesTable extends Component {
 
@@ -55,7 +15,7 @@ class UploadedFilesTable extends Component {
 		      { key: 'subjectId', name:'Subject Id', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentId', name:'Experiment Id', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter, resizable: true, sortable: true},
-			  { key: 'createdAt', name: 'Added On', formatter: DateFormatterTime, resizable: true, sortable: true} ];
+			  { key: 'createdAt', name: 'Added On', formatter: DateTimeFormatter, resizable: true, sortable: true} ];
 		this.state = { rows: props.uploadedFiles };
 	}
 	  
