@@ -8,14 +8,21 @@ export const showUploadModalAction = (show) => {
 		type: actionNames.SHOW_UPLOAD_MODAL,
 		payload: show
 	}
-}
+};
+
+export const showFileProgressModalAction = (show) => {
+    return {
+        type: actionNames.SHOW_FILE_PROGRESS_MODAL,
+        payload: show
+    }
+};
 
 export const changeUploadTab = (tabIndex) => {
 	return {
 		type: actionNames.CHANGE_UPLOAD_TAB,
 		payload: tabIndex
 	}
-}
+};
 
 export const updateFilesToUpload = (files) => {
     return {
@@ -69,7 +76,7 @@ export const uploadPackageInfo = (data) => {
             console.log(err);
           })
     };
-}
+};
 
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
@@ -82,4 +89,11 @@ export const viewUploadedFiles = () => {
                 console.error(err);
             });
 	};
-}
+};
+
+export const updateUploadStatus = (status) => {
+    return {
+        type: actionNames.UPDATE_UPLOAD_STATUS,
+        payload: status
+    }
+};

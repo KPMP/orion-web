@@ -5,5 +5,7 @@
   "packageInfo": null,
   "currentTab": 0,
   "showUploadModal": false,
-  "uploadedFiles": []
+  "uploadedFiles": [],
+  "showFileProgressModal": false,
+  "uploadStatus": ""
 }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ProgressBar from 'react-fine-uploader/progress-bar';
-
 
 class FileList extends Component {
 
@@ -14,8 +12,7 @@ class FileList extends Component {
                         </thead>
                         <tbody>
                             {this.props.files.map((row, i) => {
-                                return <tr key={i}><td>{row.name}</td><td>{row.fileMetadata}</td><td>{this.props.uploader && <ProgressBar id={row.id} uploader={this.props.uploader}/>}</td>
-                                </tr>
+                                return <tr key={i}><td>{row.name}</td><td>{row.fileMetadata}</td></tr>
                             })}
                         </tbody>
                     </table>

@@ -23,16 +23,16 @@
 	}
 
 	.dropzone {
-	    border-radius: 5px;
-	    background-color: #E1E1E1;
-	    border: 2px dashed #C7C7C7;
-	    height: 100px;
-	    width: 500px;
-	    
-	    .dz-message {
-	    		text-align: center;
-	    		margin: 2em 0em 2em 0em;
-	    	} 
+		border-radius: 5px;
+		background-color: #E1E1E1;
+		border: 2px dashed #C7C7C7;
+		height: 100px;
+		width: 500px;
+
+		.dz-message {
+			text-align: center;
+			margin: 2em 0em 2em 0em;
+		}
 	}
 
 	#uploadStatus {
@@ -79,8 +79,16 @@
 	margin-bottom: 0.5rem;
 }
 
-.modal-content {
-	height: 725px;
+.uploadFilesModal {
+	.modal-content {
+		height: 750px;
+	}
+}
+
+.fileProgressModal {
+	.modal-content {
+		width: 600px;
+	}
 }
 
 .centerBold {
@@ -113,41 +121,6 @@
 	font-style: italic;
 }
 
-//.react-fine-uploader-file-progress-bar,
-// .react-fine-uploader-total-progress-bar {
-//	 border-radius: 3px;
-// }
-//.react-fine-uploader-file-progress-bar-container,
-//.react-fine-uploader-total-progress-bar-container {
-//	background: #F2F2F2;
-//	border-radius: 3px;
-//	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
-//	position: absolute;
-//}
-//.react-fine-uploader-total-progress-bar-container {
-//	display: inline-block;
-//	height: 25px;
-//	margin-left: 10px;
-//	margin-right: 10px;
-//	margin-top: 4px;
-//	width: 70%;
-//}
-//.react-fine-uploader-file-progress-bar,
-//.react-fine-uploader-total-progress-bar {
-//	background: #00ABC7;
-//	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
-//	height: inherit;
-//}
-//.react-fine-uploader-file-progress-bar-container {
-//	height: 15px;
-//	left: 50%;
-//	opacity: 0.9;
-//	top: 60px;
-//	transform: translateX(-50%);
-//	width: 90%;
-//	z-index: 1;
-//}
-
 .react-fine-uploader-file-progress-bar {
 	display: block;
 	display: block;
@@ -168,4 +141,12 @@
 	display: inline;
 	float: right;
 	width: 500px;
+}
+
+#fileProgressTable {
+	width: 100%
+}
+
+#fileProgressTable td {
+	padding: 5px
 }
