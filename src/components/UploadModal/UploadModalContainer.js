@@ -55,6 +55,7 @@ const mapDispatchToProps = (dispatch, props) =>
             dispatch(showUploadModalAction(false));
             dispatch(setPackageInfo(null));
             dispatch(updateUploadStatus(""));
+            dispatch(changeUploadTab(0));
         },
         updateUploadStatus(status) {
             dispatch(updateUploadStatus(status));
