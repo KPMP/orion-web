@@ -9,10 +9,10 @@ import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 
 const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
 
-const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => (
+const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cancel }) => (
     <div className="row buttonRow">
         <div className="col-6 float-left">
-            <Button className="btn-outline-dark" bsStyle="default" onClick={() => showUploadModal(false)}>Cancel</Button>
+            <Button className="btn-outline-dark" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
         </div>
         <div className="col-6">
             <ButtonGroup className="float-right">
@@ -23,8 +23,9 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => 
     </div>
 );
 
-const ReviewPanel = ({ props }) => {
-    const { form, changeUploadTab, showUploadModal, processUpload, fileList, cancel } = props;
+const ReviewPanel = ({ props, cancel }) => {
+
+    const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
         return (<p><em>Please define your upload first and then attach files.</em></p>);
@@ -92,7 +93,7 @@ const ReviewPanel = ({ props }) => {
                     <FileList files={ fileList } />
                 </div>
             </div>
-            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} />
+            <ReviewControls changeUploadTab={changeUploadTab} processUpload={processUpload} cancel={cancel} />
         </div>
     );
 };
@@ -252,7 +253,7 @@ class UploadModal extends Component {
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <ReviewPanel props={ this.props } />
+                                <ReviewPanel props={ this.props } cancel={this.cancel}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
