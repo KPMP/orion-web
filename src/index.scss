@@ -61,9 +61,15 @@
 
 	.uploadTable {
 		padding-top: 15px;
+		overflow: auto;
+
+		.uploadCell {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	}
 }
-
 
 .fine-uploader-dropzone-container {
 	min-height: 100px !important;

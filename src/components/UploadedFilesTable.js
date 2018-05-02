@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
-
-class DateFormatter extends React.Component {
-
-	render() {
-		const formattedDate = this.props.value ? new Date(this.props.value).toLocaleDateString("en-US") : "";
-		return (
-			<div>
-				<div>
-          			{formattedDate}
-				</div>
-			</div>);
-	}
-}
+import {DefaultFormatter, DateFormatter, DateTimeFormatter} from './tableCellFormatters';
 
 class UploadedFilesTable extends Component {
 
@@ -20,13 +8,14 @@ class UploadedFilesTable extends Component {
 		super();
 		
 		this._columns = [
-		      { key: 'researcher', name: 'Name' },
-		      { key: 'institution', name: 'Site' },
-		      { key: 'packageType', name: 'Type' },
-		      { key: 'filename', name: 'File Name'},
-		      { key: 'subjectId', name:'Subject Id'},
-		      { key: 'experimentId', name:'Experiment Id'},
-		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter}];
+		      { key: 'researcher', name: 'Name', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'institution', name: 'Site', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'packageType', name: 'Type', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'filename', name: 'File Name', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'subjectId', name:'Subject Id', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'experimentId', name:'Experiment Id', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter, resizable: true, sortable: true},
+			  { key: 'createdAt', name: 'Added On', formatter: DateTimeFormatter, resizable: true, sortable: true} ];
 		this.state = { rows: props.uploadedFiles };
 	}
 	  
@@ -40,7 +29,21 @@ class UploadedFilesTable extends Component {
 	
 	rowGetter = (i) => {
 		return this.state.rows[i];
-	};z
+	};
+
+	handleGridSort = (sortColumn, sortDirection) => {
+		const comparer = (a, b) => {
+			if (sortDirection === 'ASC') {
+				return (a[sortColumn] > b[sortColumn]) ? 1 : -1;
+			} else if (sortDirection === 'DESC') {
+				return (a[sortColumn] < b[sortColumn]) ? 1 : -1;
+			}
+		};
+
+		const rows = sortDirection === 'NONE' ? this.state.originalRows.slice(0) : this.state.rows.sort(comparer);
+
+		this.setState({ rows });
+	};
 
 	render() {
 		return(
@@ -52,6 +55,7 @@ class UploadedFilesTable extends Component {
 							columns={this._columns}
 							rowGetter={this.rowGetter}
 							rowsCount={this.state.rows.length}
+							onGridSort={this.handleGridSort}
 							minHeight={500} /> : '' }
 					</div>		
 				</div>
