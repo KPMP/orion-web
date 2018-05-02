@@ -18,10 +18,10 @@ class SelectBox extends Component {
 					((error && <span className="formError">{error}</span>) ||
 							(warning && <span>{warning}</span>))}
 				</ControlLabel>
-				<select name={name} class={classes} onBlur={onBlur} onChange={onChange} onFocus={onFocus}>
+				<select name={name} className={classes} onBlur={onBlur} onChange={onChange} onFocus={onFocus}>
 					<option value=''>- select - </option>
 					{options.map(function(option, index) {
-						return <option value={option.value}>{option.label}</option>
+						return <option key={index} value={option.value}>{option.label}</option>
 					})}
 				</select>
 								
