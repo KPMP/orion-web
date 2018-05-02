@@ -23,16 +23,16 @@
 	}
 
 	.dropzone {
-	    border-radius: 5px;
-	    background-color: #E1E1E1;
-	    border: 2px dashed #C7C7C7;
-	    height: 100px;
-	    width: 500px;
-	    
-	    .dz-message {
-	    		text-align: center;
-	    		margin: 2em 0em 2em 0em;
-	    	} 
+		border-radius: 5px;
+		background-color: #E1E1E1;
+		border: 2px dashed #C7C7C7;
+		height: 100px;
+		width: 500px;
+
+		.dz-message {
+			text-align: center;
+			margin: 2em 0em 2em 0em;
+		}
 	}
 
 	#uploadStatus {
@@ -61,9 +61,15 @@
 
 	.uploadTable {
 		padding-top: 15px;
+		overflow: auto;
+
+		.uploadCell {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	}
 }
-
 
 .fine-uploader-dropzone-container {
 	min-height: 100px !important;
@@ -75,3 +81,78 @@
 	padding-right: 15px;
 }
 
+.form-group {
+	margin-bottom: 0.5rem;
+}
+
+.uploadFilesModal {
+	.modal-content {
+		height: 750px;
+	}
+}
+
+.fileProgressModal {
+	.modal-content {
+		width: 600px;
+	}
+}
+
+.centerBold {
+	text-align: center;
+	font-weight: bold;
+}
+
+.fileList thead {
+	border-top: none;
+}
+
+#attachedFiles {
+	margin-top: 10px;
+}
+
+#fileDescription {
+	margin-top: 10px;
+}
+
+#packageDescription {
+	margin-botton: 10px;
+}
+
+.dotted {
+	margin-top: 15px;
+	border: 3px dashed #ccc;
+	border-style: dashed;
+	padding: 5px;
+	border-radius: 5px;
+	font-style: italic;
+}
+
+.react-fine-uploader-file-progress-bar {
+	display: block;
+	display: block;
+	background: rgba(0, 204, 0, 1);
+	width: 0%;
+	height: 15px;
+	border-radius: 6px;
+	margin-bottom: 3px;
+}
+
+.react-fine-uploader-total-progress-bar {
+	height: 25px;
+	border-radius: 9px;
+}
+
+.react-fine-uploader-total-progress-bar-container {
+	margin-left: 9px;
+	display: inline;
+	float: right;
+	width: 500px;
+}
+
+#fileProgressTable {
+	width: 100%
+}
+
+#fileProgressTable td {
+	padding: 5px
+}

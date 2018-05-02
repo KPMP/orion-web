@@ -1,98 +1,114 @@
 import React, { Component } from 'react'
 import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
-import FineUploaderTraditional from 'fine-uploader-wrappers'
-import qq from 'fine-uploader/lib/core'
-import Gallery from 'react-fine-uploader'
+import FineUploaderTraditional from 'fine-uploader-wrappers';
+import qq from 'fine-uploader/lib/core';
+import Gallery from 'react-fine-uploader';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
+import FileProgressModal from "../FileProgressModal/FileProgressModal";
 
-const BASE_URL = (process.env.REACT_APP_ENVIRONMENT === 'production' ? 'http://upload.kpmp.org' : 'http://localhost') + ':3030';
+let BASE_URL = 'http://localhost:3030';
+if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+	BASE_URL = 'http://upload.kpmp.org:3030';
+} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
+	BASE_URL = 'http://141.214.4.23:3030/';
+}
 
-const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload }) => (
+const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cancel, uploadDisabled }) => (
     <div className="row buttonRow">
         <div className="col-6 float-left">
-            <Button className="btn-outline-dark" bsStyle="default" onClick={() => showUploadModal(false)}>Cancel</Button>
+            <Button className="btn-outline-dark" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
         </div>
         <div className="col-6">
             <ButtonGroup className="float-right">
                 <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
-                <Button type="submit" bsStyle="primary" onClick={() => processUpload()}>Start Upload</Button>
+                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={uploadDisabled}>Start Upload</Button>
             </ButtonGroup>
         </div>
     </div>
 );
 
-const ReviewPanel = ({ props }) => {
-    const { form, changeUploadTab, showUploadModal, processUpload, fileList, cancel } = props;
+const ReviewPanel = ({ props, cancel }) => {
+    const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
+    let showPackageInfo = true;
+    let values = {};
+    let uploadDisabled = false;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
-        return (<p><em>Please define your upload first and then attach files.</em></p>);
+        showPackageInfo = false;
+        uploadDisabled = true;
+    } else {
+        values = form.uploadPackageInfoForm.values;
     }
 
-    const values = form.uploadPackageInfoForm.values;
- 
     return (
         <div className="container-fluid">
-            <div className="row">
-                <div className="col-12">
-                    <div className="modalTitle">Review Upload</div>
+            {showPackageInfo ?
+                <div id="packageInfo">
+                <div id="packageDescription">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="modalTitle">Review Upload</div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Name:</strong>
+                        </div>
+                        <div className="col-8">
+                            <span>{ values.firstName } { values.lastName }</span>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Institution:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.institutionName }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Package Type:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.packageType }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Experiment #:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.experimentId }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Subject #:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.subjectId }
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4">
+                            <strong>Experiment Date:</strong>
+                        </div>
+                        <div className="col-8">
+                            { values.experimentDate }
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Name:</strong>
+                <div className="row">
+                    <div className="col-12">
+                        <FileList files={ fileList }/>
+                    </div>
                 </div>
-                <div className="col-8">
-                    <span>{ values.firstName } { values.lastName }</span>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Institution:</strong>
-                </div>
-                <div className="col-8">
-                    { values.institutionName }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Package Type:</strong>
-                </div>
-                <div className="col-8">
-                    { values.packageType }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Experiment #:</strong>
-                </div>
-                <div className="col-8">
-                    { values.experimentId }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Subject #:</strong>
-                </div>
-                <div className="col-8">
-                    { values.subjectId }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <strong>Experiment Date:</strong>
-                </div>
-                <div className="col-8">
-                    { values.experimentDate }
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12">
-                    <FileList files={ fileList } />
-                </div>
-            </div>
-            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} />
+            : <div className="dotted">Please define your upload first and then attach files.</div>}
+            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );
 };
@@ -119,7 +135,7 @@ class UploadModal extends Component {
 		    }
 		});
 	}
-	
+
     componentDidMount() {
         this.uploader.on('submit', (id, name) => {
             if (this.uploader.methods.getUploads({
@@ -146,8 +162,7 @@ class UploadModal extends Component {
             // this.props.showUploadModal(false);
             // this.props.viewUploadedFiles();
 
-            // replace when daisy chain is fixed
-            window.location.reload();
+            this.props.updateUploadStatus("complete");
         });
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
@@ -160,14 +175,14 @@ class UploadModal extends Component {
     }
 
     componentDidUpdate() {
-        if (this.props.packageInfo) {
+        if (this.props.packageInfo && !this.props.showFileProgressModal) {
             this.uploader.methods.reset();
 
             this.props.fileList.forEach((file, id) => {
                 this.uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
                 this.uploader.methods.addFiles([this.props.fileList[id].file]);
             });
-
+            this.props.showFileProgress(true);
             this.uploader.methods.uploadStoredFiles();
         }
     }
@@ -198,15 +213,16 @@ class UploadModal extends Component {
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
-    		this.uploader.methods.reset(); 
-    		this.props.showUploadModal(false);
+    		this.uploader.methods.reset();
+            this.props.resetModals();
     		this.props.clearFileList();
-    }
+    };
 
-    render() {
+    render = () => {
         return (
-            <div className="static-modal">
-                <Modal.Dialog>
+            ( this.props.showFileProgressModal ? <FileProgressModal uploader={ this.uploader } fileList= { this.props.fileList } cancel={ this.cancel } uploadStatus={ this.props.uploadStatus }/> :
+            <div className="uploadFilesModal static-modal">
+                <Modal.Dialog className="uploadFilesModal">
                     <Modal.Body className="uploadFilesContainer">
                         <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
@@ -219,10 +235,10 @@ class UploadModal extends Component {
                             </TabPanel>
                             <TabPanel>
                                 <div>
-                                    <div className="modalTitle">Select File(s)</div>
+                                    <div className="modalTitle">Select File</div>
                                     <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
-                                    <div className="form-group">
-                                        <ControlLabel htmlFor="fileDescription">Description* <i>(each file requires a description)</i></ControlLabel>
+                                    <div id="fileDescription" className="form-group">
+                                        <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
                                         <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
                                     </div>
                                     <div className="row">
@@ -230,8 +246,9 @@ class UploadModal extends Component {
                                             <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
                                         </div>
                                     </div>
-                                    <div>
-                                        <span>Attached Files</span>
+                                    <hr/>
+                                    <div id="attachedFiles">
+                                        <span style={{fontWeight: "bold"}}>Attached Files</span>
                                         <FileList files={this.props.fileList} />
                                     </div>
                                 </div>
@@ -242,22 +259,23 @@ class UploadModal extends Component {
                                             <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.cancel(this.uploader, this.props)}>Cancel</Button>
                                         </div>
                                         <div className="col-6">
-                                        		<ButtonGroup className="float-right">
+                                        		<div className="float-right">
                                         			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
                                         			&nbsp;
                                         			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
-                                            	</ButtonGroup>
+                                            	</div>
                                         </div>
                                     </div>
                                 </div>
                             </TabPanel>
                             <TabPanel>
-                                <ReviewPanel props={ this.props } />
+                                <ReviewPanel props={ this.props } cancel={this.cancel}/>
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
                 </Modal.Dialog>
             </div>
+                )
         )
     }
 }

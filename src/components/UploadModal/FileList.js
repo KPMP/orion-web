@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class FileList extends Component {
 
@@ -6,9 +6,9 @@ class FileList extends Component {
         if (this.props.files.length) {
             return (
                 <div className="fileList">
-                    <table className="table table-sm">
+                    <table className="table table-sm fileList">
                         <thead>
-                            <tr><th>Name</th><th>Description</th></tr>
+                            <tr><th>Name</th><th>Description</th><th></th></tr>
                         </thead>
                         <tbody>
                             {this.props.files.map((row, i) => {
