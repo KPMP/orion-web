@@ -3,16 +3,24 @@ import {  ControlLabel } from 'react-bootstrap';
 
 class TextField extends Component {
 	render() {
-		console.log(this.props);
+		let { label } = this.props;
+		let { name, type, onBlur, onChange, onFocus } = this.props.input;
+		let { error, touched, warning } = this.props.meta;
+		let classes = 'form-control';
+		if (touched && error) {
+			classes += ' fieldInError';
+		}
 		return (
 			<div>
-				<ControlLabel>{this.props.label}</ControlLabel>
+				<ControlLabel>{label} &nbsp;
+					{touched &&
+						((error && <span className="formError ">{error}</span>) ||
+								(warning && <span>{warning}</span>))}
+				</ControlLabel>
 				<div>
-					<input name={this.props.input.name} type={this.props.input.type} className="form-control" />
-						Is touched: {this.props.meta.touched}
-					{this.props.meta.touched &&
-						((this.props.meta.error && <span>{this.props.meta.error}</span>) ||
-								(this.props.meta.warning && <span>{this.props.meta.warning}</span>))}
+					<input name={name} type={type} className={classes} onBlur={onBlur}
+						onChange={onChange} onFocus={onFocus}/>
+					
 				</div>
 			</div>
 		);

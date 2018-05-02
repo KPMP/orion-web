@@ -156,3 +156,11 @@
 #fileProgressTable td {
 	padding: 5px
 }
+
+.formError {
+	color: red;
+}
+
+.fieldInError {
+	border-color: red !important;
+}
