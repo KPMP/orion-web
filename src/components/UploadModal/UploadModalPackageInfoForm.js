@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
 import { Button, ControlLabel } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import ReduxDatePicker from './ReduxDatePicker';
+
+const renderDatePicker = ({input, placeholder, defaultValue, meta: {touched, error} }) => (
+    <div>
+        <DatePicker
+          {...input}
+            placeholder={placeholder}
+            dateFormat="YYYY-MM-DD"
+            selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
+            onChange={this.handleChange}
+        />
+        {touched && error && <span>{error}</span>}
+    </div>
+);
 
 class UploadModalPackageInfoForm extends Component {
     render() {
@@ -67,7 +83,7 @@ class UploadModalPackageInfoForm extends Component {
                     </div>
                     <div className="form-group">
                         <ControlLabel>Experiment Date (optional)</ControlLabel>
-                        <Field name="experimentDate" className="form-control" component="input" type="date" />
+                        <Field name="experimentDate" component={ReduxDatePicker}/>
                     </div>
                 </div>
                 <div className="row buttonRow">
