@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
-import Gallery from 'react-fine-uploader';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
+import FileList from './FileList';
+import AttachFilesTab from './AttachFilesTab';
 
 let BASE_URL = 'http://localhost:3030';
 if (process.env.REACT_APP_ENVIRONMENT === 'production') {
@@ -187,29 +187,8 @@ class UploadModal extends Component {
         }
     }
 
-    attachFiles = () => {
-        var files = this.uploader.methods.getUploads({
-            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
-        });
+ 
 
-        if (files.length) {
-            var file = files.pop();
-
-            file.fileMetadata = this.props.fileDescription;
-            this.uploader.methods.cancel(file.id);
-            this.props.appendToFileList(file);
-            this.props.updateFileDescription("");
-
-            return;
-        }
-        
-        alert("Please add another file to attach.");
-    };
-
-    handleFileDescriptionChange = (event) => {
-        this.props.updateFileDescription(event.target.value);
-    };
-    
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
@@ -234,39 +213,7 @@ class UploadModal extends Component {
                                 <UploadModalPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
-                                <div>
-                                    <div className="modalTitle">Select File</div>
-                                    <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
-                                    <div id="fileDescription" className="form-group">
-                                        <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
-                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12 text-center">
-                                            <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div id="attachedFiles">
-                                        <span style={{fontWeight: "bold"}}>Attached Files</span>
-                                        <FileList files={this.props.fileList} />
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div>
-                                    <div className="row">
-                                        <div className="col-6 float-left">
-                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.cancel(this.uploader, this.props)}>Cancel</Button>
-                                        </div>
-                                        <div className="col-6">
-                                        		<div className="float-right">
-                                        			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
-                                        			&nbsp;
-                                        			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
-                                            	</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
                             </TabPanel>
                             <TabPanel>
                                 <ReviewPanel props={ this.props } cancel={this.cancel}/>
