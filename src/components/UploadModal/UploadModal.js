@@ -147,13 +147,6 @@ class UploadModal extends Component {
 
             return true;
         });
-        this.uploader.on('upload', (id, name) => {
-            if (this.props.currentTab === 2) {
-                return true;
-            }
-
-            return { pause: true };
-        });
         this.uploader.on('allComplete', (success, failure) => {
             // @FIXME: this is a redux daisy chain that is creating race conditions
             // this.uploader.methods.cancelAll();

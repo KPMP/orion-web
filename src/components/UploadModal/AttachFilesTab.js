@@ -6,8 +6,25 @@ import qq from 'fine-uploader/lib/core';
 
 class AttachFilesTab extends Component {
 	
+	constructor() {
+		super();
+		this.state = { fileAttached: false, descriptionSet: false };
+	}
+	
+	componentDidMount() {
+		this.props.uploader.on('upload', (id, name) => {
+            if (this.props.currentTab === 2) {
+                return true;
+            }
+			this.setState({fileAttached: true});
+            return { pause: true };
+        });
+	}
+	
     handleFileDescriptionChange = (event) => {
+    		this.setState( { descriptionSet: true });
         this.props.updateFileDescription(event.target.value);
+        console.log(this.state);
     };
     
     attachFiles = () => {
@@ -23,20 +40,21 @@ class AttachFilesTab extends Component {
             this.props.appendToFileList(file);
             this.props.updateFileDescription("");
 
+            this.setState({ fileAttached: false, descriptionSet: false });
             return;
         }
         
-        alert("Please add another file to attach.");
     };
 	
+   
+    shouldNextBeDisabled = () => {
+    		if (this.props.fileList.length > 0) {
+    			return false;
+    		}
+    		return true;
+    }
+    
 	render() {
-		let files = this.props.uploader.methods.getUploads({
-	            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
-	        });
-		let allowAttach = false;
-		if (files.length !== 0) {
-			allowAttach = true;
-		}
 		return (
 			<div>
 				<div>
@@ -48,7 +66,7 @@ class AttachFilesTab extends Component {
 	                </div>
 	                <div className="row">
 	                    <div className="col-12 text-center">
-	                        <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()} disabled={!allowAttach}>Attach</Button>
+	                        <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()} disabled={!(this.state.fileAttached && this.state.descriptionSet)}>Attach</Button>
 	                    </div>
 	                </div>
 	                <hr/>
@@ -67,7 +85,7 @@ class AttachFilesTab extends Component {
 	                    		<div className="float-right">
 	                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
 	                    			&nbsp;
-	                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
+	                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>
 	                        	</div>
 	                    </div>
 	                </div>

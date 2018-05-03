@@ -57,7 +57,6 @@ class UploadModalPackageInfoForm extends Component {
         return (
             <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
                 <div className="modalTitle" id="uploadInfoHeader">Upload Information</div>
-                <span className="badge badge-danger">All fields are required unless otherwise noted</span>
                 <div>
                     <div className="form-group">
                         <Field name="firstName" component={TextField} label="First Name" type="text"/>
