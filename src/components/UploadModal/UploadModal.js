@@ -31,12 +31,10 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cance
 
 const ReviewPanel = ({ props, cancel }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
-    let showPackageInfo = true;
     let values = {};
     let uploadDisabled = false;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
-        showPackageInfo = false;
         uploadDisabled = true;
     } else {
         values = form.uploadPackageInfoForm.values;
@@ -44,8 +42,7 @@ const ReviewPanel = ({ props, cancel }) => {
 
     return (
         <div className="container-fluid">
-            {showPackageInfo ?
-                <div id="packageInfo">
+            <div id="packageInfo">
                 <div id="packageDescription">
                     <div className="row">
                         <div className="col-12">
@@ -107,7 +104,6 @@ const ReviewPanel = ({ props, cancel }) => {
                     </div>
                 </div>
                 </div>
-            : <div className="dotted">Please define your upload first and then attach files.</div>}
             <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );
@@ -189,6 +185,10 @@ class UploadModal extends Component {
             this.props.resetModals();
     		this.props.clearFileList();
     };
+    
+    switchTabs = (tabIndex) => {
+    		this.props.changeUploadTab(tabIndex)
+    }
 
     render = () => {
         return (
@@ -196,7 +196,7 @@ class UploadModal extends Component {
             <div className="uploadFilesModal static-modal">
                 <Modal.Dialog className="uploadFilesModal">
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
+                        <Tabs selectedIndex={this.props.currentTab} onSelect={(tabIndex) => this.switchTabs(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
                                 <Tab>1: Define Upload</Tab>
                                 <Tab>2: Attach Files</Tab>
