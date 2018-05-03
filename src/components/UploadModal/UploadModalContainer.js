@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch, props) =>
             dispatch(setPackageInfo(null));
             dispatch(updateUploadStatus(""));
             dispatch(changeUploadTab(0));
+            dispatch(viewUploadedFiles());
         },
         updateUploadStatus(status) {
             dispatch(updateUploadStatus(status));
