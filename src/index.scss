@@ -72,7 +72,10 @@
 }
 
 .fine-uploader-dropzone-container {
-	min-height: 100px !important;
+    min-height: 100px !important;
+    & .react-fine-uploader-gallery-files {
+        overflow-y: visible;
+    }
 }
 
 .react-fine-uploader-gallery-dropzone-content {
@@ -118,15 +121,6 @@
 	margin-botton: 10px;
 }
 
-.dotted {
-	margin-top: 15px;
-	border: 3px dashed #ccc;
-	border-style: dashed;
-	padding: 5px;
-	border-radius: 5px;
-	font-style: italic;
-}
-
 .react-fine-uploader-file-progress-bar {
 	display: block;
 	display: block;
@@ -155,4 +149,12 @@
 
 #fileProgressTable td {
 	padding: 5px
+}
+
+.formError {
+	color: red;
+}
+
+.fieldInError {
+	border-color: red !important;
 }

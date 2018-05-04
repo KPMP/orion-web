@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, props) =>
 ({
-    shouldShowUploadModal: state.showUploadModal,
+    shouldShowUploadModal: state.uploadDialog.showUploadModal,
     uploadedFiles: state.uploadedFiles
 });
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
-	showUploadModalAction() {
-		dispatch(showUploadModalAction(true));
+	showUploadModalAction(shouldShow) {
+		dispatch(showUploadModalAction(shouldShow));
 	},
 	viewUploadedFiles() {
 		dispatch(viewUploadedFiles());

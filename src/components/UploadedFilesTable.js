@@ -16,15 +16,17 @@ class UploadedFilesTable extends Component {
 		      { key: 'experimentId', name:'Experiment Id', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter, resizable: true, sortable: true},
 			  { key: 'createdAt', name: 'Added On', formatter: DateTimeFormatter, resizable: true, sortable: true} ];
-		this.state = { rows: props.uploadedFiles };
+
+		let rows = props.uploadedFiles;
+		this.state = { rows };
 	}
-	  
+
 	componentWillReceiveProps(nextProps) {
-		this.setState({ rows: nextProps.uploadedFiles });
+		this.setState({ rows: nextProps.uploadedFiles.slice(0) });
 	}
-	
+
 	componentDidMount() {
-		this.setState({ rows: this.props.uploadedFiles });
+		this.setState({ rows: this.props.uploadedFiles.slice(0) });
 	}
 	
 	rowGetter = (i) => {
@@ -40,7 +42,7 @@ class UploadedFilesTable extends Component {
 			}
 		};
 
-		const rows = sortDirection === 'NONE' ? this.state.originalRows.slice(0) : this.state.rows.sort(comparer);
+		const rows = sortDirection === 'NONE' ? this.props.uploadedFiles.slice(0) : this.state.rows.sort(comparer);
 
 		this.setState({ rows });
 	};
