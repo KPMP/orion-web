@@ -20,13 +20,13 @@ class UploadedFilesTable extends Component {
 		let rows = props.uploadedFiles;
 		this.state = { rows };
 	}
-	  
+
 	componentWillReceiveProps(nextProps) {
-		this.setState({ rows: nextProps.uploadedFiles });
+		this.setState({ rows: nextProps.uploadedFiles.slice(0) });
 	}
-	
+
 	componentDidMount() {
-		this.setState({ rows: this.props.uploadedFiles });
+		this.setState({ rows: this.props.uploadedFiles.slice(0) });
 	}
 	
 	rowGetter = (i) => {
