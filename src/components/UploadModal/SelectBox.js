@@ -5,7 +5,7 @@ class SelectBox extends Component {
 	
 	render() {
 		let { label, options } = this.props;
-		let { name, type, onBlur, onChange, onFocus } = this.props.input;
+		let { name, onBlur, onChange, onFocus } = this.props.input;
 		let { error, touched, warning } = this.props.meta;
 		let classes = 'form-control';
 		if (touched && error) {
