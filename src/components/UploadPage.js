@@ -6,6 +6,7 @@ import UploadedFilesTableContainer from './UploadedFilesTableContainer';
 class UploadPage extends Component {
 	
 	render() {
+		console.log(this.props);
 		return (
 			<div className="container-fluid" id="outerContainer">
 				<div className="row" id="navbar">
@@ -19,7 +20,7 @@ class UploadPage extends Component {
 				</div>
 				<div className="row">
 					<div className="col-12">
-						<Button bsStyle="primary" className="uploadButton" onClick={() => this.props.showUploadModalAction() }>New Upload</Button>
+						<Button bsStyle="primary" className="uploadButton" onClick={() => this.props.showUploadModalAction(true) }>New Upload</Button>
 					</div>
 					{this.props.shouldShowUploadModal &&
 						<UploadModalContainer />
