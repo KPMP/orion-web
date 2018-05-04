@@ -1,26 +1,23 @@
 import { connect } from 'react-redux';
-import { updateFilesToUpload, updateFileDescription, appendToFileList, uploadPackageInfo, 
-	changeUploadTab, showUploadModalAction, viewUploadedFiles, clearFileList, showFileProgressModalAction, setPackageInfo, updateUploadStatus } from '../../actions/UploadForm/uploadTabActions';
+import { updateFileDescription, appendToFileList, uploadPackageInfo, changeUploadTab, showUploadModalAction, 
+	viewUploadedFiles, showFileProgressModalAction, updateUploadStatus,
+	resetUploadModal} from '../../actions/UploadForm/uploadTabActions';
 import UploadModal from './UploadModal';
 import { submit } from 'redux-form';
 
 const mapStateToProps = (state, props) =>
     ({
         form: state.form,
-        filesToUpload: state.filesToUpload,
-        fileDescription: state.fileDescription,
-        fileList: state.fileList,
-        packageInfo: state.packageInfo,
-        currentTab: state.currentTab,
-        showFileProgressModal: state.showFileProgressModal,
-        uploadStatus: state.uploadStatus
+        fileDescription: state.uploadDialog.fileDescription,
+        fileList: state.uploadDialog.fileList,
+        packageInfo: state.uploadDialog.packageInfo,
+        currentTab: state.uploadDialog.currentTab,
+        showFileProgressModal: state.uploadDialog.showFileProgressModal,
+        uploadStatus: state.uploadDialog.uploadStatus
     });
 
 const mapDispatchToProps = (dispatch, props) =>
     ({
-        updateFilesToUpload(files) {
-            dispatch(updateFilesToUpload(files));
-        },
         updateFileDescription(description) {
             dispatch(updateFileDescription(description));
         },
@@ -28,8 +25,7 @@ const mapDispatchToProps = (dispatch, props) =>
             dispatch(appendToFileList(file));
         },
         processUpload() {
-        	dispatch(submit('uploadPackageInfoForm'));
-            // dispatch(viewUploadedFiles());
+        		dispatch(submit('uploadPackageInfoForm'));
         },
         uploadPackageInfo(formData) {
             dispatch(uploadPackageInfo(formData));
@@ -39,23 +35,16 @@ const mapDispatchToProps = (dispatch, props) =>
         },
         showUploadModal(visible) {
         		dispatch(showUploadModalAction(visible));
-        		dispatch(changeUploadTab(0));
         },
         viewUploadedFiles() {
         		dispatch(viewUploadedFiles());
-        },
-        clearFileList() {
-        		dispatch(clearFileList());
         },
         showFileProgress(visible) {
             dispatch(showFileProgressModalAction(visible));
         },
         resetModals() {
-            dispatch(showFileProgressModalAction(false));
-            dispatch(showUploadModalAction(false));
-            dispatch(setPackageInfo(null));
-            dispatch(updateUploadStatus(""));
-            dispatch(changeUploadTab(0));
+        		dispatch(resetUploadModal());
+            dispatch(viewUploadedFiles());
         },
         updateUploadStatus(status) {
             dispatch(updateUploadStatus(status));

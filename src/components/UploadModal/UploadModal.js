@@ -144,13 +144,6 @@ class UploadModal extends Component {
             return true;
         });
         this.uploader.on('allComplete', (success, failure) => {
-            // @FIXME: this is a redux daisy chain that is creating race conditions
-            // this.uploader.methods.cancelAll();
-            // this.uploader.methods.clearStoredFiles();
-            // this.uploader.methods.reset();
-            // this.props.showUploadModal(false);
-            // this.props.viewUploadedFiles();
-
             this.props.updateUploadStatus("complete");
         });
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
@@ -176,14 +169,11 @@ class UploadModal extends Component {
         }
     }
 
- 
-
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
     		this.uploader.methods.reset();
-            this.props.resetModals();
-    		this.props.clearFileList();
+        this.props.resetModals();
     };
     
     switchTabs = (tabIndex) => {

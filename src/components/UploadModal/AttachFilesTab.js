@@ -38,8 +38,6 @@ class AttachFilesTab extends Component {
             file.fileMetadata = this.props.fileDescription;
             this.props.uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
-            this.props.updateFileDescription("");
-
             this.setState({ fileAttached: false, descriptionSet: false });
             return;
         }

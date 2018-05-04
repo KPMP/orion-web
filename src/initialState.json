@@ -1,11 +1,12 @@
 {
-  "filesToUpload": [],
-  "fileList": [],
-  "fileDescription": "",
-  "packageInfo": null,
-  "currentTab": 0,
-  "showUploadModal": false,
   "uploadedFiles": [],
-  "showFileProgressModal": false,
-  "uploadStatus": ""
+  "uploadDialog" : {
+  	"fileList": [],
+  	"fileDescription": "",
+  	"packageInfo": null,
+  	"currentTab": 0,
+  	"showUploadModal": false,
+  	"showFileProgressModal": false,
+  	"uploadStatus": ""
+  }
 }

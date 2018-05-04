@@ -24,13 +24,6 @@ export const changeUploadTab = (tabIndex) => {
 	}
 };
 
-export const updateFilesToUpload = (files) => {
-    return {
-        type: actionNames.UPDATE_FILES_TO_UPLOAD,
-        payload: files
-    }
-};
-
 export const updateFileDescription = (description) => {
     return {
         type: actionNames.UPDATE_FILE_DESCRIPTION,
@@ -97,3 +90,9 @@ export const updateUploadStatus = (status) => {
         payload: status
     }
 };
+
+export const resetUploadModal = () => {
+	return {
+		type: actionNames.RESET_UPLOAD_MODAL
+	}
+}

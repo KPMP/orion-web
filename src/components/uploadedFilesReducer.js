@@ -1,4 +1,4 @@
-import actionNames from '../actionNames';
+import actionNames from '../actions/actionNames';
 
 export const uploadedFiles = (state = [], action) => {
     switch(action.type) {
