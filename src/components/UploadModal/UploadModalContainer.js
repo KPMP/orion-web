@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updateFileDescription, appendToFileList, uploadPackageInfo, changeUploadTab, showUploadModalAction, 
-	viewUploadedFiles, clearFileList, showFileProgressModalAction, updateUploadStatus,
+	viewUploadedFiles, showFileProgressModalAction, updateUploadStatus,
 	resetUploadModal} from '../../actions/UploadForm/uploadTabActions';
 import UploadModal from './UploadModal';
 import { submit } from 'redux-form';
@@ -38,9 +38,6 @@ const mapDispatchToProps = (dispatch, props) =>
         },
         viewUploadedFiles() {
         		dispatch(viewUploadedFiles());
-        },
-        clearFileList() {
-        		dispatch(clearFileList());
         },
         showFileProgress(visible) {
             dispatch(showFileProgressModalAction(visible));

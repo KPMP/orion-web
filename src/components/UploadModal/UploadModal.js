@@ -169,8 +169,6 @@ class UploadModal extends Component {
         }
     }
 
- 
-
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 

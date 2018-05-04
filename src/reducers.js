@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { uploadedFiles } from './actions/UploadForm/uploadedFilesReducer';
+import { uploadedFiles } from './components/uploadedFilesReducer';
 import actionNames from './actions/actionNames';
 import loadedState from './initialState';
 import { reducer as formReducer } from 'redux-form';
