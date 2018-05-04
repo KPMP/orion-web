@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
-import Gallery from 'react-fine-uploader';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import FileList from './FileList';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
+import FileList from './FileList';
+import AttachFilesTab from './AttachFilesTab';
 
 let BASE_URL = 'http://localhost:3030';
 if (process.env.REACT_APP_ENVIRONMENT === 'production') {
@@ -31,12 +31,10 @@ const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cance
 
 const ReviewPanel = ({ props, cancel }) => {
     const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
-    let showPackageInfo = true;
     let values = {};
     let uploadDisabled = false;
 
     if (!form.uploadPackageInfoForm || !form.uploadPackageInfoForm.values) {
-        showPackageInfo = false;
         uploadDisabled = true;
     } else {
         values = form.uploadPackageInfoForm.values;
@@ -44,8 +42,7 @@ const ReviewPanel = ({ props, cancel }) => {
 
     return (
         <div className="container-fluid">
-            {showPackageInfo ?
-                <div id="packageInfo">
+            <div id="packageInfo">
                 <div id="packageDescription">
                     <div className="row">
                         <div className="col-12">
@@ -107,7 +104,6 @@ const ReviewPanel = ({ props, cancel }) => {
                     </div>
                 </div>
                 </div>
-            : <div className="dotted">Please define your upload first and then attach files.</div>}
             <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );
@@ -147,13 +143,6 @@ class UploadModal extends Component {
 
             return true;
         });
-        this.uploader.on('upload', (id, name) => {
-            if (this.props.currentTab === 2) {
-                return true;
-            }
-
-            return { pause: true };
-        });
         this.uploader.on('allComplete', (success, failure) => {
             // @FIXME: this is a redux daisy chain that is creating race conditions
             // this.uploader.methods.cancelAll();
@@ -187,29 +176,8 @@ class UploadModal extends Component {
         }
     }
 
-    attachFiles = () => {
-        var files = this.uploader.methods.getUploads({
-            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
-        });
+ 
 
-        if (files.length) {
-            var file = files.pop();
-
-            file.fileMetadata = this.props.fileDescription;
-            this.uploader.methods.cancel(file.id);
-            this.props.appendToFileList(file);
-            this.props.updateFileDescription("");
-
-            return;
-        }
-        
-        alert("Please add another file to attach.");
-    };
-
-    handleFileDescriptionChange = (event) => {
-        this.props.updateFileDescription(event.target.value);
-    };
-    
     cancel = () => {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
@@ -217,6 +185,10 @@ class UploadModal extends Component {
             this.props.resetModals();
     		this.props.clearFileList();
     };
+    
+    switchTabs = (tabIndex) => {
+    		this.props.changeUploadTab(tabIndex)
+    }
 
     render = () => {
         return (
@@ -224,7 +196,7 @@ class UploadModal extends Component {
             <div className="uploadFilesModal static-modal">
                 <Modal.Dialog className="uploadFilesModal">
                     <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.props.currentTab} onSelect={tabIndex => this.props.changeUploadTab(tabIndex)} forceRenderTabPanel={true}>
+                        <Tabs selectedIndex={this.props.currentTab} onSelect={(tabIndex) => this.switchTabs(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
                                 <Tab>1: Define Upload</Tab>
                                 <Tab>2: Attach Files</Tab>
@@ -234,39 +206,7 @@ class UploadModal extends Component {
                                 <UploadModalPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
-                                <div>
-                                    <div className="modalTitle">Select File</div>
-                                    <Gallery fileInput-multiple={ false } uploader={ this.uploader } />
-                                    <div id="fileDescription" className="form-group">
-                                        <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
-                                        <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-12 text-center">
-                                            <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()}>Attach</Button>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div id="attachedFiles">
-                                        <span style={{fontWeight: "bold"}}>Attached Files</span>
-                                        <FileList files={this.props.fileList} />
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div>
-                                    <div className="row">
-                                        <div className="col-6 float-left">
-                                            <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.cancel(this.uploader, this.props)}>Cancel</Button>
-                                        </div>
-                                        <div className="col-6">
-                                        		<div className="float-right">
-                                        			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
-                                        			&nbsp;
-                                        			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)}>Next</Button>
-                                            	</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
                             </TabPanel>
                             <TabPanel>
                                 <ReviewPanel props={ this.props } cancel={this.cancel}/>
