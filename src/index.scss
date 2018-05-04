@@ -72,7 +72,10 @@
 }
 
 .fine-uploader-dropzone-container {
-	min-height: 100px !important;
+    min-height: 100px !important;
+    & .react-fine-uploader-gallery-files {
+        overflow-y: visible;
+    }
 }
 
 .react-fine-uploader-gallery-dropzone-content {
