@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import {store} from '../../App'
-import {change} from 'redux-form'
+import { change } from 'redux-form'
+import { connect } from 'react-redux';
 
 /* Adapted from https://github.com/Hacker0x01/react-datepicker/issues/543#issuecomment-299767784 */
 
@@ -38,10 +38,9 @@ class ReduxDatePicker extends React.Component {
     handleChange ({meta, input: {name}}, date) {
         const momentDate = moment(date)
         if(!momentDate.isValid()) {
-            store.dispatch(change(meta.form, name, ''))
-            return this.props.input.onChange(null)
+            return this.props.change(meta.form, name, '')
         }
-        this.props.input.onChange(momentDate.format('MM/DD/YYYY'));
+        return this.props.input.onChange(momentDate.format('MM/DD/YYYY'));
     }
 
     render () {
@@ -67,4 +66,11 @@ class ReduxDatePicker extends React.Component {
     }
 }
 
-export default ReduxDatePicker
+
+const mapDispatchToProps = dispatch => ({
+    change(form, field, value) {
+        dispatch(change(form, field, value))
+    }
+})
+
+export default connect(null, mapDispatchToProps)(ReduxDatePicker)
