@@ -1,4 +1,5 @@
 import actionNames from '../../actions/actionNames';
+import initialState from '../../initialState.json';
 
 export const uploadDialog = (state = {}, action) => {
 	let newState = {...state}; 
@@ -11,6 +12,7 @@ export const uploadDialog = (state = {}, action) => {
             return newState;
 		case actionNames.APPEND_TO_FILE_LIST:
 			newState.fileList = [...state.fileList, action.payload];
+			newState.fileDescription = "";
             return newState;
         case actionNames.CLEAR_FILE_LIST:
         		newState.fileList = [];
@@ -27,6 +29,9 @@ export const uploadDialog = (state = {}, action) => {
         case actionNames.UPDATE_UPLOAD_STATUS:
         		newState.uploadStatus = action.payload;
             return newState;
+        case actionNames.RESET_UPLOAD_MODAL:
+        		newState = initialState.uploadDialog;
+        		return newState;
 	    default:
 	        return state;
 	}

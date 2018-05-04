@@ -175,8 +175,7 @@ class UploadModal extends Component {
     		this.uploader.methods.cancelAll();
     		this.uploader.methods.clearStoredFiles(); 
     		this.uploader.methods.reset();
-            this.props.resetModals();
-    		this.props.clearFileList();
+        this.props.resetModals();
     };
     
     switchTabs = (tabIndex) => {

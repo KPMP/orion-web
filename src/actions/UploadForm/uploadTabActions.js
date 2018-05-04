@@ -90,3 +90,9 @@ export const updateUploadStatus = (status) => {
         payload: status
     }
 };
+
+export const resetUploadModal = () => {
+	return {
+		type: actionNames.RESET_UPLOAD_MODAL
+	}
+}
