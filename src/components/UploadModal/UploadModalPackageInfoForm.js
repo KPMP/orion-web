@@ -57,7 +57,7 @@ class UploadModalPackageInfoForm extends Component {
         return (
             <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
                 <div className="modalTitle" id="uploadInfoHeader">Upload Information</div>
-                <div>
+                <div id="uploadInfo">
                     <div className="form-group">
                         <Field name="firstName" component={TextField} label="First Name" type="text"/>
                     </div>
@@ -85,11 +85,11 @@ class UploadModalPackageInfoForm extends Component {
                     </div>
                 </div>
                 <div className="row buttonRow">
-                    <div className="col-6 float-left">
-                        <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
+                    <div className="col-sm-6">
+                        <Button className="btn-outline-dark pull-left" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
-                    <div className="col-6 float-right">
-                        <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
+                    <div className="col-sm-6">
+                        <Button bsStyle="primary" className="pull-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
                     </div>
                 </div>
             </Form>

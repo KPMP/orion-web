@@ -39,16 +39,6 @@
 		border: 2px dashed #C7C7C7;
 	}
 
-	.buttonRow {
-		padding-top: 15px;
-	}
-
-	.modalTitle {
-		font-weight: 700;
-		font-size: 18px;
-		padding-bottom: 12px;
-	}
-
 	.control-label {
 		font-size: 14px;
 		margin-top: 5px;
@@ -69,6 +59,16 @@
 			text-overflow: ellipsis;
 		}
 	}
+}
+
+.buttonRow {
+	padding-top: 15px;
+}
+
+.modalTitle {
+	font-weight: 700;
+	font-size: 18px;
+	padding-bottom: 12px;
 }
 
 .fine-uploader-dropzone-container {
@@ -157,4 +157,13 @@
 
 .fieldInError {
 	border-color: red !important;
+}
+
+.dotted {
+	margin-top: 15px;
+	border: 3px dashed #ccc;
+	border-style: dashed;
+	padding: 5px;
+	border-radius: 5px;
+	font-style: italic;
 }

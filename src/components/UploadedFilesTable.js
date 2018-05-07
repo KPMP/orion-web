@@ -51,7 +51,7 @@ class UploadedFilesTable extends Component {
 		return(
 			<div className="row">
 				<div className="col-sm-12">
-					<h5>Uploads</h5>
+					<h4>Uploads</h4>
 					<div className="uploadTable">
 						{ this.state.rows.length ? <ReactDataGrid
 							columns={this._columns}
