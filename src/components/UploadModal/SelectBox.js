@@ -12,7 +12,6 @@ class SelectBox extends Component {
 	
 	changed(e) {
 		this.props.input.onChange();
-		console.log("[" + e.target.value + "]");
 		if (e.target.value === "Other") {
 			this.setState({"showOtherField": true});
 		} else {
