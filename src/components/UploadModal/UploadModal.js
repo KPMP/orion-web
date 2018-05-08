@@ -40,6 +40,10 @@ const ReviewPanel = ({ props, cancel }) => {
         values = form.uploadPackageInfoForm.values;
     }
 
+    let packageType = values.packageType;
+    if (values.packageTypeOther !== undefined) {
+    		packageType = values.packageTypeOther;
+    }
     return (
         <div className="container-fluid">
             <div id="packageInfo">
@@ -70,7 +74,7 @@ const ReviewPanel = ({ props, cancel }) => {
                             <strong>Package Type:</strong>
                         </div>
                         <div className="col-8">
-                            { values.packageType }
+                        		{packageType}
                         </div>
                     </div>
                     <div className="row">
