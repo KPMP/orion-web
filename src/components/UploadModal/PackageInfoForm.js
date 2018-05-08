@@ -19,10 +19,13 @@ const validate = (values) => {
 	if(!values.packageType) {
 		errors.packageType = '* Required';
 	}
+	if (!values.packageTypeOther && values.packageType === "Other") {
+		errors.packageTypeOther = "* Required";
+	}
 	return errors;
 }
 
-class UploadModalPackageInfoForm extends Component {
+class PackageInfoForm extends Component {
     render() {
         const { handleSubmit, onSubmit } = this.props;
         let institutionOptions = [ {'value': 'Broad (Michigan/Broad/Princeton TIS)', 'label': 'Broad (Michigan/Broad/Princeton TIS)'},
@@ -55,7 +58,7 @@ class UploadModalPackageInfoForm extends Component {
         ];
        
         return (
-            <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm">
+            <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm" id="uploadPackageInfoForm">
                 <div className="modalTitle" id="uploadInfoHeader">Upload Information</div>
                 <div>
                     <div className="form-group">
@@ -70,6 +73,7 @@ class UploadModalPackageInfoForm extends Component {
                     <div className="form-group">
                         <Field name="packageType" className="form-control" label="Package Type Name" component={SelectBox} options={packageTypes} />
                     </div>
+                    
                     <div className="form-group">
                         <ControlLabel>Subject # (optional)</ControlLabel>
                         <Field name="subjectId" className="form-control" component="input" type="text" />
@@ -103,4 +107,4 @@ export default reduxForm({
     validate,
     touchOnBlur: true,
     touchOnChange: true
-})(UploadModalPackageInfoForm);
+})(PackageInfoForm);

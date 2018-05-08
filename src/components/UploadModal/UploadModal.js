@@ -3,7 +3,7 @@ import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
+import PackageInfoForm from './PackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
 import FileList from './FileList';
 import AttachFilesTab from './AttachFilesTab';
@@ -193,7 +193,7 @@ class UploadModal extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadModalPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
+                                <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
                                 <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
