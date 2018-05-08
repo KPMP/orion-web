@@ -158,3 +158,32 @@
 .fieldInError {
 	border-color: red !important;
 }
+
+.react-fine-uploader-gallery-progress-bar-container {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-total-progress-bar-container {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-pause-resume-button {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-file-input-upload-icon {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-dropzone {
+	border: 1px dashed #ccc !important;
+}
+
+.react-fine-uploader-gallery-file-input-container {
+	background: #007bff !important;
+	border: 1px solid #007bff !important;;
+}
+
+.react-fine-uploader-gallery-status {
+	display: none !important;
+}
