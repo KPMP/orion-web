@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
-npm install
+npm install --force
 exec "$@" watch | "$@" watch-css
