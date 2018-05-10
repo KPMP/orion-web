@@ -8,7 +8,7 @@ class AttachFilesTab extends Component {
 	
 	constructor() {
 		super();
-		this.state = { fileAttached: false, descriptionSet: false };
+		this.state = { fileAttached: false, descriptionSet: false, showMultiFileMessage: false };
 	}
 	
 	componentDidMount() {
@@ -19,10 +19,22 @@ class AttachFilesTab extends Component {
 			this.setState({fileAttached: true});
             return { pause: true };
         });
+		this.props.uploader.on('submit', (id, name) => {
+            if (this.props.uploader.methods.getUploads({
+                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
+            }).length > 1 && this.props.currentTab === 1) {
+                this.setState({showMultiFileMessage: true});
+                return false;
+            } else {
+            		this.setState({ showMultiFileMessage: false });
+            }
+
+            return true;
+        });
 	}
 	
     handleFileDescriptionChange = (event) => {
-    		this.setState( { descriptionSet: true });
+    		this.setState( { descriptionSet: true } );
         this.props.updateFileDescription(event.target.value);
         console.log(this.state);
     };
@@ -38,7 +50,7 @@ class AttachFilesTab extends Component {
             file.fileMetadata = this.props.fileDescription;
             this.props.uploader.methods.cancel(file.id);
             this.props.appendToFileList(file);
-            this.setState({ fileAttached: false, descriptionSet: false });
+            this.setState({ fileAttached: false, descriptionSet: false, showMultiFileMessage: false });
             return;
         }
         
@@ -56,7 +68,9 @@ class AttachFilesTab extends Component {
 		return (
 			<div>
 				<div>
-	                <div className="modalTitle">Select File</div>
+	                <div className="modalTitle">Select File
+	                		{ this.state.showMultiFileMessage && <div className="attachFileError">Only one file may be added at a time.</div> }
+	                </div>
 	                <Gallery fileInput-multiple={ false } uploader={ this.props.uploader } />
 	                <div id="fileDescription" className="form-group">
 	                    <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>

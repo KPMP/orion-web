@@ -133,19 +133,11 @@ class UploadModal extends Component {
 	}
 
     componentDidMount() {
-        this.uploader.on('submit', (id, name) => {
-            if (this.uploader.methods.getUploads({
-                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
-            }).length > 1 && this.props.currentTab === 1) {
-                alert("Please upload and attach one file at a time.");
-                return false;
-            }
-
-            return true;
-        });
+        
         this.uploader.on('allComplete', (success, failure) => {
             this.props.updateUploadStatus("complete");
         });
+        
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
             if (filename !== undefined) {
