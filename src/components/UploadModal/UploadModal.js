@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
