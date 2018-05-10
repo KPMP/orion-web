@@ -73,7 +73,7 @@ class AttachFilesTab extends Component {
 	                <hr/>
 	                <div id="attachedFiles">
 	                    <span style={{fontWeight: "bold"}}>Attached Files</span>
-	                    <FileList files={this.props.fileList} />
+	                    <FileList files={this.props.fileList} allowDelete={true} removeFile={this.props.removeFileFromList}/>
 	                </div>
 	            </div>
 	            <hr/>
