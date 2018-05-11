@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
+import PackageInfoForm from './PackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
 import FileList from './FileList';
 import AttachFilesTab from './AttachFilesTab';
@@ -39,6 +39,10 @@ const ReviewPanel = ({ props, cancel }) => {
         values = form.uploadPackageInfoForm.values;
     }
 
+    let packageType = values.packageType;
+    if (values.packageTypeOther !== undefined) {
+    		packageType = values.packageTypeOther;
+    }
     return (
         <div className="container-fluid">
             <div id="packageInfo">
@@ -69,7 +73,7 @@ const ReviewPanel = ({ props, cancel }) => {
                             <strong>Package Type:</strong>
                         </div>
                         <div className="col-sm-8">
-                            { values.packageType }
+                        		{packageType}
                         </div>
                     </div>
                     <div className="row">
@@ -184,7 +188,7 @@ class UploadModal extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <UploadModalPackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
+                                <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
                                 <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
