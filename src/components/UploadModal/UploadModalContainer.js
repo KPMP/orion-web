@@ -13,7 +13,8 @@ const mapStateToProps = (state, props) =>
         packageInfo: state.uploadDialog.packageInfo,
         currentTab: state.uploadDialog.currentTab,
         showFileProgressModal: state.uploadDialog.showFileProgressModal,
-        uploadStatus: state.uploadDialog.uploadStatus
+        uploadStatus: state.uploadDialog.uploadStatus,
+        showUploadModal: state.uploadDialog.showUploadModal
     });
 
 const mapDispatchToProps = (dispatch, props) =>
@@ -33,7 +34,7 @@ const mapDispatchToProps = (dispatch, props) =>
         changeUploadTab(newTabIndex) {
         		dispatch(changeUploadTab(newTabIndex));
         },
-        showUploadModal(visible) {
+        updateShowUploadModal(visible) {
         		dispatch(showUploadModalAction(visible));
         },
         viewUploadedFiles() {

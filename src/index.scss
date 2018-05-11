@@ -39,16 +39,6 @@
 		border: 2px dashed #C7C7C7;
 	}
 
-	.buttonRow {
-		padding-top: 15px;
-	}
-
-	.modalTitle {
-		font-weight: 700;
-		font-size: 18px;
-		padding-bottom: 12px;
-	}
-
 	.control-label {
 		font-size: 14px;
 		margin-top: 5px;
@@ -71,6 +61,16 @@
 	}
 }
 
+.buttonRow {
+	padding-top: 15px;
+}
+
+.modalTitle {
+	font-weight: 700;
+	font-size: 18px;
+	padding-bottom: 12px;
+}
+
 .fine-uploader-dropzone-container {
     min-height: 100px !important;
     & .react-fine-uploader-gallery-files {
@@ -80,7 +80,7 @@
 
 .react-fine-uploader-gallery-dropzone-content {
 	top: 25% !important;
-	text-align: right !important;
+	text-align: center !important;
 	padding-right: 15px;
 }
 
@@ -157,4 +157,37 @@
 
 .fieldInError {
 	border-color: red !important;
+}
+
+.react-fine-uploader-gallery-progress-bar-container {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-total-progress-bar-container {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-pause-resume-button {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-file-input-upload-icon {
+	display: none !important;
+}
+
+.react-fine-uploader-gallery-dropzone {
+	border: 1px dashed #ccc !important;
+}
+
+.react-fine-uploader-gallery-file-input-container {
+	background: #007bff !important;
+	border: 1px solid #007bff !important;;
+}
+
+.react-fine-uploader-gallery-status {
+	display: none !important;
+}
+
+.navbar-brand {
+	color: white;
 }

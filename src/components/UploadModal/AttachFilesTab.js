@@ -22,9 +22,12 @@ class AttachFilesTab extends Component {
 	}
 	
     handleFileDescriptionChange = (event) => {
-    		this.setState( { descriptionSet: true });
+    		if (event.target.value !== "" && event.target.value !== undefined) {
+    			this.setState( { descriptionSet: true });
+    		} else {
+    			this.setState( {descriptionSet: false});
+    		}
         this.props.updateFileDescription(event.target.value);
-        console.log(this.state);
     };
     
     attachFiles = () => {
@@ -76,11 +79,11 @@ class AttachFilesTab extends Component {
 	            <hr/>
 	            <div>
 	                <div className="row">
-	                    <div className="col-6 float-left">
-	                        <Button className="btn-outline-dark" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
+	                    <div className="col-sm-6">
+	                        <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
 	                    </div>
-	                    <div className="col-6">
-	                    		<div className="float-right">
+	                    <div className="col-sm-6">
+	                    		<div className="pull-right">
 	                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
 	                    			&nbsp;
 	                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>

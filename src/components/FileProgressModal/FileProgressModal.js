@@ -13,8 +13,8 @@ class FileProgressModal extends Component {
                         <FileProgress files={this.props.fileList} uploader={this.props.uploader}/>
                         <hr/>
                         <div className="row">
-                            <div className="col-12">
-                                <div className="float-right">
+                            <div className="col-sm-12">
+                                <div className="pull-right">
                                     <Button className="btn-outline-dark" onClick={() => this.props.cancel() }>Cancel</Button>
                                 &nbsp;
                                     <Button bsStyle="primary" disabled={ this.props.uploadStatus === "complete" ? false : true } onClick={() => this.props.cancel() }>Done</Button>

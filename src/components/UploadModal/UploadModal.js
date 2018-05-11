@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, ButtonGroup, ControlLabel } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import qq from 'fine-uploader/lib/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -15,16 +15,16 @@ if (process.env.REACT_APP_ENVIRONMENT === 'production') {
 	BASE_URL = 'http://141.214.4.23:3030/';
 }
 
-const ReviewControls = ({ showUploadModal, changeUploadTab, processUpload, cancel, uploadDisabled }) => (
+const ReviewControls = ({ changeUploadTab, processUpload, cancel, uploadDisabled }) => (
     <div className="row buttonRow">
-        <div className="col-6 float-left">
-            <Button className="btn-outline-dark" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
+        <div className="col-sm-6">
+            <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
         </div>
-        <div className="col-6">
-            <ButtonGroup className="float-right">
+        <div className="col-sm-6">
+            <div className="pull-right">
                 <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
                 <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={uploadDisabled}>Start Upload</Button>
-            </ButtonGroup>
+            </div>
         </div>
     </div>
 );
@@ -49,66 +49,66 @@ const ReviewPanel = ({ props, cancel }) => {
             <div id="packageInfo">
                 <div id="packageDescription">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-sm-12">
                             <div className="modalTitle">Review Upload</div>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Name:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                             <span>{ values.firstName } { values.lastName }</span>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Institution:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                             { values.institutionName }
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Package Type:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                         		{packageType}
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Experiment #:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                             { values.experimentId }
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Subject #:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                             { values.subjectId }
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <strong>Experiment Date:</strong>
                         </div>
-                        <div className="col-8">
+                        <div className="col-sm-8">
                             { values.experimentDate }
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-sm-12">
                         <FileList files={ fileList }/>
                     </div>
                 </div>
                 </div>
-            <ReviewControls changeUploadTab={changeUploadTab} showUploadModal={showUploadModal} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
+            <ReviewControls changeUploadTab={changeUploadTab} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );
 };
@@ -188,7 +188,7 @@ class UploadModal extends Component {
         return (
             ( this.props.showFileProgressModal ? <FileProgressModal uploader={ this.uploader } fileList= { this.props.fileList } cancel={ this.cancel } uploadStatus={ this.props.uploadStatus }/> :
             <div className="uploadFilesModal static-modal">
-                <Modal.Dialog className="uploadFilesModal">
+                <Modal show={this.props.showUploadModal} className="uploadFilesModal">
                     <Modal.Body className="uploadFilesContainer">
                         <Tabs selectedIndex={this.props.currentTab} onSelect={(tabIndex) => this.switchTabs(tabIndex)} forceRenderTabPanel={true}>
                             <TabList>
@@ -197,7 +197,7 @@ class UploadModal extends Component {
                                 <Tab>3: Review Upload</Tab>
                             </TabList>
                             <TabPanel>
-                                <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} showUploadModal={this.props.showUploadModal} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
+                                <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
                             </TabPanel>
                             <TabPanel>
                                 <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
@@ -207,7 +207,7 @@ class UploadModal extends Component {
                             </TabPanel>
                         </Tabs>
                     </Modal.Body>
-                </Modal.Dialog>
+                </Modal>
             </div>
                 )
         )

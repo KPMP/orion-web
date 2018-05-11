@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
-import {  ControlLabel } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { ControlLabel, Button } from 'react-bootstrap';
 import TextField from './TextField';
 import SelectBox from './SelectBox';
+import ReduxDatePicker from './ReduxDatePicker';
 
 const validate = (values) => {
 	const errors = {};
@@ -60,7 +60,7 @@ class PackageInfoForm extends Component {
         return (
             <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm" id="uploadPackageInfoForm">
                 <div className="modalTitle" id="uploadInfoHeader">Upload Information</div>
-                <div>
+                <div id="uploadInfo">
                     <div className="form-group">
                         <Field name="firstName" component={TextField} label="First Name" type="text"/>
                     </div>
@@ -85,15 +85,15 @@ class PackageInfoForm extends Component {
                     </div>
                     <div className="form-group">
                         <ControlLabel>Experiment Date (optional)</ControlLabel>
-                        <Field name="experimentDate" className="form-control" component="input" type="date" />
+                        <Field name="experimentDate" component={ReduxDatePicker}/>
                     </div>
                 </div>
                 <div className="row buttonRow">
-                    <div className="col-6 float-left">
-                        <Button className="btn-outline-dark" onClick={() => this.props.cancel()}>Cancel</Button>
+                    <div className="col-sm-6 float-left">
+                        <Button className="btn-outline-dark pull-left" onClick={() => this.props.cancel()}>Cancel</Button>
                     </div>
-                    <div className="col-6 float-right">
-                        <Button bsStyle="primary" className="float-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
+                    <div className="col-sm-6 float-right">
+                        <Button bsStyle="primary" className="pull-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
                     </div>
                 </div>
             </Form>
