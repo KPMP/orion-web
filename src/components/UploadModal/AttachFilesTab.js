@@ -48,7 +48,11 @@ class AttachFilesTab extends Component {
 	}
 	
     handleFileDescriptionChange = (event) => {
-    		this.setState( { descriptionSet: true } );
+    		if (event.target.value !== "" && event.target.value !== undefined) {
+    			this.setState( { descriptionSet: true });
+    		} else {
+    			this.setState( {descriptionSet: false});
+    		}
         this.props.updateFileDescription(event.target.value);
     };
     
@@ -98,22 +102,24 @@ class AttachFilesTab extends Component {
 	                <hr/>
 	                <div id="attachedFiles">
 	                    <span style={{fontWeight: "bold"}}>Attached Files</span>
-	                    <FileList files={this.props.fileList} />
+	                    <FileList files={this.props.fileList} allowDelete={true} removeFile={this.props.removeFileFromList}/>
 	                </div>
 	            </div>
 	            <hr/>
 	            <div>
 	                <div className="row">
-	                    <div className="col-sm-6">
-	                        <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
-	                    </div>
-	                    <div className="col-sm-6">
-	                    		<div className="pull-right">
-	                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
-	                    			&nbsp;
-	                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>
-	                        	</div>
-	                    </div>
+	                		<div className="buttonRow">
+		                    <div className="col-sm-6">
+		                        <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
+		                    </div>
+		                    <div className="col-sm-6">
+		                    		<div className="pull-right">
+		                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
+		                    			&nbsp;
+		                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>
+		                        	</div>
+		                    </div>
+		                </div>
 	                </div>
 	            </div>		
             </div>

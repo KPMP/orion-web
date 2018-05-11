@@ -6,8 +6,6 @@ import 'react-fine-uploader/gallery/gallery.css';
 import 'react-tabs/style/react-tabs.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();

@@ -1,7 +1,13 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
-
 const api = Api.getInstance();
+
+export const removeFileFromList = (index) => {
+	return {
+		type: actionNames.REMOVE_FILE_FROM_LIST,
+		payload: index
+	}
+}
 
 export const showUploadModalAction = (show) => {
 	return {

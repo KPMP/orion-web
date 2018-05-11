@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updateFileDescription, appendToFileList, uploadPackageInfo, changeUploadTab, showUploadModalAction, 
-	viewUploadedFiles, showFileProgressModalAction, updateUploadStatus,
+	viewUploadedFiles, showFileProgressModalAction, updateUploadStatus, removeFileFromList,
 	resetUploadModal} from '../../actions/UploadForm/uploadTabActions';
 import UploadModal from './UploadModal';
 import { submit } from 'redux-form';
@@ -19,36 +19,39 @@ const mapStateToProps = (state, props) =>
 
 const mapDispatchToProps = (dispatch, props) =>
     ({
-        updateFileDescription(description) {
-            dispatch(updateFileDescription(description));
-        },
-        appendToFileList(file) {
-            dispatch(appendToFileList(file));
-        },
+	    	appendToFileList(file) {
+	    		dispatch(appendToFileList(file));
+	    	},
+	    	changeUploadTab(newTabIndex) {
+	    		dispatch(changeUploadTab(newTabIndex));
+	    	},
         processUpload() {
         		dispatch(submit('uploadPackageInfoForm'));
+        },
+        removeFileFromList(index) {
+        		dispatch(removeFileFromList(index));
+        },
+        resetModals() {
+	        	dispatch(resetUploadModal());
+	        	dispatch(viewUploadedFiles());
+        },
+        showFileProgress(visible) {
+        		dispatch(showFileProgressModalAction(visible));
+        },
+        updateFileDescription(description) {
+        		dispatch(updateFileDescription(description));
         },
         uploadPackageInfo(formData) {
             dispatch(uploadPackageInfo(formData));
         },
-        changeUploadTab(newTabIndex) {
-        		dispatch(changeUploadTab(newTabIndex));
-        },
         updateShowUploadModal(visible) {
         		dispatch(showUploadModalAction(visible));
         },
-        viewUploadedFiles() {
-        		dispatch(viewUploadedFiles());
-        },
-        showFileProgress(visible) {
-            dispatch(showFileProgressModalAction(visible));
-        },
-        resetModals() {
-        		dispatch(resetUploadModal());
-            dispatch(viewUploadedFiles());
-        },
         updateUploadStatus(status) {
             dispatch(updateUploadStatus(status));
+        },
+        viewUploadedFiles() {
+        		dispatch(viewUploadedFiles());
         }
     });
 

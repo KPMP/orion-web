@@ -63,6 +63,9 @@
 
 .buttonRow {
 	padding-top: 15px;
+	position: fixed;
+	bottom: 15px;
+	width: 100%;
 }
 
 .modalTitle {
@@ -85,12 +88,12 @@
 }
 
 .form-group {
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.25rem;
 }
 
 .uploadFilesModal {
 	.modal-content {
-		height: 750px;
+		min-height: 750px;
 	}
 }
 
@@ -190,6 +193,11 @@
 
 .navbar-brand {
 	color: white;
+}
+
+.glyphicon-remove {
+	color: red;
+	cursor: pointer;
 }
 
 .attachFileError {
