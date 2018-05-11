@@ -8,7 +8,7 @@ class AttachFilesTab extends Component {
 	
 	constructor() {
 		super();
-		this.state = { fileAttached: false, descriptionSet: false, showMultiFileMessage: false };
+		this.state = { fileAttached: false, descriptionSet: false, showMultiFileMessage: false, showDuplicateFileMessage: "" };
 	}
 	
 	componentDidMount() {
@@ -20,12 +20,26 @@ class AttachFilesTab extends Component {
             return { pause: true };
         });
 		this.props.uploader.on('submit', (id, name) => {
+			var newFiles = this.props.uploader.methods.getUploads({
+		            status: [ qq.status.SUBMITTING ]
+		    });
             if (this.props.uploader.methods.getUploads({
-                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
-            }).length > 1 && this.props.currentTab === 1) {
+		            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
+		    }).length > 1 && this.props.currentTab === 1) {
                 this.setState({showMultiFileMessage: true});
                 return false;
             } else {
+            		let inError = false;
+                for (let i in this.props.fileList) {
+                		if (this.props.fileList[i].name === newFiles[0].name) {
+             			inError = true;
+             		}
+                }
+                if (inError) {
+                 	this.setState({showDuplicateFileMessage: newFiles[0].name});
+                } else {
+                 	this.setState({showDuplicateFileMessage: ""});
+                }
             		this.setState({ showMultiFileMessage: false });
             }
 
@@ -39,7 +53,8 @@ class AttachFilesTab extends Component {
     		} else {
     			this.setState( {descriptionSet: false});
     		}
-        this.props.updateFileDescription(event.target.value);    };
+        this.props.updateFileDescription(event.target.value);
+    };
     
     attachFiles = () => {
         var files = this.props.uploader.methods.getUploads({
@@ -51,8 +66,8 @@ class AttachFilesTab extends Component {
 
             file.fileMetadata = this.props.fileDescription;
             this.props.uploader.methods.cancel(file.id);
-            this.props.appendToFileList(file);
-            this.setState({ fileAttached: false, descriptionSet: false, showMultiFileMessage: false });
+            	this.props.appendToFileList(file);
+            	this.setState({ fileAttached: false, descriptionSet: false, showMultiFileMessage: false, showDuplicateFileMessage: "" });
             return;
         }
         
@@ -72,6 +87,7 @@ class AttachFilesTab extends Component {
 				<div>
 	                <div className="modalTitle">Select File
 	                		{ this.state.showMultiFileMessage && <div className="attachFileError">Only one file may be added at a time.</div> }
+	                		{ this.state.showDuplicateFileMessage !== "" && <div className="attachFileError">You have already selected {this.state.showDuplicateFileMessage} to upload.</div>}
 	                </div>
 	                <Gallery fileInput-multiple={ false } uploader={ this.props.uploader } />
 	                <div id="fileDescription" className="form-group">
@@ -80,7 +96,7 @@ class AttachFilesTab extends Component {
 	                </div>
 	                <div className="row">
 	                    <div className="col-12 text-center">
-	                        <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()} disabled={!(this.state.fileAttached && this.state.descriptionSet)}>Attach</Button>
+	                        <Button type="submit" className="btn-outline-dark" onClick={() => this.attachFiles()} disabled={!(this.state.fileAttached && this.state.descriptionSet && this.state.showDuplicateFileMessage === "")}>Attach</Button>
 	                    </div>
 	                </div>
 	                <hr/>
