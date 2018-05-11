@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Modal, Button, ButtonGroup } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
-import qq from 'fine-uploader/lib/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import UploadModalPackageInfoForm from './UploadModalPackageInfoForm';
 import FileProgressModal from "../FileProgressModal/FileProgressModal";
@@ -30,7 +29,7 @@ const ReviewControls = ({ changeUploadTab, processUpload, cancel, uploadDisabled
 );
 
 const ReviewPanel = ({ props, cancel }) => {
-    const { form, changeUploadTab, showUploadModal, processUpload, fileList } = props;
+    const { form, changeUploadTab, processUpload, fileList } = props;
     let values = {};
     let uploadDisabled = false;
 
@@ -133,19 +132,11 @@ class UploadModal extends Component {
 	}
 
     componentDidMount() {
-        this.uploader.on('submit', (id, name) => {
-            if (this.uploader.methods.getUploads({
-                status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
-            }).length > 1 && this.props.currentTab === 1) {
-                alert("Please upload and attach one file at a time.");
-                return false;
-            }
-
-            return true;
-        });
+        
         this.uploader.on('allComplete', (success, failure) => {
             this.props.updateUploadStatus("complete");
         });
+        
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
             if (filename !== undefined) {
