@@ -34,10 +34,12 @@ class AttachFilesTab extends Component {
 	}
 	
     handleFileDescriptionChange = (event) => {
-    		this.setState( { descriptionSet: true } );
-        this.props.updateFileDescription(event.target.value);
-        console.log(this.state);
-    };
+    		if (event.target.value !== "" && event.target.value !== undefined) {
+    			this.setState( { descriptionSet: true });
+    		} else {
+    			this.setState( {descriptionSet: false});
+    		}
+        this.props.updateFileDescription(event.target.value);    };
     
     attachFiles = () => {
         var files = this.props.uploader.methods.getUploads({
