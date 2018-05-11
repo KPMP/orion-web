@@ -92,16 +92,18 @@ class AttachFilesTab extends Component {
 	            <hr/>
 	            <div>
 	                <div className="row">
-	                    <div className="col-sm-6">
-	                        <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
-	                    </div>
-	                    <div className="col-sm-6">
-	                    		<div className="pull-right">
-	                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
-	                    			&nbsp;
-	                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>
-	                        	</div>
-	                    </div>
+	                		<div className="buttonRow">
+		                    <div className="col-sm-6">
+		                        <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => this.props.cancel(this.props.uploader, this.props)}>Cancel</Button>
+		                    </div>
+		                    <div className="col-sm-6">
+		                    		<div className="pull-right">
+		                    			<Button className="btn-outline-dark" onClick={() => this.props.changeUploadTab(0)}>Back</Button>
+		                    			&nbsp;
+		                    			<Button bsStyle="primary" onClick={() => this.props.changeUploadTab(2)} disabled={this.shouldNextBeDisabled()}>Next</Button>
+		                        	</div>
+		                    </div>
+		                </div>
 	                </div>
 	            </div>		
             </div>

@@ -15,17 +15,19 @@ if (process.env.REACT_APP_ENVIRONMENT === 'production') {
 }
 
 const ReviewControls = ({ changeUploadTab, processUpload, cancel, uploadDisabled }) => (
-    <div className="row buttonRow">
-        <div className="col-sm-6">
-            <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
-        </div>
-        <div className="col-sm-6">
-            <div className="pull-right">
-                <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
-                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={uploadDisabled}>Start Upload</Button>
-            </div>
-        </div>
-    </div>
+		<div className="row">
+	    		<div className="buttonRow">
+		        <div className="col-sm-6">
+		            <Button className="btn-outline-dark pull-left" bsStyle="default" onClick={() => cancel()}>Cancel</Button>
+		        </div>
+		        <div className="col-sm-6">
+		            <div className="pull-right">
+		                <Button className="btn-outline-dark" onClick={() => changeUploadTab(1)}>Back</Button> &nbsp;
+		                <Button type="submit" bsStyle="primary" onClick={() => processUpload()} disabled={uploadDisabled}>Start Upload</Button>
+		            </div>
+		        </div>
+	        </div>
+	    </div>
 );
 
 const ReviewPanel = ({ props, cancel }) => {
@@ -44,7 +46,7 @@ const ReviewPanel = ({ props, cancel }) => {
     		packageType = values.packageTypeOther;
     }
     return (
-        <div className="container-fluid">
+    		<div>
             <div id="packageInfo">
                 <div id="packageDescription">
                     <div className="row">
@@ -106,7 +108,7 @@ const ReviewPanel = ({ props, cancel }) => {
                         <FileList files={ fileList }/>
                     </div>
                 </div>
-                </div>
+            </div>
             <ReviewControls changeUploadTab={changeUploadTab} processUpload={processUpload} cancel={cancel} uploadDisabled={uploadDisabled}/>
         </div>
     );

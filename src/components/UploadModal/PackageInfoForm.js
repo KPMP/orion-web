@@ -88,12 +88,14 @@ class PackageInfoForm extends Component {
                         <Field name="experimentDate" component={ReduxDatePicker}/>
                     </div>
                 </div>
-                <div className="row buttonRow">
-                    <div className="col-sm-6 float-left">
-                        <Button className="btn-outline-dark pull-left" onClick={() => this.props.cancel()}>Cancel</Button>
-                    </div>
-                    <div className="col-sm-6 float-right">
-                        <Button bsStyle="primary" className="pull-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
+                <div className="row">
+                		<div className="buttonRow">
+	                    <div className="col-sm-6">
+	                        <Button className="btn-outline-dark pull-left" onClick={() => this.props.cancel()}>Cancel</Button>
+	                    </div>
+	                    <div className="col-sm-6">
+	                        <Button bsStyle="primary" className="pull-right" onClick={() => this.props.changeUploadTab(1)} disabled={!this.props.valid}>Next</Button>
+	                    </div>
                     </div>
                 </div>
             </Form>
