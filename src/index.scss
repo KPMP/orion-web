@@ -63,6 +63,9 @@
 
 .buttonRow {
 	padding-top: 15px;
+	position: fixed;
+	bottom: 15px;
+	width: 100%;
 }
 
 .modalTitle {
@@ -90,7 +93,7 @@
 
 .uploadFilesModal {
 	.modal-content {
-		height: 750px;
+		min-height: 750px;
 	}
 }
 
