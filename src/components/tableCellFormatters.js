@@ -4,7 +4,7 @@ import moment from 'moment';
 export class DateFormatter extends React.Component {
 
     render() {
-        const formattedDate = this.props.value ? new Date(this.props.value).toLocaleDateString("en-US") : "";
+        const formattedDate = this.props.value ? moment.utc(this.props.value).format('YYYY-MM-DD') : "";
         return (
             <DefaultFormatter value={formattedDate} />
         );
@@ -13,7 +13,7 @@ export class DateFormatter extends React.Component {
 
 export class DateTimeFormatter extends React.Component {
     render() {
-        const formattedDate = this.props.value ? moment.utc(this.props.value).format('M/D/YYYY') : "";
+        const formattedDate = this.props.value ? moment.utc(this.props.value).format('YYYY-MM-DD, h:mm:ss A') : "";
         return (
             <DefaultFormatter value={formattedDate} />
         );
