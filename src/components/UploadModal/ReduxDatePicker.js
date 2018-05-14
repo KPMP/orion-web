@@ -40,7 +40,7 @@ class ReduxDatePicker extends React.Component {
         if(!momentDate.isValid()) {
             return this.props.change(meta.form, name, '')
         }
-        return this.props.input.onChange(momentDate.format('MM/DD/YYYY'));
+        return this.props.input.onChange(momentDate.format('YYYY-MM-DD'));
     }
 
     render () {
@@ -57,10 +57,10 @@ class ReduxDatePicker extends React.Component {
                     name={input.name}
                     placeholder={placeholder}
                     dateFormat="YYYY-MM-DD"
-                    selected={input.value ? moment(input.value, 'MM/DD/YYYY') : null}
+                    selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
                     onChange={handleChange}
                 />
-        {touched && error && <span>{error}</span>}
+                {touched && error && <span>{error}</span>}
             </div>
         )
     }
