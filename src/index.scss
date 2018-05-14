@@ -61,13 +61,6 @@
 	}
 }
 
-.buttonRow {
-	padding-top: 15px;
-	position: fixed;
-	bottom: 15px;
-	width: 100%;
-}
-
 .modalTitle {
 	font-weight: 700;
 	font-size: 18px;
@@ -92,9 +85,21 @@
 }
 
 .uploadFilesModal {
-	.modal-content {
-		min-height: 750px;
-	}
+	& .modal-content {
+        min-height: 750px;
+        height: 750px;
+    }
+    & .uploadFilesContainer {
+        height: 100%;
+    }
+    & .buttonRow {
+        padding-top: 15px;
+        position: absolute;
+        border-top: 1px solid #e5e5e5;
+        left: 0;
+        bottom: 15px;
+        width: 100%;
+    }
 }
 
 .fileProgressModal {
