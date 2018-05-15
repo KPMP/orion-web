@@ -43,7 +43,7 @@ class FileList extends Component {
             )
         }
 
-        return <p><em>No files attached.</em></p>        
+        return <div className="fileList"><p><em>No files attached.</em></p></div>        
     }
 }
 
