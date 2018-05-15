@@ -9,13 +9,13 @@ class UploadedFilesTable extends Component {
 		
 		this._columns = [
 		      { key: 'researcher', name: 'Name', resizable: true, sortable: true, formatter: DefaultFormatter },
-		      { key: 'institution', name: 'Site', resizable: true, sortable: true, formatter: DefaultFormatter },
-		      { key: 'packageType', name: 'Type', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'institution', name: 'Site Name', resizable: true, sortable: true, formatter: DefaultFormatter },
+		      { key: 'packageType', name: 'Package Type', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'filename', name: 'File Name', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'subjectId', name:'Subject #', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentId', name:'Experiment #', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'experimentDate', name: 'Experiment Date', formatter: DateFormatter, resizable: true, sortable: true},
-			  { key: 'createdAt', name: 'Added On', formatter: DateTimeFormatter, resizable: true, sortable: true} ];
+			  { key: 'createdAt', name: 'Upload Date', formatter: DateTimeFormatter, resizable: true, sortable: true} ];
 
 		let rows = props.uploadedFiles;
 		this.state = { rows };
