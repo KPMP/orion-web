@@ -71,7 +71,7 @@ class PackageInfoForm extends Component {
                         <Field name="institutionName" label="Site Name" className="form-control" component={SelectBox} options={institutionOptions} />
                     </div>
                     <div className="form-group">
-                        <Field name="packageType" className="form-control" label="Package Type Name" component={SelectBox} options={packageTypes} />
+                        <Field name="packageType" className="form-control" label="Package Type" component={SelectBox} options={packageTypes} />
                     </div>
                     
                     <div className="form-group">
