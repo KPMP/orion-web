@@ -24,7 +24,7 @@ class AttachFilesTab extends Component {
 		            status: [ qq.status.SUBMITTING ]
 		    });
             if (this.props.uploader.methods.getUploads({
-		            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]
+		            status: [ qq.status.SUBMITTING, qq.status.SUBMITTED, qq.status.PAUSED ]
 		    }).length > 1 && this.props.currentTab === 1) {
                 this.setState({showMultiFileMessage: true});
                 return false;
