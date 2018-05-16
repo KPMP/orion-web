@@ -29,7 +29,7 @@ class FileList extends Component {
         if (this.props.files.length) {
             return (
                 <div className="fileList">
-                    <table className="table table-sm fileList">
+                    <table className="table table-sm">
                         <thead>
                             <tr><th>Name</th><th>Description</th><th></th></tr>
                         </thead>
@@ -43,7 +43,7 @@ class FileList extends Component {
             )
         }
 
-        return <p><em>No files attached.</em></p>        
+        return <div className="fileList"><p><em>No files attached.</em></p></div>        
     }
 }
 

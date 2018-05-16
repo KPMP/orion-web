@@ -104,7 +104,7 @@ const ReviewPanel = ({ props, cancel }) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-12">
+                    <div className="col-sm-12 uploadFileList">
                         <FileList files={ fileList }/>
                     </div>
                 </div>
