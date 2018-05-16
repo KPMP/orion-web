@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Gallery from 'react-fine-uploader';
+import UploadIcon from 'react-fine-uploader/gallery/upload-icon';
+import Gallery from 'react-fine-uploader/gallery';
 import {  ControlLabel, Button } from 'react-bootstrap';
 import FileList from './FileList';
 import qq from 'fine-uploader/lib/core';
@@ -82,6 +83,13 @@ class AttachFilesTab extends Component {
     }
     
 	render() {
+		const dropZoneChildren =
+			<span className='react-fine-uploader-gallery-dropzone-content'>
+				<UploadIcon className='react-fine-uploader-gallery-dropzone-upload-icon' />
+				Drop file here
+			</span>;
+		const fileInputChildren = <span>Select a file</span>;
+
 		return (
 			<div>
 				<div>
@@ -89,7 +97,7 @@ class AttachFilesTab extends Component {
 	                		{ this.state.showMultiFileMessage && <div className="attachFileError">Only one file may be added at a time.</div> }
 	                		{ this.state.showDuplicateFileMessage !== "" && <div className="attachFileError">You have already selected {this.state.showDuplicateFileMessage} to upload.</div>}
 	                </div>
-	                <Gallery fileInput-multiple={ false } uploader={ this.props.uploader } />
+					<Gallery uploader={ this.props.uploader } fileInput-multiple={false} fileInput-children={fileInputChildren} children={dropZoneChildren}/>
 	                <div id="fileDescription" className="form-group">
 	                    <ControlLabel htmlFor="fileDescription"><span className="modalTitle">Add File Description</span><span style={{color: "red"}}>*</span> <i>(each file requires a description)</i></ControlLabel>
 	                    <textarea className="form-control" cols="63" row="6" onChange={this.handleFileDescriptionChange} id="fileDescription" name="fileDescription" placeholder="Please describe this file." value={this.props.fileDescription}></textarea>
