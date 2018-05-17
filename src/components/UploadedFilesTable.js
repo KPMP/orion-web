@@ -50,19 +50,32 @@ class UploadedFilesTable extends Component {
 			}
 
 			if (sortDirection === 'ASC') {
-				if (isNaN(value1)) {
+				if (isNaN(value1) && isNaN(value2)) {
 					return value1.toString().toLowerCase().localeCompare(value2.toString().toLowerCase());
 				}
-				else {
+				else if (!isNaN(value1) && !isNaN(value2)) {
 					return value1 - value2;
 				}
-			}
-			else {
-				if (isNaN(value1)) {
-					return value2.toString().toLowerCase().localeCompare(value1.toString().toLowerCase());
+				else if (!isNaN(value1) && isNaN(value2)) {
+					return -1;
 				}
 				else {
+					return 1;
+				}
+
+			}
+			else {
+				if (isNaN(value1) && isNaN(value2)) {
+					return value2.toString().toLowerCase().localeCompare(value1.toString().toLowerCase());
+				}
+				else if (!isNaN(value1) && !isNaN(value2)) {
 					return value2 - value1;
+				}
+				else if (!isNaN(value1) && isNaN(value2)) {
+					return 1;
+				}
+				else {
+					return -1;
 				}
 			}
 		};
