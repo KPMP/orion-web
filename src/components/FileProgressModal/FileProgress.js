@@ -23,12 +23,16 @@ class FileProgress extends Component {
                             {this.props.files.map((row, i) => {
                                 return (
                                 <tbody>
-                                    <tr key={"a" + i}><td width="50%">&nbsp;<br/></td><td width="50%">{(row.size / 1000000).toFixed(2)} MB</td></tr>
-                                    <tr key={"b" + i}><td width="50%">{row.name}</td>
-                                        <td width="50%">
+                                    <tr key={i}>
+                                        <td width="45%" className="fileNameCell">{row.name}</td>
+                                        <td width="45%" className="fileProgressCell">
                                             {this.props.uploader && <ProgressBar id={row.id} uploader={this.props.uploader} />}
                                             {this.props.uploader && <Status id={row.id} uploader={this.props.uploader} text={ statusMessages }/> }
-                                    </td></tr>
+                                        </td>
+                                        <td width="10%" className="fileSizeCell">
+                                            {(row.size / 1000000).toFixed(2)} MB
+                                        </td>
+                                    </tr>
                                 </tbody>
                                     )
                             })}
