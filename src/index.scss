@@ -139,8 +139,13 @@
 	background: rgba(0, 204, 0, 1);
 	width: 0%;
 	height: 15px;
-	border-radius: 6px;
-	margin-bottom: 3px;
+}
+
+.react-fine-uploader-file-progress-bar-container {
+	background-color: lightgrey;
+	border-width: 1px;
+	border-style: solid;
+	border-color: darkgrey;
 }
 
 .react-fine-uploader-total-progress-bar {
@@ -160,7 +165,16 @@
 }
 
 #fileProgressTable td {
-	padding: 5px
+	padding: 10px;
+	vertical-align: top;
+}
+
+#fileProgressTable .fileSizeCell {
+	white-space: nowrap;
+}
+
+#fileProgressTable .fileNameCell {
+	white-space: normal;
 }
 
 .formError {
