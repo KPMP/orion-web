@@ -83,9 +83,9 @@ class PackageInfoForm extends Component {
                         <ControlLabel>Experiment # (optional)</ControlLabel>
                         <Field name="experimentId" className="form-control" component="input" type="text" />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group"> 
                         <ControlLabel>Experiment Date (optional)</ControlLabel>
-                        <Field name="experimentDate" component={ReduxDatePicker}/>
+                        <Field name="experimentDate" className="form-control" component={ReduxDatePicker}/>
                     </div>
                 </div>
                 <div className="row">
