@@ -11,7 +11,7 @@ class SelectBox extends Component {
 	}
 	
 	changed(e) {
-		this.props.input.onChange();
+		this.props.input.onChange(e);
 		if (e.target.value === "Other") {
 			this.setState({"showOtherField": true});
 		} else {
@@ -21,7 +21,7 @@ class SelectBox extends Component {
 	
 	render() {
 		let { label, options } = this.props;
-		let { name, onBlur, onChange, onFocus } = this.props.input;
+		let { name, onBlur, onFocus } = this.props.input;
 		let { error, touched, warning } = this.props.meta;
 		let classes = 'form-control';
 		if (touched && error) {
