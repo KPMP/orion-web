@@ -4,8 +4,7 @@ import { ControlLabel, Button } from 'react-bootstrap';
 import TextField from './TextField';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
-import ReduxDatePicker from './ReduxDatePicker';
-import moment from 'moment'
+import moment from 'moment';
 
 const validate = (values) => {
 	const errors = {};

@@ -45,10 +45,7 @@ class ReduxDatePicker extends React.Component {
     }
 
     render () {
-        const {
-            input, placeholder,
-            meta: {touched, error}
-            } = this.props;
+        const { input } = this.props;
 
         const handleChange = this.handleChange.bind(this, this.props);
 

@@ -6,7 +6,7 @@ import ReduxDatePicker from './ReduxDatePicker';
 class DateField extends Component {
     render() {
         let { label } = this.props;
-        let { name, type, onBlur, onChange, onFocus, value} = this.props.input;
+        let { name, onBlur, onChange, onFocus} = this.props.input;
         let { error, touched, warning } = this.props.meta;
         let classes = 'form-control';
         if (touched && error) {
