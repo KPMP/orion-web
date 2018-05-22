@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { change } from 'redux-form'
 import { connect } from 'react-redux';
+import Datetime from 'react-datetime';
 
 /* Adapted from https://github.com/Hacker0x01/react-datepicker/issues/543#issuecomment-299767784 */
 
@@ -17,11 +17,6 @@ class ReduxDatePicker extends React.Component {
             touched: PropTypes.bool,
             error: PropTypes.bool,
         }),
-        placeholder: PropTypes.string,
-    };
-
-    static defaultProps = {
-        placeholder: ''
     };
 
     constructor (props) {
@@ -36,31 +31,27 @@ class ReduxDatePicker extends React.Component {
      * @param {*} date String to be converted to moment format.
      */
     handleChange ({meta, input: {name}}, date) {
-        const momentDate = moment(date)
-        if(!momentDate.isValid()) {
-            return this.props.change(meta.form, name, '')
+        if (typeof date === "object" || date.length === 10) {
+            const momentDate = moment(date);
+            if(!momentDate.isValid()) {
+                return this.props.change(meta.form, name, '')
+            }
+            return this.props.input.onChange(momentDate.format('YYYY-MM-DD'));
         }
-        return this.props.input.onChange(momentDate.format('YYYY-MM-DD'));
+        else {
+            return this.props.input.onChange(date);
+        }
+
     }
 
     render () {
-        const {
-            input, placeholder,
-            meta: {touched, error}
-            } = this.props;
+        const { input } = this.props;
 
-        const handleChange = this.handleChange.bind(this, this.props)
+        const handleChange = this.handleChange.bind(this, this.props);
 
         return (
             <div>
-                <DatePicker
-                    name={input.name}
-                    placeholder={placeholder}
-                    dateFormat="YYYY-MM-DD"
-                    selected={input.value ? moment(input.value, 'YYYY-MM-DD') : null}
-                    onChange={handleChange}
-                />
-                {touched && error && <span>{error}</span>}
+                <Datetime inputProps={ {name: input.name} } onChange={handleChange} closeOnSelect={true} value={input.value}/>
             </div>
         )
     }

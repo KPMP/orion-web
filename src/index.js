@@ -5,6 +5,7 @@ import './index.css';
 import 'react-fine-uploader/gallery/gallery.css';
 import 'react-tabs/style/react-tabs.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datetime/css/react-datetime.css';
 import App from './App';
 
 

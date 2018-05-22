@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Form, Field, reduxForm } from 'redux-form';
 import { ControlLabel, Button } from 'react-bootstrap';
 import TextField from './TextField';
+import DateField from './DateField';
 import SelectBox from './SelectBox';
-import ReduxDatePicker from './ReduxDatePicker';
+import moment from 'moment';
 
 const validate = (values) => {
 	const errors = {};
@@ -21,6 +22,9 @@ const validate = (values) => {
 	}
 	if (!values.packageTypeOther && values.packageType === "Other") {
 		errors.packageTypeOther = "* Required";
+	}
+	if(values.experimentDate && !moment(values.experimentDate).isValid()) {
+		errors.experimentDate = "Invalid Date";
 	}
 	return errors;
 }
@@ -84,9 +88,8 @@ class PackageInfoForm extends Component {
                         <Field name="experimentId" className="form-control" component="input" type="text" />
                     </div>
                     <div className="form-group">
-                        <ControlLabel>Experiment Date (optional)</ControlLabel>
-                        <Field name="experimentDate" component={ReduxDatePicker}/>
-                    </div>
+						<Field name="experimentDate" component={DateField} label="Experiment Date (optional)" type="text" />
+					</div>
                 </div>
                 <div className="row">
                 		<div className="buttonRow">
