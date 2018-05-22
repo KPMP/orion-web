@@ -7,7 +7,7 @@ class FileProgressModal extends Component {
     render = () => {
         return (
             <div className="fileProgressModal static-modal">
-                <Modal.Dialog className="fileProgressModal">
+                <Modal className="fileProgressModal" show={this.props.show}>
                     <Modal.Header><div className="modalTitle">Upload Status</div></Modal.Header>
                     <Modal.Body className="uploadFilesContainer">
                         <FileProgress files={this.props.fileList} uploader={this.props.uploader}/>
@@ -22,7 +22,7 @@ class FileProgressModal extends Component {
                             </div>
                         </div>
                     </Modal.Body>
-                </Modal.Dialog>
+                </Modal>
             </div>
         );
     }

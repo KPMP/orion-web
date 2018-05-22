@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch, props) =>
 	    		dispatch(changeUploadTab(newTabIndex));
 	    	},
         processUpload() {
+                dispatch(showUploadModalAction(false));
         		dispatch(submit('uploadPackageInfoForm'));
         },
         removeFileFromList(index) {

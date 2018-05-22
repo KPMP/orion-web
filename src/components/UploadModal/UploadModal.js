@@ -179,30 +179,31 @@ class UploadModal extends Component {
 
     render = () => {
         return (
-            ( this.props.showFileProgressModal ? <FileProgressModal uploader={ this.uploader } fileList= { this.props.fileList } cancel={ this.cancel } uploadStatus={ this.props.uploadStatus }/> :
-            <div className="uploadFilesModal static-modal">
-                <Modal show={this.props.showUploadModal} className="uploadFilesModal">
-                    <Modal.Body className="uploadFilesContainer">
-                        <Tabs selectedIndex={this.props.currentTab} onSelect={(tabIndex) => this.switchTabs(tabIndex)} forceRenderTabPanel={true}>
-                            <TabList>
-                                <Tab>1: Define Upload</Tab>
-                                <Tab>2: Attach Files</Tab>
-                                <Tab>3: Review Upload</Tab>
-                            </TabList>
-                            <TabPanel>
-                                <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
-                            </TabPanel>
-                            <TabPanel>
-                                <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
-                            </TabPanel>
-                            <TabPanel>
-                                <ReviewPanel props={ this.props } cancel={this.cancel}/>
-                            </TabPanel>
-                        </Tabs>
-                    </Modal.Body>
-                </Modal>
+            <div>
+                <div className="uploadFilesModal static-modal">
+                    <Modal show={this.props.showUploadModal} className="uploadFilesModal">
+                        <Modal.Body className="uploadFilesContainer">
+                            <Tabs selectedIndex={this.props.currentTab} onSelect={(tabIndex) => this.switchTabs(tabIndex)} forceRenderTabPanel={true}>
+                                <TabList>
+                                    <Tab>1: Define Upload</Tab>
+                                    <Tab>2: Attach Files</Tab>
+                                    <Tab>3: Review Upload</Tab>
+                                </TabList>
+                                <TabPanel>
+                                    <PackageInfoForm uploadPackageInfo={this.props.uploadPackageInfo} changeUploadTab={this.props.changeUploadTab} onSubmit={data => { this.props.uploadPackageInfo(data) }} cancel={this.cancel} />
+                                </TabPanel>
+                                <TabPanel>
+                                    <AttachFilesTab uploader={this.uploader} {...this.props} cancel={this.cancel}/>
+                                </TabPanel>
+                                <TabPanel>
+                                    <ReviewPanel props={ this.props } cancel={this.cancel}/>
+                                </TabPanel>
+                            </Tabs>
+                        </Modal.Body>
+                    </Modal>
+                </div>
+                <FileProgressModal show={this.props.showFileProgressModal} uploader={ this.uploader } fileList= { this.props.fileList } cancel={ this.cancel } uploadStatus={ this.props.uploadStatus }/>
             </div>
-                )
         )
     }
 }
