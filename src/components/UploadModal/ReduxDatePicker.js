@@ -51,7 +51,7 @@ class ReduxDatePicker extends React.Component {
 
         return (
             <div>
-                <Datetime inputProps={ {name: input.name} } onChange={handleChange} closeOnSelect={true} value={input.value}/>
+                <Datetime inputProps={ {placeholder: 'YYYY-MM-DD', name: input.name} } onChange={handleChange} closeOnSelect={true} value={input.value}/>
             </div>
         )
     }
