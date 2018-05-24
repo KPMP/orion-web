@@ -23,7 +23,7 @@ const validate = (values) => {
 	if (!values.packageTypeOther && values.packageType === "Other") {
 		errors.packageTypeOther = "* Required";
 	}
-	if(values.experimentDate && !moment(values.experimentDate).isValid()) {
+	if(values.experimentDate && !moment(values.experimentDate, ['YYYY-MM-DD'], true).isValid()) {
 		errors.experimentDate = "Invalid Date";
 	}
 	return errors;
