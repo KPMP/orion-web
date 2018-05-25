@@ -4,6 +4,7 @@ import moment from 'moment'
 import { change } from 'redux-form'
 import { connect } from 'react-redux';
 import Datetime from 'react-datetime';
+import 'babel-polyfill';
 
 /* Adapted from https://github.com/Hacker0x01/react-datepicker/issues/543#issuecomment-299767784 */
 
@@ -31,11 +32,8 @@ class ReduxDatePicker extends React.Component {
      * @param {*} date String to be converted to moment format.
      */
     handleChange ({meta, input: {name}}, date) {
-        if (typeof date === "object" || date.length === 10) {
+        if (typeof date === "object" || moment(date, ['YYYY-MM-DD', 'MM/DD/YYYY', 'MM-DD-YYYY'], true).isValid()) {
             const momentDate = moment(date);
-            if(!momentDate.isValid()) {
-                return this.props.change(meta.form, name, '')
-            }
             return this.props.input.onChange(momentDate.format('YYYY-MM-DD'));
         }
         else {
@@ -43,6 +41,7 @@ class ReduxDatePicker extends React.Component {
         }
 
     }
+
 
     render () {
         const { input } = this.props;
