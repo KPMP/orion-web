@@ -1,0 +1,46 @@
+{
+  "name": "orion-web",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2",
+    "react-scripts": "1.1.4"
+  },
+  "dependencies": {
+    "ajv": "^6.4.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^3.3.7",
+    "detect-browser": "^2.4.0",
+    "fine-uploader": "^5.16.2",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.1",
+    "popper.js": "^1.14.3",
+    "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
+    "react-data-grid": "^4.0.7",
+    "react-datetime": "^2.14.0",
+    "react-dom": "^16.3.1",
+    "react-dropzone": "^4.2.9",
+    "react-dropzone-component": "^3.2.0",
+    "react-fine-uploader": "^1.1.0",
+    "react-redux": "^5.0.7",
+    "react-tabs": "^2.2.2",
+    "react-transition-group": "^1.2.0",
+    "react-widgets": "^4.2.6",
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

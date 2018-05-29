@@ -1,0 +1,12 @@
+{
+  "uploadedFiles": [],
+  "uploadDialog" : {
+  	"fileList": [],
+  	"fileDescription": "",
+  	"packageInfo": null,
+  	"currentTab": 0,
+  	"showUploadModal": false,
+  	"showFileProgressModal": false,
+  	"uploadStatus": ""
+  }
+}
