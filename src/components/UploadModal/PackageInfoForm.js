@@ -111,5 +111,5 @@ export default reduxForm({
     form: 'uploadPackageInfoForm',
     validate,
     touchOnBlur: true,
-    touchOnChange: true,
+    touchOnChange: true
 })(PackageInfoForm);
