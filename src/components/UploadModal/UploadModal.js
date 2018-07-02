@@ -7,13 +7,6 @@ import FileProgressModal from "../FileProgressModal/FileProgressModal";
 import FileList from './FileList';
 import AttachFilesTab from './AttachFilesTab';
 
-let BASE_URL = 'http://localhost:3030';
-if (process.env.REACT_APP_ENVIRONMENT === 'production') {
-	BASE_URL = 'http://upload.kpmp.org:3030';
-} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
-	BASE_URL = 'http://141.214.4.23:3030/';
-}
-
 const ReviewControls = ({ changeUploadTab, processUpload, cancel, uploadDisabled }) => (
 		<div className="row">
 	    		<div className="buttonRow">
@@ -128,7 +121,7 @@ class UploadModal extends Component {
 		            enabled: true
 		        },
 		        request: {
-		            endpoint: BASE_URL + '/upload'
+		            endpoint: '/upload'
 		        },
 		        retry: {
 		            enableAuto: false
