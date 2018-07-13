@@ -121,7 +121,7 @@ class UploadModal extends Component {
 		            enabled: true
 		        },
 		        request: {
-		            endpoint: '/api/upload'
+		            endpoint: '/api/uploader/fileChunk'
 		        },
 		        retry: {
 		            enableAuto: false
