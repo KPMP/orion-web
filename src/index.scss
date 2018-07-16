@@ -13,6 +13,9 @@
     margin: 10px 0 0 0;
     height: 85vh;
     overflow-y: scroll;
+    .pkg-panel:nth-child(even) {
+        background-color: rgb(230, 241, 255);
+    }
 }
 
 .pkg-filter {
