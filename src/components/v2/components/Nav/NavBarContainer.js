@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavButton from './NavButton';
-import { Navbar, Nav, NavItem, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 export const panes = {
     packages: 'Packages',
@@ -10,13 +10,13 @@ export const panes = {
 class UploaderContainer extends Component {
     render() {
         return (
-            <Navbar fluid>
+            <Navbar fluid className="nav-container">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <img src="img/KPMP-DataPortal.jpg" alt="logo"/>
+                        <img src="img/KPMP-DataPortal-bigger.jpg" alt="logo" width="100%" height="auto" />
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav>
+                <Nav className="nav-route">
                     <NavItem>
                         <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect}/>
                     </NavItem>
@@ -28,11 +28,9 @@ class UploaderContainer extends Component {
                     <Navbar.Text>
                         John Smith
                     </Navbar.Text>
-                    <NavItem>
-                        <Button className="btn btn-link">
-                            Sign out
-                        </Button>
-                    </NavItem>
+                    <Navbar.Text>
+                        Sign out
+                    </Navbar.Text>
                 </Nav>
             </Navbar>
         );

@@ -1,3 +1,99 @@
-#pkg-pane {
+.pane {
     margin: 0px 10px 0px 10px;
+    i {
+        color: gray;
+    }
+}
+
+#pkg-search-bar {
+    width: 200px;
+}
+
+#pkg-list {
+    margin: 10px 0 0 0;
+    height: 85vh;
+    overflow-y: scroll;
+}
+
+.pkg-filter {
+    margin: 0px 10px 0px 0px;
+}
+
+.search-glass {
+    background: rgb(2, 117, 216);
+    color: white;
+}
+
+.pkg-panel {
+    margin: 0px 10px 10px 0px;
+}
+
+.pkg-panel-info {
+    div:nth-child(2) {
+        margin: 12px 0px 12px;
+    }
+    div:nth-child(3) {
+        color: gray;
+    }
+}
+
+.pkg-panel-right {
+    div:nth-child(2) {
+        margin: 7px 0px 7px;
+    }
+    div {
+        button {
+            background: rgb(2, 117, 216);
+            color: white;
+            font-family: "ArialMT", "Arial";
+        }
+    }
+}
+
+.upload-type-sel {
+    b {
+        font-size: 18px;
+    }
+}
+
+.dd-gray-text {
+    color: gray;
+}
+
+.upload-ctrl-submit {
+    float: right;
+}
+
+#upload-form-default {
+    text-align: center;
+    div {
+        b {
+            color: gray;
+        }
+    }
+}
+
+.pkg-type-img {
+    text-align: center;
+    div {
+        margin-top: -50px;
+    }
+}
+
+.nav-container {
+    text-align: center;
+    background-color: white;
+    .nav-route {
+        float: none;
+        display: inline-block;
+        margin: -10px 0px;
+    }
+}
+
+.btn-primary {
+    background-color: rgb(2, 117, 216);
+}
+
+.navbar-default .btn-link {
+    color: rgb(2, 117, 216);
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MenuItem } from 'react-bootstrap'
 
 class FilterDropdownItem extends Component {
-    onClick = () => {
+    onSelect = () => {
         const addFilter = this.props.addFilter;
         if (addFilter) {
             addFilter(this.props.comp);
@@ -10,7 +10,7 @@ class FilterDropdownItem extends Component {
     }
 
     render() {
-        return <MenuItem eventKey={this.props.eventKey} onClick={this.onClick}>{this.props.name}</MenuItem>
+        return <MenuItem eventKey={this.props.eventKey} onSelect={this.onSelect}>{this.props.name}</MenuItem>
     }
 }
 

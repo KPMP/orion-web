@@ -7,7 +7,7 @@ class UploaderContainer extends Component {
         super(props);
         this.state = {
             pane: panes.packages
-        }
+        };
     }
 
     handlePaneSelect = (pane) => {

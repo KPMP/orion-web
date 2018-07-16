@@ -10,12 +10,7 @@ class NavButton extends Component {
     }
 
     render() {
-        let cls = "btn";
-        if (this.props.selected === this.props.name) {
-            cls = cls + " btn-primary";
-        } else {
-            cls = cls + " btn-link";
-        }
+        const cls = this.props.selected === this.props.name ? "btn-primary" : "btn-link";
 
         return (
             <Button className={cls} onClick={this.handleClick}>

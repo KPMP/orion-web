@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
 import FilterDropdown from './FilterDropdown';
+import PackageSearchBar from './PackageSearchBar';
+import { Form } from 'react-bootstrap';
 
 class PackageSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filters: []
+            filters: new Set(),
+            filterOpen: false
         };
     }
 
-    addFilter = (filter) => {
-        console.log(filter);
+    toggle = () => {
         this.setState({
-            filters: [...this.state.filters, filter]
+            filterOpen: !this.state.filterOpen
+        });
+    }
+
+    addFilter = (filter) => {
+        this.setState({
+            filters: new Set([...this.state.filters, filter]),
+            filterOpen: false
         });
     }
 
     render() {
         const filters = this.state.filters;
         return (
-            <div id="pkg-search">
-                <FilterDropdown addFilter={this.addFilter}/>
-                {filters}
-            </div>
+            <Form inline id="pkg-search">
+                <FilterDropdown addFilter={this.addFilter} toggle={this.toggle} open={this.state.filterOpen}/>
+                <PackageSearchBar />
+                {Array.from(filters)
+                    .map(comp => {
+                        return React.createElement(comp, { key: comp.toString()});
+                    })}
+            </Form>
         )
     }
 }

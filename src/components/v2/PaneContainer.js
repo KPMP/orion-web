@@ -1,15 +1,15 @@
 import React from 'react';
 import { panes } from './components/Nav/NavBarContainer';
 import PackagesContainer from './PackagesContainer';
+import UploadContainer from './UploadContainer';
 
 const PaneContainer = (props) => {
     switch (props.pane) {
-        case panes.packages:
-            return <PackagesContainer />;
         case panes.upload:
-            return <div>Upload!</div>;
+            return <UploadContainer />;
+        case panes.packages:
         default:
-            return <div>Wut!</div>;
+            return <PackagesContainer />;
     }
 }
 
