@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import UploadPageContainer from './components/UploadPageContainer';
+import UploadPageContainer from './components/v2/UploaderContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { viewUploadedFiles } from './actions/UploadForm/uploadTabActions';
+//import { viewUploadedFiles } from './actions/UploadForm/uploadTabActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -23,7 +23,7 @@ store.subscribe(saveState);
 class App extends Component {
   
 	componentWillMount() {
-		viewUploadedFiles()(store.dispatch);
+		//viewUploadedFiles()(store.dispatch);
 	}
 	
 	render() {
