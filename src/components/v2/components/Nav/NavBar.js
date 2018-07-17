@@ -7,16 +7,16 @@ export const panes = {
     upload: 'Upload'
 }
 
-class UploaderContainer extends Component {
+class NavBar extends Component {
     render() {
         return (
             <Navbar fluid className="nav-container">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <img src="img/KPMP-DataPortal-bigger.jpg" alt="logo" width="100%" height="auto" />
+                        <img src="img/logo_KPMP_Data_Portal.png" alt="Kidney Precision Medicine Project Data Portal" className="logo" />
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav className="nav-route">
+                <Nav className="nav-route pull-left">
                     <NavItem>
                         <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect}/>
                     </NavItem>
@@ -37,4 +37,4 @@ class UploaderContainer extends Component {
     }
 }
 
-export default UploaderContainer;
+export default NavBar;

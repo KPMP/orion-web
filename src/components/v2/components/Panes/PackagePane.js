@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PackageSearch from './components/Packages/PackageSearch';
-import PackageList from './components/Packages/PackageList';
+import PackageSearch from '../Packages/PackageSearch';
+import PackageList from '../Packages/PackageList';
 
-class PackagesContainer extends Component {
+class PackagePane extends Component {
     render() {
         return (
             <div className="pane">
@@ -14,4 +14,4 @@ class PackagesContainer extends Component {
     }
 }
 
-export default PackagesContainer;
+export default PackagePane;

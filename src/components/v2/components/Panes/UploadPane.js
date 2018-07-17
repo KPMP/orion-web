@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import UploadControl from './components/Upload/UploadControl';
-import UploadForm from './components/Upload/UploadForm';
-import DefaultType from './components/Upload/Types/DefaultType';
-import { titles } from './components/Upload/UploadTypeDropdown';
+import UploadControl from '../Upload/UploadControl';
+import UploadForm from '../Upload/UploadForm';
+import DefaultType from '../Upload/Types/DefaultType';
+import { titles } from '../Upload/UploadTypeDropdown';
 
-class UploadContainer extends Component {
+class UploadPane extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,4 +29,4 @@ class UploadContainer extends Component {
     }
 }
 
-export default UploadContainer;
+export default UploadPane;
