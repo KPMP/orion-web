@@ -58,6 +58,7 @@ class PackageInfoForm extends Component {
         		{'value': '3-D tissue imaging', 'label': '3-D tissue imaging'},
         		{'value': 'Spatial Metabolomics', 'label': 'Spatial Metabolomics'},
         		{'value': 'Inflammatory Cells', 'label': 'Inflammatory Cells'},
+        		{'value': 'Whole Slide Images', 'label': 'Whole Slide Images'},
         		{'value': 'Other', 'label': 'Other'},
         ];
        
