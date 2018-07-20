@@ -72,6 +72,15 @@ const ReviewPanel = ({ props, cancel }) => {
                         </div>
                     </div>
                     <div className="row">
+	                    <div className="col-sm-4">
+	                    		<strong>Associated Protocol:</strong>
+	                    </div>
+	                    		<div className="col-sm-8">
+	                    		{values.protocol}
+	                    </div>
+                    </div>
+                    
+                    <div className="row">
                         <div className="col-sm-4">
                             <strong>Experiment #:</strong>
                         </div>
