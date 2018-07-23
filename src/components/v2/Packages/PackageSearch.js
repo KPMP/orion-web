@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import FilterDropdown from './FilterDropdown';
-import PackageSearchBar from './PackageSearchBar';
 import { Form } from 'react-bootstrap';
 
 class PackageSearch extends Component {
@@ -29,8 +27,6 @@ class PackageSearch extends Component {
         const filters = this.state.filters;
         return (
             <Form inline id="pkg-search">
-                <FilterDropdown addFilter={this.addFilter} toggle={this.toggle} open={this.state.filterOpen}/>
-                <PackageSearchBar />
                 {Array.from(filters)
                     .map(comp => {
                         return React.createElement(comp, { key: comp.toString()});
