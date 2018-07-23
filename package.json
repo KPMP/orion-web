@@ -12,6 +12,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
+    "dateformat": "^3.0.3",
     "detect-browser": "^2.4.0",
     "fine-uploader": "^5.16.2",
     "jquery": "^3.3.1",
