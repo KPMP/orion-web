@@ -66,7 +66,7 @@ export const setUploadedFilesList = (uploadedFiles) => {
 
 export const uploadPackageInfo = (data) => {
     return (dispatch) => {
-        api.post('/upload/packageInfo', data)
+        api.post('/api/uploader/packageInfo', data)
           .then((res) => {
             dispatch(setPackageInfo(res.data));
           })
@@ -79,7 +79,7 @@ export const uploadPackageInfo = (data) => {
 
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
-		api.get('/viewUploads')
+		api.get('/api/uploader/viewFiles')
 			.then(res => {
 				dispatch(setUploadedFilesList(res.data));
 			})

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -72,6 +72,15 @@ const ReviewPanel = ({ props, cancel }) => {
                         </div>
                     </div>
                     <div className="row">
+	                    <div className="col-sm-4">
+	                    		<strong>Associated Protocol:</strong>
+	                    </div>
+	                    		<div className="col-sm-8">
+	                    		{values.protocol}
+	                    </div>
+                    </div>
+                    
+                    <div className="row">
                         <div className="col-sm-4">
                             <strong>Experiment #:</strong>
                         </div>
@@ -121,7 +130,7 @@ class UploadModal extends Component {
 		            enabled: true
 		        },
 		        request: {
-		            endpoint: '/upload'
+		            endpoint: '/api/uploader/fileChunk'
 		        },
 		        retry: {
 		            enableAuto: false
@@ -140,7 +149,7 @@ class UploadModal extends Component {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
             if (filename !== undefined) {
                 alert("We encountered an error uploading file: " + filename + "\n With reason: " + errorReason);
-                // just becasue the back end had trouble doesn't mean we need to toss the queue
+                // just because the back end had trouble doesn't mean we need to toss the queue
                 this.props.changeUploadTab(1);
             }
         });

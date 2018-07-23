@@ -26,6 +26,9 @@ const validate = (values) => {
 	if(values.experimentDate && !moment(values.experimentDate, ['YYYY-MM-DD'], true).isValid()) {
 		errors.experimentDate = "Invalid Date";
 	}
+	if (!values.protocol) {
+		errors.protocol = "* Required";
+	}
 	return errors;
 }
 
@@ -58,8 +61,17 @@ class PackageInfoForm extends Component {
         		{'value': '3-D tissue imaging', 'label': '3-D tissue imaging'},
         		{'value': 'Spatial Metabolomics', 'label': 'Spatial Metabolomics'},
         		{'value': 'Inflammatory Cells', 'label': 'Inflammatory Cells'},
+        		{'value': 'Whole Slide Images', 'label': 'Whole Slide Images'},
         		{'value': 'Other', 'label': 'Other'},
         ];
+        let protocols = [{'value': 'Pilot 1', 'label': 'Pilot 1'},
+	        	{'value': 'Pilot 2', 'label': 'Pilot 2'},
+	        	{'value': 'Pilot 3', 'label': 'Pilot 3'},
+	        	{'value': 'Protocol v1: Pathology MOP v1 ', 'label': 'Protocol v1: Pathology MOP v1 '},
+	        	{'value': 'Protocol v1: TIS MOP v1 ', 'label': 'Protocol v1: TIS MOP v1 '},
+	        	{'value': 'Other', 'label': 'Other'},
+        	];
+        
        
         return (
             <Form onSubmit={handleSubmit(onSubmit)} name="uploadPackageInfoForm" id="uploadPackageInfoForm">
@@ -75,9 +87,11 @@ class PackageInfoForm extends Component {
                         <Field name="institutionName" label="Site Name" className="form-control" component={SelectBox} options={institutionOptions} />
                     </div>
                     <div className="form-group">
-                        <Field name="packageType" className="form-control" label="Package Type" component={SelectBox} options={packageTypes} />
+                        <Field name="packageType" className="form-control" label="Package Type" component={SelectBox} options={packageTypes} additionalFieldName="packageTypeOther"/>
                     </div>
-                    
+                    <div className="form-group">
+                    		<Field name="protocol" className="form-control" label="Associated Protocol" component={SelectBox} options={protocols} />
+                    	</div>
                     <div className="form-group">
                         <ControlLabel>Subject # (optional)</ControlLabel>
                         <Field name="subjectId" className="form-control" component="input" type="text" />

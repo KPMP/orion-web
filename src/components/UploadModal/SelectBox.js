@@ -12,7 +12,7 @@ class SelectBox extends Component {
 	
 	changed(e) {
 		this.props.input.onChange(e);
-		if (e.target.value === "Other") {
+		if (e.target.value === "Other" && this.props.additionalFieldName !== undefined) {
 			this.setState({"showOtherField": true});
 		} else {
 			this.setState({"showOtherField": false});
@@ -42,7 +42,7 @@ class SelectBox extends Component {
 					})}
 				</select>
 				{this.state.showOtherField && 
-					<Field name="packageTypeOther" component={TextField} type="text"/>		
+					<Field name={this.props.additionalFieldName} component={TextField} type="text"/>		
 				}
 			</div>
 		);
