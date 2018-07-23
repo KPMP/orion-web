@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PackageSearch from '../Packages/PackageSearch';
-import PackageList from '../Packages/PackageList';
+import PackageListContainer from '../Packages/PackageListContainer';
 
-class PackagePane extends Component {
+class PackagesPane extends Component {
     render() {
         return (
             <div className="pane">
                 <PackageSearch />
                 <i>Search results are displayed in reverse chronological order</i>
-                <PackageList />
+                <PackageListContainer />
             </div>
         );
     }
 }
 
-export default PackagePane;
+export default PackagesPane;

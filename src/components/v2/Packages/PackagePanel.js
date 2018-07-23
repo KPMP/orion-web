@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 
 class PackagePanel extends Component {
+
     render() {
         return (
             <Panel className="pkg-panel">
@@ -12,9 +13,9 @@ class PackagePanel extends Component {
                             <div>Type<br />icon</div>
                         </Col>
                         <Col md={4} className="pkg-panel-info">
-                            <div><b>{this.props.pkgId}</b></div>
-                            <div><a>Package Type</a></div>
-                            <div>Submitted <b>YYYY-MM-DD</b> at hh:mm by <a>Joe Researcher, Michigan</a></div>
+                            <div><b>{this.props.uploadPackage.packageId}</b></div>
+                            <div><a>{this.props.uploadPackage.packageType}</a></div>
+                            <div>Submitted <b>{this.props.uploadPackage.submitted}</b> at hh:mm by <a>{this.props.uploadPackage.submitter}, {this.props.uploadPackage.institution}</a></div>
                         </Col>
                         <Col md={2} mdOffset={5} className="pkg-panel-right">
                             <div><a>nn attachments</a></div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UploadPage from './components/v2/components/Pages/UploadPage';
+import UploadPage from './components/v2/Pages/UploadPage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
