@@ -5,8 +5,8 @@ import { getLocalDateString, getLocalTimeString } from '../../../helpers/timezon
 class PackagePanel extends Component {
 
     render() {
-        var submittedDate = getLocalDateString(this.props.uploadPackage.submitted);
-        var submittedTime = getLocalTimeString(this.props.uploadPackage.submitted);
+        var submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
+        var submittedTime = getLocalTimeString(this.props.uploadPackage.createdAt);
     		return (
             <Panel className="pkg-panel">
                 <Panel.Body>
