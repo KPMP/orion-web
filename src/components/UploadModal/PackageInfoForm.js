@@ -93,13 +93,8 @@ class PackageInfoForm extends Component {
                     		<Field name="protocol" className="form-control" label="Associated Protocol" component={SelectBox} options={protocols} />
                     	</div>
                     <div className="form-group">
-                        <ControlLabel>Subject # (optional)</ControlLabel>
+                        <ControlLabel>Subject ID (optional)</ControlLabel>
                         <Field name="subjectId" className="form-control" component="input" type="text" />
-                    </div>
-                    <div className="centerBold">-OR-</div>
-                    <div className="form-group">
-                        <ControlLabel>Experiment # (optional)</ControlLabel>
-                        <Field name="experimentId" className="form-control" component="input" type="text" />
                     </div>
                     <div className="form-group">
 						<Field name="experimentDate" component={DateField} label="Experiment Date (optional)" type="text" />
