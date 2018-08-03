@@ -23,3 +23,5 @@ yarn-error.log*
 
 *.css
 package-lock.json
+
+.settings
