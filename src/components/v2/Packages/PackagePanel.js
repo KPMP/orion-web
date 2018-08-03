@@ -4,6 +4,10 @@ import { getLocalDateString, getLocalTimeString } from '../../../helpers/timezon
 
 class PackagePanel extends Component {
 
+    handleAttachmentClick(e) {
+
+    }
+
     render() {
         var submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
         var submittedTime = getLocalTimeString(this.props.uploadPackage.createdAt);
@@ -17,7 +21,7 @@ class PackagePanel extends Component {
                             <div>Submitted <b>{submittedDate}</b> at {submittedTime} by <a>{this.props.uploadPackage.submitter}, {this.props.uploadPackage.institution}</a></div>
                         </Col>
                         <Col md={2} mdOffset={4} className="pkg-panel-right">
-                            <div><a>nn attachments</a></div>
+                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.files.length} attachment(s)</a></div>
                             <div><a>Show package metadata</a></div>
                             <div>
                                 <Button className="btn btn-primary">
