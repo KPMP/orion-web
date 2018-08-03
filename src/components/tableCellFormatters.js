@@ -31,3 +31,11 @@ export class DefaultFormatter extends React.Component {
             </div>);
     }
 }
+
+export class DownloadFormatter extends React.Component {
+	render () {
+		return (
+			<div><i class="fa fa-download" aria-hidden="true"></i></div>
+		)
+	}
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDataGrid from 'react-data-grid';
-import {DefaultFormatter, DateFormatter, DateTimeFormatter} from './tableCellFormatters';
+import {DefaultFormatter, DateFormatter, DateTimeFormatter, DownloadFormatter} from './tableCellFormatters';
 
 class UploadedFilesTable extends Component {
 
@@ -14,7 +14,7 @@ class UploadedFilesTable extends Component {
 		      { key: 'packageType', name: 'Package Type', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'subjectId', name:'Subject #', resizable: true, sortable: true, formatter: DefaultFormatter },
 			  { key: 'createdAt', name: 'Upload Date', formatter: DateTimeFormatter, resizable: true, sortable: true},
-			  { key: 'download', name: 'Download', resizable: true, sortable: false, formatter: DefaultFormatter }];
+			  { key: 'download', name: '', resizable: true, sortable: false, formatter: DownloadFormatter }];
 
 		let rows = props.uploadedFiles;
 		this.state = { rows };
