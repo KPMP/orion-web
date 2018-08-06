@@ -158,10 +158,12 @@ class UploadModal extends Component {
         if (this.props.packageInfo && !this.props.showFileProgressModal) {
             this.uploader.methods.reset();
 
-            this.props.fileList.forEach((file, id) => {
-                this.uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo }, id);
+            this.props.fileList.forEach((file, id, fileList) => {
+                this.uploader.methods.setParams({ fileMetadata: file.fileMetadata, ...this.props.packageInfo, fileId: id,
+                    totalFiles: fileList.length }, id);
                 this.uploader.methods.addFiles([this.props.fileList[id].file]);
             });
+
             this.props.showFileProgress(true);
             this.uploader.methods.uploadStoredFiles();
         }
