@@ -133,6 +133,14 @@ class UploadModal extends Component {
 		        },
 		        retry: {
 		            enableAuto: false
+		        },
+		        callbacks: {
+			        	onAllComplete: function(succeeded, failed) {
+			        		props.uploadFinish(succeeded);
+			        		if (props.uploadStatus !== "complete") {
+			        			props.updateUploadStatus("complete");
+			        		}
+			        	}
 		        }
 		    }
 		});
@@ -140,13 +148,6 @@ class UploadModal extends Component {
 
     componentDidMount() {
 
-        this.uploader.on('allComplete', (success, failure) => {
-            if (this.props.uploadStatus !== "complete") {
-                this.props.uploadFinish(this.props.packageInfo.packageId);
-                this.props.updateUploadStatus("complete");
-            }
-        });
-        
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
             // for some reason we always get an undefined file here, so we are just ignoring it for now.
             if (filename !== undefined) {

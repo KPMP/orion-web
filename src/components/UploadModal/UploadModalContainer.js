@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch, props) =>
 	    		dispatch(changeUploadTab(newTabIndex));
 	    	},
         processUpload() {
-                dispatch(showUploadModalAction(false));
+            dispatch(showUploadModalAction(false));
         		dispatch(submit('uploadPackageInfoForm'));
         },
         removeFileFromList(index) {
@@ -54,8 +54,8 @@ const mapDispatchToProps = (dispatch, props) =>
         viewUploadedFiles() {
         		dispatch(viewUploadedFiles());
         },
-        uploadFinish(packageId) {
-            dispatch(uploadFinish(packageId));
+        uploadFinish(successfulUploads) {
+            dispatch(uploadFinish(successfulUploads));
         }
     });
 
