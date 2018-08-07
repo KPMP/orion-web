@@ -14,7 +14,7 @@ class UploadedFilesTable extends Component {
 		      { key: 'packageType', name: 'Package Type', resizable: true, sortable: true, formatter: DefaultFormatter },
 		      { key: 'subjectId', name:'Subject ID', resizable: true, sortable: true, formatter: DefaultFormatter },
 			  { key: 'createdAt', name: 'Upload Date', formatter: DateTimeFormatter, resizable: true, sortable: true},
-			  { key: 'download', name: '', resizable: true, sortable: false, formatter: DownloadFormatter }];
+			  { key: 'download', name: '', resizable: true, sortable: false, formatter: DownloadFormatter, width: 30 }];
 
 		let rows = props.uploadedFiles;
 		this.state = { rows };

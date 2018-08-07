@@ -79,8 +79,9 @@ export const uploadPackageInfo = (data) => {
 
 export const uploadFinish = (packageId) => {
     return (dispatch) => {
-        api.post('/upload/finish', {packageId: packageId})
+        api.post('/upload/finish/' + packageId)
             .then((res) => {
+            		console.log(res.data);
             })
             .catch((err) => {
                 alert("We were unable to process your request, please try again");
