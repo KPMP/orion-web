@@ -142,7 +142,7 @@ class UploadModal extends Component {
         
         this.uploader.on('allComplete', (success, failure) => {
             this.props.updateUploadStatus("complete");
-            this.props.uploadFinish(this.props.packageInfo.id);
+            this.props.uploadFinish(this.props.packageInfo.packageId);
         });
         
         this.uploader.on('error', (fileId, filename, errorReason, xhr) => {
