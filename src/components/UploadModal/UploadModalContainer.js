@@ -14,7 +14,7 @@ const mapStateToProps = (state, props) =>
         currentTab: state.uploadDialog.currentTab,
         showFileProgressModal: state.uploadDialog.showFileProgressModal,
         uploadStatus: state.uploadDialog.uploadStatus,
-        showUploadModal: state.uploadDialog.showUploadModal
+        showUploadModal: state.uploadDialog.showUploadModal,
     });
 
 const mapDispatchToProps = (dispatch, props) =>
