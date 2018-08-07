@@ -77,9 +77,9 @@ export const uploadPackageInfo = (data) => {
     };
 };
 
-export const uploadFinish = () => {
+export const uploadFinish = (packageId) => {
     return (dispatch) => {
-        api.post('/upload/finish')
+        api.post('/upload/finish', {packageId: packageId})
             .then((res) => {
             })
             .catch((err) => {

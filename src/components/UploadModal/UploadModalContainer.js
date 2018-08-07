@@ -54,8 +54,8 @@ const mapDispatchToProps = (dispatch, props) =>
         viewUploadedFiles() {
         		dispatch(viewUploadedFiles());
         },
-        uploadFinish() {
-            dispatch(uploadFinish());
+        uploadFinish(packageId) {
+            dispatch(uploadFinish(packageId));
         }
     });
 
