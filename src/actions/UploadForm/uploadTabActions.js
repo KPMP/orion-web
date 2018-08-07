@@ -77,6 +77,18 @@ export const uploadPackageInfo = (data) => {
     };
 };
 
+export const uploadFinish = () => {
+    return (dispatch) => {
+        api.post('/upload/finish')
+            .then((res) => {
+            })
+            .catch((err) => {
+                alert("We were unable to process your request, please try again");
+                console.log(err);
+            })
+    };
+};
+
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
 		api.get('/viewUploads')
