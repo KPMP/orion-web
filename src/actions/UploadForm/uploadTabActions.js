@@ -80,11 +80,9 @@ export const uploadPackageInfo = (data) => {
 export const uploadFinish = (successfulUploads) => {
     return (dispatch, getState) => {
     		if (getState().uploadDialog.fileList.length === successfulUploads.length) {
-    			console.log("finish it!")
     			let packageId = getState().uploadDialog.packageInfo.packageId;
     			api.post('/upload/finish/' + packageId, {}, { timeout: 60000})
 	    			.then((res) => {
-	    				console.log(res.data);
 	    			})
 	    			.catch((err) => {
 	    				alert("We were unable to process your request, please try again");
