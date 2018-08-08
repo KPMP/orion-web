@@ -89,7 +89,7 @@ const ReviewPanel = ({ props, cancel }) => {
                     
                     <div className="row">
                         <div className="col-sm-4">
-                            <strong>Subject ID:</strong>
+                            <strong>Subject/Sample ID:</strong>
                         </div>
                         <div className="col-sm-8">
                             { values.subjectId }
