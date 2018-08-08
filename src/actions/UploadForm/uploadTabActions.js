@@ -94,7 +94,7 @@ export const uploadFinish = (successfulUploads) => {
 
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
-		api.get('/viewUploads')
+		api.get('/viewUploads', {}, {timeout: 30000})
 			.then(res => {
 				dispatch(setUploadedFilesList(res.data));
 			})
