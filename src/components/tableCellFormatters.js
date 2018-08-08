@@ -1,5 +1,14 @@
 import React from 'react';
 import moment from 'moment';
+import Api from '../helpers/Api';
+const api = Api.getInstance();
+
+let BASE_URL = 'http://localhost:3030';
+if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+	BASE_URL = 'http://upload.kpmp.org:3030';
+} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
+	BASE_URL = 'http://141.214.4.23:3030';
+}
 
 export class DateFormatter extends React.Component {
 
@@ -34,8 +43,12 @@ export class DefaultFormatter extends React.Component {
 
 export class DownloadFormatter extends React.Component {
 	render () {
-		return (
-			<div><i class="fa fa-download" aria-hidden="true"></i></div>
-		)
+		if (this.props.dependentValues.downloadable) {
+			return (
+					<div><a href={BASE_URL + "/download/" + this.props.dependentValues.databaseId}><i class="fa fa-download" aria-hidden="true"></i></a></div>
+			)
+		} else {
+			return (<div>&nbsp;</div>);
+		}
 	}
 }

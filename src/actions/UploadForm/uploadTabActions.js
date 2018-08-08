@@ -77,6 +77,21 @@ export const uploadPackageInfo = (data) => {
     };
 };
 
+export const uploadFinish = (successfulUploads) => {
+    return (dispatch, getState) => {
+    		if (getState().uploadDialog.fileList.length === successfulUploads.length) {
+    			let packageId = getState().uploadDialog.packageInfo.packageId;
+    			api.post('/upload/finish/' + packageId, {}, { timeout: 60000})
+	    			.then((res) => {
+	    			})
+	    			.catch((err) => {
+	    				alert("We were unable to process your request, please try again");
+	    				console.log(err);
+	    			})
+    			};
+    		}
+};
+
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
 		api.get('/viewUploads')
