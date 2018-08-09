@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Api from '../helpers/Api';
+import { getLocalDateString, getLocalTimeString } from '../helpers/timezoneUtil'
 const api = Api.getInstance();
 
 let BASE_URL = 'http://localhost:3030';
@@ -22,7 +23,7 @@ export class DateFormatter extends React.Component {
 
 export class DateTimeFormatter extends React.Component {
     render() {
-        const formattedDate = this.props.value ? moment.utc(this.props.value).format('YYYY-MM-DD, h:mm:ss A') : "";
+        const formattedDate = getLocalDateString(this.props.value) + " " + getLocalTimeString(this.props.value);
         return (
             <DefaultFormatter value={formattedDate} />
         );
