@@ -29,6 +29,9 @@ const validate = (values) => {
 	if (!values.protocol) {
 		errors.protocol = "* Required";
 	}
+	if (!values.subjectId) {
+		errors.subjectId = "* Required";
+	}
 	return errors;
 }
 
@@ -93,8 +96,7 @@ class PackageInfoForm extends Component {
                     		<Field name="protocol" className="form-control" label="Associated Protocol" component={SelectBox} options={protocols} />
                     	</div>
                     <div className="form-group">
-                        <ControlLabel>Subject/Sample ID (optional)</ControlLabel>
-                        <Field name="subjectId" className="form-control" component="input" type="text" />
+                        <Field name="subjectId" className="form-control" component={TextField} label="Subject/Sample ID" type="text" />
                     </div>
                     <div className="form-group">
 						<Field name="experimentDate" component={DateField} label="Experiment Date (optional)" type="text" />
