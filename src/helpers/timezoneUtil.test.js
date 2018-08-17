@@ -1,4 +1,4 @@
-import { getLocalDateString, getLocalTimeString } from './timezoneUtil';
+import { getLocalDateString, getLocalTimeString,getIEFriendlyDate } from './timezoneUtil';
 
 describe('getLocalDate', () => {
     it('should parse the date from a timestamp', () => {
@@ -26,4 +26,10 @@ describe('getLocalTime', () => {
         expect(getLocalTimeString('1969-07-20T09:30:00.000+0000')).toEqual(localHour + ':30 AM');
     });
 
+});
+
+describe('getIEFriendlyDate', () => {
+    it('get rid of the last bit and add a Z', () => {
+        expect(getIEFriendlyDate('1969-07-08T13:30:00.000+0000')).toEqual('1969-07-08T13:30:00.000Z');
+    });
 });
