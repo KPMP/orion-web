@@ -27,7 +27,7 @@ class FileProgress extends Component {
                                         <td width="45%" className="fileNameCell">{row.name}</td>
                                         <td width="45%" className="fileProgressCell">
                                             {this.props.uploader && <ProgressBar id={row.id} uploader={this.props.uploader} />}
-                                            {this.props.uploader && <Status id={row.id} uploader={this.props.uploader} text={ statusMessages }/> }
+                                            {this.props.uploader && <Status id={i} uploader={this.props.uploader} text={ statusMessages }/> }
                                         </td>
                                         <td width="10%" className="fileSizeCell">
                                             {(row.size / 1000000).toFixed(2)} MB
