@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import UploadPageContainer from './components/UploadPageContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import createHistory from 'history/createBrowserHistory';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
+import ReactGA from 'react-ga';
 import rootReducer from './reducers';
 import { viewUploadedFiles } from './actions/UploadForm/uploadTabActions';
 
@@ -17,12 +19,25 @@ const saveState = () => {
   window.sessionStorage.setItem("redux-store", JSON.stringify(store.getState()));
 };
 
+ReactGA.initialize('UA-124331187-1');
+
+function logPageView(location, action) {
+	ReactGA.set({ page: location.pathname + location.search });
+	ReactGA.pageview(location.pathname + location.search);
+}
+
+const history = createHistory();
+history.listen((location, action) => {
+	logPageView(location, action);
+});
+
 store.subscribe(function(){console.log(store.getState())});
 store.subscribe(saveState);
 
 class App extends Component {
   
 	componentWillMount() {
+		logPageView(window.location, "");
 		viewUploadedFiles()(store.dispatch);
 	}
 	

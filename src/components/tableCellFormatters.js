@@ -43,10 +43,19 @@ export class DefaultFormatter extends React.Component {
 }
 
 export class DownloadFormatter extends React.Component {
+
+    downloadClickAction = () => {
+        ReactGA.event({
+            category: 'Download',
+            action: 'File Package',
+            value: this.props.dependentValues.databaseId,
+        });
+    }
+
 	render () {
 		if (this.props.dependentValues.downloadable) {
 			return (
-					<div><a href={BASE_URL + "/download/" + this.props.dependentValues.databaseId}><i class="fa fa-download" aria-hidden="true"></i></a></div>
+					<div onClick={this.downloadClickAction}><a href={BASE_URL + "/download/" + this.props.dependentValues.databaseId}><i class="fa fa-download" aria-hidden="true"></i></a></div>
 			)
 		} else {
 			return (<div>&nbsp;</div>);
