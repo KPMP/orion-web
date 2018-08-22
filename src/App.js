@@ -19,7 +19,14 @@ const saveState = () => {
   window.sessionStorage.setItem("redux-store", JSON.stringify(store.getState()));
 };
 
-ReactGA.initialize('UA-124331187-1');
+let GA_TRACKING_ID = 'UA-124331187-2';
+if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+	GA_TRACKING_ID = 'UA-124331187-2';
+} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
+	GA_TRACKING_ID = 'UA-124331187-1';
+}
+
+ReactGA.initialize(GA_TRACKING_ID);
 
 function logPageView(location, action) {
 	ReactGA.set({ page: location.pathname + location.search });
