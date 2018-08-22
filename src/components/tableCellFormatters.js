@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import moment from 'moment';
 import Api from '../helpers/Api';
 import { getLocalDateString, getLocalTimeString } from '../helpers/timezoneUtil'
@@ -48,7 +49,7 @@ export class DownloadFormatter extends React.Component {
         ReactGA.event({
             category: 'Download',
             action: 'File Package',
-            value: this.props.dependentValues.databaseId,
+            value: this.props.dependentValues.databaseId
         });
     }
 
