@@ -9,8 +9,8 @@ class AttachmentsModal extends Component {
                 <div className="attachmentsModal static-modal">
                     <Modal show={this.props.show} className="attachmentsModal">
                         <Modal.Body className="attachmentsModalBody">
-                        {this.props.files.map((file) => {
-                            return <span key={file.>{file.fileName}</span>
+                        {this.props.attachments.map((attachment) => {
+                            return <span key={attachment.>{attachment.fileName}</span>
                         })}
                         </Modal.Body>
                     </Modal>
