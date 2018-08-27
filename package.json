@@ -12,6 +12,7 @@
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.7",
     "dateformat": "^3.0.3",
+    "filesize": "^3.6.1",
     "detect-browser": "^2.5.1",
     "fine-uploader": "^5.16.2",
     "jquery": "^3.3.1",

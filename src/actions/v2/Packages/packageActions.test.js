@@ -1,5 +1,5 @@
 import actionNames from '../../actionNames';
-import { setPackages } from './packageActions';
+import { setPackages, showPackageAttachments } from './packageActions';
 
 describe ('setPackages', () => {
 	it('should create the correct action', () => {
