@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Col, Row } from 'react-bootstrap';
 import filesize from 'filesize';
+import { shouldColorRow } from './attachmentsModalRowHelper';
 
 class AttachmentsModal extends Component {
 	
@@ -15,7 +16,7 @@ class AttachmentsModal extends Component {
                         <Modal.Body className="attachmentsModalBody">
                         {this.props.attachments.map((attachment, index) => {
                         		let rowClass = "attachmentsModalRow";
-                        		if (((index + 1) % 2) === 0) {
+                        		if (shouldColorRow(index)) {
                         			rowClass +=" grayRow";
                         		}
                             return (<Row key={index} className={rowClass}>
