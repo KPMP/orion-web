@@ -3,6 +3,25 @@
 	height: 40%;
 }
 
+.attachmentsModalBody {
+	padding-top: 0px;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 5px;
+	
+	.attachmentsModalRow {
+		height: 83px;
+		border-bottom: 1px solid #e5e5e5;
+		padding-top: 5px;
+		line-height: 83px;
+	}
+	.grayRow {
+		background-color: rgba(242, 242, 242, 1);
+	}
+		
+}
+
+
 .pane {
     margin: 0px 10px 0px 10px;
     i {
