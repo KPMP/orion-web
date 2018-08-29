@@ -19,9 +19,10 @@ class AttachmentsModal extends Component {
                         		if (shouldColorRow(index)) {
                         			rowClass +=" grayRow";
                         		}
+                        		console.log(attachment.fileName);
                             return (<Row key={index} className={rowClass}>
-                            		<Col md={10}>{attachment.fileName}</Col>
-                            		<Col md={2}>{filesize(attachment.size)}</Col>
+                            		<Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
+                            		<Col md={3}>{filesize(attachment.size)}</Col>
                         		</Row>);
                         })}
                         </Modal.Body>

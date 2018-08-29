@@ -1,3 +1,7 @@
+a {
+	cursor: pointer;
+}
+
 .logo {
 	width: 40%;
 	height: 40%;
@@ -10,13 +14,43 @@
 	padding-bottom: 5px;
 	
 	.attachmentsModalRow {
-		height: 83px;
+		max-height: 83px;
 		border-bottom: 1px solid #e5e5e5;
-		padding-top: 5px;
-		line-height: 83px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		word-wrap: break-word;
+		
+		.filename {
+			overflow: hidden;
+			position: relative;
+			line-height: 1.2em;
+			/* max-height = line-height * max number of lines (1.2 x 3) */
+			max-height: 3.6em;
+			text-align: justify;
+			margin-right: 0em;
+			padding-right: 1em;
+		}
+		.filename:before {
+			content: '...';
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+		.filename:after {
+			content: '';
+			position: absolute;
+			right: 0;
+			width: 1em;
+			height: 1em;
+			margin-top: 0.2em;
+			background: white;
+		}
 	}
 	.grayRow {
 		background-color: rgba(242, 242, 242, 1);
+		.filename:after {
+			background: rgba(242, 242, 242, 1);
+		}
 	}
 		
 }
