@@ -14,9 +14,10 @@ a {
 	padding-bottom: 5px;
 	
 	.attachmentsModalRow {
-		height: 83px;
+		max-height: 83px;
 		border-bottom: 1px solid #e5e5e5;
 		padding-top: 15px;
+		padding-bottom: 15px;
 		word-wrap: break-word;
 		
 		.filename {
