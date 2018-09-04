@@ -5,7 +5,7 @@ class UploadTypeDropdownItem extends Component {
     handleSelect = () => {
         const onSelect = this.props.onSelect;
         if (onSelect) {
-            onSelect(this.props.comp);
+            onSelect(this.props.name);
         }
     }
 

@@ -11,7 +11,6 @@ class UploadPane extends Component {
     }
 
     handleSelect = (packageType) => {
-        console.log(packageType);
     		this.setState({
             packageType: packageType
         });
