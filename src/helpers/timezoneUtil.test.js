@@ -29,7 +29,7 @@ describe('getLocalTime', () => {
 });
 
 describe('getIEFriendlyDate', () => {
-	it('get rid of the last bit and add a Z', () => {
+	it('gets rid of the last bit and add a Z', () => {
 		expect(getIEFriendlyDate('1969-07-08T13:30:00.000+0000')).toEqual('1969-07-08T13:30:00.000Z');
 	});
 });
