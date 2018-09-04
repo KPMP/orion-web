@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import Types from './Types';
 
-class DefaultType extends Component {
-    static get Type() {
-        return Types.Default;
-    }
+class DefaultUploadForm extends Component {
 
     render() {
         const svg = <svg
@@ -64,4 +60,4 @@ class DefaultType extends Component {
     }
 }
 
-export default DefaultType;
+export default DefaultUploadForm;

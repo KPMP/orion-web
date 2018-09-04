@@ -140,3 +140,9 @@ a {
 .navbar-default .btn-link {
     color: rgb(2, 117, 216);
 }
+
+.packageTypeSelect {
+	text-align: left;
+	width: 200px;
+	@extend .dd-gray-text;
+}
