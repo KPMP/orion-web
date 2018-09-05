@@ -62,6 +62,12 @@ class V1StyleForm extends Component {
                 <div className="form-group">
 					<Field name="experimentDate" component={DateField} label="Experiment Date (optional)" type="text" />
 				</div>
+				<div className="form-group">
+					<ControlLabel>Description</ControlLabel>
+					<div>
+						<Field name="description" component="textarea" type="text"/>
+					</div>
+				</div>
             </div>
         </Form>
 				

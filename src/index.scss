@@ -154,10 +154,17 @@ a {
 	}
 }
 
-.formError {
-	color: red;
-}
-
-.fieldInError {
-	border-color: red !important;
+#uploadInfo {
+	.formError {
+		color: red;
+	}
+	
+	.fieldInError {
+		border-color: red !important;
+	}
+	
+	textarea {
+		width: 589px;
+		height: 65px;
+	}
 }
