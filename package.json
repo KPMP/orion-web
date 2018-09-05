@@ -15,6 +15,7 @@
     "detect-browser": "^2.5.1",
     "filesize": "^3.6.1",
     "fine-uploader": "^5.16.2",
+    "formik": "^1.1.2",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "popper.js": "^1.14.3",

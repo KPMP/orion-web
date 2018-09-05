@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {  ControlLabel } from 'react-bootstrap';
-import { Field } from 'redux-form';
 import TextField from './TextField';
 
 class SelectBox extends Component {
@@ -20,29 +19,24 @@ class SelectBox extends Component {
 	}
 	
 	render() {
-		let { label, options } = this.props;
-		let { name, onBlur, onFocus } = this.props.input;
-		let { error, touched, warning } = this.props.meta;
-		let classes = 'form-control';
-		if (touched && error) {
-			classes += ' fieldInError';
-		}
+		let { label, options, name } = this.props;
+//		let classes = 'form-control';
+//		if (touched && error) {
+//			classes += ' fieldInError';
+//		}
 
 		return (
 			<div>
 				<ControlLabel>{label} &nbsp;
-					{touched &&
-					((error && <span className="formError">{error}</span>) ||
-							(warning && <span>{warning}</span>))}
 				</ControlLabel>
-				<select name={name} className={classes} onBlur={onBlur} onChange={(value)=>this.changed(value)} onFocus={onFocus}>
+				<select name={name} className="form-control">
 					<option value=''>- select - </option>
 					{options.map(function(option, index) {
 						return <option key={index} value={option.value}>{option.label}</option>
 					})}
 				</select>
 				{this.state.showOtherField && 
-					<Field name={this.props.additionalFieldName} component={TextField} type="text"/>		
+					<TextField name={this.props.additionalFieldName} />
 				}
 			</div>
 		);

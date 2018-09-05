@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ControlLabel } from 'react-bootstrap';
-import { Form, Field, reduxForm } from 'redux-form';
 import TextField from './TextField';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
@@ -42,42 +41,37 @@ class V1StyleForm extends Component {
 	render() {
 		
 		return(
-			<Form name="uploadPackageInfoForm" id="uploadPackageInfoForm">
+			<form id="uploadPackageInfoForm">
             <div id="uploadInfo">
-                <div className="form-group">
-                    <Field name="firstName" component={TextField} label="First Name" type="text"/>
+                <div>
+                		<TextField name="firstName" label="First Name"/>
                 </div>
-                <div className="form-group">
-                    <Field name="lastName" component={TextField} label="Last Name" type="text" />
+                <div >
+                		<TextField name="lastName" label="Last Name"/>
                 </div>
-                <div className="form-group">
-                    <Field name="institutionName" label="Site Name" className="form-control" component={SelectBox} options={institutionList.institutions} />
+                <div >
+                		<SelectBox name="institutionName" label="Site Name" options={institutionList.institutions}/>
                 </div>
-                <div className="form-group">
-                		<Field name="protocol" className="form-control" label="Associated Protocol" component={SelectBox} options={protocolList.protocols} />
+                <div >
+                		<SelectBox name="protocol" label="Associated Protocol" options={protocolList.protocols}/>
                 	</div>
-                <div className="form-group">
-                    <Field name="subjectId" component={TextField} label="Subject/Sample ID" type="text" />
+                <div>
+                		<TextField name="subjectId" label="Subject/Sample ID"/>
                 </div>
-                <div className="form-group">
-					<Field name="experimentDate" component={DateField} label="Experiment Date (optional)" type="text" />
+                <div>
+                		<DateField name="exprimentDate" label="Experiment Date (optional)"/>
 				</div>
-				<div className="form-group">
+				<div>
 					<ControlLabel>Description</ControlLabel>
 					<div>
-						<Field name="description" component="textarea" type="text"/>
+						<textarea name="description" type="text" />
 					</div>
 				</div>
             </div>
-        </Form>
+        </form>
 				
 		);
 	}
 }
 
-export default reduxForm({
-    form: 'uploadPackageInfoForm',
-    validate,
-    touchOnBlur: true,
-    touchOnChange: true
-})(V1StyleForm);
+export default V1StyleForm;
