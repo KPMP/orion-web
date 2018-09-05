@@ -141,10 +141,6 @@ a {
     color: rgb(2, 117, 216);
 }
 
-.packageTypeSelect {
-	width: 250px;
-}
-
 .dropzone {
 	padding-bottom: 25px;
 	
@@ -166,5 +162,9 @@ a {
 	textarea {
 		width: 589px;
 		height: 65px;
+	}
+
+	.packageTypeSelect {
+		width: 250px;
 	}
 }

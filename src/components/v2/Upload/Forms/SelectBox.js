@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import {  ControlLabel } from 'react-bootstrap';
 import TextField from './TextField';
+import Select from 'react-select';
 
 class SelectBox extends Component {
-
+	
 	constructor () {
 		super();
-		this.state = { "showOtherField": false }
+		this.state = { "showOtherField": false,
+				selectedOption: null}
 	}
 	
-	changed(e) {
-		this.props.input.onChange(e);
-		if (e.target.value === "Other" && this.props.additionalFieldName !== undefined) {
+	changed = (selectedOption) => {
+		this.setState({ "selectedOption": selectedOption });
+		if (selectedOption.value === "Other" && this.props.additionalFieldName !== undefined) {
 			this.setState({"showOtherField": true});
 		} else {
 			this.setState({"showOtherField": false});
@@ -20,21 +22,12 @@ class SelectBox extends Component {
 	
 	render() {
 		let { label, options, name } = this.props;
-//		let classes = 'form-control';
-//		if (touched && error) {
-//			classes += ' fieldInError';
-//		}
-
+		let { selectedOption } = this.state;
 		return (
 			<div>
 				<ControlLabel>{label} &nbsp;
 				</ControlLabel>
-				<select name={name} className="form-control">
-					<option value=''>- select - </option>
-					{options.map(function(option, index) {
-						return <option key={index} value={option.value}>{option.label}</option>
-					})}
-				</select>
+				<Select value={selectedOption} onChange={this.changed} options={options}/>
 				{this.state.showOtherField && 
 					<TextField name={this.props.additionalFieldName} />
 				}
