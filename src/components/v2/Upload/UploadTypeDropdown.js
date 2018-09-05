@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-import { DropdownButton } from 'react-bootstrap'
-import UploadTypeDropdownItem from './UploadTypeDropdownItem'
+import { DropdownButton } from 'react-bootstrap';
+import Select from 'react-select';
 
 class UploadTypeDropdown extends Component {
-    render() {
+    
+	constructor() {
+		super();
+		this.state = { selectedOption: null };
+	}
+	
+	handleChange = (selectedOption) => {
+		this.props.onSelect(selectedOption.value);
+		this.setState({ selectedOption });
+	}
+	
+	render() {
+    		let { selectedOption } = this.state;
+		let options = [{ value: 'Sub-segment RNA-Seq', label: 'Sub-segment RNA-Seq'},
+    			{ value: 'Single-cell RNA-Seq', label: 'Single-cell RNA-Seq'},
+    			{ value: 'Single-nucleus RNA-Seq', label: 'Single-nucleus RNA-Seq'},
+    			{ value: 'Bulk RNA-Seq', label: 'Bulk RNA-Seq'},
+    			{ value: 'DNA Methylation', label: 'DNA Methylation'},
+    			{ value: 'Segmental miRNA', label: 'Segmental miRNA'},
+    			{ value: 'Multiplex ISH', label: 'Multiplex ISH'},
+    			{ value: 'Sub-segmental Proteomics', label: 'Sub-segmental Proteomics'},
+    			{ value: 'Near-single-cell Proteomics', label: 'Near-single-cell Proteomics'},
+    			{ value: '3-D tissue imaging', label: '3-D tissue imaging'},
+    			{ value: 'Spatial Metabolomics', label: 'Spatial Metabolomics'},
+    			{ value: 'Inflammatory Cells', label: 'Inflammatory Cells'},
+    			{ value: 'Whole Slide Images', label: 'Whole Slide Images'},
+    			{ value: 'Other', label: 'Other'}
+    			];
         return (
-            <DropdownButton
-                bsStyle="default"
-                title={this.props.title}
-                className="packageTypeSelect"
-                id="upload-type-dd"
-            >
-                <UploadTypeDropdownItem eventKey="1" onSelect={this.props.onSelect} name='Sub-segment RNASeq' />
-                	<UploadTypeDropdownItem eventKey="2" onSelect={this.props.onSelect} name='Single-cell RNAseq' />
-            		<UploadTypeDropdownItem eventKey="3" onSelect={this.props.onSelect} name='Single-nucleus RNAseq' />
-        			<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Bulk RNAseq' />
-    				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='DNA Methylation' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Segmental miRNA' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Multiplex ISH' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Sub-segmental Proteomics' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Near-single-cell Proteomics' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='3-D tissue imaging' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Spatial Metabolomics' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Inflammatory Cells' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Whole Slide Images' />
-				<UploadTypeDropdownItem eventKey="4" onSelect={this.props.onSelect} name='Other' />
-            </DropdownButton>
+            <Select value={selectedOption} onChange={this.handleChange} options={options} className="packageTypeSelect"/>
         )
     }
 }
