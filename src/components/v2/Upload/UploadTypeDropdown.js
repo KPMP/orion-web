@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DropdownButton } from 'react-bootstrap';
 import Select from 'react-select';
 import packageTypeList from './packageTypes';
 
