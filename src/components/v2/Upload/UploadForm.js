@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import DefaultUploadForm from './Forms/DefaultUploadForm';
-import V1StyleForm from './Forms/V1StyleForm';
+import Form from './Forms/V1StyleUploadFormFormik';
 import FileDropzone from './Forms/FileDropzone';
 
 class UploadForm extends Component {
 	render() {
+		
+		const uploadPackage = {
+			packageType: this.props.packageType,
+			submitterFirstName: '',
+			submitterLastName: '',
+			institution: '',
+			protocol: '',
+			experimentDate: null,
+			description: '',
+			subjectId: ''
+		}
 		if (this.props.packageType === 'Select') {
 			return ( <DefaultUploadForm/> );
 		} else {
@@ -18,7 +29,7 @@ class UploadForm extends Component {
 					</Row>
 					<Row>
 						<Col md={12}>
-							<V1StyleForm/>
+							<Form uploadPackage={uploadPackage}/>
 						</Col>
 					</Row>
 				</div>

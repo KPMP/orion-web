@@ -32,7 +32,8 @@
     "react-transition-group": "^1.2.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "yup": "^0.26.3"
   },
   "scripts": {
     "start-js": "react-scripts start",
