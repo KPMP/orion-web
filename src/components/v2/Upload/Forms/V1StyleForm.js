@@ -61,7 +61,7 @@ class UploadForm extends Component {
 			        		<TextField name="subjectId" label="Subject/Sample ID" onChange={handleChange} onBlur={handleBlur} value={values.subjectId} touched={touched.subjectId} error={errors.subjectId}/>
 			        </div>
 			        <div>
-			        		<DateField name="exprimentDate" label="Experiment Date (optional)"/>
+			        		<DateField name="experimentDate" label="Experiment Date (optional)" onChange={handleChange} onBlur={handleBlur} value={values.experimentDate} touched={touched.experimentDate} error={errors.experimentDate}/>
 					</div>
 					<div>
 						<ControlLabel>Description</ControlLabel>

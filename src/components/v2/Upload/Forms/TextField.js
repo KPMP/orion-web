@@ -12,7 +12,7 @@ class TextField extends Component {
 		}
 		return (
 			<div>
-				<ControlLabel>{label}<span className="formError">{errorMessage}</span>
+				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
 				<div>
 					<input name={name} type="text" className={classes} onChange={onChange} onBlur={onBlur} value={value}/>

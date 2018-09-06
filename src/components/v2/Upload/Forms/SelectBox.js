@@ -33,7 +33,7 @@ class SelectBox extends Component {
 		let { selectedOption } = this.state;
 		return (
 			<div>
-				<ControlLabel>{label}<span className="formError">{errorMessage}</span>
+				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
 				<Select value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={onBlur}/>
 				{this.state.showOtherField && 
