@@ -12,6 +12,8 @@ class SelectBox extends Component {
 	}
 	
 	changed = (selectedOption) => {
+		this.props.setFieldValue(this.props.name, selectedOption.value);
+		this.props.onChange(selectedOption.value);
 		this.setState({ "selectedOption": selectedOption });
 		if (selectedOption.value === "Other" && this.props.additionalFieldName !== undefined) {
 			this.setState({"showOtherField": true});
@@ -21,13 +23,19 @@ class SelectBox extends Component {
 	}
 	
 	render() {
-		let { label, options, name } = this.props;
+		let { label, options, name, onChange, onBlur, value, touched, error } = this.props;
+		let classes = '';
+		let errorMessage = "* ";
+		if (error !== undefined) {
+			classes = 'fieldInError';
+			errorMessage += error;
+		}
 		let { selectedOption } = this.state;
 		return (
 			<div>
-				<ControlLabel>{label} &nbsp;
+				<ControlLabel>{label}<span className="formError">{errorMessage}</span>
 				</ControlLabel>
-				<Select value={selectedOption} onChange={this.changed} options={options}/>
+				<Select value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={onBlur}/>
 				{this.state.showOtherField && 
 					<TextField name={this.props.additionalFieldName} />
 				}

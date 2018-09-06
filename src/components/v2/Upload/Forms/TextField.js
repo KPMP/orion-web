@@ -5,14 +5,14 @@ class TextField extends Component {
 	render() {
 		let { label, name, onChange, onBlur, value, touched, error } = this.props;
 		let classes = 'form-control';
-		let errorMessage = '';
+		let errorMessage = '* ';
 		if (touched && error !== undefined) {
 			classes += ' fieldInError';
-			errorMessage = error;
+			errorMessage += error;
 		}
 		return (
 			<div>
-				<ControlLabel>{label} &nbsp;<span className="formError">{errorMessage}</span>
+				<ControlLabel>{label}<span className="formError">{errorMessage}</span>
 				</ControlLabel>
 				<div>
 					<input name={name} type="text" className={classes} onChange={onChange} onBlur={onBlur} value={value}/>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import DefaultUploadForm from './Forms/DefaultUploadForm';
-import Form from './Forms/V1StyleUploadFormFormik';
+import V1StyleForm from './Forms/V1StyleForm';
 import FileDropzone from './Forms/FileDropzone';
 
 class UploadForm extends Component {
@@ -29,7 +29,7 @@ class UploadForm extends Component {
 					</Row>
 					<Row>
 						<Col md={12}>
-							<Form uploadPackage={uploadPackage}/>
+							<V1StyleForm uploadPackage={uploadPackage}/>
 						</Col>
 					</Row>
 				</div>
