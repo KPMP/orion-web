@@ -21,7 +21,7 @@ class UploadForm extends Component {
 			return ( <DefaultUploadForm/> );
 		} else {
 			return (
-				<div>
+				<div id="uploadForm">
 					<Row className="dropzone">
 						<Col md={12}>
 							<FileDropzone/>

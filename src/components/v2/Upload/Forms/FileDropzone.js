@@ -22,15 +22,19 @@ const uploader = new FineUploaderTraditional ({
 
 class FileDropzone extends Component {
 	
+	uploadFile(e) {
+		e.preventDefault();
+		document.getElementById("upload").click();
+	}
+	
 	render() {
-		const dropZoneChildren =
-			<span className='react-fine-uploader-gallery-dropzone-content'>
-				<UploadIcon className='react-fine-uploader-gallery-dropzone-upload-icon' />
-				Drop file here
-			</span>;
-		const fileInputChildren = <span>Select a file</span>;
+		const children = <span/>;
+		const fileInputChildren = <span>Drop file(s) here or <a>browse</a></span>;
+//		<span className='react-fine-uploader-gallery-dropzone-content'>
+//		Drop file(s) here or <span><a onClick={this.uploadFile}>browse</a><input multiple type="file" name="qqfile" id="upload"/></span>
+//	</span>;
 		return(
-			<Gallery uploader={uploader} fileInput-children={fileInputChildren} children={dropZoneChildren} />
+			<Gallery uploader={uploader} fileInput-children={fileInputChildren} children={children}/>
 		);
 	}
 }

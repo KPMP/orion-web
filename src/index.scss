@@ -147,6 +147,33 @@ a {
 	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
 		max-height: 120px;
 		min-height: 120px;
+		border: 1px dashed darkgrey;
+	}
+
+	.fine-uploader-dropzone-container {
+		padding: 0px 15px 0px 15px;
+	}
+
+	.react-fine-uploader-gallery-file-input-container {
+		color: #999;
+		background: transparent;
+		width: 100%;
+		border: none;
+		border-radius: unset;
+		float: unset;
+		font-size: 20px;
+		line-height: 120px;
+		padding: 0px;
+	}
+
+	.react-fine-uploader-gallery-file-input-container:hover {
+		color: #999;
+		color: black;
+		background: transparent;
+		width: 100%;
+		border: none;
+		border-radius: unset;
+		float: unset;
 	}
 }
 
@@ -167,4 +194,12 @@ a {
 	.packageTypeSelect {
 		width: 250px;
 	}
+	
+}
+
+#uploadForm {
+	#upload {
+		display: none;
+	}
+
 }
