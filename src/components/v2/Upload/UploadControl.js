@@ -4,13 +4,13 @@ import UploadTypeDropdown from './UploadTypeDropdown';
 
 class UploadControl extends Component {
     render() {
-        return (
+    		return (
             <Row id="upload-ctrl">
                 <Col md={11}>
                     <UploadTypeDropdown title={this.props.title} onSelect={this.props.handleSelect} handlePackageTypeOther={this.props.handlePackageTypeOther}/>
                 </Col>
                 <Col md={1} className="upload-ctrl-submit">
-                    <Button className="btn-primary" disabled={this.props.submitEnabled}>
+                    <Button className="btn-primary" disabled={this.props.submitDisabled}>
                         Submit
                     </Button>
                 </Col>

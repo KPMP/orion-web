@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Formik } from 'formik';
 import TextField from './TextField';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
 import { ControlLabel, Col, Row } from 'react-bootstrap';
 import protocolList from './protocols';
 import institutionList from './institutions';
-import { validate } from './v1StyleFormValidator';
 
-
-class UploadForm extends Component {
+class V1StyleForm extends Component {
 	render() {
+		
 		const {
 			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
@@ -68,13 +66,5 @@ class UploadForm extends Component {
 	}
 }
 
-const Form = (props) => {
 
-	return (
-		<div>
-			<Formik component={UploadForm} validate={validate}/>
-		</div>
-	);
-}
-
-export default Form;
+export default V1StyleForm;

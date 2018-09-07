@@ -4,6 +4,8 @@ import DefaultUploadForm from './Forms/DefaultUploadForm';
 import V1StyleForm from './Forms/V1StyleForm';
 import FileDropzone from './Forms/FileDropzone';
 import UploadControl from './UploadControl';
+import { Formik } from 'formik';
+import { validate } from './Forms/v1StyleFormValidator';
 
 class UploadForm extends Component {
 	
@@ -25,25 +27,36 @@ class UploadForm extends Component {
     		this.setState({packageTypeOther: packageTypeOther});
     }
     
+    isSubmitDisabled = (uploadPackage) => {
+    		let errors = validate(uploadPackage);
+    		if (Object.keys(errors).length === 0) {
+    			return false;
+    		}
+    		return true;
+    }
+    
 	render() {
+		const {
+			values, touched, errors, handleChange, setFieldValue, handleBlur
+		} = this.props;
 		
 		let submitEnabled = false;
 		const uploadPackage = {
 			packageType: this.state.packageType,
 			packageTypeOther: this.state.packageTypeOther,
-			submitterFirstName: '',
-			submitterLastName: '',
-			institution: '',
-			protocol: '',
-			experimentDate: null,
-			description: '',
-			subjectId: ''
+			submitterFirstName: values.submitterFirstName,
+			submitterLastName: values.submitterLastName,
+			institutionName: values.institutionName,
+			protocol: values.protocol,
+			experimentDate: values.experimentDate,
+			description: values.description,
+			subjectId: values.subjectId
 		}
 		
 		if (this.state.packageType === 'Select') {
 			return (
 				<div>
-					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitEnabled={submitEnabled} />
+					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} />
 					<hr/>
 					<DefaultUploadForm/> 
 				</div>
@@ -51,7 +64,7 @@ class UploadForm extends Component {
 		} else {
 			return (
 				<div id="uploadForm">
-					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitEnabled={true} />	
+					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={this.isSubmitDisabled(uploadPackage)} />	
 					<hr/>
 					<Row className="dropzone">
 						<Col md={12}>
@@ -60,7 +73,7 @@ class UploadForm extends Component {
 					</Row>
 					<Row>
 						<Col md={12}>
-							<V1StyleForm uploadPackage={uploadPackage}/>
+							<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
 						</Col>
 					</Row>
 				</div>
@@ -69,4 +82,13 @@ class UploadForm extends Component {
 	}
 }
 
-export default UploadForm;
+const Form = (props) => {
+
+	return (
+		<div>
+			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={validate} />
+		</div>
+	);
+}
+
+export default Form;
