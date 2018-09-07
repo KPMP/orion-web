@@ -8,7 +8,7 @@ class SelectBox extends Component {
 	constructor () {
 		super();
 		this.state = { "showOtherField": false,
-				selectedOption: null}
+				selectedOption: null, touched: false }
 	}
 	
 	changed = (selectedOption) => {
@@ -22,15 +22,16 @@ class SelectBox extends Component {
 		}
 	}
 	
-	blur = () => {
-		
+	blur = (e) => {
+		this.props.onBlur(e);
+		this.setState({touched: true});
 	}
 	
 	render() {
 		let { label, options, name, onChange, onBlur, value, touched, error } = this.props;
 		let classes = '';
 		let errorMessage = "* ";
-		if (error !== undefined) {
+		if (this.state.touched && error !== undefined) {
 			classes = 'fieldInError';
 			errorMessage += error;
 		}
@@ -39,7 +40,7 @@ class SelectBox extends Component {
 			<div>
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
-				<Select value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={onBlur}/>
+				<Select value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur}/>
 				{this.state.showOtherField && 
 					<TextField name={this.props.additionalFieldName} />
 				}
