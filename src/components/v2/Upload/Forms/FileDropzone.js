@@ -28,11 +28,10 @@ class FileDropzone extends Component {
 	}
 	
 	render() {
-		const children = <span/>;
-		const fileInputChildren = <span>Drop file(s) here or <a>browse</a></span>;
-//		<span className='react-fine-uploader-gallery-dropzone-content'>
-//		Drop file(s) here or <span><a onClick={this.uploadFile}>browse</a><input multiple type="file" name="qqfile" id="upload"/></span>
-//	</span>;
+		const children = <span className='react-fine-uploader-gallery-dropzone-content'>
+			Drop file(s) here
+			</span>;
+		const fileInputChildren = <span>Select file(s)</span>;
 		return(
 			<Gallery uploader={uploader} fileInput-children={fileInputChildren} children={children}/>
 		);
