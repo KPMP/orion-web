@@ -12,7 +12,7 @@ import { validate } from './v1StyleFormValidator';
 class UploadForm extends Component {
 	render() {
 		const {
-			values, touched, errors, isSubmitting, handleChange, setFieldValue, handleBlur, handleSubmit
+			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
 		return(
 			<form id="uploadPackageInfoForm">
