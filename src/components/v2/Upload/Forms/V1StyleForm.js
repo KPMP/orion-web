@@ -6,36 +6,8 @@ import SelectBox from './SelectBox';
 import { ControlLabel, Col, Row } from 'react-bootstrap';
 import protocolList from './protocols';
 import institutionList from './institutions';
-import moment from 'moment';
+import { validate } from './v1StyleFormValidator';
 
-const validate = (values) => {
-	const errors = {};
-	if(!values.submitterFirstName) {
-		errors.submitterFirstName = 'Required';
-	}
-	if (!values.submitterLastName) {
-		errors.submitterLastName = 'Required';
-	}
-	if(!values.institutionName) {
-		errors.institutionName = 'Required';
-	}
-	if(!values.packageType) {
-		errors.packageType = 'Required';
-	}
-	if (!values.packageTypeOther && values.packageType === "Other") {
-		errors.packageTypeOther = "Required";
-	}
-	if(values.experimentDate && !moment(values.experimentDate, ['YYYY-MM-DD'], true).isValid()) {
-		errors.experimentDate = "Invalid Date";
-	}
-	if (!values.protocol) {
-		errors.protocol = "Required";
-	}
-	if (!values.subjectId) {
-		errors.subjectId = "Required";
-	}
-	return errors;
-}
 
 class UploadForm extends Component {
 	render() {
