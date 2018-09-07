@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FineUploaderTraditional from 'fine-uploader-wrappers';
 import Gallery from 'react-fine-uploader/gallery';
-import UploadIcon from 'react-fine-uploader/gallery/upload-icon';
 
 const uploader = new FineUploaderTraditional ({
 	options: {

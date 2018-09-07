@@ -6,7 +6,8 @@ class UploadPane extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            packageType: 'Select'
+            packageType: 'Select',
+            packageTypeOther: ''
         };
     }
 
@@ -15,13 +16,17 @@ class UploadPane extends Component {
             packageType: packageType
         });
     }
+    
+    handlePackageTypeOther = (packageTypeOther) => {
+    		this.setState({packageTypeOther: packageTypeOther});
+    }
 
     render() {
     		return (
             <div className="pane">
-                <UploadControl title={this.state.packageType} handleSelect={this.handleSelect}/>
+                <UploadControl title={this.state.packageType} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther}/>
                 <hr />
-                <UploadForm packageType={this.state.packageType} />
+                <UploadForm packageType={this.state.packageType} packageTypeOther={this.state.packageTypeOther}/>
             </div>
         )
     }

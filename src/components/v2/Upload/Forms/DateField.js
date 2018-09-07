@@ -20,7 +20,7 @@ class DateField extends Component {
                 </ControlLabel>
                 <div>
                 { (browserName === "ie") ? <ReduxDatePicker {...this.props} />
-                    : <input name={name} type="date" className="form-control" onChange={onChange} onBlur={onBlur}/>
+                    : <input name={name} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value}/>
                 }
                 </div>
             </div>

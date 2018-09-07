@@ -9,6 +9,7 @@ class UploadForm extends Component {
 		
 		const uploadPackage = {
 			packageType: this.props.packageType,
+			packageTypeOther: this.props.packageTypeOther,
 			submitterFirstName: '',
 			submitterLastName: '',
 			institution: '',
@@ -17,6 +18,7 @@ class UploadForm extends Component {
 			description: '',
 			subjectId: ''
 		}
+		
 		if (this.props.packageType === 'Select') {
 			return ( <DefaultUploadForm/> );
 		} else {

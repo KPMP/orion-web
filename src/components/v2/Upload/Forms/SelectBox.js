@@ -28,7 +28,7 @@ class SelectBox extends Component {
 	}
 	
 	render() {
-		let { label, options, name, onChange, onBlur, value, touched, error } = this.props;
+		let { label, options, name, error } = this.props;
 		let classes = '';
 		let errorMessage = "* ";
 		if (this.state.touched && error !== undefined) {
@@ -40,7 +40,7 @@ class SelectBox extends Component {
 			<div>
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
-				<Select value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur}/>
+				<Select name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur}/>
 				{this.state.showOtherField && 
 					<TextField name={this.props.additionalFieldName} />
 				}

@@ -154,6 +154,16 @@ a {
 
 }
 
+#upload-ctrl {
+	.formError {
+		color: red;
+	}
+
+	.form-control {
+		height: 38px;
+	}
+}
+
 #uploadInfo {
 	.formError {
 		color: red;
