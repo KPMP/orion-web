@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import UploadControl from '../Upload/UploadControl';
 import UploadForm from '../Upload/UploadForm';
-import DefaultType from '../Upload/Types/DefaultType';
-import { titles } from '../Upload/UploadTypeDropdown';
 
 class UploadPane extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: DefaultType
+            packageType: 'Select',
+            packageTypeOther: ''
         };
     }
 
-    handleSelect = (comp) => {
-        this.setState({
-            selected: comp
+    handleSelect = (packageType) => {
+    		this.setState({
+            packageType: packageType
         });
+    }
+    
+    handlePackageTypeOther = (packageTypeOther) => {
+    		this.setState({packageTypeOther: packageTypeOther});
     }
 
     render() {
-        return (
+    		return (
             <div className="pane">
-                <UploadControl title={titles[this.state.selected.Type]} handleSelect={this.handleSelect}/>
+                <UploadControl title={this.state.packageType} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther}/>
                 <hr />
-                <UploadForm comp={this.state.selected} />
+                <UploadForm packageType={this.state.packageType} packageTypeOther={this.state.packageTypeOther}/>
             </div>
         )
     }

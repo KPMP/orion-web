@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
-import { DropdownButton } from 'react-bootstrap'
-import UploadTypeDropdownItem from './UploadTypeDropdownItem'
-import SubSegmentRNASeq from './Types/SubSegmentRNASeq';
-import Types from './Types/Types';
-
-export const titles = {
-    [Types.Default]: 'Select',
-    [Types.SubSegmentRNASeq]: 'Sub-segment RNASeq'
-};
+import Select from 'react-select';
+import packageTypeList from './packageTypes';
+import TextField from './Forms/TextField';
+import { Row, Col } from 'react-bootstrap';
 
 class UploadTypeDropdown extends Component {
-    render() {
+    
+	constructor() {
+		super();
+		this.state = { selectedOption: null, "showOtherField": false };
+	}
+	
+	handleChange = (selectedOption) => {
+		if (selectedOption.value === "Other") {
+			this.setState({ "showOtherField": true });
+		}
+		this.props.onSelect(selectedOption.value);
+		this.setState({ selectedOption });
+	}
+	
+	render() {
+    		let { selectedOption } = this.state;
         return (
-            <DropdownButton
-                bsStyle="default"
-                title={this.props.title}
-                className="dd-gray-text"
-                id="upload-type-dd"
-            >
-                <UploadTypeDropdownItem eventKey="1" comp={SubSegmentRNASeq} onSelect={this.props.onSelect} name={titles[SubSegmentRNASeq.Type]} />
-            </DropdownButton>
+        		<Row>
+        			<Col md="3">
+	        			<div className="header">
+	                    <b>Select a package type</b>
+	                </div>
+        				<Select value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect"/>
+        			</Col>
+        				{this.state.showOtherField &&
+      					<Col md="3">
+        						<TextField name="packageTypeOther" label="Package Type Other (specify)" onChange={this.props.handlePackageTypeOther}/>
+        					</Col>
+        				}
+        			
+            </Row>
         )
     }
 }

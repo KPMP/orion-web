@@ -7,6 +7,15 @@ a {
 	height: 40%;
 }
 
+.header {
+	font-size: 18px;
+	font-weight: 600;	
+}
+
+.row {
+	padding-top: 5px;
+}
+
 .attachmentsModalBody {
 	padding-top: 0px;
 	padding-right: 15px;
@@ -93,12 +102,6 @@ a {
     }
 }
 
-.upload-type-sel {
-    b {
-        font-size: 18px;
-    }
-}
-
 .dd-gray-text {
     color: gray;
 }
@@ -139,4 +142,59 @@ a {
 
 .navbar-default .btn-link {
     color: rgb(2, 117, 216);
+}
+
+.dropzone {
+	padding-bottom: 15px;
+	
+	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
+		min-height: 120px;
+		border: 1px dashed darkgrey;
+	}
+
+}
+
+#upload-ctrl {
+	.formError {
+		color: red;
+	}
+
+	.form-control {
+		height: 38px;
+	}
+}
+
+#uploadInfo {
+	.formError {
+		color: red;
+	}
+	
+	.fieldInError {
+		border: 1px solid red !important;
+	}
+	
+	textarea {
+		width: 100%;
+		height: 65px;
+	}
+
+	.packageTypeSelect {
+		width: 250px;
+	}
+	
+	.form-control {
+		height: 38px;
+	}
+
+	#packageInformationSection {
+		padding-top: 15px;
+	}
+	
+}
+
+#uploadForm {
+	#upload {
+		display: none;
+	}
+
 }
