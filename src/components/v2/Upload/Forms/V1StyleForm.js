@@ -69,7 +69,6 @@ class UploadForm extends Component {
 }
 
 const Form = (props) => {
-	
 
 	return (
 		<div>
