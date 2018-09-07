@@ -7,6 +7,15 @@ a {
 	height: 40%;
 }
 
+.header {
+	font-size: 18px;
+	font-weight: 600;	
+}
+
+.row {
+	padding-top: 5px;
+}
+
 .attachmentsModalBody {
 	padding-top: 0px;
 	padding-right: 15px;
@@ -93,12 +102,6 @@ a {
     }
 }
 
-.upload-type-sel {
-    b {
-        font-size: 18px;
-    }
-}
-
 .dd-gray-text {
     color: gray;
 }
@@ -142,7 +145,7 @@ a {
 }
 
 .dropzone {
-	padding-bottom: 25px;
+	padding-bottom: 15px;
 	
 	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
 		max-height: 120px;
@@ -187,12 +190,20 @@ a {
 	}
 	
 	textarea {
-		width: 589px;
+		width: 100%;
 		height: 65px;
 	}
 
 	.packageTypeSelect {
 		width: 250px;
+	}
+	
+	.form-control {
+		height: 38px;
+	}
+
+	#packageInformationSection {
+		padding-top: 15px;
 	}
 	
 }

@@ -7,7 +7,7 @@ class UploadControl extends Component {
         return (
             <Row id="upload-ctrl">
                 <Col md={2}>
-                    <div className="upload-type-sel">
+                    <div className="header">
                         <b>Select a package type</b>
                     </div>
                     <UploadTypeDropdown title={this.props.title} onSelect={this.props.handleSelect}/>

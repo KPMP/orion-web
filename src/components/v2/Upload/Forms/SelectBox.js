@@ -22,6 +22,10 @@ class SelectBox extends Component {
 		}
 	}
 	
+	blur = () => {
+		
+	}
+	
 	render() {
 		let { label, options, name, onChange, onBlur, value, touched, error } = this.props;
 		let classes = '';
