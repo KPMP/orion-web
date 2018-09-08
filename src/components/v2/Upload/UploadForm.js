@@ -6,6 +6,8 @@ import FileDropzone from './Forms/FileDropzone';
 import UploadControl from './UploadControl';
 import { Formik } from 'formik';
 import { validate } from './Forms/v1StyleFormValidator';
+import { uploader } from './fineUploader';
+import qq from 'fine-uploader/lib/core';
 
 class UploadForm extends Component {
 	
@@ -13,8 +15,19 @@ class UploadForm extends Component {
         super(props);
         this.state = {
             packageType: 'Select',
-            packageTypeOther: ''
+            packageTypeOther: '',
+            filesAdded: 0
         };
+        uploader.on('submit', () => {
+        		let newCount = this.state.filesAdded + 1;
+        		this.setState( { filesAdded: newCount } );
+        		return true;
+        });
+        uploader.on('cancel', () => {
+        		let newCount = this.state.filesAdded - 1;
+        		this.setState( { filesAdded: newCount });
+        		return true;
+        })
     }
 
     handleSelect = (packageType) => {
@@ -29,7 +42,7 @@ class UploadForm extends Component {
     
     isSubmitDisabled = (uploadPackage) => {
     		let errors = validate(uploadPackage);
-    		if (Object.keys(errors).length === 0) {
+    		if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
     			return false;
     		}
     		return true;
@@ -40,7 +53,6 @@ class UploadForm extends Component {
 			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
 		
-		let submitEnabled = false;
 		const uploadPackage = {
 			packageType: this.state.packageType,
 			packageTypeOther: this.state.packageTypeOther,
@@ -68,7 +80,7 @@ class UploadForm extends Component {
 					<hr/>
 					<Row className="dropzone">
 						<Col md={12}>
-							<FileDropzone/>
+							<FileDropzone uploader={uploader}/>
 						</Col>
 					</Row>
 					<Row>

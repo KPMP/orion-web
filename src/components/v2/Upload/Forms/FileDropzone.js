@@ -1,23 +1,5 @@
 import React, { Component } from 'react';
-import FineUploaderTraditional from 'fine-uploader-wrappers';
 import Gallery from 'react-fine-uploader/gallery';
-
-const uploader = new FineUploaderTraditional ({
-	options: {
-		chunking: {
-			enabled: true
-		},
-		deleteFile: {
-			enabled: false,
-		},
-		request: {
-			endpoint: '/api/uploader/fileChunk'
-		},
-		retry: {
-			enableAuto: false
-		}
-	}
-});
 
 class FileDropzone extends Component {
 	
@@ -32,7 +14,7 @@ class FileDropzone extends Component {
 			</span>;
 		const fileInputChildren = <span>Select file(s)</span>;
 		return(
-			<Gallery uploader={uploader} fileInput-children={fileInputChildren} children={children}/>
+			<Gallery uploader={this.props.uploader} fileInput-children={fileInputChildren} children={children}/>
 		);
 	}
 }
