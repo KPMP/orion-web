@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { getLocalDateString, getLocalTimeString } from '../../../helpers/timezoneUtil';
 import AttachmentsModal from './AttachmentsModal';
+import MetadataModal from './MetadataModal';
 
 class PackagePanel extends Component {
 
@@ -9,12 +10,18 @@ class PackagePanel extends Component {
 		super();
 		this.state = { showAttachments: false };
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
+		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 	}
 	
     handleAttachmentClick() {
     		let show = !this.state.showAttachments;
     		this.setState({ showAttachments: show });
     }
+
+	handleMetadataClick() {
+		let show = !this.state.showMetadata;
+		this.setState({ showMetadata: show });
+	}
 
     render() {
         var submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
@@ -31,7 +38,7 @@ class PackagePanel extends Component {
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
 	                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.attachments.length} attachment(s)</a></div>
-	                            <div><a>Show package metadata</a></div>
+	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            <div>
 	                                <Button className="btn btn-primary">
 	                                    <span className="glyphicon glyphicon-download-alt" />
@@ -42,7 +49,8 @@ class PackagePanel extends Component {
 	                        </Col>
 	                    </Row>
 	                    <AttachmentsModal show={this.state.showAttachments} attachments={this.props.uploadPackage.attachments} close={this.handleAttachmentClick}/>
-	                </Panel.Body>
+						<MetadataModal show={this.state.showMetadata} uploadPackage={this.props.uploadPackage} close={this.handleMetadataClick}/>
+					</Panel.Body>
 	            </Panel>
             </div>
         );
