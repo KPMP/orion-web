@@ -26,8 +26,8 @@ class PackagePanel extends Component {
 	                    <Row>
 	                        <Col md={6} className="pkg-panel-info">
 	                            <div><b>{this.props.uploadPackage.packageId}</b></div>
-	                            <div><a>{this.props.uploadPackage.packageType}</a></div>
-	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by <a>{this.props.uploadPackage.submitterFirstName} {this.props.uploadPackage.submitterLastName}, {this.props.uploadPackage.institution}</a></div>
+	                            <div>{this.props.uploadPackage.packageType}</div>
+	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {this.props.uploadPackage.submitterFirstName} {this.props.uploadPackage.submitterLastName}, {this.props.uploadPackage.institution}</div>
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
 	                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.attachments.length} attachment(s)</a></div>
