@@ -9,6 +9,7 @@ import { validate } from './Forms/v1StyleFormValidator';
 import { uploader } from './fineUploader';
 import qq from 'fine-uploader/lib/core';
 
+
 class UploadForm extends Component {
 	
     constructor(props) {
@@ -48,18 +49,18 @@ class UploadForm extends Component {
     		return true;
     }
     
-    handleSubmit = (packageInformation) => {
-    		console.log("in custom handle submit");
+    handleSubmit = () => {
+    	
     }
     
 	render() {
 		const {
-			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit
+			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit, handleSelect
 		} = this.props;
 		
 		const uploadPackage = {
-			packageType: this.state.packageType,
-			packageTypeOther: this.state.packageTypeOther,
+			packageType: values.packageType,
+			packageTypeOther: values.packageTypeOther,
 			submitterFirstName: values.submitterFirstName,
 			submitterLastName: values.submitterLastName,
 			institutionName: values.institutionName,
@@ -69,10 +70,10 @@ class UploadForm extends Component {
 			subjectId: values.subjectId
 		}
 		
-		if (this.state.packageType === 'Select') {
+		if (values.packageType === undefined) {
 			return (
 				<div>
-					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} />
+					<UploadControl title={this.props.title} handleSelect={handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} {...this.props}/>
 					<hr/>
 					<DefaultUploadForm/> 
 				</div>
@@ -81,7 +82,7 @@ class UploadForm extends Component {
 			return (
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
 					<div id="uploadForm">
-						<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={this.isSubmitDisabled(uploadPackage)} />	
+					<UploadControl title={this.props.title} handleSelect={handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} {...this.props}/>
 						<hr/>
 						<Row className="dropzone">
 							<Col md={12}>
@@ -104,7 +105,7 @@ const Form = (props) => {
 
 	return (
 		<div>
-			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {console.log(values)}}/>
+			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values)}}/>
 		</div>
 	);
 }

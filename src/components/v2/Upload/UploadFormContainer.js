@@ -7,8 +7,9 @@ const mapStateToProps = (state, props) =>
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
-	postPackageInformation() {
+	postPackageInformation(packageInfo) {
 		console.log("in post package information");
+		console.log(packageInfo);
 	}
 });
 
