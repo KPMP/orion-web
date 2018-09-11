@@ -152,6 +152,11 @@ a {
 		border: 1px dashed darkgrey;
 	}
 
+	.react-fine-uploader-gallery-file-input-container {
+		background-color: #0275d8;
+		border: 1px solid #0275d8;
+	}
+
 }
 
 #upload-ctrl {
@@ -184,6 +189,11 @@ a {
 	
 	.form-control {
 		height: 38px;
+	}
+
+	.form-control:focus {
+		box-shadow: none;
+		border: 2px solid rgb(38,132, 255);
 	}
 
 	#packageInformationSection {
