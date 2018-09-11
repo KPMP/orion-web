@@ -15,8 +15,6 @@ class UploadForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            packageType: 'Select',
-            packageTypeOther: '',
             filesAdded: 0
         };
         uploader.on('submit', () => {
@@ -31,16 +29,6 @@ class UploadForm extends Component {
         })
     }
 
-    handleSelect = (packageType) => {
-    		this.setState({
-            packageType: packageType
-        });
-    }
-    
-    handlePackageTypeOther = (packageTypeOther) => {
-    		this.setState({packageTypeOther: packageTypeOther});
-    }
-    
     isSubmitDisabled = (uploadPackage) => {
     		let errors = validate(uploadPackage);
     		if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
@@ -70,34 +58,29 @@ class UploadForm extends Component {
 			subjectId: values.subjectId
 		}
 		
-		if (values.packageType === undefined) {
-			return (
-				<div>
-					<UploadControl title={this.props.title} handleSelect={handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} {...this.props}/>
-					<hr/>
-					<DefaultUploadForm/> 
-				</div>
-			);
-		} else {
-			return (
+		return (
+			<div>
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
-					<div id="uploadForm">
-					<UploadControl title={this.props.title} handleSelect={handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={true} {...this.props}/>
-						<hr/>
-						<Row className="dropzone">
-							<Col md={12}>
-								<FileDropzone uploader={uploader}/>
-							</Col>
-						</Row>
-						<Row>
-							<Col md={12}>
-								<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
-							</Col>
-						</Row>
-					</div>
+					<UploadControl submitDisabled={this.isSubmitDisabled(uploadPackage)} {...this.props}/>
+					<hr/>
+					{ values.packageType === undefined && <DefaultUploadForm/> }
+					{ values.packageType !== undefined && 
+						<div id="uploadForm">
+							<Row className="dropzone">
+								<Col md={12}>
+									<FileDropzone uploader={uploader}/>
+								</Col>
+							</Row>
+							<Row>
+								<Col md={12}>
+									<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
+								</Col>
+							</Row>
+						</div>
+					}
 				</form>
-			);
-		}
+			</div>
+		);
 	}
 }
 

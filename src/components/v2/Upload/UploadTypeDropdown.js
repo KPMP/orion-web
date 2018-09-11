@@ -12,14 +12,16 @@ class UploadTypeDropdown extends Component {
 	}
 	
 	handleChange = (selectedOption) => {
+		this.props.setFieldValue(selectedOption.value);
+		this.props.handleChange(selectedOption.value);
+		this.setState({ selectedOption });
 		if (selectedOption.value === "Other") {
 			this.setState({ "showOtherField": true });
 		}
-		this.props.onSelect(selectedOption.value);
-		this.setState({ selectedOption });
 	}
 	
 	render() {
+		let { label, options, name, error, handleBlur, handleChange } = this.props;
     		let { selectedOption } = this.state;
         return (
         		<Row>
@@ -27,11 +29,11 @@ class UploadTypeDropdown extends Component {
 	        			<div className="header">
 	                    <b>Select a package type</b>
 	                </div>
-        				<Select value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect"/>
+        				<Select value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect" name="packageType" onBlur={handleBlur}/>
         			</Col>
         				{this.state.showOtherField &&
       					<Col md="3">
-        						<TextField name="packageTypeOther" label="Package Type Other (specify)" onChange={this.props.handlePackageTypeOther}/>
+        						<TextField name="packageTypeOther" label="Package Type Other (specify)" onChange={handleChange} onBlur={handleBlur}/>
         					</Col>
         				}
         			
