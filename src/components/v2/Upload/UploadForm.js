@@ -48,9 +48,13 @@ class UploadForm extends Component {
     		return true;
     }
     
+    handleSubmit = (packageInformation) => {
+    		console.log("in custom handle submit");
+    }
+    
 	render() {
 		const {
-			values, touched, errors, handleChange, setFieldValue, handleBlur
+			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit
 		} = this.props;
 		
 		const uploadPackage = {
@@ -75,20 +79,22 @@ class UploadForm extends Component {
 			);
 		} else {
 			return (
-				<div id="uploadForm">
-					<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={this.isSubmitDisabled(uploadPackage)} />	
-					<hr/>
-					<Row className="dropzone">
-						<Col md={12}>
-							<FileDropzone uploader={uploader}/>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={12}>
-							<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
-						</Col>
-					</Row>
-				</div>
+				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
+					<div id="uploadForm">
+						<UploadControl title={this.props.title} handleSelect={this.handleSelect} handlePackageTypeOther={this.handlePackageTypeOther} submitDisabled={this.isSubmitDisabled(uploadPackage)} />	
+						<hr/>
+						<Row className="dropzone">
+							<Col md={12}>
+								<FileDropzone uploader={uploader}/>
+							</Col>
+						</Row>
+						<Row>
+							<Col md={12}>
+								<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
+							</Col>
+						</Row>
+					</div>
+				</form>
 			);
 		}
 	}
@@ -98,7 +104,7 @@ const Form = (props) => {
 
 	return (
 		<div>
-			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={validate} />
+			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {console.log(values)}}/>
 		</div>
 	);
 }
