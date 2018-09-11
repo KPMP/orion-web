@@ -21,3 +21,7 @@ export const setPackages = (packages) => {
 		payload: packages
 	}
 }
+
+export const uploadPackage = (uploader, packageInfo) => {
+	console.log(packageInfo);
+}
