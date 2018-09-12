@@ -27,7 +27,7 @@ class V1StyleForm extends Component {
 		        </Row>
 		        <Row>
 		        		<Col md="4">
-		        			<SelectBox name="institutionName" label="Site Name" options={institutionList.institutions} handleChange={handleChange} handleBlur={handleBlur} error={errors.institutionName} setFieldValue={setFieldValue}/>
+		        			<SelectBox name="institution" label="Site Name" options={institutionList.institutions} handleChange={handleChange} handleBlur={handleBlur} error={errors.institution} setFieldValue={setFieldValue}/>
 		        		</Col>
 		        	</Row>
 		        	<Row>

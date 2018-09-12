@@ -37,10 +37,6 @@ class UploadForm extends Component {
     		return true;
     }
     
-    handleSubmit = () => {
-    	
-    }
-    
 	render() {
 		const {
 			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit, handleSelect
@@ -51,7 +47,7 @@ class UploadForm extends Component {
 			packageTypeOther: values.packageTypeOther,
 			submitterFirstName: values.submitterFirstName,
 			submitterLastName: values.submitterLastName,
-			institutionName: values.institutionName,
+			institution: values.institution,
 			protocol: values.protocol,
 			experimentDate: values.experimentDate,
 			description: values.description,

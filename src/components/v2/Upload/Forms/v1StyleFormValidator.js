@@ -8,8 +8,8 @@ export const validate = (values) => {
 	if (!values.submitterLastName) {
 		errors.submitterLastName = 'Required';
 	}
-	if(!values.institutionName) {
-		errors.institutionName = 'Required';
+	if(!values.institution) {
+		errors.institution = 'Required';
 	}
 	if(!values.packageType) {
 		errors.packageType = 'Required';

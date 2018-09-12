@@ -22,6 +22,16 @@ export const setPackages = (packages) => {
 	}
 }
 
-export const uploadPackage = (uploader, packageInfo) => {
+export const uploadPackage = (packageInfo) => {
 	console.log(packageInfo);
+	return (dispatch) => {
+		api.post('/api/v1/packages', packageInfo)
+		.then(res=> {
+			console.log(res);
+		})
+		.catch(err => {
+			alert("We were unable to upload your package to the KPMP Data Lake File Repository");
+			console.log(err);
+		});
+	};
 }

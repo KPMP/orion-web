@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import UploadForm from './UploadForm';
+import { uploadPackage } from '../../../actions/v2/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -8,8 +9,7 @@ const mapStateToProps = (state, props) =>
 const mapDispatchToProps = (dispatch, props) =>
 ({
 	postPackageInformation(packageInfo) {
-		console.log("in post package information");
-		console.log(packageInfo);
+		dispatch(uploadPackage(packageInfo));
 	}
 });
 
