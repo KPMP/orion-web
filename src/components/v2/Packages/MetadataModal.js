@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Modal, Col, Row } from 'react-bootstrap';
 import filesize from 'filesize';
+import { getLocalDateString } from '../../../helpers/timezoneUtil';
 
 class MetadataModal extends Component {
 
     render() {
+        let experimentDate = this.props.uploadPackage.experimentDate?getLocalDateString(this.props.uploadPackage.experimentDate):"N/A";
         return (
             <div>
                 <div className="metadataModal static-modal">
@@ -13,10 +15,18 @@ class MetadataModal extends Component {
                             <Modal.Title>Provided Metadata</Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="metadataModalBody">
-                            <div>Package type: {this.props.uploadPackage.packageType}</div>
-                            <div>Subject ID: {this.props.uploadPackage.subjectId}</div>
-                            Experiment number: AAAA-1234-YY-ZZZZZ
-                            Experiment date: 2018-05-31
+                            <p>Package type: {this.props.uploadPackage.packageType}</p>
+                            <p>Subject ID: {this.props.uploadPackage.subjectId}</p>
+                            <p>Experiment date: {experimentDate}</p>
+                            <p>Submitted by:</p>
+                            <ul>
+                                <li>Institution: {this.props.uploadPackage.institution}</li>
+                                <li>Submitter:</li>
+                                <ul>
+                                    <li>First name: {this.props.uploadPackage.submitterFirstName}</li>
+                                    <li>Last name: {this.props.uploadPackage.submitterLastName}</li>
+                                </ul>
+                            </ul>
                         </Modal.Body>
                     </Modal>
                 </div>
