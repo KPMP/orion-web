@@ -6,7 +6,6 @@ import FileDropzone from './Forms/FileDropzone';
 import UploadControl from './UploadControl';
 import { Formik } from 'formik';
 import { validate } from './Forms/v1StyleFormValidator';
-import { uploader } from './fineUploader';
 import qq from 'fine-uploader/lib/core';
 
 
@@ -17,12 +16,12 @@ class UploadForm extends Component {
         this.state = {
             filesAdded: 0
         };
-        uploader.on('submit', () => {
+        props.uploader.on('submit', () => {
         		let newCount = this.state.filesAdded + 1;
         		this.setState( { filesAdded: newCount } );
         		return true;
         });
-        uploader.on('cancel', () => {
+        props.uploader.on('cancel', () => {
         		let newCount = this.state.filesAdded - 1;
         		this.setState( { filesAdded: newCount });
         		return true;
@@ -64,7 +63,7 @@ class UploadForm extends Component {
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
-									<FileDropzone uploader={uploader}/>
+									<FileDropzone uploader={this.props.uploader}/>
 								</Col>
 							</Row>
 							<Row>

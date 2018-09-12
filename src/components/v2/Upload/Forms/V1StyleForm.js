@@ -55,7 +55,7 @@ class V1StyleForm extends Component {
 					<Col md="8">
 						<ControlLabel>Description</ControlLabel>
 						<div>
-							<textarea name="description" type="text" />
+							<textarea name="description" type="text" onChange={handleChange} onBlur={handleBlur} value={values.description}/>
 						</div>
 					</Col>
 				</Row>
