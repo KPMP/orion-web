@@ -87,14 +87,15 @@ a {
 
 .pkg-panel {
     margin: 0px 10px 10px 0px;
+
+	.odd-row {
+		background-color: rgba(230, 241, 255, 1);
+	}
 }
 
 .pkg-panel-info {
     div:nth-child(2) {
         margin: 12px 0px 12px;
-    }
-    div:nth-child(3) {
-        color: gray;
     }
 }
 
@@ -161,6 +162,16 @@ a {
 		border: 1px dashed darkgrey;
 	}
 
+	.react-fine-uploader-gallery-file-input-container {
+		background-color: #0275d8;
+		border: 1px solid #0275d8;
+	}
+
+	.react-fine-uploader-gallery-file-input-container:hover {
+		background-color: #286090;
+		border: 1px solid #204d74;
+	}
+
 }
 
 #upload-ctrl {
@@ -193,6 +204,11 @@ a {
 	
 	.form-control {
 		height: 38px;
+	}
+
+	.form-control:focus {
+		box-shadow: none;
+		border: 2px solid rgb(38,132, 255);
 	}
 
 	#packageInformationSection {

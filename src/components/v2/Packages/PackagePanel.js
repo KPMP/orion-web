@@ -3,6 +3,7 @@ import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { getLocalDateString, getLocalTimeString } from '../../../helpers/timezoneUtil';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
+import { shouldColorRow } from './attachmentsModalRowHelper.js';
 
 class PackagePanel extends Component {
 
@@ -29,7 +30,7 @@ class PackagePanel extends Component {
     		return (
     			<div>
 	            <Panel className="pkg-panel">
-	                <Panel.Body>
+	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
 	                        <Col md={6} className="pkg-panel-info">
 								<div><b>{this.props.uploadPackage.subjectId}</b></div>

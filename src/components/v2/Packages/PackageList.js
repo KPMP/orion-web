@@ -7,8 +7,8 @@ class PackageList extends Component {
 		this.props.getPackages();
 	}
     render() {
-        const panels = this.props.packages.map((uploadPackage) => {
-            return <PackagePanel uploadPackage={uploadPackage}/>;
+        const panels = this.props.packages.map((uploadPackage, index) => {
+            return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
         });
         return (
             <div id="pkg-list">
