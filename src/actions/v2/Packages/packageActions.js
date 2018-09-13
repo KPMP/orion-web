@@ -1,5 +1,6 @@
 import actionNames from '../../actionNames';
 import Api from '../../../helpers/Api';
+import qq from 'fine-uploader/lib/core';
 const api = Api.getInstance();
 
 export const getPackages = () => {
@@ -22,6 +23,19 @@ export const setPackages = (packages) => {
 	}
 }
 
+export const finishPackage = (packageId) => {
+	return (dispatch) => {
+		api.post('/api/v1/packages/' + packageId + '/files/finish')
+			.then(res => {
+				// reload the package list
+			})
+			.catch(err => {
+				alert("We were unable to finish your package upload.  You will be unable to download");
+				console.log(err);
+			});
+	}
+}
+
 export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
@@ -30,6 +44,12 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
 			let packageId = res.data;
+			let totalFiles = uploader.methods.getUploads().length;
+			uploader.on('allComplete', function(successes, failures) {
+				if (successes.length === totalFiles) {
+					dispatch(finishPackage(packageId));
+				}
+			});
 			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
 			uploader.methods.uploadStoredFiles();
 		})
@@ -39,3 +59,4 @@ export const uploadPackage = (packageInfo, uploader) => {
 		});
 	};
 }
+
