@@ -9,9 +9,6 @@ export const uploader = new FineUploaderTraditional ({
 		deleteFile: {
 			enabled: false,
 		},
-		request: {
-			endpoint: '/api/uploader/fileChunk'
-		},
 		retry: {
 			enableAuto: false
 		}

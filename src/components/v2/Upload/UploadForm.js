@@ -7,7 +7,7 @@ import UploadControl from './UploadControl';
 import { Formik } from 'formik';
 import { validate } from './Forms/v1StyleFormValidator';
 import qq from 'fine-uploader/lib/core';
-
+import { uploader } from './fineUploader';
 
 class UploadForm extends Component {
 	
@@ -16,12 +16,13 @@ class UploadForm extends Component {
         this.state = {
             filesAdded: 0
         };
-        props.uploader.on('submit', () => {
+        
+        uploader.on('submit', () => {
         		let newCount = this.state.filesAdded + 1;
         		this.setState( { filesAdded: newCount } );
         		return true;
         });
-        props.uploader.on('cancel', () => {
+        uploader.on('cancel', () => {
         		let newCount = this.state.filesAdded - 1;
         		this.setState( { filesAdded: newCount });
         		return true;
@@ -63,7 +64,7 @@ class UploadForm extends Component {
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
-									<FileDropzone uploader={this.props.uploader}/>
+									<FileDropzone uploader={uploader}/>
 								</Col>
 							</Row>
 							<Row>
@@ -80,10 +81,9 @@ class UploadForm extends Component {
 }
 
 const Form = (props) => {
-
 	return (
 		<div>
-			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values)}}/>
+			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}}/>
 		</div>
 	);
 }

@@ -29,8 +29,9 @@ export const uploadPackage = (packageInfo, uploader) => {
 	return (dispatch) => {
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
-			console.log(res);
-			console.log(uploader);
+			let packageId = res.data;
+			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
+			uploader.methods.uploadStoredFiles();
 		})
 		.catch(err => {
 			alert("We were unable to upload your package to the KPMP Data Lake File Repository");
