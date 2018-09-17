@@ -27,7 +27,6 @@ class PackagePanel extends Component {
     render() {
 		let submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
 		let submittedTime = getLocalTimeString(this.props.uploadPackage.createdAt);
-		let BASE_URL = 'http://localhost:3030';
     		return (
     			<div>
 	            <Panel className="pkg-panel">
@@ -42,7 +41,7 @@ class PackagePanel extends Component {
 	                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.attachments.length} attachment(s)</a></div>
 	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            <div>
-	                                <Button className="btn btn-primary" onClick={() => window.location.href=BASE_URL + "/download/" + this.props.uploadPackage.packageId}>
+	                                <Button className="btn btn-primary" onClick={() => window.location.href="api/v1/packages/" + this.props.uploadPackage.packageId + "/files"}>
 	                                    <span className="glyphicon glyphicon-download-alt" />
 	                                    <i> </i>
 	                                    <b>Download</b>
