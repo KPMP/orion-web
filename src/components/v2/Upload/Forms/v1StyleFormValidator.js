@@ -26,5 +26,6 @@ export const validate = (values) => {
 	if (!values.subjectId) {
 		errors.subjectId = "Required";
 	}
+	console.log(errors);
 	return errors;
 }
