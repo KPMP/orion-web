@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import NavBar, {panes} from '../Nav/NavBar';
+import {panes} from '../Nav/NavBar';
+import NavBarContainer from '../Nav/NavBarContainer';
 import PaneHolder from '../Panes/PaneHolder'
 
 class UploadPage extends Component {
@@ -19,7 +20,7 @@ class UploadPage extends Component {
     render() {
         return (
             <div>
-                <NavBar pane={this.state.pane} handlePaneSelect={this.handlePaneSelect} />
+                <NavBarContainer pane={this.state.pane} handlePaneSelect={this.handlePaneSelect} />
                 <PaneHolder pane={this.state.pane} />
             </div>
         );

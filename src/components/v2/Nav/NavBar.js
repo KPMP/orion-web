@@ -18,10 +18,10 @@ class NavBar extends Component {
                 </Navbar.Header>
                 <Nav className="nav-route pull-left">
                     <NavItem>
-                        <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect}/>
+                        <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                     </NavItem>
                     <NavItem>
-                        <NavButton name={panes.upload} selected={this.props.pane} onClick={this.props.handlePaneSelect}/>
+                        <NavButton name={panes.upload} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                     </NavItem>
                 </Nav>
                 <Nav pullRight>

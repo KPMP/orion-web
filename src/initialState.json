@@ -9,5 +9,7 @@
   	"showFileProgressModal": false,
   	"uploadStatus": ""
   },
-  "packages": []
+  
+  "packages": [],
+  "isUploading": false
 }

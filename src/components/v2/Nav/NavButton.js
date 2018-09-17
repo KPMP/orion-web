@@ -13,7 +13,7 @@ class NavButton extends Component {
         const cls = this.props.selected === this.props.name ? "btn-primary" : "btn-link";
 
         return (
-            <Button className={cls} onClick={this.handleClick}>
+            <Button className={cls} onClick={this.handleClick} disabled={this.props.disable}>
                 {this.props.name}
             </Button>
         );
