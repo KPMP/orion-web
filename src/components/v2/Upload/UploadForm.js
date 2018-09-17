@@ -57,7 +57,6 @@ class UploadForm extends Component {
 		
 		return (
 			<div>
-				{ this.state.showDuplicateFileMessage && "DUPLICATE"}
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
 					<UploadControl submitDisabled={this.isSubmitDisabled(values)} {...this.props}/>
 					<hr/>

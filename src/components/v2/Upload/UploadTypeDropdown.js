@@ -3,6 +3,8 @@ import Select from 'react-select';
 import packageTypeList from './packageTypes';
 import TextField from './Forms/TextField';
 import { Row, Col } from 'react-bootstrap';
+import { Field } from 'formik';
+import { validateNotEmpty } from './Forms/v1StyleFormValidator';
 
 class UploadTypeDropdown extends Component {
     
@@ -12,7 +14,7 @@ class UploadTypeDropdown extends Component {
 	}
 	
 	handleChange = (selectedOption) => {
-		this.props.setFieldValue(selectedOption.value);
+		this.props.setFieldValue('packageType', selectedOption.value);
 		this.props.handleChange(selectedOption.value);
 		this.setState({ selectedOption });
 		if (selectedOption.value === "Other") {
@@ -21,7 +23,7 @@ class UploadTypeDropdown extends Component {
 	}
 	
 	render() {
-		let { label, options, name, error, handleBlur, handleChange } = this.props;
+		let { handleBlur, handleChange } = this.props;
     		let { selectedOption } = this.state;
         return (
         		<Row>
@@ -29,7 +31,7 @@ class UploadTypeDropdown extends Component {
 	        			<div className="header">
 	                    <b>Select a package type</b>
 	                </div>
-        				<Select value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect" name="packageType" onBlur={handleBlur}/>
+        				<Field component={Select} value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect" name="packageType" onBlur={handleBlur} validate={validateNotEmpty}/>
         			</Col>
         				{this.state.showOtherField &&
       					<Col md="3">
