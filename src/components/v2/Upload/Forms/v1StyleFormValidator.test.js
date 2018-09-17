@@ -10,7 +10,7 @@ describe("validate", () => {
 	it("should return undefined in errors.submitterFirstName when a first name supplied", () => {
 		let values = { "submitterFirstName": 'firstName' };
 		let result = validate(values);
-		expect(result.submitterFirstName).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('submitterFirstName'));
 	});
 	it("should return 'Required' in errors.submitterLastName when no last name supplied", () => {
 		let values = { 'submitterLastName': '' };
@@ -20,17 +20,17 @@ describe("validate", () => {
 	it("should return undefined in errors.submitterLastName when a last name supplied", () => {
 		let values = { 'submitterLastName': 'last' };
 		let result = validate(values);
-		expect(result.submitterLastName).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('submitterLastName'));
 	});
-	it("should return 'Required' in errors.institutionName when no institution supplied", () => {
-		let values = { "institutionName": '' };
+	it("should return 'Required' in errors.institution when no institution supplied", () => {
+		let values = { "institution": '' };
 		let result = validate(values);
-		expect(result.institutionName).toEqual('Required');
+		expect(result.institution).toEqual('Required');
 	});
-	it("should return undefined in errors.institutionName when a institution supplied", () => {
-		let values = { "institutionName": 'name' };
+	it("should return undefined in errors.institution when a institution supplied", () => {
+		let values = { "institution": 'name' };
 		let result = validate(values);
-		expect(result.institutionName).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('institution'));
 	});
 	it("should return 'Required' in errors.packageType when no packageType supplied", () => {
 		let values = { 'packageType': '' };
@@ -40,7 +40,7 @@ describe("validate", () => {
 	it("should return undefined in errors.packageType when a packageType supplied", () => {
 		let values = { 'packageType': 'type' };
 		let result = validate(values);
-		expect(result.packageType).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('packageType'));
 	});
 	it("should return 'Required' in errors.protocol when no protocol supplied", () => {
 		let values = { 'protocol': '' };
@@ -50,7 +50,7 @@ describe("validate", () => {
 	it("should return undefined in errors.protocol when a protocol supplied", () => {
 		let values = { 'protocol': 'protocol' };
 		let result = validate(values);
-		expect(result.protocol).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('protocol'));
 	});
 	it("should return 'Required' in errors.subjectId when no subjectId supplied", () => {
 		let values = { 'subjectId': '' };
@@ -60,7 +60,7 @@ describe("validate", () => {
 	it("should return undefined in errors.subjectId when a subjectId supplied", () => {
 		let values = { 'subjectId': 'subjectId' };
 		let result = validate(values);
-		expect(result.subjectId).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('subjectId'));
 	});
 	it("should return 'Required' in errors.packageTypeOther when no packageTypeOther supplied and packageType is 'Other'", () => {
 		let values = { 'packageType': 'Other', 'packageTypeOther': '' };
@@ -70,7 +70,7 @@ describe("validate", () => {
 	it("should return undefined in errors.packageTypeOther when a packageTypeOther supplied and packageType is 'Other'", () => {
 		let values = { 'packageType': 'Other', 'packageTypeOther': 'stuff' };
 		let result = validate(values);
-		expect(result.packageTypeOther).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('packageTypeOther'));
 	});
 	it("should return 'Invalid Date' in errors.experimentDate when date is supplied in wrong format", () => {
 		let values = { 'experimentDate': '12-12-2012' };
@@ -80,6 +80,6 @@ describe("validate", () => {
 	it("should not set errors.experimentDate when date is not supplied", () => {
 		let values = { 'experimentDate': '' };
 		let result = validate(values);
-		expect(result.experimentDate).toEqual(undefined);
+		expect(false).toEqual(result.hasOwnProperty('experimentDate'));
 	});
 });

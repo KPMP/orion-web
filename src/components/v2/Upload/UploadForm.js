@@ -15,7 +15,6 @@ class UploadForm extends Component {
         super(props);
         this.state = {
             filesAdded: 0,
-            showDuplicateFileMessage: false
         };
         
         uploader.on('submit', () => {
@@ -34,18 +33,19 @@ class UploadForm extends Component {
         		for(let fileIndex in files) {
         			let existingName = files[fileIndex].name;
         			if (existingName === name) {
-        				this.setState({ showDuplicateFileMessage: true });
+        				alert("You have already selected " + existingName + " to upload.");
         				return false;
         			}
         			
         		}
-        		this.setState( { showDuplicateFileMessage: false });
         		return true;
         });
     }
 
-    isSubmitDisabled = (uploadPackage) => {
-    		let errors = validate(uploadPackage);
+    isSubmitDisabled = (values) => {
+    		let errors = validate(values);
+    		console.log(values);
+    		console.log(errors);
     		if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
     			return false;
     		}
@@ -57,23 +57,11 @@ class UploadForm extends Component {
 			values, handleSubmit
 		} = this.props;
 		
-		const uploadPackage = {
-			packageType: values.packageType,
-			packageTypeOther: values.packageTypeOther,
-			submitterFirstName: values.submitterFirstName,
-			submitterLastName: values.submitterLastName,
-			institution: values.institution,
-			protocol: values.protocol,
-			experimentDate: values.experimentDate,
-			description: values.description,
-			subjectId: values.subjectId
-		}
-		
 		return (
 			<div>
 				{ this.state.showDuplicateFileMessage && "DUPLICATE"}
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
-					<UploadControl submitDisabled={this.isSubmitDisabled(uploadPackage)} {...this.props}/>
+					<UploadControl submitDisabled={this.isSubmitDisabled(values)} {...this.props}/>
 					<hr/>
 					{ values.packageType === undefined && <DefaultUploadForm/> }
 					{ values.packageType !== undefined && 
@@ -85,7 +73,7 @@ class UploadForm extends Component {
 							</Row>
 							<Row>
 								<Col md={12}>
-									<V1StyleForm uploadPackage={uploadPackage} {...this.props}/>
+									<V1StyleForm {...this.props}/>
 								</Col>
 							</Row>
 						</div>
@@ -99,7 +87,9 @@ class UploadForm extends Component {
 const Form = (props) => {
 	return (
 		<div>
-			<Formik initialValues={props.uploadPackage} component={UploadForm} validate={(values) => validate} onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}}/>
+			<Formik component={UploadForm}  
+				onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}} 
+				validateOnChange={true} validateOnBlur={true}/>
 		</div>
 	);
 }

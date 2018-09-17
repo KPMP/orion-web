@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {  ControlLabel } from 'react-bootstrap';
 import { detect } from 'detect-browser';
 import ReduxDatePicker from './ReduxDatePicker';
+import { Field } from 'formik';
+import { validateDate } from './v1StyleFormValidator';
 
 class DateField extends Component {
     render() {
@@ -20,7 +22,7 @@ class DateField extends Component {
                 </ControlLabel>
                 <div>
                 { (browserName === "ie") ? <ReduxDatePicker {...this.props} />
-                    : <input name={name} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value}/>
+                    : <Field name={name} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateDate}/>
                 }
                 </div>
             </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {  ControlLabel } from 'react-bootstrap';
 import TextField from './TextField';
 import Select from 'react-select';
+import { Field } from 'formik';
+import { validateNotEmpty } from './v1StyleFormValidator';
 
 class SelectBox extends Component {
 	
@@ -40,7 +42,7 @@ class SelectBox extends Component {
 			<div>
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
-					<Select name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur}/>
+					<Field component={Select} name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur} validate={validateNotEmpty}/>
 					{this.state.showOtherField && 
 							<TextField name={this.props.additionalFieldName} label={this.props.additionalFieldLabel} onChange={handleChange} onBlur={handleBlur} value={this.props.otherValue}/>
 					}

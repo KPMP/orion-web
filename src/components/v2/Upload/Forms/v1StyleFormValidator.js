@@ -2,30 +2,40 @@ import moment from 'moment';
 
 export const validate = (values) => {
 	const errors = {};
-	if(!values.submitterFirstName) {
-		errors.submitterFirstName = 'Required';
-	}
-	if (!values.submitterLastName) {
-		errors.submitterLastName = 'Required';
-	}
-	if(!values.institution) {
-		errors.institution = 'Required';
-	}
-	if(!values.packageType) {
-		errors.packageType = 'Required';
-	}
+	
+	setError(values.submitterFirstName, errors, validateNotEmpty, 'submitterFirstName');
+	setError(values.submitterLastName, errors, validateNotEmpty, 'submitterLastName');
+	setError(values.institution, errors, validateNotEmpty, 'institution');
+	setError(values.packageType, errors, validateNotEmpty, 'packageType');
+	setError(values.protocol, errors, validateNotEmpty, 'protocol');
+	setError(values.subjectId, errors, validateNotEmpty, 'subjectId');
+	setError(values.experimentDate, errors, validateDate, 'experimentDate');
+	
 	if (!values.packageTypeOther && values.packageType === "Other") {
 		errors.packageTypeOther = "Required";
 	}
-	if(values.experimentDate && !moment(values.experimentDate, ['YYYY-MM-DD'], true).isValid()) {
-		errors.experimentDate = "Invalid Date";
-	}
-	if (!values.protocol) {
-		errors.protocol = "Required";
-	}
-	if (!values.subjectId) {
-		errors.subjectId = "Required";
-	}
-	console.log(errors);
 	return errors;
+}
+
+export const setError = (fieldValue, errors, validation, fieldKey) => {
+	let error = validation(fieldValue);
+	if (error !== undefined) {
+		errors[fieldKey] = error;
+	}
+}
+
+export const validateNotEmpty = (value) => {
+	let error;
+	if (!value) {
+		error = "Required";
+	}
+	return error;
+}
+
+export const validateDate = (date) => {
+	let error;
+	if (date && !moment(date, ['YYYY-MM-DD'], true).isValid()) {
+		error = "Invalid Date";
+	}
+	return error;
 }
