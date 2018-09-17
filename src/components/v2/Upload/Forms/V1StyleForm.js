@@ -10,7 +10,7 @@ class V1StyleForm extends Component {
 	render() {
 		
 		const {
-			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit
+			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
 		return(
 		    <div id="uploadInfo">

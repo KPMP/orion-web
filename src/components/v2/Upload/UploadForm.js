@@ -14,7 +14,8 @@ class UploadForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filesAdded: 0
+            filesAdded: 0,
+            showDuplicateFileMessage: false
         };
         
         uploader.on('submit', () => {
@@ -26,7 +27,21 @@ class UploadForm extends Component {
         		let newCount = this.state.filesAdded - 1;
         		this.setState( { filesAdded: newCount });
         		return true;
-        })
+        });
+        uploader.on('submit', (id, name) => {
+        		let files = uploader.methods.getUploads({
+	            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+        		for(let fileIndex in files) {
+        			let existingName = files[fileIndex].name;
+        			if (existingName === name) {
+        				this.setState({ showDuplicateFileMessage: true });
+        				return false;
+        			}
+        			
+        		}
+        		this.setState( { showDuplicateFileMessage: false });
+        		return true;
+        });
     }
 
     isSubmitDisabled = (uploadPackage) => {
@@ -39,7 +54,7 @@ class UploadForm extends Component {
     
 	render() {
 		const {
-			values, touched, errors, handleChange, setFieldValue, handleBlur, handleSubmit, handleSelect
+			values, handleSubmit
 		} = this.props;
 		
 		const uploadPackage = {
@@ -56,6 +71,7 @@ class UploadForm extends Component {
 		
 		return (
 			<div>
+				{ this.state.showDuplicateFileMessage && "DUPLICATE"}
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
 					<UploadControl submitDisabled={this.isSubmitDisabled(uploadPackage)} {...this.props}/>
 					<hr/>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import SelectBox from './Forms/SelectBox';
 import packageTypeList from './packageTypes';
-import UploadTypeDropdown from './UploadTypeDropdown';
 
 class UploadControl extends Component {
     render() {
