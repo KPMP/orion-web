@@ -26,7 +26,7 @@ export const finishPackage = (packageId) => {
 	return (dispatch) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish')
 			.then(res => {
-				// reload the package list
+				window.location.reload();
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");
