@@ -44,8 +44,6 @@ class UploadForm extends Component {
 
     isSubmitDisabled = (values) => {
     		let errors = validate(values);
-    		console.log(values);
-    		console.log(errors);
     		if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
     			return false;
     		}

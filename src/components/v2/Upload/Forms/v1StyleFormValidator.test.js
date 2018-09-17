@@ -1,4 +1,4 @@
-import { validate } from './v1StyleFormValidator';
+import { validate, validateNotEmpty, validateDate } from './v1StyleFormValidator';
 import React from 'react';
 
 describe("validate", () => {
@@ -82,4 +82,23 @@ describe("validate", () => {
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('experimentDate'));
 	});
+});
+
+describe('validateNotEmpty', () => {
+	it('should return "Required" when value is empty', () => {
+		expect(validateNotEmpty('')).toEqual('Required');
+	});
+	
+	it('should return undefined when value is given', () => {
+		expect(validateNotEmpty('stuff')).toEqual(undefined);
+	});
+});
+
+describe('validateDate', () => {
+	it('should return "Invalid Date" if date is not in YYYY-MM-DD format', () => {
+		expect(validateDate('12-12-2012')).toEqual("Invalid Date");
+	});
+	it('should return undefined if date is in YYYY-MM-DD format', () => {
+		expect(validateDate('2012-12-30')).toEqual(undefined);
+	})
 });
