@@ -46,7 +46,6 @@ class PackagePanel extends Component {
 	                                    <span className="glyphicon glyphicon-download-alt" />
 	                                    <i> </i>
 	                                    <b>Download</b>
-										<a href={BASE_URL + "/download/" + this.props.uploadPackage.packageId}></a>
 	                                </Button>
 	                            </div>
 	                        </Col>
