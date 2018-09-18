@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {  ControlLabel } from 'react-bootstrap';
 import TextField from './TextField';
 import Select from 'react-select';
+import { Field } from 'formik';
+import { validateNotEmpty } from './v1StyleFormValidator';
 
 class SelectBox extends Component {
 	
@@ -13,7 +15,7 @@ class SelectBox extends Component {
 	
 	changed = (selectedOption) => {
 		this.props.setFieldValue(this.props.name, selectedOption.value);
-		this.props.onChange(selectedOption.value);
+		this.props.handleChange(selectedOption.value);
 		this.setState({ "selectedOption": selectedOption });
 		if (selectedOption.value === "Other" && this.props.additionalFieldName !== undefined) {
 			this.setState({"showOtherField": true});
@@ -23,12 +25,12 @@ class SelectBox extends Component {
 	}
 	
 	blur = (e) => {
-		this.props.onBlur(e);
+		this.props.handleBlur(e);
 		this.setState({touched: true});
 	}
 	
 	render() {
-		let { label, options, name, error } = this.props;
+		let { label, options, name, error, handleBlur, handleChange } = this.props;
 		let classes = '';
 		let errorMessage = "* ";
 		if (this.state.touched && error !== undefined) {
@@ -40,10 +42,10 @@ class SelectBox extends Component {
 			<div>
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
-				<Select name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur}/>
-				{this.state.showOtherField && 
-					<TextField name={this.props.additionalFieldName} />
-				}
+					<Field component={Select} name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur} validate={validateNotEmpty}/>
+					{this.state.showOtherField && 
+							<TextField name={this.props.additionalFieldName} label={this.props.additionalFieldLabel} onChange={handleChange} onBlur={handleBlur} value={this.props.otherValue}/>
+					}
 			</div>
 		);
 	}
