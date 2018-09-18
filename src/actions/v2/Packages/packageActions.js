@@ -60,6 +60,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 				} else if (failed.length > 0){
 					alert("We were unable to upload all of your files. You will need to resubmit this package.");
 					dispatch(setIsUploading(false));
+					window.location.reload();
 				}
 			});
 			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
