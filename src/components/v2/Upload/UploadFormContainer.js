@@ -4,6 +4,7 @@ import { uploadPackage } from '../../../actions/v2/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
+	isUploading: state.isUploading
 });
     
 const mapDispatchToProps = (dispatch, props) =>

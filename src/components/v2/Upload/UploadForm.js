@@ -44,7 +44,9 @@ class UploadForm extends Component {
 
     isSubmitDisabled = (values) => {
     		let errors = validate(values);
-    		if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
+    		if (this.props.isUploading) {
+    			return true;
+    		} else if (Object.keys(errors).length === 0 && this.state.filesAdded > 0) {
     			return false;
     		}
     		return true;
@@ -54,7 +56,6 @@ class UploadForm extends Component {
 		const {
 			values, handleSubmit
 		} = this.props;
-		
 		return (
 			<div>
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
@@ -84,9 +85,9 @@ class UploadForm extends Component {
 const Form = (props) => {
 	return (
 		<div>
-			<Formik component={UploadForm}  
+			<Formik render={formikProps => <UploadForm {...formikProps} isUploading={props.isUploading}/>}  
 				onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}} 
-				validateOnChange={true} validateOnBlur={true}/>
+				validateOnChange={true} validateOnBlur={true} />
 		</div>
 	);
 }
