@@ -40,13 +40,15 @@ class PackagePanel extends Component {
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
 	                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.attachments.length} attachment(s)</a></div>
 	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
-	                            <div>
-	                                <Button className="btn btn-primary" onClick={() => window.location.href="api/v1/packages/" + this.props.uploadPackage.packageId + "/files"}>
-	                                    <span className="glyphicon glyphicon-download-alt" />
-	                                    <i> </i>
-	                                    <b>Download</b>
-	                                </Button>
-	                            </div>
+	                            {this.props.uploadPackage.downloadable &&
+		                            <div>
+		                                <Button className="btn btn-primary" onClick={() => window.location.href="api/v1/packages/" + this.props.uploadPackage.packageId + "/files"}>
+		                                    <span className="glyphicon glyphicon-download-alt" />
+		                                    <i> </i>
+		                                    <b>Download</b>
+		                                </Button>
+		                            </div>
+	                            }
 	                        </Col>
 	                    </Row>
 	                    <AttachmentsModal show={this.state.showAttachments} attachments={this.props.uploadPackage.attachments} close={this.handleAttachmentClick}/>
