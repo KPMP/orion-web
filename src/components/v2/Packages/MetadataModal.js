@@ -15,7 +15,8 @@ class MetadataModal extends Component {
                         </Modal.Header>
                         <Modal.Body className="metadataModalBody">
                             <p>Package type: {this.props.uploadPackage.packageType}</p>
-                            <p>Subject ID: {this.props.uploadPackage.subjectId}</p>
+                            <p>Description: {this.props.uploadPackage.description}</p>
+                            <p>Subject/Sample ID: {this.props.uploadPackage.subjectId}</p>
                             <p>Experiment date: {experimentDate}</p>
                             <p>Submitted by:</p>
                             <ul>
