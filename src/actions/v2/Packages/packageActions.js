@@ -54,9 +54,13 @@ export const uploadPackage = (packageInfo, uploader) => {
 		.then(res=> {
 			let packageId = res.data;
 			let totalFiles = uploader.methods.getUploads().length;
-			uploader.on('allComplete', function(successes, failures) {
-				if (successes.length === totalFiles) {
+			uploader.on('allComplete', function(succeeded, failed) {
+				if (succeeded.length === totalFiles) {
 					dispatch(finishPackage(packageId));
+				} else if (failed.length > 0){
+					alert("We were unable to upload all of your files. You will need to resubmit this package.");
+					dispatch(setIsUploading(false));
+					window.location.reload();
 				}
 			});
 			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
@@ -64,6 +68,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 		})
 		.catch(err => {
 			alert("We were unable to upload your package to the KPMP Data Lake File Repository");
+			dispatch(setIsUploading(false));
 			console.log(err);
 		});
 	};
