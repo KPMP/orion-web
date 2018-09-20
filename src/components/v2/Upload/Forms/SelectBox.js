@@ -42,7 +42,7 @@ class SelectBox extends Component {
 			<div>
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
-					<Field component={Select} name={name} value={selectedOption} onChange={this.changed} options={options} className={classes} onBlur={this.blur} validate={validateNotEmpty}/>
+					<Field component={Select} name={name} value={selectedOption} onChange={this.changed.bind(this)} options={options} className={classes} onBlur={this.blur.bind(this)} validate={validateNotEmpty}/>
 					{this.state.showOtherField && 
 							<TextField name={this.props.additionalFieldName} label={this.props.additionalFieldLabel} onChange={handleChange} onBlur={handleBlur} value={this.props.otherValue}/>
 					}
