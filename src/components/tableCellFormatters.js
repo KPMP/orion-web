@@ -5,13 +5,6 @@ import Api from '../helpers/Api';
 import { getLocalDateString, getLocalTimeString } from '../helpers/timezoneUtil'
 const api = Api.getInstance();
 
-let BASE_URL = 'http://localhost:3030';
-if (process.env.REACT_APP_ENVIRONMENT === 'production') {
-	BASE_URL = 'http://upload.kpmp.org:3030';
-} else if (process.env.REACT_APP_ENVIRONMENT === 'dev') {
-	BASE_URL = 'http://141.214.4.23:3030';
-}
-
 export class DateFormatter extends React.Component {
 
     render() {
@@ -56,7 +49,7 @@ export class DownloadFormatter extends React.Component {
 	render () {
 		if (this.props.dependentValues.downloadable) {
 			return (
-					<div onClick={this.downloadClickAction}><a href={BASE_URL + "/download/" + this.props.dependentValues.databaseId}><i class="fa fa-download" aria-hidden="true"></i></a></div>
+					<div onClick={this.downloadClickAction}><a href={"/api/download/" + this.props.dependentValues.databaseId}><i class="fa fa-download" aria-hidden="true"></i></a></div>
 			)
 		} else {
 			return (<div>&nbsp;</div>);

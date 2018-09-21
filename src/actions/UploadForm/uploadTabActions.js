@@ -66,7 +66,7 @@ export const setUploadedFilesList = (uploadedFiles) => {
 
 export const uploadPackageInfo = (data) => {
     return (dispatch) => {
-        api.post('/upload/packageInfo', data)
+        api.post('/api/upload/packageInfo', data)
           .then((res) => {
             dispatch(setPackageInfo(res.data));
           })
@@ -81,7 +81,7 @@ export const uploadFinish = (successfulUploads) => {
     return (dispatch, getState) => {
     		if (getState().uploadDialog.fileList.length === successfulUploads.length) {
     			let packageId = getState().uploadDialog.packageInfo.packageId;
-    			api.post('/upload/finish/' + packageId, {}, { timeout: 60000})
+    			api.post('/api/upload/finish/' + packageId, {}, { timeout: 60000})
 	    			.then((res) => {
 	    			})
 	    			.catch((err) => {
@@ -94,7 +94,7 @@ export const uploadFinish = (successfulUploads) => {
 
 export const viewUploadedFiles = () => {
 	return (dispatch) => {
-		api.get('/viewUploads', {}, {timeout: 30000})
+		api.get('/api/viewUploads', {}, {timeout: 30000})
 			.then(res => {
 				dispatch(setUploadedFilesList(res.data));
 			})
