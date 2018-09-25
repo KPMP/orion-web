@@ -61,6 +61,10 @@ a {
     i {
         color: gray;
     }
+   .row {
+   		margin-left: 0px;
+   		margin-right: 0px;
+   	}
 }
 
 #pkg-search-bar {
@@ -117,6 +121,7 @@ a {
 }
 
 .upload-ctrl-submit {
+	padding-top: 10px;
     float: right;
 }
 
@@ -152,6 +157,10 @@ a {
 
 .navbar-default .btn-link {
     color: rgb(2, 117, 216);
+}
+
+.navbar {
+	margin-bottom: 0px;
 }
 
 .dropzone {

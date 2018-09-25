@@ -13,7 +13,7 @@ class NavBar extends Component {
             <Navbar fluid className="nav-container">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <img src="img/logo_KPMP_Data_Portal.png" alt="Kidney Precision Medicine Project Data Portal" className="logo" />
+                        <img src="img/logo_KPMP-Data-Lake-Uploader.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav className="nav-route pull-left">
