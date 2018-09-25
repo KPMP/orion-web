@@ -217,7 +217,7 @@ a {
 		height: 38px;
 	}
 
-	.form-control:focus {
+	.form-control:focus, textarea:focus {
 		box-shadow: none;
 		border: 2px solid rgb(38,132, 255);
 	}

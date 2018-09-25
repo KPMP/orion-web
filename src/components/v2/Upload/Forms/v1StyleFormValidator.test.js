@@ -82,6 +82,16 @@ describe("validate", () => {
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('experimentDate'));
 	});
+	it("should return 'Required' in errors.description when no description supplied", () => {
+		let values = { 'description': '' };
+		let result = validate(values);
+		expect(result.description).toEqual('Required');
+	});
+	it("should return undefined in errors.description when a description supplied", () => {
+		let values = { 'description': 'description' };
+		let result = validate(values);
+		expect(false).toEqual(result.hasOwnProperty('description'));
+	});
 });
 
 describe('validateNotEmpty', () => {
