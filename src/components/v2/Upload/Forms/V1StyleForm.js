@@ -48,7 +48,7 @@ class V1StyleForm extends Component {
 		        	</Row>
 		        <Row>
 		        		<Col md="4">
-		        			<DateField name="experimentDate" label="Experiment Date (optional)" onChange={handleChange} onBlur={handleBlur} value={values.experimentDate} touched={touched.experimentDate} error={errors.experimentDate}/>
+		        			<DateField name="experimentDate" label="Experiment Date (optional)" onChange={handleChange} onBlur={handleBlur} value={values.experimentDate} touched={touched.experimentDate} error={errors.experimentDate} setFieldValue={setFieldValue}/>
 		        		</Col>
 		        	</Row>
 				<Row>

@@ -28,15 +28,14 @@ class ReduxDatePicker extends React.Component {
      * @param {*} date String to be converted to moment format.
      */
     handleChange ({meta, name}, date) {
-    		console.log(date);
         if (typeof date === "object" || moment(date, ['YYYY-MM-DD', 'MM/DD/YYYY', 'MM-DD-YYYY'], true).isValid()) {
-        		console.log("in if");
             const momentDate = moment(date);
             const formattedDate = momentDate.format('YYYY-MM-DD');
+            this.props.setFieldValue(name, formattedDate);
             return this.props.onChange(formattedDate);
         }
         else {
-        		console.log("in else");
+        		this.props.setFieldValue(name, date);
             return this.props.onChange(date);
         }
 

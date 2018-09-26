@@ -8,8 +8,6 @@ import { validateDate } from './v1StyleFormValidator';
 class DateField extends Component {
     render() {
         let { label, name, onChange, onBlur, value, touched, error } = this.props;
-        console.log("in date field: ");
-        console.log(this.props);
         let browser = detect();
         let browserName = (browser !== null) ? browser.name : "unknown";
         let errorMessage = "";
@@ -24,7 +22,7 @@ class DateField extends Component {
                 <ControlLabel>{label} {errorMessage}
                 </ControlLabel>
                 <div>
-                { (browserName === "ie") ? <Field name={name} render={datePicker} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateDate}/>
+                { (browserName === "ie") ? <Field name={name} render={(field) => (datePicker)} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateDate}/>
                     : <Field name={name} type="date" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateDate}/>
                 }
                 </div>
