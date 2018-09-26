@@ -10,14 +10,10 @@ import 'babel-polyfill';
 
 class ReduxDatePicker extends React.Component {
     static propTypes = {
-        input: PropTypes.shape({
-            onChange: PropTypes.func.isRequired,
-            value: PropTypes.string.isRequired,
-        }).isRequired,
-        meta: PropTypes.shape({
-            touched: PropTypes.bool,
-            error: PropTypes.bool,
-        }),
+        onChange: PropTypes.func.isRequired,
+        value: PropTypes.string.isRequired,
+        touched: PropTypes.bool,
+        error: PropTypes.bool
     };
 
     constructor (props) {
@@ -31,26 +27,29 @@ class ReduxDatePicker extends React.Component {
      * @param {*} param0 Destructured ReduxForm props
      * @param {*} date String to be converted to moment format.
      */
-    handleChange ({meta, input: {name}}, date) {
+    handleChange ({meta, name}, date) {
         if (typeof date === "object" || moment(date, ['YYYY-MM-DD', 'MM/DD/YYYY', 'MM-DD-YYYY'], true).isValid()) {
             const momentDate = moment(date);
-            return this.props.input.onChange(momentDate.format('YYYY-MM-DD'));
+            const formattedDate = momentDate.format('YYYY-MM-DD');
+            this.props.setFieldValue(name, formattedDate);
+            return this.props.onChange(formattedDate);
         }
         else {
-            return this.props.input.onChange(date);
+        		this.props.setFieldValue(name, date);
+            return this.props.onChange(date);
         }
 
     }
 
 
     render () {
-        const { input } = this.props;
-
+    		console.log(this.props);
+    		const { name, value } = this.props;
         const handleChange = this.handleChange.bind(this, this.props);
 
         return (
             <div>
-                <Datetime inputProps={ {placeholder: 'YYYY-MM-DD', name: input.name} } onChange={handleChange} closeOnSelect={true} value={input.value}/>
+                <Datetime inputProps={ {placeholder: 'YYYY-MM-DD', name: name} } onChange={handleChange} closeOnSelect={true} value={value}/>
             </div>
         )
     }
