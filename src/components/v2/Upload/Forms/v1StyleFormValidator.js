@@ -10,7 +10,8 @@ export const validate = (values) => {
 	setError(values.protocol, errors, validateNotEmpty, 'protocol');
 	setError(values.subjectId, errors, validateNotEmpty, 'subjectId');
 	setError(values.experimentDate, errors, validateDate, 'experimentDate');
-	
+	setError(values.description, errors, validateNotEmpty, 'description');
+
 	if (!values.packageTypeOther && values.packageType === "Other") {
 		errors.packageTypeOther = "Required";
 	}

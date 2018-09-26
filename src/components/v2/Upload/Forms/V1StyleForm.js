@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import TextField from './TextField';
+import TextArea from './TextArea';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
-import { ControlLabel, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import protocolList from './protocols';
 import institutionList from './institutions';
 
@@ -53,10 +54,7 @@ class V1StyleForm extends Component {
 		        	</Row>
 				<Row>
 					<Col md="8">
-						<ControlLabel>Description</ControlLabel>
-						<div>
-							<textarea name="description" type="text" onChange={handleChange} onBlur={handleBlur} value={values.description} placeholder="Describe the contents of this package"/>
-						</div>
+						<TextArea label="Description" name="description" type="text" onChange={handleChange} onBlur={handleBlur} value={values.description} placeholder="Describe the contents of this package" touched={touched.description} error={errors.description}/>
 					</Col>
 				</Row>
 			</div>
