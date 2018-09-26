@@ -43,7 +43,7 @@ class V1StyleForm extends Component {
 
 		        		</Col>
 		        		<Col md="4">
-		        			<TextField name="subjectId" label="Subject/Sample ID" onChange={handleChange} onBlur={handleBlur} value={values.subjectId} touched={touched.subjectId} error={errors.subjectId}/>
+		        			<TextField name="subjectId" label="Subject/Sample ID" onChange={handleChange} onBlur={handleBlur} value={values.subjectId} touched={touched.subjectId} error={errors.subjectId} placeholder="Enter subject or sample ID"/>
 		        		</Col>
 		        	</Row>
 		        <Row>
@@ -55,7 +55,7 @@ class V1StyleForm extends Component {
 					<Col md="8">
 						<ControlLabel>Description</ControlLabel>
 						<div>
-							<textarea name="description" type="text" onChange={handleChange} onBlur={handleBlur} value={values.description}/>
+							<textarea name="description" type="text" onChange={handleChange} onBlur={handleBlur} value={values.description} placeholder="Describe the contents of this package"/>
 						</div>
 					</Col>
 				</Row>

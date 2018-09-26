@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import UploadPage from './components/v2/Pages/UploadPage';
-import UploadPageContainer from './components/UploadPageContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
@@ -32,7 +31,6 @@ class App extends Component {
 	    			<BrowserRouter>
 	    				<Switch>
 	    					<Route exact path="/" component={UploadPage} store={store}/>
-	    					<Route exact path="/oldUpload" component={UploadPageContainer} store={store}/>
 	    				</Switch>
 	    			</BrowserRouter>
 	    		</Provider>
