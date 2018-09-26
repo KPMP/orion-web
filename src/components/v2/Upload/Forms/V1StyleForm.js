@@ -3,7 +3,7 @@ import TextField from './TextField';
 import TextArea from './TextArea';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
-import { ControlLabel, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import protocolList from './protocols';
 import institutionList from './institutions';
 
