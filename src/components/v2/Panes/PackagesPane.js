@@ -3,8 +3,6 @@ import PackageListContainer from '../Packages/PackageListContainer';
 import { Row } from 'react-bootstrap';
 
 class PackagesPane extends Component {
-
-
     render() {
         return (
         		<div className="pane">
