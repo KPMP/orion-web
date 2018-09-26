@@ -57,7 +57,7 @@ a {
 }
 
 .pane {
-    margin: 0px 10px 0px 10px;
+	margin: 0px 15px 0px 15px;
     i {
         color: gray;
     }
@@ -193,6 +193,7 @@ a {
 	.form-control {
 		height: 38px;
 	}
+
 }
 
 #uploadInfo {
@@ -225,12 +226,22 @@ a {
 	#packageInformationSection {
 		padding-top: 15px;
 	}
-	
+
 }
 
 #uploadForm {
 	#upload {
 		display: none;
 	}
+}
 
+#uploadPackageInfoForm {
+	*[class*='col-'] {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.secondField {
+		padding-left: 15px !important;
+	}
 }

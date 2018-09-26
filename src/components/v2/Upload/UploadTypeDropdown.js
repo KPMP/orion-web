@@ -26,7 +26,7 @@ class UploadTypeDropdown extends Component {
 		let { handleBlur, handleChange } = this.props;
     		let { selectedOption } = this.state;
         return (
-        		<Row>
+        		<div>
         			<Col md="3">
 	        			<div className="header">
 	                    <b>Select a package type</b>
@@ -34,12 +34,11 @@ class UploadTypeDropdown extends Component {
         				<Field component={Select} value={selectedOption} onChange={this.handleChange} options={packageTypeList.options} className="packageTypeSelect" name="packageType" onBlur={handleBlur} validate={validateNotEmpty}/>
         			</Col>
         				{this.state.showOtherField &&
-      					<Col md="3">
+      					<Col md="3" className="secondField">
         						<TextField name="packageTypeOther" label="Package Type Other (specify)" onChange={handleChange} onBlur={handleBlur}/>
         					</Col>
         				}
-        			
-            </Row>
+        		</div>	
         )
     }
 }
