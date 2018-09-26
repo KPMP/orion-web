@@ -51,6 +51,10 @@ class UploadForm extends Component {
     		}
     		return true;
     }
+
+	componentWillMount() {
+		uploader.methods.reset();
+	}
     
 	render() {
 		const {
