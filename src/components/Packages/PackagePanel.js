@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
-import { getLocalDateString, getLocalTimeString } from '../../../helpers/timezoneUtil';
+import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';

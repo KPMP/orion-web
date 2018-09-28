@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainPage from './components/v2/MainPage';
+import MainPage from './components/MainPage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';

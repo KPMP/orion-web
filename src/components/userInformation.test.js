@@ -1,5 +1,5 @@
 import { userInformation } from './userInformationReducer';
-import actionNames from '../../actions/actionNames';
+import actionNames from '../actions/actionNames';
 
 describe('userInformation', () => {
 	it('should set state when actionName is SET_USER_INFORMATION', () => {

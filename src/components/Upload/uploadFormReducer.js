@@ -1,4 +1,4 @@
-import actionNames from '../../../actions/actionNames';
+import actionNames from '../../actions/actionNames';
 
 export const isUploading = ( state = false, action ) => {
 	let newState = {...state}; 

@@ -1,4 +1,4 @@
-import actionNames from '../../../actions/actionNames';
+import actionNames from '../../actions/actionNames';
 
 export const packages = (state = [], action) => {
 	let newState = {...state}; 
