@@ -1,5 +1,5 @@
-import Api from '../../helpers/Api';
-import actionNames from '../actionNames';
+import Api from '../helpers/Api';
+import actionNames from './actionNames';
 const api = Api.getInstance();
 
 export const getUserInformation = () => {

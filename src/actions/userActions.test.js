@@ -1,5 +1,5 @@
 import { setUserInformation } from './userActions';
-import actionNames from '../actionNames';
+import actionNames from './actionNames';
 
 describe('setUserInformation', () => {
 	it('should create the correct action', () => {
