@@ -13,12 +13,17 @@ class V1StyleForm extends Component {
 		const {
 			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
+		
+		
 		return(
 		    <div id="uploadInfo">
 		    		<div className="header">
 		    			Submitted by
 		    		</div>
 		        <Row>
+		        		{this.props.userInformation.firstName !== "" && this.props.userInformation.lastName !=="" &&
+		        			<Col md="4">{this.props.userInformation.firstName} {this.props.userInformation.lastName}</Col>
+		        		}
 		        		<Col md="4">
 		        			<TextField name="submitterFirstName" label="First Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterFirstName} touched={touched.submitterFirstName} error={errors.submitterFirstName} errors={errors}/>
 		        		</Col>
