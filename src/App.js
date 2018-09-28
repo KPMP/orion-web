@@ -6,6 +6,7 @@ import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { getUserInformation } from './actions/userActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -23,6 +24,7 @@ store.subscribe(saveState);
 class App extends Component {
   
 	componentWillMount() {
+		getUserInformation(store.dispatch);
 	}
 	
 	render() {
