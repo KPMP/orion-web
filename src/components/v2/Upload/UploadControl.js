@@ -11,7 +11,7 @@ class UploadControl extends Component {
 	                <UploadTypeDropdown {...this.props} />
                 	</Col>
                 <Col md={1} className="upload-ctrl-submit">
-                    <Button className="btn-primary" disabled={this.props.submitDisabled} type="submit">
+                    <Button className="btn-primary pull-right" disabled={this.props.submitDisabled} type="submit">
                         Submit
                     </Button>
                 </Col>
