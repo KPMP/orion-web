@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UploadForm from './UploadForm';
-import { uploadPackage } from '../../../actions/v2/Packages/packageActions';
+import { uploadPackage } from '../../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
