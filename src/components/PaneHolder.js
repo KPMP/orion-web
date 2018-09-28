@@ -1,7 +1,7 @@
 import React from 'react';
-import { panes } from '../Nav/NavBar';
-import PackagesPane from '../Panes/PackagesPane';
-import UploadPane from '../Panes/UploadPane';
+import { panes } from './Nav/NavBar';
+import PackagesPane from './Packages/PackagesPane';
+import UploadPane from './Upload/UploadPane';
 
 const PaneHolder = (props) => {
     switch (props.pane) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {panes} from './Nav/NavBar';
 import NavBarContainer from './Nav/NavBarContainer';
-import PaneHolder from './Panes/PaneHolder'
+import PaneHolder from './PaneHolder'
 
 class MainPage extends Component {
     constructor(props) {
