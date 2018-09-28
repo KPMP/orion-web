@@ -1,13 +1,12 @@
 import Api from '../../helpers/Api';
+import actionNames from '../actionNames';
 const api = Api.getInstance();
 
 export const getUserInformation = () => {
-	console.log("outside return in getUserInformation");
 	return (dispatch) => {
-		console.log("in get user information ");
 		api.get('/api/v1/attributes')
 			.then(res => {
-				console.log(res)
+				dispatch(setUserInformation(res.data));
 			})
 			.catch(err => {
 	            alert("Unable to retrieve user information");
@@ -15,3 +14,10 @@ export const getUserInformation = () => {
 	        });
 	};
 } 
+
+export const setUserInformation = (userInfo) => {
+	return {
+		type: actionNames.SET_USER_INFORMATION,
+		payload: userInfo
+	}
+}

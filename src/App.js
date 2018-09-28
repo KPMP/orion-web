@@ -24,7 +24,6 @@ store.subscribe(saveState);
 class App extends Component {
   
 	componentWillMount() {
-		console.log("component will mount");
 		getUserInformation()(store.dispatch);
 	}
 	
