@@ -4,7 +4,7 @@ const api = Api.getInstance();
 
 export const getUserInformation = () => {
 	return (dispatch) => {
-		api.get('/api/v1/attributes')
+		api.get('/api/v1/userInformation')
 			.then(res => {
 				dispatch(setUserInformation(res.data));
 			})
