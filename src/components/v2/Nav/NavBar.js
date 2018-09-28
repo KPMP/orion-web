@@ -26,7 +26,7 @@ class NavBar extends Component {
                 </Nav>
                 <Nav pullRight>
                     <Navbar.Text>
-                        John Smith
+                        {this.props.displayName}
                     </Navbar.Text>
                     <Navbar.Text>
                         Sign out
