@@ -6,7 +6,7 @@ import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { getUserInformation } from './actions/userActions';
+import { getUserInformation } from './actions/v2/userActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");

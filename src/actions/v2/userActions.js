@@ -1,6 +1,7 @@
+import Api from '../../helpers/Api';
 const api = Api.getInstance();
 
-const getUserInformation = () => {
+export const getUserInformation = () => {
 	return (dispatch) => {
 		api.get('/api/v1/attributes')
 		.then(res => {
