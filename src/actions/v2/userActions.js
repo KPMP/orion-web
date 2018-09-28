@@ -3,6 +3,7 @@ const api = Api.getInstance();
 
 export const getUserInformation = () => {
 	return (dispatch) => {
+		console.log("in get user information ");
 		api.get('/api/v1/attributes')
 		.then(res => {
 			console.log(res)
