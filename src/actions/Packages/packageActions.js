@@ -1,5 +1,6 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
+import qq from 'fine-uploader/lib/core';
 const api = Api.getInstance();
 
 export const getPackages = () => {
@@ -53,7 +54,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
 			let packageId = res.data;
-			let totalFiles = uploader.methods.getUploads().length;
+			let canceledFiles = uploader.methods.getUploads(
+					{ status: [qq.status.CANCELED] });
+			let allFiles = uploader.methods.getUploads();
+			let totalFiles = allFiles.length - canceledFiles.length;
 			uploader.on('allComplete', function(succeeded, failed) {
 				if (succeeded.length === totalFiles) {
 					dispatch(finishPackage(packageId));

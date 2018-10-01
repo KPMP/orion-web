@@ -26,7 +26,7 @@ class V1StyleForm extends Component {
 				        		<Col md="4">
 				        			<TextField name="submitterFirstName" label="First Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterFirstName} touched={touched.submitterFirstName} error={errors.submitterFirstName} errors={errors}/>
 				        		</Col>
-				        		<Col md="4" >
+				        		<Col md="4" className="secondField">
 				        			<TextField name="submitterLastName" label="Last Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterLastName} touched={touched.submitterLastName} error={errors.submitterLastName}/>
 				        		</Col>
 			        		</div>)
@@ -49,7 +49,7 @@ class V1StyleForm extends Component {
 		        			<SelectBox name="protocol" label="Associated Protocol" options={protocolList.protocols} handleChange={handleChange} handleBlur={handleBlur} error={errors.protocol} setFieldValue={setFieldValue}/>
 
 		        		</Col>
-		        		<Col md="4">
+		        		<Col md="4" className="secondField">
 		        			<TextField name="subjectId" label="Subject/Sample ID" onChange={handleChange} onBlur={handleBlur} value={values.subjectId} touched={touched.subjectId} error={errors.subjectId} placeholder="Enter subject or sample ID"/>
 		        		</Col>
 		        	</Row>
