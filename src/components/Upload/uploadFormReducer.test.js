@@ -1,4 +1,4 @@
-import actionNames from '../../../actions/actionNames';
+import actionNames from '../../actions/actionNames';
 import { isUploading } from './uploadFormReducer';
 
 describe('isUploading', () => {

@@ -1,4 +1,4 @@
-import actionNames from '../../actionNames';
+import actionNames from '../actionNames';
 import { setPackages, showPackageAttachments } from './packageActions';
 
 describe ('setPackages', () => {

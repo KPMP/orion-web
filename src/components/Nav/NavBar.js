@@ -9,7 +9,11 @@ export const panes = {
 
 class NavBar extends Component {
     render() {
-        return (
+        let name = this.props.displayName;
+        if (name === "") {
+        		name = this.props.firstName + " " + this.props.lastName;
+        }
+    		return (
             <Navbar fluid className="nav-container">
                 <Navbar.Header>
                     <Navbar.Brand>
@@ -26,7 +30,7 @@ class NavBar extends Component {
                 </Nav>
                 <Nav pullRight>
                     <Navbar.Text>
-                        John Smith
+                        {this.props.displayName}
                     </Navbar.Text>
                     <Navbar.Text>
                         Sign out

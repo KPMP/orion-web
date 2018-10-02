@@ -13,18 +13,24 @@ class V1StyleForm extends Component {
 		const {
 			values, touched, errors, handleChange, setFieldValue, handleBlur
 		} = this.props;
+		
 		return(
 		    <div id="uploadInfo">
 		    		<div className="header">
 		    			Submitted by
 		    		</div>
 		        <Row>
-		        		<Col md="4">
-		        			<TextField name="submitterFirstName" label="First Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterFirstName} touched={touched.submitterFirstName} error={errors.submitterFirstName} errors={errors}/>
-		        		</Col>
-		        		<Col md="4" className="secondField" >
-		        			<TextField name="submitterLastName" label="Last Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterLastName} touched={touched.submitterLastName} error={errors.submitterLastName}/>
-		        		</Col>
+		        		{(this.props.userInformation.firstName !== "" && this.props.userInformation.lastName !=="") ?
+		        			(<Col md="8">{this.props.userInformation.firstName} {this.props.userInformation.lastName}</Col>) :
+			        		(<div>
+				        		<Col md="4">
+				        			<TextField name="submitterFirstName" label="First Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterFirstName} touched={touched.submitterFirstName} error={errors.submitterFirstName} errors={errors}/>
+				        		</Col>
+				        		<Col md="4" className="secondField">
+				        			<TextField name="submitterLastName" label="Last Name" onChange={handleChange} onBlur={handleBlur} value={values.submitterLastName} touched={touched.submitterLastName} error={errors.submitterLastName}/>
+				        		</Col>
+			        		</div>)
+		        		}
 		        </Row>
 		        <Row>
 		        		<Col md="4">
