@@ -29,7 +29,7 @@ class NavBar extends Component {
                         John Smith
                     </Navbar.Text>
                     <Navbar.Text>
-                        <a href="https://shibboleth.umich.edu/idp/profile/SAML2/POST/SLO">Sign out</a>
+                        <a href="/Shibboleth.sso/Logout?return=/">Sign out</a>
                     </Navbar.Text>
                 </Nav>
             </Navbar>
