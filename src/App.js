@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import UploadPage from './components/v2/Pages/UploadPage';
+import MainPage from './components/MainPage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { getUserInformation } from './actions/userActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -23,6 +24,7 @@ store.subscribe(saveState);
 class App extends Component {
   
 	componentWillMount() {
+		getUserInformation()(store.dispatch);
 	}
 	
 	render() {
@@ -30,7 +32,7 @@ class App extends Component {
 	    		<Provider store={store}>
 	    			<BrowserRouter>
 	    				<Switch>
-	    					<Route exact path="/" component={UploadPage} store={store}/>
+	    					<Route exact path="/" component={MainPage} store={store}/>
 	    				</Switch>
 	    			</BrowserRouter>
 	    		</Provider>

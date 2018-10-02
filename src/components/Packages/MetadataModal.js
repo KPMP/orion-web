@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { getLocalDateString } from '../../../helpers/timezoneUtil';
+import { getLocalDateString } from '../../helpers/timezoneUtil';
 
 class MetadataModal extends Component {
 

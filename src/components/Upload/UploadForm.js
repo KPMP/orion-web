@@ -89,7 +89,7 @@ class UploadForm extends Component {
 const Form = (props) => {
 	return (
 		<div>
-			<Formik render={formikProps => <UploadForm {...formikProps} isUploading={props.isUploading}/>}  
+			<Formik initialValues={{'submitterFirstName': props.userInformation.firstName, 'submitterLastName': props.userInformation.lastName }} render={formikProps => <UploadForm {...formikProps} isUploading={props.isUploading} userInformation={props.userInformation}/>}  
 				onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}} 
 				validateOnChange={true} validateOnBlur={true} />
 		</div>

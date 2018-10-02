@@ -1,5 +1,5 @@
-import actionNames from '../../actionNames';
-import Api from '../../../helpers/Api';
+import actionNames from '../actionNames';
+import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
 const api = Api.getInstance();
 

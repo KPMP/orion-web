@@ -1,4 +1,4 @@
-import actionNames from '../../../actions/actionNames';
+import actionNames from '../../actions/actionNames';
 import { packages } from './packagePanelReducer';
 
 describe('packages', () => {
