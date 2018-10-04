@@ -7,8 +7,6 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { getUserInformation } from './actions/userActions';
-import createHistory from 'history/createBrowserHistory';
-import ReactGA from 'react-ga';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -19,25 +17,13 @@ const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState, win
 const saveState = () => {
   window.sessionStorage.setItem("redux-store", JSON.stringify(store.getState()));
 };
-const GA_TRACKING_ID = 'UA-124331187-2';
 
 store.subscribe(function(){console.log(store.getState())});
 store.subscribe(saveState);
 
-ReactGA.initialize(GA_TRACKING_ID);
-function logPageView(location, action) {
-	ReactGA.set({ page: location.pathname + location.search });
-	ReactGA.pageview(location.pathname + location.search);
-}
-const history = createHistory();
-history.listen((location, action) => {
-	logPageView(location, action);
-});
-
 class App extends Component {
   
 	componentWillMount() {
-		logPageView(window.location, "");
 		getUserInformation()(store.dispatch);
 	}
 	
