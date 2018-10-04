@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import { Panel, Col, Row, Button } from 'react-bootstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import AttachmentsModal from './AttachmentsModal';
@@ -24,6 +25,15 @@ class PackagePanel extends Component {
 		this.setState({ showMetadata: show });
 	}
 
+	handleDownloadClick(packageId, e) {
+		ReactGA.event({
+			category: 'Download',
+			action: 'File Package',
+			label: packageId
+		});
+		window.location.href="api/v1/packages/" + packageId + "/files"
+	}
+
     render() {
 		let submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
 		let submittedTime = getLocalTimeString(this.props.uploadPackage.createdAt);
@@ -42,7 +52,7 @@ class PackagePanel extends Component {
 	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            {this.props.uploadPackage.downloadable &&
 		                            <div>
-		                                <Button className="btn btn-primary" onClick={() => window.location.href="api/v1/packages/" + this.props.uploadPackage.packageId + "/files"}>
+		                                <Button className="btn btn-primary" value={this.props.uploadPackage.packageId} onClick={(e) => this.handleDownloadClick(this.props.uploadPackage.packageId, e)}>
 		                                    <span className="glyphicon glyphicon-download-alt" />
 		                                    <i> </i>
 		                                    <b>Download</b>
