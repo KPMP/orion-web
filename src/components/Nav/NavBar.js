@@ -33,7 +33,7 @@ class NavBar extends Component {
                         {this.props.displayName}
                     </Navbar.Text>
                     <Navbar.Text>
-                        Sign out
+                        <a href="/Shibboleth.sso/Logout?return=/">Sign out</a>
                     </Navbar.Text>
                 </Nav>
             </Navbar>
