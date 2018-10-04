@@ -19,6 +19,8 @@ class UploadTypeDropdown extends Component {
 		this.setState({ selectedOption });
 		if (selectedOption.value === "Other") {
 			this.setState({ "showOtherField": true });
+		} else {
+			this.setState({ "showOtherField": false });
 		}
 	}
 	
