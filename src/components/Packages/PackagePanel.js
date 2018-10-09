@@ -35,24 +35,25 @@ class PackagePanel extends Component {
 	}
 
     render() {
-		let submittedDate = getLocalDateString(this.props.uploadPackage.createdAt);
-		let submittedTime = getLocalTimeString(this.props.uploadPackage.createdAt);
+		let packageInfo = this.props.uploadPackage.packageInfo;
+    		let submittedDate = getLocalDateString(packageInfo.createdAt);
+		let submittedTime = getLocalTimeString(packageInfo.createdAt);
     		return (
     			<div>
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
 	                        <Col md={6} className="pkg-panel-info">
-								<div><b>{this.props.uploadPackage.subjectId}</b></div>
-	                            <div>{this.props.uploadPackage.packageType}</div>
-	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {this.props.uploadPackage.submitterFirstName} {this.props.uploadPackage.submitterLastName}, {this.props.uploadPackage.institution}</div>
+								<div><b>{packageInfo.subjectId}</b></div>
+	                            <div>{packageInfo.packageType}</div>
+	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
-	                            <div><a onClick={this.handleAttachmentClick}>{this.props.uploadPackage.attachments.length} attachment(s)</a></div>
+	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
 	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            {this.props.uploadPackage.downloadable &&
 		                            <div>
-		                                <Button className="btn btn-primary" value={this.props.uploadPackage.packageId} onClick={(e) => this.handleDownloadClick(this.props.uploadPackage.packageId, e)}>
+		                                <Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
 		                                    <span className="glyphicon glyphicon-download-alt" />
 		                                    <i> </i>
 		                                    <b>Download</b>
@@ -61,8 +62,8 @@ class PackagePanel extends Component {
 	                            }
 	                        </Col>
 	                    </Row>
-	                    <AttachmentsModal show={this.state.showAttachments} attachments={this.props.uploadPackage.attachments} close={this.handleAttachmentClick}/>
-						<MetadataModal show={this.state.showMetadata} uploadPackage={this.props.uploadPackage} close={this.handleMetadataClick}/>
+	                    <AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.attachments} close={this.handleAttachmentClick}/>
+						<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick}/>
 					</Panel.Body>
 	            </Panel>
             </div>
