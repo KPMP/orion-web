@@ -5,6 +5,7 @@ import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUt
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
+import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
 
 class PackagePanel extends Component {
 
@@ -38,11 +39,15 @@ class PackagePanel extends Component {
 		let packageInfo = this.props.uploadPackage.packageInfo;
     		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
+		let {iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
     			<div>
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
+							<Col md={1} className="pkg-panel-icon">
+								<img src={"img/" + iconImage} alt={iconDataType} className="data-type-icon" />
+							</Col>
 	                        <Col md={6} className="pkg-panel-info">
 								<div><b>{packageInfo.subjectId}</b></div>
 	                            <div>{packageInfo.packageType}</div>
