@@ -39,16 +39,14 @@ class PackagePanel extends Component {
 		let packageInfo = this.props.uploadPackage.packageInfo;
     		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
-		let {iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
+		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
     			<div>
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
-							<Col md={1} className="pkg-panel-icon">
-								<img src={"img/" + iconImage} alt={iconDataType} className="data-type-icon" />
-							</Col>
 	                        <Col md={6} className="pkg-panel-info">
+								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
 								<div><b>{packageInfo.subjectId}</b></div>
 	                            <div>{packageInfo.packageType}</div>
 	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>

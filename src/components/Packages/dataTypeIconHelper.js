@@ -40,14 +40,12 @@ const iconDataTypes = new Map(
 
 
 export const getDataTypeIconInfo = (dataType) => {
-    iconDataTypes.forEach((iconDataTypeInfo) => {
-        if (iconDataTypeInfo.dataTypes.includes(dataType)) {
+    for(let [iconDataType, iconDataTypeInfo] of iconDataTypes) {
+        if (iconDataTypeInfo.dataTypes.indexOf(dataType) !== -1) {
             return iconDataTypeInfo
         }
-        else {
-            return iconDataTypes.get('Other');
-        }
-    });
+    }
+    return iconDataTypes.get('Other')
 };
 
 
