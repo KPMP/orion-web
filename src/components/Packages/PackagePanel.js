@@ -47,9 +47,11 @@ class PackagePanel extends Component {
 	                    <Row>
 	                        <Col md={6} className="pkg-panel-info">
 								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
-								<div><b>{packageInfo.subjectId}</b></div>
-	                            <div>{packageInfo.packageType}</div>
-	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
+								<div className="pkg-info">
+									<div><b>{packageInfo.subjectId}</b></div>
+									<div>{packageInfo.packageType}</div>
+									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
+								</div>
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
 	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>

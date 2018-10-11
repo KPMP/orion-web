@@ -100,7 +100,11 @@ a {
 	}
 }
 
-.pkg-panel-info {
+.pkg-info {
+	overflow: hidden;
+}
+
+.pkg-info {
     div:nth-child(2) {
         margin: 12px 0px 12px;
     }
