@@ -45,7 +45,7 @@ class PackagePanel extends Component {
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
-	                        <Col md={6} className="pkg-panel-info">
+	                        <Col md={6}>
 								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
 								<div className="pkg-info">
 									<div><b>{packageInfo.subjectId}</b></div>
