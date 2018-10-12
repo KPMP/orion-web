@@ -84,6 +84,10 @@ a {
     margin: 0px 10px 0px 0px;
 }
 
+.pkg-type-icon {
+	margin-right: 10px;
+}
+
 .search-glass {
     background: rgb(2, 117, 216);
     color: white;
@@ -91,13 +95,13 @@ a {
 
 .pkg-panel {
     margin: 0px 10px 10px 0px;
-
 	.odd-row {
 		background-color: rgba(230, 241, 255, 1);
 	}
 }
 
-.pkg-panel-info {
+.pkg-info {
+	overflow: hidden;
     div:nth-child(2) {
         margin: 12px 0px 12px;
     }

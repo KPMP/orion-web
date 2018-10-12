@@ -5,6 +5,7 @@ import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUt
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
+import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
 
 class PackagePanel extends Component {
 
@@ -38,15 +39,19 @@ class PackagePanel extends Component {
 		let packageInfo = this.props.uploadPackage.packageInfo;
     		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
+		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
     			<div>
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
-	                        <Col md={6} className="pkg-panel-info">
-								<div><b>{packageInfo.subjectId}</b></div>
-	                            <div>{packageInfo.packageType}</div>
-	                            <div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
+	                        <Col md={6}>
+								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
+								<div className="pkg-info">
+									<div><b>{packageInfo.subjectId}</b></div>
+									<div>{packageInfo.packageType}</div>
+									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
+								</div>
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
 	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
