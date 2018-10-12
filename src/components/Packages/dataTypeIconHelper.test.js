@@ -1,8 +1,11 @@
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
 
 describe('getDataTypeIconInfo', () => {
-    it('should return the Other', () => {
+    it('should return Other', () => {
         expect(getDataTypeIconInfo("Blah").iconDataType).toBe("Other");
+    });
+    it('should return Other', () => {
+        expect(getDataTypeIconInfo("Inflammatory Cells").iconDataType).toBe("Other");
     });
     it('should return Imaging', () => {
         expect(getDataTypeIconInfo("3-D tissue imaging").iconDataType).toBe("Imaging");
