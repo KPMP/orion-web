@@ -4,7 +4,7 @@ const iconDataTypes = new Map(
             {
                 iconDataType: 'Imaging',
                 iconImage: 'icon_imaging_132x132.png',
-                dataTypes: ['3-D tissue imaging', 'Multiplex ISH', 'Whole Slide Images']
+                dataTypes: ['3-D tissue imaging', 'CODEX', 'Multiplex ISH', 'Whole Slide Images']
             }
         ],
         ['Metabolomics',
@@ -18,7 +18,7 @@ const iconDataTypes = new Map(
             {
                 iconDataType: 'Other',
                 iconImage: 'icon_other_132x132.png',
-                dataTypes: ['DNA Methylation', 'Inflammatory Cells', 'Other']
+                dataTypes: ['DNA Methylation', 'Other']
             }
         ],
         ['Proteomics',
