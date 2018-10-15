@@ -2,8 +2,8 @@
 	"options" : [
     			{ "value": "3-D tissue imaging", "label": "3-D tissue imaging"},
     			{ "value": "Bulk RNA-Seq", "label": "Bulk RNA-Seq"},
+    			{ "value": "CODEX", "label": "CODEX" },
     			{ "value": "DNA Methylation", "label": "DNA Methylation"},
-    			{ "value": "Inflammatory Cells", "label": "Inflammatory Cells"},
     			{ "value": "Multiplex ISH", "label": "Multiplex ISH"},
     			{ "value": "Near-single-cell Proteomics", "label": "Near-single-cell Proteomics"},
     			{ "value": "Segmental miRNA", "label": "Segmental miRNA"},
