@@ -22,7 +22,7 @@ class MetadataModal extends Component {
                             <p>Submitted by:</p>
                             <ul>
                                 <li>Institution: {this.props.uploadPackage.institution}</li>
-                                <li>Submitter: {this.props.uploadPackage.submitterFirstName} {this.props.uploadPackage.submitterLastName}</li>
+                                <li>Submitter: {this.props.uploadPackage.submitter.firstName} {this.props.uploadPackage.submitter.lastName}</li>
                             </ul>
                         </Modal.Body>
                     </Modal>

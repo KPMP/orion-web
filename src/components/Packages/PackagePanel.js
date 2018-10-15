@@ -50,7 +50,7 @@ class PackagePanel extends Component {
 								<div className="pkg-info">
 									<div><b>{packageInfo.subjectId}</b></div>
 									<div>{packageInfo.packageType}</div>
-									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitterFirstName} {packageInfo.submitterLastName}, {packageInfo.institution}</div>
+									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</div>
 								</div>
 	                        </Col>
 	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
