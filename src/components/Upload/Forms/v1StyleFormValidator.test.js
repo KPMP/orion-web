@@ -2,93 +2,90 @@ import { validate, validateNotEmpty, validateDate } from './v1StyleFormValidator
 import React from 'react';
 
 describe("validate", () => {
-	it("should return 'Required' in errors.submitterFirstName when no first name supplied", () => {
-		let values = { "submitterFirstName": '' };
+
+	let values = {
+		submitter: {
+			id: undefined
+		}
+	};
+
+	it("should return 'Required' in errors.submitter.id when no id supplied", () => {
+		values.submitter.id = "";
 		let result = validate(values);
-		expect(result.submitterFirstName).toEqual('Required');
+		expect(result.submitterId).toEqual('Required');
 	});
-	it("should return undefined in errors.submitterFirstName when a first name supplied", () => {
-		let values = { "submitterFirstName": 'firstName' };
+	it("should return undefined in errors.submitter.id when id supplied", () => {
+		values.submitter.id = "1234";
 		let result = validate(values);
-		expect(false).toEqual(result.hasOwnProperty('submitterFirstName'));
-	});
-	it("should return 'Required' in errors.submitterLastName when no last name supplied", () => {
-		let values = { 'submitterLastName': '' };
-		let result = validate(values);
-		expect(result.submitterLastName).toEqual('Required');
-	});
-	it("should return undefined in errors.submitterLastName when a last name supplied", () => {
-		let values = { 'submitterLastName': 'last' };
-		let result = validate(values);
-		expect(false).toEqual(result.hasOwnProperty('submitterLastName'));
+		expect(false).toEqual(result.hasOwnProperty('submitterId'));
 	});
 	it("should return 'Required' in errors.institution when no institution supplied", () => {
-		let values = { "institution": '' };
+		values.institution = "";
 		let result = validate(values);
 		expect(result.institution).toEqual('Required');
 	});
 	it("should return undefined in errors.institution when a institution supplied", () => {
-		let values = { "institution": 'name' };
+		values = {...values, "institution": 'name' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('institution'));
 	});
 	it("should return 'Required' in errors.packageType when no packageType supplied", () => {
-		let values = { 'packageType': '' };
+		values = {...values, 'packageType': '' };
 		let result = validate(values);
 		expect(result.packageType).toEqual('Required');
 	});
 	it("should return undefined in errors.packageType when a packageType supplied", () => {
-		let values = { 'packageType': 'type' };
+		values = {...values, 'packageType': 'type' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('packageType'));
 	});
 	it("should return 'Required' in errors.protocol when no protocol supplied", () => {
-		let values = { 'protocol': '' };
+		values = {...values, 'protocol': '' };
 		let result = validate(values);
 		expect(result.protocol).toEqual('Required');
 	});
 	it("should return undefined in errors.protocol when a protocol supplied", () => {
-		let values = { 'protocol': 'protocol' };
+		values = {...values, 'protocol': 'protocol' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('protocol'));
 	});
 	it("should return 'Required' in errors.subjectId when no subjectId supplied", () => {
-		let values = { 'subjectId': '' };
+		values = {...values, 'subjectId': '' };
 		let result = validate(values);
 		expect(result.subjectId).toEqual('Required');
 	});
 	it("should return undefined in errors.subjectId when a subjectId supplied", () => {
-		let values = { 'subjectId': 'subjectId' };
+		values = {...values, 'subjectId': 'subjectId' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('subjectId'));
 	});
 	it("should return 'Required' in errors.packageTypeOther when no packageTypeOther supplied and packageType is 'Other'", () => {
-		let values = { 'packageType': 'Other', 'packageTypeOther': '' };
+		values = {...values, 'packageType': 'Other', 'packageTypeOther': '' };
 		let result = validate(values);
 		expect(result.packageTypeOther).toEqual('Required');
 	});
 	it("should return undefined in errors.packageTypeOther when a packageTypeOther supplied and packageType is 'Other'", () => {
-		let values = { 'packageType': 'Other', 'packageTypeOther': 'stuff' };
+		values = {...values, 'packageType': 'Other', 'packageTypeOther': 'stuff' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('packageTypeOther'));
 	});
 	it("should return 'Invalid Date' in errors.experimentDate when date is supplied in wrong format", () => {
-		let values = { 'experimentDate': '12-12-2012' };
+		values = {...values, 'experimentDate': '12-12-2012' };
 		let result = validate(values);
 		expect(result.experimentDate).toEqual('Invalid Date');
 	});
 	it("should not set errors.experimentDate when date is not supplied", () => {
-		let values = { 'experimentDate': '' };
+		values = {...values, 'experimentDate': '' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('experimentDate'));
 	});
 	it("should return 'Required' in errors.description when no description supplied", () => {
-		let values = { 'description': '' };
+		values = {...values, 'description': '' };
 		let result = validate(values);
 		expect(result.description).toEqual('Required');
 	});
 	it("should return undefined in errors.description when a description supplied", () => {
-		let values = { 'description': 'description' };
+		values = {...values, 'description': 'description' };
 		let result = validate(values);
 		expect(false).toEqual(result.hasOwnProperty('description'));
 	});
