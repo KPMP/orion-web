@@ -1,4 +1,4 @@
-const iconDataTypes = new Map(
+export const iconDataTypes = new Map(
     [
         ['Imaging',
             {
@@ -32,7 +32,7 @@ const iconDataTypes = new Map(
             {
                 iconDataType: 'Transcriptomics',
                 iconImage: 'icon_transcriptomics_132x132.png',
-                dataTypes: ['Bulk RNAseq', 'Segmental miRNA', 'Single-cell RNAseq', 'Single-nucleus RNAseq', 'Sub-segment RNAseq']
+                dataTypes: ['Bulk RNA-Seq', 'Segmental miRNA', 'Single-cell RNA-Seq', 'Single-nucleus RNA-Seq', 'Sub-segment RNA-Seq']
             }
         ]
     ]

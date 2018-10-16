@@ -1,4 +1,28 @@
-import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
+import { getDataTypeIconInfo, iconDataTypes } from './dataTypeIconHelper.js';
+import packageTypeList from '../Upload/packageTypes';
+
+describe('iconDataTypes', () => {
+	it('should contain mapping for all package types', () => {
+		let otherFound = false;
+		let packageTypes = [];
+		packageTypeList.options.forEach(function(obj) { packageTypes.push(obj.value) });
+		let fullDataTypeList = [];
+		for(let [iconDataTypeKey, iconDataTypeInfo] of iconDataTypes) {
+			for(var i=0; i < iconDataTypeInfo.dataTypes.length; i++) {
+				if (iconDataTypeInfo.dataTypes[i] !== "Other") {
+					fullDataTypeList.push(iconDataTypeInfo.dataTypes[i]);
+				} else {
+					otherFound = true;
+				}
+			}
+		}
+		fullDataTypeList.sort();
+		if (otherFound) {
+			fullDataTypeList.push("Other");
+		}
+		expect(packageTypes).toEqual(fullDataTypeList);
+	});
+});
 
 describe('getDataTypeIconInfo', () => {
     describe("Other types", () => {
@@ -53,22 +77,22 @@ describe('getDataTypeIconInfo', () => {
     });
     
     describe("Transcriptomics types", () => {
-	    	it('should return Transcriptomics when Bulk RNASeq', () => {
-	    		let iconInfo = getDataTypeIconInfo("Bulk RNAseq"); 
+	    	it('should return Transcriptomics when Bulk RNA-Seq', () => {
+	    		let iconInfo = getDataTypeIconInfo("Bulk RNA-Seq"); 
 	    		expect(iconInfo.iconDataType).toBe("Transcriptomics");
 	    		expect(iconInfo.iconImage).toBe("icon_transcriptomics_132x132.png");
 	    	});
 	    	it('should return Transcriptomics when Segmental miRNA', () => {
 	    		expect(getDataTypeIconInfo("Segmental miRNA").iconDataType).toBe("Transcriptomics");
 	    	});
-	    	it('should return Transcriptomics when Single-cell RNAseq', () => {
-	    		expect(getDataTypeIconInfo("Single-cell RNAseq").iconDataType).toBe("Transcriptomics");
+	    	it('should return Transcriptomics when Single-cell RNA-Seq', () => {
+	    		expect(getDataTypeIconInfo("Single-cell RNA-Seq").iconDataType).toBe("Transcriptomics");
 	    	});
-	    	it('should return Transcriptomics when Single-nucleus RNAseq', () => {
-	    		expect(getDataTypeIconInfo("Single-nucleus RNAseq").iconDataType).toBe("Transcriptomics");
+	    	it('should return Transcriptomics when Single-nucleus RNA-Seq', () => {
+	    		expect(getDataTypeIconInfo("Single-nucleus RNA-Seq").iconDataType).toBe("Transcriptomics");
 	    	});
-	    	it('should return Transcriptomics when Sub-segment RNAseq', () => {
-	    		expect(getDataTypeIconInfo("Sub-segment RNAseq").iconDataType).toBe("Transcriptomics");
+	    	it('should return Transcriptomics when Sub-segment RNA-Seq', () => {
+	    		expect(getDataTypeIconInfo("Sub-segment RNA-Seq").iconDataType).toBe("Transcriptomics");
 	    	});
     })
 });
