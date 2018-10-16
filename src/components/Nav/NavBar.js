@@ -20,7 +20,7 @@ class NavBar extends Component {
                         <img src="img/logo_KPMP-Data-Lake-Uploader.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Nav className="nav-route pull-left">
+                <Nav className="nav-route">
                     <NavItem>
                         <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                     </NavItem>

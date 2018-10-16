@@ -3,8 +3,8 @@ a {
 }
 
 .logo {
-	width: 40%;
-	height: 40%;
+	width: 100%;
+	height: 100%;
 }
 
 .header {
@@ -146,12 +146,15 @@ a {
 }
 
 .nav-container {
-    text-align: center;
     background-color: white;
+    .navbar-header {
+    		width: 220px;
+    		height: 68px;
+    	}
     .nav-route {
-        float: none;
-        display: inline-block;
-        margin: -10px 0px;
+        position: absolute;
+    		left: 50%;
+    		transform: translateX(-50%);
     }
 }
 
