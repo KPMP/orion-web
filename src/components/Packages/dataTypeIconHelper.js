@@ -1,10 +1,10 @@
-const iconDataTypes = new Map(
+export const iconDataTypes = new Map(
     [
         ['Imaging',
             {
                 iconDataType: 'Imaging',
                 iconImage: 'icon_imaging_132x132.png',
-                dataTypes: ['3-D tissue imaging', 'Multiplex ISH', 'Whole Slide Images']
+                dataTypes: ['3-D tissue imaging', 'CODEX', 'Multiplex ISH', 'Whole Slide Images']
             }
         ],
         ['Metabolomics',
@@ -18,7 +18,7 @@ const iconDataTypes = new Map(
             {
                 iconDataType: 'Other',
                 iconImage: 'icon_other_132x132.png',
-                dataTypes: ['DNA Methylation', 'Inflammatory Cells', 'Other']
+                dataTypes: ['DNA Methylation', 'Other']
             }
         ],
         ['Proteomics',
@@ -32,7 +32,7 @@ const iconDataTypes = new Map(
             {
                 iconDataType: 'Transcriptomics',
                 iconImage: 'icon_transcriptomics_132x132.png',
-                dataTypes: ['Bulk RNAseq', 'Segmental miRNA', 'Single-cell RNAseq', 'Single-nucleus RNAseq', 'Sub-segment RNAseq']
+                dataTypes: ['Bulk RNA-Seq', 'Segmental miRNA', 'Single-cell RNA-Seq', 'Single-nucleus RNA-Seq', 'Sub-segment RNA-Seq']
             }
         ]
     ]
