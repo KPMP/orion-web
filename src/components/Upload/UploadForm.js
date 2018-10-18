@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import DefaultUploadForm from './Forms/DefaultUploadForm';
 import V1StyleForm from './Forms/V1StyleForm';
 import FileDropzone from './Forms/FileDropzone';
@@ -63,7 +63,7 @@ class UploadForm extends Component {
 		return (
 			<div>
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
-					<UploadControl submitDisabled={this.isSubmitDisabled(values)} {...this.props}/>
+					<UploadControl {...this.props}/>
 					<hr/>
 					{ values.packageType === undefined && <DefaultUploadForm/> }
 					{ values.packageType !== undefined && 
@@ -80,6 +80,9 @@ class UploadForm extends Component {
 							</Row>
 						</div>
 					}
+					<Button className="btn-primary uploadFormSubmit" disabled={this.isSubmitDisabled(values)} type="submit">
+						Submit
+					</Button>
 				</form>
 			</div>
 		);
