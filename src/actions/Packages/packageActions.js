@@ -49,6 +49,15 @@ export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}
+	let activeFiles = uploader.methods.getUploads({
+		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+	packageInfo.attachments = activeFiles.map((file) => {
+		return {
+			id: file.uuid,
+			fileName: file.name,
+			size: file.size
+		}
+	});
 	return (dispatch) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo)
