@@ -78,11 +78,16 @@ class UploadForm extends Component {
 									<V1StyleForm {...this.props}/>
 								</Col>
 							</Row>
+							<hr/>
+							<Row>
+								<Col md={12} className="text-center">
+									<Button className="btn-primary uploadFormSubmit" disabled={this.isSubmitDisabled(values)} type="submit">
+										Submit
+									</Button>
+								</Col>
+							</Row>
 						</div>
 					}
-					<Button className="btn-primary uploadFormSubmit" disabled={this.isSubmitDisabled(values)} type="submit">
-						Submit
-					</Button>
 				</form>
 			</div>
 		);
