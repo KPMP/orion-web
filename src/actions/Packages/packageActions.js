@@ -53,7 +53,6 @@ export const uploadPackage = (packageInfo, uploader) => {
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.attachments = activeFiles.map((file) => {
 		return {
-			id: file.uuid,
 			fileName: file.name,
 			size: file.size
 		}
