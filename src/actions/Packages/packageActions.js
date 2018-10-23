@@ -1,7 +1,7 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
-import { handleError } from '../Error/errorActions.js';
+import { handleError } from '../Error/errorActions';
 
 const api = Api.getInstance();
 
