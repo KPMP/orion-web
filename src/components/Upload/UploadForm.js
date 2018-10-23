@@ -70,7 +70,7 @@ class UploadForm extends Component {
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
-									<FileDropzone uploader={uploader}/>
+									<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 								</Col>
 							</Row>
 							<Row>
