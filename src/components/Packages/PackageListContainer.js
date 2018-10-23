@@ -4,13 +4,13 @@ import { getPackages } from '../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
-    packages: state.packages,
+    packages: state.packages
 });
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
 	getPackages() {
-		dispatch(getPackages(props));
+		dispatch(getPackages());
 	}
 });
     

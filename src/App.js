@@ -43,7 +43,7 @@ class App extends Component {
 	render() {
 	    return (
 	    		<Provider store={store}>
-	    			<HashRouter history={history}>
+	    			<HashRouter>
 	    				<Switch>
 	    					<Route exact path="/" component={MainPage} store={store}/>
 							<Route exact path="/oops" component={Oops} />
