@@ -1,17 +1,18 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
+import { handleError } from '../Error/errorActions.js';
+
 const api = Api.getInstance();
 
-export const getPackages = () => {
+export const getPackages = (props) => {
 	return (dispatch) => {
 		api.get('/api/v1/packages')
 			.then(res => {
 				dispatch(setPackages(res.data));
 			})
 			.catch(err => {
-                alert("Cannot connect to KPMP Data Lake File Repository");
-                console.error(err);
+				dispatch(handleError("Unable to connect to the Data Lake: " + err));
             });
 	};
 };
@@ -71,7 +72,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 			uploader.methods.uploadStoredFiles();
 		})
 		.catch(err => {
-			alert("We were unable to upload your package to the KPMP Data Lake File Repository");
+			dispatch(handleError("Unable to upload package to the KPMP Data Lake File Repository: " + err));
 			dispatch(setIsUploading(false));
 			console.log(err);
 		});

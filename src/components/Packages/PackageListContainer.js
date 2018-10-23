@@ -10,8 +10,8 @@ const mapStateToProps = (state, props) =>
 const mapDispatchToProps = (dispatch, props) =>
 ({
 	getPackages() {
-		dispatch(getPackages());
+		dispatch(getPackages(props));
 	}
 });
     
-export default connect(mapStateToProps, mapDispatchToProps)(PackageList);    
+export default connect(mapStateToProps, mapDispatchToProps)(PackageList);
