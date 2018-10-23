@@ -1,5 +1,6 @@
 import { setUserInformation } from './userActions';
 import actionNames from './actionNames';
+import { handleError } from './Error/errorActions.js';
 
 describe('setUserInformation', () => {
 	it('should create the correct action', () => {
