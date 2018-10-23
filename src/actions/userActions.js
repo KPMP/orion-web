@@ -1,5 +1,7 @@
 import Api from '../helpers/Api';
 import actionNames from './actionNames';
+import { handleError } from './Error/errorActions';
+
 const api = Api.getInstance();
 
 export const getUserInformation = () => {
@@ -9,8 +11,7 @@ export const getUserInformation = () => {
 				dispatch(setUserInformation(res.data));
 			})
 			.catch(err => {
-	            alert("Unable to retrieve user information");
-	            console.error(err);
+				dispatch(handleError("Unable to retrieve user information: " + err));
 	        });
 	};
 } 

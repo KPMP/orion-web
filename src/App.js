@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import MainPage from './components/MainPage';
+import Oops from './components/Error/Oops';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { getUserInformation } from './actions/userActions';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
 
@@ -38,17 +38,17 @@ class App extends Component {
   
 	componentWillMount() {
 		logPageView(window.location, "");
-		getUserInformation()(store.dispatch);
 	}
 	
 	render() {
 	    return (
 	    		<Provider store={store}>
-	    			<BrowserRouter>
+	    			<HashRouter>
 	    				<Switch>
 	    					<Route exact path="/" component={MainPage} store={store}/>
+							<Route exact path="/oops" component={Oops} />
 	    				</Switch>
-	    			</BrowserRouter>
+	    			</HashRouter>
 	    		</Provider>
 	    );
 	  }

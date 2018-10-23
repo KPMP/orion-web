@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {panes} from './Nav/NavBar';
 import NavBarContainer from './Nav/NavBarContainer';
 import PaneHolder from './PaneHolder'
+import { getUserInformation } from '../actions/userActions';
+import { connect } from 'react-redux';
 
 class MainPage extends Component {
     constructor(props) {
@@ -17,6 +19,10 @@ class MainPage extends Component {
         });
     }
 
+    componentWillMount() {
+        getUserInformation()(this.props.dispatch);
+    }
+
     render() {
         return (
             <div>
@@ -27,4 +33,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default connect()(MainPage);
