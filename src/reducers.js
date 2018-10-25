@@ -1,15 +1,14 @@
 import { combineReducers } from 'redux';
-import { uploadedFiles } from './components/uploadedFilesReducer';
 import actionNames from './actions/actionNames';
 import loadedState from './initialState';
-import { reducer as formReducer } from 'redux-form';
-import { uploadDialog } from './components/UploadModal/uploadDialogReducer';
-
+import { packages } from './components/Packages/packagePanelReducer';
+import { isUploading } from './components/Upload/uploadFormReducer';
+import { userInformation } from './components/userInformationReducer';
 
 const appReducer = combineReducers({
-    form: formReducer,
-    uploadedFiles,
-    uploadDialog
+    packages,
+    isUploading,
+    userInformation
 });
 
 const rootReducer = (state, action) => {

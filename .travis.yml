@@ -1,0 +1,19 @@
+before_install:
+  - export TZ=America/Detroit
+
+language: node_js
+
+node_js:
+  - 8
+
+script:
+  - CI=true npm test
+  - npm run build
+
+notifications:
+  email:
+    - rlreamy@umich.edu
+    - zwright@umich.edu
+    - royerbr@med.umich.edu
+    - cgates@umich.edu
+    - cspital@uw.edu

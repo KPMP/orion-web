@@ -22,4 +22,5 @@ yarn-debug.log*
 yarn-error.log*
 
 *.css
-package-lock.json
+.vscode
+.settings

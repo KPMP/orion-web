@@ -1,266 +1,284 @@
-.fileList {
-	max-height: 140px;
-	overflow-y: auto;
-}
-
-.uploadFileList {
-	padding-top: 15px;
-}
-
-#outerContainer {
-	#navbar {
-		margin-left: -30px;
-		margin-right: -30px;
-		padding-bottom: 15px;
-	}
-
-	#content {
-		padding-top: 15px;
-		margin-right: 15px;
-		form {
-			label {
-				font-weight: 600;
-				width: 175px;
-				padding-right: 15px;
-			}
-		}
-	}
-
-	.dropzone {
-		border-radius: 5px;
-		background-color: #E1E1E1;
-		border: 2px dashed #C7C7C7;
-		height: 100px;
-		width: 500px;
-
-		.dz-message {
-			text-align: center;
-			margin: 2em 0em 2em 0em;
-		}
-	}
-
-	#uploadStatus {
-		border: 2px dashed #C7C7C7;
-	}
-
-	.control-label {
-		font-size: 14px;
-		margin-top: 5px;
-		margin-bottom: 0px;
-	}
-
-	.uploadButton {
-		float: right;
-	}
-
-	.uploadTable {
-		padding-top: 15px;
-		overflow: auto;
-
-		.uploadCell {
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-	}
-}
-
-.modalTitle {
-	font-weight: 700;
-	font-size: 18px;
-	padding-bottom: 12px;
-}
-
-.fine-uploader-dropzone-container {
-    min-height: 100px !important;
-    & .react-fine-uploader-gallery-files {
-        overflow-y: visible;
-    }
-}
-
-.react-fine-uploader-gallery-dropzone-content {
-	top: 25% !important;
-	text-align: center !important;
-	padding-right: 15px;
-}
-
-.form-group {
-	margin-bottom: 0.25rem;
-}
-
-.uploadFilesModal {
-	& .modal-content {
-        min-height: 750px;
-        height: 750px;
-    }
-    & .uploadFilesContainer {
-        height: 100%;
-    }
-    & .buttonRow {
-        padding-top: 15px;
-        position: absolute;
-        border-top: 1px solid #e5e5e5;
-        left: 0;
-        bottom: 15px;
-        width: 100%;
-    }
-}
-
-.fileProgressModal {
-	.modal-content {
-		width: 600px;
-	}
-}
-
-.centerBold {
-	text-align: center;
-	font-weight: bold;
-}
-
-.fileList thead {
-	border-top: none;
-}
-
-#attachedFiles {
-	margin-top: 10px;
-}
-
-#fileDescription {
-	margin-top: 10px;
-}
-
-#packageDescription {
-	margin-botton: 10px;
-}
-
-.react-fine-uploader-file-progress-bar {
-	display: block;
-	display: block;
-	background: rgba(0, 204, 0, 1);
-	width: 0%;
-	height: 15px;
-}
-
-.react-fine-uploader-file-progress-bar-container {
-	background-color: lightgrey;
-	border-width: 1px;
-	border-style: solid;
-	border-color: darkgrey;
-}
-
-.react-fine-uploader-total-progress-bar {
-	height: 25px;
-	border-radius: 9px;
-}
-
-.react-fine-uploader-total-progress-bar-container {
-	margin-left: 9px;
-	display: inline;
-	float: right;
-	width: 500px;
-}
-
-#fileProgressTable {
-	width: 100%
-}
-
-#fileProgressTable td {
-	padding: 10px;
-	vertical-align: top;
-}
-
-#fileProgressTable .fileSizeCell {
-	white-space: nowrap;
-}
-
-#fileProgressTable .fileNameCell {
-	white-space: normal;
-}
-
-.formError {
-	color: red;
-}
-
-.fieldInError {
-	border-color: red !important;
-}
-
-.react-fine-uploader-gallery-progress-bar-container {
-	display: none !important;
-}
-
-.react-fine-uploader-gallery-total-progress-bar-container {
-	display: none !important;
-}
-
-.react-fine-uploader-gallery-pause-resume-button {
-	display: none !important;
-}
-
-.react-fine-uploader-gallery-file-input-upload-icon {
-	display: none !important;
-}
-
-.react-fine-uploader-gallery-dropzone {
-	border: 1px dashed #ccc !important;
-}
-
-.react-fine-uploader-gallery-file-input-container {
-	background: #007bff !important;
-	border: 1px solid #007bff !important;;
-}
-
-.react-fine-uploader-gallery-status {
-	display: none !important;
-}
-
-.navbar-brand {
-	color: white;
-}
-
-.glyphicon-remove {
-	color: red;
+a {
 	cursor: pointer;
 }
 
-.attachFileError {
-	color: red;
-	font-size: 14px;
-	font-weight: normal;
+.logo {
+	width: 40%;
+	height: 40%;
 }
 
-/* From https://github.com/Hacker0x01/react-datepicker/issues/624 */
-.react-datepicker-popper {
-    
-    & .react-datepicker {
-        font-size: 1em;
-    }
-    & .react-datepicker__header {
-        padding-top: 0.8em;
-    }
-    & .react-datepicker__month {
-        margin: 0.4em 1em;
-    }
-    & .react-datepicker__day-name, & .react-datepicker__day {
-        width: 1.9em;
-        line-height: 1.9em;
-        margin: 0.166em;
-    }
-    & .react-datepicker__current-month {
-        font-size: 1em;
-    }
-    & .react-datepicker__navigation {
-        top: 1em;
-        line-height: 1.7em;
-        border: 0.45em solid transparent;
-    }
-    & .react-datepicker__navigation--previous {
-        border-right-color: #ccc;
-        left: 1em;
-    }
-    & .react-datepicker__navigation--next {
-        border-left-color: #ccc;
-        right: 1em;
-    }
+.header {
+	font-size: 18px;
+	font-weight: 600;	
+}
 
+.row {
+	padding-top: 5px;
+}
+
+.attachmentsModalBody {
+	padding-top: 0px;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 5px;
+	
+	.attachmentsModalRow {
+		border-bottom: 1px solid #e5e5e5;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		word-wrap: break-word;
+		
+		.filename {
+			overflow: hidden;
+			position: relative;
+			line-height: 1.2em;
+			margin-right: 0em;
+			padding-right: 1em;
+		}
+		
+	}
+	.grayRow {
+		background-color: rgba(242, 242, 242, 1);
+		.filename:after {
+			background: rgba(242, 242, 242, 1);
+		}
+	}
+		
+}
+
+.metadataModalBody {
+	ul {
+		list-style: none;
+		margin-bottom: 10px;
+	}
+	li {
+		margin-bottom: 10px;
+	}
+}
+
+.pane {
+	margin: 0px 15px 0px 15px;
+    i {
+        color: gray;
+    }
+   .row {
+   		margin-left: 0px;
+   		margin-right: 0px;
+   	}
+}
+
+#pkg-search-bar {
+    width: 200px;
+}
+
+#pkg-list {
+    margin: 10px 0 0 0;
+    height: 85vh;
+    overflow-y: scroll;
+    .pkg-panel:nth-child(even) {
+        background-color: rgb(230, 241, 255);
+    }
+}
+
+.pkg-filter {
+    margin: 0px 10px 0px 0px;
+}
+
+.pkg-type-icon {
+	margin-right: 10px;
+}
+
+.search-glass {
+    background: rgb(2, 117, 216);
+    color: white;
+}
+
+.pkg-panel {
+    margin: 0px 10px 10px 0px;
+	.odd-row {
+		background-color: rgba(230, 241, 255, 1);
+	}
+}
+
+.pkg-info {
+	overflow: hidden;
+    div:nth-child(2) {
+        margin: 12px 0px 12px;
+    }
+}
+
+.pkg-panel-right {
+    div:nth-child(2) {
+        margin: 7px 0px 7px;
+    }
+    div {
+        button {
+            background: rgb(2, 117, 216);
+            color: white;
+            font-family: "ArialMT", "Arial";
+        }
+    }
+}
+
+.pkg-panel-left {
+	padding-left: 5px;
+}
+
+.dd-gray-text {
+    color: gray;
+}
+
+.upload-ctrl-submit {
+	padding-top: 10px;
+    float: right;
+}
+
+#upload-form-default {
+    text-align: center;
+    div {
+        b {
+            color: gray;
+        }
+    }
+}
+
+.pkg-type-img {
+    text-align: center;
+    div {
+        margin-top: -50px;
+    }
+}
+
+.nav-container {
+    text-align: center;
+    background-color: white;
+    .nav-route {
+        float: none;
+        display: inline-block;
+        margin: -10px 0px;
+    }
+}
+
+.btn-primary {
+    background-color: rgb(2, 117, 216);
+}
+
+.navbar-default .btn-link {
+    color: rgb(2, 117, 216);
+}
+
+.navbar {
+	margin-bottom: 0px;
+}
+
+.dropzone {
+	padding-bottom: 15px;
+	
+	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
+		min-height: 120px;
+		border: 1px dashed darkgrey;
+	}
+
+	.react-fine-uploader-gallery-file-input-container {
+		background-color: #0275d8;
+		border: 1px solid #0275d8;
+	}
+
+	.react-fine-uploader-gallery-file-input-container:hover {
+		background-color: #286090;
+		border: 1px solid #204d74;
+	}
+	.react-fine-uploader-gallery-retry-button {
+		display: none;
+	}
+}
+
+#upload-ctrl {
+	.formError {
+		color: red;
+	}
+
+	.form-control {
+		height: 38px;
+	}
+
+}
+
+#uploadInfo {
+	.formError {
+		color: red;
+	}
+	
+	.fieldInError {
+		border: 1px solid red !important;
+	}
+	
+	textarea {
+		width: 100%;
+		height: 65px;
+	}
+
+	.packageTypeSelect {
+		width: 250px;
+	}
+	
+	.form-control {
+		height: 38px;
+	}
+
+	.form-control:focus, textarea:focus {
+		box-shadow: none;
+		border: 2px solid rgb(38,132, 255);
+	}
+
+	#packageInformationSection {
+		padding-top: 15px;
+	}
+
+}
+
+#uploadForm {
+	#upload {
+		display: none;
+	}
+}
+
+#uploadPackageInfoForm {
+	*[class*='col-'] {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.secondField {
+		padding-left: 15px !important;
+	}
+
+	.uploadFormSubmit {
+		width: 150px;
+		margin-bottom: 15px;
+	}
+
+
+}
+
+.react-fine-uploader-gallery-file  {
+	margin-top: 30px !important;
+}
+
+#oops-content {
+
+	margin-top: 150px;
+
+	.oops-big {
+		font-size: 72px;
+	}
+
+	.oops-small {
+		font-size: 32px;
+	}
+
+	#oops-image {
+		width: 385px;
+		height: 330px;
+	}
 }
