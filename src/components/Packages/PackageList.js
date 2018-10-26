@@ -3,10 +3,6 @@ import PackagePanel from './PackagePanel';
 
 class PackageList extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.getPackages();
     }
