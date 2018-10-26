@@ -191,6 +191,12 @@ a {
 	.react-fine-uploader-gallery-retry-button {
 		display: none;
 	}
+	
+	.react-fine-uploader-gallery-cancel-button {
+		&.cancel-disabled {
+			display: none;
+		}
+	}
 }
 
 #upload-ctrl {
