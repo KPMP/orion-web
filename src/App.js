@@ -36,7 +36,7 @@ history.listen((location, action) => {
 
 class App extends Component {
   
-	componentWillMount() {
+	componentDidMount() {
 		logPageView(window.location, "");
 	}
 	

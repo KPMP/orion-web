@@ -11,16 +11,13 @@ class MainPage extends Component {
         this.state = {
             pane: panes.packages
         };
+        getUserInformation()(props.dispatch);
     }
 
     handlePaneSelect = (pane) => {
         this.setState({
             pane
         });
-    }
-
-    componentWillMount() {
-        getUserInformation()(this.props.dispatch);
     }
 
     render() {
