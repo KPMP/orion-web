@@ -5,7 +5,10 @@ class PackageList extends Component {
 
     constructor(props) {
         super(props);
-        props.getPackages();
+    }
+
+    componentDidMount() {
+        this.props.getPackages();
     }
 
     render() {
