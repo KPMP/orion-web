@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import DefaultUploadForm from './Forms/DefaultUploadForm';
 import V1StyleForm from './Forms/V1StyleForm';
 import FileDropzone from './Forms/FileDropzone';
@@ -63,19 +63,27 @@ class UploadForm extends Component {
 		return (
 			<div>
 				<form id="uploadPackageInfoForm" onSubmit={handleSubmit}>
-					<UploadControl submitDisabled={this.isSubmitDisabled(values)} {...this.props}/>
+					<UploadControl {...this.props}/>
 					<hr/>
 					{ values.packageType === undefined && <DefaultUploadForm/> }
 					{ values.packageType !== undefined && 
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
-									<FileDropzone uploader={uploader}/>
+									<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 								</Col>
 							</Row>
 							<Row>
 								<Col md={12}>
 									<V1StyleForm {...this.props}/>
+								</Col>
+							</Row>
+							<hr/>
+							<Row>
+								<Col md={12} className="text-center">
+									<Button className="btn-primary uploadFormSubmit" disabled={this.isSubmitDisabled(values)} type="submit">
+										Submit
+									</Button>
 								</Col>
 							</Row>
 						</div>
@@ -89,7 +97,7 @@ class UploadForm extends Component {
 const Form = (props) => {
 	return (
 		<div>
-			<Formik initialValues={{'submitterFirstName': props.userInformation.firstName, 'submitterLastName': props.userInformation.lastName, 'submitterEmail': props.userInformation.email }} render={formikProps => <UploadForm {...formikProps} isUploading={props.isUploading} userInformation={props.userInformation}/>}
+			<Formik initialValues={{ 'submitter': {'id': props.userInformation.id } }} render={formikProps => <UploadForm {...formikProps} isUploading={props.isUploading} userInformation={props.userInformation}/>}
 				onSubmit={(values, {setSubmitting, setErrors}) => {props.postPackageInformation(values, uploader)}} 
 				validateOnChange={true} validateOnBlur={true} />
 		</div>

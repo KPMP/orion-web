@@ -11,9 +11,10 @@ class MetadataModal extends Component {
                 <div className="metadataModal static-modal">
                     <Modal show={this.props.show} onHide={this.props.close}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Provided Metadata</Modal.Title>
+                            <Modal.Title>Package metadata</Modal.Title>
                         </Modal.Header>
                         <Modal.Body className="metadataModalBody">
+                            <p>ID: {this.props.uploadPackage.packageId}</p>
                             <p>Package type: {this.props.uploadPackage.packageType}</p>
                             <p>Associated protocol: {this.props.uploadPackage.protocol}</p>
                             <p>Description: {this.props.uploadPackage.description}</p>
@@ -22,7 +23,7 @@ class MetadataModal extends Component {
                             <p>Submitted by:</p>
                             <ul>
                                 <li>Institution: {this.props.uploadPackage.institution}</li>
-                                <li>Submitter: {this.props.uploadPackage.submitterFirstName} {this.props.uploadPackage.submitterLastName}</li>
+                                <li>Submitter: {this.props.uploadPackage.submitter.firstName} {this.props.uploadPackage.submitter.lastName}</li>
                             </ul>
                         </Modal.Body>
                     </Modal>

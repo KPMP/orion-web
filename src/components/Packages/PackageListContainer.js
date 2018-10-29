@@ -4,7 +4,7 @@ import { getPackages } from '../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
-    packages: state.packages,
+    packages: state.packages
 });
     
 const mapDispatchToProps = (dispatch, props) =>
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch, props) =>
 	}
 });
     
-export default connect(mapStateToProps, mapDispatchToProps)(PackageList);    
+export default connect(mapStateToProps, mapDispatchToProps)(PackageList);
