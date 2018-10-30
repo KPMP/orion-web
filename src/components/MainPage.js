@@ -19,7 +19,7 @@ class MainPage extends Component {
         });
     }
 
-    componentWillMount() {
+    componentDidMount() {
         getUserInformation()(this.props.dispatch);
     }
 
