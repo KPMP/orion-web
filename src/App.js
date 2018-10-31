@@ -47,7 +47,7 @@ class App extends Component {
 	    				<Switch>
 	    					<Route exact path="/" component={MainPage} store={store}/>
 							<Route exact path="/oops" component={Oops} />
-	    				</Switch>
+						</Switch>
 	    			</HashRouter>
 	    		</Provider>
 	    );

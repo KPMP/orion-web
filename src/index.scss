@@ -156,10 +156,24 @@ a {
     		height: 68px;
     	}
     .nav-route {
-        position: absolute;
-    		left: 50%;
-    		transform: translateX(-50%);
+		text-align: center;
+		padding-top: 10px;
     }
+	.nav-user {
+		float: right;
+		text-align: right;
+		padding-top: 20px;
+	}
+	@media only screen and (max-width: 768px) {
+		.nav-route {
+			text-align: left;
+		}
+		.nav-user {
+			text-align: left;
+			float: left;
+		}
+	}
+
 }
 
 .btn-primary {
