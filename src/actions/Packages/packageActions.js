@@ -50,6 +50,12 @@ export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}
+	packageInfo.submitter = {
+		...packageInfo.submitter,
+		firstName: packageInfo.submitterFirstName,
+		lastName: packageInfo.submitterLastName,
+		email: packageInfo.submitterEmail
+	};
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.attachments = activeFiles.map((file) => {
