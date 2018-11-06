@@ -51,6 +51,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}
 	packageInfo.submitter = {
+		...packageInfo.submitter,
 		firstName: packageInfo.submitterFirstName,
 		lastName: packageInfo.submitterLastName,
 		email: packageInfo.submitterEmail
