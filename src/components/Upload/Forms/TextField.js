@@ -6,7 +6,7 @@ import { validateNotEmpty } from './v1StyleFormValidator';
 class TextField extends Component {
 	
 	render() {
-		let { label, name, onChange, onBlur, value, touched, error, placeholder } = this.props;
+		let { label, name, onChange, onBlur, value, touched, error, placeholder, disabled } = this.props;
 		let classes = 'form-control';
 		let errorMessage = '* ';
 		if (touched && error !== undefined) {
@@ -18,7 +18,7 @@ class TextField extends Component {
 				<ControlLabel>{label} <span className="formError">{errorMessage}</span>
 				</ControlLabel>
 				<div>
-					<Field name={name} type="text" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateNotEmpty} placeholder={placeholder}/>
+					<Field name={name} disabled={disabled} type="text" className={classes} onChange={onChange} onBlur={onBlur} value={value} validate={validateNotEmpty} placeholder={placeholder}/>
 				</div>
 			</div>
 		);
