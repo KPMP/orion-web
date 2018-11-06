@@ -9,15 +9,35 @@ describe("validate", () => {
 		}
 	};
 
-	it("should return 'Required' in errors.submitter.id when no id supplied", () => {
-		values.submitter.id = "";
+	it("should return 'Required' in errors.submitterFirstName when no submitterFirstName supplied", () => {
+		values.submitterFirstName = "";
 		let result = validate(values);
-		expect(result.submitterId).toEqual('Required');
+		expect(result.submitterFirstName).toEqual('Required');
 	});
-	it("should return undefined in errors.submitter.id when id supplied", () => {
-		values.submitter.id = "1234";
+	it("should return undefined in errors.submitterFirstName when submitterFirstName supplied", () => {
+		values.submitterFirstName = "Woody";
 		let result = validate(values);
-		expect(false).toEqual(result.hasOwnProperty('submitterId'));
+		expect(false).toEqual(result.hasOwnProperty('submitterFirstName'));
+	});
+	it("should return 'Required' in errors.submitterLastName when no submitterLastName supplied", () => {
+		values.submitterLastName = "";
+		let result = validate(values);
+		expect(result.submitterLastName).toEqual('Required');
+	});
+	it("should return undefined in errors.submitterLastName when submitterLastName supplied", () => {
+		values.submitterLastName = "Woodpecker";
+		let result = validate(values);
+		expect(false).toEqual(result.hasOwnProperty('submitterLastName'));
+	});
+	it("should return 'Required' in errors.submitterEmail when no submitterEmail supplied", () => {
+		values.submitterEmail = "";
+		let result = validate(values);
+		expect(result.submitterEmail).toEqual('Required');
+	});
+	it("should return undefined in errors.submitterEmail when submitterEmail supplied", () => {
+		values.submitterEmail = "woody@woodpecker.com";
+		let result = validate(values);
+		expect(false).toEqual(result.hasOwnProperty('submitterEmail'));
 	});
 	it("should return 'Required' in errors.institution when no institution supplied", () => {
 		values.institution = "";
