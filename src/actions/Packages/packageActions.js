@@ -51,9 +51,9 @@ export const uploadPackage = (packageInfo, uploader) => {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}
 	packageInfo.submitter = {
-		firstName: packageInfo.firstName,
-		lastName: packageInfo.lastName,
-		email: packageInfo.email
+		firstName: packageInfo.submitterFirstName,
+		lastName: packageInfo.submitterLastName,
+		email: packageInfo.submitterEmail
 	};
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
