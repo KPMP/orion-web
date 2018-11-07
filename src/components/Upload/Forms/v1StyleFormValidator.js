@@ -2,8 +2,9 @@ import moment from 'moment';
 
 export const validate = (values) => {
 	const errors = {};
-
-	setError(values.submitter.id, errors, validateNotEmpty, 'submitterId');
+	setError(values.submitterFirstName, errors, validateNotEmpty, 'submitterFirstName');
+	setError(values.submitterLastName, errors, validateNotEmpty, 'submitterLastName');
+	setError(values.submitterEmail, errors, validateNotEmpty, 'submitterEmail');
 	setError(values.institution, errors, validateNotEmpty, 'institution');
 	setError(values.packageType, errors, validateNotEmpty, 'packageType');
 	setError(values.protocol, errors, validateNotEmpty, 'protocol');
