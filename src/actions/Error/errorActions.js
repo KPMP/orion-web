@@ -1,6 +1,6 @@
-export const handleError = (error) => {
+export const handleError = (error, props) => {
     return (dispatch) => {
-        window.location.href = "/#/oops";
+        props.history.push("/oops");
         console.error(error);
     }
 };

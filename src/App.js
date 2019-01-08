@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { Route, Switch, HashRouter } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
 
@@ -43,12 +43,12 @@ class App extends Component {
 	render() {
 	    return (
 	    		<Provider store={store}>
-	    			<HashRouter>
+	    			<Router history={history}>
 	    				<Switch>
 	    					<Route exact path="/" component={MainPage} store={store}/>
 							<Route exact path="/oops" component={Oops} />
 						</Switch>
-	    			</HashRouter>
+	    			</Router>
 	    		</Provider>
 	    );
 	  }
