@@ -1,4 +1,4 @@
-export const handleError = (error, props) => {
+export const handleError = (error) => {
     return (dispatch) => {
         window.location.href = "/oops";
         console.error(error);
