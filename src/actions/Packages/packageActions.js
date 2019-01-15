@@ -1,7 +1,7 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
-import { handleError } from '../Error/errorActions';
+import { handleError, sendMessageToBackend } from '../Error/errorActions';
 
 const api = Api.getInstance();
 
@@ -79,7 +79,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 				} else if (failed.length > 0){
 					alert("We were unable to upload all of your files. You will need to resubmit this package.");
 					dispatch(setIsUploading(false));
-					window.location.reload();
+					dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 				}
 			});
 			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
