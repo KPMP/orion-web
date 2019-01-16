@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
-import { getLocalDateString } from '../../helpers/timezoneUtil';
+import dateFormat from 'dateformat';
 
 class MetadataModal extends Component {
 
     render() {
-        let experimentDate = this.props.uploadPackage.experimentDate?getLocalDateString(this.props.uploadPackage.experimentDate):"N/A";
+    	console.log(this.props.uploadPackage.experimentDate);
+        let experimentDate = this.props.uploadPackage.experimentDate?dateFormat(this.props.uploadPackage.experimentDate, 'yyyy-mm-dd', true):"N/A";
         return (
             <div>
                 <div className="metadataModal static-modal">
