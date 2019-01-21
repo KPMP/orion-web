@@ -10,32 +10,44 @@ export const packages = (state = {}, action) => {
 			newState.filters = [];
 			return newState;
 		case actionNames.ADD_FILTER:
-			let unFilteredPackageList = state.unfiltered;
-			let filteredPackageList = {}
+			let filteredPackageList = state.unfiltered;
 			let filters = state.filters;
-			filters.push(action.payload);
-			newState.filters = filters;
+
+			if (filters.length > 0) {
+				filters.map((filter, index) => {
+					if (filter.filterType === action.payload.filterType) {
+						filters.splice(index, 1, action.payload);
+					} else {
+						filters.push(action.payload)
+					}
+				})
+				
+			} else {
+				filters.push(action.payload);
+			}
+			
+			
 			filters.map((filter, index) => {
 				
 				if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
-					filteredPackageList = unFilteredPackageList.filter((packageItem, index) => {
-						if(packageItem.packageInfo.institution === action.payload.value) {
+					filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+						if(packageItem.packageInfo.institution === filter.value) {
 							return packageItem;
 						}
 						return null;
 					});
 				} 
 				else if (filter.filterType === filterActions.filterTypes.PACKAGE_TYPE) {
-					filteredPackageList = unFilteredPackageList.filter((packageItem, index) => {
-						if(packageItem.packageInfo.packageType === action.payload.value) {
+					filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+						if(packageItem.packageInfo.packageType === filter.value) {
 							return packageItem;
 						}
 						return null;
 					});
 				}
 				else if (filter.filterType === filterActions.filterTypes.SUBMITTER) {
-					filteredPackageList = unFilteredPackageList.filter((packageItem, index) => {
-						if(packageItem.packageInfo.submitter.id === action.payload.value) {
+					filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+						if(packageItem.packageInfo.submitter.id === filter.value) {
 							return packageItem;
 						}
 						return null;
@@ -44,6 +56,7 @@ export const packages = (state = {}, action) => {
 			})
 			newState.unfiltered = state.unfiltered;
 			newState.filtered = filteredPackageList;
+			newState.filters = filters;
 			return newState;
 		default:
 			return state;

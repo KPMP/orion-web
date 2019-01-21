@@ -78,7 +78,7 @@ describe('packages', () => {
 		let state = {
 				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: []
+				filters: [{filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}]
 		};
 		let action = {
 				type: actionNames.ADD_FILTER,
@@ -86,17 +86,26 @@ describe('packages', () => {
 		};
 		
 		let newState = packages(state, action);
-		expect(newState).toEqual({ filtered: [{packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+		expect(newState).toEqual({ filtered: [{packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 			unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}}  ],
-			filters: [ action.payload ]});
+			filters: [ {filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}, { filterType: filterActions.filterTypes.SUBMITTER, value: '123' } ]});
 		
-		let secondAction = {
-				type: actionNames.ADD_FILTER,
-				payload: { filterType: filterActions.filterTypes.INSTITUTION, value: 'UW' }
+	});
+	it('should replace an existing filter of a given type', () => {
+		let state = {
+				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				filters: [{filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}]
 		};
-		expect(packages(newState, secondAction)).toEqual({ filtered: [{packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+		let action = {
+				type: actionNames.ADD_FILTER,
+				payload: { filterType: filterActions.filterTypes.INSTITUTION, value: 'UMICH' }
+		};
+		let newState = packages(state, action);
+		expect(newState).toEqual({ filtered: [{packageInfo: {institution: 'UMICH', submitter: { id: '345'}}} ],
 			unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}}  ],
-			filters: [ action.payload, secondAction.payload]});
+			filters: [ {filterType: filterActions.filterTypes.INSTITUTION, value: 'UMICH'} ]});
+		
 	});
 	
 });
