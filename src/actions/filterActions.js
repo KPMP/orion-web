@@ -1,22 +1,17 @@
-import Api from '../helpers/Api';
+//import Api from '../helpers/Api';
 import actionNames from './actionNames';
 
-const api = Api.getInstance();
+//const api = Api.getInstance();
 
-const filterTypes = {
+export const filterTypes = {
 	INSTITUTION: "INSTITUTION",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
 }
 
-const addFilter = (type, value) => {
+export const addFilter = (type, value) => {
 	return {
 		type: actionNames.ADD_FILTER,
 		payload: { filterType: type, value: value }
 	}
-}
-
-module.exports = {
-	addFilter: addFilter,
-	filterTypes: filterTypes
 }

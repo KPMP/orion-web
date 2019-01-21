@@ -1,6 +1,6 @@
 import React from 'react';
 import { panes } from './Nav/NavBar';
-import PackagesPane from './Packages/PackagesPane';
+import PackagesPaneContainer from './Packages/PackagesPaneContainer';
 import UploadPane from './Upload/UploadPane';
 
 const PaneHolder = (props) => {
@@ -9,7 +9,7 @@ const PaneHolder = (props) => {
             return <UploadPane />;
         case panes.packages:
         default:
-            return <PackagesPane />;
+            return <PackagesPaneContainer />;
     }
 }
 
