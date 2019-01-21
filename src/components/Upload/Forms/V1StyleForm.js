@@ -4,8 +4,8 @@ import TextArea from './TextArea';
 import DateField from './DateField';
 import SelectBox from './SelectBox';
 import { Col, Row } from 'react-bootstrap';
-import protocolList from './protocols';
-import institutionList from './institutions';
+import protocolList from '../../protocols';
+import institutionList from '../../institutions';
 
 class V1StyleForm extends Component {
 	render() {
@@ -48,7 +48,7 @@ class V1StyleForm extends Component {
 		        		}
 		        <Row>
 		        		<Col md="4">
-		        			<SelectBox name="institution" label="Institution" options={institutionList.institutions} handleChange={handleChange} handleBlur={handleBlur} error={errors.institution} setFieldValue={setFieldValue}/>
+		        			<SelectBox name="institution" label="Institution" options={institutionList.options} handleChange={handleChange} handleBlur={handleBlur} error={errors.institution} setFieldValue={setFieldValue}/>
 		        		</Col>
 		        	</Row>
 		        	<Row>
@@ -60,7 +60,7 @@ class V1StyleForm extends Component {
 		        	</Row>
 		        <Row >
 		        		<Col md="4">
-		        			<SelectBox name="protocol" label="Associated Protocol" options={protocolList.protocols} handleChange={handleChange} handleBlur={handleBlur} error={errors.protocol} setFieldValue={setFieldValue}/>
+		        			<SelectBox name="protocol" label="Associated Protocol" options={protocolList.options} handleChange={handleChange} handleBlur={handleBlur} error={errors.protocol} setFieldValue={setFieldValue}/>
 
 		        		</Col>
 		        		<Col md="4" className="secondField">

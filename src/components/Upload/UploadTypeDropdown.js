@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import packageTypeList from './packageTypes';
+import packageTypeList from '../packageTypes';
 import TextField from './Forms/TextField';
 import { Col } from 'react-bootstrap';
 import { Field } from 'formik';
