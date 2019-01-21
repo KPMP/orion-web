@@ -11,21 +11,21 @@ describe('packages', () => {
 		expect(packages(expectedState, action)).toEqual(expectedState);
 	});
 	
-	it('should set the action.payload when it is SET_PACKAGES action', () => {
+	it('should set the filtered and unfiltered list when it is SET_PACKAGES action', () => {
 		let action = {
 			type: actionNames.SET_PACKAGES,
 			payload: [{"key": "value"}]
 		};
 		let currentState = [ {"stateKey": "stateValue"}];
-		let expectedState = [{"key": "value"}];
+		let expectedState = { unfiltered: [{"key": "value"}], filtered: [{"key": "value"}]};
 		expect(packages(currentState, action)).toEqual(expectedState);
 	});
 	
-	it('should return [] in state if state is undefined and not SET_PACKAGES action', () => {
+	it('should return {} in state if state is undefined and not SET_PACKAGES action', () => {
 		let action = {
 			type: "SOME_OTHER_ACTION",
 			payload: [{"key": "value"}]
 		};
-		expect(packages(undefined, action)).toEqual([]);
+		expect(packages(undefined, action)).toEqual({});
 	});
 });

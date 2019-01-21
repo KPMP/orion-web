@@ -13,10 +13,10 @@ class PackagesPane extends Component {
     				<Col xs="3" className="noLeftPadding">
     					<FilterControl placeholder="Filter by institution" options={institutions.options}/>
     				</Col>
-    				<Col xs="3">
+    				<Col xs="3" className="noLeftPadding">
     					<FilterControl placeholder="Filter by package type" options={packageTypes.options}/>
     				</Col>
-    				<Col xs="3">
+    				<Col xs="3" className="noLeftPadding">
     					<FilterControl placeholder="Filter by submitter" options={[{value: '1', label: 'one'}]} />
     				</Col>
     			</Row>

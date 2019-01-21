@@ -8,7 +8,7 @@ class PackageList extends Component {
     }
 
     render() {
-        const panels = this.props.packages.map((uploadPackage, index) => {
+        const panels = this.props.packages.filtered.map((uploadPackage, index) => {
             return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
         });
         return (
