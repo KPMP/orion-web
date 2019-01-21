@@ -2,7 +2,7 @@ import actionNames from '../../actions/actionNames';
 import * as filterActions from '../../actions/filterActions';
 
 export const filterPackages = (state = {}, action) => {
-	let newState = {}; 
+	let newState = { }; 
 	switch(action.type) {
 		case actionNames.ADD_FILTER:
 			let filteredPackageList = state.filtered;
@@ -29,6 +29,9 @@ export const filterPackages = (state = {}, action) => {
 			}
 			newState.unfiltered = state.unfiltered;
 			newState.filtered = filteredPackageList;
+			let filters = state.filters;
+			filters.push(action.payload);
+			newState.filters = filters;
 			return newState;
 		default:
 			return state;

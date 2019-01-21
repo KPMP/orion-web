@@ -1,8 +1,9 @@
 {
   "packages": {
   	"unfiltered": [],
-  	"filtered": []
+  	"filtered": [],
+  	"filters": []
   },
   "isUploading": false,
-  "filters": []
+  
 }
