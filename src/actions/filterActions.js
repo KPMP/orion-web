@@ -15,3 +15,10 @@ export const addFilter = (type, value) => {
 		payload: { filterType: type, value: value }
 	}
 }
+
+export const removeFilter = (type, value) => {
+	return {
+		type: actionNames.REMOVE_FILTER,
+		payload: { filterType: type, value: value }
+	}
+}

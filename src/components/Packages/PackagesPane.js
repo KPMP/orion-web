@@ -12,13 +12,13 @@ class PackagesPane extends Component {
     		<div className="pane">
     			<Row>
     				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} onChange={this.props.addFilter}/>
+    					<FilterControl placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
     				</Col>
     				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} onChange={this.props.addFilter}/>
+    					<FilterControl placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
     				</Col>
     				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by submitter" options={[{value: '1', label: 'one'}]} type={filterActions.filterTypes.SUBMITTER} onChange={this.props.addFilter}/>
+    					<FilterControl placeholder="Filter by submitter" options={[{value: '1', label: 'one'}]} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
     				</Col>
     			</Row>
     			<Row>
