@@ -111,7 +111,8 @@ describe('packages', () => {
 		let state = {
 				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: [{filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}]
+				filters: [{filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}],
+				userList: []
 		};
 		let action = {
 				type: actionNames.REMOVE_FILTER,
@@ -119,7 +120,22 @@ describe('packages', () => {
 		};
 		expect(packages(state, action)).toEqual({filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: []})
+				filters: [], userList: []})
+	});
+	it('should add users when SET_USERS', () => {
+		let state = {
+				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				filters: [],
+				userList: []
+		};
+		let action = {
+			type: actionNames.SET_USERS,
+			payload: [{user: 'john', id: '123'}]
+		}
+		expect(packages(state, action)).toEqual({filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+			unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+			filters: [], userList: [{user: 'john', id: '123'}]})
 	});
 	
 });

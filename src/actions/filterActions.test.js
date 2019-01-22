@@ -24,3 +24,15 @@ describe('removeFilter', () => {
 		expect(action).toEqual(expectedAction);
 	});
 });
+
+describe('setUsers', () => {
+	it('should create the correct action', () => {
+		let payload = [{user: 'johnny', id:'123'}];
+		let expectedAction = {
+			type: actionNames.SET_USERS,
+			payload: payload
+		}
+		let action = filterActions.setUsers(payload);
+		expect(action).toEqual(expectedAction);
+	})
+})
