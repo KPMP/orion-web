@@ -20,6 +20,7 @@ export const packages = (state = {}, action) => {
 					} else {
 						filters.push(action.payload)
 					}
+					return filters;
 				})
 				
 			} else {
@@ -28,7 +29,6 @@ export const packages = (state = {}, action) => {
 			
 			
 			filters.map((filter, index) => {
-				
 				if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
 					filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 						if(packageItem.packageInfo.institution === filter.value) {
@@ -53,6 +53,7 @@ export const packages = (state = {}, action) => {
 						return null;
 					});
 				}
+				return filteredPackageList;
 			})
 			newState.unfiltered = state.unfiltered;
 			newState.filtered = filteredPackageList;
