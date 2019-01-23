@@ -14,7 +14,6 @@ class FilterControl extends Component {
 	}
 	
 	clearFilter = () => {
-		console.log(this.state.selectedOption);
 		this.props.removeFilter(this.props.type, this.state.selectedOption.value);
 		this.setState({ selectedOption: null });
 	}

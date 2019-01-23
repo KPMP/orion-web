@@ -37,11 +37,14 @@ export const packages = (state = {}, action) => {
 		case actionNames.ADD_FILTER:
 
 			if (filters.length > 0) {
+				var filterAdded = false;
 				filters.map((filter, index) => {
-					if (filter.filterType === action.payload.filterType) {
+					if (filter.filterType === action.payload.filterType && !filterAdded) {
 						filters.splice(index, 1, action.payload);
-					} else {
-						filters.push(action.payload)
+						filterAdded = true;
+					} else if (!filterAdded) {
+						filters.push(action.payload);
+						filterAdded = true;
 					}
 					return filters;
 				})

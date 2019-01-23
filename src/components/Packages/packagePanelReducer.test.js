@@ -122,6 +122,21 @@ describe('packages', () => {
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				filters: [], userList: []})
 	});
+	it('should remove filter and update filtered packages when REMOVE_FILTER', () => {
+		let state = {
+				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				filters: [{filterType: filterActions.filterTypes.INSTITUTION, value: 'UW'}, {filterType: filterActions.filterTypes.SUBMITTER, value: '345'}],
+				userList: []
+		};
+		let action = {
+				type: actionNames.REMOVE_FILTER,
+				payload: { filterType: filterActions.filterTypes.INSTITUTION, value: 'UW' }
+		};
+		expect(packages(state, action)).toEqual({filtered: [  { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }} ],
+			unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+			filters: [{filterType: filterActions.filterTypes.SUBMITTER, value: '345'}], userList: []})
+	});
 	it('should add users when SET_USERS', () => {
 		let state = {
 				filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
