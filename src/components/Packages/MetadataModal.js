@@ -6,7 +6,6 @@ import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 class MetadataModal extends Component {
 
     render() {
-    	console.log(this.props.uploadPackage.experimentDate);
         let experimentDate = this.props.uploadPackage.experimentDate?dateFormat(getIEFriendlyDate(this.props.uploadPackage.experimentDate), 'yyyy-mm-dd', true):"N/A";
         return (
             <div>

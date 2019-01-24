@@ -1,5 +1,5 @@
 import { getDataTypeIconInfo, iconDataTypes } from './dataTypeIconHelper.js';
-import packageTypeList from '../Upload/packageTypes';
+import packageTypeList from '../packageTypes';
 
 describe('iconDataTypes', () => {
 	it('should contain mapping for all package types', () => {

@@ -3,6 +3,7 @@ import {panes} from './Nav/NavBar';
 import NavBarContainer from './Nav/NavBarContainer';
 import PaneHolder from './PaneHolder'
 import { getUserInformation } from '../actions/userActions';
+import * as filterActions from '../actions/filterActions';
 import { connect } from 'react-redux';
 import ErrorBoundaryContainer from './Error/ErrorBoundaryContainer';
 
@@ -22,6 +23,7 @@ class MainPage extends Component {
 
     componentDidMount() {
         getUserInformation()(this.props.dispatch);
+        filterActions.getUsers()(this.props.dispatch);
     }
 
     render() {

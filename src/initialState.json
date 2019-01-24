@@ -1,4 +1,9 @@
 {
-  "packages": [],
+  "filtering": {
+  	"unfiltered": [],
+  	"filtered": [],
+  	"filters": [],
+  	"userList": []
+  },
   "isUploading": false
 }

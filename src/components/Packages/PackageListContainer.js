@@ -4,7 +4,7 @@ import { getPackages } from '../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
-    packages: state.packages
+    packages: state.filtering
 });
     
 const mapDispatchToProps = (dispatch, props) =>
