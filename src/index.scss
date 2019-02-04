@@ -1,3 +1,5 @@
+$filter-height: 55px;
+
 a {
 	cursor: pointer;
 }
@@ -21,7 +23,7 @@ a {
 }
 
 .filters {
-	height: 55px;
+	height: $filter-height;
 }
 
 .clearFilter {
@@ -92,7 +94,7 @@ a {
 
 #pkg-list {
     margin: 10px 0 0 0;
-    height: 85vh;
+    height: calc(85vh - #{$filter-height});
     overflow-y: scroll;
     .pkg-panel:nth-child(even) {
         background-color: rgb(230, 241, 255);

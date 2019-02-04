@@ -36,20 +36,18 @@ export const packages = (state = {}, action) => {
 			return newState;
 		case actionNames.ADD_FILTER:
 
+			var filterAdded = false;
 			if (filters.length > 0) {
-				var filterAdded = false;
 				filters.map((filter, index) => {
 					if (filter.filterType === action.payload.filterType && !filterAdded) {
 						filters.splice(index, 1, action.payload);
-						filterAdded = true;
-					} else if (!filterAdded) {
-						filters.push(action.payload);
 						filterAdded = true;
 					}
 					return filters;
 				})
 				
-			} else {
+			} 
+			if (!filterAdded) {
 				filters.push(action.payload);
 			}
 			
