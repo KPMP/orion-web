@@ -160,6 +160,21 @@ describe('packages', () => {
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}}  ],
 				filters: [ { filterType: filterActions.filterTypes.INSTITUTION, value: 'UMICH'}, {filterType: filterActions.filterTypes.SUBMITTER, value: '345'} ]});
 		});
+		it('should return the packages with package types outside of predefined set when package type "Other" is selected', () => {
+			let state = {
+					filtered: [ {packageInfo: { packageType: 'CODEX', institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { packageType: 'Random type', institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: { packageType: 'Bulk RNA-Seq', institution: 'UW', submitter: { id: '123'}}} ],
+					unfiltered: [ {packageInfo: { packageType: 'CODEX', institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { packageType: 'Random type', institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: { packageType: 'Bulk RNA-Seq', institution: 'UW', submitter: { id: '123'}}} ],
+					filters: []
+			};
+			let action = {
+					type: actionNames.ADD_FILTER,
+					payload: { filterType: filterActions.filterTypes.PACKAGE_TYPE, value: 'Other' }
+			};
+			let newState = packages(state, action);
+			expect(newState).toEqual({ filtered: [{ packageInfo: { packageType: 'Random type', institution: 'UMICH', submitter: { id: '345'}}}],
+				unfiltered: [ {packageInfo: { packageType: 'CODEX', institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { packageType: 'Random type', institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: { packageType: 'Bulk RNA-Seq', institution: 'UW', submitter: { id: '123'}}} ],
+				filters: [ { filterType: filterActions.filterTypes.PACKAGE_TYPE, value: 'Other' } ]});
+		});
 	});
 	describe("remove_filter action", () => {
 		
