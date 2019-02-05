@@ -18,13 +18,27 @@ a {
 	padding-top: 5px;
 }
 
-.noLeftPadding {
-	padding-left: 0px;
+.filter-control {
+	width: 265px;
+	padding-right: 15px;
 }
 
 .filters {
-	height: $filter-height;
+	margin-left: -15px;
 }
+
+@media only screen and (max-width:1024px) {
+	.filter {
+		display: block !important;
+	}
+
+}
+.filter {
+	height: $filter-height;
+	display: inline-table;
+}
+
+
 
 .clearFilter {
 	color: #337ab7;

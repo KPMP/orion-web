@@ -23,14 +23,12 @@ class PackagesPane extends Component {
         return (
     		<div className="pane">
     			<Row>
-    				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-    				</Col>
-    				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-    				</Col>
-    				<Col xs="3" className="noLeftPadding">
-    					<FilterControl placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+    				<Col xs="12" >
+    					<div className="filters">
+    						<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+    						<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+    						<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+    					</div>
     				</Col>
     			</Row>
     			<Row>

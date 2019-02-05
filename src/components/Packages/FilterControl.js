@@ -20,9 +20,9 @@ class FilterControl extends Component {
 	
 	render() {
 		return (
-			<div className="filters">
-				<Select value={this.state.selectedOption} options={this.props.options} placeholder={this.props.placeholder} onChange={this.addFilter}/>
-				{ this.state.selectedOption !== null && <span className="clearFilter" onClick={this.clearFilter}>Clear</span> }
+			<div className="filter">
+				<Select value={this.state.selectedOption} options={this.props.options} placeholder={this.props.placeholder} onChange={this.addFilter} className={this.props.className}/>
+				{ this.state.selectedOption !== null ? <span className="clearFilter" onClick={this.clearFilter}>Clear</span> : <span className="clearFilter">&nbsp;</span>}
 			</div>
 		)
 	}
