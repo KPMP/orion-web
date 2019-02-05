@@ -1,5 +1,6 @@
 import actionNames from '../../actions/actionNames';
 import * as filterActions from '../../actions/filterActions';
+import packageTypes from '../packageTypes';
 
 export const packages = (state = {}, action) => {
 	let newState = {}; 
@@ -36,20 +37,18 @@ export const packages = (state = {}, action) => {
 			return newState;
 		case actionNames.ADD_FILTER:
 
+			var filterAdded = false;
 			if (filters.length > 0) {
-				var filterAdded = false;
 				filters.map((filter, index) => {
 					if (filter.filterType === action.payload.filterType && !filterAdded) {
 						filters.splice(index, 1, action.payload);
-						filterAdded = true;
-					} else if (!filterAdded) {
-						filters.push(action.payload);
 						filterAdded = true;
 					}
 					return filters;
 				})
 				
-			} else {
+			} 
+			if (!filterAdded) {
 				filters.push(action.payload);
 			}
 			
@@ -66,6 +65,10 @@ export const packages = (state = {}, action) => {
 }
 
 const applyFilters = (filters, filteredPackageList) => {
+	let predefinedPackageTypes = [];
+	packageTypes.options.map((option, index) => {
+		return predefinedPackageTypes.push(option.value);
+	});
 	filters.map((filter, index) => {
 		if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
@@ -77,7 +80,12 @@ const applyFilters = (filters, filteredPackageList) => {
 		} 
 		else if (filter.filterType === filterActions.filterTypes.PACKAGE_TYPE) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.packageType === filter.value) {
+				if(filter.value === 'Other') {
+					if (!predefinedPackageTypes.includes(packageItem.packageInfo.packageType) ) {
+						return packageItem;
+					}
+				}
+				else if(packageItem.packageInfo.packageType === filter.value) {
 					return packageItem;
 				}
 				return null;

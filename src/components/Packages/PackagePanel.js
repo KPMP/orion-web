@@ -37,7 +37,7 @@ class PackagePanel extends Component {
 
     render() {
 		let packageInfo = this.props.uploadPackage.packageInfo;
-    		let submittedDate = getLocalDateString(packageInfo.createdAt);
+    	let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (

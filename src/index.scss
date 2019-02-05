@@ -1,3 +1,5 @@
+$filter-height: 55px;
+
 a {
 	cursor: pointer;
 }
@@ -16,13 +18,27 @@ a {
 	padding-top: 5px;
 }
 
-.noLeftPadding {
-	padding-left: 0px;
+.filter-control {
+	width: 265px;
+	padding-right: 15px;
 }
 
 .filters {
-	height: 55px;
+	margin-left: -15px;
 }
+
+@media only screen and (max-width:1024px) {
+	.filter {
+		display: block !important;
+	}
+
+}
+.filter {
+	height: $filter-height;
+	display: inline-table;
+}
+
+
 
 .clearFilter {
 	color: #337ab7;
@@ -92,7 +108,7 @@ a {
 
 #pkg-list {
     margin: 10px 0 0 0;
-    height: 85vh;
+    height: calc(85vh - #{$filter-height});
     overflow-y: scroll;
     .pkg-panel:nth-child(even) {
         background-color: rgb(230, 241, 255);
