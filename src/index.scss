@@ -16,6 +16,7 @@ a {
 
 .row {
 	padding-top: 5px;
+	margin-right: 0px !important;
 }
 
 .filter-control {
@@ -32,6 +33,9 @@ a {
 		display: block !important;
 	}
 
+	#pkg-list {
+		height: 50vh !important;
+	}
 }
 .filter {
 	height: $filter-height;
@@ -92,6 +96,8 @@ a {
 }
 
 .pane {
+	height: calc(100vh - 37px - #{$filter-height});
+	overflow-y: hidden;
 	margin: 0px 15px 0px 15px;
     i {
         color: gray;
@@ -108,7 +114,7 @@ a {
 
 #pkg-list {
     margin: 10px 0 0 0;
-    height: calc(85vh - #{$filter-height});
+    height: calc(100vh - 150px - #{$filter-height});
     overflow-y: scroll;
     .pkg-panel:nth-child(even) {
         background-color: rgb(230, 241, 255);
@@ -186,6 +192,8 @@ a {
 
 .nav-container {
     background-color: white;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 10px;
     .navbar-header {
     		width: 220px;
     		height: 68px;
