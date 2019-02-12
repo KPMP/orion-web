@@ -2,18 +2,27 @@ import React, { Component } from 'react';
 import PackagePanel from './PackagePanel';
 
 class PackageList extends Component {
-	
-	componentWillMount() {
-		this.props.getPackages();
-	}
+
+    componentDidMount() {
+        this.props.getPackages();
+    }
+
     render() {
-        const panels = this.props.packages.map((uploadPackage, index) => {
+        const panels = this.props.packages.filtered.map((uploadPackage, index) => {
             return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
         });
         return (
-            <div id="pkg-list">
-                {panels}
-            </div>
+        	<div>
+	    		{panels.length > 0 ?
+	    			<div id="pkg-list">
+	            		{panels}
+	           		</div>
+	            : 
+	            	<div className="noResults alert alert-info">
+	            		No packages returned for the selected criteria.
+	            	</div>
+	    		}
+    		</div>
         );
     }
 }

@@ -1,5 +1,5 @@
 {
-	"protocols": [
+	"options": [
 		{"value": "Pilot 1", "label": "Pilot 1"},
 		{"value": "Pilot 2", "label": "Pilot 2"},
 		{"value": "Pilot 3", "label": "Pilot 3"},

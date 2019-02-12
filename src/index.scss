@@ -1,10 +1,12 @@
+$filter-height: 65px;
+
 a {
 	cursor: pointer;
 }
 
 .logo {
-	width: 40%;
-	height: 40%;
+	width: 100%;
+	height: 100%;
 }
 
 .header {
@@ -14,6 +16,43 @@ a {
 
 .row {
 	padding-top: 5px;
+	margin-right: 0px !important;
+}
+
+.filter-control {
+	width: 265px;
+	padding-right: 15px;
+}
+
+.filters {
+	margin-left: -15px;
+}
+
+@media only screen and (max-width:1024px) {
+	.filter {
+		display: block !important;
+	}
+
+	#pkg-list {
+		height: 50vh !important;
+	}
+}
+.filter {
+	height: $filter-height;
+	display: inline-table;
+}
+
+
+
+.clearFilter {
+	color: #337ab7;
+	font-size: 11px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.noResults {
+	margin-top: 10px;
 }
 
 .attachmentsModalBody {
@@ -57,6 +96,8 @@ a {
 }
 
 .pane {
+	height: calc(100vh - 37px - #{$filter-height});
+	overflow-y: hidden;
 	margin: 0px 15px 0px 15px;
     i {
         color: gray;
@@ -73,7 +114,7 @@ a {
 
 #pkg-list {
     margin: 10px 0 0 0;
-    height: 85vh;
+    height: calc(100vh - 150px - #{$filter-height});
     overflow-y: scroll;
     .pkg-panel:nth-child(even) {
         background-color: rgb(230, 241, 255);
@@ -150,13 +191,32 @@ a {
 }
 
 .nav-container {
-    text-align: center;
     background-color: white;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 10px;
+    .navbar-header {
+    		width: 220px;
+    		height: 68px;
+    	}
     .nav-route {
-        float: none;
-        display: inline-block;
-        margin: -10px 0px;
+		text-align: center;
+		padding-top: 10px;
     }
+	.nav-user {
+		float: right;
+		text-align: right;
+		padding-top: 20px;
+	}
+	@media only screen and (max-width: 768px) {
+		.nav-route {
+			text-align: left;
+		}
+		.nav-user {
+			text-align: left;
+			float: left;
+		}
+	}
+
 }
 
 .btn-primary {

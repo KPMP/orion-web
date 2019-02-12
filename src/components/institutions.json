@@ -1,5 +1,5 @@
 {
-	"institutions": [ 
+	"options": [ 
 		{"value": "Broad (Michigan/Broad/Princeton TIS)", "label": "Broad (Michigan/Broad/Princeton TIS)"},
 		{"value": "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "label": "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)"},
 		{"value": "Indiana (IU/OSU TIS)", "label": "Indiana (IU/OSU TIS)"},

@@ -15,6 +15,7 @@ class FileDropzone extends Component {
 		}
 		const children = <span className='react-fine-uploader-gallery-dropzone-content'>
 			Drop file(s) here
+
 			</span>;
 		const fileInputChildren = <span>Select file(s)</span>;
 		return(

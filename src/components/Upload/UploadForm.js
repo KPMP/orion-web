@@ -16,6 +16,8 @@ class UploadForm extends Component {
         this.state = {
             filesAdded: 0,
         };
+
+		uploader.methods.reset();
         
         uploader.on('submit', () => {
         		let newCount = this.state.filesAdded + 1;
@@ -52,9 +54,6 @@ class UploadForm extends Component {
     		return true;
     }
 
-	componentWillMount() {
-		uploader.methods.reset();
-	}
     
 	render() {
 		const {

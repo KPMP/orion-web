@@ -4,7 +4,7 @@ before_install:
 language: node_js
 
 node_js:
-  - 8
+  - 11
 
 script:
   - CI=true npm test
@@ -14,6 +14,5 @@ notifications:
   email:
     - rlreamy@umich.edu
     - zwright@umich.edu
-    - royerbr@med.umich.edu
     - cgates@umich.edu
-    - cspital@uw.edu
+    - rossmith@umich.edu
