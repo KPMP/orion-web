@@ -97,7 +97,6 @@ a {
 
 .pane {
 	height: calc(100vh - 37px - #{$filter-height});
-	overflow-y: hidden;
 	margin: 0px 15px 0px 15px;
     i {
         color: gray;
@@ -195,9 +194,9 @@ a {
     border-bottom: 1px solid #e7e7e7;
     margin-bottom: 10px;
     .navbar-header {
-    		width: 220px;
-    		height: 68px;
-    	}
+    	width: 220px;
+    	height: 68px;
+    }
     .nav-route {
 		text-align: center;
 		padding-top: 10px;
@@ -325,7 +324,6 @@ a {
 		width: 150px;
 		margin-bottom: 15px;
 	}
-
 
 }
 
