@@ -8,6 +8,7 @@
     "react-scripts": "1.1.4"
   },
   "dependencies": {
+    "antd": "^3.13.5",
     "axios": "0.18.0",
     "babel-polyfill": "6.26.0",
     "bootstrap": "3.3.7",
