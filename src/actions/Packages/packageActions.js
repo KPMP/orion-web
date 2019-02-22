@@ -47,6 +47,7 @@ export const finishPackage = (packageId) => {
 }
 
 export const uploadPackage = (packageInfo, uploader) => {
+	console.log(packageInfo.experimentDate);
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}

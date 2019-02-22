@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import UploadForm from './UploadForm';
+import UploadForm2 from './UploadForm2';
 import { uploadPackage } from '../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
@@ -15,4 +15,4 @@ const mapDispatchToProps = (dispatch, props) =>
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UploadForm);    
+export default connect(mapStateToProps, mapDispatchToProps)(UploadForm2);    

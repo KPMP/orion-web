@@ -348,3 +348,10 @@ a {
 		height: 330px;
 	}
 }
+
+.ant-form-item-label {
+	line-height: unset !important;
+}
+.ant-form-item {
+	margin-bottom: 0px !important;
+}
