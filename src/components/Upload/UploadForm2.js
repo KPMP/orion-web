@@ -11,6 +11,8 @@ import { Form, Select, Input, DatePicker } from 'antd';
 import packageTypeList from '../packageTypes';
 import institutionList from '../institutions';
 import protocolList from '../protocols';
+import SelectBox from './SelectBox';
+import TextField from './TextField';
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -20,8 +22,7 @@ class UploadForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filesAdded: 0,
-            packageType: undefined
+            filesAdded: 0
         };
 
 		uploader.methods.reset();
@@ -60,10 +61,6 @@ class UploadForm extends Component {
     		}
     		return true;
     }
-
-	selectPackage = (value) => {
-		this.setState({packageType: value});
-	}
 	
 	handleSubmit = (e) => {
 		this.props.form.validateFields((err, values) => {
@@ -77,10 +74,8 @@ class UploadForm extends Component {
     
 	render() {
 		
-		const { getFieldDecorator } = this.props.form;
-		const requiredConfig = {
-				rules: [{required: true, message: 'Required'}]
-		}
+		const { getFieldDecorator, getFieldValue } = this.props.form;
+		const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]}
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
 		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
 		let submitterEmailDisabled = this.props.userInformation.email !== "";
@@ -88,16 +83,10 @@ class UploadForm extends Component {
 		return (
 			<div>
 				<Form onSubmit={this.handleSubmit}>
-					<Form.Item label="Select package type">
-						{getFieldDecorator('packageType', requiredConfig)(
-							<Select showSearch  placeholder="Select..." onChange={this.selectPackage} name="packageType">
-								{packageTypeList.options.map(option => <Option key={option.value}>{option.label}</Option>)}
-							</Select>
-						)}
-					</Form.Item>
+					<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 					<hr/>
-					{ this.state.packageType === undefined && <DefaultUploadForm/> }
-					{ this.state.packageType !== undefined && 
+					{ getFieldValue('packageType') === undefined && <DefaultUploadForm/> }
+					{ getFieldValue('packageType') !== undefined && 
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
@@ -152,15 +141,7 @@ class UploadForm extends Component {
 					        		}
 					        <Row>
 					        		<Col md="4">
-					        			<Form.Item label="Institution">
-					        				{getFieldDecorator('institution', {
-					        					validateTrigger: ['onBlur', 'onChange'], rules: [{required: true, message: "Required" }]
-					        				})(
-							        			<Select showSearch  placeholder="Select..." onChange={this.selectPackage} name="institution">
-													{institutionList.options.map(option => <Option key={option.value}>{option.label}</Option>)}
-												</Select>
-											)}
-					        			</Form.Item>
+					        			<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 					        		</Col>
 					        	</Row>
 					        	<Row>
@@ -172,24 +153,10 @@ class UploadForm extends Component {
 					        	</Row>
 					        <Row >
 					        		<Col md="4">
-						        		<Form.Item label="Associated Protocol">
-					        				{getFieldDecorator('protocol', {
-					        					validateTrigger: ['onBlur', 'onChange'], rules: [{required: true, message: "Required" }]
-					        				})(
-							        			<Select showSearch  placeholder="Select..." onChange={this.selectPackage} name="protocol">
-													{protocolList.options.map(option => <Option key={option.value}>{option.label}</Option>)}
-												</Select>
-											)}
-				        				</Form.Item>
+					        			<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 					        		</Col>
 					        		<Col md="4" className="secondField">
-						        		<Form.Item label="Subject/Sample ID">
-											{getFieldDecorator('subjectId', {
-												validateTrigger:['onBlur', 'onChange'], rules: [{required: true, message: 'Required', whitespace: true}]
-											})(
-												<Input name="subjectId" />
-											)}
-										</Form.Item>
+					        			<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 					        		</Col>
 					        	</Row>
 					        <Row>
