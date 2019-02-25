@@ -47,7 +47,6 @@ export const finishPackage = (packageId) => {
 }
 
 export const uploadPackage = (packageInfo, uploader) => {
-	console.log("upload package");
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
 	}
@@ -65,24 +64,17 @@ export const uploadPackage = (packageInfo, uploader) => {
 			size: file.size
 		}
 	});
-	console.log(activeFiles);
 	return (dispatch) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
-			console.log("posted")
 			let packageId = res.data;
-			console.log(packageId)
 			let canceledFiles = uploader.methods.getUploads(
 					{ status: [qq.status.CANCELED] });
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
-			console.log("cancelsed files", canceledFiles.length);
-			console.log("all files", allFiles.length);
-			console.log("total files", totalFiles);
 			uploader.on('allComplete', function(succeeded, failed) {
 				if (succeeded.length === totalFiles) {
-					console.log("calling finish package");
 					dispatch(finishPackage(packageId));
 				} else if (failed.length > 0){
 					alert("We were unable to upload all of your files. You will need to resubmit this package.");
