@@ -38,17 +38,16 @@ class UploadForm extends Component {
     		return true;
         });
         uploader.on('submit', (id, name) => {
-        		let files = uploader.methods.getUploads({
-	            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
-        		for(let fileIndex in files) {
-        			let existingName = files[fileIndex].name;
-        			if (existingName === name) {
-        				alert("You have already selected " + existingName + " to upload.");
-        				return false;
-        			}
-        			
-        		}
-        		return true;
+    		let files = uploader.methods.getUploads({
+            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+    		for(let fileIndex in files) {
+    			let existingName = files[fileIndex].name;
+    			if (existingName === name) {
+    				alert("You have already selected " + existingName + " to upload.");
+    				return false;
+    			}
+    		}
+    		return true;
         });
     }
     
@@ -101,11 +100,21 @@ class UploadForm extends Component {
 		let protocolError = isFieldTouched('protocol') && getFieldError('protocol');
 		let subjectIdError = isFieldTouched('subjectId') && getFieldError('subjectId');
 		let descriptionError = isFieldTouched('description') && getFieldError('description');
+		let packageTypeOtherError = isFieldTouched('packageTypeOther') && getFieldError('packageTypeOther');
 		
 		return (
 			<div>
 				<Form >
-					<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeError}/>
+					<Row>
+						<Col md="3">
+							<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeError}/>
+						</Col>
+						{getFieldValue('packageType') === 'Other' &&
+							<Col md="3" className="secondField">
+								<TextField label="Package Type Other (specify)" fieldName="packageTypeOther" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeOtherError}/>
+							</Col>	
+						}
+					</Row>
 					<hr/>
 					{ getFieldValue('packageType') === undefined && <DefaultUploadForm/> }
 					{ getFieldValue('packageType') !== undefined && 

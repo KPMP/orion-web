@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
+import { Form, Select } from 'antd';
 import packageTypeList from '../packageTypes';
 import TextField from './Forms/TextField';
 import { Col } from 'react-bootstrap';
