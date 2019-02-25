@@ -22,7 +22,7 @@ class FilterControl extends Component {
 		const Option = Select.Option;
 		return (
 			<div className="filter">
-				<Select showSearch value={this.state.selectedOption} placeholder={this.props.placeholder} onChange={this.addFilter} className={this.props.className}>
+				<Select showSearch placeholder={this.props.placeholder} onChange={this.addFilter} className={this.props.className}>
 				 {this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 				</Select><br/>
 				{ this.state.selectedOption !== null ? <span className="clearFilter" onClick={this.clearFilter}>Clear</span> : <span className="clearFilter">&nbsp;</span>}
