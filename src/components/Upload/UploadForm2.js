@@ -82,7 +82,7 @@ class UploadForm extends Component {
 		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
 		return (
 			<div>
-				<Form onSubmit={this.handleSubmit}>
+				<Form>
 					<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 					<hr/>
 					{ getFieldValue('packageType') === undefined && <DefaultUploadForm/> }
@@ -115,26 +115,14 @@ class UploadForm extends Component {
 														</Form.Item>
 													</Col>
 													<Col md="4" className="secondField">
-														<Form.Item label="Last Name">
-															{getFieldDecorator('submitterLastName', {
-																validateTrigger:['onBlur', 'onChange'], rules: [{required: true, message: 'Required', whitespace: true}]
-															})(
-																<Input name="submitterLastName" disabled={submitterLastNameDisabled} />
-															)}
-														</Form.Item>
+														<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} isDisabled={submitterLastNameDisabled}/>
 													</Col>
 													
 						        				</div>
 											</Row>
 											<Row>
 												<Col md="4">
-													<Form.Item label="Email">
-														{getFieldDecorator('submitterEmail', {
-															validateTrigger:['onBlur', 'onChange'], rules: [{required: true, message: 'Required', whitespace: true}]
-														})(
-																<Input name="submitterEmail" disabled={submitterEmailDisabled} />
-														)}
-													</Form.Item>
+													<TextField label="Email" fieldName="submitterEmail" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator}/>
 												</Col>
 											</Row>
 											</div>)
@@ -184,7 +172,7 @@ class UploadForm extends Component {
 							<hr/>
 							<Row>
 								<Col md={12} className="text-center">
-									<Button className="btn-primary uploadFormSubmit" type="submit">
+									<Button className="btn-primary uploadFormSubmit" type="submit" onClick={this.handleSubmit}>
 										Submit
 									</Button>
 								</Col>
