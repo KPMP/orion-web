@@ -110,13 +110,6 @@ class UploadForm extends Component {
 		
 		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
 		
-		let packageTypeError = isFieldTouched('packageType') && getFieldError('packageType');
-		let submitterFirstNameError = isFieldTouched('submitterFirstName') && getFieldError('submitterFirstName');
-		let submitterLastNameError = isFieldTouched('submitterLastName') && getFieldError('submitterLastName');
-		let submitterEmailError = isFieldTouched('submitterEmail') && getFieldError('submitterEmail');
-		let institutionError = isFieldTouched('institution') && getFieldError('institution');
-		let protocolError = isFieldTouched('protocol') && getFieldError('protocol');
-		let subjectIdError = isFieldTouched('subjectId') && getFieldError('subjectId');
 		let descriptionError = isFieldTouched('description') && getFieldError('description');
 		let packageTypeOtherError = isFieldTouched('packageTypeOther') && getFieldError('packageTypeOther');
 		
@@ -125,7 +118,7 @@ class UploadForm extends Component {
 				<Form >
 					<Row>
 						<Col md="3">
-							<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeError}/>
+							<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
 						</Col>
 						{getFieldValue('packageType') === 'Other' &&
 							<Col md="3" className="secondField">
@@ -155,24 +148,24 @@ class UploadForm extends Component {
 											<Row>
 												<div>
 													<Col md="4">
-														<TextField label="First Name" fieldName="submitterFirstName" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} isDisabled={submitterLastNameDisabled} error={submitterFirstNameError}/>
+														<TextField label="First Name" fieldName="submitterFirstName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
 													</Col>
 													<Col md="4" className="secondField">
-														<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} isDisabled={submitterLastNameDisabled} error={submitterLastNameError}/>
+														<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
 													</Col>
 													
 						        				</div>
 											</Row>
 											<Row>
 												<Col md="4">
-													<TextField label="Email" fieldName="submitterEmail" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={submitterEmailError}/>
+													<TextField label="Email" fieldName="submitterEmail" fieldOptions={requiredFieldOptions} form={this.props.form}/>
 												</Col>
 											</Row>
 											</div>)
 					        		}
 					        <Row>
 					        		<Col md="4">
-					        			<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={institutionError}/>
+					        			<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
 					        		</Col>
 					        	</Row>
 					        	<Row>
@@ -184,10 +177,10 @@ class UploadForm extends Component {
 					        	</Row>
 					        <Row >
 					        		<Col md="4">
-					        			<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={protocolError}/>
+					        			<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
 					        		</Col>
 					        		<Col md="4" className="secondField">
-					        			<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={subjectIdError}/>
+					        			<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} form={this.props.form}/>
 					        		</Col>
 					        	</Row>
 					        <Row>
