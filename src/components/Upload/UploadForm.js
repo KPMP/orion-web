@@ -77,7 +77,6 @@ class UploadForm extends Component {
     
 	isSubmitDisabled = () => {
 		
-		let { setFieldsValue } = this.props.form; 
 		let fieldsTouched = 0;
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
 		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
@@ -102,7 +101,7 @@ class UploadForm extends Component {
 	
 	render() {
 		
-		const { getFieldDecorator, getFieldValue, getFieldError, isFieldTouched, setFieldsValue } = this.props.form;
+		const { getFieldDecorator, getFieldValue, getFieldError, isFieldTouched } = this.props.form;
 		const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
 		
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
