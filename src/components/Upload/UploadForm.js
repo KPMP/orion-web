@@ -56,7 +56,17 @@ class UploadForm extends Component {
     }
     
 	handleSubmit = (e) => {
-		this.props.form.validateFields((err, values) => {
+		let { validateFields, setFieldsValue } = this.props.form; 
+		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
+		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
+		let submitterEmailDisabled = this.props.userInformation.email !== "";
+		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
+		if (dontNeedUserInfo) {
+			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
+			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
+			setFieldsValue({ submitterEmail: this.props.userInformation.email });
+		}
+		validateFields((err, values) => {
 			if(!err) {
 				this.props.postPackageInformation(values, uploader);
 			} else {
@@ -66,7 +76,16 @@ class UploadForm extends Component {
 	}
     
 	isSubmitDisabled = () => {
+		
+		let { setFieldsValue } = this.props.form; 
 		let fieldsTouched = 0;
+		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
+		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
+		let submitterEmailDisabled = this.props.userInformation.email !== "";
+		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
+		if (dontNeedUserInfo) {
+			fieldsTouched = 3;
+		}
     	for (var index in requiredFields) {
     		let field = requiredFields[index];
     		if (this.props.form.isFieldTouched(field)) {
@@ -83,7 +102,7 @@ class UploadForm extends Component {
 	
 	render() {
 		
-		const { getFieldDecorator, getFieldValue, getFieldError, isFieldTouched } = this.props.form;
+		const { getFieldDecorator, getFieldValue, getFieldError, isFieldTouched, setFieldsValue } = this.props.form;
 		const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
 		
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
