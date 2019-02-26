@@ -31,7 +31,6 @@ export const getUsers = () => {
 				dispatch(setUsers(res.data));
 			})
 			.catch(err => {
-				alert("We were unable to retrieve the list of users");
 				console.log(err);
 				handleError();
 			});

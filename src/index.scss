@@ -1,4 +1,4 @@
-$filter-height: 65px;
+$filter-height: 57px;
 
 a {
 	cursor: pointer;
@@ -347,4 +347,11 @@ a {
 		width: 385px;
 		height: 330px;
 	}
+}
+
+.ant-form-item-label {
+	line-height: unset !important;
+}
+.ant-form-item {
+	margin-bottom: 0px !important;
 }
