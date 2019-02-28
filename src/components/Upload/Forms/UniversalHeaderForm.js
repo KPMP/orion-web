@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import SelectBox from '../SelectBox';
-import TextField from '../TextField';
+import SelectBox from './FormComponents/SelectBox';
+import TextField from './FormComponents/TextField';
+import TextArea from './FormComponents/TextArea';
 import { Row, Col } from 'react-bootstrap';	
 import { Form, Input, DatePicker, Button } from 'antd';
 import DTD from '../../dynamicFormsDTD';
@@ -13,8 +14,10 @@ const FIELD_TYPES = {
 };
 
 const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
-
 const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
+
+const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
+const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'array'}]};
 
 class UniversalHeaderForm extends Component {
 	
@@ -43,53 +46,66 @@ class UniversalHeaderForm extends Component {
 	 * Render configured react components with field configuration JSON
 	 */
 	renderField(fieldJson) {
-		let fieldComponent = null, 
-			fieldOptions = fieldJson.required ? requiredFieldOptions : optionalFieldOptions, 
-			colLg = 4, 
-			colMd = 6, 
-			colSm = 12;
-		
-		console.log(fieldJson.fieldName, '<- fieldName');
-		
+		let fieldComponent = null;
+		let	fieldOptions = fieldJson.required ? requiredFieldOptions : optionalFieldOptions; 
+		let	colLg = 4; 
+		let	colMd = 6; 
+		let	colSm = 12;
+		let options = {};
 		switch (fieldJson.type.toUpperCase()) {
-		case FIELD_TYPES.MULTI_SELECT:
-			fieldComponent = <h3>{fieldJson.label}, Multiselect</h3>;
-			break;
-			
-		case FIELD_TYPES.DROP_DOWN:			
-			let options = fieldJson.values.map((elem) => {
-				return {label: elem, value: elem};
+			case FIELD_TYPES.MULTI_SELECT:
+				fieldOptions = fieldJson.required ? requiredFieldArrayOptions : optionalFieldArrayOptions; 
+				options = fieldJson.values.map((element) => {
+					return {label: element, value: element};
 				});
-			
-			fieldComponent =
-				<SelectBox 
-					//className="filter-control"
-					label={fieldJson.label} 
-					fieldName={fieldJson.fieldName} 
-					options={options} 
-					fieldOptions={fieldOptions}
-					form={this.props.form} />;
-			break;
-			
-		case FIELD_TYPES.TEXT_FIELD:
-			fieldComponent = 
-				<TextField 
+				
+				fieldComponent =
+					<SelectBox 
+						isMultiple={true}
+						label={fieldJson.label} 
+						fieldName={fieldJson.fieldName} 
+						options={options} 
+						fieldOptions={fieldOptions}
+						form={this.props.form} />;
+				break;
+				
+			case FIELD_TYPES.DROP_DOWN:			
+				options = fieldJson.values.map((element) => {
+					return {label: element, value: element};
+				});
+				
+				fieldComponent =
+					<SelectBox 
+						label={fieldJson.label} 
+						fieldName={fieldJson.fieldName} 
+						options={options} 
+						fieldOptions={fieldOptions}
+						form={this.props.form} />;
+				break;
+				
+			case FIELD_TYPES.TEXT_FIELD:
+				fieldComponent = 
+					<TextField 
+						label={fieldJson.label} 
+						fieldName={fieldJson.fieldName} 
+						fieldOptions={fieldOptions} 
+						form={this.props.form} />;
+				break;
+				
+			case FIELD_TYPES.TEXT_AREA:
+				fieldComponent = <TextArea
 					label={fieldJson.label} 
 					fieldName={fieldJson.fieldName} 
 					fieldOptions={fieldOptions} 
 					form={this.props.form} />;
-			break;
-			
-		case FIELD_TYPES.TEXT_AREA:
-			fieldComponent = <h3>{fieldJson.label}, Text Area</h3>;
-			colLg = 12;
-			colMd = 12;
-			colSm = 12;
-			break;
-			
-		default:
-			fieldComponent = <h3>Type not implemented: {fieldJson.type}</h3>;
-			break;
+				colLg = 12;
+				colMd = 12;
+				colSm = 12;
+				break;
+				
+			default:
+				fieldComponent = <h3>Type not implemented: {fieldJson.type}</h3>;
+				break;
 		}
 		
 		return (

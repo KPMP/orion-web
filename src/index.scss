@@ -1,4 +1,9 @@
 $filter-height: 57px;
+$dropdown-width: 265px;
+
+.ant-select {
+	width: $dropdown-width;
+}
 
 a {
 	cursor: pointer;
@@ -20,7 +25,6 @@ a {
 }
 
 .filter-control {
-	width: 265px;
 	padding-right: 15px;
 }
 

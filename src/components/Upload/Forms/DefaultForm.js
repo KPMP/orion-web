@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SelectBox from '../SelectBox';
-import TextField from '../TextField';
+import SelectBox from './FormComponents/SelectBox';
+import TextField from './FormComponents/TextField';
 import { Form, Input, DatePicker, Button } from 'antd';
 import FileDropzone from './FileDropzone';
 import { Row, Col } from 'react-bootstrap';	
