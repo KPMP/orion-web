@@ -11,7 +11,7 @@ class SelectBox extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 			{getFieldDecorator(this.props.fieldName, this.props.fieldOptions)(
-					<Select showSearch  placeholder="Select..." name={this.props.fieldName}>
+					<Select showSearch className="filter-control" placeholder="Select..." name={this.props.fieldName}>
 					{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
 			)}

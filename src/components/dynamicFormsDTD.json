@@ -19,7 +19,7 @@
 				"label": "Institution Name",
 				"type": "Drop-down",
 				"required": true,
-				"values": ["Broad (Michigan/Broad/Princeton TIS)", "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "Indiana (IU/OSU TIS)", "Michigan (Michigan/Broad/Princeton TIS)", "OSU (IU/OSU TIS)", "PNNL (UTHSA/EMBL/PNNL/UCSD TIS)", "Princeton (Michigan/Broad/Princeton TIS)", "Stanford (UCSF/Stanford TIS)", "UCSD (UCSD/WashU TIS)", "UCSD (UTHSA/EMBL/PNNL/UCSD TIS)", "UCSF (UCSF/Stanford TIS)", "UTHSA (UTHSA/EMBL/PNNL/UCSD TIS)", "WashU (UCSD/WashU TIS)]"],
+				"values": ["Broad (Michigan/Broad/Princeton TIS)", "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "Indiana (IU/OSU TIS)", "Michigan (Michigan/Broad/Princeton TIS)", "OSU (IU/OSU TIS)", "PNNL (UTHSA/EMBL/PNNL/UCSD TIS)", "Princeton (Michigan/Broad/Princeton TIS)", "Stanford (UCSF/Stanford TIS)", "UCSD (UCSD/WashU TIS)", "UCSD (UTHSA/EMBL/PNNL/UCSD TIS)", "UCSF (UCSF/Stanford TIS)", "UTHSA (UTHSA/EMBL/PNNL/UCSD TIS)", "WashU (UCSD/WashU TIS)"],
 				"otherAvailable": false,
 				"alphaSort": true,
 				"fieldName": "institution"
