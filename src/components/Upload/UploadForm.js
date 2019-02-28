@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import DefaultUploadForm from './Forms/DefaultUploadForm';
-import FileDropzone from './Forms/FileDropzone';
+import DefaultForm from './Forms/DefaultForm';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from './fineUploader';
-import { Form, Input, DatePicker, Button } from 'antd';
-import packageTypeList from '../packageTypes';
-import institutionList from '../institutions';
-import protocolList from '../protocols';
-import SelectBox from './SelectBox';
-import TextField from './TextField';
 
-const { TextArea } = Input;
-let submitDisabled = true;
 let requiredFields = ['packageType', 'submitterFirstName', 'submitterLastName', 'submitterEmail', 'institution', 'protocol', 'subjectId', 'description'];
+let submitDisabled = true;
 
 class UploadForm extends Component {
 	
@@ -101,126 +93,10 @@ class UploadForm extends Component {
 	
 	render() {
 		
-		const { getFieldDecorator, getFieldValue, getFieldError, isFieldTouched } = this.props.form;
-		const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
-		
-		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
-		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
-		let submitterEmailDisabled = this.props.userInformation.email !== "";
-		
-		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
-		
-		let descriptionError = isFieldTouched('description') && getFieldError('description');
-		let packageTypeOtherError = isFieldTouched('packageTypeOther') && getFieldError('packageTypeOther');
-		
 		return (
-			<div>
-				<Form >
-					<Row>
-						<Col md="3">
-							<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
-						</Col>
-						{getFieldValue('packageType') === 'Other' &&
-							<Col md="3" className="secondField">
-								<TextField label="Package Type Other (specify)" fieldName="packageTypeOther" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeOtherError}/>
-							</Col>	
-						}
-					</Row>
-					<hr/>
-					{ getFieldValue('packageType') === undefined && <DefaultUploadForm/> }
-					{ getFieldValue('packageType') !== undefined && 
-						<div id="uploadForm">
-							<Row className="dropzone">
-								<Col md={12}>
-									<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-								</Col>
-							</Row>
-							<Row>
-							 <div id="uploadInfo">
-					    		<div className="header">
-					    			Submitted by
-					    		</div>
-					        		{(dontNeedUserInfo) ?
-					        			(	<Row>
-												<Col md="8">{this.props.userInformation.firstName} {this.props.userInformation.lastName} ({this.props.userInformation.email}) </Col>
-											</Row> ) :
-						        		( <div>
-											<Row>
-												<div>
-													<Col md="4">
-														<TextField label="First Name" fieldName="submitterFirstName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
-													</Col>
-													<Col md="4" className="secondField">
-														<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
-													</Col>
-													
-						        				</div>
-											</Row>
-											<Row>
-												<Col md="4">
-													<TextField label="Email" fieldName="submitterEmail" fieldOptions={requiredFieldOptions} form={this.props.form}/>
-												</Col>
-											</Row>
-											</div>)
-					        		}
-					        <Row>
-					        		<Col md="4">
-					        			<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        	</Row>
-					        	<Row>
-					        		<Col md="12">
-							        	<div className="header" id="packageInformationSection">
-							        		Package Information
-							        	</div>
-						        	</Col>
-					        	</Row>
-					        <Row >
-					        		<Col md="4">
-					        			<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        		<Col md="4" className="secondField">
-					        			<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        	</Row>
-					        <Row>
-					        		<Col md="4">
-					        			<Form.Item label="Experiment Date">
-					        			{getFieldDecorator('experimentDate', {rules: [{required: false}]})(
-					        				<DatePicker format={'MM/DD/YYYY'} placeholder='mm/dd/yyyy' name='experimentDate'/>
-					        			)}
-					        			</Form.Item>
-					        		</Col>
-					        	</Row>
-							<Row>
-								<Col md="8">
-									<Form.Item label="Description"  validateStatus={descriptionError ? 'error' : ''}>
-										{getFieldDecorator('description', {
-											validateTrigger:['onBlur', 'onChange'], rules: [{required: true, message: 'Required', whitespace: true}]
-										})(
-											<TextArea name="description" rows={4} />
-										)}
-									</Form.Item>
-								</Col>
-							</Row>
-						</div>
-							</Row>
-							<hr/>
-							<Row>
-								<Col md={12} className="text-center">
-									<Button className="uploadFormSubmit" htmlType="submit" type="primary" onClick={this.handleSubmit} disabled={submitDisabled}>
-										Submit
-									</Button>
-								</Col>
-							</Row>
-						</div>
-					}
-				</Form>
-			</div>
+			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
 		);
 	}
 }
 
-const WrappedUploadForm = Form.create({ name: 'upload', validateMessage: "Required" })(UploadForm);
-
-export default WrappedUploadForm;
+export default UploadForm;
