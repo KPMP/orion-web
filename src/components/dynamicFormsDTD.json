@@ -229,7 +229,7 @@
 								"placeholderText": "mm/dd/yyyy"
 							}],
 							"fieldName": "libraryPrepDate"
-						},
+						}
 					]
 				}
 			]
