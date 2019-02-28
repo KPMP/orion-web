@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import DefaultForm from './Forms/DefaultForm';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from './fineUploader';
+import UniversalHeaderForm from './Forms/UniversalHeaderForm';
 
 let requiredFields = ['packageType', 'submitterFirstName', 'submitterLastName', 'submitterEmail', 'institution', 'protocol', 'subjectId', 'description'];
 let submitDisabled = true;
@@ -93,8 +94,11 @@ class UploadForm extends Component {
 	
 	render() {
 		
+//		return (
+//			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
+//		);
 		return (
-			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
+			<UniversalHeaderForm />
 		);
 	}
 }
