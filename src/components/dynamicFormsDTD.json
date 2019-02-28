@@ -1,0 +1,238 @@
+{
+	"standardFields": {
+		"sectionHeader": "Dataset Information",
+		"fields": [{
+				"label": "Submitted by",
+				"type": "Submitter Information",
+				"required": true
+			},
+			{
+				"label": "Specimen ID",
+				"type": "Drop-down",
+				"required": true,
+				"values": ["17-1606", "18-139", "18-142", "18-162", "18-312", "18-342"],
+				"otherAvailable": false,
+				"alphaSort": true,
+				"fieldName": "subjectId"
+			},
+			{
+				"label": "Institution Name",
+				"type": "Drop-down",
+				"required": true,
+				"values": ["Broad (Michigan/Broad/Princeton TIS)", "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "Indiana (IU/OSU TIS)", "Michigan (Michigan/Broad/Princeton TIS)", "OSU (IU/OSU TIS)", "PNNL (UTHSA/EMBL/PNNL/UCSD TIS)", "Princeton (Michigan/Broad/Princeton TIS)", "Stanford (UCSF/Stanford TIS)", "UCSD (UCSD/WashU TIS)", "UCSD (UTHSA/EMBL/PNNL/UCSD TIS)", "UCSF (UCSF/Stanford TIS)", "UTHSA (UTHSA/EMBL/PNNL/UCSD TIS)", "WashU (UCSD/WashU TIS)]"],
+				"otherAvailable": false,
+				"alphaSort": true,
+				"fieldName": "institution"
+			}, {
+				"label": "TIS Internal Experiment ID",
+				"type": "Text Field",
+				"required": true,
+				"fieldName": "tisInternalExperimentID"
+			},
+			{
+				"label": "Data Generator(s)",
+				"type": "Text Field",
+				"required": true,
+				"fieldName": "dataGenerators"
+			},
+			{
+				"label": "Dataset Type",
+				"type": "Drop-down",
+				"required": true,
+				"values": ["Bulk total/mRNA", "Bulk microRNA", "Segmental miRNA", "Sub-segmental RNA-Seq", "Single-cell RNA-Seq", "Single-nucleus RNA-Seq", "Bulk Proteomics", "Sub-segmental Proteomics", "Near-single-cell Proteomics", "Spatial Metabolomics", "3-D Tissue Imaging", "Multiplex ISH", "CODEX", "Whole Slide Images", "DNA Methylation"],
+				"otherAvailable": true,
+				"alphaSort": true,
+				"fieldName": "packageType"
+			},
+			{
+				"label": "Dataset Type (Other)",
+				"type": "Text Field",
+				"required": true,
+				"linkedWith": "Dataset Type",
+				"displayWhen": "Other",
+				"fieldName": "packageType"
+			},
+			{
+				"label": "Dataset Level",
+				"type": "Drop-down",
+				"required": true,
+				"values": ["Raw", "Processed", "Analyzed", "Summarized"],
+				"otherAvailable": false,
+				"alphaSort": true,
+				"fieldName": "dataLevel"
+			},
+			{
+				"label": "Dataset Description",
+				"type": "Text Area",
+				"required": true,
+				"additionalProps": [{
+					"placeholderText": "Describe the contents of this package"
+				}],
+				"fieldName": "description"
+			},
+			{
+				"label": "Protocol(s) Name/Version",
+				"type": "Multi-select",
+				"required": true,
+				"values": ["RNA Isolation Example V1", "RNA Isolation Example V2", "Nuclei Isolation Example V1", "Nuclei Isolation Example V2", "Near Single-cell Proteomics Example V1", "Tissue Processing Example V1", "Tissue Processing Example V2", "RNA Extraction Example V1", "RNA Extraction Example V2", "Single-Nucleus Drop-seq Example V1", "Single-Nucleus Drop-seq Example V2", "Multiplexed Droplet-based Single-cell RNASeq V1", "Multiplexed Droplet-based Single-cell RNASeq V2"],
+				"otherAvailable": false,
+				"alphaSort": true,
+				"fieldName": "protocol"
+			}
+		]
+	},
+	"typeSpecificElements": [{
+		"Sub-segment RNASeq": {
+			"sections": [{
+					"sectionHeader": "Tissue Processing",
+					"fields": [{
+							"label": "Tissue Processing Instrument",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "tissueProcessingInstrument"
+						},
+						{
+							"label": "Tissue Processing Instrument Software / Version",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "tissueProcessingSoftwareAndVersion"
+						},
+						{
+							"label": "Cryosectioning Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "cryosectioningDate"
+						},
+						{
+							"label": "Tissue Segmentation / Dissociation Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "tissueSegmentationDissociationDate"
+						},
+						{
+							"label": "RNA Isolation Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "rnaIsolationDate"
+						},
+						{
+							"label": "Marker Used for Dissection",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["Phalloidin", "PNA", "UMOD"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "dissectionMarker"
+						},
+						{
+							"label": "Area Dissected / Processed (Square Microns)",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "areaDissectedProcessed"
+						},
+						{
+							"label": "Calculated Volume Dissected / Processed",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "calculatedVolumeDissected"
+						},
+						{
+							"label": "Calculated Volume Dissected / Processed Units",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["ng/ul", "ug/ul"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "calculatedVolumeDissectedUnits"
+						}
+					]
+				},
+				{
+					"sectionHeader": "RNA Processing",
+					"fields": [
+						{
+							"label": "Bioanalyzer Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "bioanalyzerDate"
+						},
+						{
+							"label": "RNA Yield",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "rnaYield"
+						},
+						{
+							"label": "RNA Yield Unit",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["ng/ul", "ug/ul"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "rnaYieldUnit",
+							"constrainedBy": "Dataset Type",
+							"constraints": {
+								"Bulk total/mRNA": ["ng/ul", "ug/ul"],
+								"Bulk microRNA": ["ng/ul"],
+								"Segmental miRNA": ["ug/ul"]
+							}
+						},
+						{
+							"label": "RNA Concentration",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaConcentration"
+						},
+						{
+							"label": "RNA Selection Method",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["Option 1", "Option 2", "Option 3", "Option 4"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "rnaSelectionMethod"
+						},
+						{
+							"label": "RIN Value",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rinValue"
+						},
+						{
+							"label": "DV200 Value",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "dv200Value"
+						},
+						{
+							"label": "Library Preparation Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "libraryPrepDate"
+						},
+					]
+				}
+			]
+		}
+	}]
+}
