@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import DefaultForm from './Forms/DefaultForm';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from './fineUploader';
 import UniversalHeaderForm from './Forms/UniversalHeaderForm';
@@ -98,7 +96,7 @@ class UploadForm extends Component {
 //			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
 //		);
 		return (
-			<UniversalHeaderForm {...this.props}/>
+			<UniversalHeaderForm {...this.props} submitDisabled={submitDisabled}/>
 		);
 	}
 }
