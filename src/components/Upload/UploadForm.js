@@ -98,7 +98,7 @@ class UploadForm extends Component {
 //			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
 //		);
 		return (
-			<UniversalHeaderForm />
+			<UniversalHeaderForm {...this.props}/>
 		);
 	}
 }

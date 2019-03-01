@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import SelectBox from './FormComponents/SelectBox';
 import TextField from './FormComponents/TextField';
 import TextArea from './FormComponents/TextArea';
+import SubmitterInformation from './FormComponents/SubmitterInformation';
 import { Row, Col } from 'react-bootstrap';	
 import { Form, Input, DatePicker, Button } from 'antd';
 import DTD from '../../dynamicFormsDTD';
 
 const FIELD_TYPES = {
-	DROP_DOWN: "DROP-DOWN"
-	, TEXT_FIELD: "TEXT FIELD"
-	, TEXT_AREA: "TEXT AREA"
-	, MULTI_SELECT: "MULTI-SELECT"
+	DROP_DOWN: "DROP-DOWN", 
+	MULTI_SELECT: "MULTI-SELECT",
+	SUBMITTER_INFORMATION: "SUBMITTER INFORMATION",
+	TEXT_FIELD: "TEXT FIELD", 
+	TEXT_AREA: "TEXT AREA" 
 };
 
 const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
@@ -82,7 +84,9 @@ class UniversalHeaderForm extends Component {
 						fieldOptions={fieldOptions}
 						form={this.props.form} />;
 				break;
-				
+			case FIELD_TYPES.SUBMITTER_INFORMATION:
+				return <SubmitterInformation {...this.props} />;
+				break;
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 
 					<TextField 
