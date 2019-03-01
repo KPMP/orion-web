@@ -1,15 +1,15 @@
 import { Component } from 'react';
 import { Form } from 'antd';
 import DTD from '../../dynamicFormsDTD';
-import { renderSection, renderField } from './dynamicFormGenerator';
+import { DynamicFormGenerator } from './dynamicFormGenerator';
 
 class UniversalHeaderForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		
-		this.renderSection = renderSection.bind(this);
-		this.renderField = renderField.bind(this);
+		let formGenerator = new DynamicFormGenerator();
+		this.renderSection = formGenerator.renderSection.bind(this);
+		this.renderField = formGenerator.renderField.bind(this);
 	}
 	
 	render() {
