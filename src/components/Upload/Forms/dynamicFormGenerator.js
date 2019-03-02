@@ -21,10 +21,6 @@ const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rul
 
 export class DynamicFormGenerator {
 	
-	constructor() {
-	}
-
-
 	renderSection = (sectionJson, form, userInformation) => {
 		return (
 			<section className="container justify-content-center">
@@ -44,6 +40,20 @@ export class DynamicFormGenerator {
 		let	colSm = 12;
 		let options = {};
 		switch (fieldJson.type.toUpperCase()) {
+			case FIELD_TYPES.DROP_DOWN:			
+				options = fieldJson.values.map((element) => {
+					return {label: element, value: element};
+				});
+				
+				fieldComponent =
+					<SelectBox 
+					label={fieldJson.label} 
+					fieldName={fieldJson.fieldName} 
+					options={options} 
+					fieldOptions={fieldOptions}
+					form={form} />;
+				break;
+				
 			case FIELD_TYPES.MULTI_SELECT:
 				fieldOptions = fieldJson.required ? requiredFieldArrayOptions : optionalFieldArrayOptions; 
 				options = fieldJson.values.map((element) => {
@@ -60,21 +70,9 @@ export class DynamicFormGenerator {
 						form={form} />;
 				break;
 				
-			case FIELD_TYPES.DROP_DOWN:			
-				options = fieldJson.values.map((element) => {
-					return {label: element, value: element};
-				});
-				
-				fieldComponent =
-					<SelectBox 
-						label={fieldJson.label} 
-						fieldName={fieldJson.fieldName} 
-						options={options} 
-						fieldOptions={fieldOptions}
-						form={form} />;
-				break;
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
 				return <SubmitterInformation userInformation={userInformation} form={form} />;
+						
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 
 					<TextField 
