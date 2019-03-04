@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterControl from './FilterControl';
 import PackageListContainer from '../Packages/PackageListContainer';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import institutions from '../institutions';
 import packageTypes from '../packageTypes';
 import * as filterActions from '../../actions/filterActions';
