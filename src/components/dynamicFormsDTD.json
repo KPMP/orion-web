@@ -19,7 +19,7 @@
 				"label": "Institution Name",
 				"type": "Drop-down",
 				"required": true,
-				"values": ["Broad (Michigan/Broad/Princeton TIS)", "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "Indiana (IU/OSU TIS)", "Michigan (Michigan/Broad/Princeton TIS)", "OSU (IU/OSU TIS)", "PNNL (UTHSA/EMBL/PNNL/UCSD TIS)", "Princeton (Michigan/Broad/Princeton TIS)", "Stanford (UCSF/Stanford TIS)", "UCSD (UCSD/WashU TIS)", "UCSD (UTHSA/EMBL/PNNL/UCSD TIS)", "UCSF (UCSF/Stanford TIS)", "UTHSA (UTHSA/EMBL/PNNL/UCSD TIS)", "WashU (UCSD/WashU TIS)"],
+				"values": ["Broad (Michigan/Broad/Princeton TIS)", "EMBL (UTHSA/EMBL/PNNL/UCSD TIS)", "Indiana (IU/OSU TIS)", "Michigan (Michigan/Broad/Princeton TIS)", "OSU (IU/OSU TIS)", "PNNL (UTHSA/EMBL/PNNL/UCSD TIS)", "Princeton (Michigan/Broad/Princeton TIS)", "Stanford (UCSF/Stanford TIS)", "UCSD (UCSD/WashU TIS)", "UCSD (UTHSA/EMBL/PNNL/UCSD TIS)", "UCSF (UCSF/Stanford TIS)", "UTHSA (UTHSA/EMBL/PNNL/UCSD TIS)", "WashU (UCSD/WashU TIS)]"],
 				"otherAvailable": false,
 				"alphaSort": true,
 				"fieldName": "institution"
@@ -161,8 +161,7 @@
 				},
 				{
 					"sectionHeader": "RNA Processing",
-					"fields": [
-						{
+					"fields": [{
 							"label": "Bioanalyzer Date",
 							"type": "Date",
 							"required": true,
@@ -229,6 +228,212 @@
 								"placeholderText": "mm/dd/yyyy"
 							}],
 							"fieldName": "libraryPrepDate"
+						},
+						{
+							"label": "Library Starting Concentration",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "libraryStartingConcentration"
+						},
+						{
+							"label": "Library Starting Concentration Unit",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["nM", "pg", "mg"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "libraryStartingConcentrationUnit"
+						},
+						{
+							"label": "Library Prep Chemistry / Kit",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "libraryPrepChemistry"
+						},
+						{
+							"label": "Library Fragmentation Method",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "libraryFragmentationMethod"
+						},
+						{
+							"label": "cDNA Library Yield",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "cDNALibraryYield"
+						},
+						{
+							"label": "Processing Comments",
+							"type": "Text Area",
+							"required": false,
+							"additionalProps": [{
+								"placeholderText": "Additional comments on the RNA Processing"
+							}],
+							"fieldName": "rnaProcessingComments"
+						}
+					]
+				},
+				{
+					"sectionHeader": "RNA Sequencing",
+					"fields": [{
+							"label": "Sequencing Center",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "sequencingCenter"
+						},
+						{
+							"label": "Sequencing Platform",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "sequencingPlatform"
+						},
+						{
+							"label": "Sequencer Model",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "sequencerModel"
+						},
+						{
+							"label": "Sequencer Software / Version",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "sequencerSoftwareVersion"
+						},
+						{
+							"label": "Sequencing Date",
+							"type": "Date",
+							"required": true,
+							"validations": ["noFutureDate"],
+							"additionalProps": [{
+								"placeholderText": "mm/dd/yyyy"
+							}],
+							"fieldName": "sequencingDate"
+						},
+						{
+							"label": "cDNA Quantity Loaded",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "cDNAQuantityLoaded"
+						},
+						{
+							"label": "Single / Paired End",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["Single End", "Paired End"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "singlePairedEnd"
+						},
+						{
+							"label": "Strand 1 Read Length (bp)",
+							"type": "Numeric",
+							"required": true,
+							"fieldName": "strand1ReadLength"
+						},
+						{
+							"label": "Strand 2 Read Length (bp)",
+							"type": "Numeric",
+							"required": true,
+							"linkedWith": "Single / Paired End",
+							"displayWhen": "Paired",
+							"fieldName": "strand2ReadLength"
+						},
+						{
+							"label": "Sequencing Number of Cycles",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "sequencingNumberOfCycles"
+						},
+						{
+							"label": "Sequencing Operator",
+							"type": "Text Field",
+							"required": false,
+							"fieldName": "sequencingOperator"
+						},
+						{
+							"label": "Total Raw Reads",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "totalRawReads"
+						},
+						{
+							"label": "Phred Quality Score",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "phredQualityScore"
+						},
+						{
+							"label": "Sequencing Comments",
+							"type": "Text Area",
+							"required": false,
+							"additionalProps": [{
+								"placeholderText": "Additional comments on the RNA Sequencing"
+							}],
+							"fieldName": "rnaSequencingComments"
+						}
+					]
+				},
+				{
+					"sectionHeader": "RNA Analysis",
+					"fields": [{
+							"label": "Analysis Software Platform",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "rnaAnalysisSoftwarePlatform"
+						},
+						{
+							"label": "Analysis Software Platform Version",
+							"type": "Text Field",
+							"required": true,
+							"fieldName": "rnaAnalysisSoftwarePlatformVersion"
+						},
+						{
+							"label": "Reference Genome",
+							"type": "Drop-down",
+							"required": true,
+							"values": ["GRCh38 (hg38)", "GRCh37 (hg19)", "NCBI Build 36.1 (hg18)", "NCBI Build 35 (hg17)", "NCBI Build 34 (hg16)"],
+							"otherAvailable": false,
+							"alphaSort": true,
+							"fieldName": "referenceGenome"
+						},
+						{
+							"label": "Unassigned Reads",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaUnassignedReads"
+						},
+						{
+							"label": "Uniquely Mapped Reads",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaUniquelyMappedReads"
+						},
+						{
+							"label": "Uniquely Mapped / Raw Reads (Mapping Rate)",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaMappingRate"
+						},
+						{
+							"label": "Ribosomal Fraction",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaRibosomalFraction"
+						},
+						{
+							"label": "Genes Detected",
+							"type": "Numeric",
+							"required": false,
+							"fieldName": "rnaGenesDetected"
+						},
+						{
+							"label": "Data Analysis Comments",
+							"type": "Text Area",
+							"required": false,
+							"additionalProps": [{
+								"placeholderText": "Additional comments on the RNA Analysis"
+							}],
+							"fieldName": "rnaDataAnalysisComments"
 						}
 					]
 				}
