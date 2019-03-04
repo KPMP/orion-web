@@ -76,13 +76,14 @@ describe("renderSection", () => {
 describe('renderField', () => {
 	let formGenerator = new DynamicFormGenerator();
 	const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
+	const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 	const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
 	let form = {
 		isFieldTouched: jest.fn(),
 		getFieldDecorator: jest.fn(opts => c => c)
 	}
 	
-	it('should handle a Text Field', () => {
+	it('should handle a required Text Field', () => {
 		let fieldJson = 
 		{
 			"label": "More stuff",
@@ -101,6 +102,27 @@ describe('renderField', () => {
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.fieldOptions).toEqual(requiredFieldOptions);
+	});
+	
+	it('should handle an optional Text Field', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Text Field",
+				"required": false,
+				"fieldName": "moreStuff"
+		};
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(TextField).length).toBe(1);
+		let properties = mounted.find(TextField).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
+		expect(properties.label).toEqual('More stuff');
+		expect(properties.fieldName).toEqual('moreStuff');
+		expect(properties.form).toEqual(form);
+		expect(properties.fieldOptions).toEqual(optionalFieldOptions);
 	});
 	
 	it('should handle a Drop-down', () => {

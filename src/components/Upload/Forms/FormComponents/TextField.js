@@ -4,7 +4,7 @@ import { Form, Input } from 'antd';
 class TextField extends Component {
 	
 	render() {
-		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
+		let { isFieldTouched, getFieldError, getFieldDecorator, getFieldValue } = this.props.form;
 		let isDisabled = this.props.isDisabled || false;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		

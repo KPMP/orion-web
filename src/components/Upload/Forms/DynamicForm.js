@@ -24,7 +24,6 @@ class DynamicForm extends Component {
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
-					console.log(this.renderSection(section, this.props.form, this.props.userInformation));
 					return this.renderSection(section, this.props.form, this.props.userInformation);
 				})
 			}

@@ -3,9 +3,11 @@ import { Row, Col } from 'react-bootstrap';
 import SelectBox from './FormComponents/SelectBox';
 import TextField from './FormComponents/TextField';
 import TextArea from './FormComponents/TextArea';
+import DateField from './FormComponents/DateField';
 import SubmitterInformation from './FormComponents/SubmitterInformation';
 
 const FIELD_TYPES = {
+		DATE_FIELD: "DATE",
 		DROP_DOWN: "DROP-DOWN", 
 		MULTI_SELECT: "MULTI-SELECT",
 		SUBMITTER_INFORMATION: "SUBMITTER INFORMATION",
@@ -18,6 +20,9 @@ const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 
 const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
 const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'array'}]};
+
+const requiredFieldDateOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'date'}]};
+const optionalFieldDateOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'date'}]};
 
 export class DynamicFormGenerator {
 	
@@ -41,6 +46,16 @@ export class DynamicFormGenerator {
 		let	colSm = 12;
 		let options = {};
 		switch (fieldJson.type.toUpperCase()) {
+			
+			case FIELD_TYPES.DATE_FIELD:
+				fieldOptions = fieldJson.required ? requiredFieldDateOptions : optionalFieldDateOptions; 
+				fieldComponent =
+					<DateField label={fieldJson.label} 
+						form={form} 
+						additionalProps={fieldJson.additionalProps} 
+						fieldOptions={fieldOptions}
+						fieldName={fieldJson.fieldName}/>;
+				break;
 			case FIELD_TYPES.DROP_DOWN:			
 				options = fieldJson.values.map((element) => {
 					return {label: element, value: element};
@@ -48,11 +63,11 @@ export class DynamicFormGenerator {
 				
 				fieldComponent =
 					<SelectBox 
-					label={fieldJson.label} 
-					fieldName={fieldJson.fieldName} 
-					options={options} 
-					fieldOptions={fieldOptions}
-					form={form} />;
+						label={fieldJson.label} 
+						fieldName={fieldJson.fieldName} 
+						options={options} 
+						fieldOptions={fieldOptions}
+						form={form} />;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
