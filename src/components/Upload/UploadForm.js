@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from './fineUploader';
-import UniversalHeaderForm from './Forms/UniversalHeaderForm';
+import DynamicForm from './Forms/DynamicForm';
 
 let requiredFields = ['packageType', 'submitterFirstName', 'submitterLastName', 'submitterEmail', 'institution', 'protocol', 'subjectId', 'description'];
 let submitDisabled = true;
@@ -96,7 +96,7 @@ class UploadForm extends Component {
 //			<DefaultForm uploader={uploader} isUploading={this.props.isUploading} userInformation={this.props.userInformation} handleSubmit={this.handleSubmit} submitDisabled={submitDisabled}/>
 //		);
 		return (
-			<UniversalHeaderForm {...this.props} submitDisabled={submitDisabled} uploader={uploader}/>
+			<DynamicForm {...this.props} submitDisabled={submitDisabled} uploader={uploader}/>
 		);
 	}
 }

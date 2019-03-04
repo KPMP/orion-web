@@ -50,7 +50,7 @@
 				"required": true,
 				"linkedWith": "Dataset Type",
 				"displayWhen": "Other",
-				"fieldName": "packageType"
+				"fieldName": "packageTypeOther"
 			},
 			{
 				"label": "Dataset Level",
@@ -82,7 +82,7 @@
 		]
 	},
 	"typeSpecificElements": [{
-		"Sub-segment RNASeq": {
+		"Sub-segmental RNA-Seq": {
 			"sections": [{
 					"sectionHeader": "Tissue Processing",
 					"fields": [{

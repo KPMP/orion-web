@@ -28,6 +28,7 @@ export class DynamicFormGenerator {
 				<Row>
 					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
 				</Row>
+				<hr/>
 			</section>
 		);
 	}
