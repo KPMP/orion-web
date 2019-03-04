@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PackagePanel from './PackagePanel';
+import {Row, Col} from 'react-bootstrap';
 
 class PackageList extends Component {
 
     componentDidMount() {
-        //this.props.getPackages();
-        console.log('!!! DEBUG!  Disabled package loading');
+        this.props.getPackages();
     }
 
     render() {
@@ -19,25 +19,22 @@ class PackageList extends Component {
         }
 
         return (
-        	<div>
-                {isQuerying ?
-
-                    <div id="pkg-querying">
+        	<section id="pkg-list" class="container-fluid">{
+        	    isQuerying ?
+                    <h4 id="pkg-querying" className="text-center">
                         Loading packages...
-                    </div>
-
+                    </h4>
+                : panels.length > 0 ?
+                    <Row>
+                        {panels}
+                    </Row>
                     :
-
-                    panels.length > 0 ?
-                        <div id="pkg-list">
-                            {panels}
-                        </div>
-                        :
-                        <div className="noResults alert alert-info">
+                    <Row>
+                        <Col className="noResults alert alert-info">
                             No packages returned for the selected criteria.
-                        </div>
-                    }
-    		</div>
+                        </Col>
+                    </Row>
+            }</section>
         );
     }
 }

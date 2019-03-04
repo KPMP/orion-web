@@ -21,21 +21,19 @@ class PackagesPane extends Component {
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
         return (
-    		<div className="pane">
-    			<Row>
-    				<Col xs="12" >
-    					<div className="filters">
-    						<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-    						<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-    						<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-    					</div>
-    				</Col>
-    			</Row>
-    			<Row>
-	                <i>Search results are displayed in reverse chronological order</i>
-	                <PackageListContainer />
-	            </Row>
-            </div>
+    		<article className="pane container-fluid">
+    			<section className="row">
+					<Col xs={12} className="filters">
+						<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+					</Col>
+					<Col xs={12}>
+						<i>Search results are displayed in reverse chronological order</i>
+					</Col>
+    			</section>
+				<PackageListContainer />
+            </article>
         );
     }
 }
