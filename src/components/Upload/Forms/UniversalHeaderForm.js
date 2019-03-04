@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Form } from 'antd';
 import DTD from '../../dynamicFormsDTD';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
@@ -13,7 +13,11 @@ class UniversalHeaderForm extends Component {
 	}
 	
 	render() {
-		return this.renderSection(DTD.standardFields, this.props.form, this.props.userInformation);
+		return (
+			<section id="dynamicUploadForm">
+				{this.renderSection(DTD.standardFields, this.props.form, this.props.userInformation)}
+			</section>
+		);
 	}
 	
 }
