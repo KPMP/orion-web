@@ -23,7 +23,7 @@ export class DynamicFormGenerator {
 	
 	renderSection = (sectionJson, form, userInformation) => {
 		return (
-			<section className="container justify-content-center">
+			<section>
 				<h2>{sectionJson.sectionHeader}</h2>
 				<Row>
 					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Form } from 'antd';
 import DTD from '../../dynamicFormsDTD';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
+import { Row, Col } from 'react-bootstrap';
+import FileDropzone from './FileDropzone';
 
 class UniversalHeaderForm extends Component {
 	
@@ -14,7 +16,13 @@ class UniversalHeaderForm extends Component {
 	
 	render() {
 		return (
-			<section id="dynamicUploadForm">
+			<section id="dynamicUploadForm"  className="container justify-content-center">
+				<Row className="dropzone">
+					<Col md={12}>
+						<FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>
+					</Col>
+				</Row>
+				<hr/>
 				{this.renderSection(DTD.standardFields, this.props.form, this.props.userInformation)}
 			</section>
 		);

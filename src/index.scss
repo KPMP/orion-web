@@ -36,7 +36,11 @@ a {
 
 #dynamicUploadForm {
 	div[class^='col-'] {
-		height: 85px;
+		min-height: 85px;
+	}
+	
+	.textArea {
+		min-height: 125px;
 	}
 
 }

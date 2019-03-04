@@ -10,9 +10,9 @@ class TextAreaComponent extends Component {
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		
 		return(
-			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
+			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
 				{getFieldDecorator(this.props.fieldName, this.props.fieldOptions)(
-					<TextArea name={this.props.fieldName} rows={4} />
+					<TextArea name={this.props.fieldName} rows={3} />
 				)}
 			</Form.Item>		
 		
