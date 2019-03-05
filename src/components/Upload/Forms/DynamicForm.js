@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'antd';
+import { Form, Button } from 'antd';
 import DTD from '../../dynamicFormsDTD';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
 import { Row, Col } from 'react-bootstrap';
@@ -39,6 +39,11 @@ class DynamicForm extends Component {
 				<hr/>
 				{this.renderSection(DTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
+				<Row className="submit-button-row">
+					<Col md={12}>
+						<Button id="submit" disabled={true}>Submit</Button>
+					</Col>
+				</Row>
 			</section>
 		);
 	}
