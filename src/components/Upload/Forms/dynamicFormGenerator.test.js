@@ -125,7 +125,7 @@ describe('renderField', () => {
 		expect(properties.fieldOptions).toEqual(optionalFieldOptions);
 	});
 	
-	it('should handle a Drop-down', () => {
+	it('should handle a required Drop-down', () => {
 		let fieldJson = 
 		{
 			"label": "More stuff",
@@ -151,6 +151,35 @@ describe('renderField', () => {
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
 		expect(properties.fieldOptions).toEqual(requiredFieldOptions);
+		expect(properties.options).toEqual(options);
+	});
+	
+	it('should handle an optional Drop-down', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Drop-down",
+				"required": false,
+				"fieldName": "moreStuff",
+				"values": [ '1', '2']
+		};
+		
+		let options = fieldJson.values.map((element) => {
+			return {label: element, value: element};
+		});
+		
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(SelectBox).length).toBe(1);
+		let properties = mounted.find(SelectBox).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('options')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
+		expect(properties.label).toEqual('More stuff');
+		expect(properties.fieldName).toEqual("moreStuff");
+		expect(properties.form).toEqual(form);
+		expect(properties.fieldOptions).toEqual(optionalFieldOptions);
 		expect(properties.options).toEqual(options);
 	});
 	
