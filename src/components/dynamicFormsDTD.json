@@ -48,7 +48,7 @@
 				"label": "Dataset Type (Other)",
 				"type": "Text Field",
 				"required": true,
-				"linkedWith": "Dataset Type",
+				"linkedWith": "packageType",
 				"displayWhen": "Other",
 				"fieldName": "packageTypeOther"
 			},
@@ -334,8 +334,8 @@
 							"label": "Strand 2 Read Length (bp)",
 							"type": "Numeric",
 							"required": true,
-							"linkedWith": "Single / Paired End",
-							"displayWhen": "Paired",
+							"linkedWith": "singlePairedEnd",
+							"displayWhen": "Paired End",
 							"fieldName": "strand2ReadLength"
 						},
 						{

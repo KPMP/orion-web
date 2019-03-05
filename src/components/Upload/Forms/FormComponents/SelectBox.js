@@ -18,7 +18,6 @@ class SelectBox extends Component {
 		if(this.props.isMultiple) {
 			fieldOptions = Object.assign({}, fieldOptions);
 			fieldOptions.rules[0].type = 'array';
-            console.log('+++ Is multiple!  field: ', this.props.fieldName, '+++ options: ', fieldOptions);
 		}
 
 		return (

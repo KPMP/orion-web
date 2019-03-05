@@ -38,6 +38,14 @@ export class DynamicFormGenerator {
 		let	colLg = 4; 
 		let	colMd = 6; 
 		let	colSm = 12;
+		let isDisabled = false;
+
+		if(fieldJson.hasOwnProperty('linkedWith')) {
+			isDisabled = this.isFieldDisabled(fieldJson, form);
+		}
+
+		let isRequired = !isDisabled && fieldJson.required;
+
 		switch (fieldJson.type.toUpperCase()) {
 
 			case FIELD_TYPES.NUMERIC:
@@ -45,7 +53,8 @@ export class DynamicFormGenerator {
                     <NumericField label={fieldJson.label}
 					   form={form}
 					   additionalProps={fieldJson.additionalProps}
-					   isRequired={fieldJson.required}
+					   isRequired={isRequired}
+					   isDisabled={isDisabled}
 					   fieldName={fieldJson.fieldName}/>;
 				break;
 
@@ -54,9 +63,11 @@ export class DynamicFormGenerator {
 					<DateField label={fieldJson.label} 
 						form={form} 
 						additionalProps={fieldJson.additionalProps}
-					    isRequired={fieldJson.required}
+					    isRequired={isRequired}
+					    isDisabled={isDisabled}
 						fieldName={fieldJson.fieldName}/>;
 				break;
+
 			case FIELD_TYPES.DROP_DOWN:
 				fieldComponent =
 					<SelectBox
@@ -64,7 +75,8 @@ export class DynamicFormGenerator {
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
 						isMultiple={false}
-						isRequired={fieldJson.required}
+						isRequired={isRequired}
+                        isDisabled={isDisabled}
 						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
 				break;
 				
@@ -75,7 +87,8 @@ export class DynamicFormGenerator {
                         isMultiple={true}
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
-						isRequired={fieldJson.required}
+						isRequired={isRequired}
+                        isDisabled={isDisabled}
 						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
 				break;
 				
@@ -88,7 +101,8 @@ export class DynamicFormGenerator {
                         form={form}
                         label={fieldJson.label}
 						fieldName={fieldJson.fieldName}
-						isRequired={fieldJson.required}/>;
+						isRequired={isRequired}
+                        isDisabled={isDisabled}/>;
 				break;
 				
 			case FIELD_TYPES.TEXT_AREA:
@@ -96,7 +110,8 @@ export class DynamicFormGenerator {
                     form={form}
                     label={fieldJson.label}
 					fieldName={fieldJson.fieldName}
-					isRequired={fieldJson.required}/>;
+					isRequired={isRequired}
+                    isDisabled={isDisabled}/>;
 				colLg = 12;
 				colMd = 12;
 				colSm = 12;
@@ -112,6 +127,13 @@ export class DynamicFormGenerator {
 				{fieldComponent}
 			</Col>
 		);
+	}
+
+	isFieldDisabled = function(fieldJson, form) {
+		let {linkedWith, displayWhen} = fieldJson;
+		let linkedValue = form.getFieldValue(linkedWith);
+		console.log('+++ isFieldDisabled, ' + linkedWith + '.value \"' + linkedValue + '\", displayWhen \"' + displayWhen + '\"');
+		return displayWhen !== linkedValue;
 	}
 
 	parseOptions = function(values, otherAvailable) {
