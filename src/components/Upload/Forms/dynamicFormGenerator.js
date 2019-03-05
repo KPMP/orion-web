@@ -17,6 +17,8 @@ const FIELD_TYPES = {
 		NUMERIC: "NUMERIC"
 };
 
+const OTHER_AVAILABLE_LABEL = 'Other';
+
 export class DynamicFormGenerator {
 	
 	renderSection = (sectionJson, form, userInformation) => {
@@ -36,7 +38,6 @@ export class DynamicFormGenerator {
 		let	colLg = 4; 
 		let	colMd = 6; 
 		let	colSm = 12;
-		let options = {};
 		switch (fieldJson.type.toUpperCase()) {
 
 			case FIELD_TYPES.NUMERIC:
@@ -56,11 +57,7 @@ export class DynamicFormGenerator {
 					    isRequired={fieldJson.required}
 						fieldName={fieldJson.fieldName}/>;
 				break;
-			case FIELD_TYPES.DROP_DOWN:			
-				options = fieldJson.values.map((element) => {
-					return {label: element, value: element};
-				});
-				
+			case FIELD_TYPES.DROP_DOWN:
 				fieldComponent =
 					<SelectBox
                         form={form}
@@ -68,14 +65,10 @@ export class DynamicFormGenerator {
 						fieldName={fieldJson.fieldName}
 						isMultiple={false}
 						isRequired={fieldJson.required}
-						options={options} />;
+						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
-				options = fieldJson.values.map((element) => {
-					return {label: element, value: element};
-				});
-				
 				fieldComponent =
 					<SelectBox
                         form={form}
@@ -83,7 +76,7 @@ export class DynamicFormGenerator {
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
 						isRequired={fieldJson.required}
-						options={options}/>;
+						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
@@ -119,5 +112,19 @@ export class DynamicFormGenerator {
 				{fieldComponent}
 			</Col>
 		);
+	}
+
+	parseOptions = function(values, otherAvailable) {
+        let options = values;
+        options.sort();
+        options = options.map((element) => {
+            return {label: element, value: element};
+        });
+
+        if(otherAvailable) {
+            options.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
+        }
+
+        return options;
 	}
 }
