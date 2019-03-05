@@ -53,8 +53,8 @@ class PackagePanel extends Component {
 								</div>
 	                        </Col>
 	                        <Col md={3}>
-	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
-	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
+	                            <div className="side-link"><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
+	                            <div className="side-link"><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            {this.props.uploadPackage.downloadable &&
 		                            <div>
 		                                <Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
