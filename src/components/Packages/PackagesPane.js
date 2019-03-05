@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterControl from './FilterControl';
 import PackageListContainer from '../Packages/PackageListContainer';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'reactstrap';
 import institutions from '../institutions';
 import packageTypes from '../packageTypes';
 import * as filterActions from '../../actions/filterActions';
@@ -21,10 +21,10 @@ class PackagesPane extends Component {
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
         return (
-    		<div className="pane">
+    		<article className="container">
     			<Row>
-    				<Col xs="12" >
-    					<div className="filters">
+    				<Col xs={12} >
+    					<div>
     						<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
     						<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
     						<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
@@ -32,10 +32,10 @@ class PackagesPane extends Component {
     				</Col>
     			</Row>
     			<Row>
-	                <i>Search results are displayed in reverse chronological order</i>
+	                <i class="text-secondary">Search results are displayed in reverse chronological order</i>
 	                <PackageListContainer />
 	            </Row>
-            </div>
+            </article>
         );
     }
 }
