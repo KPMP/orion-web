@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SelectBox from './FormComponents/SelectBox';
 import TextField from './FormComponents/TextField';
+import NumericField from './FormComponents/NumericField';
 import TextArea from './FormComponents/TextArea';
 import DateField from './FormComponents/DateField';
 import SubmitterInformation from './FormComponents/SubmitterInformation';
@@ -12,11 +13,15 @@ const FIELD_TYPES = {
 		MULTI_SELECT: "MULTI-SELECT",
 		SUBMITTER_INFORMATION: "SUBMITTER INFORMATION",
 		TEXT_FIELD: "TEXT FIELD", 
-		TEXT_AREA: "TEXT AREA" 
+		TEXT_AREA: "TEXT AREA" ,
+		NUMERIC: "NUMERIC"
 };
 
 const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
 const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
+
+const requiredFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required', type: 'number'}]};
+const optionalFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false, type: 'number'}]};
 
 const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
 const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'array'}]};
@@ -46,7 +51,17 @@ export class DynamicFormGenerator {
 		let	colSm = 12;
 		let options = {};
 		switch (fieldJson.type.toUpperCase()) {
-			
+
+			case FIELD_TYPES.NUMERIC:
+                fieldOptions = fieldJson.required ? requiredFieldNumericOptions : optionalFieldNumericOptions;
+                fieldComponent =
+                    <NumericField label={fieldJson.label}
+                               form={form}
+                               additionalProps={fieldJson.additionalProps}
+                               fieldOptions={fieldOptions}
+                               fieldName={fieldJson.fieldName}/>;
+				break;
+
 			case FIELD_TYPES.DATE_FIELD:
                 fieldOptions = fieldJson.required ? requiredFieldDateOptions : optionalFieldDateOptions;
                 fieldComponent =
