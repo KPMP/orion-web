@@ -18,6 +18,7 @@ const FIELD_TYPES = {
 };
 
 const OTHER_AVAILABLE_LABEL = 'Other';
+const LINKED_WITH = 'linkedWith';
 
 export class DynamicFormGenerator {
 	
@@ -40,7 +41,7 @@ export class DynamicFormGenerator {
 		let	colSm = 12;
 		let isDisabled = false;
 
-		if(fieldJson.hasOwnProperty('linkedWith')) {
+		if(fieldJson.hasOwnProperty(LINKED_WITH)) {
 			isDisabled = this.isFieldDisabled(fieldJson, form);
 		}
 
@@ -77,7 +78,7 @@ export class DynamicFormGenerator {
 						isMultiple={false}
 						isRequired={isRequired}
                         isDisabled={isDisabled}
-						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
+						options={this.parseOptions(fieldJson, form)} />;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
@@ -89,7 +90,7 @@ export class DynamicFormGenerator {
 						fieldName={fieldJson.fieldName}
 						isRequired={isRequired}
                         isDisabled={isDisabled}
-						options={this.parseOptions(fieldJson.values, fieldJson.otherAvailable)} />;
+						options={this.parseOptions(fieldJson, form)} />;
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
@@ -136,17 +137,25 @@ export class DynamicFormGenerator {
 		return displayWhen !== linkedValue;
 	}
 
-	parseOptions = function(values, otherAvailable) {
-        let options = values;
-        options.sort();
-        options = options.map((element) => {
+	parseOptions = function(fieldJson, form) {
+        let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
+
+        if(fieldJson.hasOwnProperty('constrainedBy')) {
+        	let constrainedValue = form.getFieldValue(constrainedBy);
+        	if(constraints.hasOwnProperty(constrainedValue)) {
+                values = constraints[constrainedValue];
+			}
+		}
+
+        values.sort();
+        values = values.map((element) => {
             return {label: element, value: element};
         });
 
         if(otherAvailable) {
-            options.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
+            values.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
         }
 
-        return options;
+        return values;
 	}
 }

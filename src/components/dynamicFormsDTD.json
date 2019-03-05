@@ -185,11 +185,12 @@
 							"otherAvailable": false,
 							"alphaSort": true,
 							"fieldName": "rnaYieldUnit",
-							"constrainedBy": "Dataset Type",
+							"constrainedBy": "packageType",
 							"constraints": {
 								"Bulk total/mRNA": ["ng/ul", "ug/ul"],
 								"Bulk microRNA": ["ng/ul"],
-								"Segmental miRNA": ["ug/ul"]
+								"Segmental miRNA": ["ug/ul"],
+								"Sub-segmental RNA-Seq": ["it works", "hooray"]
 							}
 						},
 						{
