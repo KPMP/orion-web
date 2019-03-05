@@ -21,6 +21,9 @@ const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
 const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'array'}]};
 
+const requiredFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required' }]};
+const optionalFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false}]};
+
 export class DynamicFormGenerator {
 	
 	renderSection = (sectionJson, form, userInformation) => {
@@ -45,7 +48,8 @@ export class DynamicFormGenerator {
 		switch (fieldJson.type.toUpperCase()) {
 			
 			case FIELD_TYPES.DATE_FIELD:
-				fieldComponent =
+                fieldOptions = fieldJson.required ? requiredFieldDateOptions : optionalFieldDateOptions;
+                fieldComponent =
 					<DateField label={fieldJson.label} 
 						form={form} 
 						additionalProps={fieldJson.additionalProps} 
