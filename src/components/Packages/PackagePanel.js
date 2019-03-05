@@ -41,11 +41,10 @@ class PackagePanel extends Component {
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
-    			<div>
 	            <Panel className="pkg-panel">
 	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
 	                    <Row>
-	                        <Col md={6} className="pkg-panel-left">
+	                        <Col md={9}>
 								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
 								<div className="pkg-info">
 									<div><b>{packageInfo.subjectId}</b></div>
@@ -53,7 +52,7 @@ class PackagePanel extends Component {
 									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</div>
 								</div>
 	                        </Col>
-	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
+	                        <Col md={3}>
 	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
 	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
 	                            {this.props.uploadPackage.downloadable &&
@@ -71,7 +70,6 @@ class PackagePanel extends Component {
 						<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick}/>
 					</Panel.Body>
 	            </Panel>
-            </div>
         );
     }
 }

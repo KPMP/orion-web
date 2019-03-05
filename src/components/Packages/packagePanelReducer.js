@@ -13,12 +13,14 @@ export const packages = (state = {}, action) => {
 			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = action.payload;
+			newState.isQuerying = state.isQuerying;
 			return newState;
 		case actionNames.SET_PACKAGES:
 			newState.filtered = action.payload;
 			newState.unfiltered = action.payload;
 			newState.filters = [];
 			newState.userList = users;
+			newState.isQuerying = state.isQuerying;
 			return newState;
 		case actionNames.REMOVE_FILTER:
 			if (filters.length > 0) {
@@ -34,6 +36,7 @@ export const packages = (state = {}, action) => {
 			newState.filtered = filteredPackageList;
 			newState.filters = filters;
 			newState.userList = users;
+			newState.isQuerying = state.isQuerying;
 			return newState;
 		case actionNames.ADD_FILTER:
 
@@ -58,6 +61,14 @@ export const packages = (state = {}, action) => {
 			newState.filtered = filteredPackageList;
 			newState.filters = filters;
 			newState.userList = users;
+			newState.isQuerying = state.isQuerying;
+			return newState;
+		case actionNames.SET_IS_QUERYING:
+			newState.filtered = state.filtered;
+			newState.unfiltered = state.unfiltered;
+			newState.filters = state.filters;
+			newState.userList = state.userList;
+			newState.isQuerying = action.payload;
 			return newState;
 		default:
 			return state;
