@@ -144,7 +144,10 @@ export class DynamicFormGenerator {
 			}
 		}
 
-        values.sort();
+        values.sort(function(a,b){
+        	return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+        
         values = values.map((element) => {
             return {label: element, value: element};
         });

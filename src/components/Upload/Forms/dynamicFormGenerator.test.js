@@ -14,8 +14,8 @@ import SubmitterInformation from './FormComponents/SubmitterInformation';
 Enzyme.configure({adapter: new Adapter()});
 
 describe("renderSection", () => {
-	let formGenerator = new DynamicFormGenerator();
-	let form = jest.fn();
+	const formGenerator = new DynamicFormGenerator();
+	const form = jest.fn();
 	
 	beforeEach(() => {
 		formGenerator.renderField = jest.fn();
@@ -76,7 +76,7 @@ describe("renderSection", () => {
 });
 
 describe('renderField', () => {
-	let formGenerator = new DynamicFormGenerator();
+	const formGenerator = new DynamicFormGenerator();
 
 	let form = {
 		isFieldTouched: jest.fn(),
@@ -463,12 +463,99 @@ describe('isFieldDisabled', () => {
 	
 	it('should be enabled when displayWhenValue equal to field value', () => {
 		let fieldJson = {
-				"label": "my field",
-				"type": "Date",
-				"displayWhen": "special value",
-				"linkedWith": "anotherField"
+			"label": "my field",
+			"type": "Date",
+			"displayWhen": "special value",
+			"linkedWith": "anotherField"
 		};
 		form.getFieldValue = jest.fn(() => "special value");
 		expect(formGenerator.isFieldDisabled(fieldJson, form)).toEqual(false);
+	});
+});
+
+describe("parseOptions", () => {
+	const formGenerator = new DynamicFormGenerator();
+	let form = {
+		isFieldTouched: jest.fn(),
+		getFieldDecorator: jest.fn(opts => c => c),
+		getFieldValue: jest.fn()
+	}
+	
+	it('should take values and create an options object in a sorted order when no constraints and no otherAvailable', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Drop-down",
+			"values": [ 'random order', 'list', '123', 'Zebra', 'aLPACA']
+		};
+		let expectedOptions = [
+			{ "label": "123", "value": "123" },
+			{ "label": "aLPACA", "value": "aLPACA" },
+			{ "label": "list", "value": "list" },
+			{ "label": "random order", "value": "random order" },
+			{ "label": "Zebra", "value": "Zebra" }
+		]
+		let options = formGenerator.parseOptions(fieldJson, form);
+		expect(options).toEqual(expectedOptions);
+	});
+	
+	it('should add Other on the end of the options when otherAvailable is true', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Drop-down",
+			"values": [ 'random order', 'list', '123', 'Zebra', 'aLPACA'],
+			"otherAvailable": true
+		};
+		let expectedOptions = [
+			{ "label": "123", "value": "123" },
+			{ "label": "aLPACA", "value": "aLPACA" },
+			{ "label": "list", "value": "list" },
+			{ "label": "random order", "value": "random order" },
+			{ "label": "Zebra", "value": "Zebra" },
+			{ "label": "Other", "value": "Other" }
+		];
+		let options = formGenerator.parseOptions(fieldJson, form);
+		expect(options).toEqual(expectedOptions);
+	});
+	
+	it('should constrain the list when constrainedBy present and value in constraints', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Drop-down",
+			"values": [ "item1", "item2", "item3", "item4"],
+			"otherAvailable": false,
+			"constrainedBy": "packageType",
+			"constraints": {
+				"selected value": ["item1", "item2"],
+				"another value": ["item3", "item4"]
+			}
+		};
+		let expectedOptions = [
+			{ "label": "item1", "value": "item1" },
+			{ "label": "item2", "value": "item2" }
+		];
+		form.getFieldValue = jest.fn(() => "selected value");
+		expect(formGenerator.parseOptions(fieldJson, form)).toEqual(expectedOptions);
+	});
+	
+	it('should return the values when constrainedBy present and value not in constraints', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Drop-down",
+			"values": [ "item1", "item2", "item3", "item4"],
+			"otherAvailable": false,
+			"constrainedBy": "packageType",
+			"constraints": {
+				"selected value": ["item1", "item2"],
+				"another value": ["item3", "item4"]
+			}
+		};
+		let expectedOptions = [
+			{ "label": "item1", "value": "item1" },
+			{ "label": "item2", "value": "item2" },
+			{ "label": "item3", "value": "item3" },
+			{ "label": "item4", "value": "item4" }
+		];
+		form.getFieldValue = jest.fn(() => "something else");
+		expect(formGenerator.parseOptions(fieldJson, form)).toEqual(expectedOptions);
 	});
 });
