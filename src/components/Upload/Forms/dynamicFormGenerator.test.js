@@ -80,7 +80,8 @@ describe('renderField', () => {
 
 	let form = {
 		isFieldTouched: jest.fn(),
-		getFieldDecorator: jest.fn(opts => c => c)
+		getFieldDecorator: jest.fn(opts => c => c),
+		getFieldValue: jest.fn()
 	}
 	
 	it('should handle a required Text Field', () => {
@@ -430,3 +431,44 @@ describe('renderField', () => {
 	
 });
 
+
+describe('isFieldDisabled', () => {
+	
+	const formGenerator = new DynamicFormGenerator();
+	let form = {
+		isFieldTouched: jest.fn(),
+		getFieldDecorator: jest.fn(opts => c => c),
+		getFieldValue: jest.fn()
+	}
+	
+	it('should return false when no linkedWith value', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Date"
+		}
+		
+		expect(formGenerator.isFieldDisabled(fieldJson, form)).toEqual(false);
+	});
+	
+	it('should be disabled when displayWhenValue not equal to field value', () => {
+		let fieldJson = {
+			"label": "my field",
+			"type": "Date",
+			"displayWhen": "special value",
+			"linkedWith": "anotherField"
+		};
+		form.getFieldValue = jest.fn(() => "not the value");
+		expect(formGenerator.isFieldDisabled(fieldJson, form)).toEqual(true);
+	});
+	
+	it('should be enabled when displayWhenValue equal to field value', () => {
+		let fieldJson = {
+				"label": "my field",
+				"type": "Date",
+				"displayWhen": "special value",
+				"linkedWith": "anotherField"
+		};
+		form.getFieldValue = jest.fn(() => "special value");
+		expect(formGenerator.isFieldDisabled(fieldJson, form)).toEqual(false);
+	});
+});

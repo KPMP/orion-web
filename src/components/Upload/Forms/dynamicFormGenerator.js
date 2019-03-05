@@ -39,12 +39,7 @@ export class DynamicFormGenerator {
 		let	colLg = 4; 
 		let	colMd = 6; 
 		let	colSm = 12;
-		let isDisabled = false;
-
-		if(fieldJson.hasOwnProperty(LINKED_WITH)) {
-			isDisabled = this.isFieldDisabled(fieldJson, form);
-		}
-
+		let isDisabled = this.isFieldDisabled(fieldJson, form);
 		let isRequired = !isDisabled && fieldJson.required;
 
 		switch (fieldJson.type.toUpperCase()) {
@@ -131,10 +126,12 @@ export class DynamicFormGenerator {
 	}
 
 	isFieldDisabled = function(fieldJson, form) {
-		let {linkedWith, displayWhen} = fieldJson;
-		let linkedValue = form.getFieldValue(linkedWith);
-		console.log('+++ isFieldDisabled, ' + linkedWith + '.value \"' + linkedValue + '\", displayWhen \"' + displayWhen + '\"');
-		return displayWhen !== linkedValue;
+		if(fieldJson.hasOwnProperty(LINKED_WITH)) {
+			let {linkedWith, displayWhen} = fieldJson;
+			let linkedValue = form.getFieldValue(linkedWith);
+			return displayWhen !== linkedValue;
+		}
+		return false;
 	}
 
 	parseOptions = function(fieldJson, form) {
