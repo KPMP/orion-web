@@ -17,18 +17,6 @@ const FIELD_TYPES = {
 		NUMERIC: "NUMERIC"
 };
 
-const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
-const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
-
-const requiredFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required', type: 'number'}]};
-const optionalFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false, type: 'number'}]};
-
-const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
-const optionalFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false, type: 'array'}]};
-
-const requiredFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required' }]};
-const optionalFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false}]};
-
 export class DynamicFormGenerator {
 	
 	renderSection = (sectionJson, form, userInformation) => {
@@ -45,7 +33,6 @@ export class DynamicFormGenerator {
 
 	renderField = (fieldJson, form, userInformation) => {
 		let fieldComponent = null;
-		let	fieldOptions = fieldJson.required ? requiredFieldOptions : optionalFieldOptions; 
 		let	colLg = 4; 
 		let	colMd = 6; 
 		let	colSm = 12;
@@ -53,22 +40,20 @@ export class DynamicFormGenerator {
 		switch (fieldJson.type.toUpperCase()) {
 
 			case FIELD_TYPES.NUMERIC:
-                fieldOptions = fieldJson.required ? requiredFieldNumericOptions : optionalFieldNumericOptions;
                 fieldComponent =
                     <NumericField label={fieldJson.label}
-                               form={form}
-                               additionalProps={fieldJson.additionalProps}
-                               fieldOptions={fieldOptions}
-                               fieldName={fieldJson.fieldName}/>;
+					   form={form}
+					   additionalProps={fieldJson.additionalProps}
+					   isRequired={fieldJson.required}
+					   fieldName={fieldJson.fieldName}/>;
 				break;
 
 			case FIELD_TYPES.DATE_FIELD:
-                fieldOptions = fieldJson.required ? requiredFieldDateOptions : optionalFieldDateOptions;
                 fieldComponent =
 					<DateField label={fieldJson.label} 
 						form={form} 
-						additionalProps={fieldJson.additionalProps} 
-						fieldOptions={fieldOptions}
+						additionalProps={fieldJson.additionalProps}
+					    isRequired={fieldJson.required}
 						fieldName={fieldJson.fieldName}/>;
 				break;
 			case FIELD_TYPES.DROP_DOWN:			
@@ -77,28 +62,28 @@ export class DynamicFormGenerator {
 				});
 				
 				fieldComponent =
-					<SelectBox 
+					<SelectBox
+                        form={form}
 						label={fieldJson.label} 
-						fieldName={fieldJson.fieldName} 
-						options={options} 
-						fieldOptions={fieldOptions}
-						form={form} />;
+						fieldName={fieldJson.fieldName}
+						isMultiple={false}
+						isRequired={fieldJson.required}
+						options={options} />;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
-				fieldOptions = fieldJson.required ? requiredFieldArrayOptions : optionalFieldArrayOptions; 
 				options = fieldJson.values.map((element) => {
 					return {label: element, value: element};
 				});
 				
 				fieldComponent =
-					<SelectBox 
-						isMultiple={true}
+					<SelectBox
+                        form={form}
+                        isMultiple={true}
 						label={fieldJson.label} 
-						fieldName={fieldJson.fieldName} 
-						options={options} 
-						fieldOptions={fieldOptions}
-						form={form} />;
+						fieldName={fieldJson.fieldName}
+						isRequired={fieldJson.required}
+						options={options}/>;
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
@@ -106,19 +91,19 @@ export class DynamicFormGenerator {
 						
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 
-					<TextField 
-						label={fieldJson.label} 
-						fieldName={fieldJson.fieldName} 
-						fieldOptions={fieldOptions} 
-						form={form} />;
+					<TextField
+                        form={form}
+                        label={fieldJson.label}
+						fieldName={fieldJson.fieldName}
+						isRequired={fieldJson.required}/>;
 				break;
 				
 			case FIELD_TYPES.TEXT_AREA:
 				fieldComponent = <TextArea
-					label={fieldJson.label} 
-					fieldName={fieldJson.fieldName} 
-					fieldOptions={fieldOptions} 
-					form={form} />;
+                    form={form}
+                    label={fieldJson.label}
+					fieldName={fieldJson.fieldName}
+					isRequired={fieldJson.required}/>;
 				colLg = 12;
 				colMd = 12;
 				colSm = 12;
@@ -134,9 +119,5 @@ export class DynamicFormGenerator {
 				{fieldComponent}
 			</Col>
 		);
-	}	
-	
-	
+	}
 }
-
-

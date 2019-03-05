@@ -75,9 +75,7 @@ describe("renderSection", () => {
 
 describe('renderField', () => {
 	let formGenerator = new DynamicFormGenerator();
-	const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
-	const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
-	const requiredFieldArrayOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1, type: 'array'}]};
+
 	let form = {
 		isFieldTouched: jest.fn(),
 		getFieldDecorator: jest.fn(opts => c => c)
@@ -97,11 +95,9 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
-		expect(properties.fieldOptions).toEqual(requiredFieldOptions);
 	});
 	
 	it('should handle an optional Text Field', () => {
@@ -118,11 +114,9 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
-		expect(properties.fieldOptions).toEqual(optionalFieldOptions);
 	});
 	
 	it('should handle a required Drop-down', () => {
@@ -146,11 +140,9 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
-		expect(properties.fieldOptions).toEqual(requiredFieldOptions);
 		expect(properties.options).toEqual(options);
 	});
 	
@@ -175,11 +167,9 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
-		expect(properties.fieldOptions).toEqual(optionalFieldOptions);
 		expect(properties.options).toEqual(options);
 	});
 	
@@ -202,9 +192,7 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
-		expect(properties.fieldOptions).toEqual(requiredFieldArrayOptions);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
@@ -224,9 +212,7 @@ describe('renderField', () => {
 		let properties = mounted.find(TextArea).props();
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
-		expect(properties.hasOwnProperty('fieldOptions')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
-		expect(properties.fieldOptions).toEqual(requiredFieldOptions);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
