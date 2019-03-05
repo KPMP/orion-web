@@ -7,6 +7,7 @@ import { Form } from 'antd';
 import TextArea from './FormComponents/TextArea';
 import TextField from './FormComponents/TextField';
 import SelectBox from './FormComponents/SelectBox';
+import NumericField from './FormComponents/NumericField';
 import SubmitterInformation from './FormComponents/SubmitterInformation';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -95,9 +96,11 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(true);
 	});
 	
 	it('should handle an optional Text Field', () => {
@@ -114,9 +117,11 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(false);
 	});
 	
 	it('should handle a required Drop-down', () => {
@@ -140,10 +145,12 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
+		expect(properties.isRequired).toEqual(true);
 	});
 	
 	it('should handle an optional Drop-down', () => {
@@ -167,13 +174,15 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
+		expect(properties.isRequired).toEqual(false);
 	});
 	
-	it('should handle a Multi-select', () => {
+	it('should handle a required Multi-select', () => {
 		let fieldJson = 
 		{
 			"label": "More stuff",
@@ -193,13 +202,47 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('options')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
+		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
+		expect(properties.isRequired).toEqual(true);
+		expect(properties.isMultiple).toEqual(true);
 	});
 	
-	it('should handle a Text Area', () => {
+	it('should handle an optional Multi-select', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Multi-select",
+				"required": false,
+				"fieldName": "moreStuff",
+				"values": [ '1', '2']
+		};
+		let options = fieldJson.values.map((element) => {
+			return {label: element, value: element};
+		});
+		
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(SelectBox).length).toBe(1);
+		let properties = mounted.find(SelectBox).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('options')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
+		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
+		expect(properties.label).toEqual("More stuff");
+		expect(properties.fieldName).toEqual('moreStuff');
+		expect(properties.form).toEqual(form);
+		expect(properties.options).toEqual(options);
+		expect(properties.isRequired).toEqual(false);
+		expect(properties.isMultiple).toEqual(true);
+	});
+	
+	it('should handle a required Text Area', () => {
 		let fieldJson = 
 		{
 			"label": "More stuff",
@@ -213,9 +256,74 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('label')).toBe(true);
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(true);
+	});
+	
+	it('should handle an optional Text Area', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Text Area",
+				"required": false,
+				"fieldName": "moreStuff",
+		};
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(TextArea).length).toBe(1);
+		let properties = mounted.find(TextArea).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
+		expect(properties.label).toEqual('More stuff');
+		expect(properties.fieldName).toEqual('moreStuff');
+		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(false);
+	});
+	
+	it('should handle a required Numeric', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Numeric",
+				"required": true,
+				"fieldName": "moreStuff",
+		};
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(NumericField).length).toBe(1);
+		let properties = mounted.find(NumericField).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
+		expect(properties.label).toEqual('More stuff');
+		expect(properties.fieldName).toEqual('moreStuff');
+		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(true);
+	});
+	
+	it('should handle an optional Numeric', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Numeric",
+				"required": false,
+				"fieldName": "moreStuff",
+		};
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		expect(mounted.find(NumericField).length).toBe(1);
+		let properties = mounted.find(NumericField).props();
+		expect(properties.hasOwnProperty('label')).toBe(true);
+		expect(properties.hasOwnProperty('fieldName')).toBe(true);
+		expect(properties.hasOwnProperty('form')).toBe(true);
+		expect(properties.hasOwnProperty('isRequired')).toBe(true);
+		expect(properties.label).toEqual('More stuff');
+		expect(properties.fieldName).toEqual('moreStuff');
+		expect(properties.form).toEqual(form);
+		expect(properties.isRequired).toEqual(false);
 	});
 	
 	it('should hanlde Submitter Information', () => {
