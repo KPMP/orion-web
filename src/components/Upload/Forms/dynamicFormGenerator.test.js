@@ -90,7 +90,8 @@ describe('renderField', () => {
 			"label": "More stuff",
 			"type": "Text Field",
 			"required": true,
-			"fieldName": "moreStuff"
+			"fieldName": "moreStuff",
+			"additionalProps": [{"field": "value"}]
 		};
 		let mounted = mount(formGenerator.renderField(fieldJson, form));
 		expect(mounted.find(TextField).length).toBe(1);
@@ -100,11 +101,13 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle an optional Text Field', () => {
@@ -113,7 +116,8 @@ describe('renderField', () => {
 				"label": "More stuff",
 				"type": "Text Field",
 				"required": false,
-				"fieldName": "moreStuff"
+				"fieldName": "moreStuff",
+				"additionalProps": [{"field": "value"}]
 		};
 		let mounted = mount(formGenerator.renderField(fieldJson, form));
 		expect(mounted.find(TextField).length).toBe(1);
@@ -123,11 +127,13 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle a required Drop-down', () => {
@@ -137,7 +143,8 @@ describe('renderField', () => {
 			"type": "Drop-down",
 			"required": true,
 			"fieldName": "moreStuff",
-			"values": [ '1', '2']
+			"values": [ '1', '2'],
+			"additionalProps": [{"field": "value"}]
 		};
 		
 		let options = fieldJson.values.map((element) => {
@@ -154,6 +161,7 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
@@ -161,6 +169,7 @@ describe('renderField', () => {
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isMultiple).toEqual(false);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle an optional Drop-down', () => {
@@ -170,7 +179,8 @@ describe('renderField', () => {
 				"type": "Drop-down",
 				"required": false,
 				"fieldName": "moreStuff",
-				"values": [ '1', '2']
+				"values": [ '1', '2'],
+				"additionalProps": [{"field": "value"}]
 		};
 		
 		let options = fieldJson.values.map((element) => {
@@ -187,6 +197,7 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
@@ -194,6 +205,7 @@ describe('renderField', () => {
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isMultiple).toEqual(false);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle a required Multi-select', () => {
@@ -203,7 +215,8 @@ describe('renderField', () => {
 			"type": "Multi-select",
 			"required": true,
 			"fieldName": "moreStuff",
-			"values": [ '1', '2']
+			"values": [ '1', '2'],
+			"additionalProps": [{"field": "value"}]
 		};
 		let options = fieldJson.values.map((element) => {
 			return {label: element, value: element};
@@ -218,12 +231,14 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isMultiple).toEqual(true);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle an optional Multi-select', () => {
@@ -233,7 +248,8 @@ describe('renderField', () => {
 				"type": "Multi-select",
 				"required": false,
 				"fieldName": "moreStuff",
-				"values": [ '1', '2']
+				"values": [ '1', '2'],
+				"additionalProps": [{"field": "value"}]
 		};
 		let options = fieldJson.values.map((element) => {
 			return {label: element, value: element};
@@ -248,12 +264,14 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('options')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isMultiple).toEqual(true);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle a required Text Area', () => {
@@ -263,6 +281,7 @@ describe('renderField', () => {
 			"type": "Text Area",
 			"required": true,
 			"fieldName": "moreStuff",
+			"additionalProps": [{"field": "value"}]
 		};
 		let mounted = mount(formGenerator.renderField(fieldJson, form));
 		expect(mounted.find(TextArea).length).toBe(1);
@@ -272,11 +291,13 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle an optional Text Area', () => {
@@ -286,6 +307,7 @@ describe('renderField', () => {
 				"type": "Text Area",
 				"required": false,
 				"fieldName": "moreStuff",
+				"additionalProps": [{"field": "value"}]
 		};
 		let mounted = mount(formGenerator.renderField(fieldJson, form));
 		expect(mounted.find(TextArea).length).toBe(1);
@@ -295,11 +317,13 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isDisabled).toEqual(false);
+		expect(properties.additionalProps).toEqual([{"field": "value"}]);
 	});
 	
 	it('should handle a required Numeric', () => {
