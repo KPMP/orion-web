@@ -1,8 +1,12 @@
-$filter-height: 57px;
 $dropdown-width: 265px;
-$header-height: 68px;
 
-body {
+$header-height: 68px;
+$filter-height: 37px;
+$filter-min-width: 195px;
+$packages-filter-controls-sm-height: 166px;
+$packages-filter-controls-md-height: 66px;
+
+body, .margin-top-for-header {
 	margin-top: $header-height;
 }
 
@@ -24,10 +28,6 @@ a {
 	font-weight: 600;	
 }
 
-.filter-control {
-	width: $dropdown-width;
-}
-
 #dynamicUploadForm {
 	div[class^='col-'] {
 		min-height: 86px;
@@ -37,18 +37,6 @@ a {
 		min-height: 125px;
 	}
 
-}
-
-.filter {
-	height: $filter-height;
-	display: inline-table;
-}
-
-.clearFilter {
-	color: #337ab7;
-	font-size: 11px;
-	cursor: pointer;
-	text-decoration: none;
 }
 
 .noResults {
@@ -95,12 +83,39 @@ a {
 	}
 }
 
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+PACKAGES
+*/
 #packages-pane {
+	/* xs to sm */
+	padding-top: $packages-filter-controls-sm-height;
 
-	margin-top: $filter-height;
+	/* md and up */
+	@media (min-width: 768px) {
+		padding-top: $packages-filter-controls-md-height;
+	}
 
 	#packages-filter-controls {
 
+		/* xs to sm */
+		height: $packages-filter-controls-sm-height;
+
+		/* md and up */
+		@media (min-width: 768px) {
+			height: $packages-filter-controls-md-height;
+		}
+
+		.filter {
+			width: 100%;
+			min-width: $filter-min-width;
+			height: $filter-height;
+			display: inline-table;
+
+			.filter-control {
+				height: $filter-height;
+			}
+		}
 	}
 
 	#packages-list {
@@ -108,10 +123,16 @@ a {
 			background-color: rgb(230, 241, 255) !important;
 		}
 	}
-}
 
-.pkg-filter {
-    margin: 0px 10px 0px 0px;
+	#packages-button-add-new {
+		/* xs to sm */
+		width: 100%;
+
+		/* md and up */
+		@media (min-width: 768px) {
+			width: auto;
+		}
+	}
 }
 
 .search-glass {
@@ -137,13 +158,6 @@ a {
     }
 }
 
-.pkg-type-img {
-    text-align: center;
-    div {
-        margin-top: -50px;
-    }
-}
-
 .navbar {
     background-color: white;
     border-bottom: 1px solid #e7e7e7;
@@ -161,6 +175,7 @@ a {
 		text-align: right;
 		padding-top: 20px;
 	}
+
 	@media only screen and (max-width: 768px) {
 		.nav-route {
 			text-align: left;
@@ -305,4 +320,37 @@ a {
 }
 .ant-form-item {
 	margin-bottom: 0px !important;
+}
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Bootstrap 4 breakpoints
+
+https://bootstrapcreative.com/bootstrap-4-media-queries/
+*/
+
+/*
+Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap because it is "mobile first"
+*/
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }
