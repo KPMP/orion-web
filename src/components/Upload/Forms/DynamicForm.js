@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import DTD from '../../dynamicFormsDTD';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 
 class DynamicForm extends Component {

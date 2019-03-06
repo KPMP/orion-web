@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'reactstrap';
 import SelectBox from './FormComponents/SelectBox';
 import TextField from './FormComponents/TextField';
 import NumericField from './FormComponents/NumericField';

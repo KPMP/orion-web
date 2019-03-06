@@ -26,7 +26,6 @@
     "popper.js": "1.14.3",
     "prop-types": "^15.7.2",
     "react": "16.7.0",
-    "react-bootstrap": "0.32.1",
     "react-datetime": "2.14.0",
     "react-dom": "16.7.0",
     "react-fine-uploader": "1.1.0",
