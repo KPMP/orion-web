@@ -1,13 +1,24 @@
 $dropdown-width: 265px;
 
 $header-height-padded: 59px;
+$footer-height-padded: 32px;
 $filter-height: 37px;
 $filter-min-width: 195px;
 $packages-filter-controls-sm-height: 186px;
 $packages-filter-controls-md-height: 86px;
 
+$footer-color: #283C5E;
+
 body, .margin-top-for-header {
 	margin-top: $header-height-padded;
+}
+
+#root {
+	margin-bottom: $footer-height-padded;
+}
+
+#footer {
+	background: $footer-color;
 }
 
 .ant-select {
