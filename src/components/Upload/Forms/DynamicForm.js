@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'antd';
-import DTD from '../../dynamicFormsDTD';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
 import { Row, Col } from 'react-bootstrap';
 import FileDropzone from './FileDropzone';
@@ -20,7 +19,7 @@ class DynamicForm extends Component {
 		let dynamicFormElements = [];
 		let dynamicSections = null;
 		if (getFieldValue('packageType') !== undefined) {
-			dynamicFormElements = DTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
@@ -37,7 +36,7 @@ class DynamicForm extends Component {
 					</Col>
 				</Row>
 				<hr/>
-				{this.renderSection(DTD.standardFields, this.props.form, this.props.userInformation)}
+				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
 				<Row className="submit-button-row">
 					<Col md={12}>

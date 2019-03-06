@@ -6,6 +6,7 @@ import { getUserInformation } from '../actions/userActions';
 import * as filterActions from '../actions/filterActions';
 import { connect } from 'react-redux';
 import ErrorBoundaryContainer from './Error/ErrorBoundaryContainer';
+import { getFormDTD } from '../actions/Upload/uploadActions';
 
 class MainPage extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class MainPage extends Component {
     componentDidMount() {
         getUserInformation()(this.props.dispatch);
         filterActions.getUsers()(this.props.dispatch);
+        getFormDTD()(this.props.dispatch);
     }
 
     render() {
