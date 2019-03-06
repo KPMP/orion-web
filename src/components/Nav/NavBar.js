@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavButton from './NavButton';
-import { Navbar, NavbarBrand, Col, Row } from 'reactstrap';
+import { Navbar, NavbarBrand, Col } from 'reactstrap';
+import NavUser from "./NavUser";
 
 export const panes = {
     packages: 'Packages',
@@ -11,10 +12,15 @@ class NavBar extends Component {
     render() {
         let name = this.props.displayName;
         if (name === "") {
-        		name = this.props.firstName + " " + this.props.lastName;
+            name = this.props.firstName + " " + this.props.lastName;
         }
+
+        if (name === " ") {
+            name = "NO USERNAME";
+        }
+
     		return (
-                <Navbar className="px-1 py-1 fixed-top">
+                <Navbar id="navbar" className="px-1 py-1 fixed-top">
                     <Col sm={4}>
                         <div className="navbar-header">
                             <NavbarBrand >
@@ -29,9 +35,7 @@ class NavBar extends Component {
                         </div>
                     </Col>
                     <Col sm={4}>
-                        <div className="text-right">
-                            {this.props.displayName} &nbsp; <a href="/Shibboleth.sso/Logout?return=/Shibboleth.sso/Login">Sign out</a>
-                        </div>
+                        <NavUser displayName={name}/>
                     </Col>
                 </Navbar>
         );

@@ -1,5 +1,3 @@
-$dropdown-width: 265px;
-
 $header-height-padded: 59px;
 $footer-height-padded: 32px;
 $filter-height: 37px;
@@ -9,7 +7,7 @@ $packages-filter-controls-md-height: 86px;
 
 $footer-color: #283C5E;
 
-body, .margin-top-for-header {
+body {
 	margin-top: $header-height-padded;
 }
 
@@ -59,7 +57,7 @@ a {
 	padding-right: 15px;
 	padding-left: 15px;
 	padding-bottom: 5px;
-	
+
 	.attachmentsModalRow {
 		border-bottom: 1px solid #e5e5e5;
 		padding-top: 15px;
@@ -172,33 +170,22 @@ PACKAGES
     }
 }
 
-.navbar {
+#navbar {
     background-color: white;
 	border-bottom: 1px solid #e7e7e7;
 
     .navbar-header {
     	width: 220px;
     }
-    .nav-route {
-		text-align: center;
-		padding-top: 10px;
-    }
-	.nav-user {
-		float: right;
-		text-align: right;
-		padding-top: 20px;
-	}
+}
 
-	@media only screen and (max-width: 768px) {
-		.nav-route {
-			text-align: left;
-		}
-		.nav-user {
-			text-align: left;
-			float: left;
-		}
-	}
-
+.fixed-top-subnav {
+	/* to avoid clash with #navbar */
+	position: fixed;
+	top: $header-height-padded;
+	right: 0;
+	left: 0;
+	z-index: 1029; // This is 1030 - 1, just under the Bootstrap 4 z index for dropdowns
 }
 
 .btn-primary {
