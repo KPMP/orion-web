@@ -114,8 +114,8 @@ class UploadForm extends Component {
 		let packageTypeOtherError = isFieldTouched('packageTypeOther') && getFieldError('packageTypeOther');
 		
 		return (
-			<div>
-				<Form >
+			<article className="container-fluid">
+				<Form className="container-fluid">
 					<Row>
 						<Col md="3">
 							<SelectBox label="Select a package type" fieldName='packageType' options={packageTypeList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
@@ -123,12 +123,12 @@ class UploadForm extends Component {
 						{getFieldValue('packageType') === 'Other' &&
 							<Col md="3" className="secondField">
 								<TextField label="Package Type Other (specify)" fieldName="packageTypeOther" fieldOptions={requiredFieldOptions} getFieldDecorator={getFieldDecorator} error={packageTypeOtherError}/>
-							</Col>	
+							</Col>
 						}
 					</Row>
 					<hr/>
 					{ getFieldValue('packageType') === undefined && <DefaultUploadForm/> }
-					{ getFieldValue('packageType') !== undefined && 
+					{ getFieldValue('packageType') !== undefined &&
 						<div id="uploadForm">
 							<Row className="dropzone">
 								<Col md={12}>
@@ -136,15 +136,15 @@ class UploadForm extends Component {
 								</Col>
 							</Row>
 							<Row>
-							 <div id="uploadInfo">
-					    		<div className="header">
-					    			Submitted by
-					    		</div>
-					        		{(dontNeedUserInfo) ?
-					        			(	<Row>
+							 <Col md={12} id="uploadInfo">
+								<div className="header">
+									Submitted by
+								</div>
+									{(dontNeedUserInfo) ?
+										(	<Row>
 												<Col md="8">{this.props.userInformation.firstName} {this.props.userInformation.lastName} ({this.props.userInformation.email}) </Col>
 											</Row> ) :
-						        		( <div>
+										( <div>
 											<Row>
 												<div>
 													<Col md="4">
@@ -153,8 +153,8 @@ class UploadForm extends Component {
 													<Col md="4" className="secondField">
 														<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
 													</Col>
-													
-						        				</div>
+
+												</div>
 											</Row>
 											<Row>
 												<Col md="4">
@@ -162,36 +162,36 @@ class UploadForm extends Component {
 												</Col>
 											</Row>
 											</div>)
-					        		}
-					        <Row>
-					        		<Col md="4">
-					        			<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        	</Row>
-					        	<Row>
-					        		<Col md="12">
-							        	<div className="header" id="packageInformationSection">
-							        		Package Information
-							        	</div>
-						        	</Col>
-					        	</Row>
-					        <Row >
-					        		<Col md="4">
-					        			<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        		<Col md="4" className="secondField">
-					        			<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} form={this.props.form}/>
-					        		</Col>
-					        	</Row>
-					        <Row>
-					        		<Col md="4">
-					        			<Form.Item label="Experiment Date">
-					        			{getFieldDecorator('experimentDate', {rules: [{required: false}]})(
-					        				<DatePicker format={'MM/DD/YYYY'} placeholder='mm/dd/yyyy' name='experimentDate'/>
-					        			)}
-					        			</Form.Item>
-					        		</Col>
-					        	</Row>
+									}
+							<Row>
+									<Col md="4">
+										<SelectBox label="Institution" fieldName='institution' options={institutionList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
+									</Col>
+								</Row>
+								<Row>
+									<Col md="12">
+										<div className="header" id="packageInformationSection">
+											Package Information
+										</div>
+									</Col>
+								</Row>
+							<Row >
+									<Col md="4">
+										<SelectBox label="Associated Protocol" fieldName='protocol' options={protocolList.options} fieldOptions={requiredFieldOptions} form={this.props.form}/>
+									</Col>
+									<Col md="4" className="secondField">
+										<TextField label="Subject/Sample ID" fieldName="subjectId" fieldOptions={requiredFieldOptions} form={this.props.form}/>
+									</Col>
+								</Row>
+							<Row>
+									<Col md="4">
+										<Form.Item label="Experiment Date">
+										{getFieldDecorator('experimentDate', {rules: [{required: false}]})(
+											<DatePicker format={'MM/DD/YYYY'} placeholder='mm/dd/yyyy' name='experimentDate'/>
+										)}
+										</Form.Item>
+									</Col>
+								</Row>
 							<Row>
 								<Col md="8">
 									<Form.Item label="Description"  validateStatus={descriptionError ? 'error' : ''}>
@@ -203,7 +203,7 @@ class UploadForm extends Component {
 									</Form.Item>
 								</Col>
 							</Row>
-						</div>
+						</Col>
 							</Row>
 							<hr/>
 							<Row>
@@ -216,7 +216,7 @@ class UploadForm extends Component {
 						</div>
 					}
 				</Form>
-			</div>
+			</article>
 		);
 	}
 }
