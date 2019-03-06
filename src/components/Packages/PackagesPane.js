@@ -38,7 +38,7 @@ class PackagesPane extends Component {
 					</Row>
                     <Row>
 						<Col xs={12}>
-                        	<i class="text-secondary small">Search results are displayed in reverse chronological order</i>
+                        	<i class="text-secondary">Search results are displayed in reverse chronological order</i>
 						</Col>
                     </Row>
     			</header>

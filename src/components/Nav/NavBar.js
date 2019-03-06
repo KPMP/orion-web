@@ -23,18 +23,19 @@ class NavBar extends Component {
                 <Navbar id="navbar" className="px-1 py-1 fixed-top">
                     <Col sm={4}>
                         <div className="navbar-header">
-                            <NavbarBrand >
-                                <img src="img/logo_KPMP-Data-Lake-Uploader.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
+                            <NavbarBrand className="d-flex align-items-center">
+                                <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
+                                <span className="ml-2">Data Lake Uploader</span>
                             </NavbarBrand>
                         </div>
                     </Col>
-                    <Col sm={4}>
+                    <Col sm={4} className="d-none d-md-block">
                         <div className="text-center">
                             <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                             <NavButton name={panes.upload} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                         </div>
                     </Col>
-                    <Col sm={4}>
+                    <Col sm={4} className="d-none d-md-block">
                         <NavUser displayName={name}/>
                     </Col>
                 </Navbar>
