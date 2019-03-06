@@ -17,7 +17,7 @@ class TextAreaComponent extends Component {
 		return(
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<TextArea name={this.props.fieldName} rows={3} />
+					<TextArea name={this.props.fieldName} rows={3} placeholder={this.props.additionalProps.placeholderText}/>
 				)}
 			</Form.Item>		
 		
@@ -30,7 +30,8 @@ TextAreaComponent.propTypes = {
     label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool.isRequired,
     isDisabled: PropTypes.bool,
-    form: PropTypes.object.isRequired
+    form: PropTypes.object.isRequired,
+    additionalProps: PropTypes.object
 };
 
 export default TextAreaComponent;

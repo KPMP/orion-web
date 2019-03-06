@@ -65,9 +65,9 @@
 				"label": "Dataset Description",
 				"type": "Text Area",
 				"required": true,
-				"additionalProps": [{
+				"additionalProps": {
 					"placeholderText": "Describe the contents of this package"
-				}],
+				},
 				"fieldName": "description"
 			},
 			{
@@ -102,9 +102,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "cryosectioningDate"
 						},
 						{
@@ -112,9 +112,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "tissueSegmentationDissociationDate"
 						},
 						{
@@ -122,9 +122,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "rnaIsolationDate"
 						},
 						{
@@ -166,9 +166,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "bioanalyzerDate"
 						},
 						{
@@ -225,9 +225,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "libraryPrepDate"
 						},
 						{
@@ -267,9 +267,9 @@
 							"label": "Processing Comments",
 							"type": "Text Area",
 							"required": false,
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "Additional comments on the RNA Processing"
-							}],
+							},
 							"fieldName": "rnaProcessingComments"
 						}
 					]
@@ -305,9 +305,9 @@
 							"type": "Date",
 							"required": true,
 							"validations": ["noFutureDate"],
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "mm/dd/yyyy"
-							}],
+							},
 							"fieldName": "sequencingDate"
 						},
 						{
@@ -367,9 +367,9 @@
 							"label": "Sequencing Comments",
 							"type": "Text Area",
 							"required": false,
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "Additional comments on the RNA Sequencing"
-							}],
+							},
 							"fieldName": "rnaSequencingComments"
 						}
 					]
@@ -431,9 +431,9 @@
 							"label": "Data Analysis Comments",
 							"type": "Text Area",
 							"required": false,
-							"additionalProps": [{
+							"additionalProps": {
 								"placeholderText": "Additional comments on the RNA Analysis"
-							}],
+							},
 							"fieldName": "rnaDataAnalysisComments"
 						}
 					]
