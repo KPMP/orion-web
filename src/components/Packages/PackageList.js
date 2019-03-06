@@ -13,7 +13,7 @@ class PackageList extends Component {
         });
         return (
             panels.length > 0 ?
-                <div id="pkg-list">
+                <div id="packages-list">
                     {panels}
                 </div>
             :

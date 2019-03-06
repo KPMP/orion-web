@@ -6,7 +6,6 @@ body {
 	margin-top: $header-height;
 }
 
-
 .ant-select {
 	width: 100%;
 }
@@ -29,7 +28,6 @@ a {
 	width: $dropdown-width;
 }
 
-
 #dynamicUploadForm {
 	div[class^='col-'] {
 		min-height: 86px;
@@ -39,17 +37,6 @@ a {
 		min-height: 125px;
 	}
 
-}
-
-
-@media only screen and (max-width:1024px) {
-	.filter {
-		display: block !important;
-	}
-
-	#pkg-list {
-		height: 50vh !important;
-	}
 }
 
 .filter {
@@ -108,61 +95,28 @@ a {
 	}
 }
 
-#pkg-search-bar {
-    width: 200px;
-}
+#packages-pane {
 
-#pkg-list {
-    //margin: 10px 0 0 0;
-    //height: calc(100vh - 150px - #{$filter-height});
-    //overflow-y: scroll;
-    .pkg-panel:nth-child(even) {
-        background-color: rgb(230, 241, 255);
-    }
+	margin-top: $filter-height;
+
+	#packages-filter-controls {
+
+	}
+
+	#packages-list {
+		.bg-light {
+			background-color: rgb(230, 241, 255) !important;
+		}
+	}
 }
 
 .pkg-filter {
     margin: 0px 10px 0px 0px;
 }
 
-.pkg-type-icon {
-	margin-right: 10px;
-}
-
 .search-glass {
     background: rgb(2, 117, 216);
     color: white;
-}
-
-.pkg-panel {
-    margin: 0px 10px 10px 0px;
-	.odd-row {
-		background-color: rgba(230, 241, 255, 1);
-	}
-}
-
-.pkg-info {
-	overflow: hidden;
-    div:nth-child(2) {
-        margin: 12px 0px 12px;
-    }
-}
-
-.pkg-panel-right {
-    div:nth-child(2) {
-        margin: 7px 0px 7px;
-    }
-    div {
-        button {
-            background: rgb(2, 117, 216);
-            color: white;
-            font-family: "ArialMT", "Arial";
-        }
-    }
-}
-
-.pkg-panel-left {
-	padding-left: 5px;
 }
 
 .dd-gray-text {

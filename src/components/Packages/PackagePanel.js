@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
-import { Panel, Col, Row, Button } from 'react-bootstrap';
+import { Col, Row, Button } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
@@ -41,37 +41,35 @@ class PackagePanel extends Component {
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
-    			<div>
-	            <Panel className="pkg-panel">
-	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
-	                    <Row>
-	                        <Col md={6} className="pkg-panel-left">
-								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
-								<div className="pkg-info">
-									<div><b>{packageInfo.subjectId}</b></div>
-									<div>{packageInfo.packageType}</div>
-									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</div>
+				<section>
+					<Row className={
+						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
+						"border border-primary rounded no-gutters px-2 py-2 mx-2 my-2"}>
+						<Col md={10} className="media">
+							<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
+							<Row className="media-body mx-2 align-items-center">
+								<Col xs={12}><b>{packageInfo.subjectId}</b></Col>
+								<Col xs={12}>{packageInfo.packageType}</Col>
+								<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</Col>
+							</Row>
+						</Col>
+						<Col md={2}>
+							<div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
+							<div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
+							{this.props.uploadPackage.downloadable &&
+								<div>
+									<Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
+										<span className="glyphicon glyphicon-download-alt" />
+										<i> </i>
+										<b>Download</b>
+									</Button>
 								</div>
-	                        </Col>
-	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
-	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
-	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
-	                            {this.props.uploadPackage.downloadable &&
-		                            <div>
-		                                <Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
-		                                    <span className="glyphicon glyphicon-download-alt" />
-		                                    <i> </i>
-		                                    <b>Download</b>
-		                                </Button>
-		                            </div>
-	                            }
-	                        </Col>
-	                    </Row>
-	                    <AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.attachments} close={this.handleAttachmentClick}/>
-						<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick}/>
-					</Panel.Body>
-	            </Panel>
-            </div>
+							}
+						</Col>
+					</Row>
+					<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.attachments} close={this.handleAttachmentClick}/>
+					<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick}/>
+				</section>
         );
     }
 }

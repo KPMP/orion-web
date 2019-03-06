@@ -21,8 +21,8 @@ class PackagesPane extends Component {
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
         return (
-    		<article className="container">
-    			<Row>
+    		<article id="packages-pane" className="container">
+    			<Row id="packages-filter-controls">
     				<Col xs={12} >
     					<div>
     						<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
