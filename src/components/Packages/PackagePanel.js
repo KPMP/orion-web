@@ -6,6 +6,8 @@ import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class PackagePanel extends Component {
 
@@ -45,26 +47,31 @@ class PackagePanel extends Component {
 					<Row className={
 						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
 						"border border-primary rounded no-gutters px-2 py-2 mx-2 my-2"}>
-						<Col md={10} className="media align-items-center">
+						<Col xs={12} md={10} className="media align-items-center">
 							<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
-							<Row className="media-body mx-2 align-items-center">
-								<Col xs={12}><b>{packageInfo.subjectId}</b></Col>
-								<Col xs={12}>{packageInfo.packageType}</Col>
+							<Row className="media-body mx-2 d-flex align-items-center">
+								<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
+								<Col xs={12} className="pb-1">{packageInfo.packageType}</Col>
 								<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</Col>
 							</Row>
 						</Col>
-						<Col md={2}>
-							<div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
-							<div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
-							{this.props.uploadPackage.downloadable &&
-								<div>
-									<Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
-										<span className="glyphicon glyphicon-download-alt" />
-										<i> </i>
-										<b>Download</b>
+						<Col xs={12} md={2}>
+							<Row>
+								<Col xs={4} md={12}>
+									<a className="d-block text-primary" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
+                                </Col>
+								<Col xs={4} md={12}>
+									<a className="d-block text-primary pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
+								</Col>
+							{!this.props.uploadPackage.downloadable &&
+								<Col xs={4} md={12}>
+									<Button size="sm" color="primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
+										<FontAwesomeIcon icon={faDownload} />
+										<span>&nbsp;Download</span>
 									</Button>
-								</div>
+								</Col>
 							}
+							</Row>
 						</Col>
 					</Row>
 					<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.attachments} close={this.handleAttachmentClick}/>
