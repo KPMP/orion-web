@@ -1,13 +1,13 @@
 $dropdown-width: 265px;
 
-$header-height: 68px;
+$header-height-padded: 59px;
 $filter-height: 37px;
 $filter-min-width: 195px;
-$packages-filter-controls-sm-height: 166px;
-$packages-filter-controls-md-height: 66px;
+$packages-filter-controls-sm-height: 186px;
+$packages-filter-controls-md-height: 86px;
 
 body, .margin-top-for-header {
-	margin-top: $header-height;
+	margin-top: $header-height-padded;
 }
 
 .ant-select {
@@ -97,6 +97,9 @@ PACKAGES
 	}
 
 	#packages-filter-controls {
+		background-color: white;
+		border: solid #e7e7e7;
+		border-width: 1px 0;
 
 		/* xs to sm */
 		height: $packages-filter-controls-sm-height;
@@ -160,8 +163,7 @@ PACKAGES
 
 .navbar {
     background-color: white;
-    border-bottom: 1px solid #e7e7e7;
-    margin-bottom: 10px;
+	border-bottom: 1px solid #e7e7e7;
 
     .navbar-header {
     	width: 220px;

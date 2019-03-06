@@ -17,12 +17,11 @@ class PackagesPane extends Component {
 		return userOptions;
 	}
 	
-	
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
         return (
     		<article id="packages-pane" className="container">
-    			<header id="packages-filter-controls" className="container-fluid margin-top-for-header fixed-top">
+    			<header id="packages-filter-controls" className="container-fluid margin-top-for-header fixed-top pt-3">
 					<Row noGutters>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-2">
 							<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
