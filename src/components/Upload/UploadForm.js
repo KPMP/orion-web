@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from './fineUploader';
 import DynamicForm from './Forms/DynamicForm';
+import { connect } from 'react-redux';
+import { getFormDTD } from '../../actions/Upload/uploadActions';
 
 let requiredFields = ['packageType', 'submitterFirstName', 'submitterLastName', 'submitterEmail', 'institution', 'protocol', 'subjectId', 'description'];
 let submitDisabled = true;
@@ -65,6 +67,11 @@ class UploadForm extends Component {
 			}
 		})
 	}
+	
+
+    componentDidMount() {
+        getFormDTD()(this.props.dispatch);
+    }
     
 	isSubmitDisabled = () => {
 		
@@ -101,4 +108,4 @@ class UploadForm extends Component {
 	}
 }
 
-export default UploadForm;
+export default connect()(UploadForm);

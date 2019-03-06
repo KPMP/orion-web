@@ -13,11 +13,16 @@ class TextAreaComponent extends Component {
 		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
+		let placeholderText = undefined;
+		if (this.props.additionalProps !== undefined) {
+			placeholderText = this.props.additionalProps.placeholderText;
+		}
+		
 		
 		return(
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<TextArea name={this.props.fieldName} rows={3} placeholder={this.props.additionalProps.placeholderText}/>
+					<TextArea name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
 				)}
 			</Form.Item>		
 		
