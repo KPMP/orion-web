@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import { Col, Row, Button } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
-import AttachmentsModal from './AttachmentsModal';
-import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AttachmentsModal from './AttachmentsModal';
+import MetadataModal from './MetadataModal';
 
 class PackagePanel extends Component {
 
-	constructor() {
-		super();
-		this.state = { showAttachments: false };
+	constructor(props) {
+		super(props);
+		this.state = { showAttachments: false, showMetadata:false };
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 	}
