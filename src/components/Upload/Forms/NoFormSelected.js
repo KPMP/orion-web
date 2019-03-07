@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DefaultUploadForm extends Component {
+class NoFormSelected extends Component {
 
     render() {
         const svg = <svg
@@ -60,4 +60,4 @@ class DefaultUploadForm extends Component {
     }
 }
 
-export default DefaultUploadForm;
+export default NoFormSelected;

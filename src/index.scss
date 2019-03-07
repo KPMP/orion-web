@@ -1,4 +1,9 @@
 $filter-height: 57px;
+$dropdown-width: 265px;
+
+.ant-select {
+	width: 100%;
+}
 
 a {
 	cursor: pointer;
@@ -27,8 +32,24 @@ a {
 }
 
 .filter-control {
-	width: 265px;
+	width: $dropdown-width;
 	padding-right: 15px;
+}
+
+.filters {
+	margin-left: -15px;
+}
+
+
+#dynamicUploadForm {
+	div[class^='col-'] {
+		min-height: 86px;
+	}
+	
+	.textArea {
+		min-height: 125px;
+	}
+
 }
 
 @media only screen and (max-width:1024px) {
