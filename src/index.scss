@@ -132,6 +132,10 @@ PACKAGES
 		}
 
 		color: var(--dark);
+
+		.packages-querying {
+			color: var(--gray);
+		}
 	}
 
 	#packages-button-add-new {

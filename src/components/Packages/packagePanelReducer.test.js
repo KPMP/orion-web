@@ -191,7 +191,8 @@ describe('packages', () => {
 			};
 			expect(packages(state, action)).toEqual({filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: [], userList: []})
+				filters: [],
+				userList: []})
 		});
 		it('should remove filter and update filtered packages', () => {
 			let state = {
@@ -206,7 +207,8 @@ describe('packages', () => {
 			};
 			expect(packages(state, action)).toEqual({filtered: [  { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: [{filterType: filterActions.filterTypes.SUBMITTER, value: '345'}], userList: []})
+				filters: [{filterType: filterActions.filterTypes.SUBMITTER, value: '345'}],
+				userList: []})
 		});
 	});
 	describe("set_users action", () => {
@@ -223,7 +225,32 @@ describe('packages', () => {
 			}
 			expect(packages(state, action)).toEqual({filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
 				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
-				filters: [], userList: [{user: 'john', id: '123'}]})
+				filters: [],
+				userList: [{user: 'john', id: '123'}]})
+		});
+	});
+	describe("set_querying action", () => {
+		it('should set querying to true', () => {
+			let state = {
+                filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+                unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+                filters: [],
+                userList: [],
+                "isQuerying": null
+            };
+
+			let action = {
+				type: actionNames.SET_IS_QUERYING,
+				payload: true
+			};
+
+			expect(packages(state, action)).toEqual({
+                filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+                unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+                filters: [],
+                userList: [],
+                "isQuerying": true
+            });
 		});
 	});
 	

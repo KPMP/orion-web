@@ -5,9 +5,7 @@ class UploadPane extends Component {
 
     render() {
     		return (
-            <div className="pane">
-                <UploadFormContainer />
-            </div>
+            <UploadFormContainer />
         )
     }
 }

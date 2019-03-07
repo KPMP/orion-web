@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PackagePanel from './PackagePanel';
+import {Row, Col} from 'reactstrap';
 
 class PackageList extends Component {
 
@@ -8,18 +9,32 @@ class PackageList extends Component {
     }
 
     render() {
-        const panels = this.props.packages.filtered.map((uploadPackage, index) => {
-            return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
-        });
+        let isQuerying = this.props.packages.isQuerying === null || this.props.packages.isQuerying;
+        let panels = [];
+
+        if(!isQuerying) {
+            panels = this.props.packages.filtered.map((uploadPackage, index) => {
+                return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
+            });
+        }
+
         return (
-            panels.length > 0 ?
-                <div id="packages-list">
-                    {panels}
-                </div>
-            :
-                <div className="noResults alert alert-info">
-                    No packages returned for the selected criteria.
-                </div>
+        	<section id="packages-list" class="container-fluid">{
+        	    isQuerying ?
+                    <h4 id="packages-querying" className="packages-querying text-center pt-3">
+                        Loading packages...
+                    </h4>
+                : panels.length > 0 ?
+                    <Row>
+                        {panels}
+                    </Row>
+                    :
+                    <Row>
+                        <Col className="alert alert-info">
+                            No packages returned for the selected criteria.
+                        </Col>
+                    </Row>
+            }</section>
         );
     }
 }

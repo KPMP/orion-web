@@ -30,7 +30,7 @@ class DynamicForm extends Component {
 		}
 		
 		return (
-			<section id="dynamicUploadForm"  className="container justify-content-center">
+			<section id="dynamicUploadForm"  className="container justify-content-center pt-4">
 				<Row className="dropzone">
 					<Col md={12}>
 						<FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>
