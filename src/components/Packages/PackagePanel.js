@@ -43,7 +43,7 @@ class PackagePanel extends Component {
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
     		return (
-				<section>
+				<section className="package">
 					<Row className={
 						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
 						"border border-primary rounded no-gutters px-2 py-2 mx-2 my-2"}>
