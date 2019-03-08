@@ -12,11 +12,16 @@ class TextField extends Component {
 		let isDisabled = this.props.isDisabled || false;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
+		let placeholderText = undefined;
+		if (this.props.additionalProps !== undefined) {
+			placeholderText = this.props.additionalProps.placeholderText;
+		}
+		
 		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Input name={this.props.fieldName} disabled={isDisabled}/>
+					<Input name={this.props.fieldName} disabled={isDisabled} placeholder={placeholderText}/>
 				)}
 			</Form.Item>
 		);
@@ -29,7 +34,8 @@ TextField.propTypes = {
     label: PropTypes.string.isRequired,
 	isRequired: PropTypes.bool.isRequired,
 	isDisabled: PropTypes.bool,
-	form: PropTypes.object.isRequired
+	form: PropTypes.object.isRequired,
+	additionalProps: PropTypes.object
 };
 
 export default TextField;

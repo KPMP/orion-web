@@ -11,11 +11,15 @@ class DateField extends Component {
 		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 		let fieldOptions = this.props.isRequired ? requiredFieldDateOptions : optionalFieldDateOptions;
-
+		let placeholderText = undefined;
+		if (this.props.additionalProps !== undefined) {
+			placeholderText = this.props.additionalProps.placeholderText;
+		}
+		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker mode='date' format={'MM/DD/YYYY'} placeholder={'MM/DD/YYYY'} name={this.props.fieldName}/>
+					<DatePicker mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);
@@ -28,7 +32,8 @@ DateField.propTypes = {
 	label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool.isRequired,
     isDisabled: PropTypes.bool,
-    form: PropTypes.object.isRequired
+    form: PropTypes.object.isRequired,
+    additionalProps: PropTypes.object
 };
 
 export default DateField;

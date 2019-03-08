@@ -49,5 +49,12 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
+  "eslintConfig": {
+        "env": {
+            "browser": true,
+            "node": true,
+            "cache": true
+        }
+    },
   "proxy": "http://localhost:3030"
 }

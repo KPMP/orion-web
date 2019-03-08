@@ -5,7 +5,8 @@ import { uploadPackage } from '../../actions/Packages/packageActions';
 const mapStateToProps = (state, props) =>
 ({
 	isUploading: state.isUploading,
-	userInformation: state.userInformation
+	userInformation: state.userInformation,
+	formDTD: state.formDTD
 });
     
 const mapDispatchToProps = (dispatch, props) =>

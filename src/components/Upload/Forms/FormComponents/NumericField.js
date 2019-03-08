@@ -29,7 +29,8 @@ NumericField.propTypes = {
     label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool.isRequired,
     isDisabled: PropTypes.bool,
-    form: PropTypes.object.isRequired
+    form: PropTypes.object.isRequired,
+    additionalProps: PropTypes.object
 };
 
 export default NumericField;

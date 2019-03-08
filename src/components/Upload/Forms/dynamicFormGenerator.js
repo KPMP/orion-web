@@ -73,7 +73,8 @@ export class DynamicFormGenerator {
 						isMultiple={false}
 						isRequired={isRequired}
                         isDisabled={isDisabled}
-						options={this.parseOptions(fieldJson, form)} />;
+						options={this.parseOptions(fieldJson, form)}
+						additionalProps={fieldJson.additionalProps}/>;
 				break;
 				
 			case FIELD_TYPES.MULTI_SELECT:
@@ -85,7 +86,8 @@ export class DynamicFormGenerator {
 						fieldName={fieldJson.fieldName}
 						isRequired={isRequired}
                         isDisabled={isDisabled}
-						options={this.parseOptions(fieldJson, form)} />;
+						options={this.parseOptions(fieldJson, form)}
+						additionalProps={fieldJson.additionalProps}/>;
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
@@ -98,7 +100,8 @@ export class DynamicFormGenerator {
                         label={fieldJson.label}
 						fieldName={fieldJson.fieldName}
 						isRequired={isRequired}
-                        isDisabled={isDisabled}/>;
+                        isDisabled={isDisabled}
+						additionalProps={fieldJson.additionalProps}/>;
 				break;
 				
 			case FIELD_TYPES.TEXT_AREA:
@@ -107,7 +110,8 @@ export class DynamicFormGenerator {
                     label={fieldJson.label}
 					fieldName={fieldJson.fieldName}
 					isRequired={isRequired}
-                    isDisabled={isDisabled}/>;
+                    isDisabled={isDisabled}
+					additionalProps={fieldJson.additionalProps}/>;
 				colLg = 12;
 				colMd = 12;
 				colSm = 12;
@@ -144,7 +148,10 @@ export class DynamicFormGenerator {
 			}
 		}
 
-        values.sort();
+        values.sort(function(a,b){
+        	return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+        
         values = values.map((element) => {
             return {label: element, value: element};
         });
