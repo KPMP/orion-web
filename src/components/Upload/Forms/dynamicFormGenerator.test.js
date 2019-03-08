@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { DynamicFormGenerator } from './dynamicFormGenerator';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'reactstrap';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Form } from 'antd';
 import TextArea from './FormComponents/TextArea';
 import TextField from './FormComponents/TextField';
 import SelectBox from './FormComponents/SelectBox';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PackagePanel from './PackagePanel';
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'reactstrap';
 
 class PackageList extends Component {
 
@@ -19,9 +19,9 @@ class PackageList extends Component {
         }
 
         return (
-        	<section id="pkg-list" class="container-fluid">{
+        	<section id="packages-list" class="container-fluid">{
         	    isQuerying ?
-                    <h4 id="pkg-querying" className="text-center">
+                    <h4 id="packages-querying" className="packages-querying text-center pt-3">
                         Loading packages...
                     </h4>
                 : panels.length > 0 ?
@@ -30,7 +30,7 @@ class PackageList extends Component {
                     </Row>
                     :
                     <Row>
-                        <Col className="noResults alert alert-info">
+                        <Col className="alert alert-info">
                             No packages returned for the selected criteria.
                         </Col>
                     </Row>

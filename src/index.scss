@@ -1,45 +1,31 @@
-$filter-height: 57px;
-$dropdown-width: 265px;
+$header-height-padded: 59px;
+$footer-height-padded: 32px;
+$filter-height: 37px;
+$filter-min-width: 195px;
+$packages-filter-controls-sm-height: 186px;
+$packages-filter-controls-md-height: 86px;
 
-.ant-select {
-	width: 100%;
+$footer-color: #283C5E;
+
+body {
+	margin-top: $header-height-padded;
+}
+
+#root {
+	margin-bottom: $footer-height-padded;
+}
+
+#footer {
+	background: $footer-color;
 }
 
 a {
 	cursor: pointer;
 }
 
-.logo {
+.ant-select {
 	width: 100%;
-	height: 100%;
 }
-
-.header {
-	font-size: 18px;
-	font-weight: 600;	
-}
-
-.row {
-	padding-top: 5px;
-	margin-right: 0px !important;
-}
-
-.row.no-gutters {
-	[class^="col-"] {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-}
-
-.filter-control {
-	width: $dropdown-width;
-	padding-right: 15px;
-}
-
-.filters {
-	margin-left: -15px;
-}
-
 
 #dynamicUploadForm {
 	div[class^='col-'] {
@@ -52,21 +38,6 @@ a {
 
 }
 
-@media only screen and (max-width:1024px) {
-	.filter {
-		display: block !important;
-	}
-
-	#pkg-list {
-		height: 50vh !important;
-	}
-}
-
-.filter {
-	height: $filter-height;
-	display: inline-table;
-}
-
 .noResults {
 	margin-top: 10px;
 }
@@ -76,7 +47,7 @@ a {
 	padding-right: 15px;
 	padding-left: 15px;
 	padding-bottom: 5px;
-	
+
 	.attachmentsModalRow {
 		border-bottom: 1px solid #e5e5e5;
 		padding-top: 15px;
@@ -111,67 +82,76 @@ a {
 	}
 }
 
-.pane {
-	height: calc(100vh - 37px - #{$filter-height});
-    i {
-        color: gray;
-    }
-}
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+PACKAGES
+*/
+#packages-pane {
+	/* xs to sm */
+	padding-top: $packages-filter-controls-sm-height;
 
-#pkg-querying {
-	color: gray;
-}
+	/* md and up */
+	@media (min-width: 768px) {
+		padding-top: $packages-filter-controls-md-height;
+	}
 
-#pkg-search-bar {
-    width: 200px;
-}
+	#packages-filter-controls {
+		background-color: white;
+		border: solid #e7e7e7;
+		border-width: 1px 0;
 
-#pkg-list {
-    margin: 10px 0 0 0;
-    height: calc(100vh - 150px - #{$filter-height});
-    overflow-y: scroll;
-    .pkg-panel:nth-child(even) {
-        background-color: rgb(230, 241, 255);
-    }
-}
+		/* xs to sm */
+		height: $packages-filter-controls-sm-height;
+		i {
+			font-size: x-small;
+		}
 
-.pkg-type-icon {
-	margin-right: 10px;
+		/* md and up */
+		@media (min-width: 768px) {
+			height: $packages-filter-controls-md-height;
+			i {
+				font-size: small;
+			}
+		}
+
+		.filter {
+			width: 100%;
+			min-width: $filter-min-width;
+			height: $filter-height;
+			display: inline-table;
+
+			.filter-control {
+				height: $filter-height;
+			}
+		}
+	}
+
+	#packages-list {
+		.bg-light {
+			background-color: rgb(230, 241, 255) !important;
+		}
+
+		color: var(--dark);
+
+		.packages-querying {
+			color: var(--gray);
+		}
+	}
+
+	#packages-button-add-new {
+		/* xs to sm */
+		width: 100%;
+
+		/* md and up */
+		@media (min-width: 768px) {
+			width: auto;
+		}
+	}
 }
 
 .search-glass {
     background: rgb(2, 117, 216);
     color: white;
-}
-
-.pkg-panel {
-    margin: 0px 10px 10px 0px;
-	.odd-row {
-		background-color: rgba(230, 241, 255, 1);
-	}
-	.side-link {
-		margin-bottom: 10px;
-	}
-}
-
-.pkg-info {
-	overflow: hidden;
-    div:nth-child(2) {
-        margin: 12px 0px 12px;
-    }
-}
-
-.pkg-panel-right {
-    div:nth-child(2) {
-        margin: 7px 0px 7px;
-    }
-    div {
-        button {
-            background: rgb(2, 117, 216);
-            color: white;
-            font-family: "ArialMT", "Arial";
-        }
-    }
 }
 
 .dd-gray-text {
@@ -192,33 +172,23 @@ a {
     }
 }
 
-.nav-container {
+#navbar {
     background-color: white;
-    border-bottom: 1px solid #e7e7e7;
-    margin-bottom: 10px;
-    .navbar-header {
-    	width: 220px;
-    	height: 68px;
-    }
-    .nav-route {
-		text-align: center;
-		padding-top: 10px;
-    }
-	.nav-user {
-		float: right;
-		text-align: right;
-		padding-top: 20px;
-	}
-	@media only screen and (max-width: 768px) {
-		.nav-route {
-			text-align: left;
-		}
-		.nav-user {
-			text-align: left;
-			float: left;
-		}
-	}
+	border-bottom: 1px solid #e7e7e7;
 
+	.navbar-brand img.logo {
+		width: 80px;
+		min-width: 80px;
+	}
+}
+
+.fixed-top-subnav {
+	/* to avoid clash with #navbar */
+	position: fixed;
+	top: $header-height-padded;
+	right: 0;
+	left: 0;
+	z-index: 1029; // This is 1030 - 1, just under the Bootstrap 4 z index for dropdowns
 }
 
 .btn-primary {
@@ -353,4 +323,37 @@ a {
 }
 .ant-form-item {
 	margin-bottom: 0px !important;
+}
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Bootstrap 4 breakpoints
+
+https://bootstrapcreative.com/bootstrap-4-media-queries/
+*/
+
+/*
+Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap because it is "mobile first"
+*/
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }

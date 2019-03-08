@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col } from 'reactstrap';
 import TextField from './TextField';
 
 class SubmitterInformation extends Component {
