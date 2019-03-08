@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'antd';
-import { DynamicFormGenerator } from './dynamicFormGenerator';
+import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 
