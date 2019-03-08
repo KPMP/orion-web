@@ -322,11 +322,33 @@ PACKAGES
 	}
 }
 
-.ant-form-item-label {
-	line-height: unset !important;
-}
+
 .ant-form-item {
 	margin-bottom: 0px !important;
+
+	.ant-form-item-label {
+		line-height: unset !important;
+
+		label::after {
+			display: none !important;
+			content: "" !important;
+		}
+
+		label.ant-form-item-required::before {
+			display: none !important;
+			content: "" !important;
+		}
+
+		label.ant-form-item-required::after {
+			display: inline-block !important;
+			margin-right: 4px;
+			color: #f5222d;
+			font-size: 14px;
+			font-family: SimSun,sans-serif;
+			line-height: 1;
+			content: "*" !important;
+		}
+	}
 }
 
 /*
