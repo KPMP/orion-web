@@ -41,6 +41,12 @@ export class DynamicFormGenerator {
 	preprocessSectionJson = (sectionJson) => {
 		//TODO reorder or otherwise process section JSON
 
+		//TODO walk the sectionJson for units; when found,
+		// 1) remove the unit field
+		// 2) find and remove the measured field, preserving the array index
+		// 3) at the array index, insert a new compound field for the fieldWithUnit component type
+
+		return sectionJson;
 	}
 
 	renderField = (fieldJson, form, userInformation) => {
