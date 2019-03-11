@@ -14,6 +14,10 @@ body {
 	padding-right: 0px !important;
 }
 
+body.modal-open {
+	overflow-y: auto;
+}
+
 #root {
 	margin-bottom: $footer-height-padded;
 }
