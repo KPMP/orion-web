@@ -329,6 +329,11 @@ PACKAGES
 	margin-bottom: 0px !important;
 }
 
+/** Fixes Bootstrap 4 scrollbar disappearance with modals in Windows browsers */
+.modal-open {
+	overflow-y: auto;
+}
+
 /*
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 Bootstrap 4 breakpoints
