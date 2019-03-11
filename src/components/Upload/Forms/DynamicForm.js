@@ -6,16 +6,11 @@ import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 
-let submitDisabled = true;
-let requiredFieldCount = 0;
-
 class DynamicForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		
-		requiredFieldCount = this.updateRequiredFieldCount(this.props.formDTD.standardFields);
-		
+
 		this.state = {
 			filesAdded: 0
 		}
@@ -49,25 +44,36 @@ class DynamicForm extends Component {
     		return true;
         });
 		
-		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
 	}
 	
-	updateRequiredFieldCount (section) {
-		let newCount = requiredFieldCount;
+	updateRequiredFieldCount (section, currentCount) {
+		let newCount = currentCount;
 		
 		section.fields.map((field) => {
 			if (field.required) {
 				newCount ++;
 			}
 		});
-		
-		requiredFieldCount = newCount;
+		return newCount;
 	}
 	
 	isSubmitDisabled() {
+		
+		let requiredFieldCount = this.updateRequiredFieldCount(this.props.formDTD.standardFields, 0);
+		let { getFieldValue } = this.props.form;
+		if (getFieldValue('packageType') !== undefined) {
+			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+			if (dynamicFormElements.length > 0) {
+				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
+				dynamicFormElements.sections.map((section) => {
+					requiredFieldCount = this.updateRequiredFieldCount(section, requiredFieldCount);
+				});
+			}
+		}
+		
 		let fieldsTouched = 0;
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
 		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
@@ -86,13 +92,10 @@ class DynamicForm extends Component {
     	let hasErrors = Object.keys(fieldsError).some(field => fieldsError[field]);
     	
     	if (!hasErrors && fieldsTouched >= requiredFieldCount && this.state.filesAdded > 0) {
-    		submitDisabled = false;
+    		return false;
     	}
+    	return true;
 	}
-	
-    componentDidUpdate() {
-    	this.isSubmitDisabled();
-    }
 	
 	render() {
 		
@@ -104,7 +107,6 @@ class DynamicForm extends Component {
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
-					this.updateRequiredFieldCount(section);
 					return this.renderSection(section, this.props.form, this.props.userInformation);
 				})
 			}
@@ -122,7 +124,7 @@ class DynamicForm extends Component {
 				{dynamicSections}
 				<Row className="submit-button-row">
 					<Col md={12}>
-						<Button id="submit" disabled={submitDisabled}>Submit</Button>
+						<Button id="submit" disabled={this.isSubmitDisabled()}>Submit</Button>
 					</Col>
 				</Row>
 			</section>
