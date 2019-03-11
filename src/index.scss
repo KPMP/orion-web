@@ -9,6 +9,13 @@ $footer-color: #283C5E;
 
 body {
 	margin-top: $header-height-padded;
+
+	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
+	padding-right: 0px !important;
+}
+
+body.modal-open {
+	overflow-y: auto;
 }
 
 #root {
