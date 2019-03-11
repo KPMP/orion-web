@@ -4,29 +4,29 @@ import PropTypes from "prop-types";
 
 const Option = Select.Option;
 
-const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
-const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 
 class SelectBox extends Component {
 	
 	render() {
-		let { getFieldDecorator, isFieldTouched, getFieldError } = this.props.form
-		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
-		let mode = this.props.isMultiple ? "multiple" : "default";
+		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required'}]};
+		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
+		let { getFieldDecorator, isFieldTouched, getFieldError } = this.props.form;
+		let mode = "default";
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
+		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
 
 		if(this.props.isMultiple) {
-			fieldOptions = Object.assign({}, fieldOptions);
 			fieldOptions.rules[0].type = 'array';
+			mode = "multiple";
 		}
 
 		return (
-			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
-			{getFieldDecorator(this.props.fieldName, this.props.fieldOptions)(
-					<Select mode={mode} showSearch placeholder="Select..." name={this.props.fieldName}>
-					{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
+			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
+				{getFieldDecorator(this.props.fieldName, fieldOptions)(
+					<Select showSearch mode={mode} placeholder="Select..." name={this.props.fieldName}>
+						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
-			)}
+				)}
 			</Form.Item>
 		);
 	}

@@ -25,13 +25,13 @@ class SubmitterInformation extends Component {
 			return(
 	    		 <div>
 					<Col sm={12} md={6} lg={4}>
-						<TextField label="First Name" fieldName="submitterFirstName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
+						<TextField label="First Name" fieldName="submitterFirstName" isDisabled={submitterLastNameDisabled} form={this.props.form} isRequired={true}/>
 					</Col>
 					<Col sm={12} md={6} lg={4} >
-						<TextField label="Last Name" fieldName="submitterLastName" fieldOptions={requiredFieldOptions} isDisabled={submitterLastNameDisabled} form={this.props.form}/>
+						<TextField label="Last Name" fieldName="submitterLastName" isDisabled={submitterLastNameDisabled} form={this.props.form} isRequired={true}/>
 					</Col>
 					<Col sm={12} md={6} lg={4}>
-						<TextField label="Email" fieldName="submitterEmail" fieldOptions={requiredFieldOptions} form={this.props.form}/>
+						<TextField label="Email" fieldName="submitterEmail" form={this.props.form} isRequired={true}/>
 					</Col>
 				</div>
 			);
