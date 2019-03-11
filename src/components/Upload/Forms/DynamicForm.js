@@ -124,7 +124,7 @@ class DynamicForm extends Component {
 				{dynamicSections}
 				<Row className="submit-button-row">
 					<Col md={12}>
-						<Button id="submit" disabled={this.isSubmitDisabled()}>Submit</Button>
+						<Button type="primary" id="submit" disabled={this.isSubmitDisabled()}>Submit</Button>
 					</Col>
 				</Row>
 			</section>
