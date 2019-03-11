@@ -49,49 +49,48 @@ class DynamicForm extends Component {
 		this.renderField = formGenerator.renderField.bind(this);
 	}
 	
-	updateRequiredFieldCount (section, currentCount) {
-		let newCount = currentCount;
-		
-		section.fields.map((field) => {
-			if (field.required) {
-				newCount ++;
-			}
-		});
-		return newCount;
+	isFormValid(section, form) {
+		let { getFieldError, isFieldTouched, getFieldValue } = form;
+		let formValid = true;
+		if (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
+				&& getFieldError('submitterLastName') === undefined && getFieldValue('submitterLastName') !== undefined
+				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined) {
+			
+			section.fields.map((field) => {
+				let fieldName = field.fieldName;
+				if ( field.type !== 'Submitter Information' ) {
+					if ( field.required && isFieldTouched(fieldName) ) {
+						if (getFieldError(fieldName) !== undefined) {
+							formValid = false;
+						}
+					} else if ( field.required && !isFieldTouched(fieldName)) {
+						if ((fieldName === 'packageTypeOther' && getFieldValue('packageType') === 'Other') || fieldName !== 'packageTypeOther' ) {
+							formValid = false;
+						}
+					}
+				}
+			});
+		} else {
+			formValid = false;
+		}
+		return formValid;
 	}
 	
 	isSubmitDisabled() {
-		
-		let requiredFieldCount = this.updateRequiredFieldCount(this.props.formDTD.standardFields, 0);
+		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form)
 		let { getFieldValue } = this.props.form;
 		if (getFieldValue('packageType') !== undefined) {
 			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				dynamicFormElements.sections.map((section) => {
-					requiredFieldCount = this.updateRequiredFieldCount(section, requiredFieldCount);
+					validForm = this.isFormValid(section, this.props.form);
+					return true;
 				});
 			}
 		}
 		
-		let fieldsTouched = 0;
-		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
-		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
-		let submitterEmailDisabled = this.props.userInformation.email !== "";
-		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
-		if (dontNeedUserInfo) {
-			fieldsTouched = 3;
-		}
-		let allFields = this.props.form.getFieldsError();
-    	for (var fieldName in allFields) {
-    		if (this.props.form.isFieldTouched(fieldName)) {
-    			fieldsTouched++;
-    		}
-    	}
-    	let fieldsError = this.props.form.getFieldsError();
-    	let hasErrors = Object.keys(fieldsError).some(field => fieldsError[field]);
-    	
-    	if (!hasErrors && fieldsTouched >= requiredFieldCount && this.state.filesAdded > 0) {
+    	if (validForm && this.state.filesAdded > 0) {
     		return false;
     	}
     	return true;

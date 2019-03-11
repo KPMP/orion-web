@@ -8,7 +8,7 @@ const Option = Select.Option;
 class SelectBox extends Component {
 	
 	render() {
-		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required'}]};
+		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
 		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 		let { getFieldDecorator, isFieldTouched, getFieldError } = this.props.form;
 		let mode = "default";

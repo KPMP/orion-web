@@ -10,7 +10,6 @@ class SubmitterInformation extends Component {
 		let submitterEmailDisabled = this.props.userInformation.email !== "";
 		
 		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
-		const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true, min: 1}]};
 		
 		if (dontNeedUserInfo) {
 			return (
