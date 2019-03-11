@@ -9,6 +9,9 @@ $footer-color: #283C5E;
 
 body {
 	margin-top: $header-height-padded;
+
+	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
+	padding-right: 0px !important;
 }
 
 #root {
@@ -327,11 +330,6 @@ PACKAGES
 }
 .ant-form-item {
 	margin-bottom: 0px !important;
-}
-
-/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
-.modal-open {
-	overflow-y: auto;
 }
 
 /*
