@@ -4,6 +4,7 @@ $filter-height: 37px;
 $filter-min-width: 195px;
 $packages-filter-controls-sm-height: 186px;
 $packages-filter-controls-md-height: 86px;
+$packages-submit-footer-height: 87px;
 
 $footer-color: #283C5E;
 
@@ -35,14 +36,16 @@ a {
 }
 
 #dynamicUploadForm {
-	div[class^='col-'] {
+
+	padding-bottom: $packages-submit-footer-height;
+
+	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-']  {
 		min-height: 86px;
 	}
 	
 	.textArea {
 		min-height: 125px;
 	}
-
 }
 
 .noResults {
@@ -335,6 +338,11 @@ PACKAGES
 
 	.ant-form-item-label {
 		line-height: unset !important;
+
+		label {
+			margin-bottom: 0 !important;
+			font-weight: 500;
+		}
 
 		label::after {
 			display: none !important;

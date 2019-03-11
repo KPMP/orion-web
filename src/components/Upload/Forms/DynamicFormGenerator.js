@@ -29,7 +29,7 @@ export class DynamicFormGenerator {
 
 		return (
 			<section>
-				<h2>{processedSectionJson.sectionHeader}</h2>
+				<h4>{processedSectionJson.sectionHeader}</h4>
 				<Row>
 					{ processedSectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
 				</Row>

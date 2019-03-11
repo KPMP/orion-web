@@ -30,19 +30,22 @@ class DynamicForm extends Component {
 		
 		return (
 			<section id="dynamicUploadForm"  className="container justify-content-center pt-4">
-				<Row className="dropzone">
-					<Col md={12}>
-						<FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>
-					</Col>
-				</Row>
-				<hr/>
 				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
-				<Row className="submit-button-row">
-					<Col md={12}>
-						<Button id="submit" disabled={true}>Submit</Button>
-					</Col>
-				</Row>
+                <hr/>
+                <Row className="dropzone btn-sm">
+                    <Col md={12}>
+                        <FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>
+                    </Col>
+                </Row>
+                <Row className="submit-button-row fixed-bottom border border-secondary border-top">
+                    <Col md={6}>
+                        <Button id="cancel">Cancel</Button>
+                    </Col>
+                    <Col md={6}>
+                        <Button id="submit" disabled={true}>Submit</Button>
+                    </Col>
+                </Row>
 			</section>
 		);
 	}
