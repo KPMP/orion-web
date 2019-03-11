@@ -329,9 +329,14 @@ PACKAGES
 	margin-bottom: 0px !important;
 }
 
-/** Fixes Bootstrap 4 scrollbar disappearance with modals in Windows browsers */
+/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
 .modal-open {
 	overflow-y: auto;
+}
+
+/** IE fix: Instruction text font size collides with "Add New Package" button in certain widths */
+#packages-pane.ie #packages-filter-controls i {
+	font-size: x-small !important;
 }
 
 /*
