@@ -5,7 +5,6 @@ import { Button, Row, Col } from 'reactstrap';
 import institutions from '../institutions';
 import packageTypes from '../packageTypes';
 import * as filterActions from '../../actions/filterActions';
-import detectIE from '../../helpers/detectIE';
 
 class PackagesPane extends Component {
 	
@@ -21,7 +20,7 @@ class PackagesPane extends Component {
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
         return (
-    		<article id="packages-pane" className={"container" + (detectIE() ? " ie" : "")}>
+    		<article id="packages-pane" className="container">
     			<header id="packages-filter-controls" className="container-fluid fixed-top-subnav pt-3">
 					<Row noGutters>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-2">
