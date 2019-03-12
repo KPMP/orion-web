@@ -13,6 +13,15 @@ $footer-color: #283C5E;
 	justify-content: center;
 }
 
+.ant-form-item-label {
+	label {
+		margin-bottom: 0rem !important;
+	}
+	label:after {
+		margin: 0 4px 0 2px;
+	}
+}
+
 body {
 	margin-top: $header-height-padded;
 
@@ -44,12 +53,12 @@ a {
 
 	padding-bottom: $packages-submit-footer-height;
 
-	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-']  {
+	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-'], div[class^='col-sm-']  {
 		min-height: 86px;
 	}
 	
 	.textArea {
-		min-height: 125px;
+		min-height: 115px;
 	}
 }
 

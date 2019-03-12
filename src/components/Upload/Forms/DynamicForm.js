@@ -32,7 +32,6 @@ class DynamicForm extends Component {
 			<section id="dynamicUploadForm" className="container justify-content-center pt-4">
 				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
-                <hr/>
                 <Row className="dropzone btn-sm">
                     <Col md={12}>
                         <FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>

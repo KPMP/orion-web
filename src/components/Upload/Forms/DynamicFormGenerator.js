@@ -25,28 +25,16 @@ export class DynamicFormGenerator {
 	renderSection = (inputSectionJson, form, userInformation) => {
 
 		let sectionJson = Object.assign({}, inputSectionJson);
-		let processedSectionJson = this.preprocessSectionJson(sectionJson);
 
 		return (
 			<section>
-				<h4>{processedSectionJson.sectionHeader}</h4>
+				<h4>{sectionJson.sectionHeader}</h4>
 				<Row>
-					{ processedSectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
+					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
 				</Row>
 				<hr/>
 			</section>
 		);
-	}
-
-	preprocessSectionJson = (sectionJson) => {
-		//TODO reorder or otherwise process section JSON
-
-		//TODO walk the sectionJson for units; when found,
-		// 1) remove the unit field
-		// 2) find and remove the measured field, preserving the array index
-		// 3) at the array index, insert a new compound field for the fieldWithUnit component type
-
-		return sectionJson;
 	}
 
 	renderField = (fieldJson, form, userInformation) => {
