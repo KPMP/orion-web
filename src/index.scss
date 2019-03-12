@@ -8,6 +8,11 @@ $packages-submit-footer-height: 87px;
 
 $footer-color: #283C5E;
 
+#form-footer {
+	background: #CCCCCC;
+	justify-content: center;
+}
+
 body {
 	margin-top: $header-height-padded;
 
