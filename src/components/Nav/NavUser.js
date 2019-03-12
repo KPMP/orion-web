@@ -26,9 +26,6 @@ class NavUser extends Component {
                 <DropdownToggle caret tag="a" className="text-dark"
                 >{this.props.displayName}</DropdownToggle>
                 <DropdownMenu id="nav-user-dropdown-menu">
-                    <DropdownItem tag="a" disabled>Profile</DropdownItem>
-                    <DropdownItem tag="a" disabled>Help</DropdownItem>
-                    <DropdownItem divider />
                     <DropdownItem tag="a"
                         onClick={() => {window.location.href = "/Shibboleth.sso/Logout?return=/Shibboleth.sso/Login"; }}
                         >Sign Out

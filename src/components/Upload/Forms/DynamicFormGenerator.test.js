@@ -1,5 +1,5 @@
 import React from 'react';
-import { DynamicFormGenerator } from './dynamicFormGenerator';
+import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row } from 'reactstrap';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

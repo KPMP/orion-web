@@ -22,10 +22,13 @@ const LINKED_WITH = 'linkedWith';
 
 export class DynamicFormGenerator {
 	
-	renderSection = (sectionJson, form, userInformation) => {
+	renderSection = (inputSectionJson, form, userInformation) => {
+
+		let sectionJson = Object.assign({}, inputSectionJson);
+
 		return (
 			<section>
-				<h2>{sectionJson.sectionHeader}</h2>
+				<h4>{sectionJson.sectionHeader}</h4>
 				<Row>
 					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
 				</Row>

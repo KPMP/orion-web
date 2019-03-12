@@ -4,8 +4,23 @@ $filter-height: 37px;
 $filter-min-width: 195px;
 $packages-filter-controls-sm-height: 186px;
 $packages-filter-controls-md-height: 86px;
+$packages-submit-footer-height: 87px;
 
 $footer-color: #283C5E;
+
+#form-footer {
+	background: #CCCCCC;
+	justify-content: center;
+}
+
+.ant-form-item-label {
+	label {
+		margin-bottom: 0rem !important;
+	}
+	label:after {
+		margin: 0 4px 0 2px;
+	}
+}
 
 body {
 	margin-top: $header-height-padded;
@@ -35,14 +50,16 @@ a {
 }
 
 #dynamicUploadForm {
-	div[class^='col-'] {
+
+	padding-bottom: $packages-submit-footer-height;
+
+	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-'], div[class^='col-sm-']  {
 		min-height: 86px;
 	}
 	
 	.textArea {
-		min-height: 125px;
+		min-height: 115px;
 	}
-
 }
 
 .noResults {
@@ -329,11 +346,38 @@ PACKAGES
 	}
 }
 
-.ant-form-item-label {
-	line-height: unset !important;
-}
+
 .ant-form-item {
 	margin-bottom: 0px !important;
+
+	.ant-form-item-label {
+		line-height: unset !important;
+
+		label {
+			margin-bottom: 0 !important;
+			font-weight: 500;
+		}
+
+		label::after {
+			display: none !important;
+			content: "" !important;
+		}
+
+		label.ant-form-item-required::before {
+			display: none !important;
+			content: "" !important;
+		}
+
+		label.ant-form-item-required::after {
+			display: inline-block !important;
+			margin-right: 4px;
+			color: #f5222d;
+			font-size: 14px;
+			font-family: SimSun,sans-serif;
+			line-height: 1;
+			content: "*" !important;
+		}
+	}
 }
 
 /*

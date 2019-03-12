@@ -22,7 +22,7 @@ class SubmitterInformation extends Component {
 			);
 		} else {
 			return(
-	    		 <div>
+	    		 <div className="row w-100 ml-0">
 					<Col sm={12} md={6} lg={4}>
 						<TextField label="First Name" fieldName="submitterFirstName" isDisabled={submitterLastNameDisabled} form={this.props.form} isRequired={true}/>
 					</Col>
