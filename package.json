@@ -23,6 +23,7 @@
     "fine-uploader": "5.16.2",
     "jquery": "3.3.1",
     "js-polyfills": "0.1.42",
+    "moment": "^2.24.0",
     "popper.js": "1.14.3",
     "prop-types": "^15.7.2",
     "react": "16.7.0",
@@ -50,11 +51,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-        "env": {
-            "browser": true,
-            "node": true,
-            "cache": true
-        }
-    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "cache": true
+    }
+  },
   "proxy": "http://localhost:3030"
 }
