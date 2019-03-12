@@ -69,6 +69,8 @@ class DynamicForm extends Component {
 						}
 					}
 				}
+				// this is here because the map needs a return value...we throw this away
+				return false;
 			});
 		} else {
 			formValid = false;
