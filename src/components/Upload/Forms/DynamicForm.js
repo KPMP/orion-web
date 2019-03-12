@@ -119,7 +119,7 @@ class DynamicForm extends Component {
 				{dynamicSections}
                 <Row className="dropzone btn-sm">
                     <Col md={12}>
-                        <FileDropzone uploader={this.props.uploader} isUploading={this.props.isUploading}/>
+                        <FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
                     </Col>
                 </Row>
         		<Row className="fixed-bottom pt-4" id="form-footer">
