@@ -49,6 +49,26 @@ class DynamicForm extends Component {
 		this.renderField = formGenerator.renderField.bind(this);
 	}
 	
+	handleSubmit = (e) => {
+		let { validateFields, setFieldsValue } = this.props.form; 
+		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
+		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
+		let submitterEmailDisabled = this.props.userInformation.email !== "";
+		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
+		if (dontNeedUserInfo) {
+			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
+			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
+			setFieldsValue({ submitterEmail: this.props.userInformation.email });
+		}
+		validateFields((err, values) => {
+			if(!err) {
+				this.props.postPackageInformation(values, uploader);
+			} else {
+				console.log("Received err: ", err);
+			}
+		});
+	}
+	
 	isFormValid(section, form) {
 		let { getFieldError, isFieldTouched, getFieldValue } = form;
 		let formValid = true;
@@ -127,7 +147,7 @@ class DynamicForm extends Component {
 	        			<Row className="text-center">
 		                    <Col md={12}>
 		                        <Button id="cancel" className="mr-3">Cancel</Button>
-		                        <Button id="submit" disabled={this.isSubmitDisabled()} type="primary">Upload</Button>
+		                        <Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
 		                    </Col>
 	                    </Row>
                     </div>
