@@ -66,6 +66,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 		lastName: packageInfo.submitterLastName,
 		email: packageInfo.submitterEmail
 	};
+	
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 	packageInfo.files = activeFiles.map((file) => {
