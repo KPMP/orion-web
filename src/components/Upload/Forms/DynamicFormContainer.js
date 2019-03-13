@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import DynamicForm from './Forms/DynamicForm';
-import { uploadPackage } from '../../actions/Packages/packageActions';
+import DynamicForm from './DynamicForm';
+import { uploadPackage } from '../../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
