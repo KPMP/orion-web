@@ -1,5 +1,5 @@
 import React from 'react';
-import { DynamicFormGenerator } from './dynamicFormGenerator';
+import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row } from 'reactstrap';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -70,7 +70,7 @@ describe("renderSection", () => {
 		};
 		let userInformation = {};
 		let section = shallow(formGenerator.renderSection(sectionJson.standardFields, form, userInformation));
-		expect(section.find('h2').text()).toBe("Dataset Information");
+		expect(section.find('h4').text()).toBe("Dataset Information");
 	});
 });
 
