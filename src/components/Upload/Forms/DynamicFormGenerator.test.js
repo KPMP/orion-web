@@ -384,7 +384,8 @@ describe('renderField', () => {
 				"type": "Date",
 				"required": true,
 				"fieldName": "moreStuff",
-				"additionalProps": { "field": "value" }
+				"additionalProps": { "field": "value" },
+				"validations": ["validation1"]
 		};
 		let mounted = mount(formGenerator.renderField(fieldJson, form));
 		expect(mounted.find(DateField).length).toBe(1);
@@ -395,12 +396,14 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('validations')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({ "field": "value" });
+		expect(properties.validations).toEqual(["validation1"]);
 	});
 	
 	it('should handle an optional DateField', () => {

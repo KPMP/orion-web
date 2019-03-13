@@ -64,7 +64,8 @@ export class DynamicFormGenerator {
 						additionalProps={fieldJson.additionalProps}
 					    isRequired={isRequired}
 					    isDisabled={isDisabled}
-						fieldName={fieldJson.fieldName}/>;
+						fieldName={fieldJson.fieldName}
+                		validations={fieldJson.validations}/>;
 				break;
 
 			case FIELD_TYPES.DROP_DOWN:
