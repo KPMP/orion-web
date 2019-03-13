@@ -70,7 +70,7 @@ describe("renderSection", () => {
 		};
 		let userInformation = {};
 		let section = shallow(formGenerator.renderSection(sectionJson.standardFields, form, userInformation));
-		expect(section.find('h2').text()).toBe("Dataset Information");
+		expect(section.find('h4').text()).toBe("Dataset Information");
 	});
 });
 
