@@ -51,11 +51,7 @@ class DynamicForm extends Component {
 	
 	handleSubmit = (e) => {
 		let { validateFields, setFieldsValue } = this.props.form; 
-		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
-		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
-		let submitterEmailDisabled = this.props.userInformation.email !== "";
-		let dontNeedUserInfo = submitterFirstNameDisabled && submitterLastNameDisabled && submitterEmailDisabled;
-		if (dontNeedUserInfo) {
+		if (!this.needUserInfo()) {
 			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
 			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
 			setFieldsValue({ submitterEmail: this.props.userInformation.email });
@@ -69,12 +65,20 @@ class DynamicForm extends Component {
 		});
 	}
 	
+	needUserInfo() {
+		let submitterFirstBlank = this.props.userInformation.firstName === "";
+		let submitterLastNameBlank = this.props.userInformation.lastName === "";
+		let submitterEmailBlank = this.props.userInformation.email === "";
+		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
+	}
+	
 	isFormValid(section, form) {
 		let { getFieldError, isFieldTouched, getFieldValue } = form;
 		let formValid = true;
-		if (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
+		
+		if (!this.needUserInfo() || (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
 				&& getFieldError('submitterLastName') === undefined && getFieldValue('submitterLastName') !== undefined
-				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined) {
+				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined))  {
 			
 			section.fields.map((field) => {
 				let fieldName = field.fieldName;
