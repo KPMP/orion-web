@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import UploadForm from './UploadForm';
-import { uploadPackage } from '../../actions/Packages/packageActions';
+import DynamicForm from './DynamicForm';
+import { uploadPackage } from '../../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch, props) =>
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UploadForm);    
+export default connect(mapStateToProps, mapDispatchToProps)(DynamicForm);    

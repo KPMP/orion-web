@@ -49,12 +49,36 @@ class DynamicForm extends Component {
 		this.renderField = formGenerator.renderField.bind(this);
 	}
 	
+	handleSubmit = (e) => {
+		let { validateFields, setFieldsValue } = this.props.form; 
+		if (!this.needUserInfo()) {
+			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
+			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
+			setFieldsValue({ submitterEmail: this.props.userInformation.email });
+		}
+		validateFields((err, values) => {
+			if(!err) {
+				this.props.postPackageInformation(values, uploader);
+			} else {
+				console.log("Received err: ", err);
+			}
+		});
+	}
+	
+	needUserInfo() {
+		let submitterFirstBlank = this.props.userInformation.firstName === "";
+		let submitterLastNameBlank = this.props.userInformation.lastName === "";
+		let submitterEmailBlank = this.props.userInformation.email === "";
+		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
+	}
+	
 	isFormValid(section, form) {
 		let { getFieldError, isFieldTouched, getFieldValue } = form;
 		let formValid = true;
-		if (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
+		
+		if (!this.needUserInfo() || (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
 				&& getFieldError('submitterLastName') === undefined && getFieldValue('submitterLastName') !== undefined
-				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined) {
+				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined))  {
 			
 			section.fields.map((field) => {
 				let fieldName = field.fieldName;
@@ -126,8 +150,8 @@ class DynamicForm extends Component {
         			<div className="container justify-content-center">
 	        			<Row className="text-center">
 		                    <Col md={12}>
-		                        <Button id="cancel" className="mr-3" disabled={this.isSubmitDisabled()}>Cancel</Button>
-		                        <Button id="submit" type="primary">Upload</Button>
+		                        <Button id="cancel" className="mr-3">Cancel</Button>
+		                        <Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
 		                    </Col>
 	                    </Row>
                     </div>

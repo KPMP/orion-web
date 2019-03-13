@@ -7,7 +7,7 @@ class Oops extends Component {
             <article className="container-fluid">
                 <Navbar className="container-fluid">
                     <NavbarBrand>
-                        <img src="img/logo_KPMP-Data-Lake-Uploader.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
+                        <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                     </NavbarBrand>
                 </Navbar>
                 <Row id="oops-content">
