@@ -14,11 +14,13 @@ class SubmitterInformation extends Component {
 		
 		if (dontNeedUserInfo) {
 			return (
-				<Col sm={12} md={12} lg={12}>
+				<Col sm={12} md={12} lg={12} className="ant-form-item submitterInfo">
 					<div className="ant-form-item-label">
 						<label>Submitted By</label>
 					</div>
-					{this.props.userInformation.firstName} {this.props.userInformation.lastName} ({this.props.userInformation.email}) 
+					<div className="submitterInfoValues">
+						{this.props.userInformation.firstName} {this.props.userInformation.lastName} ({this.props.userInformation.email})
+					</div>
 				</Col>
 			);
 		} else {
