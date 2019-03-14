@@ -29,6 +29,10 @@ class DateField extends Component {
 		
 	}
 	
+	focus = () => {
+		this.setState({ opened: true, touched: true });
+	}
+	
 	render() {
 		let { getFieldDecorator, getFieldValue } = this.props.form;
 		let fieldOptions = this.props.isRequired ? requiredFieldDateOptions : optionalFieldDateOptions;
@@ -47,7 +51,7 @@ class DateField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
+					<DatePicker onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);
