@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Form, InputNumber } from 'antd';
+import { Form, Input } from 'antd';
 import PropTypes from 'prop-types';
 
-const requiredFieldNumericOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: true, message: 'Required', type: 'number'}]};
-const optionalFieldNumericOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: false, type: 'number'}]};
+const requiredFieldNumericOptions = {validateTrigger: [ 'onChange', 'onBlur' ], rules: [{required: true, message: 'Required'}]};
+const optionalFieldNumericOptions = {validateTrigger: [ 'onChange', 'onBlur' ], rules: [{required: false}]};
 
 class NumericField extends Component {
 
@@ -16,7 +16,7 @@ class NumericField extends Component {
         return (
             <Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
                 {getFieldDecorator(this.props.fieldName, fieldOptions)(
-                    <InputNumber name={this.props.fieldName} disabled={isDisabled}/>
+                    <Input type="number" name={this.props.fieldName} disabled={isDisabled}/>
                 )}
             </Form.Item>
         );
