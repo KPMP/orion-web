@@ -3,14 +3,15 @@ import { Form, DatePicker } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const requiredFieldDateOptions = {rules: [{required: true, message: 'Required', type:'object' }]};
-const optionalFieldDateOptions = {rules: [{required: false, type:'object'}]};
+const requiredFieldDateOptions = { rules: [{required: true, message: 'Required' }] } ;
+const optionalFieldDateOptions = { rules: [{required: false}]};
 
 class DateField extends Component {
 	
 	constructor(props) {
 		super(props);
 		this.state = {
+			opened: false,
 			touched: false
 		}
 	}
@@ -21,40 +22,32 @@ class DateField extends Component {
 	
 	openChange = (open) => {
 		if (open) {
+			this.setState({ opened: true });
+		} else if (!open && this.state.opened) {
 			this.setState({ touched: true });
 		}
-		this.props.form.validateFields((err, values) => {
-			if(!err) {
-				console.log("all good")
-			} else {
-				console.log("Received err: ", err);
-			}
-		});
 		
 	}
 	
 	render() {
-		let { getFieldDecorator, getFieldValue, setFields, isFieldTouched, getFieldError } = this.props.form;
+		let { getFieldDecorator, getFieldValue } = this.props.form;
 		let fieldOptions = this.props.isRequired ? requiredFieldDateOptions : optionalFieldDateOptions;
 		let placeholderText = undefined;
 		if (this.props.additionalProps !== undefined) {
 			placeholderText = this.props.additionalProps.placeholderText;
 		}
-		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
+		let error = false;
 		
-//		let error = false;
-//		let value = getFieldValue(this.props.fieldName);
-//		if (value === undefined && this.state.touched) {
-//			error = true;
-//		} else {
-//			error = false;
-//		}
-//		onOpenChange={this.openChange} 
+		if (this.state.opened && this.state.touched && getFieldValue(this.props.fieldName) === undefined) {
+			error = true;
+		} else {
+			error = false;
+		}
 		
 		return (
-			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
+			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker disabledDate={this.disabledDate} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
+					<DatePicker disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);
