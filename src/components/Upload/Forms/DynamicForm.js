@@ -75,7 +75,7 @@ class DynamicForm extends Component {
 	}
 	
 	isFormValid(section, form) {
-		let { getFieldError, isFieldTouched, getFieldValue, validateFields } = form;
+		let { getFieldError, getFieldValue } = form;
 		let formValid = true;
 		
 		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
