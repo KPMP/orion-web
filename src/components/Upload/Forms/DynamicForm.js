@@ -51,14 +51,15 @@ class DynamicForm extends Component {
 	
 	handleSubmit = (e) => {
 		let { validateFields, setFieldsValue } = this.props.form; 
-		if (!this.needUserInfo()) {
-			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
-			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
-			setFieldsValue({ submitterEmail: this.props.userInformation.email });
-		}
 		validateFields((err, values) => {
+			let newValues = values;
+			if (!this.needUserInfo()) {
+				newValues.submitterFirstName = this.props.userInformation.firstName;
+				newValues.submitterLastName = this.props.userInformation.lastName;
+				newValues.submitterEmail = this.props.userInformation.email;
+			}
 			if(!err) {
-				this.props.postPackageInformation(values, uploader);
+				this.props.postPackageInformation(newValues, uploader);
 			} else {
 				console.log("Received err: ", err);
 			}
