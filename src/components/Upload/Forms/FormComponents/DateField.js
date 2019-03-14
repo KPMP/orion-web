@@ -3,8 +3,8 @@ import { Form, DatePicker } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const requiredFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required' }]};
-const optionalFieldDateOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false}]};
+const requiredFieldDateOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: true, message: 'Required' }]};
+const optionalFieldDateOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: false}]};
 
 class DateField extends Component {
 	

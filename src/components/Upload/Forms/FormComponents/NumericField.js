@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Form, InputNumber } from 'antd';
 import PropTypes from 'prop-types';
 
-const requiredFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: true, message: 'Required', type: 'number'}]};
-const optionalFieldNumericOptions = {validateTrigger: [ 'onChange' ], rules: [{required: false, type: 'number'}]};
+const requiredFieldNumericOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: true, message: 'Required', type: 'number'}]};
+const optionalFieldNumericOptions = {validateTrigger: [ 'onBlur' ], rules: [{required: false, type: 'number'}]};
 
 class NumericField extends Component {
 
