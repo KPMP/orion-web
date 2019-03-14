@@ -47,18 +47,20 @@ class DynamicForm extends Component {
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
+		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
 	}
 	
 	handleSubmit = (e) => {
-		let { validateFields, setFieldsValue } = this.props.form; 
-		if (!this.needUserInfo()) {
-			setFieldsValue({ submitterFirstName: this.props.userInformation.firstName });
-			setFieldsValue({ submitterLastName: this.props.userInformation.lastName });
-			setFieldsValue({ submitterEmail: this.props.userInformation.email });
-		}
+		let { validateFields } = this.props.form; 
 		validateFields((err, values) => {
+			let newValues = values;
+			if (!this.needUserInfo()) {
+				newValues.submitterFirstName = this.props.userInformation.firstName;
+				newValues.submitterLastName = this.props.userInformation.lastName;
+				newValues.submitterEmail = this.props.userInformation.email;
+			}
 			if(!err) {
-				this.props.postPackageInformation(values, uploader);
+				this.props.postPackageInformation(newValues, uploader);
 			} else {
 				console.log("Received err: ", err);
 			}
@@ -73,46 +75,45 @@ class DynamicForm extends Component {
 	}
 	
 	isFormValid(section, form) {
-		let { getFieldError, isFieldTouched, getFieldValue } = form;
+		let { getFieldError, getFieldValue } = form;
 		let formValid = true;
 		
-		if (!this.needUserInfo() || (getFieldError('submitterFirstName') === undefined && getFieldValue('submitterFirstName') !== undefined
-				&& getFieldError('submitterLastName') === undefined && getFieldValue('submitterLastName') !== undefined
-				&& getFieldError('submitterEmail') === undefined && getFieldValue('submitterEmail') !== undefined))  {
+		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
+				|| getFieldValue('submitterLastName') === undefined 
+				|| getFieldValue('submitterEmail') === undefined)) {
 			
-			section.fields.map((field) => {
-				let fieldName = field.fieldName;
-				if ( field.type !== 'Submitter Information' ) {
-					if ( field.required && isFieldTouched(fieldName) ) {
-						if (getFieldError(fieldName) !== undefined) {
-							formValid = false;
-						}
-					} else if ( field.required && !isFieldTouched(fieldName)) {
-						if ((fieldName === 'packageTypeOther' && getFieldValue('packageType') === 'Other') || fieldName !== 'packageTypeOther' ) {
-							formValid = false;
-						}
-					}
+			return false;
+		} 
+		
+		let fields = section.fields;
+		for (let i =0; i< fields.length; i++) {
+			let field = fields[i];
+			let fieldName = field.fieldName;
+			if ( field.type !== 'Submitter Information' ) {
+				if ( field.required && !this.isFieldDisabled(field, form) 
+						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined )) {
+					return false;
 				}
-				// this is here because the map needs a return value...we throw this away
-				return false;
-			});
-		} else {
-			formValid = false;
+			}
 		}
+			
 		return formValid;
 	}
 	
 	isSubmitDisabled() {
-		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form)
+		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form);
 		let { getFieldValue } = this.props.form;
 		if (getFieldValue('packageType') !== undefined) {
 			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
-				dynamicFormElements.sections.map((section) => {
-					validForm = this.isFormValid(section, this.props.form);
-					return true;
-				});
+				let sections = dynamicFormElements.sections;
+				for (let i =0; i< sections.length; i++) {
+					if (!this.isFormValid(sections[i], this.props.form)) {
+						validForm = false;
+						break;
+					}
+				}
 			}
 		}
 		

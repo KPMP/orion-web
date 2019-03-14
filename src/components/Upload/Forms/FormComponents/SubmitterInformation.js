@@ -5,6 +5,7 @@ import TextField from './TextField';
 class SubmitterInformation extends Component {
 	
 	render() {
+		
 		let submitterFirstNameDisabled = this.props.userInformation.firstName !== "";
 		let submitterLastNameDisabled = this.props.userInformation.lastName !== "";
 		let submitterEmailDisabled = this.props.userInformation.email !== "";
