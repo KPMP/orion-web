@@ -51,6 +51,11 @@ a {
 
 #dynamicUploadForm {
 
+	.submitterInfo {
+		min-height: 0px;
+		padding-bottom: 15px;
+	}
+
 	padding-bottom: $packages-submit-footer-height;
 
 	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-'], div[class^='col-sm-']  {
@@ -59,6 +64,10 @@ a {
 	
 	.textArea {
 		min-height: 115px;
+	}
+	
+	textarea.ant-input {
+		margin-top: 4px;
 	}
 }
 
@@ -352,6 +361,7 @@ PACKAGES
 
 	.ant-form-item-label {
 		line-height: unset !important;
+		font-size: 14px;
 
 		label {
 			margin-bottom: 0 !important;
@@ -372,7 +382,6 @@ PACKAGES
 			display: inline-block !important;
 			margin-right: 4px;
 			color: #f5222d;
-			font-size: 14px;
 			font-family: SimSun,sans-serif;
 			line-height: 1;
 			content: "*" !important;
