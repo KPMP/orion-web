@@ -145,12 +145,13 @@ export class DynamicFormGenerator {
 	parseOptions = function(fieldJson, form) {
         let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
 
-        if(fieldJson.hasOwnProperty('constrainedBy')) {
-        	let constrainedValue = form.getFieldValue(constrainedBy);
-        	if(constraints.hasOwnProperty(constrainedValue)) {
-                values = constraints[constrainedValue];
-			}
-		}
+		// Commented out until we handle constraints in DTD
+        //if(fieldJson.hasOwnProperty('constrainedBy')) {
+        	//let constrainedValue = form.getFieldValue(constrainedBy);
+        	//if(constraints.hasOwnProperty(constrainedValue)) {
+         //       values = constraints[constrainedValue];
+		//	}
+		//}
 
         values.sort(function(a,b){
         	return a.toLowerCase().localeCompare(b.toLowerCase());
