@@ -143,9 +143,11 @@ export class DynamicFormGenerator {
 	}
 
 	parseOptions = function(fieldJson, form) {
-        let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
+        let {values, otherAvailable} = fieldJson;
 
 		// Commented out until we handle constraints in DTD
+		//let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
+
         //if(fieldJson.hasOwnProperty('constrainedBy')) {
         	//let constrainedValue = form.getFieldValue(constrainedBy);
         	//if(constraints.hasOwnProperty(constrainedValue)) {
