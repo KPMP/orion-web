@@ -10,6 +10,9 @@ class PackagesPane extends Component {
 	
 	usersToOptions = (users) => {
 		let userOptions = [];
+		users.sort((user1, user2) => {
+			user1.firstName - user2.lastName;
+		});
 		users.map((user, index) => {
 			let label = user.firstName + " " + user.lastName;
 			return userOptions.push( {value: user.id, label: label});
