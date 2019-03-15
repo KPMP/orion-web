@@ -11,14 +11,16 @@ class PackagesPane extends Component {
 	usersToOptions = (users) => {
 		let userOptions = [];
 		users.sort((user1, user2) => {
+			let returnVal = 0;
 			let user1Upper = user1.firstName.toUpperCase();
 			let user2Upper = user2.firstName.toUpperCase();
 			if (user1Upper < user2Upper) {
-				return -1;
+				returnVal = -1;
 			}
 			if (user1Upper > user2Upper) {
-				return 1;
+				returnVal = 1;
 			}
+			return returnVal;
 		});
 		users.map((user, index) => {
 			let label = user.firstName + " " + user.lastName;
