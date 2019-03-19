@@ -99,14 +99,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional Text Field', () => {
@@ -125,14 +127,15 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle a required Drop-down', () => {
@@ -159,16 +162,18 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isMultiple).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional Drop-down', () => {
@@ -195,16 +200,18 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual("moreStuff");
 		expect(properties.form).toEqual(form);
 		expect(properties.options).toEqual(options);
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isMultiple).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle a required Multi-select', () => {
@@ -231,6 +238,8 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
@@ -238,6 +247,8 @@ describe('renderField', () => {
 		expect(properties.isRequired).toEqual(true);
 		expect(properties.isMultiple).toEqual(true);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional Multi-select', () => {
@@ -264,6 +275,8 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
 		expect(properties.hasOwnProperty('isMultiple')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual("More stuff");
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
@@ -271,6 +284,8 @@ describe('renderField', () => {
 		expect(properties.isRequired).toEqual(false);
 		expect(properties.isMultiple).toEqual(true);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle a required Text Area', () => {
@@ -289,14 +304,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional Text Area', () => {
@@ -315,14 +332,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({"field": "value"});
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle a required Numeric', () => {
@@ -341,14 +360,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({ "field": "value" });
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional Numeric', () => {
@@ -367,14 +388,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({ "field": "value" });
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle a required DateField', () => {
@@ -394,16 +417,18 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
 		expect(properties.hasOwnProperty('validations')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(true);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({ "field": "value" });
 		expect(properties.validations).toEqual(["validation1"]);
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should handle an optional DateField', () => {
@@ -422,14 +447,16 @@ describe('renderField', () => {
 		expect(properties.hasOwnProperty('fieldName')).toBe(true);
 		expect(properties.hasOwnProperty('form')).toBe(true);
 		expect(properties.hasOwnProperty('isRequired')).toBe(true);
-		expect(properties.hasOwnProperty('isDisabled')).toBe(true);
 		expect(properties.hasOwnProperty('additionalProps')).toBe(true);
+		expect(properties.hasOwnProperty('json')).toBe(true);
+		expect(properties.hasOwnProperty('isFieldDisabled')).toBe(true);
 		expect(properties.label).toEqual('More stuff');
 		expect(properties.fieldName).toEqual('moreStuff');
 		expect(properties.form).toEqual(form);
 		expect(properties.isRequired).toEqual(false);
-		expect(properties.isDisabled).toEqual(false);
 		expect(properties.additionalProps).toEqual({ "field": "value" });
+		expect(properties.json).toEqual(fieldJson);
+		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
 	it('should hanlde Submitter Information', () => {
