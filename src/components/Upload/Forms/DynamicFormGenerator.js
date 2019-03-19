@@ -78,7 +78,8 @@ export class DynamicFormGenerator {
 						fieldName={fieldJson.fieldName}
 						isMultiple={false}
 						isRequired={isRequired}
-                        isDisabled={isDisabled}
+						json={fieldJson}
+        				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
 						additionalProps={fieldJson.additionalProps}/>;
 				break;
@@ -91,7 +92,8 @@ export class DynamicFormGenerator {
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
 						isRequired={isRequired}
-                        isDisabled={isDisabled}
+						json={fieldJson}
+        				isFieldDisabled={this.isFieldDisabled}
 						options={this.parseOptions(fieldJson, form)}
 						additionalProps={fieldJson.additionalProps}/>;
 				break;
@@ -119,7 +121,8 @@ export class DynamicFormGenerator {
                     label={fieldJson.label}
 					fieldName={fieldJson.fieldName}
 					isRequired={isRequired}
-                    isDisabled={isDisabled}
+					json={fieldJson}
+					isFieldDisabled={this.isFieldDisabled}
 					additionalProps={fieldJson.additionalProps}/>;
 				colLg = 12;
 				colMd = 12;

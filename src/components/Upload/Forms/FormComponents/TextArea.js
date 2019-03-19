@@ -9,6 +9,14 @@ const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 
 class TextAreaComponent extends Component {
 	
+	isFieldDisabled = () => {
+		if (this.props.isFieldDisabled !== undefined) {
+			return this.props.isFieldDisabled(this.props.json, this.props.form);
+		} else {
+			return this.props.isDisabled;
+		}
+	}
+	
 	render() {
 		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
@@ -17,12 +25,12 @@ class TextAreaComponent extends Component {
 		if (this.props.additionalProps !== undefined) {
 			placeholderText = this.props.additionalProps.placeholderText;
 		}
-		
+		let isDisabled = this.isFieldDisabled();
 		
 		return(
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<TextArea name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
+					<TextArea disabled={isDisabled} name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
 				)}
 			</Form.Item>		
 		
