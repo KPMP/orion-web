@@ -7,6 +7,14 @@ const Option = Select.Option;
 
 class SelectBox extends Component {
 	
+	isFieldDisabled = () => {
+		if (this.props.isFieldDisabled !== undefined) {
+			return this.props.isFieldDisabled(this.props.json, this.props.form);
+		} else {
+			return this.props.isDisabled;
+		}
+	}
+	
 	render() {
 		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
 		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
@@ -20,10 +28,12 @@ class SelectBox extends Component {
 			mode = "multiple";
 		}
 
+		let isDisabled = this.isFieldDisabled();
+		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Select showSearch mode={mode} placeholder="Select..." name={this.props.fieldName}>
+					<Select disabled={isDisabled} showSearch mode={mode} placeholder="Select..." name={this.props.fieldName}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
 				)}
