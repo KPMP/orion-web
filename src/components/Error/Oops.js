@@ -24,7 +24,7 @@ class Oops extends Component {
                     </Col>
                     <Col xs={12} md={6}>
                         <p className="oops-big">Oops...</p>
-                        <p className="oops-small">Looks like something went wrong.<br/>We're working on it.</p>
+                        <p className="oops-small">Looks like something went wrong.<br/>We&#39;re working on it.</p>
                         <p className="oops-button-container">
                             <Button className="btn btn-primary"
                                     onClick={() => window.location.href = "/"}>
