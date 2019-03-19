@@ -50,11 +50,12 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.NUMERIC:
                 fieldComponent =
                     <NumericField label={fieldJson.label}
-					   form={form}
-					   additionalProps={fieldJson.additionalProps}
-					   isRequired={isRequired}
-					   isDisabled={isDisabled}
-					   fieldName={fieldJson.fieldName}/>;
+                		form={form}
+                		additionalProps={fieldJson.additionalProps}
+                		isRequired={isRequired}
+                		json={fieldJson}
+        				isFieldDisabled={this.isFieldDisabled}
+                		fieldName={fieldJson.fieldName}/>;
 				break;
 
 			case FIELD_TYPES.DATE_FIELD:
@@ -63,7 +64,8 @@ export class DynamicFormGenerator {
 						form={form} 
 						additionalProps={fieldJson.additionalProps}
 					    isRequired={isRequired}
-					    isDisabled={isDisabled}
+					    json={fieldJson}
+                		isFieldDisabled={this.isFieldDisabled}
 						fieldName={fieldJson.fieldName}
                 		validations={fieldJson.validations}/>;
 				break;
@@ -97,8 +99,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
 				return <SubmitterInformation 
 				userInformation={userInformation} 
-				form={form}
-				json={fieldJson} />;
+				form={form} />;
 						
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 

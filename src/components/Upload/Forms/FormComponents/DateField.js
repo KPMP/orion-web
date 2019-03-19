@@ -33,6 +33,14 @@ class DateField extends Component {
 		this.setState({ opened: true, touched: true });
 	}
 	
+	isFieldDisabled = () => {
+		if (this.props.isFieldDisabled !== undefined) {
+			return this.props.isFieldDisabled(this.props.json, this.props.form);
+		} else {
+			return this.props.isDisabled;
+		}
+	}
+	
 	render() {
 		let { getFieldDecorator, getFieldValue } = this.props.form;
 		let fieldOptions = this.props.isRequired ? requiredFieldDateOptions : optionalFieldDateOptions;
@@ -48,10 +56,12 @@ class DateField extends Component {
 			error = false;
 		}
 		
+		let isDisabled = this.isFieldDisabled();
+		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
+					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format={'MM/DD/YYYY'} placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);
