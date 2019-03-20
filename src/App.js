@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MainPage from './components/MainPage';
 import Oops from './components/Error/Oops';
+import PackagesPaneContainer from './components/Packages/PackagesPaneContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
@@ -9,6 +9,8 @@ import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
+import AboutPaneContainer from "./components/About/AboutPaneContainer";
+import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -45,7 +47,10 @@ class App extends Component {
 	    		<Provider store={store}>
 	    			<Router history={history}>
 	    				<Switch>
-	    					<Route exact path="/" component={MainPage} store={store}/>
+	    					<Route exact path="/" component={PackagesPaneContainer} store={store}/>
+							<Route exact path="/packages" component={PackagesPaneContainer} store={store}/>
+                            <Route exact path="/upload" component={DynamicFormContainer} store={store}/>
+                            <Route exact path="/about" component={AboutPaneContainer} store={store}/>
 							<Route exact path="/oops" component={Oops} />
 						</Switch>
 	    			</Router>
