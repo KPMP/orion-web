@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 
-export const panes = {
-    packages: 'Packages',
-    upload: 'Upload'
-}
-
 class NavBar extends Component {
     render() {
         let name = this.props.displayName;
@@ -20,7 +15,7 @@ class NavBar extends Component {
 
     		return (
                 <Navbar id="navbar" className="px-1 py-1 fixed-top">
-                    <Col sm={4}>
+                    <Col sm={6}>
                         <div className="navbar-header">
                             <NavbarBrand className="d-flex align-items-center">
                                 <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
@@ -28,7 +23,7 @@ class NavBar extends Component {
                             </NavbarBrand>
                         </div>
                     </Col>
-                    <Col sm={4} className="d-none d-md-block">
+                    <Col sm={6} className="d-none d-md-block">
                         <NavUser displayName={name}/>
                     </Col>
                 </Navbar>

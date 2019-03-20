@@ -11,6 +11,8 @@ import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
 import AboutPaneContainer from "./components/About/AboutPaneContainer";
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
+import NavBarContainer from "./components/Nav/NavBarContainer";
+import NavFooter from "./components/Nav/NavFooter";
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -46,14 +48,18 @@ class App extends Component {
 	    return (
 	    		<Provider store={store}>
 	    			<Router history={history}>
-	    				<Switch>
-	    					<Route exact path="/" component={PackagesPaneContainer} store={store}/>
-							<Route exact path="/packages" component={PackagesPaneContainer} store={store}/>
-                            <Route exact path="/upload" component={DynamicFormContainer} store={store}/>
-                            <Route exact path="/about" component={AboutPaneContainer} store={store}/>
-							<Route exact path="/oops" component={Oops} />
-						</Switch>
-	    			</Router>
+						<div>
+							<NavBarContainer />
+							<Switch>
+								<Route exact path="/" component={PackagesPaneContainer} store={store} />
+								<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
+								<Route exact path="/upload" component={DynamicFormContainer} store={store} />
+								<Route exact path="/about" component={AboutPaneContainer} store={store} />
+								<Route exact path="/oops" component={Oops} />
+							</Switch>
+							<NavFooter />
+						</div>
+					</Router>
 	    		</Provider>
 	    );
 	  }
