@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {panes} from './Nav/NavBar';
 import NavBarContainer from './Nav/NavBarContainer';
+import NavFooter from './Nav/NavFooter';
 import PaneHolder from './PaneHolder'
 import { getUserInformation } from '../actions/userActions';
 import * as filterActions from '../actions/filterActions';
@@ -33,11 +34,7 @@ class MainPage extends Component {
             <ErrorBoundaryContainer>
                 <NavBarContainer pane={this.state.pane} handlePaneSelect={this.handlePaneSelect} />
                 <PaneHolder pane={this.state.pane} />
-                <div id="footer" className="fixed-bottom px-1 py-1">
-                    <a className="text-light small"
-                       href="https://kpmp.org" target="_blank"  rel="noopener noreferrer"
-                    >&copy; Kidney Precision Medicine Project</a>
-                </div>
+                <NavFooter/>
             </ErrorBoundaryContainer>
         );
     }
