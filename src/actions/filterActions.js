@@ -26,7 +26,7 @@ export const removeFilter = (type, value) => {
 
 export const getUsers = () => {
 	return (dispatch) => {
-		api.get('/api/v1/users')
+		api.get('/api/v1/users?hasPackage=true')
 			.then(res => {
 				dispatch(setUsers(res.data));
 			})
