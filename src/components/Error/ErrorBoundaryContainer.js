@@ -13,5 +13,5 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(sendMessageToBackend(error));
 	}
 });
-    
+
 export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);

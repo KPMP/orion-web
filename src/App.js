@@ -13,9 +13,7 @@ import AboutPaneContainer from "./components/About/AboutPaneContainer";
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
-import { getUserInformation } from './actions/userActions';
-import { getFormDTD } from './actions/Upload/uploadActions';
-import { getUsers } from './actions/filterActions';
+import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -28,7 +26,7 @@ const saveState = () => {
 };
 const GA_TRACKING_ID = 'UA-124331187-2';
 
-store.subscribe(function(){console.log(store.getState())});
+// store.subscribe(function(){console.log(store.getState())});
 store.subscribe(saveState);
 
 ReactGA.initialize(GA_TRACKING_ID);
@@ -45,28 +43,25 @@ class App extends Component {
   
 	componentDidMount() {
 		logPageView(window.location, "");
-        getUserInformation()(this.props.dispatch);
-        getUsers()(this.props.dispatch);
-        getFormDTD()(this.props.dispatch);
-    }
+	}
 
     render() {
 	    return (
-	    		<Provider store={store}>
-	    			<Router history={history}>
-						<div>
-							<NavBarContainer />
-							<Switch>
-								<Route exact path="/" component={PackagesPaneContainer} store={store} />
-								<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
-								<Route exact path="/upload" component={DynamicFormContainer} store={store} />
-								<Route exact path="/about" component={AboutPaneContainer} store={store} />
-								<Route exact path="/oops" component={Oops} />
-							</Switch>
-							<NavFooter />
-						</div>
-					</Router>
-	    		</Provider>
+			<Provider store={store}>
+				<Router history={history}>
+					<div>
+						<NavBarContainer />
+						<Switch>
+							<Route exact path="/" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
+							<Route exact path="/about" component={AboutPaneContainer} store={store} />
+							<Route exact path="/oops" component={Oops} />
+						</Switch>
+						<NavFooter />
+					</div>
+				</Router>
+			</Provider>
 	    );
 	  }
 }

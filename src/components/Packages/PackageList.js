@@ -5,7 +5,14 @@ import {Row, Col} from 'reactstrap';
 class PackageList extends Component {
 
     componentDidMount() {
-        this.props.getPackages();
+        if(!this.isRemoteDataLoaded()) {
+            this.props.loadRemoteData();
+        }
+    }
+
+    isRemoteDataLoaded() {
+        return Object.keys(this.props.packages.filtered).length !== 0
+            && this.props.packages.filtered.constructor === Array;
     }
 
     render() {

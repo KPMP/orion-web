@@ -49,6 +49,12 @@ class DynamicForm extends Component {
 		this.renderField = formGenerator.renderField.bind(this);
 		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
 	}
+
+	componentDidMount() {
+		if(!this.isRemoteDataLoaded()) {
+            this.props.loadRemoteData();
+        }
+    }
 	
 	handleSubmit = (e) => {
 		let { validateFields } = this.props.form; 
@@ -73,17 +79,22 @@ class DynamicForm extends Component {
 		let submitterEmailBlank = this.props.userInformation.email === "";
 		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
 	}
+
+	isRemoteDataLoaded() {
+		return Object.keys(this.props.formDTD).length !== 0
+            && this.props.formDTD.constructor === Object;
+	}
 	
 	isFormValid(section, form) {
 		let { getFieldError, getFieldValue } = form;
 		let formValid = true;
-		
+
 		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
 				|| getFieldValue('submitterLastName') === undefined 
 				|| getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
-		} 
+		}
 		
 		let fields = section.fields;
 		for (let i =0; i< fields.length; i++) {
@@ -103,8 +114,13 @@ class DynamicForm extends Component {
 	isSubmitDisabled() {
 		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form);
 		let { getFieldValue } = this.props.form;
+
 		if (getFieldValue('packageType') !== undefined) {
-			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(
+				function(element) {
+					return element.hasOwnProperty(getFieldValue('packageType'))
+				});
+
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				let sections = dynamicFormElements.sections;
@@ -120,11 +136,18 @@ class DynamicForm extends Component {
     	if (validForm && this.state.filesAdded > 0) {
     		return false;
     	}
+
     	return true;
 	}
 	
 	render() {
-		
+
+		if(!this.isRemoteDataLoaded()) {
+			return (
+				<h2>Loading...</h2>
+			);
+		}
+
 		let { getFieldValue } = this.props.form;
 		let dynamicFormElements = [];
 		let dynamicSections = null;
@@ -139,7 +162,7 @@ class DynamicForm extends Component {
 		}
 		
 		return (
-			<section id="dynamicUploadForm" className="container justify-content-center pt-4">
+			<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
                 <Row className="dropzone btn-sm">
@@ -157,7 +180,7 @@ class DynamicForm extends Component {
 	                    </Row>
                     </div>
                 </Row>
-			</section>
+			</article>
 		);
 	}
 	

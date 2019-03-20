@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Col, Row, Button } from 'reactstrap';
-import NavFooter from '../Nav/NavFooter';
+import { Col, Row, Button } from 'reactstrap';
 
 class Oops extends Component {
     render() {
