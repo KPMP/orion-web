@@ -5,7 +5,7 @@ import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
-import { Link } from 'react-router-dom';
+import { Link, Prompt } from 'react-router-dom';
 
 class DynamicForm extends Component {
 	
@@ -165,27 +165,33 @@ class DynamicForm extends Component {
 		}
 		
 		return (
-			<article id="dynamicUploadForm" className="container justify-content-center pt-4">
-				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
-				{dynamicSections}
-				<Row className="dropzone btn-sm">
-					<Col md={12}>
-						<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-					</Col>
-				</Row>
-				<Row className="fixed-bottom pt-4" id="form-footer">
-					<div className="container justify-content-center">
-						<Row className="text-center">
-							<Col md={12}>
-								<Link to="/">
-									<Button id="cancel" className="mr-3">Cancel</Button>
-								</Link>
-								<Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
-							</Col>
-						</Row>
-					</div>
-				</Row>
-			</article>
+			<React.Fragment>
+				<Prompt
+					when={() => {return true;}}
+					message={'Unsaved changes will be lost.  Continue?'}
+				/>
+				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
+					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
+					{dynamicSections}
+					<Row className="dropzone btn-sm">
+						<Col md={12}>
+							<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+						</Col>
+					</Row>
+					<Row className="fixed-bottom pt-4" id="form-footer">
+						<div className="container justify-content-center">
+							<Row className="text-center">
+								<Col md={12}>
+									<Link to="/">
+										<Button id="cancel" className="mr-3">Cancel</Button>
+									</Link>
+									<Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
+								</Col>
+							</Row>
+						</div>
+					</Row>
+				</article>
+			</React.Fragment>
 		);
 	}
 }
