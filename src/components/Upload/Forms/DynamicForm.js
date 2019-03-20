@@ -145,7 +145,9 @@ class DynamicForm extends Component {
 
 		if(!this.isRemoteDataLoaded()) {
 			return (
-				<h2>Loading...</h2>
+				<h4 className="text-center pt-3">
+					Loading upload form...
+				</h4>
 			);
 		}
 
