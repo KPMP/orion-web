@@ -49,7 +49,7 @@ class App extends Component {
 	    return (
 			<Provider store={store}>
 				<Router history={history}>
-					<div>
+					<ErrorBoundaryContainer>
 						<NavBarContainer />
 						<Switch>
 							<Route exact path="/" component={PackagesPaneContainer} store={store} />
@@ -59,7 +59,7 @@ class App extends Component {
 							<Route exact path="/oops" component={Oops} />
 						</Switch>
 						<NavFooter />
-					</div>
+					</ErrorBoundaryContainer>
 				</Router>
 			</Provider>
 	    );

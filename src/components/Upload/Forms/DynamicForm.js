@@ -5,6 +5,7 @@ import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
+import { Link } from 'react-router-dom';
 
 class DynamicForm extends Component {
 	
@@ -16,33 +17,33 @@ class DynamicForm extends Component {
 		}
 		
 		uploader.methods.reset();
-        
-        uploader.on('submit', () => {
-    		let newCount = this.state.filesAdded + 1;
-    		this.setState( { filesAdded: newCount } );
-    		this.isSubmitDisabled();
-    		return true;
-        });
-        
-        uploader.on('cancel', () => {
-    		let newCount = this.state.filesAdded - 1;
-    		this.setState( { filesAdded: newCount });
-    		this.isSubmitDisabled();
-    		return true;
-        });
-        
-        uploader.on('submit', (id, name) => {
-    		let files = uploader.methods.getUploads({
-            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
-    		for(let fileIndex in files) {
-    			let existingName = files[fileIndex].name;
-    			if (existingName === name) {
-    				alert("You have already selected " + existingName + " to upload.");
-    				return false;
-    			}
-    		}
-    		return true;
-        });
+		
+		uploader.on('submit', () => {
+			let newCount = this.state.filesAdded + 1;
+			this.setState( { filesAdded: newCount } );
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('cancel', () => {
+			let newCount = this.state.filesAdded - 1;
+			this.setState( { filesAdded: newCount });
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('submit', (id, name) => {
+			let files = uploader.methods.getUploads({
+			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+			for(let fileIndex in files) {
+				let existingName = files[fileIndex].name;
+				if (existingName === name) {
+					alert("You have already selected " + existingName + " to upload.");
+					return false;
+				}
+			}
+			return true;
+		});
 		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
@@ -52,9 +53,14 @@ class DynamicForm extends Component {
 
 	componentDidMount() {
 		if(!this.isRemoteDataLoaded()) {
-            this.props.loadRemoteData();
-        }
-    }
+			this.props.loadRemoteData();
+		}
+	}
+
+	isRemoteDataLoaded() {
+		return Object.keys(this.props.formDTD).length !== 0
+			&& this.props.formDTD.constructor === Object;
+	}
 	
 	handleSubmit = (e) => {
 		let { validateFields } = this.props.form; 
@@ -78,11 +84,6 @@ class DynamicForm extends Component {
 		let submitterLastNameBlank = this.props.userInformation.lastName === "";
 		let submitterEmailBlank = this.props.userInformation.email === "";
 		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
-	}
-
-	isRemoteDataLoaded() {
-		return Object.keys(this.props.formDTD).length !== 0
-            && this.props.formDTD.constructor === Object;
 	}
 	
 	isFormValid(section, form) {
@@ -133,11 +134,11 @@ class DynamicForm extends Component {
 			}
 		}
 		
-    	if (validForm && this.state.filesAdded > 0) {
-    		return false;
-    	}
+		if (validForm && this.state.filesAdded > 0) {
+			return false;
+		}
 
-    	return true;
+		return true;
 	}
 	
 	render() {
@@ -165,25 +166,26 @@ class DynamicForm extends Component {
 			<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 				{dynamicSections}
-                <Row className="dropzone btn-sm">
-                    <Col md={12}>
-                        <FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-                    </Col>
-                </Row>
-        		<Row className="fixed-bottom pt-4" id="form-footer">
-        			<div className="container justify-content-center">
-	        			<Row className="text-center">
-		                    <Col md={12}>
-		                        <Button id="cancel" className="mr-3">Cancel</Button>
-		                        <Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
-		                    </Col>
-	                    </Row>
-                    </div>
-                </Row>
+				<Row className="dropzone btn-sm">
+					<Col md={12}>
+						<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+					</Col>
+				</Row>
+				<Row className="fixed-bottom pt-4" id="form-footer">
+					<div className="container justify-content-center">
+						<Row className="text-center">
+							<Col md={12}>
+								<Link to="/">
+									<Button id="cancel" className="mr-3">Cancel</Button>
+								</Link>
+								<Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
+							</Col>
+						</Row>
+					</div>
+				</Row>
 			</article>
 		);
 	}
-	
 }
 
 const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
