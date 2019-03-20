@@ -191,35 +191,40 @@ PACKAGES
 }
 
 .search-glass {
-    background: rgb(2, 117, 216);
-    color: white;
+	background: rgb(2, 117, 216);
+	color: white;
 }
 
 .dd-gray-text {
-    color: gray;
+	color: gray;
 }
 
 .upload-ctrl-submit {
 	padding-top: 10px;
-    float: right;
+	float: right;
 }
 
 #upload-form-default {
-    text-align: center;
-    div {
-        b {
-            color: gray;
-        }
-    }
+	text-align: center;
+	div {
+		b {
+			color: gray;
+		}
+	}
 }
 
 #navbar {
-    background-color: white;
+	background-color: white;
 	border-bottom: 1px solid #e7e7e7;
 
-	.navbar-brand img.logo {
-		width: 80px;
-		min-width: 80px;
+	.navbar-header {
+
+		text-decoration: none;
+
+		.navbar-brand img.logo {
+			width: 80px;
+			min-width: 80px;
+		}
 	}
 }
 
@@ -233,11 +238,11 @@ PACKAGES
 }
 
 .btn-primary {
-    background-color: rgb(2, 117, 216);
+	background-color: rgb(2, 117, 216);
 }
 
 .navbar-default .btn-link {
-    color: rgb(2, 117, 216);
+	color: rgb(2, 117, 216);
 }
 
 .dropzone {

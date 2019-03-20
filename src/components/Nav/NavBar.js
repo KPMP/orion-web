@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
     render() {
@@ -19,12 +20,12 @@ class NavBar extends Component {
         return (
             <Navbar id="navbar" className="px-1 py-1 fixed-top">
                 <Col sm={6}>
-                    <div className="navbar-header">
+                    <Link to="/" className="navbar-header text-dark">
                         <NavbarBrand className="d-flex align-items-center">
                             <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                             <span className="ml-2">Data Lake Uploader</span>
                         </NavbarBrand>
-                    </div>
+                    </Link>
                 </Col>
                 <Col sm={6} className="d-none d-md-block">
                     <NavUser displayName={name}/>
