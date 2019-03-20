@@ -63,7 +63,7 @@ class PackagePanel extends Component {
 								<Col xs={4} md={12}>
 									<a className="d-block text-primary pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 								</Col>
-							{this.props.uploadPackage.downloadable &&
+							{!this.props.uploadPackage.downloadable &&
 								<Col xs={4} md={12}>
 									<Button size="sm" color="primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
 										<FontAwesomeIcon icon={faDownload} />

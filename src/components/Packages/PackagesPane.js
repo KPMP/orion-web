@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilterControl from './FilterControl';
 import PackageListContainer from '../Packages/PackageListContainer';
-import { Row, Col } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 import institutions from '../institutions';
 import packageTypes from '../packageTypes';
 import * as filterActions from '../../actions/filterActions';
@@ -43,6 +43,9 @@ class PackagesPane extends Component {
                         </Col>
                         <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
                             <FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+                        </Col>
+                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-auto mr-md-0">
+                            <Button id="packages-button-add-new" color="primary" className="float-md-right btn-sm" disabled>Add new package</Button>
                         </Col>
 					</Row>
                     <Row>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavButton from './NavButton';
 import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 
@@ -27,12 +26,6 @@ class NavBar extends Component {
                                 <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                                 <span className="ml-2">Data Lake Uploader</span>
                             </NavbarBrand>
-                        </div>
-                    </Col>
-                    <Col sm={4} className="d-none d-md-block">
-                        <div className="text-center">
-                            <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
-                            <NavButton name={panes.upload} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
                         </div>
                     </Col>
                     <Col sm={4} className="d-none d-md-block">
