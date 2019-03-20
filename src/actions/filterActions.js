@@ -43,3 +43,15 @@ export const setUsers = (userList) => {
 		payload: userList
 	}
 }
+
+export const setPackageTypesFromDTD = (formDTD) => {
+	let packageTypeFieldArr = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "packageType"
+	});
+	let packageTypes = packageTypeFieldArr[0].values;
+	return {
+		type: actionNames.SET_PACKAGE_TYPES,
+		payload: packageTypes
+	}
+}
+
