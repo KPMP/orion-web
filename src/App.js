@@ -13,6 +13,9 @@ import AboutPaneContainer from "./components/About/AboutPaneContainer";
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
+import { getUserInformation } from './actions/userActions';
+import { getFormDTD } from './actions/Upload/uploadActions';
+import { getUsers } from './actions/filterActions';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -42,9 +45,12 @@ class App extends Component {
   
 	componentDidMount() {
 		logPageView(window.location, "");
-	}
-	
-	render() {
+        getUserInformation()(this.props.dispatch);
+        getUsers()(this.props.dispatch);
+        getFormDTD()(this.props.dispatch);
+    }
+
+    render() {
 	    return (
 	    		<Provider store={store}>
 	    			<Router history={history}>
