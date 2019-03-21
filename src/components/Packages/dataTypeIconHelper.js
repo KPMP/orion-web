@@ -34,6 +34,13 @@ export const iconDataTypes = new Map(
                 iconImage: 'icon_transcriptomics_132x132.png',
                 dataTypes: ['Bulk RNA-Seq', 'Segmental miRNA', 'Single-cell RNA-Seq', 'Single-nucleus RNA-Seq', 'Sub-segment RNA-Seq']
             }
+        ],
+        ['Pilot 3',
+        	{
+        		iconDataType: 'Pilot3',
+        		iconImage: 'icon_pilot3_132x132.png',
+        		dataTypes: ['Pilot 3 Receipt Picture']
+        	}
         ]
     ]
 );

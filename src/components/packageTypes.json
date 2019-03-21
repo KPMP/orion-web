@@ -6,6 +6,7 @@
 		{ "value": "DNA Methylation", "label": "DNA Methylation"},
 		{ "value": "Multiplex ISH", "label": "Multiplex ISH"},
 		{ "value": "Near-single-cell Proteomics", "label": "Near-single-cell Proteomics"},
+		{ "value": "Pilot 3 Receipt Picture", "label": "Pilot 3 Receipt Picture" },
 		{ "value": "Segmental miRNA", "label": "Segmental miRNA"},
 		{ "value": "Single-cell RNA-Seq", "label": "Single-cell RNA-Seq"},
 		{ "value": "Single-nucleus RNA-Seq", "label": "Single-nucleus RNA-Seq"},
