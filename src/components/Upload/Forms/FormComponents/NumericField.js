@@ -20,11 +20,15 @@ class NumericField extends Component {
         let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
         let fieldOptions = this.props.isRequired ? requiredFieldNumericOptions : optionalFieldNumericOptions;
         let isDisabled = this.isFieldDisabled();
+        let placeholderText = undefined;
+		if (this.props.additionalProps !== undefined) {
+			placeholderText = this.props.additionalProps.placeholderText;
+		}
         
         return (
             <Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
                 {getFieldDecorator(this.props.fieldName, fieldOptions)(
-                    <Input type="number" name={this.props.fieldName} disabled={isDisabled}/>
+                    <Input type="number" name={this.props.fieldName} placeholder={placeholderText} disabled={isDisabled}/>
                 )}
             </Form.Item>
         );
