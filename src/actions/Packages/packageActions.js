@@ -7,15 +7,12 @@ const api = Api.getInstance();
 
 export const getPackages = () => {
 	return (dispatch) => {
-		dispatch(setIsQuerying(true));
 		api.get('/api/v1/packages')
 			.then(res => {
 				dispatch(setPackages(res.data));
-                dispatch(setIsQuerying(false));
 			})
 			.catch(err => {
 				dispatch(handleError("Unable to connect to the Data Lake: " + err));
-                dispatch(setIsQuerying(false));
             });
 	};
 };
@@ -24,13 +21,6 @@ export const setPackages = (packages) => {
 	return {
 		type: actionNames.SET_PACKAGES,
 		payload: packages
-	}
-}
-
-export const setIsQuerying = (isQuerying) => {
-	return {
-		type: actionNames.SET_IS_QUERYING,
-		payload: isQuerying
 	}
 }
 

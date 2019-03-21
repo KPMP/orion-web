@@ -16,7 +16,7 @@ class PackageList extends Component {
     }
 
     render() {
-        let isQuerying = this.props.packages.isQuerying === null || this.props.packages.isQuerying;
+        let isQuerying = !this.isRemoteDataLoaded();
         let panels = [];
 
         if(!isQuerying) {
