@@ -30,8 +30,6 @@ body.modal-open {
 
 a {
 	cursor: pointer;
-	color: #337ab7;
-	text-decoration: none;
 }
 
 #form-footer {
@@ -118,6 +116,11 @@ a {
 PACKAGES
 */
 #packages-pane {
+
+	a {
+		color: #337ab7 !important;
+	}
+
 	/* xs to sm */
 	padding-top: $packages-filter-controls-sm-height;
 

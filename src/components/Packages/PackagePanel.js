@@ -59,13 +59,13 @@ class PackagePanel extends Component {
 							<Row>
 								<Col xs={4} md={12}>
 									{/* eslint-disable-next-line */} 
-									<a className="d-block text-primary" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
+									<a className="d-block" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
                                 </Col>
 								<Col xs={4} md={12}>
 									{/* eslint-disable-next-line */} 
-									<a className="d-block text-primary pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
+									<a className="d-block pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 								</Col>
-							{!this.props.uploadPackage.downloadable &&
+							{this.props.uploadPackage.downloadable &&
 								<Col xs={4} md={12}>
 									<Button size="sm" color="primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
 										<FontAwesomeIcon icon={faDownload} />

@@ -20,10 +20,10 @@ class NavBar extends Component {
         return (
             <Navbar id="navbar" className="px-1 py-1 fixed-top">
                 <Col sm={6}>
-                    <Link to="/" className="navbar-header text-dark">
+                    <Link to="/" className="navbar-header">
                         <NavbarBrand className="d-flex align-items-center">
                             <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
-                            <span className="ml-2">Data Lake Uploader</span>
+                            <span className="ml-2 text-dark">Data Lake Uploader</span>
                         </NavbarBrand>
                     </Link>
                 </Col>
