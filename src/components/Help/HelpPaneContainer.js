@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AboutPane from './AboutPane';
+import HelpPane from './HelpPane';
 //import { addFilter, removeFilter } from '../../actions/filterActions';
 
 const mapStateToProps = (state, props) =>
@@ -8,4 +8,4 @@ const mapStateToProps = (state, props) =>
 const mapDispatchToProps = (dispatch, props) =>
     ({ });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutPane);
+export default connect(mapStateToProps, mapDispatchToProps)(HelpPane);

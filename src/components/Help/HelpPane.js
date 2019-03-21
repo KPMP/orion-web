@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class AboutPane extends Component {
+class HelpPane extends Component {
     render() {
         return (
-            <h3>About Pane</h3>
+            <h3>Help Pane</h3>
         );
     }
 }
 
-export default AboutPane;
+export default HelpPane;
