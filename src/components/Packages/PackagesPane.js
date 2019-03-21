@@ -3,11 +3,30 @@ import FilterControl from './FilterControl';
 import PackageListContainer from '../Packages/PackageListContainer';
 import { Row, Col } from 'reactstrap';
 import institutions from '../institutions';
-import packageTypes from '../packageTypes';
 import * as filterActions from '../../actions/filterActions';
 
 class PackagesPane extends Component {
-	
+
+	packageTypesToOptions = (packageTypes) => {
+		let packageTypeOptions = packageTypes.map(value => {
+			return { value: value, label: value }
+		});
+		packageTypeOptions.sort((option1, option2) => {
+			let returnVal = 0;
+			let label1 = option1.label.toUpperCase();
+			let label2 = option2.label.toUpperCase();
+			if (label1 < label2) {
+				returnVal = -1;
+			}
+			if (label1 > label2) {
+				returnVal = 1;
+			}
+			return returnVal;
+		});
+		packageTypeOptions.push({ value: "Other", label: "Other"});
+		return packageTypeOptions;
+	}
+
 	usersToOptions = (users) => {
 		let userOptions = [];
 		users.sort((user1, user2) => {
@@ -31,6 +50,11 @@ class PackagesPane extends Component {
 	
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
+		let packageTypeOptions = [];
+		if (this.props.packageTypes.length) {
+			packageTypeOptions = this.packageTypesToOptions(this.props.packageTypes);
+		}
+
         return (
     		<article id="packages-pane" className="container">
     			<header id="packages-filter-controls" className="container-fluid fixed-top-subnav pt-3">
@@ -39,7 +63,7 @@ class PackagesPane extends Component {
 							<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
                         <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-                            <FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypes.options} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+                            <FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
                         </Col>
                         <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
                             <FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>

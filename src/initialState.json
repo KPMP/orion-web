@@ -4,7 +4,8 @@
   	"filtered": [],
   	"filters": [],
   	"userList": [],
-  	"isQuerying": null
+  	"isQuerying": null,
+	"packageTypes": []
   },
   "isUploading": false,
   "formDTD": {}

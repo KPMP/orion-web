@@ -4,7 +4,8 @@ import { addFilter, removeFilter } from '../../actions/filterActions';
 
 const mapStateToProps = (state, props) =>
 ({
-	users: state.filtering.userList
+	users: state.filtering.userList,
+	packageTypes: state.filtering.packageTypes
 });
     
 const mapDispatchToProps = (dispatch, props) =>
