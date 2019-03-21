@@ -358,12 +358,16 @@ PACKAGES
 	}
 }
 
+#form-footer {
+	background: #CCCCCC;
+	justify-content: center;
+}
 
 .ant-form-item {
 	margin-bottom: 0px !important;
 
 	.ant-form-item-label {
-		line-height: unset !important;
+		line-height: 1.4em !important;
 		font-size: 14px;
 
 		label {
@@ -374,7 +378,7 @@ PACKAGES
 		label::after {
 			display: none !important;
 			content: "" !important;
-			margin: 0 4px 0 2px;
+			margin: 0 4px 0 2px !important;
 		}
 
 		label.ant-form-item-required::before {
