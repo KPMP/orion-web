@@ -58,9 +58,11 @@ class PackagePanel extends Component {
 						<Col xs={12} md={2}>
 							<Row>
 								<Col xs={4} md={12}>
+									{/* eslint-disable-next-line */} 
 									<a className="d-block text-primary" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
                                 </Col>
 								<Col xs={4} md={12}>
+									{/* eslint-disable-next-line */} 
 									<a className="d-block text-primary pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 								</Col>
 							{!this.props.uploadPackage.downloadable &&
