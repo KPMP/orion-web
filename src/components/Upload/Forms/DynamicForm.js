@@ -168,7 +168,7 @@ class DynamicForm extends Component {
 			<React.Fragment>
 				<Prompt
 					when={() => {return true;}}
-					message={'Unsaved changes will be lost.  Continue?'}
+					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
