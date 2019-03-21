@@ -2,46 +2,38 @@ import React, { Component } from 'react';
 import { Col } from 'reactstrap';
 import TextField from './TextField';
 
+const FIRST_NAME = "firstName";
+const LAST_NAME = "lastName";
+const EMAIL = "email";
+
 class SubmitterInformation extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = {
-            submitterFirstNameDisabled: false,
-            submitterLastNameDisabled: false,
-            submitterEmailDisabled: false,
-            userInfoPopulated: false
-        }
+		this.state = this.getDerivedStateFromProps(props);
 	}
 
-	componentDidMount() {
-
-		let userInfo = this.props.userInformation;
-
-		let isDisabled = function(propName) {
-			return userInfo.hasOwnProperty(propName)
-				&& userInfo[propName] !== "";
-		}
-
-		let isEmptyObject = function(obj) {
-            return Object.keys(obj).length === 0 && obj.constructor === Object;
-		}
-
-		let state = {
-            submitterFirstNameDisabled: isDisabled("firstName"),
-            submitterLastNameDisabled: isDisabled("lastName"),
-            submitterEmailDisabled: isDisabled("email")
+    getDerivedStateFromProps(nextProps) {
+        return {
+            submitterFirstNameDisabled: this.isFieldDisabled(FIRST_NAME, nextProps),
+            submitterLastNameDisabled: this.isFieldDisabled(LAST_NAME, nextProps),
+            submitterEmailDisabled: this.isFieldDisabled(EMAIL, nextProps),
+            userInfoPopulated: this.isUserInfoPopulated(nextProps)
         };
+    }
 
-		state.userInfoPopulated = !isEmptyObject(userInfo)
-			&& state.submitterFirstNameDisabled && state.submitterLastNameDisabled && state.submitterEmailDisabled;
+	isFieldDisabled(fieldName, props) {
+        return props.userInformation.hasOwnProperty(fieldName)
+            && props.userInformation[fieldName] !== "";
+	}
 
-		this.setState(state);
+	isUserInfoPopulated(props) {
+		return this.isFieldDisabled(FIRST_NAME, props)
+            && this.isFieldDisabled(LAST_NAME, props)
+            && this.isFieldDisabled(EMAIL, props)
 	}
 
 	render() {
-
         if (this.state.userInfoPopulated) {
             return (
                 <Col sm={12} md={12} lg={12} className="ant-form-item submitterInfo">
