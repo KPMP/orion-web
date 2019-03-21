@@ -8,22 +8,9 @@ $packages-submit-footer-height: 87px;
 
 $footer-color: #283C5E;
 
-#form-footer {
-	background: #CCCCCC;
-	justify-content: center;
-}
-
-.ant-form-item-label {
-	label {
-		margin-bottom: 0rem !important;
-	}
-	label:after {
-		margin: 0 4px 0 2px;
-	}
-}
-
 body {
 	margin-top: $header-height-padded;
+	font-size: 14px;
 
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
 	padding-right: 0px !important;
@@ -43,6 +30,13 @@ body.modal-open {
 
 a {
 	cursor: pointer;
+	color: #337ab7;
+	text-decoration: none;
+}
+
+#form-footer {
+	background: #CCCCCC;
+	justify-content: center;
 }
 
 .ant-select {
@@ -380,6 +374,7 @@ PACKAGES
 		label::after {
 			display: none !important;
 			content: "" !important;
+			margin: 0 4px 0 2px;
 		}
 
 		label.ant-form-item-required::before {

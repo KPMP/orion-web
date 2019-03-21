@@ -46,7 +46,7 @@ class PackagePanel extends Component {
 				<section className="package">
 					<Row className={
 						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
-						"border border-primary rounded no-gutters px-2 py-2 mx-2 my-2"}>
+						"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
 						<Col xs={12} md={10} className="media align-items-center">
 							<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
 							<Row className="media-body mx-2 d-flex align-items-center">
