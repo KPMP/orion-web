@@ -1,28 +1,4 @@
 import { getDataTypeIconInfo, iconDataTypes } from './dataTypeIconHelper.js';
-import packageTypeList from '../packageTypes';
-
-describe('iconDataTypes', () => {
-	it('should contain mapping for all package types', () => {
-		let otherFound = false;
-		let packageTypes = [];
-		packageTypeList.options.forEach(function(obj) { packageTypes.push(obj.value) });
-		let fullDataTypeList = [];
-		for(let [iconDataTypeKey, iconDataTypeInfo] of iconDataTypes) {
-			for(var i=0; i < iconDataTypeInfo.dataTypes.length; i++) {
-				if (iconDataTypeInfo.dataTypes[i] !== "Other") {
-					fullDataTypeList.push(iconDataTypeInfo.dataTypes[i]);
-				} else {
-					otherFound = true;
-				}
-			}
-		}
-		fullDataTypeList.sort();
-		if (otherFound) {
-			fullDataTypeList.push("Other");
-		}
-		expect(packageTypes).toEqual(fullDataTypeList);
-	});
-});
 
 describe('getDataTypeIconInfo', () => {
     describe("Other types", () => {

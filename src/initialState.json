@@ -3,7 +3,8 @@
   	"unfiltered": [],
   	"filtered": [],
   	"filters": [],
-  	"userList": []
+  	"userList": [],
+	"packageTypes": []
   },
   "formDTD": {}
 }

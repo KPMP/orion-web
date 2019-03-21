@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import PackagesPane from './PackagesPane';
-import {addFilter, getUsers, removeFilter} from '../../actions/filterActions';
-import {getUserInformation} from "../../actions/userActions";
+import { addFilter, getUsers, removeFilter } from '../../actions/filterActions';
+import { getUserInformation } from "../../actions/userActions";
+import { getFormDTD } from "../../actions/Upload/uploadActions";
 
 const mapStateToProps = (state, props) =>
 ({
-	users: state.filtering.userList
+	users: state.filtering.userList,
+	packageTypes: state.filtering.packageTypes
 });
     
 const mapDispatchToProps = (dispatch, props) =>
@@ -21,6 +23,7 @@ const mapDispatchToProps = (dispatch, props) =>
 	loadRemoteData() {
 		getUserInformation()(dispatch);
 		getUsers()(dispatch);
+        getFormDTD()(dispatch);
 	}
 });
     
