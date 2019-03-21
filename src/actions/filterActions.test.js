@@ -36,3 +36,28 @@ describe('setUsers', () => {
 		expect(action).toEqual(expectedAction);
 	})
 })
+
+describe('setPackageType', () => {
+	it('should create the correct action', () => {
+		let packageTypes = ["Type 1", "Type 2"];
+		let payload = {
+			"standardFields": {
+				"fields": [
+					{
+						fieldName: "packageType",
+						values: packageTypes
+					},
+					{
+						fieldName: "dummyField"
+					}
+				]
+			}
+		};
+		let expectedAction = {
+			type: actionNames.SET_PACKAGE_TYPES,
+			payload: packageTypes
+		}
+		let action = filterActions.setPackageTypesFromDTD(payload);
+		expect(action).toEqual(expectedAction);
+	})
+})
