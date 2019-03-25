@@ -26,7 +26,12 @@ class FilterControl extends Component {
 		const Option = Select.Option;
 		return (
 			<div className="filter">
-				<Select allowClear showSearch placeholder={this.props.placeholder} onChange={this.addFilter} className={this.props.className}>
+				<Select
+					allowClear showSearch
+					placeholder={this.props.placeholder}
+					onChange={this.addFilter}
+					className={this.props.className}
+					dropdownClassName="filter-control-dropdown">
 				 {this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 				</Select>
 			</div>

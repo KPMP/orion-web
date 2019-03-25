@@ -39,8 +39,8 @@ export class DynamicFormGenerator {
 
 	renderField = (fieldJson, form, userInformation) => {
 		let fieldComponent = null;
-		let	colLg = 4; 
-		let	colMd = 6; 
+		let	colLg = 4;
+		let	colMd = 6;
 		let	colSm = 12;
 		let isDisabled = this.isFieldDisabled(fieldJson, form);
 		let isRequired = !isDisabled && fieldJson.required;

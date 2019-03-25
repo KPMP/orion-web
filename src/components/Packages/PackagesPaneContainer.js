@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import PackagesPane from './PackagesPane';
-import { addFilter, removeFilter } from '../../actions/filterActions';
+import { addFilter, getUsers, removeFilter } from '../../actions/filterActions';
+import { getUserInformation } from "../../actions/userActions";
+import { getFormDTD } from "../../actions/Upload/uploadActions";
 
 const mapStateToProps = (state, props) =>
 ({
@@ -13,8 +15,15 @@ const mapDispatchToProps = (dispatch, props) =>
 	addFilter(type, value) {
 		dispatch(addFilter(type, value));
 	},
+
 	removeFilter(type, value) {
 		dispatch(removeFilter(type, value));
+	},
+
+	loadRemoteData() {
+		getUserInformation()(dispatch);
+		getUsers()(dispatch);
+        getFormDTD()(dispatch);
 	}
 });
     
