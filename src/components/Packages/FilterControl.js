@@ -31,7 +31,7 @@ class FilterControl extends Component {
 					placeholder={this.props.placeholder}
 					onChange={this.addFilter}
 					className={this.props.className}
-					dropdownClassName="fixed">
+                    getPopupContainer={() => document.getElementById('packages-filter-controls')}>
 				 {this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 				</Select>
 			</div>

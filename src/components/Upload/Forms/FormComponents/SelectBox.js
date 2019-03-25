@@ -38,7 +38,7 @@ class SelectBox extends Component {
 						showSearch mode={mode}
 						placeholder="Select..."
 						name={this.props.fieldName}
-                        dropdownClassName="fixed">
+                        getPopupContainer={() => document.getElementById('dynamicUploadForm')}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
 				)}
