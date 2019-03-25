@@ -36,7 +36,7 @@ export const finishPackage = (packageId) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish')
 			.then(res => {
 				dispatch(setIsUploading(false));
-				window.location.reload();
+				window.location.pathname = '/';
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");
