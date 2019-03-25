@@ -1,6 +1,6 @@
 import React from 'react';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
-import { Row } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TextArea from './FormComponents/TextArea';
@@ -480,6 +480,24 @@ describe('renderField', () => {
 		expect(properties.userInformation).toEqual(submitterInformation);
 		expect(properties.form).toEqual(form);
 		
+	});
+
+	it('should handle cols in additionalProps', () => {
+		let fieldJson =
+		{
+			"label": "More stuff",
+			"type": "Multi-select",
+			"required": false,
+			"fieldName": "moreStuff",
+			"values": ['1', '2'],
+			"additionalProps": {"cols": {"colLg":9999, "colMd": 999, "colSm": 99}}
+		};
+		let mounted = mount(formGenerator.renderField(fieldJson, form));
+		let properties = mounted.find(Col).props();
+		expect(properties.lg).toEqual(9999);
+		expect(properties.md).toEqual(999);
+		expect(properties.sm).toEqual(99);
+
 	});
 	
 });
