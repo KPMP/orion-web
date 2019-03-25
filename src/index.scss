@@ -9,7 +9,7 @@ $packages-submit-footer-height: 87px;
 $footer-color: #283C5E;
 
 body {
-	margin-top: $header-height-padded;
+	//margin-top: $header-height-padded;
 	font-size: 14px;
 
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
@@ -21,7 +21,33 @@ body.modal-open {
 }
 
 #root {
-	margin-bottom: $footer-height-padded;
+	//margin-bottom: $footer-height-padded;
+	position: relative;
+	overflow-y: scroll;
+
+	/* xs to sm */
+	top: calc(#{$header-height-padded} + #{$packages-filter-controls-sm-height});
+	height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-filter-controls-sm-height}
+		- #{$footer-height-padded});
+
+	/* md and up */
+	@media (min-width: 768px) {
+		top: calc(#{$header-height-padded} + #{$packages-filter-controls-md-height});
+		height: calc(100vh + 10px
+			- #{$header-height-padded}
+			- #{$packages-filter-controls-md-height}
+			- #{$footer-height-padded});
+	}
+}
+
+#root.with-route-upload {
+	top: $header-height-padded;
+	height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-submit-footer-height}
+		- #{$footer-height-padded});
 }
 
 #footer {
@@ -41,7 +67,7 @@ a {
 	width: 100%;
 }
 
-.ant-select-dropdown.filter-control-dropdown {
+.ant-select-dropdown.fixed {
 	position: fixed;
 }
 
@@ -51,8 +77,6 @@ a {
 		min-height: 0px;
 		padding-bottom: 15px;
 	}
-
-	padding-bottom: $packages-submit-footer-height;
 
 	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-'], div[class^='col-sm-']  {
 		min-height: 86px;
@@ -119,14 +143,6 @@ PACKAGES
 
 	a {
 		color: #337ab7 !important;
-	}
-
-	/* xs to sm */
-	padding-top: $packages-filter-controls-sm-height;
-
-	/* md and up */
-	@media (min-width: 768px) {
-		padding-top: $packages-filter-controls-md-height;
 	}
 
 	#packages-filter-controls {

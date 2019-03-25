@@ -31,7 +31,7 @@ class FilterControl extends Component {
 					placeholder={this.props.placeholder}
 					onChange={this.addFilter}
 					className={this.props.className}
-					dropdownClassName="filter-control-dropdown">
+					dropdownClassName="fixed">
 				 {this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 				</Select>
 			</div>
