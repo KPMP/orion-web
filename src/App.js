@@ -26,7 +26,7 @@ const saveState = () => {
 };
 const GA_TRACKING_ID = 'UA-124331187-2';
 
-// store.subscribe(function(){console.log(store.getState())});
+store.subscribe(function(){console.log(store.getState())});
 store.subscribe(saveState);
 
 ReactGA.initialize(GA_TRACKING_ID);
