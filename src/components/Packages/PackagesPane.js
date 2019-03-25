@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
 import FilterControl from './FilterControl';
 import PackageListContainer from '../Packages/PackageListContainer';
-import { Row, Col } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import institutions from '../institutions';
 import * as filterActions from '../../actions/filterActions';
 
 class PackagesPane extends Component {
 
-	packageTypesToOptions = (packageTypes) => {
+	componentDidMount() {
+		if(!this.isRemoteDataLoaded()) {
+			this.props.loadRemoteData();
+		}
+	}
+
+	isRemoteDataLoaded() {
+		return Object.keys(this.props.users).length !== 0
+			&& this.props.users.constructor === Object
+			&& this.props.packageTypes.length > 0;
+	}
+
+	packageTypesToOptions(packageTypes) {
 		let packageTypeOptions = packageTypes.map(value => {
 			return { value: value, label: value }
 		});
+
 		packageTypeOptions.sort((option1, option2) => {
 			let returnVal = 0;
 			let label1 = option1.label.toUpperCase();
 			let label2 = option2.label.toUpperCase();
+
 			if (label1 < label2) {
 				returnVal = -1;
 			}
+
 			if (label1 > label2) {
 				returnVal = 1;
 			}
+
 			return returnVal;
 		});
+
 		packageTypeOptions.push({ value: "Other", label: "Other"});
 		return packageTypeOptions;
 	}
@@ -62,25 +80,33 @@ class PackagesPane extends Component {
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by institution" options={institutions.options} type={filterActions.filterTypes.INSTITUTION} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-                            <FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-                        </Col>
-                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
-                            <FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-                        </Col>
-					</Row>
-                    <Row>
-						<Col xs={12}>
-                        	<i class="text-secondary">Search results are displayed in reverse chronological order</i>
+						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+							<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-                    </Row>
-    			</header>
+						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
+							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						</Col>
+						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-auto mr-md-0">
+							<Link to="/upload">
+								<Button id="packages-button-add-new"
+										color="primary"
+										className="float-md-right btn-sm"
+										>Add new package</Button>
+							</Link>
+						</Col>
+					</Row>
+					<Row>
+						<Col xs={12}>
+							<i class="text-secondary">Search results are displayed in reverse chronological order</i>
+						</Col>
+					</Row>
+				</header>
 				<Row>
-                    <PackageListContainer />
+					<PackageListContainer />
 				</Row>
-            </article>
-        );
-    }
+			</article>
+		);
+	}
 }
 
 export default PackagesPane;

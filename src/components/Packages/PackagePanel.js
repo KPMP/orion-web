@@ -47,7 +47,7 @@ class PackagePanel extends Component {
 				<section className="package">
 					<Row className={
 						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
-						"border border-primary rounded no-gutters px-2 py-2 mx-2 my-2"}>
+						"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
 						<Col xs={12} md={10} className="media align-items-center">
 							<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
 							<Row className="media-body mx-2 d-flex align-items-center">
@@ -60,11 +60,11 @@ class PackagePanel extends Component {
 							<Row>
 								<Col xs={4} md={12}>
 									{/* eslint-disable-next-line */} 
-									<a className="d-block text-primary" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
+									<a className="d-block" onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a>
                                 </Col>
 								<Col xs={4} md={12}>
 									{/* eslint-disable-next-line */} 
-									<a className="d-block text-primary pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
+									<a className="d-block pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 								</Col>
 							{this.props.uploadPackage.downloadable &&
 								<Col xs={4} md={12}>

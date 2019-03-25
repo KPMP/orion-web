@@ -10,7 +10,7 @@ const mapStateToProps = (state, props) =>
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
-	getPackages() {
+	loadRemoteData() {
 		dispatch(getPackages());
 	}
 });

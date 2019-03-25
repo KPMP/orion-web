@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import DynamicForm from './DynamicForm';
 import { uploadPackage } from '../../../actions/Packages/packageActions';
+import {getFormDTD} from "../../../actions/Upload/uploadActions";
 
 const mapStateToProps = (state, props) =>
 ({
@@ -8,11 +9,15 @@ const mapStateToProps = (state, props) =>
 	userInformation: state.userInformation,
 	formDTD: state.formDTD
 });
-    
+
 const mapDispatchToProps = (dispatch, props) =>
 ({
 	postPackageInformation(packageInfo, uploader) {
 		dispatch(uploadPackage(packageInfo, uploader));
+	},
+
+	loadRemoteData() {
+		getFormDTD()(dispatch);
 	}
 });
 

@@ -7,31 +7,32 @@ export const packages = (state = {}, action) => {
 	let filters = state.filters;
 	let users = state.userList;
 	let packageTypes = state.packageTypes;
+
 	switch(action.type) {
 		case actionNames.SET_USERS:
 			newState.filtered = state.filtered;
 			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = action.payload;
-			newState.isQuerying = state.isQuerying;
 			newState.packageTypes = state.packageTypes;
 			return newState;
+
 		case actionNames.SET_PACKAGE_TYPES:
 			newState.filtered = state.filtered;
 			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = users;
-			newState.isQuerying = state.isQuerying;
 			newState.packageTypes = action.payload;
 			return newState;
+
 		case actionNames.SET_PACKAGES:
 			newState.filtered = action.payload;
 			newState.unfiltered = action.payload;
 			newState.filters = [];
 			newState.userList = users;
-			newState.isQuerying = state.isQuerying;
 			newState.packageTypes = state.packageTypes;
 			return newState;
+
 		case actionNames.REMOVE_FILTER:
 			if (filters.length > 0) {
 				filters.map((filter, index) => {
@@ -41,17 +42,17 @@ export const packages = (state = {}, action) => {
 					return filters;
 				});
 			}
+        
 			filteredPackageList = applyFilters(filters, filteredPackageList, packageTypes);
 			newState.unfiltered = state.unfiltered;
 			newState.filtered = filteredPackageList;
 			newState.filters = filters;
 			newState.userList = users;
-			newState.isQuerying = state.isQuerying;
 			newState.packageTypes = state.packageTypes;
 			return newState;
-		case actionNames.ADD_FILTER:
 
-			var filterAdded = false;
+		case actionNames.ADD_FILTER:
+			let filterAdded = false;
 			if (filters.length > 0) {
 				filters.map((filter, index) => {
 					if (filter.filterType === action.payload.filterType && !filterAdded) {
@@ -67,22 +68,13 @@ export const packages = (state = {}, action) => {
 			}
 			
 			filteredPackageList = applyFilters(filters, filteredPackageList, packageTypes);
-			
 			newState.unfiltered = state.unfiltered;
 			newState.filtered = filteredPackageList;
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
-			newState.isQuerying = state.isQuerying;
 			return newState;
-		case actionNames.SET_IS_QUERYING:
-			newState.filtered = state.filtered;
-			newState.unfiltered = state.unfiltered;
-			newState.filters = state.filters;
-			newState.userList = state.userList;
-			newState.isQuerying = action.payload;
-			newState.packageTypes = state.packageTypes;
-			return newState;
+
 		default:
 			return state;
 	}

@@ -5,6 +5,7 @@ import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
+import { Link, Prompt } from 'react-router-dom';
 
 class DynamicForm extends Component {
 	
@@ -16,38 +17,49 @@ class DynamicForm extends Component {
 		}
 		
 		uploader.methods.reset();
-        
-        uploader.on('submit', () => {
-    		let newCount = this.state.filesAdded + 1;
-    		this.setState( { filesAdded: newCount } );
-    		this.isSubmitDisabled();
-    		return true;
-        });
-        
-        uploader.on('cancel', () => {
-    		let newCount = this.state.filesAdded - 1;
-    		this.setState( { filesAdded: newCount });
-    		this.isSubmitDisabled();
-    		return true;
-        });
-        
-        uploader.on('submit', (id, name) => {
-    		let files = uploader.methods.getUploads({
-            status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
-    		for(let fileIndex in files) {
-    			let existingName = files[fileIndex].name;
-    			if (existingName === name) {
-    				alert("You have already selected " + existingName + " to upload.");
-    				return false;
-    			}
-    		}
-    		return true;
-        });
+		
+		uploader.on('submit', () => {
+			let newCount = this.state.filesAdded + 1;
+			this.setState( { filesAdded: newCount } );
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('cancel', () => {
+			let newCount = this.state.filesAdded - 1;
+			this.setState( { filesAdded: newCount });
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('submit', (id, name) => {
+			let files = uploader.methods.getUploads({
+			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+			for(let fileIndex in files) {
+				let existingName = files[fileIndex].name;
+				if (existingName === name) {
+					alert("You have already selected " + existingName + " to upload.");
+					return false;
+				}
+			}
+			return true;
+		});
 		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
 		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
+	}
+
+	componentDidMount() {
+		if(!this.isRemoteDataLoaded()) {
+			this.props.loadRemoteData();
+		}
+	}
+
+	isRemoteDataLoaded() {
+		return Object.keys(this.props.formDTD).length !== 0
+			&& this.props.formDTD.constructor === Object;
 	}
 	
 	handleSubmit = (e) => {
@@ -77,13 +89,13 @@ class DynamicForm extends Component {
 	isFormValid(section, form) {
 		let { getFieldError, getFieldValue } = form;
 		let formValid = true;
-		
+
 		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
 				|| getFieldValue('submitterLastName') === undefined 
 				|| getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
-		} 
+		}
 		
 		let fields = section.fields;
 		for (let i =0; i< fields.length; i++) {
@@ -103,8 +115,13 @@ class DynamicForm extends Component {
 	isSubmitDisabled() {
 		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form);
 		let { getFieldValue } = this.props.form;
+
 		if (getFieldValue('packageType') !== undefined) {
-			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(
+				function(element) {
+					return element.hasOwnProperty(getFieldValue('packageType'))
+				});
+
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				let sections = dynamicFormElements.sections;
@@ -117,14 +134,23 @@ class DynamicForm extends Component {
 			}
 		}
 		
-    	if (validForm && this.state.filesAdded > 0) {
-    		return false;
-    	}
-    	return true;
+		if (validForm && this.state.filesAdded > 0) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	render() {
-		
+
+		if(!this.isRemoteDataLoaded()) {
+			return (
+				<h4 className="text-center pt-3">
+					Loading upload form...
+				</h4>
+			);
+		}
+
 		let { getFieldValue } = this.props.form;
 		let dynamicFormElements = [];
 		let dynamicSections = null;
@@ -139,28 +165,35 @@ class DynamicForm extends Component {
 		}
 		
 		return (
-			<section id="dynamicUploadForm" className="container justify-content-center pt-4">
-				{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
-				{dynamicSections}
-                <Row className="dropzone btn-sm">
-                    <Col md={12}>
-                        <FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-                    </Col>
-                </Row>
-        		<Row className="fixed-bottom pt-4" id="form-footer">
-        			<div className="container justify-content-center">
-	        			<Row className="text-center">
-		                    <Col md={12}>
-		                        <Button id="cancel" className="mr-3">Cancel</Button>
-		                        <Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
-		                    </Col>
-	                    </Row>
-                    </div>
-                </Row>
-			</section>
+			<React.Fragment>
+				<Prompt
+					when={() => {return true;}}
+					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
+				/>
+				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
+					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
+					{dynamicSections}
+					<Row className="dropzone btn-sm">
+						<Col md={12}>
+							<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+						</Col>
+					</Row>
+					<Row className="fixed-bottom pt-4" id="form-footer">
+						<div className="container justify-content-center">
+							<Row className="text-center">
+								<Col md={12}>
+									<Link to="/">
+										<Button id="cancel" className="mr-3">Cancel</Button>
+									</Link>
+									<Button id="submit" disabled={this.isSubmitDisabled()} type="primary" onClick={this.handleSubmit}>Upload</Button>
+								</Col>
+							</Row>
+						</div>
+					</Row>
+				</article>
+			</React.Fragment>
 		);
 	}
-	
 }
 
 const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
