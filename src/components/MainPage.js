@@ -5,6 +5,7 @@ import NavFooter from './Nav/NavFooter';
 import PaneHolder from './PaneHolder'
 import { getUserInformation } from '../actions/userActions';
 import * as filterActions from '../actions/filterActions';
+import { getPackageTypeIcons } from '../actions/packageTypeIconsActions';
 import { connect } from 'react-redux';
 import ErrorBoundaryContainer from './Error/ErrorBoundaryContainer';
 import { getFormDTD } from '../actions/Upload/uploadActions';
@@ -26,6 +27,7 @@ class MainPage extends Component {
     componentDidMount() {
         getUserInformation()(this.props.dispatch);
         filterActions.getUsers()(this.props.dispatch);
+        getPackageTypeIcons()(this.props.dispatch);
         getFormDTD()(this.props.dispatch);
     }
 
