@@ -26,7 +26,6 @@ class DateField extends Component {
 		} else if (!open && this.state.opened) {
 			this.setState({ touched: true });
 		}
-		
 	}
 	
 	focus = () => {
@@ -39,6 +38,11 @@ class DateField extends Component {
 		} else {
 			return this.props.isDisabled;
 		}
+	}
+	
+	clearContents = () => {
+		let { resetFields } = this.props.form;
+		resetFields(this.props.fieldName);
 	}
 	
 	render() {
@@ -57,6 +61,9 @@ class DateField extends Component {
 		}
 		
 		let isDisabled = this.isFieldDisabled();
+		if (isDisabled) {
+			this.clearContents();
+		}
 		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >

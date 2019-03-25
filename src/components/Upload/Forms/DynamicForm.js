@@ -63,6 +63,7 @@ class DynamicForm extends Component {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
 				console.log("Received err: ", err);
+				throw new Error("Unable to submit form: ", err);
 			}
 		});
 	}

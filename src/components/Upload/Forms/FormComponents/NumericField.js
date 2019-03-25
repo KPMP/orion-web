@@ -15,11 +15,19 @@ class NumericField extends Component {
 		}
 	}
 	
+	clearContents = () => {
+		let { resetFields } = this.props.form;
+		resetFields(this.props.fieldName);
+	}
+	
     render() {
         let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
         let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
         let fieldOptions = this.props.isRequired ? requiredFieldNumericOptions : optionalFieldNumericOptions;
         let isDisabled = this.isFieldDisabled();
+        if (isDisabled) {
+        	this.clearContents();
+        }
         let placeholderText = undefined;
 		if (this.props.additionalProps !== undefined) {
 			placeholderText = this.props.additionalProps.placeholderText;
