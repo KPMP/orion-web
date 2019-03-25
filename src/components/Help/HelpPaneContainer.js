@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import HelpPane from './HelpPane';
-//import { addFilter, removeFilter } from '../../actions/filterActions';
 
 const mapStateToProps = (state, props) =>
     ({ });
