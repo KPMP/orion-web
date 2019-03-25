@@ -6,5 +6,8 @@
   	"userList": [],
 	"packageTypes": []
   },
-  "formDTD": {}
+  "formDTD": {},
+  "help": {
+	  "releases": []
+  }
 }
