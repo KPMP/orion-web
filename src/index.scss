@@ -216,7 +216,7 @@ PACKAGES
 
 	.navbar-header {
 
-		text-decoration: none;
+		text-decoration: none !important;
 
 		.navbar-brand img.logo {
 			width: 80px;
@@ -398,6 +398,11 @@ PACKAGES
 			content: "*" !important;
 		}
 	}
+}
+
+/** HELP PAGE **/
+#help-howto-container {
+	min-height: 400px;
 }
 
 /*

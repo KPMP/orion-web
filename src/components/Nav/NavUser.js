@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class NavUser extends Component {
@@ -26,6 +27,12 @@ class NavUser extends Component {
                 <DropdownToggle caret tag="a" className="text-dark"
                 >{this.props.displayName}</DropdownToggle>
                 <DropdownMenu id="nav-user-dropdown-menu">
+                    <Link to="/help">
+                        <DropdownItem>
+                            Help
+                        </DropdownItem>
+                    </Link>
+                    <DropdownItem divider />
                     <DropdownItem tag="a"
                         onClick={() => {window.location.href = "/Shibboleth.sso/Logout?return=/Shibboleth.sso/Login"; }}
                         >Sign Out
