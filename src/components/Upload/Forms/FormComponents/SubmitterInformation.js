@@ -47,19 +47,27 @@ class SubmitterInformation extends Component {
             );
         }
 
-		return (
-			 <div className="row w-100 ml-0">
-				<Col sm={12} md={6} lg={4}>
-					<TextField label="First Name" fieldName="submitterFirstName" isDisabled={this.state.submitterLastNameDisabled} form={this.props.form} isRequired={true}/>
-				</Col>
-				<Col sm={12} md={6} lg={4} >
-					<TextField label="Last Name" fieldName="submitterLastName" isDisabled={this.state.submitterLastNameDisabled} form={this.props.form} isRequired={true}/>
-				</Col>
-				<Col sm={12} md={6} lg={4}>
-					<TextField label="Email" fieldName="submitterEmail" isDisabled={this.state.submitterEmailDisabled} form={this.props.form} isRequired={true}/>
-				</Col>
-			</div>
-		);
+        else {
+            return (
+                <div className="row w-100 ml-0">
+                    <Col sm={12} md={6} lg={4}>
+                        <TextField label="First Name" fieldName="submitterFirstName"
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isRequired={true}/>
+                    </Col>
+                    <Col sm={12} md={6} lg={4}>
+                        <TextField label="Last Name" fieldName="submitterLastName"
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isRequired={true}/>
+                    </Col>
+                    <Col sm={12} md={6} lg={4}>
+                        <TextField label="Email" fieldName="submitterEmail"
+                                   isDisabled={this.state.submitterEmailDisabled} form={this.props.form}
+                                   isRequired={true}/>
+                    </Col>
+                </div>
+            );
+        }
 	}
 }
 
