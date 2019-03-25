@@ -7,27 +7,29 @@ import PropTypes from 'prop-types';
 class AttachmentsModal extends Component {
 	
     render() {
-    		return (
-            <div className="attachmentsModal static-modal">
-                <Modal isOpen={this.props.show} onHide={this.props.close}>
-                        <ModalHeader toggle={this.props.close}>
-                            Attached Files
-                        </ModalHeader>
-                    <ModalBody className="attachmentsModalBody">
-                    {this.props.attachments.map((attachment, index) => {
-                            let rowClass = "attachmentsModalRow";
-                            if (shouldColorRow(index)) {
-                                rowClass +=" grayRow";
-                            }
-                        return (<Row key={index} className={rowClass}>
-                                <Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
-                                <Col md={3}>{filesize(attachment.size)}</Col>
-                            </Row>);
-                    })}
-                    </ModalBody>
-                </Modal>
-            </div>
-        )
+    	console.log(this.props);
+    	return (
+			<div className="attachmentsModal static-modal">
+				<Modal isOpen={this.props.show} onHide={this.props.close}>
+					<ModalHeader toggle={this.props.close}>
+	            		Attached Files
+	            	</ModalHeader>
+            		<ModalBody className="attachmentsModalBody">
+            		{this.props.attachments.map((attachment, index) => {
+            			let rowClass = "attachmentsModalRow";
+            			if (shouldColorRow(index)) {
+            				rowClass +=" grayRow";
+            			}
+            			return (<Row key={index} className={rowClass}>
+            				<Col md={9} className="filename"><span>{attachment.fileName}</span></Col>
+            				<Col md={3}>{filesize(attachment.size)}</Col>
+            			</Row>);
+            		})}
+            		</ModalBody>
+				</Modal>
+			</div>
+    	);
+          
     }
 }
 
