@@ -6,5 +6,7 @@
   	"userList": [],
 	"packageTypes": []
   },
-  "formDTD": {}
+  "isUploading": false,
+  "formDTD": {},
+  "packageTypeIcons": []
 }
