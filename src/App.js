@@ -14,6 +14,7 @@ import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
+import { applyRouteClass } from './helpers/routeClassUtil';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -37,12 +38,14 @@ function logPageView(location, action) {
 const history = createHistory();
 history.listen((location, action) => {
 	logPageView(location, action);
+	applyRouteClass();
 });
 
 class App extends Component {
-  
+
 	componentDidMount() {
 		logPageView(window.location, "");
+		applyRouteClass();
 	}
 
     render() {
