@@ -12,7 +12,7 @@ export const getPackageTypeIcons = () => {
             })
             .catch(err => {
                 console.log(err);
-                handleError();
+                dispatch(handleError("Unable to get package type icons: " + err));
             });
     }
 }
