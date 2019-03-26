@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 class AttachmentsModal extends Component {
 	
     render() {
-    	console.log(this.props);
     	return (
 			<div className="attachmentsModal static-modal">
 				<Modal isOpen={this.props.show} onHide={this.props.close}>
