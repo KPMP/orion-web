@@ -14,7 +14,7 @@ class MetadataModal extends Component {
 		let header = section.sectionHeader;
 		let fields = section.fields;
 		return (
-			<TreeNode title={header} key={header}>
+			<TreeNode title={header} key={header} selectable={false}>
 				{ fields.map((fieldJson) => this.renderField(fieldJson)) }
 			</TreeNode>
 		);
@@ -27,9 +27,9 @@ class MetadataModal extends Component {
 			let nameField = "Submitter: " + name;
 			let institutionField = "Institution: " + packageInfo.institution;
 			return (
-				<TreeNode title="Submitted by:" key="Submitted By">
-					<TreeNode title={institutionField} key={institutionField} isLeaf/>
-					<TreeNode title={nameField} key={name} isLeaf/>
+				<TreeNode title="Submitted by:" key="Submitted By" selectable={false}>
+					<TreeNode title={institutionField} key={institutionField} isLeaf selectable={false}/>
+					<TreeNode title={nameField} key={name} isLeaf selectable={false}/>
 				</TreeNode>
 			);
 		} else if (fieldJson.label === "Package Type (Other)") {
@@ -37,7 +37,7 @@ class MetadataModal extends Component {
 		} else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			let title = fieldJson.label + ": " + fieldValue;
-			return <TreeNode title={title} key={title}/>;
+			return <TreeNode title={title} key={title} selectable={false} isLeaf/>;
 		}
 	}
 	
