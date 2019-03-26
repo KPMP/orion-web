@@ -459,7 +459,7 @@ describe('renderField', () => {
 		expect(properties.isFieldDisabled).toEqual(formGenerator.isFieldDisabled);
 	});
 	
-	it('should hanlde Submitter Information', () => {
+	it('should handle Submitter Information', () => {
 		let fieldJson = 
 		{
 			"label": "More stuff",

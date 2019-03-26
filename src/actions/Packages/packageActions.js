@@ -7,15 +7,12 @@ const api = Api.getInstance();
 
 export const getPackages = () => {
 	return (dispatch) => {
-		dispatch(setIsQuerying(true));
 		api.get('/api/v1/packages')
 			.then(res => {
 				dispatch(setPackages(res.data));
-                dispatch(setIsQuerying(false));
 			})
 			.catch(err => {
 				dispatch(handleError("Unable to connect to the Data Lake: " + err));
-                dispatch(setIsQuerying(false));
             });
 	};
 };
@@ -24,13 +21,6 @@ export const setPackages = (packages) => {
 	return {
 		type: actionNames.SET_PACKAGES,
 		payload: packages
-	}
-}
-
-export const setIsQuerying = (isQuerying) => {
-	return {
-		type: actionNames.SET_IS_QUERYING,
-		payload: isQuerying
 	}
 }
 
@@ -46,7 +36,7 @@ export const finishPackage = (packageId) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish')
 			.then(res => {
 				dispatch(setIsUploading(false));
-				window.location.reload();
+				window.location.pathname = '/';
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");

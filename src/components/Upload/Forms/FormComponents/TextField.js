@@ -15,6 +15,11 @@ class TextField extends Component {
 		}
 	}
 	
+	clearContents = () => {
+		let { resetFields } = this.props.form;
+		resetFields(this.props.fieldName);
+	}
+	
 	render() {
 		let { isFieldTouched, getFieldError, getFieldDecorator } = this.props.form;
 		let error = isFieldTouched(this.props.fieldName) && getFieldError(this.props.fieldName);
@@ -24,6 +29,9 @@ class TextField extends Component {
 			placeholderText = this.props.additionalProps.placeholderText;
 		}
 		let isDisabled = this.isFieldDisabled();
+		if (isDisabled) {
+			this.clearContents();
+		}
 
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>

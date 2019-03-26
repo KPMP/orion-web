@@ -15,6 +15,11 @@ class SelectBox extends Component {
 		}
 	}
 	
+	clearContents = () => {
+		let { resetFields } = this.props.form;
+		resetFields(this.props.fieldName);
+	}
+	
 	render() {
 		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
 		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
@@ -29,11 +34,19 @@ class SelectBox extends Component {
 		}
 
 		let isDisabled = this.isFieldDisabled();
+		if (isDisabled) {
+			this.clearContents();
+		}
 		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Select disabled={isDisabled} showSearch mode={mode} placeholder="Select..." name={this.props.fieldName}>
+					<Select
+						disabled={isDisabled}
+						showSearch mode={mode}
+						placeholder="Select..."
+						name={this.props.fieldName}
+                        getPopupContainer={() => document.getElementById('dynamicUploadForm')}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
 				)}

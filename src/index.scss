@@ -9,7 +9,7 @@ $packages-submit-footer-height: 87px;
 $footer-color: #283C5E;
 
 body {
-	margin-top: $header-height-padded;
+	font-size: 14px;
 
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
 	padding-right: 0px !important;
@@ -20,7 +20,32 @@ body.modal-open {
 }
 
 #root {
-	margin-bottom: $footer-height-padded;
+	position: relative;
+	overflow-y: scroll;
+
+	/* xs to sm */
+	top: calc(#{$header-height-padded} + #{$packages-filter-controls-sm-height});
+	height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-filter-controls-sm-height}
+		- #{$footer-height-padded});
+
+	/* md and up */
+	@media (min-width: 768px) {
+		top: calc(#{$header-height-padded} + #{$packages-filter-controls-md-height});
+		height: calc(100vh + 10px
+			- #{$header-height-padded}
+			- #{$packages-filter-controls-md-height}
+			- #{$footer-height-padded});
+	}
+}
+
+#root.with-route-upload {
+	top: $header-height-padded;
+	height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-submit-footer-height}
+		- #{$footer-height-padded});
 }
 
 #footer {
@@ -29,6 +54,11 @@ body.modal-open {
 
 a {
 	cursor: pointer;
+}
+
+#form-footer {
+	background: #CCCCCC;
+	justify-content: center;
 }
 
 .ant-select {
@@ -41,8 +71,6 @@ a {
 		min-height: 0px;
 		padding-bottom: 15px;
 	}
-
-	padding-bottom: $packages-submit-footer-height;
 
 	div[class^='col-md-'], div[class^='col-lg-'],div[class^='col-xl-'], div[class^='col-sm-']  {
 		min-height: 86px;
@@ -106,12 +134,9 @@ a {
 PACKAGES
 */
 #packages-pane {
-	/* xs to sm */
-	padding-top: $packages-filter-controls-sm-height;
 
-	/* md and up */
-	@media (min-width: 768px) {
-		padding-top: $packages-filter-controls-md-height;
+	a {
+		color: #337ab7 !important;
 	}
 
 	#packages-filter-controls {
@@ -173,35 +198,40 @@ PACKAGES
 }
 
 .search-glass {
-    background: rgb(2, 117, 216);
-    color: white;
+	background: rgb(2, 117, 216);
+	color: white;
 }
 
 .dd-gray-text {
-    color: gray;
+	color: gray;
 }
 
 .upload-ctrl-submit {
 	padding-top: 10px;
-    float: right;
+	float: right;
 }
 
 #upload-form-default {
-    text-align: center;
-    div {
-        b {
-            color: gray;
-        }
-    }
+	text-align: center;
+	div {
+		b {
+			color: gray;
+		}
+	}
 }
 
 #navbar {
-    background-color: white;
+	background-color: white;
 	border-bottom: 1px solid #e7e7e7;
 
-	.navbar-brand img.logo {
-		width: 80px;
-		min-width: 80px;
+	.navbar-header {
+
+		text-decoration: none;
+
+		.navbar-brand img.logo {
+			width: 80px;
+			min-width: 80px;
+		}
 	}
 }
 
@@ -215,11 +245,11 @@ PACKAGES
 }
 
 .btn-primary {
-    background-color: rgb(2, 117, 216);
+	background-color: rgb(2, 117, 216);
 }
 
 .navbar-default .btn-link {
-    color: rgb(2, 117, 216);
+	color: rgb(2, 117, 216);
 }
 
 .dropzone {
