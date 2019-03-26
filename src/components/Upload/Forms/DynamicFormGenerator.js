@@ -19,6 +19,8 @@ const FIELD_TYPES = {
 
 const OTHER_AVAILABLE_LABEL = 'Other';
 const LINKED_WITH = 'linkedWith';
+const COLUMNS = 'cols';
+const ADDITIONAL_PROPS = 'additionalProps';
 
 export class DynamicFormGenerator {
 	
@@ -42,6 +44,9 @@ export class DynamicFormGenerator {
 		let	colLg = 4;
 		let	colMd = 6;
 		let	colSm = 12;
+		if (fieldJson.hasOwnProperty(ADDITIONAL_PROPS) && fieldJson.additionalProps.hasOwnProperty(COLUMNS)) {
+			({ colLg, colMd, colSm } = fieldJson.additionalProps.cols);
+		}
 		let isDisabled = this.isFieldDisabled(fieldJson, form);
 		let isRequired = !isDisabled && fieldJson.required;
 

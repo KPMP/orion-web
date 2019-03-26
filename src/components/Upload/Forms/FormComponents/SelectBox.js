@@ -41,7 +41,12 @@ class SelectBox extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<Select disabled={isDisabled} showSearch mode={mode} placeholder="Select..." name={this.props.fieldName}>
+					<Select
+						disabled={isDisabled}
+						showSearch mode={mode}
+						placeholder="Select..."
+						name={this.props.fieldName}
+                        getPopupContainer={() => document.getElementById('dynamicUploadForm')}>
 						{this.props.options.map(option => <Option key={option.value}>{option.label}</Option>)}
 					</Select>
 				)}
