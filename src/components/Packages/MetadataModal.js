@@ -3,47 +3,21 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import PropTypes from 'prop-types';
+import { MetadataRenderer } from './MetadataRenderer';
 import { Tree } from 'antd';
-
-const { TreeNode } = Tree;
 
 class MetadataModal extends Component {
 
-	renderSection(section) {
-		console.log(section);
-		let header = section.sectionHeader;
-		let fields = section.fields;
-		return (
-			<TreeNode title={header} key={header} selectable={false}>
-				{ fields.map((fieldJson) => this.renderField(fieldJson)) }
-			</TreeNode>
-		);
-	}
-	
-	renderField(fieldJson, userInformation) {
-		let packageInfo = this.props.uploadPackage;
-		if (fieldJson.type === "Submitter Information") {
-			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
-			let nameField = "Submitter: " + name;
-			let institutionField = "Institution: " + packageInfo.institution;
-			return (
-				<TreeNode title="Submitted by:" key="Submitted By" selectable={false}>
-					<TreeNode title={institutionField} key={institutionField} isLeaf selectable={false}/>
-					<TreeNode title={nameField} key={name} isLeaf selectable={false}/>
-				</TreeNode>
-			);
-		} else if (fieldJson.label === "Package Type (Other)") {
-			// ignore, we don't want to display this
-		} else {
-			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
-			let title = fieldJson.label + ": " + fieldValue;
-			return <TreeNode title={title} key={title} selectable={false} isLeaf/>;
-		}
+	constructor(props) {
+		super(props);
+		let renderer = new MetadataRenderer();
+		this.renderSection = renderer.renderSection.bind(this);
+		this.renderField = renderer.renderField.bind(this);
 	}
 	
     render() {
         let experimentDate = this.props.uploadPackage.experimentDate?dateFormat(getIEFriendlyDate(this.props.uploadPackage.experimentDate), 'yyyy-mm-dd', true):"N/A";
-        let standardSection = this.renderSection(this.props.currentDTD.standardFields);
+        let standardSection = this.renderSection(this.props.currentDTD.standardFields, this.props.uploadPackage);
         let remainingSections = "";
         let packageType = this.props.uploadPackage.packageType;
         if (packageType !== undefined) {
@@ -51,11 +25,10 @@ class MetadataModal extends Component {
 			if (remainingSections.length > 0) {
 				remainingSections = remainingSections[0][packageType];
 				remainingSections = remainingSections.sections.map((section) => {
-					return this.renderSection(section);
+					return this.renderSection(section, this.props.uploadPackage);
 				});
 			}
 		}
-        console.log(remainingSections);
         
         return (
             <div className="metadataModal static-modal">
