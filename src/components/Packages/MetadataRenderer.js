@@ -26,8 +26,6 @@ export class MetadataRenderer {
 					<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
 				</TreeNode>
 			);
-		} else if (fieldJson.label === "Package Type (Other)") {
-			// ignore, we don't want to display this
 		} else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			let title = fieldJson.label + ": " + fieldValue;

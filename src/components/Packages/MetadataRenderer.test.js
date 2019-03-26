@@ -125,7 +125,54 @@ describe('renderField', () => {
 		expect(props.selectable).toEqual(false);
 		expect(props.eventKey).toEqual("Submitter: Testy Testerson");
 		expect(props.isLeaf).toEqual(true);
-		
 
+	});
+	
+	it('should render remaining fields appropriately', () => {
+		let fieldJson = 
+		{
+			"label": "More stuff",
+			"type": "Something else",
+			"fieldName": "thisField"
+		};
+		let packageInfo = { thisField: "This value" };
+		let field = renderer.renderField(fieldJson, packageInfo);
+		let mounted = mount(<Tree>{field}</Tree>);
+		expect(mounted.find(TreeNode).length).toBe(1);
+		expect(mounted.find(TreeNode).length).toBe(1);
+		let node = mounted.find(TreeNode);
+		let props = node.props();
+		expect(props.hasOwnProperty('title')).toBe(true);
+		expect(props.hasOwnProperty('selectable')).toBe(true);
+		expect(props.hasOwnProperty('eventKey')).toBe(true);
+		expect(props.hasOwnProperty('isLeaf')).toBe(true);
+		expect(props.title).toEqual("More stuff: This value");
+		expect(props.selectable).toEqual(false);
+		expect(props.eventKey).toEqual("More stuff: This value");
+		expect(props.isLeaf).toBe(true);
+	});
+	
+	it('should render field with blank value when not in packageInfo', () => {
+		let fieldJson = 
+		{
+				"label": "More stuff",
+				"type": "Something else",
+				"fieldName": "thisField"
+		};
+		let packageInfo = { anotherField: "This value" };
+		let field = renderer.renderField(fieldJson, packageInfo);
+		let mounted = mount(<Tree>{field}</Tree>);
+		expect(mounted.find(TreeNode).length).toBe(1);
+		expect(mounted.find(TreeNode).length).toBe(1);
+		let node = mounted.find(TreeNode);
+		let props = node.props();
+		expect(props.hasOwnProperty('title')).toBe(true);
+		expect(props.hasOwnProperty('selectable')).toBe(true);
+		expect(props.hasOwnProperty('eventKey')).toBe(true);
+		expect(props.hasOwnProperty('isLeaf')).toBe(true);
+		expect(props.title).toEqual("More stuff: ");
+		expect(props.selectable).toEqual(false);
+		expect(props.eventKey).toEqual("More stuff: ");
+		expect(props.isLeaf).toBe(true);
 	});
 });

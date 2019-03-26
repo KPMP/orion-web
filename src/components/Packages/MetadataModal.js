@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import dateFormat from 'dateformat';
-import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import PropTypes from 'prop-types';
 import { MetadataRenderer } from './MetadataRenderer';
 import { Tree } from 'antd';
@@ -16,7 +14,6 @@ class MetadataModal extends Component {
 	}
 	
     render() {
-        let experimentDate = this.props.uploadPackage.experimentDate?dateFormat(getIEFriendlyDate(this.props.uploadPackage.experimentDate), 'yyyy-mm-dd', true):"N/A";
         let standardSection = this.renderSection(this.props.currentDTD.standardFields, this.props.uploadPackage);
         let remainingSections = "";
         let packageType = this.props.uploadPackage.packageType;
