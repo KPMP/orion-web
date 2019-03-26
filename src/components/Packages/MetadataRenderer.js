@@ -21,9 +21,9 @@ export class MetadataRenderer {
 			let nameField = "Submitter: " + name;
 			let institutionField = "Institution: " + packageInfo.institution;
 			return (
-				<TreeNode title="Submitted by:" key="Submitted By" selectable={false}>
+				<TreeNode title="Submitted by:" key="Submitted by:" selectable={false}>
 					<TreeNode title={institutionField} key={institutionField} isLeaf selectable={false}/>
-					<TreeNode title={nameField} key={name} isLeaf selectable={false}/>
+					<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
 				</TreeNode>
 			);
 		} else if (fieldJson.label === "Package Type (Other)") {
