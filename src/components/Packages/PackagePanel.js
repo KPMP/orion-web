@@ -39,10 +39,10 @@ class PackagePanel extends Component {
 
     render() {
 		let packageInfo = this.props.uploadPackage.packageInfo;
-
+		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
-		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
+		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
 		
     	return (
 			<section className="package">

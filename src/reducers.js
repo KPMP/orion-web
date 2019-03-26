@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import actionNames from './actions/actionNames';
 import loadedState from './initialState';
 import { packages as filtering } from './components/Packages/packagePanelReducer';
+import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
 import { forms } from './components/Packages/formsReducer';
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
     formDTD,
     forms,
     userInformation
+    packageTypeIcons
 });
 
 const rootReducer = (state, action) => {

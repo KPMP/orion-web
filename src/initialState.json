@@ -7,5 +7,7 @@
 	"packageTypes": []
   },
   "formDTD": {},
-  "forms": {}
+  "forms": {},
+  "isUploading": false,
+  "packageTypeIcons": []
 }
