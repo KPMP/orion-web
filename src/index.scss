@@ -9,7 +9,6 @@ $packages-submit-footer-height: 87px;
 $footer-color: #283C5E;
 
 body {
-	//margin-top: $header-height-padded;
 	font-size: 14px;
 
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
@@ -21,7 +20,6 @@ body.modal-open {
 }
 
 #root {
-	//margin-bottom: $footer-height-padded;
 	position: relative;
 	overflow-y: scroll;
 
