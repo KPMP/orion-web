@@ -12,7 +12,7 @@ class DateField extends Component {
 		super(props);
 		this.state = {
 			opened: false,
-			touched: false,
+			touched: false
 		}
 	}
 	
