@@ -71,6 +71,9 @@ class DynamicForm extends Component {
 				newValues.submitterLastName = this.props.userInformation.lastName;
 				newValues.submitterEmail = this.props.userInformation.email;
 			}
+			newValues.version = this.props.formDTD.version;
+			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
+			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
 			if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
@@ -78,6 +81,16 @@ class DynamicForm extends Component {
 				throw new Error("Unable to submit form: ", err);
 			}
 		});
+	}
+	
+	determinePackageTypeMetadataVersion= () => {
+		let { getFieldValue } = this.props.form; 
+		let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+		if (dynamicFormElements.length > 0) {
+			dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
+			return dynamicFormElements.version;
+		}
+		return undefined;
 	}
 	
 	needUserInfo() {
