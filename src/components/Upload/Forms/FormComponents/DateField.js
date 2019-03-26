@@ -13,7 +13,6 @@ class DateField extends Component {
 		this.state = {
 			opened: false,
 			touched: false,
-			value: ""
 		}
 	}
 	
