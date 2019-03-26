@@ -33,11 +33,13 @@ class HelpPane extends Component {
                         <p>
                             If you have questions or issues to report, email <a href="mailto:upload-support@kpmp.org">upload-support@kpmp.org</a>.
                         </p>
+                    </section>
+                    <section className="d-none">
                         <h4 className="text-dark">About the Data Lake Uploader</h4>
                         <p>Short overview of the Data Lake Uploader.  orem ipsum dolor amet authentic cred hexagon, viral woke lo-fi whatever pinterest live-edge migas. Before they sold out locavore food truck tacos roof party keytar franzen, biodiesel bitters XOXO man bun. Vegan pinterest organic ethical freegan fanny pack literally synth. Etsy cred VHS kitsch man braid meditation selfies whatever actually tousled hexagon cliche forage.
                             Lo-fi tumeric vegan pinterest try-hard flannel fashion axe viral squid ethical fixie kitsch fingerstache raw denim. Meditation brooklyn gluten-free hashtag waistcoat, distillery taxidermy kitsch beard hell of church-key bushwick lomo aesthetic. Snackwave XOXO air plant meditation, typewriter chicharrones enamel pin disrupt photo booth tattooed. Vice schlitz actually poutine normcore literally tilde beard palo santo pug crucifix drinking vinegar roof party pour-over whatever. Waistcoat chillwave af hella, farm-to-table fanny pack iceland poutine succulents disrupt aesthetic.</p>
                     </section>
-                    <section className="py-2">
+                    <section className="py-2 d-none">
                         <h4 className="text-dark">How to use</h4>
                         <div id="help-howto-container"
                              className="d-flex border border-secondary bg-light w-100 align-items-center justify-content-center">
