@@ -3,50 +3,48 @@ export const iconDataTypes = new Map(
         ['Imaging',
             {
                 iconDataType: 'Imaging',
-                iconImage: 'icon_imaging_132x132.png',
-                dataTypes: ['3-D tissue imaging', 'CODEX', 'Multiplex ISH', 'Whole Slide Images']
+                iconImage: 'icon_imaging_132x132.png'
             }
         ],
         ['Metabolomics',
             {
                 iconDataType: 'Metabolomics',
-                iconImage: 'icon_metabolomics_132x132.png',
-                dataTypes: ['Spatial Metabolomics']
+                iconImage: 'icon_metabolomics_132x132.png'
             }
         ],
         ['Other',
             {
                 iconDataType: 'Other',
-                iconImage: 'icon_other_132x132.png',
-                dataTypes: ['DNA Methylation', 'Other']
+                iconImage: 'icon_other_132x132.png'
             }
         ],
         ['Proteomics',
             {
                 iconDataType: 'Proteomics',
-                iconImage: 'icon_proteomics_132x132.png',
-                dataTypes: ['Near-single-cell Proteomics', 'Sub-segmental Proteomics']
+                iconImage: 'icon_proteomics_132x132.png'
             }
         ],
         ['Transcriptomics',
             {
                 iconDataType: 'Transcriptomics',
-                iconImage: 'icon_transcriptomics_132x132.png',
-                dataTypes: ['Bulk RNA-Seq', 'Segmental miRNA', 'Single-cell RNA-Seq', 'Single-nucleus RNA-Seq', 'Sub-segment RNA-Seq']
+                iconImage: 'icon_transcriptomics_132x132.png'
             }
         ]
     ]
 );
 
 
-export const getDataTypeIconInfo = (dataType) => {
-    for(let [iconDataTypeKey, iconDataTypeInfo] of iconDataTypes) {
-        iconDataTypeInfo.iconDataTypeKey = iconDataTypeKey;
-        if (iconDataTypeInfo.dataTypes.indexOf(dataType) !== -1) {
-            return iconDataTypeInfo
-        }
+export const getDataTypeIconInfo = (packageTypeIcons, dataType) => {
+    let packageTypeIcon = packageTypeIcons.find( iconInfo => {
+        let packageTypeArr = iconInfo.packageTypes.map( packageType => {return packageType.toLowerCase()});
+        return (packageTypeArr.includes(dataType.toLowerCase()));
+    }, this);
+
+    if (packageTypeIcon && iconDataTypes.has(packageTypeIcon.iconType)) {
+        return iconDataTypes.get(packageTypeIcon.iconType)
+    } else {
+        return iconDataTypes.get('Other')
     }
-    return iconDataTypes.get('Other')
 };
 
 

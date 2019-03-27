@@ -48,6 +48,13 @@ body.modal-open {
 		- #{$footer-height-padded});
 }
 
+#root.with-route-help {
+	top: $header-height-padded;
+	height: calc(100vh + 10px
+	- #{$header-height-padded}
+	- #{$footer-height-padded});
+}
+
 #footer {
 	background: $footer-color;
 }

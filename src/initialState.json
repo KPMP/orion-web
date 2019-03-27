@@ -6,8 +6,10 @@
   	"userList": [],
 	"packageTypes": []
   },
+  "isUploading": false,
   "formDTD": {},
   "help": {
-	  "releases": []
-  }
+    "releases": []
+  },
+  "packageTypeIcons": []
 }
