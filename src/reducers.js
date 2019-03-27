@@ -12,7 +12,7 @@ const appReducer = combineReducers({
     isUploading,
     formDTD,
     forms,
-    userInformation
+    userInformation,
     packageTypeIcons
 });
 

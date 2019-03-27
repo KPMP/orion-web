@@ -14,6 +14,9 @@ class MetadataModal extends Component {
 	}
 	
     render() {
+    	if (this.props.currentDTD.version !== this.props.uploadPackage.version) {
+    		console.log("we need to get a new version of the form")
+    	}
         let standardSection = this.renderSection(this.props.currentDTD.standardFields, this.props.uploadPackage);
         let remainingSections = "";
         let packageType = this.props.uploadPackage.packageType;
