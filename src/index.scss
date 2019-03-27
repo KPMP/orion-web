@@ -48,6 +48,13 @@ body.modal-open {
 		- #{$footer-height-padded});
 }
 
+#root.with-route-help {
+	top: $header-height-padded;
+	height: calc(100vh + 10px
+	- #{$header-height-padded}
+	- #{$footer-height-padded});
+}
+
 #footer {
 	background: $footer-color;
 }
@@ -135,10 +142,6 @@ PACKAGES
 */
 #packages-pane {
 
-	a {
-		color: #337ab7 !important;
-	}
-
 	#packages-filter-controls {
 		background-color: white;
 		border: solid #e7e7e7;
@@ -183,6 +186,14 @@ PACKAGES
 
 		.package {
 			width: 100%;
+
+			a {
+				color: #337ab7 !important;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 
@@ -226,11 +237,21 @@ PACKAGES
 
 	.navbar-header {
 
-		text-decoration: none;
+		text-decoration: none !important;
 
 		.navbar-brand img.logo {
 			width: 80px;
 			min-width: 80px;
+		}
+	}
+
+	a.dropdown-toggle {
+
+	}
+
+	#nav-user-dropdown-menu {
+		a:hover {
+			text-decoration: none !important;
 		}
 	}
 }
@@ -408,6 +429,11 @@ PACKAGES
 			content: "*" !important;
 		}
 	}
+}
+
+/** HELP PAGE **/
+#help-howto-container {
+	min-height: 400px;
 }
 
 /*

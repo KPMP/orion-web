@@ -8,5 +8,8 @@
   },
   "isUploading": false,
   "formDTD": {},
+  "help": {
+    "releases": []
+  },
   "packageTypeIcons": []
 }
