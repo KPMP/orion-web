@@ -63,7 +63,7 @@ class DynamicForm extends Component {
 	}
 	
 	handleSubmit = (e) => {
-		let { validateFields } = this.props.form; 
+		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
 			let newValues = values;
 			if (!this.needUserInfo()) {
