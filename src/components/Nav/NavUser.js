@@ -22,7 +22,10 @@ class NavUser extends Component {
 
     render() {
         return (
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}
+            <Dropdown isOpen={this.state.dropdownOpen}
+                      toggle={this.toggle}
+                      inNavbar
+                      direction="down"
                       className="float-right col-sm-0">
                 <DropdownToggle caret tag="a" className="text-dark"
                 >{this.props.displayName}</DropdownToggle>
