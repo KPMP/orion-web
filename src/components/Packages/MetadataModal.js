@@ -3,25 +3,43 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { MetadataRenderer } from './MetadataRenderer';
 import { Tree } from 'antd';
+import Api from '../../helpers/Api';
+const api = Api.getInstance();
 
 class MetadataModal extends Component {
 
 	constructor(props) {
 		super(props);
+		
+		this.state = {
+			dtd: props.currentDTD
+		}
 		let renderer = new MetadataRenderer();
 		this.renderSection = renderer.renderSection.bind(this);
 		this.renderField = renderer.renderField.bind(this);
 	}
 	
+	componentDidMount() {
+		if (this.props.currentDTD.version !== this.props.uploadPackage.version) {
+			this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
+				this.setState({dtd: data});
+			});
+		} else {
+			this.setState({dtd: this.props.currentDTD});
+		}
+	}
+	
+	async getDTDByVersion (version) {
+		let result = await api.get('/api/v1/form/version/' + version );
+		return await result.data;
+	}
+	
     render() {
-    	if (this.props.currentDTD.version !== this.props.uploadPackage.version) {
-    		console.log("we need to get a new version of the form")
-    	}
-        let standardSection = this.renderSection(this.props.currentDTD.standardFields, this.props.uploadPackage);
+        let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
         let remainingSections = "";
         let packageType = this.props.uploadPackage.packageType;
         if (packageType !== undefined) {
-        	remainingSections = this.props.currentDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(packageType) });
+        	remainingSections = this.state.dtd.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(packageType) });
 			if (remainingSections.length > 0) {
 				remainingSections = remainingSections[0][packageType];
 				remainingSections = remainingSections.sections.map((section) => {
@@ -38,7 +56,7 @@ class MetadataModal extends Component {
                     </ModalHeader>
                     <ModalBody className="metadataModalBody">
                         <p>ID: {this.props.uploadPackage._id}</p>
-                        <Tree defaultExpandedKeys={[ this.props.currentDTD.standardFields.sectionHeader ]}>
+                        <Tree defaultExpandedKeys={[ this.state.dtd.standardFields.sectionHeader ]}>
                         	{standardSection}
                         	{remainingSections}
                         </Tree>

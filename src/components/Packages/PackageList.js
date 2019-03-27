@@ -21,7 +21,7 @@ class PackageList extends Component {
 
         if(!isQuerying) {
             panels = this.props.packages.filtered.map((uploadPackage, index) => {
-                return <PackagePanel index={index} uploadPackage={uploadPackage} currentDTD={this.props.formDTD} forms={this.props.forms} packageTypeIcons={this.props.packageTypeIcons}/>;
+                return <PackagePanel index={index} uploadPackage={uploadPackage} currentDTD={this.props.formDTD} packageTypeIcons={this.props.packageTypeIcons}/>;
             });
         }
 

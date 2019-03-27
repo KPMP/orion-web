@@ -5,13 +5,11 @@ import { packages as filtering } from './components/Packages/packagePanelReducer
 import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
-import { forms } from './components/Packages/formsReducer';
 
 const appReducer = combineReducers({
     filtering,
     isUploading,
     formDTD,
-    forms,
     userInformation,
     packageTypeIcons
 });
