@@ -5,7 +5,9 @@ import { getPackages } from '../../actions/Packages/packageActions';
 const mapStateToProps = (state, props) =>
 ({
     packages: state.filtering,
-	packageTypeIcons: state.packageTypeIcons
+    formDTD: state.formDTD,
+	packageTypeIcons: state.packageTypeIcons,
+	priorDTDVersion: state.priorDTDVersion
 });
     
 const mapDispatchToProps = (dispatch, props) =>

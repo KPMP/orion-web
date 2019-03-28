@@ -21,7 +21,7 @@ export const getFormDTD = () => {
 			})
 			.catch(err => {
 				console.log(err);
-				handleError();
+				dispatch(handleError());
 			});
 	}
 }
