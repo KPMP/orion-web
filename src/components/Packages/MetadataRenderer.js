@@ -1,5 +1,7 @@
 import React from 'react';
 import { Tree } from 'antd';
+import dateFormat from 'dateformat';
+import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 
 const { TreeNode } = Tree;
 
@@ -28,6 +30,10 @@ export class MetadataRenderer {
 			);
 		} else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
+			if (fieldJson.fieldName === "experimentDate") {
+				let experimentDate = packageInfo[fieldJson.fieldName]?dateFormat(getIEFriendlyDate(packageInfo[fieldJson.fieldName]), 'yyyy-mm-dd', true):"N/A";
+				fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : experimentDate;
+			}
 			let title = fieldJson.label + ": " + fieldValue;
 			return <TreeNode title={title} key={title} selectable={false} isLeaf/>;
 		}
