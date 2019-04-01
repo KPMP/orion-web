@@ -54,7 +54,7 @@ class PackagePanel extends Component {
     					<Row className="media-body mx-2 d-flex align-items-center">
     						<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
     						<Col xs={12} className="pb-1">{packageInfo.packageType}</Col>
-    						<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</Col>
+    						<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
     					</Row>
     				</Col>
     				<Col xs={12} md={2}>

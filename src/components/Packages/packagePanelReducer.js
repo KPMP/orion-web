@@ -88,7 +88,7 @@ const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 	filters.map((filter, index) => {
 		if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.institution === filter.value) {
+				if(packageItem.packageInfo.tisName === filter.value) {
 					return packageItem;
 				}
 				return null;

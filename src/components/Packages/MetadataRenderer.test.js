@@ -85,7 +85,7 @@ describe('renderField', () => {
 			"label": "More stuff",
 			"type": "Submitter Information",
 		};
-		let packageInfo = { submitter: { firstName: "Testy", lastName: "Testerson" }, institution: "Looney Bin"};
+		let packageInfo = { submitter: { firstName: "Testy", lastName: "Testerson" }, tisName: "Looney Bin"};
 		
 		let field = renderer.renderField(fieldJson, packageInfo);
 		let mounted = mount(<Tree>{field}</Tree>);
@@ -100,9 +100,9 @@ describe('renderField', () => {
 		expect(props.eventKey).toEqual("Submitted by:");
 		
 		expect(props.children.length).toBe(2);
-		let institution = props.children[0];
+		let tisName = props.children[0];
 		let submitter = props.children[1];
-		let mountedInstitution = mount(<Tree>{institution}</Tree>);
+		let mountedInstitution = mount(<Tree>{tisName}</Tree>);
 		let institutionDom = mountedInstitution.find(TreeNode	);
 		props = institutionDom.props();
 		expect(props.hasOwnProperty('title')).toBe(true);
