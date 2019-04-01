@@ -70,7 +70,7 @@ class PackagesPane extends Component {
 			return { value: value, label: value }
 		});
 
-		tisNames.sort((option1, option2) => {
+		tisNameOptions.sort((option1, option2) => {
 			let returnVal = 0;
 			let label1 = option1.label.toUpperCase();
 			let label2 = option2.label.toUpperCase();
@@ -86,7 +86,7 @@ class PackagesPane extends Component {
 			return returnVal;
 		});
 
-		return tisNames;
+		return tisNameOptions;
 	}
 	
     render() {
