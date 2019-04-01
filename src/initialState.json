@@ -1,10 +1,11 @@
 {
   "filtering": {
-  	"unfiltered": [],
   	"filtered": [],
   	"filters": [],
-  	"userList": [],
-	"packageTypes": []
+	"packageTypes": [],
+	"tisNames": [],
+  	"unfiltered": [],
+  	"userList": []
   },
   "formDTD": {},
   "isUploading": false,

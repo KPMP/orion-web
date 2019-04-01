@@ -55,3 +55,14 @@ export const setPackageTypesFromDTD = (formDTD) => {
 	}
 }
 
+export const setTisNamesFromDTD = (formDTD) => {
+	let tisNameFieldArray = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "tisName"
+	});
+	let tisNames = tisNameFieldArray[0].values;
+	return {
+		type: actionNames.SET_TIS_NAMES,
+		payload: tisNames
+	}
+}
+

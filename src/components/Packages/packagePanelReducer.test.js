@@ -254,4 +254,27 @@ describe('packages', () => {
 			})
 		});
 	});
+	describe("set_tis_names action", () => {
+		it('should add tisNames', () => {
+			let state = {
+					filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'} }}, { packageInfo: { institution: 'UMICH', submitter: { id: '345'}}}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+					unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+					filters: [],
+					userList: [], 
+					packageTypes: ["Type 1", "Type 2"], 
+					tisNames: []
+			};
+			let action = {
+					type: actionNames.SET_TIS_NAMES,
+					payload: ["Name 1", "Name 2"]
+			};
+			expect(packages(state, action)).toEqual({filtered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				unfiltered: [ {packageInfo: { institution: 'Ohio', submitter: { id: '123'}}}, { packageInfo: { institution: 'UMICH', submitter: {id: '345'} }}, {packageInfo: {institution: 'UW', submitter: { id: '123'}}} ],
+				filters: [],
+				userList: [],
+				packageTypes: ["Type 1", "Type 2"],
+				tisNames: ["Name 1", "Name 2"]
+			})
+		});
+	});
 });
