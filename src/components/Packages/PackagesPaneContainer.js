@@ -8,7 +8,8 @@ import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
 const mapStateToProps = (state, props) =>
 ({
 	users: state.filtering.userList,
-	packageTypes: state.filtering.packageTypes
+	packageTypes: state.filtering.packageTypes,
+	tisNames: state.filtering.tisNames
 });
     
 const mapDispatchToProps = (dispatch, props) =>
