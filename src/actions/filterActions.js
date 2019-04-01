@@ -5,7 +5,7 @@ import { handleError } from './Error/errorActions';
 const api = Api.getInstance();
 
 export const filterTypes = {
-	INSTITUTION: "INSTITUTION",
+	TIS_NAME: "TIS_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
 }

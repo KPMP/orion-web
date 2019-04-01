@@ -100,9 +100,9 @@ const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
-		if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
+		if (filter.filterType === filterActions.filterTypes.TIS_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.institution === filter.value) {
+				if(packageItem.packageInfo.tisName === filter.value) {
 					return packageItem;
 				}
 				return null;
