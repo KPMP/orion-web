@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PackagePanel from './PackagePanel';
-import {Row, Col} from 'reactstrap';
+import {Row} from 'reactstrap';
 
 class PackageList extends Component {
 
