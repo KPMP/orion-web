@@ -109,9 +109,9 @@ describe('renderField', () => {
 		expect(props.hasOwnProperty('selectable')).toBe(true);
 		expect(props.hasOwnProperty('eventKey')).toBe(true);
 		expect(props.hasOwnProperty('isLeaf')).toBe(true);
-		expect(props.title).toEqual("Institution: Looney Bin");
+		expect(props.title).toEqual("TIS Name: Looney Bin");
 		expect(props.selectable).toEqual(false);
-		expect(props.eventKey).toEqual("Institution: Looney Bin");
+		expect(props.eventKey).toEqual("TIS Name: Looney Bin");
 		expect(props.isLeaf).toEqual(true);
 		
 		let mountedSubmitter = mount(<Tree>{submitter}</Tree>);
