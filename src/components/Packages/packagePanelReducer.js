@@ -14,6 +14,7 @@ export const packages = (state = {}, action) => {
 			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = action.payload;
+			newState.tisNames = state.tisNames;
 			newState.packageTypes = state.packageTypes;
 			return newState;
 
@@ -22,7 +23,17 @@ export const packages = (state = {}, action) => {
 			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = users;
+			newState.tisNames = state.tisNames;
 			newState.packageTypes = action.payload;
+			return newState;
+			
+		case actionNames.SET_TIS_NAMES:
+			newState.filtered = state.filtered;
+			newState.unfiltered = state.unfiltered;
+			newState.filters = state.filters;
+			newState.userList = users;
+			newState.packageTypes = packageTypes;
+			newState.tisNames = action.payload;
 			return newState;
 
 		case actionNames.SET_PACKAGES:
@@ -31,6 +42,7 @@ export const packages = (state = {}, action) => {
 			newState.filters = [];
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
+			newState.tisNames = state.tisNames;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -49,6 +61,7 @@ export const packages = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
+			newState.tisNames = state.tisNames;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -73,6 +86,7 @@ export const packages = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
+			newState.tisNames = state.tisNames;
 			return newState;
 
 		default:
@@ -86,7 +100,7 @@ const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
-		if (filter.filterType === filterActions.filterTypes.INSTITUTION) {
+		if (filter.filterType === filterActions.filterTypes.TIS_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 				if(packageItem.packageInfo.tisName === filter.value) {
 					return packageItem;

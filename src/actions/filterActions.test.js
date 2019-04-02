@@ -37,7 +37,7 @@ describe('setUsers', () => {
 	})
 })
 
-describe('setPackageType', () => {
+describe('setPackageTypesFromDTD', () => {
 	it('should create the correct action', () => {
 		let packageTypes = ["Type 1", "Type 2"];
 		let payload = {
@@ -60,4 +60,29 @@ describe('setPackageType', () => {
 		let action = filterActions.setPackageTypesFromDTD(payload);
 		expect(action).toEqual(expectedAction);
 	})
-})
+});
+
+describe('setTisNamesFromDTD', () => {
+	it('should create the correct action', () => {
+		let tisNames = ["Type 1", "Type 2"];
+		let payload = {
+			"standardFields": {
+				"fields": [
+					{
+						fieldName: "tisName",
+						values: tisNames
+					},
+					{
+						fieldName: "dummyField"
+					}
+				]
+			}
+		};
+		let expectedAction = {
+			type: actionNames.SET_TIS_NAMES,
+			payload: tisNames
+		}
+		let action = filterActions.setTisNamesFromDTD(payload);
+		expect(action).toEqual(expectedAction);
+	})
+});
