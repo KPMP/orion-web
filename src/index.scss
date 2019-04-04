@@ -130,6 +130,21 @@ a {
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 PACKAGES
 */
+
+.ant-tree li span {
+	white-space: normal;
+}
+
+.metadataModalBody {
+	.anticon {
+		vertical-align: 0.125em !important;
+	}
+	
+	.ant-tree-child-tree > li:last-child {
+		padding-bottom: 4px !important;
+	}
+}
+
 #packages-pane {
 
 	#packages-filter-controls {
