@@ -46,11 +46,11 @@ class DateField extends Component {
 	}
 
 	convertStringValueToMoment = value => {
-		return moment(value, 'MM/DD/YYYY')
+		return moment(value, 'YYYY-MM-DD')
 	}
 
 	convertMomentToStringValue = value => {
-		return value.format('MM/DD/YYYY');
+		return value.format('YYYY-MM-DD');
 	}
 	
 	render() {
@@ -77,7 +77,7 @@ class DateField extends Component {
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
 				{getFieldDecorator(this.props.fieldName, fieldOptions)(
-					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format='MM/DD/YYYY' placeholder={placeholderText} name={this.props.fieldName}/>
+					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format='YYYY-MM-DD' placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
 		);
