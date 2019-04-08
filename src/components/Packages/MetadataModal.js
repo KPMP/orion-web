@@ -28,7 +28,7 @@ class MetadataModal extends Component {
 	}
 
 	isNewDTD() {
-		return (!this.state.data && this.props.uploadPackage) ||
+		return (!this.state.dtd && this.props.uploadPackage) ||
 			(this.state.dtd &&
 			this.props.uploadPackage &&
 			this.state.dtd.version !== this.props.currentDTD.version);
