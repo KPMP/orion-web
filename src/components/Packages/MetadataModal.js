@@ -35,9 +35,10 @@ class MetadataModal extends Component {
 	}
 
 	isRemoteDataLoaded() {
-		return this.state.dtd && this.state.dtd.hasOwnProperty('version');
+		return this.state.dtd && this.state.dtd.hasOwnProperty('version')
+            && this.state.dtd.hasOwnProperty('standardFields');
 	}
-	
+
 	async getDTDByVersion (version) {
 		let result = await api.get('/api/v1/form/version/' + version );
 		return await result.data;
@@ -51,7 +52,9 @@ class MetadataModal extends Component {
 		else {
 
             let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
-            let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') ?
+            let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') &&
+                this.state.dtd.standardFields !== null &&
+                this.state.dtd.standardFields !== undefined ?
                 this.state.dtd.standardFields.sectionHeader :
                 null;
 
