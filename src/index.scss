@@ -131,11 +131,8 @@ a {
 PACKAGES
 */
 
-.ant-tree li span {
-	white-space: normal;
-}
-
 .metadataModalBody {
+
 	.anticon {
 		vertical-align: 0.125em !important;
 	}
@@ -143,6 +140,34 @@ PACKAGES
 	.ant-tree-child-tree > li:last-child {
 		padding-bottom: 4px !important;
 	}
+	
+	.ant-tree {
+		max-width: 450px;
+	}
+		
+	.tree-title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 400px;
+		display: block;
+	}
+	
+	/* point when modal will resize */
+	@media (min-width: 992px) {
+		.ant-tree {
+			max-width: 760px;
+		}
+		
+		.tree-title {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			width: 685px;
+			display: block;
+		}
+	}
+
 }
 
 #packages-pane {
