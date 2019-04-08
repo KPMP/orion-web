@@ -20,11 +20,11 @@ class MetadataModal extends Component {
 	}
 	
 	componentDidMount() {
-		// if (this.isNewDTD()) {
-		// 	this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
-		// 		this.setState({dtd: data});
-		// 	});
-		// }
+		if (this.isNewDTD()) {
+			this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
+				this.setState({dtd: data});
+			});
+		}
 	}
 
 	isNewDTD() {
@@ -46,7 +46,7 @@ class MetadataModal extends Component {
 	
     render() {
 		if(!this.isRemoteDataLoaded()) {
-			return <div className="metadataModal static-modal d-none" />;
+			return <div className="metadataModal static-modal" />;
 		}
 
 		else {
