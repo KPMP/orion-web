@@ -3,19 +3,40 @@ import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 import { Link } from 'react-router-dom';
 
-class NavBar extends Component {
-    render() {
+const NO_USERNAME = "Not Logged In";
 
-        let isDisplayNameEmpty = this.props.displayName === undefined
-            || this.props.displayName === "";
+class NavBar extends Component {
+
+    constructor(props) {
+        super(props);
+
+        if(this.props.userInformation === false) {
+            this.props.loadRemoteData();
+        }
+    }
+
+    getDisplayName() {
+
+        let userInformation = this.props.userInformation || {
+            displayName: NO_USERNAME
+        };
+
+        let isDisplayNameEmpty = !userInformation.displayName || userInformation.displayName.length === 0;
 
         let name = isDisplayNameEmpty ?
-            this.props.firstName + " " + this.props.lastName :
-            this.props.displayName;
+            userInformation.firstName + " " + userInformation.lastName :
+            userInformation.displayName;
 
         if(isDisplayNameEmpty || name === " ") {
-            name = "NO USERNAME";
+            name = NO_USERNAME;
         }
+
+        return name;
+    }
+
+    render() {
+
+        let displayName = this.getDisplayName();
 
         return (
             <Navbar id="navbar" className="px-1 py-1 fixed-top">
@@ -28,7 +49,7 @@ class NavBar extends Component {
                     </Link>
                 </Col>
                 <Col sm={6} className="d-none d-md-block">
-                    <NavUser displayName={name}/>
+                    <NavUser displayName={displayName}/>
                 </Col>
             </Navbar>
         );
