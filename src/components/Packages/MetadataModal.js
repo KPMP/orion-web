@@ -20,50 +20,75 @@ class MetadataModal extends Component {
 	}
 	
 	componentDidMount() {
-		if (this.props.currentDTD.version !== this.props.uploadPackage.version) {
+		if (this.isNewDTD()) {
 			this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
 				this.setState({dtd: data});
 			});
-		} else {
-			this.setState({dtd: this.props.currentDTD});
 		}
 	}
-	
+
+	isNewDTD() {
+		return (!this.state.dtd && this.props.uploadPackage) ||
+			(this.state.dtd &&
+			this.props.uploadPackage &&
+			this.state.dtd.version !== this.props.currentDTD.version);
+	}
+
+	isRemoteDataLoaded() {
+		return this.state.dtd && this.state.dtd.hasOwnProperty('version')
+            && this.state.dtd.hasOwnProperty('standardFields');
+	}
+
 	async getDTDByVersion (version) {
 		let result = await api.get('/api/v1/form/version/' + version );
 		return await result.data;
 	}
 	
     render() {
-        let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
-        let remainingSections = "";
-        let packageType = this.props.uploadPackage.packageType;
-        if (packageType !== undefined) {
-        	remainingSections = this.state.dtd.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(packageType) });
-			if (remainingSections.length > 0) {
-				remainingSections = remainingSections[0][packageType];
-				remainingSections = remainingSections.sections.map((section) => {
-					return this.renderSection(section, this.props.uploadPackage);
-				});
-			}
+		if(!this.isRemoteDataLoaded()) {
+			return <div className="metadataModal static-modal" />;
 		}
-        
-        return (
-            <div className="metadataModal static-modal">
-                <Modal size="lg" isOpen={this.props.show} onHide={this.props.close}>
-                    <ModalHeader toggle={this.props.close}>
-                        Package metadata
-                    </ModalHeader>
-                    <ModalBody className="metadataModalBody">
-                        <p>ID: {this.props.uploadPackage._id}</p>
-                        <Tree defaultExpandedKeys={[ this.state.dtd.standardFields.sectionHeader ]}>
-                        	{standardSection}
-                        	{remainingSections}
-                        </Tree>
-                    </ModalBody>
-                </Modal>
-            </div>
-        )
+
+		else {
+
+            let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
+            let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') &&
+                this.state.dtd.standardFields !== null &&
+                this.state.dtd.standardFields !== undefined ?
+                this.state.dtd.standardFields.sectionHeader :
+                null;
+
+            let remainingSections = "";
+            let packageType = this.props.uploadPackage.packageType;
+            if (packageType !== undefined) {
+                remainingSections = this.state.dtd.typeSpecificElements.filter(function (element) {
+                    return element.hasOwnProperty(packageType)
+                });
+                if (remainingSections.length > 0) {
+                    remainingSections = remainingSections[0][packageType];
+                    remainingSections = remainingSections.sections.map((section) => {
+                        return this.renderSection(section, this.props.uploadPackage);
+                    });
+                }
+            }
+
+            return (
+                <div className="metadataModal static-modal">
+                    <Modal size="lg" isOpen={this.props.show} onHide={this.props.close}>
+                        <ModalHeader toggle={this.props.close}>
+                            Package metadata
+                        </ModalHeader>
+                        <ModalBody className="metadataModalBody">
+                            <p>ID: {this.props.uploadPackage._id}</p>
+                            <Tree defaultExpandedKeys={[defaultExpandedKeys]}>
+                                {standardSection}
+                                {remainingSections}
+                            </Tree>
+                        </ModalBody>
+                    </Modal>
+                </div>
+            )
+        }
     }
 }
 
