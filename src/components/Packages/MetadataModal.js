@@ -56,7 +56,7 @@ class MetadataModal extends Component {
                     </ModalHeader>
                     <ModalBody className="metadataModalBody">
                         <p>ID: {this.props.uploadPackage._id}</p>
-                        <Tree defaultExpandedKeys={[ this.state.dtd.standardFields.sectionHeader ]}>
+                        <Tree blockNode={true} defaultExpandedKeys={[ this.state.dtd.standardFields.sectionHeader ]}>
                         	{standardSection}
                         	{remainingSections}
                         </Tree>
