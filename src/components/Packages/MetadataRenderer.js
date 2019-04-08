@@ -36,7 +36,8 @@ export class MetadataRenderer {
 			}
 			
 			let title = <span className='tree-title'>{fieldJson.label}: {fieldValue} </span>;
-			return <TreeNode title={title} key={title} selectable={false} isLeaf/>;
+			let eventKey = fieldJson.label + ": " + fieldValue;
+			return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
 		}
 	}
 	
