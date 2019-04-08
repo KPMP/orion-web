@@ -10,7 +10,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
 
-        if(this.props.userInformation === false) {
+        if(!this.isRemoteDataLoaded()) {
             this.props.loadRemoteData();
         }
     }
@@ -34,9 +34,14 @@ class NavBar extends Component {
         return name;
     }
 
+    isRemoteDataLoaded() {
+        return this.props.userInformation !== false;
+    }
+
     render() {
 
         let displayName = this.getDisplayName();
+        let isUserInformationLoaded = this.isRemoteDataLoaded();
 
         return (
             <Navbar id="navbar" className="px-1 py-1 fixed-top">
@@ -49,7 +54,7 @@ class NavBar extends Component {
                     </Link>
                 </Col>
                 <Col sm={6} className="d-none d-md-block">
-                    <NavUser displayName={displayName}/>
+                    <NavUser displayName={isUserInformationLoaded ? displayName : "..."}/>
                 </Col>
             </Navbar>
         );
