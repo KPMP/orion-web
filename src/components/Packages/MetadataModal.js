@@ -20,13 +20,18 @@ class MetadataModal extends Component {
 	}
 	
 	componentDidMount() {
-		if (this.props.currentDTD.version !== this.props.uploadPackage.version) {
+		if (this.isNewDTD()) {
 			this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
 				this.setState({dtd: data});
 			});
-		} else {
-			this.setState({dtd: this.props.currentDTD});
 		}
+	}
+
+	isNewDTD() {
+		return (!this.state.currentDTD && this.props.uploadPackage) ||
+			(this.props.currentDTD &&
+			this.props.uploadPackage &&
+			this.props.currentDTD.version !== this.props.currentDTD.version);
 	}
 	
 	async getDTDByVersion (version) {
@@ -36,6 +41,13 @@ class MetadataModal extends Component {
 	
     render() {
         let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
+
+        let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') ?
+            this.state.dtd.standardFields.sectionHeader :
+			null;
+
+        console.log('+++ this.state: ', this.state);
+
         let remainingSections = "";
         let packageType = this.props.uploadPackage.packageType;
         if (packageType !== undefined) {
@@ -56,7 +68,7 @@ class MetadataModal extends Component {
                     </ModalHeader>
                     <ModalBody className="metadataModalBody">
                         <p>ID: {this.props.uploadPackage._id}</p>
-                        <Tree defaultExpandedKeys={[ this.state.dtd.standardFields.sectionHeader ]}>
+                        <Tree defaultExpandedKeys={[ defaultExpandedKeys ]}>
                         	{standardSection}
                         	{remainingSections}
                         </Tree>
