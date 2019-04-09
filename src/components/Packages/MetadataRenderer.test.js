@@ -147,7 +147,7 @@ describe('renderField', () => {
 		expect(props.hasOwnProperty('eventKey')).toBe(true);
 		expect(props.hasOwnProperty('isLeaf')).toBe(true);
 		let renderedTitle = shallow(props.title);
-		let title = "<span class=\"tree-title\">More stuff: This value </span>";
+		let title = "<span class=\"tree-title\" title=\"More stuff: This value\">More stuff: This value </span>";
 		expect(renderedTitle.html()).toEqual(title);
 		expect(props.selectable).toEqual(false);
 		expect(props.eventKey).toEqual("More stuff: This value");
@@ -173,7 +173,7 @@ describe('renderField', () => {
 		expect(props.hasOwnProperty('eventKey')).toBe(true);
 		expect(props.hasOwnProperty('isLeaf')).toBe(true);
 		let renderedTitle = shallow(props.title);
-		let title = "<span class=\"tree-title\">More stuff:  </span>";
+		let title = "<span class=\"tree-title\" title=\"More stuff: \">More stuff:  </span>";
 		expect(renderedTitle.html()).toEqual(title);
 		expect(props.selectable).toEqual(false);
 		expect(props.eventKey).toEqual("More stuff: ");

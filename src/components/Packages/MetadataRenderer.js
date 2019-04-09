@@ -35,7 +35,8 @@ export class MetadataRenderer {
 				fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : experimentDate;
 			}
 			
-			let title = <span className='tree-title'>{fieldJson.label}: {fieldValue} </span>;
+			let titleText = fieldJson.label +": " + fieldValue;
+			let title = <span className='tree-title' title={titleText}>{titleText} </span>;
 			let eventKey = fieldJson.label + ": " + fieldValue;
 			return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
 		}
