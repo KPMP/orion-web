@@ -12,21 +12,8 @@ class MetadataModal extends Component {
 		let renderer = new MetadataRenderer();
 		this.renderSection = renderer.renderSection.bind(this);
 		this.renderField = renderer.renderField.bind(this);
-		if (this.isNewDTD()) {
-			this.props.getDTDByVersion(this.props.uploadPackage.version);
-		}
 	}
 	
-	isNewDTD() {
-		if (!this.props.dtds && this.props.uploadPackage) {
-			return true;
-		} else if (this.props.dtds && this.props.uploadPackage && !this.props.dtds[this.props.uploadPackage.version]) {
-			return true;
-		} else if (this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version]) {
-			return false;
-		}
-	}
-
 	isRemoteDataLoaded() {
 		return this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version];
 	}
