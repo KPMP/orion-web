@@ -8,51 +8,45 @@ class MetadataModal extends Component {
 
 	constructor(props) {
 		super(props);
-		
-		this.state = {
-			dtd: props.currentDTD
-		}
+
 		let renderer = new MetadataRenderer();
 		this.renderSection = renderer.renderSection.bind(this);
 		this.renderField = renderer.renderField.bind(this);
-	}
-	
-	componentDidMount() {
 		if (this.isNewDTD()) {
 			this.props.getDTDByVersion(this.props.uploadPackage.version);
 		}
 	}
-
+	
 	isNewDTD() {
-		return true;
-//		
-//		return (!this.state.dtd && this.props.uploadPackage) ||
-//			(this.state.dtd &&
-//			this.props.uploadPackage &&
-//			this.state.dtd.version !== this.props.currentDTD.version);
+		if (!this.props.dtds && this.props.uploadPackage) {
+			return true;
+		} else if (this.props.dtds && this.props.uploadPackage && !this.props.dtds[this.props.uploadPackage.version]) {
+			return true;
+		} else if (this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version]) {
+			return false;
+		}
 	}
 
 	isRemoteDataLoaded() {
-		return this.state.dtd && this.state.dtd.hasOwnProperty('version')
-            && this.state.dtd.hasOwnProperty('standardFields');
+		return this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version];
 	}
 	
     render() {
 		if(!this.isRemoteDataLoaded()) {
 			return <div className="metadataModal static-modal" />;
 		} else {
-
-            let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
-            let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') &&
-                this.state.dtd.standardFields !== null &&
-                this.state.dtd.standardFields !== undefined ?
-                this.state.dtd.standardFields.sectionHeader :
+			let dtd = this.props.dtds[this.props.uploadPackage.version];
+            let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
+            let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
+                dtd.standardFields !== null &&
+                dtd.standardFields !== undefined ?
+                dtd.standardFields.sectionHeader :
                 null;
 
             let remainingSections = "";
             let packageType = this.props.uploadPackage.packageType;
             if (packageType !== undefined) {
-                remainingSections = this.state.dtd.typeSpecificElements.filter(function (element) {
+                remainingSections = dtd.typeSpecificElements.filter(function (element) {
                     return element.hasOwnProperty(packageType)
                 });
                 if (remainingSections.length > 0) {

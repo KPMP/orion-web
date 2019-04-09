@@ -11,7 +11,6 @@ export const addDTD = (dtd) => {
 }
 
 export const getDTDByVersion = (version) => {
-	console.log("Getting dtd version: " + version);
 	return (dispatch) => {
 		api.get('/api/v1/form/version/' + version )
 			.then(res => {
