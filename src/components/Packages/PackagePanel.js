@@ -79,7 +79,7 @@ class PackagePanel extends Component {
                    </Col>
     			</Row>
     			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
-    			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} currentDTD={this.props.currentDTD}/>
+    			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} currentDTD={this.props.currentDTD} getDTDByVersion={this.props.getDTDByVersion}/>
     		</section>
     	);
     }

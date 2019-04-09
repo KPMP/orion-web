@@ -3,8 +3,6 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { MetadataRenderer } from './MetadataRenderer';
 import { Tree } from 'antd';
-import Api from '../../helpers/Api';
-const api = Api.getInstance();
 
 class MetadataModal extends Component {
 
@@ -21,27 +19,22 @@ class MetadataModal extends Component {
 	
 	componentDidMount() {
 		if (this.isNewDTD()) {
-			this.props.getDTDByVersion(this.props.uploadPackage.version).then(data => {
-				this.setState({dtd: data});
-			});
+			this.props.getDTDByVersion(this.props.uploadPackage.version);
 		}
 	}
 
 	isNewDTD() {
-		return (!this.state.dtd && this.props.uploadPackage) ||
-			(this.state.dtd &&
-			this.props.uploadPackage &&
-			this.state.dtd.version !== this.props.currentDTD.version);
+		return true;
+//		
+//		return (!this.state.dtd && this.props.uploadPackage) ||
+//			(this.state.dtd &&
+//			this.props.uploadPackage &&
+//			this.state.dtd.version !== this.props.currentDTD.version);
 	}
 
 	isRemoteDataLoaded() {
 		return this.state.dtd && this.state.dtd.hasOwnProperty('version')
             && this.state.dtd.hasOwnProperty('standardFields');
-	}
-
-	async getDTDByVersion (version) {
-		let result = await api.get('/api/v1/form/version/' + version );
-		return await result.data;
 	}
 	
     render() {
