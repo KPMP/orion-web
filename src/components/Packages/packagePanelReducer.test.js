@@ -1,6 +1,52 @@
 import actionNames from '../../actions/actionNames';
-import { packages } from './packagePanelReducer';
+import { packages, dtds } from './packagePanelReducer';
 import * as filterActions from '../../actions/filterActions';
+
+describe('dtds', () => {
+	it('should return the given state when not a covered action', () => {
+		let action = {
+			type: "SOME_OTHER_ACTION",
+			payload: [{"key": "value"}]
+		};
+		let expectedState = [ {"stateKey": "stateValue"}];
+		expect(dtds(expectedState, action)).toEqual(expectedState);
+	});
+	
+	it('should return {} in state if state is undefined and not a covered action', () => {
+		let action = {
+			type: "SOME_OTHER_ACTION",
+			payload: [{"key": "value"}]
+		};
+		expect(dtds(undefined, action)).toEqual({});
+	});
+	
+	it('should construct the appropriate state for ADD_DTD action and an empty state', () => {
+		let action = {
+			type: actionNames.ADD_DTD,
+			payload: { version: 0, standardFields: [] }
+		};
+		let expectedState = {
+			0: 	{ version: 0, standardFields: [] }
+		};
+		
+		expect(dtds({}, action)).toEqual(expectedState);
+	});
+	it('should construct the appropriate state for ADD_DTD action and a non-empty state', () => {
+		let action = {
+				type: actionNames.ADD_DTD,
+				payload: { version: 0, standardFields: [] }
+		};
+		let expectedState = {
+			1: { version: 1, standardFields: [] },
+			0: { version: 0, standardFields: [] }
+		};
+		let currentState = {
+			1: { version: 1, standardFields: [] }
+		}
+		
+		expect(dtds(currentState, action)).toEqual(expectedState);
+	});
+});
 
 
 describe('packages', () => {

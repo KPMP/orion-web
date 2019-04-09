@@ -1,6 +1,19 @@
 import actionNames from '../../actions/actionNames';
 import * as filterActions from '../../actions/filterActions';
 
+export const dtds = ( state = {}, action ) => {
+	let newState = state;
+	switch (action.type) {
+		case actionNames.ADD_DTD:
+			let version = action.payload.version;
+			newState[version] = action.payload;
+			return newState;
+		default:
+			return state;
+	
+	}
+}
+
 export const packages = (state = {}, action) => {
 	let newState = {}; 
 	let filteredPackageList = state.unfiltered;

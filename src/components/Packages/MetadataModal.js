@@ -21,7 +21,7 @@ class MetadataModal extends Component {
 	
 	componentDidMount() {
 		if (this.isNewDTD()) {
-			this.getDTDByVersion(this.props.uploadPackage.version).then(data => {
+			this.props.getDTDByVersion(this.props.uploadPackage.version).then(data => {
 				this.setState({dtd: data});
 			});
 		}

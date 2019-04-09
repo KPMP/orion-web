@@ -10,7 +10,7 @@ export const addDTD = (dtd) => {
 	}
 }
 
-export const getFormDTDForVersion = (version) => {
+export const getDTDByVersion = (version) => {
 	return (dispatch) => {
 		api.get('/api/v1/form/version/' + version )
 			.then(res => {

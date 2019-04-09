@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PackagePanel from './PackagePanel';
+import { getDTDByVersion } from '../../actions/dtdActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -12,6 +13,9 @@ const mapStateToProps = (state, props) =>
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
+	getDTDByVersion(version) {
+		dispatch(getDTDByVersion(version));
+	}
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagePanel);
