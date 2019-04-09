@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PackagePanel from './PackagePanel';
+import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
 
 class PackageList extends Component {
@@ -34,7 +34,7 @@ class PackageList extends Component {
 
         else {
             panels = this.props.packages.filtered.map((uploadPackage, index) => {
-                return <PackagePanel index={index} uploadPackage={uploadPackage} currentDTD={this.props.formDTD} packageTypeIcons={this.props.packageTypeIcons}/>;
+                return <PackagePanelContainer index={index} uploadPackage={uploadPackage}/>;
             });
         }
 
