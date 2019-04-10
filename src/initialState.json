@@ -12,5 +12,6 @@
   "help": {
     "releases": []
   },
+  "userInformation": false,
   "packageTypeIcons": []
 }

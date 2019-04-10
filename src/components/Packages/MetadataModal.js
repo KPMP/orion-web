@@ -47,9 +47,7 @@ class MetadataModal extends Component {
     render() {
 		if(!this.isRemoteDataLoaded()) {
 			return <div className="metadataModal static-modal" />;
-		}
-
-		else {
+		} else {
 
             let standardSection = this.renderSection(this.state.dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = this.state.dtd.standardFields.hasOwnProperty('sectionHeader') &&
@@ -80,7 +78,7 @@ class MetadataModal extends Component {
                         </ModalHeader>
                         <ModalBody className="metadataModalBody">
                             <p>ID: {this.props.uploadPackage._id}</p>
-                            <Tree defaultExpandedKeys={[defaultExpandedKeys]}>
+                            <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
                                 {standardSection}
                                 {remainingSections}
                             </Tree>
