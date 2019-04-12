@@ -6,8 +6,7 @@ const mapStateToProps = (state, props) =>
 ({
     packages: state.filtering,
     formDTD: state.formDTD,
-	packageTypeIcons: state.packageTypeIcons,
-	priorDTDVersion: state.priorDTDVersion
+	packageTypeIcons: state.packageTypeIcons
 });
     
 const mapDispatchToProps = (dispatch, props) =>
