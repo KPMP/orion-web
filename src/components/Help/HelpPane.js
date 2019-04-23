@@ -50,6 +50,7 @@ class HelpPane extends Component {
                         <h4 className="text-dark">Metadata Versions</h4>
                         <Row>
                             <Col xs={12}>
+                                <p>Starting in the spring of 2019, we expanded our metadata collection efforts to require a rich set of standardized data properties with each data upload. We released the standardized data properties in phases based on package type. See the list below for more information:</p>
                                 <table className="table">
                                     <thead className="bg-light text-dark"><tr>
                                         <th scope="col">Version</th>
@@ -60,8 +61,8 @@ class HelpPane extends Component {
                                         {
                                             this.props.help.releases.map((release) => {
                                                 return (<tr>
-                                                    <th scope="row">{release.version}</th>
-                                                    <td>{release.date}</td>
+                                                    <td>{release.version}</td>
+                                                    <td className="text-nowrap">{release.date}</td>
                                                     <td>{release.desc}</td>
                                                 </tr>);
                                             })
