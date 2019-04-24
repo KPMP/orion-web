@@ -2,14 +2,25 @@ import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
 import { handleError, sendMessageToBackend } from '../Error/errorActions';
+import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
+
 
 export const getPackages = () => {
 	return (dispatch) => {
 		api.get('/api/v1/packages')
 			.then(res => {
 				dispatch(setPackages(res.data));
+				let versions = [];
+				res.data.forEach(function(packageItem) {
+					if (!versions.includes(packageItem.packageInfo.version)) {
+						versions.push(packageItem.packageInfo.version);
+					}
+				});
+				versions.forEach(function(version) {
+					dispatch(getDTDByVersion(version));
+				});
 			})
 			.catch(err => {
 				dispatch(handleError("Unable to connect to the Data Lake: " + err));
@@ -36,7 +47,7 @@ export const finishPackage = (packageId) => {
 		api.post('/api/v1/packages/' + packageId + '/files/finish')
 			.then(res => {
 				dispatch(setIsUploading(false));
-				window.location.reload();
+				window.location.pathname = '/';
 			})
 			.catch(err => {
 				alert("We were unable to finish your package upload.  You will be unable to download");
@@ -56,9 +67,10 @@ export const uploadPackage = (packageInfo, uploader) => {
 		lastName: packageInfo.submitterLastName,
 		email: packageInfo.submitterEmail
 	};
+	
 	let activeFiles = uploader.methods.getUploads({
 		status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
-	packageInfo.attachments = activeFiles.map((file) => {
+	packageInfo.files = activeFiles.map((file) => {
 		return {
 			fileName: file.name,
 			size: file.size

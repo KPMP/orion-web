@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MainPage from './components/MainPage';
 import Oops from './components/Error/Oops';
+import PackagesPaneContainer from './components/Packages/PackagesPaneContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import loadedState from './initialState';
@@ -9,6 +9,12 @@ import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
+import HelpPaneContainer from "./components/Help/HelpPaneContainer";
+import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
+import NavBarContainer from "./components/Nav/NavBarContainer";
+import NavFooter from "./components/Nav/NavFooter";
+import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
+import { applyRouteClass } from './helpers/routeClassUtil';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -32,24 +38,34 @@ function logPageView(location, action) {
 const history = createHistory();
 history.listen((location, action) => {
 	logPageView(location, action);
+    window.scrollTo(0, 0);
+	applyRouteClass();
 });
 
 class App extends Component {
-  
+
 	componentDidMount() {
 		logPageView(window.location, "");
+		applyRouteClass();
 	}
-	
-	render() {
+
+    render() {
 	    return (
-	    		<Provider store={store}>
-	    			<Router history={history}>
-	    				<Switch>
-	    					<Route exact path="/" component={MainPage} store={store}/>
+			<Provider store={store}>
+				<Router history={history}>
+					<ErrorBoundaryContainer>
+						<NavBarContainer />
+						<Switch>
+							<Route exact path="/" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
+							<Route exact path="/help" component={HelpPaneContainer} store={store} />
 							<Route exact path="/oops" component={Oops} />
 						</Switch>
-	    			</Router>
-	    		</Provider>
+						<NavFooter />
+					</ErrorBoundaryContainer>
+				</Router>
+			</Provider>
 	    );
 	  }
 }

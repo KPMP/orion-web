@@ -1,28 +1,54 @@
 import React, { Component } from 'react';
-import PackagePanel from './PackagePanel';
+import PackagePanelContainer from './PackagePanelContainer';
+import {Row} from 'reactstrap';
 
 class PackageList extends Component {
 
     componentDidMount() {
-        this.props.getPackages();
+        if(!this.isRemoteDataLoaded()) {
+            this.props.loadRemoteData();
+        }
+    }
+
+    isRemoteDataLoaded() {
+        return Object.keys(this.props.packages.unfiltered).length !== 0
+            && this.props.packages.unfiltered.constructor === Array;
+    }
+
+    hasFilteredResults() {
+        return Object.keys(this.props.packages.filtered).length !== 0
+            && this.props.packages.filtered.constructor === Array;
     }
 
     render() {
-        const panels = this.props.packages.filtered.map((uploadPackage, index) => {
-            return <PackagePanel index={index} uploadPackage={uploadPackage}/>;
-        });
+        let message = null,
+            panels = [];
+
+        if (!this.isRemoteDataLoaded()) {
+            message = "Loading packages...";
+        }
+
+        else if (!this.hasFilteredResults()) {
+            message = "No packages returned for the selected criteria.";
+        }
+
+        else {
+            panels = this.props.packages.filtered.map((uploadPackage, index) => {
+                return <PackagePanelContainer index={index} uploadPackage={uploadPackage}/>;
+            });
+        }
+
         return (
-        	<div>
-	    		{panels.length > 0 ?
-	    			<div id="pkg-list">
-	            		{panels}
-	           		</div>
-	            : 
-	            	<div className="noResults alert alert-info">
-	            		No packages returned for the selected criteria.
-	            	</div>
-	    		}
-    		</div>
+        	<section id="packages-list" class="container-fluid">{
+                message !== null ?
+                    <h4 id="packages-querying" className="packages-querying text-center pt-3">
+                        {message}
+                    </h4>
+                :
+                    <Row>
+                        {panels}
+                    </Row>
+            }</section>
         );
     }
 }

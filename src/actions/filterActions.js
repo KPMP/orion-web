@@ -5,7 +5,7 @@ import { handleError } from './Error/errorActions';
 const api = Api.getInstance();
 
 export const filterTypes = {
-	INSTITUTION: "INSTITUTION",
+	TIS_NAME: "TIS_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
 }
@@ -26,12 +26,11 @@ export const removeFilter = (type, value) => {
 
 export const getUsers = () => {
 	return (dispatch) => {
-		api.get('/api/v1/users')
+		api.get('/api/v1/users?hasPackage=true')
 			.then(res => {
 				dispatch(setUsers(res.data));
 			})
 			.catch(err => {
-				alert("We were unable to retrieve the list of users");
 				console.log(err);
 				handleError();
 			});
@@ -44,3 +43,26 @@ export const setUsers = (userList) => {
 		payload: userList
 	}
 }
+
+export const setPackageTypesFromDTD = (formDTD) => {
+	let packageTypeFieldArr = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "packageType"
+	});
+	let packageTypes = packageTypeFieldArr[0].values;
+	return {
+		type: actionNames.SET_PACKAGE_TYPES,
+		payload: packageTypes
+	}
+}
+
+export const setTisNamesFromDTD = (formDTD) => {
+	let tisNameFieldArray = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "tisName"
+	});
+	let tisNames = tisNameFieldArray[0].values;
+	return {
+		type: actionNames.SET_TIS_NAMES,
+		payload: tisNames
+	}
+}
+

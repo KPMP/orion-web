@@ -1,39 +1,62 @@
 import React, { Component } from 'react';
-import NavButton from './NavButton';
-import { Navbar, Col, Row } from 'react-bootstrap';
+import { Navbar, NavbarBrand, Col } from 'reactstrap';
+import NavUser from "./NavUser";
+import { Link } from 'react-router-dom';
 
-export const panes = {
-    packages: 'Packages',
-    upload: 'Upload'
-}
+const NO_USERNAME = "Not Logged In";
 
 class NavBar extends Component {
-    render() {
-        let name = this.props.displayName;
-        if (name === "") {
-        		name = this.props.firstName + " " + this.props.lastName;
+
+    constructor(props) {
+        super(props);
+
+        if(!this.isRemoteDataLoaded()) {
+            this.props.loadRemoteData();
         }
-    		return (
-                <Row className="nav-container container-fluid">
-                    <Col sm={4}>
-                        <Navbar.Header>
-                            <Navbar.Brand>
-                                <img src="img/logo_KPMP-Data-Lake-Uploader.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
-                            </Navbar.Brand>
-                        </Navbar.Header>
-                    </Col>
-                    <Col sm={4}>
-                        <div className="nav-route">
-                            <NavButton name={panes.packages} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
-                            <NavButton name={panes.upload} selected={this.props.pane} onClick={this.props.handlePaneSelect} disable={this.props.isUploading}/>
-                        </div>
-                    </Col>
-                    <Col sm={4}>
-                        <div className="nav-user">
-                            {this.props.displayName} &nbsp; <a href="/Shibboleth.sso/Logout?return=/Shibboleth.sso/Login">Sign out</a>
-                        </div>
-                    </Col>
-                </Row>
+    }
+
+    getDisplayName() {
+
+        let userInformation = this.props.userInformation || {
+            displayName: NO_USERNAME
+        };
+
+        let isDisplayNameEmpty = !userInformation.displayName || userInformation.displayName.length === 0;
+
+        let name = isDisplayNameEmpty ?
+            userInformation.firstName + " " + userInformation.lastName :
+            userInformation.displayName;
+
+        if(isDisplayNameEmpty || name === " ") {
+            name = NO_USERNAME;
+        }
+
+        return name;
+    }
+
+    isRemoteDataLoaded() {
+        return this.props.userInformation !== false;
+    }
+
+    render() {
+
+        let displayName = this.getDisplayName();
+        let isUserInformationLoaded = this.isRemoteDataLoaded();
+
+        return (
+            <Navbar id="navbar" className="px-1 py-1 fixed-top">
+                <Col sm={6}>
+                    <Link to="/" className="navbar-header">
+                        <NavbarBrand className="d-flex align-items-center">
+                            <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
+                            <span className="ml-2 text-dark">Data Lake Uploader</span>
+                        </NavbarBrand>
+                    </Link>
+                </Col>
+                <Col sm={6} className="d-none d-md-block">
+                    <NavUser displayName={isUserInformationLoaded ? displayName : "..."}/>
+                </Col>
+            </Navbar>
         );
     }
 }

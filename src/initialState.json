@@ -1,9 +1,18 @@
 {
+  "dtds": {},
   "filtering": {
-  	"unfiltered": [],
   	"filtered": [],
   	"filters": [],
+	"packageTypes": [],
+	"tisNames": [],
+  	"unfiltered": [],
   	"userList": []
   },
-  "isUploading": false
+  "formDTD": {},
+  "help": {
+    "releases": []
+  },
+  "isUploading": false,
+  "packageTypeIcons": [],
+  "userInformation": false
 }

@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import NavBar from './NavBar';
+import { getUserInformation } from '../../actions/userActions';
 
 const mapStateToProps = (state, props) =>
 ({
 	isUploading: state.isUploading,
-	displayName: state.userInformation.displayName,
-	firstName: state.userInformation.firstName,
-	lastName: state.userInformation.lastName
+	userInformation: state.userInformation
 });
 
 const mapDispatchToProps = (dispatch, props) =>
 ({
-
+	loadRemoteData: () => {
+		dispatch(getUserInformation());
+	}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);    

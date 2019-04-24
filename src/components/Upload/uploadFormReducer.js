@@ -10,3 +10,14 @@ export const isUploading = ( state = false, action ) => {
 			return state;
 	}
 }
+
+export const formDTD = ( state = {}, action ) => {
+	let newState = {...state};
+	switch(action.type) {
+		case actionNames.SET_FORM_DTD:
+			newState = action.payload;
+			return newState;
+		default:
+			return state;
+	}
+}

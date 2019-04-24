@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button } from 'reactstrap';
 
 class NavButton extends Component {
     handleClick = (ev) => {
@@ -10,10 +10,11 @@ class NavButton extends Component {
     }
 
     render() {
-        const cls = this.props.selected === this.props.name ? "btn-primary" : "btn-link";
+        const isSelected = this.props.selected === this.props.name;
+        const cls = isSelected ? "" : "btn-link";
 
         return (
-            <Button className={cls} onClick={this.handleClick} disabled={this.props.disable}>
+            <Button color={isSelected ? "primary" : ""} className={cls} onClick={this.handleClick} disabled={this.props.disable}>
                 {this.props.name}
             </Button>
         );

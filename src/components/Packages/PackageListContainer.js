@@ -4,12 +4,14 @@ import { getPackages } from '../../actions/Packages/packageActions';
 
 const mapStateToProps = (state, props) =>
 ({
-    packages: state.filtering
+    packages: state.filtering,
+    formDTD: state.formDTD,
+	packageTypeIcons: state.packageTypeIcons
 });
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
-	getPackages() {
+	loadRemoteData() {
 		dispatch(getPackages());
 	}
 });

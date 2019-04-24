@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
-import { Panel, Col, Row, Button } from 'react-bootstrap';
+import { Col, Row, Button } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
-import AttachmentsModal from './AttachmentsModal';
-import MetadataModal from './MetadataModal';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AttachmentsModal from './AttachmentsModal';
+import MetadataModal from './MetadataModal';
 
 class PackagePanel extends Component {
 
-	constructor() {
-		super();
-		this.state = { showAttachments: false };
+	constructor(props) {
+		super(props);
+		this.state = { showAttachments: false, showMetadata:false };
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 	}
 	
     handleAttachmentClick() {
-    		let show = !this.state.showAttachments;
-    		this.setState({ showAttachments: show });
+		let show = !this.state.showAttachments;
+		this.setState({ showAttachments: show });
     }
 
 	handleMetadataClick() {
@@ -37,42 +39,49 @@ class PackagePanel extends Component {
 
     render() {
 		let packageInfo = this.props.uploadPackage.packageInfo;
-    	let submittedDate = getLocalDateString(packageInfo.createdAt);
+		let packageTypeIcons = this.props.packageTypeIcons;
+		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
-		let { iconDataType, iconImage } = getDataTypeIconInfo(packageInfo.packageType);
-    		return (
-    			<div>
-	            <Panel className="pkg-panel">
-	                <Panel.Body className={shouldColorRow(this.props.index)?"odd-row":"even-row"}>
-	                    <Row>
-	                        <Col md={6} className="pkg-panel-left">
-								<div className="pkg-type-icon pull-left"><img src={"img/" + iconImage} alt={iconDataType} height="80px" /></div>
-								<div className="pkg-info">
-									<div><b>{packageInfo.subjectId}</b></div>
-									<div>{packageInfo.packageType}</div>
-									<div>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.institution}</div>
-								</div>
+		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
+		
+    	return (
+			<section className="package">
+    			<Row className={
+    					(shouldColorRow(this.props.index) ? "bg-light " : " ") +
+    					"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
+    				<Col xs={12} md={10} className="media align-items-center">
+    					<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
+    					<Row className="media-body mx-2 d-flex align-items-center">
+    						<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
+    						<Col xs={12} className="pb-1">{packageInfo.packageType}</Col>
+    						<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
+    					</Row>
+    				</Col>
+    				<Col xs={12} md={2}>
+						<Row>
+							<Col xs={4} md={12}>
+								{/* eslint-disable-next-line */} 
+								<a className="d-block" onClick={this.handleAttachmentClick}>{packageInfo.files.length} attachment(s)</a>
 	                        </Col>
-	                        <Col md={2} mdOffset={4} className="pkg-panel-right">
-	                            <div><a onClick={this.handleAttachmentClick}>{packageInfo.attachments.length} attachment(s)</a></div>
-	                            <div><a onClick={this.handleMetadataClick}>Show package metadata</a></div>
-	                            {this.props.uploadPackage.downloadable &&
-		                            <div>
-		                                <Button className="btn btn-primary" value={packageInfo.packageId} onClick={(e) => this.handleDownloadClick(packageInfo.packageId, e)}>
-		                                    <span className="glyphicon glyphicon-download-alt" />
-		                                    <i> </i>
-		                                    <b>Download</b>
-		                                </Button>
-		                            </div>
-	                            }
-	                        </Col>
-	                    </Row>
-	                    <AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.attachments} close={this.handleAttachmentClick}/>
-						<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick}/>
-					</Panel.Body>
-	            </Panel>
-            </div>
-        );
+	                        <Col xs={4} md={12}>
+								{/* eslint-disable-next-line */} 
+								<a className="d-block pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
+							</Col>
+							{this.props.uploadPackage.downloadable &&
+								<Col xs={4} md={12}>
+									<Button size="sm" color="primary" value={packageInfo._id} onClick={(e) => this.handleDownloadClick(packageInfo._id, e)}>
+										<FontAwesomeIcon icon={faDownload} />
+										<span>&nbsp;Download</span>
+									</Button>
+								</Col>
+							}
+	                   </Row>
+                   </Col>
+    			</Row>
+    			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
+    			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
+    		</section>
+    	);
     }
 }
 
