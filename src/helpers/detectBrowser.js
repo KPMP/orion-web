@@ -2,7 +2,8 @@ import Bowser from "bowser";
 import {toast} from "react-toastify";
 
 toast.configure({
-    autoClose: 10000
+    autoClose: 10000,
+    bodyClassName: 'text-dark'
 });
 
 const shouldDoPopup = () => {
