@@ -1,7 +1,9 @@
 import Bowser from "bowser";
 import {toast} from "react-toastify";
 
-toast.configure();
+toast.configure({
+    autoClose: 10000
+});
 
 const shouldDoPopup = () => {
     const browserName = Bowser.getParser(window.navigator.userAgent).getBrowserName();
@@ -10,7 +12,7 @@ const shouldDoPopup = () => {
 }
 
 const notifyIESupport = () => {
-    toast("You may have a degraded experience while using IE; please consider using Chrome or Firefox.");
+    toast("You may have a degraded experience while using Internet Explorer. After uploading a package, refresh your screen to see your latest upload.");
 }
 
 const detectIEAndNotify = () => {
