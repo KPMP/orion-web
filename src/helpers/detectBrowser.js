@@ -8,7 +8,6 @@ toast.configure({
 
 const shouldDoPopup = () => {
     const browserName = Bowser.getParser(window.navigator.userAgent).getBrowserName();
-    console.log('+++ shouldDoPopup.browserName: ', browserName);
     return browserName.toUpperCase().match("INTERNET EXPLORER");
 }
 
