@@ -15,6 +15,7 @@ import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import { applyRouteClass } from './helpers/routeClassUtil';
+import detectIEAndNotify from './helpers/detectBrowser';
 
 window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
@@ -41,6 +42,8 @@ history.listen((location, action) => {
     window.scrollTo(0, 0);
 	applyRouteClass();
 });
+
+detectIEAndNotify();
 
 class App extends Component {
 
