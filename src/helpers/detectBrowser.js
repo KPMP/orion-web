@@ -4,8 +4,9 @@ import {toast} from "react-toastify";
 toast.configure();
 
 const shouldDoPopup = () => {
-    const browser = Bowser.getParser(window.navigator.userAgent);
-    return browser.getBrowser().name.toLowerCase().match("INTERNET EXPLORER");
+    const browserName = Bowser.getParser(window.navigator.userAgent).getBrowserName();
+    console.log('+++ shouldDoPopup.browserName: ', browserName);
+    return browserName.toUpperCase().match("INTERNET EXPLORER");
 }
 
 const notifyIESupport = () => {
