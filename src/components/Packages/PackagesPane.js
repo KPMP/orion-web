@@ -60,7 +60,8 @@ class PackagesPane extends Component {
 		});
 		users.map((user, index) => {
 			let label = user.firstName + " " + user.lastName;
-			return userOptions.push( {value: user.id, label: label});
+			let value = user.id + "|" + label;
+			return userOptions.push( {value: value, label: label});
 		});
 		return userOptions;
 	}
