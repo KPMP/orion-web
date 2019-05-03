@@ -12,8 +12,7 @@ class FilterControl extends Component {
 		if (value === undefined) {
 			this.clearFilter();
 		} else {
-			let filter = value.split("|");
-			this.props.addFilter(this.props.type, filter[0]);
+			this.props.addFilter(this.props.type, value.key);
 			this.setState({selectedOption: value});
 		}
 	}
@@ -33,6 +32,8 @@ class FilterControl extends Component {
 					onChange={this.addFilter}
 					className={this.props.className}
 					onSearch={this.handleSearch}
+					labelInValue
+					filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     getPopupContainer={() => document.getElementById('packages-filter-controls')}>
 				 {this.props.options.map(option => <Option value={option.value}>{option.label}</Option>)}
 				</Select>
