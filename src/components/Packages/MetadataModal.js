@@ -46,7 +46,7 @@ class MetadataModal extends Component {
 
             return (
                 <div className="metadataModal static-modal">
-                    <Modal size="lg" isOpen={this.props.show} onHide={this.props.close}>
+                    <Modal size="lg" isOpen={this.props.show}>
                         <ModalHeader toggle={this.props.close}>
                             Package metadata
                         </ModalHeader>
