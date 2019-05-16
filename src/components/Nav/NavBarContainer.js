@@ -4,7 +4,6 @@ import { getUserInformation } from '../../actions/userActions';
 
 const mapStateToProps = (state, props) =>
 ({
-	isUploading: state.isUploading,
 	userInformation: state.userInformation
 });
 

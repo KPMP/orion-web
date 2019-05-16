@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 class HelpPane extends Component {
 
@@ -77,5 +78,10 @@ class HelpPane extends Component {
         }
     }
 }
+
+HelpPane.propTypes = {
+    help: PropTypes.object.isRequired,
+    loadRemoteData: PropTypes.func.isRequired
+};
 
 export default HelpPane;

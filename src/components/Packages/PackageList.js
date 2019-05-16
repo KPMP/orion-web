@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
+import PropTypes from 'prop-types';
 
 class PackageList extends Component {
 
@@ -51,6 +52,11 @@ class PackageList extends Component {
             }</section>
         );
     }
+}
+
+PackageList.propTypes = {
+    packages: PropTypes.array,
+    loadRemoteData: PropTypes.func.isRequired
 }
 
 export default PackageList;

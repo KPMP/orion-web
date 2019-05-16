@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
+import PropTypes from 'prop-types';
 
 class FilterControl extends Component {
 	
@@ -41,5 +42,14 @@ class FilterControl extends Component {
 		)
 	}
 }
+
+FilterControl.propTypes = {
+	addFilter: PropTypes.func.isRequired,
+	placeholder: PropTypes.string.isRequired,
+	className: PropTypes.string.isRequired,
+	handleSearch: PropTypes.func.isRequired,
+	options: PropTypes.array.isRequired
+}
+
 
 export default FilterControl;

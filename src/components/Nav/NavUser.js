@@ -47,7 +47,7 @@ class NavUser extends Component {
 }
 
 NavUser.propTypes = {
-    displayName: PropTypes.string.isRequired
+    displayName: PropTypes.string.isRequired,
 };
 
 export default NavUser;

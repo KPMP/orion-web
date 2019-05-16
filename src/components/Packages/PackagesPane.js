@@ -4,6 +4,7 @@ import PackageListContainer from '../Packages/PackageListContainer';
 import { Button, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as filterActions from '../../actions/filterActions';
+import PropTypes from 'prop-types';
 
 class PackagesPane extends Component {
 
@@ -134,6 +135,13 @@ class PackagesPane extends Component {
 			</article>
 		);
 	}
+}
+
+PackagesPane.propTypes = {
+	loadRemoteData: PropTypes.func.isRequired,
+	users: PropTypes.array,
+	packageTypes: PropTypes.array,
+	tisNames: PropTypes.array,
 }
 
 export default PackagesPane;
