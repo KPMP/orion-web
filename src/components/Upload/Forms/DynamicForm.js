@@ -6,6 +6,7 @@ import FileDropzone from './FileDropzone';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class DynamicForm extends Component {
 	
@@ -181,7 +182,7 @@ class DynamicForm extends Component {
 		return (
 			<React.Fragment>
 				<Prompt
-					when={() => {return true;}}
+					when={true}
 					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
@@ -208,6 +209,14 @@ class DynamicForm extends Component {
 			</React.Fragment>
 		);
 	}
+}
+
+DynamicForm.propTypes = {
+	loadRemoteData: PropTypes.func.isRequired,
+	formDTD: PropTypes.object,
+	userInformation: PropTypes.any,
+	isUploading: PropTypes.bool.isRequired,
+	form: PropTypes.object.isRequired,
 }
 
 const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);

@@ -8,6 +8,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
+import PropTypes from 'prop-types';
 
 class PackagePanel extends Component {
 
@@ -83,6 +84,13 @@ class PackagePanel extends Component {
     		</section>
     	);
     }
+}
+
+PackagePanel.propTypes = {
+	uploadPackage: PropTypes.object.isRequired,
+	packageTypeIcons: PropTypes.array.isRequired,
+	dtds: PropTypes.object.isRequired
+
 }
 
 export default PackagePanel;

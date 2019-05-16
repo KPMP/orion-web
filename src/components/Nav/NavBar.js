@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const NO_USERNAME = "Not Logged In";
 
@@ -59,6 +60,11 @@ class NavBar extends Component {
             </Navbar>
         );
     }
+}
+
+NavBar.propTypes = {
+    userInformation: PropTypes.any,
+    loadRemoteData: PropTypes.func
 }
 
 export default NavBar;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Gallery from 'react-fine-uploader/gallery';
+import PropTypes from 'prop-types';
 
 class FileDropzone extends Component {
 	
@@ -22,6 +23,11 @@ class FileDropzone extends Component {
 			<Gallery uploader={this.props.uploader} cancelButton-className={cancelButtonClass} fileInput-disabled={this.props.isUploading} fileInput-children={fileInputChildren} children={children}/>
 		);
 	}
+}
+
+FileDropzone.propTypes = {
+	uploader: PropTypes.object.isRequired,
+	isUploading: PropTypes.bool
 }
 
 export default FileDropzone;

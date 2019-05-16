@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Col } from 'reactstrap';
 import TextField from './TextField';
+import PropTypes from 'prop-types';
 
 const FIRST_NAME = "firstName";
 const LAST_NAME = "lastName";
@@ -69,6 +70,11 @@ class SubmitterInformation extends Component {
             );
         }
 	}
+}
+
+SubmitterInformation.propTypes = {
+    form: PropTypes.object.isRequired,
+    userInformation: PropTypes.object
 }
 
 export default SubmitterInformation;
