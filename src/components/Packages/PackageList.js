@@ -35,12 +35,12 @@ class PackageList extends Component {
 
         else {
             panels = this.props.packages.filtered.map((uploadPackage, index) => {
-                return <PackagePanelContainer index={index} uploadPackage={uploadPackage}/>;
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
 
         return (
-        	<section id="packages-list" class="container-fluid">{
+        	<section id="packages-list" className="container-fluid">{
                 message !== null ?
                     <h4 id="packages-querying" className="packages-querying text-center pt-3">
                         {message}
@@ -55,7 +55,7 @@ class PackageList extends Component {
 }
 
 PackageList.propTypes = {
-    packages: PropTypes.array,
+    packages: PropTypes.object,
     loadRemoteData: PropTypes.func.isRequired
 }
 

@@ -63,7 +63,7 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
-    userInformation: PropTypes.object,
+    userInformation: PropTypes.any,
     loadRemoteData: PropTypes.func
 }
 
