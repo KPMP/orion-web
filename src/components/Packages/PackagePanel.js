@@ -45,14 +45,22 @@ class PackagePanel extends Component {
 			.then ((response) => {
 				if (response.statusText === "OK") {
 					let blob = response.data;
-					const downloadLink = document.createElement('a');
-					downloadLink.setAttribute("download", packageId + ".zip");
-					const url = window.URL.createObjectURL(new Blob([blob]));
-					downloadLink.setAttribute("href", url);
-					document.body.appendChild(downloadLink);
-					downloadLink.click();
-					downloadLink.parentNode.removeChild(downloadLink);
+					var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+					if (!isIE) {
+						const downloadLink = document.createElement('a');
+						downloadLink.setAttribute("download", packageId + ".zip");
+						const url = window.URL.createObjectURL(new Blob([blob]));
+						downloadLink.setAttribute("href", url);
+						document.body.appendChild(downloadLink);
+						downloadLink.click();
+						downloadLink.parentNode.removeChild(downloadLink);
+					}
 					
+					if (isIE) {
+						let ieBlob = new Blob([response], {'application/zip'})
+						window.navigator.msSaveOrOpenBlob(ieBlob, packageId + ".zip");
+						return;
+					}
 				} else {
 					console.log("recieved http code: " + response.status);
 					this.props.handleError();
@@ -65,7 +73,6 @@ class PackagePanel extends Component {
 		});
 		e.preventDefault();
 		
-//		window.location.href=api.fixArguments(["/api/v1/packages/" + packageId + "/files"]);
 	}
 
     render() {
