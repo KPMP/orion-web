@@ -45,21 +45,14 @@ class PackagePanel extends Component {
 			.then ((response) => {
 				if (response.statusText === "OK") {
 					let blob = response.data;
-					var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
-					if (!isIE) {
-						const downloadLink = document.createElement('a');
-						downloadLink.setAttribute("download", packageId + ".zip");
-						const url = window.URL.createObjectURL(new Blob([blob]));
-						downloadLink.setAttribute("href", url);
-						document.body.appendChild(downloadLink);
-						// For some reason, we need to click the button again in firefox for the download to happen
-						downloadLink.click();
-						downloadLink.parentNode.removeChild(downloadLink);
-					}
+					const downloadLink = document.createElement('a');
+					downloadLink.setAttribute("download", packageId + ".zip");
+					const url = window.URL.createObjectURL(new Blob([blob]));
+					downloadLink.setAttribute("href", url);
+					document.body.appendChild(downloadLink);
+					downloadLink.click();
+					downloadLink.parentNode.removeChild(downloadLink);
 					
-					if (isIE) {
-						window.navigator.msSaveBlob(blob, packageId + ".zip");
-					}
 				} else {
 					console.log("recieved http code: " + response.status);
 					this.props.handleError();
