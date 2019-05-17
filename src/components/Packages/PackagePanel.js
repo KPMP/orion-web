@@ -45,7 +45,7 @@ class PackagePanel extends Component {
 			.then ((response) => {
 				if (response.statusText === "OK") {
 					let blob = response.data;
-					var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+					var isIE = window.navigator && window.navigator.msSaveOrOpenBlob;
 					if (!isIE) {
 						const downloadLink = document.createElement('a');
 						downloadLink.setAttribute("download", packageId + ".zip");
