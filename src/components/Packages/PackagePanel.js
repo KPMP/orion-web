@@ -41,7 +41,7 @@ class PackagePanel extends Component {
 			label: packageId
 		});
 		
-		api.get("/api/v1/packages/" + packageId + "/files", { responseType: 'blob' })
+		api.get("/api/v1/packages/" + packageId + "/files", { responseType: 'blob', timeout: 20000 })
 			.then ((response) => {
 				if (response.statusText === "OK") {
 					let blob = response.data;
@@ -58,9 +58,9 @@ class PackagePanel extends Component {
 					
 					if (isIE) {
 						console.log(blob);
-						let ieBlob = new Blob([response], {'application/zip'});
-						console.log(ieBlob);
-						window.navigator.msSaveOrOpenBlob(ieBlob, packageId + ".zip");
+//						let ieBlob = new Blob([blob], {'application/zip'});
+//						console.log(ieBlob);
+//						window.navigator.msSaveOrOpenBlob(ieBlob, packageId + ".zip");
 						return;
 					}
 				} else {
