@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PackagePanel from './PackagePanel';
+import { handleError } from '../../actions/Error/errorActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -12,6 +13,9 @@ const mapStateToProps = (state, props) =>
     
 const mapDispatchToProps = (dispatch, props) =>
 ({
+	handleError() {
+		dispatch(handleError());
+	}
 });
     
 export default connect(mapStateToProps, mapDispatchToProps)(PackagePanel);

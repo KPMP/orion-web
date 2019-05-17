@@ -9,6 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import PropTypes from 'prop-types';
+import Api from '../../helpers/Api';
+
+
+const api = Api.getInstance();
 
 class PackagePanel extends Component {
 
@@ -30,12 +34,45 @@ class PackagePanel extends Component {
 	}
 
 	handleDownloadClick(packageId, e) {
+		
 		ReactGA.event({
 			category: 'Download',
 			action: 'File Package',
 			label: packageId
 		});
-		window.location.href="api/v1/packages/" + packageId + "/files"
+		
+		api.get("/api/v1/packages/" + packageId + "/files", { responseType: 'blob' })
+			.then ((response) => {
+				if (response.statusText === "OK") {
+					let blob = response.data;
+					var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+					if (!isIE) {
+						const downloadLink = document.createElement('a');
+						downloadLink.setAttribute("download", packageId + ".zip");
+						const url = window.URL.createObjectURL(new Blob([blob]));
+						downloadLink.setAttribute("href", url);
+						document.body.appendChild(downloadLink);
+						// For some reason, we need to click the button again in firefox for the download to happen
+						downloadLink.click();
+						downloadLink.parentNode.removeChild(downloadLink);
+					}
+					
+					if (isIE) {
+						window.navigator.msSaveBlob(blob, packageId + ".zip");
+					}
+				} else {
+					console.log("recieved http code: " + response.status);
+					this.props.handleError();
+				}
+				
+			})
+			.catch(err => {
+				console.log(err);
+				this.props.handleError();
+		});
+		e.preventDefault();
+		
+//		window.location.href=api.fixArguments(["/api/v1/packages/" + packageId + "/files"]);
 	}
 
     render() {
