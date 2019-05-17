@@ -57,7 +57,9 @@ class PackagePanel extends Component {
 					}
 					
 					if (isIE) {
-						let ieBlob = new Blob([response], {'application/zip'})
+						console.log(blob);
+						let ieBlob = new Blob([response], {'application/zip'});
+						console.log(ieBlob);
 						window.navigator.msSaveOrOpenBlob(ieBlob, packageId + ".zip");
 						return;
 					}
