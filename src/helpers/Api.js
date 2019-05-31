@@ -1,4 +1,5 @@
 import axios from 'axios'
+import packageJson from '../../package.json';
 
 export default class Api {
 
@@ -30,13 +31,23 @@ export default class Api {
 
 		for(let i = 0; i < args.length; i++) {
 			if(i === 0) {
-				let isDev = process.env.NODE_ENV === "development";
-				output.push(isDev ? args[i].replace(/^\/?api/, "") : args[i]);
+				output.push(this.isDevelopment() ? args[i].replace(/^\/?api/, "") : args[i]);
 			}
 
 			else output.push(args[i]);
 		}
 
 		return output;
+	}
+	
+	getBaseURL() {
+		if (this.isDevelopment()) {
+			return packageJson.proxy;
+		}
+		return '';
+	}
+	
+	isDevelopment() {
+		return process.env.NODE_ENV === "development";
 	}
 }
