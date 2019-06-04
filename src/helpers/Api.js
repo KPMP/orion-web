@@ -1,4 +1,5 @@
 import axios from 'axios'
+import AuthService from '../components/Auth/AuthService'
 import packageJson from '../../package.json';
 
 export default class Api {
@@ -6,6 +7,7 @@ export default class Api {
 	constructor() {
 		this.axios = axios.create({
 			timeout: 10000,
+			headers: {'Authorization': 'Bearer ' + AuthService.getToken()}
 		});
 	}
 
