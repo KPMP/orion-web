@@ -4,7 +4,6 @@ import AuthService from '../components/Auth/AuthService'
 export default class Api {
 
 	constructor() {
-		const auth = new AuthService();
 		this.axios = axios.create({
 			timeout: 10000,
 			headers: {'Authorization': 'Bearer ' + AuthService.getToken()}
