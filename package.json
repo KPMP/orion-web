@@ -24,6 +24,7 @@
     "filesize": "3.6.1",
     "fine-uploader": "5.16.2",
     "js-polyfills": "0.1.42",
+    "jwt-decode": "^2.2.0",
     "moment": "2.24.0",
     "popper.js": "1.14.3",
     "prop-types": "15.7.2",

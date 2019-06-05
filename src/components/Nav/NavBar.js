@@ -3,6 +3,9 @@ import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import decode from 'jwt-decode';
+import AuthService from '../Auth/AuthService';
+
 
 const NO_USERNAME = "Not Logged In";
 
@@ -11,14 +14,22 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
 
-        if(!this.isRemoteDataLoaded()) {
-            this.props.loadRemoteData();
+        let user = undefined;
+        let token = AuthService.getToken();
+        console.log("navbar: " + token);
+        if (token !== null && token !== undefined) {
+            let decoded = decode(token);
+            user = JSON.parse(decoded.user);
+        }
+
+        this.state = {
+        	userInformation: user
         }
     }
 
     getDisplayName() {
 
-        let userInformation = this.props.userInformation || {
+        let userInformation = this.state.userInformation || {
             displayName: NO_USERNAME
         };
 
@@ -35,14 +46,9 @@ class NavBar extends Component {
         return name;
     }
 
-    isRemoteDataLoaded() {
-        return this.props.userInformation !== false;
-    }
-
     render() {
 
         let displayName = this.getDisplayName();
-        let isUserInformationLoaded = this.isRemoteDataLoaded();
 
         return (
             <Navbar id="navbar" className="px-1 py-1 fixed-top">
@@ -55,7 +61,7 @@ class NavBar extends Component {
                     </Link>
                 </Col>
                 <Col sm={6} className="d-none d-md-block">
-                    <NavUser displayName={isUserInformationLoaded ? displayName : "..."}/>
+                    <NavUser displayName={displayName}/>
                 </Col>
             </Navbar>
         );

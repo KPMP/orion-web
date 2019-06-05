@@ -7,14 +7,23 @@ import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import decode from 'jwt-decode';
+import AuthService from '../../Auth/AuthService';
 
 class DynamicForm extends Component {
 	
 	constructor(props) {
 		super(props);
-
+		let user = undefined;
+		let token = AuthService.getToken();
+		console.log("form: " + token)
+		if (token !== null && token !== undefined) {
+			let decoded = decode(token);
+			user = JSON.parse(decoded.user);
+		}
 		this.state = {
-			filesAdded: 0
+			filesAdded: 0,
+			userInformation: user
 		}
 		
 		uploader.methods.reset();
@@ -68,9 +77,9 @@ class DynamicForm extends Component {
 		validateFields((err, values) => {
 			let newValues = values;
 			if (!this.needUserInfo()) {
-				newValues.submitterFirstName = this.props.userInformation.firstName;
-				newValues.submitterLastName = this.props.userInformation.lastName;
-				newValues.submitterEmail = this.props.userInformation.email;
+				newValues.submitterFirstName = this.state.userInformation.firstName;
+				newValues.submitterLastName = this.state.userInformation.lastName;
+				newValues.submitterEmail = this.state.userInformation.email;
 			}
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
@@ -95,9 +104,9 @@ class DynamicForm extends Component {
 	}
 	
 	needUserInfo() {
-		let submitterFirstBlank = this.props.userInformation.firstName === "";
-		let submitterLastNameBlank = this.props.userInformation.lastName === "";
-		let submitterEmailBlank = this.props.userInformation.email === "";
+		let submitterFirstBlank = this.state.userInformation.firstName === "";
+		let submitterLastNameBlank = this.state.userInformation.lastName === "";
+		let submitterEmailBlank = this.state.userInformation.email === "";
 		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
 	}
 	
@@ -174,7 +183,7 @@ class DynamicForm extends Component {
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
-					return this.renderSection(section, this.props.form, this.props.userInformation);
+					return this.renderSection(section, this.props.form, this.state.userInformation);
 				})
 			}
 		}
@@ -186,7 +195,7 @@ class DynamicForm extends Component {
 					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
-					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
+					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.state.userInformation)}
 					{dynamicSections}
 					<Row className="dropzone btn-sm">
 						<Col md={12}>
@@ -214,7 +223,6 @@ class DynamicForm extends Component {
 DynamicForm.propTypes = {
 	loadRemoteData: PropTypes.func.isRequired,
 	formDTD: PropTypes.object,
-	userInformation: PropTypes.any,
 	isUploading: PropTypes.bool.isRequired,
 	form: PropTypes.object.isRequired,
 }

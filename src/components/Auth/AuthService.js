@@ -44,11 +44,15 @@ export default class AuthService {
     }
 
     static setToken(token) {
-        localStorage.setItem('token', token)
+        localStorage.setItem('token', token);
     }
 
     static getToken() {
-        return localStorage.getItem('token')
+    	let token = localStorage.getItem('token');
+    	if (token === "null") {
+    		token = null;
+    	}
+        return token;
     }
 
     static logout() {
