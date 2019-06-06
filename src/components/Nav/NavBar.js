@@ -3,7 +3,6 @@ import { Navbar, NavbarBrand, Col } from 'reactstrap';
 import NavUser from "./NavUser";
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import decode from 'jwt-decode';
 import AuthService from '../Auth/AuthService';
 
 
@@ -14,13 +13,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
 
-        let user = undefined;
-        let token = AuthService.getToken();
-        console.log("navbar: " + token);
-        if (token !== null && token !== undefined) {
-            let decoded = decode(token);
-            user = JSON.parse(decoded.user);
-        }
+        let user = AuthService.getUserInformationFromToken();
 
         this.state = {
         	userInformation: user

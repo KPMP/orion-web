@@ -7,20 +7,14 @@ import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import decode from 'jwt-decode';
 import AuthService from '../../Auth/AuthService';
 
 class DynamicForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		let user = undefined;
-		let token = AuthService.getToken();
-		console.log("form: " + token)
-		if (token !== null && token !== undefined) {
-			let decoded = decode(token);
-			user = JSON.parse(decoded.user);
-		}
+		
+        let user = AuthService.getUserInformationFromToken();
 		this.state = {
 			filesAdded: 0,
 			userInformation: user
