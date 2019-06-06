@@ -4,7 +4,6 @@ import loadedState from './initialState';
 import { packages as filtering, dtds } from './components/Packages/packagePanelReducer';
 import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
-import { userInformation } from './components/userInformationReducer';
 import { help } from './components/Help/helpPaneReducer';
 
 const appReducer = combineReducers({
@@ -12,7 +11,6 @@ const appReducer = combineReducers({
     dtds,
     isUploading,
     formDTD,
-    userInformation,
     help,
     packageTypeIcons
 });

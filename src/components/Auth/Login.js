@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Login extends Component {
 
     componentWillMount() {
+    	console.log("in login")
         window.location.href = this.props.loginURL;
     }
 

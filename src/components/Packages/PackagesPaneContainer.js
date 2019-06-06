@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import PackagesPane from './PackagesPane';
 import { addFilter, getUsers, removeFilter } from '../../actions/filterActions';
-import { getUserInformation } from "../../actions/userActions";
 import { getFormDTD } from "../../actions/Upload/uploadActions";
 import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
 
@@ -23,7 +22,6 @@ const mapDispatchToProps = (dispatch, props) =>
 	},
 
 	loadRemoteData() {
-		getUserInformation()(dispatch);
 		getUsers()(dispatch);
         getFormDTD()(dispatch);
 		getPackageTypeIcons()(dispatch);
