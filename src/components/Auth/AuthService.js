@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 export default class AuthService {
 
     constructor(authURL) {
-        this.authURL = authURL || 'https://dev-auth.kpmp.org';
+        this.authURL = authURL || 'https://auth.kpmp.org';
     }
 
     getLoginURL(location) {

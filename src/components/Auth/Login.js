@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AuthService from "./AuthService";
 
 class Login extends Component {
 
