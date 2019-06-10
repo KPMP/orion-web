@@ -3,16 +3,7 @@ import decode from 'jwt-decode';
 export default class AuthService {
 
     constructor(authURL) {
-        this.authURL = authURL || 'https://auth.kpmp.org';
-    }
-
-    checkAuth() {
-        this.checkOrGetToken();
-        if (AuthService.getToken() !== null) {
-            return AuthService.isTokenValid();
-        } else {
-            return false;
-        }
+        this.authURL = authURL || 'https://dev-auth.kpmp.org';
     }
 
     getLoginURL(location) {
@@ -30,20 +21,21 @@ export default class AuthService {
             body: JSON.stringify({token: AuthService.getToken()})
         };
 
-        fetch(this.authURL + '/api/auth', config)
+        return fetch(this.authURL + '/api/auth', config)
             .then(response => response.json().then(data => ({data, response})))
             .then(({ data, response }) => {
                 if (!response.ok) {
                     return Promise.reject(data)
                 } else {
                     AuthService.setToken(data.token);
+                    console.log(data.token);
                 }
             }).catch(err => 
             	console.log("Error: ", err)
             );
     }
 
-    static isTokenValid(token) {
+    static isTokenValid() {
         return AuthService.getToken() !== null;
     }
 

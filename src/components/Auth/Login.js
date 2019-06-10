@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import AuthService from "./AuthService";
 
 class Login extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            authPending: 1
+        }
+    }
 
     componentWillMount() {
     	console.log("in login")

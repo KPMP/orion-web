@@ -4,19 +4,43 @@ import AuthService from './AuthService';
 import Login from './Login';
 
 class PrivateRoute extends Component {
-    render() {
-        const auth = new AuthService();
-        let loginURL = auth.getLoginURL(window.location.href);
-        let {component: Component, ...rest} = this.props;
-        return <Route {...rest}
-            render={props =>
-                auth.checkAuth() ? (
-                    <Component {...props} />
-                ) : (
-                    <Login loginURL={loginURL} />
-                )
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            authState: undefined
+        };
+
+        this.auth = new AuthService();
+    }
+
+    componentDidMount() {
+        this.auth.checkOrGetToken().then((response) => {
+            if (AuthService.getToken() !== null) {
+                this.setState({authState: AuthService.isTokenValid()});
+            } else {
+                this.setState({authState: false});
             }
-        />
+        });
+    }
+
+    render() {
+        let loginURL = this.auth.getLoginURL(window.location.href);
+        let {component: Component, ...rest} = this.props;
+        if (this.state.authState === undefined || this.state.authState === null){
+            return <div>Checking authorization . . . </div>
+        } else {
+            return <Route {...rest}
+                          render={props =>
+                              this.state.authState ? (
+                                  <Component {...props} />
+                              ) : (
+                                  <Login loginURL={loginURL}/>
+                              )
+                          }
+            />
+        }
     }
 }
 
