@@ -21,6 +21,10 @@ class DynamicForm extends Component {
 		}
 		
 		uploader.methods.reset();
+
+		uploader.methods.setCustomHeaders(
+            {'Authorization': 'Bearer ' + AuthService.getToken()}
+        );
 		
 		uploader.on('submit', () => {
 			let newCount = this.state.filesAdded + 1;
