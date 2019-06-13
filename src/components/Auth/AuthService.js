@@ -28,7 +28,6 @@ export default class AuthService {
                     return Promise.reject(data)
                 } else {
                     AuthService.setToken(data.token);
-                    console.log(data.token);
                 }
             }).catch(err => 
             	console.log("Error: ", err)
