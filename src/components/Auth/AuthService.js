@@ -1,5 +1,3 @@
-import decode from 'jwt-decode';
-
 export default class AuthService {
 
     constructor(authURL) {
@@ -52,16 +50,6 @@ export default class AuthService {
 
     static logout() {
         localStorage.removeItem('token');
-    }
-    
-    static getUserInformationFromToken() {
-    	let user = undefined;
-        let token = AuthService.getToken();
-        if (token !== null && token !== undefined) {
-            let decoded = decode(token);
-            user = JSON.parse(decoded.user);
-        }
-        return user;
     }
 
 }
