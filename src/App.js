@@ -7,7 +7,6 @@ import loadedState from './initialState';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
-import PrivateRoute from './components/Auth/PrivateRoute';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
 import HelpPaneContainer from "./components/Help/HelpPaneContainer";
@@ -60,9 +59,9 @@ class App extends Component {
 					<ErrorBoundaryContainer>
 						<NavBarContainer />
 						<Switch>
-							<PrivateRoute  exact path="/" component={PackagesPaneContainer} store={store} />
-							<PrivateRoute  exact path="/packages" component={PackagesPaneContainer} store={store} />
-							<PrivateRoute  exact path="/upload" component={DynamicFormContainer} store={store} />
+							<Route  exact path="/" component={PackagesPaneContainer} store={store} />
+							<Route  exact path="/packages" component={PackagesPaneContainer} store={store} />
+							<Route  exact path="/upload" component={DynamicFormContainer} store={store} />
 							<Route  exact path="/help" component={HelpPaneContainer} store={store} />
 							<Route  exact path="/oops" component={Oops} />
 						</Switch>

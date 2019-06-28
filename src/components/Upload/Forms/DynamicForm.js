@@ -7,7 +7,6 @@ import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AuthService from '../../Auth/AuthService';
 
 class DynamicForm extends Component {
 	
@@ -19,10 +18,6 @@ class DynamicForm extends Component {
 		}
 		
 		uploader.methods.reset();
-
-		uploader.methods.setCustomHeaders(
-            {'Authorization': 'Bearer ' + AuthService.getToken()}
-        );
 		
 		uploader.on('submit', () => {
 			let newCount = this.state.filesAdded + 1;
