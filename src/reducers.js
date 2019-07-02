@@ -5,6 +5,7 @@ import { packages as filtering, dtds } from './components/Packages/packagePanelR
 import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { help } from './components/Help/helpPaneReducer';
+import { userInformation } from './components/userInformationReducer';
 
 const appReducer = combineReducers({
     filtering,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
     isUploading,
     formDTD,
     help,
+    userInformation,
     packageTypeIcons
 });
 

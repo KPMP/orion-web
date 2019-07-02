@@ -6,7 +6,8 @@ import {getFormDTD} from "../../../actions/Upload/uploadActions";
 const mapStateToProps = (state, props) =>
 ({
 	isUploading: state.isUploading,
-	formDTD: state.formDTD
+	formDTD: state.formDTD,
+	userInformation: state.userInformation
 });
 
 const mapDispatchToProps = (dispatch, props) =>

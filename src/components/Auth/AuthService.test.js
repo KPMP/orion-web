@@ -47,23 +47,5 @@ describe("AuthService static methods", () => {
 			expect(localStorage.getItem('token')).toBeNull();
 		});
 	});
-	
-	describe("getUserInformationFromToken", () => {
-		it("should return undefined if token is null", () => {
-			localStorage.setItem('token', null);
-			expect(AuthService.getUserInformationFromToken()).toBeUndefined();
-		});
-		
-		it("should return a json object with user information from token", () => {
-			let expectedUser = {
-				firstName: "Rebecca",
-				lastName: "Reamy",
-				displayName: "Rebecca Reamy",
-				email: "rlreamy@umich.edu"
-			}
-			
-			localStorage.setItem('token', "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJybHJlYW15QHVtaWNoLmVkdSIsImV4cCI6MTU1OTg2NDc3MiwidXNlciI6IntcImZpcnN0TmFtZVwiOlwiUmViZWNjYVwiLFwibGFzdE5hbWVcIjpcIlJlYW15XCIsXCJkaXNwbGF5TmFtZVwiOlwiUmViZWNjYSBSZWFteVwiLFwiZW1haWxcIjpcInJscmVhbXlAdW1pY2guZWR1XCJ9In0.8TRI4EUkbiDEZMXVFp_7g9bfN0vNtH28Yh2wlGuPcjPcXnNM252TNbabvWg9y1FTY0nOlCA9IeszvE7i52M1lg");
-			expect(AuthService.getUserInformationFromToken()).toEqual(expectedUser);
-		});
-	});
+
 })

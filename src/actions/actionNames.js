@@ -11,6 +11,7 @@ const actionNames = {
 	SET_RELEASES: "SET_RELEASES",
 	SET_TIS_NAMES: "SET_TIS_NAMES",
 	SET_USERS: "SET_USERS",
+	SET_USER_INFORMATION: "SET_USER_INFORMATION"
 };
 
 export default actionNames;
