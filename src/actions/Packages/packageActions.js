@@ -44,7 +44,7 @@ export const setIsUploading = (isUploading) => {
 
 export const finishPackage = (packageId) => {
 	return (dispatch) => {
-		api.post('/api/v1/packages/' + packageId + '/files/finish')
+		api.post('/api/v1/packages/' + packageId + '/files/finish', window.location.hostname)
 			.then(res => {
 				dispatch(setIsUploading(false));
 				window.location = '/';
