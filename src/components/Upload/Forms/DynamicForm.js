@@ -15,6 +15,7 @@ class DynamicForm extends Component {
 		
 		this.state = {
 			filesAdded: 0,
+			submitClicked: false
 		}
 		
 		uploader.methods.reset();
@@ -64,6 +65,7 @@ class DynamicForm extends Component {
 	}
 	
 	handleSubmit = (e) => {
+		this.setState({submitClicked: true});
 		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
 			let newValues = values;
@@ -149,7 +151,7 @@ class DynamicForm extends Component {
 			}
 		}
 		
-		if (validForm && this.state.filesAdded > 0) {
+		if (!this.state.submitClicked && validForm && this.state.filesAdded > 0) {
 			return false;
 		}
 
