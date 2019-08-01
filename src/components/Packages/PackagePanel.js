@@ -8,6 +8,8 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
+import PropTypes from 'prop-types';
+import Api from '../../helpers/Api';
 
 class PackagePanel extends Component {
 
@@ -34,7 +36,10 @@ class PackagePanel extends Component {
 			action: 'File Package',
 			label: packageId
 		});
-		window.location.href="api/v1/packages/" + packageId + "/files"
+		let api = Api.getInstance();
+		let url = api.getBaseURL() + api.fixArguments(["api/v1/packages/"]) + packageId + "/files";
+		
+		window.location.href=url;
 	}
 
     render() {
@@ -83,6 +88,13 @@ class PackagePanel extends Component {
     		</section>
     	);
     }
+}
+
+PackagePanel.propTypes = {
+	uploadPackage: PropTypes.object.isRequired,
+	packageTypeIcons: PropTypes.array.isRequired,
+	dtds: PropTypes.object.isRequired
+
 }
 
 export default PackagePanel;

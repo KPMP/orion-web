@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
+import PropTypes from 'prop-types';
 
 class FilterControl extends Component {
 	
@@ -35,11 +36,20 @@ class FilterControl extends Component {
 					labelInValue
 					filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     getPopupContainer={() => document.getElementById('packages-filter-controls')}>
-				 {this.props.options.map(option => <Option value={option.value}>{option.label}</Option>)}
+				 {this.props.options.map(option => <Option key={option.value} value={option.value}>{option.label}</Option>)}
 				</Select>
 			</div>
 		)
 	}
 }
+
+FilterControl.propTypes = {
+	addFilter: PropTypes.func.isRequired,
+	placeholder: PropTypes.string.isRequired,
+	className: PropTypes.string.isRequired,
+	handleSearch: PropTypes.func,
+	options: PropTypes.array.isRequired
+}
+
 
 export default FilterControl;

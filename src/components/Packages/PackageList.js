@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
+import PropTypes from 'prop-types';
 
 class PackageList extends Component {
 
@@ -34,12 +35,12 @@ class PackageList extends Component {
 
         else {
             panels = this.props.packages.filtered.map((uploadPackage, index) => {
-                return <PackagePanelContainer index={index} uploadPackage={uploadPackage}/>;
+                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
 
         return (
-        	<section id="packages-list" class="container-fluid">{
+        	<section id="packages-list" className="container-fluid">{
                 message !== null ?
                     <h4 id="packages-querying" className="packages-querying text-center pt-3">
                         {message}
@@ -51,6 +52,11 @@ class PackageList extends Component {
             }</section>
         );
     }
+}
+
+PackageList.propTypes = {
+    packages: PropTypes.object,
+    loadRemoteData: PropTypes.func.isRequired
 }
 
 export default PackageList;

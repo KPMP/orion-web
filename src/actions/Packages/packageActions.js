@@ -44,7 +44,7 @@ export const setIsUploading = (isUploading) => {
 
 export const finishPackage = (packageId) => {
 	return (dispatch) => {
-		api.post('/api/v1/packages/' + packageId + '/files/finish')
+		api.post('/api/v1/packages/' + packageId + '/files/finish', window.location.hostname)
 			.then(res => {
 				dispatch(setIsUploading(false));
 				window.location = '/';
@@ -94,7 +94,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 					dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
 				}
 			});
-			uploader.methods.setEndpoint('/api/v1/packages/' + packageId + '/files');
+			uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 			uploader.methods.uploadStoredFiles();
 		})
 		.catch(err => {

@@ -9,7 +9,7 @@ class AttachmentsModal extends Component {
     render() {
     	return (
 			<div className="attachmentsModal static-modal">
-				<Modal isOpen={this.props.show} onHide={this.props.close}>
+				<Modal isOpen={this.props.show}>
 					<ModalHeader toggle={this.props.close}>
 	            		Attached Files
 	            	</ModalHeader>
