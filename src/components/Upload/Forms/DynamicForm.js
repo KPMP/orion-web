@@ -51,6 +51,13 @@ class DynamicForm extends Component {
 			return true;
 		});
 		
+		uploader.on('validateBatch', () => {
+			if (this.state.submitClicked) {
+				return false;
+			}
+			return true;
+		})
+		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
