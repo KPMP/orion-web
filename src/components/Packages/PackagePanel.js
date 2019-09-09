@@ -8,6 +8,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
+import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
 
@@ -15,7 +16,7 @@ class PackagePanel extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { showAttachments: false, showMetadata:false };
+		this.state = { showAttachments: false, showMetadata:false , showLargeFile:false};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 	}
@@ -28,6 +29,11 @@ class PackagePanel extends Component {
 	handleMetadataClick() {
 		let show = !this.state.showMetadata;
 		this.setState({ showMetadata: show });
+	}
+
+	handleLargeFileClick() {
+		let show = !this.state.showLargeFile;
+		this.setState({ showLargeFile: show });
 	}
 
 	handleDownloadClick(packageId, e) {
@@ -85,6 +91,7 @@ class PackagePanel extends Component {
     			</Row>
     			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
     			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
+    			<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} />
     		</section>
     	);
     }
