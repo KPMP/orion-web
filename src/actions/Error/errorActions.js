@@ -9,11 +9,19 @@ export const handleError = () => {
 };
 
 export const sendMessageToBackend = (error) => {
-	let errorMessage = { error: error.message , stackTrace: error.stack }
-	return (dispatch) => {
-		api.post('/api/v1/error', errorMessage)
-		.then(res=> {
-			 dispatch(handleError());
-		});
-	};
+	if (error.response && error.response.status && error.response.status >= 400) {
+		return (dispatch) => {
+			console.log("handling bad response");
+			dispatch(handleError());
+		}
+	} else {
+		let errorMessage = { error: error.message , stackTrace: error.stack }
+		return (dispatch) => {
+			api.post('/api/v1/error', errorMessage)
+			.then(res=> {
+				console.log("after sent message to service")
+				dispatch(handleError());
+			});
+		};
+	}
 }

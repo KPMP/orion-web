@@ -1,6 +1,6 @@
 import Api from '../helpers/Api';	
 import actionNames from './actionNames';	
-import { handleError } from './Error/errorActions';	
+import { sendMessageToBackend } from './Error/errorActions';	
 
  const api = Api.getInstance();	
 
@@ -10,8 +10,9 @@ import { handleError } from './Error/errorActions';
 			.then(res => {	
 				dispatch(setUserInformation(res.data));	
 			})	
-			.catch(err => {	
-				dispatch(handleError("Unable to retrieve user information: " + err));	
+			.catch(err => {
+				console.log("couldn't get user information");
+				dispatch(sendMessageToBackend(err));	
 	        });	
 	};	
 } 	

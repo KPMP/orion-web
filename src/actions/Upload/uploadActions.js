@@ -1,6 +1,6 @@
 import Api from '../../helpers/Api';
 import actionNames from '../actionNames';
-import { handleError } from '../Error/errorActions';
+import { sendMessageToBackend } from '../Error/errorActions';
 import { setPackageTypesFromDTD, setTisNamesFromDTD } from '../filterActions.js';
 
 const api = Api.getInstance();
@@ -21,8 +21,7 @@ export const getFormDTD = () => {
 				dispatch(setTisNamesFromDTD(res.data));
 			})
 			.catch(err => {
-				console.log(err);
-				dispatch(handleError());
+				dispatch(sendMessageToBackend(err));
 			});
 	}
 }
