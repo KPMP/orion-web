@@ -158,12 +158,8 @@ class DynamicForm extends Component {
 				}
 			}
 		}
-		
-		if (!this.state.submitClicked && validForm && this.state.filesAdded > 0) {
-			return false;
-		}
 
-		return true;
+		return !(!this.state.submitClicked && validForm && (this.state.filesAdded > 0 || this.state.largeFilesChecked));
 	}
 	
 	render() {
@@ -220,11 +216,13 @@ class DynamicForm extends Component {
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-					<Row className="dropzone btn-sm">
-						<Col md={12}>
-							<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-						</Col>
-					</Row>
+					{!this.state.largeFilesChecked &&
+						<Row className="dropzone btn-sm">
+							<Col md={12}>
+								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+							</Col>
+						</Row>
+					}
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
