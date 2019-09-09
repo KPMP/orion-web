@@ -7,6 +7,7 @@ import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
@@ -15,8 +16,11 @@ class DynamicForm extends Component {
 		
 		this.state = {
 			filesAdded: 0,
-			submitClicked: false
-		}
+			submitClicked: false,
+			largeFilesChecked: false
+		};
+
+		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		
 		uploader.methods.reset();
 		
@@ -51,6 +55,10 @@ class DynamicForm extends Component {
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
 		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
+	}
+
+	handleLargeFilesToggle(checked) {
+		this.setState({ largeFilesChecked: checked });
 	}
 
 	componentDidMount() {
@@ -187,6 +195,28 @@ class DynamicForm extends Component {
 					when={true}
 					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
+				<article id="largeFileSupport" className="container justify-content-center pt-4">
+					<section>
+						<h4>The total size of all files in this package is:</h4>
+						<Row>
+							<Col md={12}>
+								<label>
+									<Switch
+										onChange={this.handleLargeFilesToggle}
+										checked={this.state.largeFilesChecked}
+										uncheckedIcon={false}
+										checkedIcon={false}
+										onColor="#08f"
+										height={25}
+										width={45}
+										className="react-switch"
+									/>
+									<span id="largeFileSupportLabel">Over 15 GB</span>
+								</label>
+							</Col>
+						</Row>
+					</section>
+				</article>
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
