@@ -13,7 +13,6 @@ class NavBar extends Component {
         super(props);
 
         if(!this.isRemoteDataLoaded()) {
-        	console.log("trying to get data");
         	this.props.loadRemoteData();
         }
     }

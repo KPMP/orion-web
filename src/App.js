@@ -59,11 +59,11 @@ class App extends Component {
 					<ErrorBoundaryContainer>
 						<NavBarContainer />
 						<Switch>
-							<Route  exact path="/" component={PackagesPaneContainer} store={store} />
-							<Route  exact path="/packages" component={PackagesPaneContainer} store={store} />
-							<Route  exact path="/upload" component={DynamicFormContainer} store={store} />
-							<Route  exact path="/help" component={HelpPaneContainer} store={store} />
-							<Route  exact path="/oops" component={Oops} />
+							<Route exact path="/" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
+							<Route exact path="/help" component={HelpPaneContainer} store={store} />
+							<Route exact path="/oops" component={Oops} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>
