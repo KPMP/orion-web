@@ -184,7 +184,7 @@ class DynamicForm extends Component {
 				})
 			}
 		}
-		
+		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
 				<Prompt
@@ -216,13 +216,11 @@ class DynamicForm extends Component {
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-					{!this.state.largeFilesChecked &&
-						<Row className="dropzone btn-sm">
+						<Row className={"dropzone btn-sm" + dropzoneHidden}>
 							<Col md={12}>
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
-					}
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
