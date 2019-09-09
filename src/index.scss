@@ -312,7 +312,6 @@ PACKAGES
 
 .dropzone {
 	padding-bottom: 15px;
-	
 	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
 		min-height: 120px;
 		border: 1px dashed darkgrey;
@@ -338,6 +337,10 @@ PACKAGES
 			display: none;
 		}
 	}
+}
+
+.hidden {
+	display: none;
 }
 
 #upload-ctrl {
