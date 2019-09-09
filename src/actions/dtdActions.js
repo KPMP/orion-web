@@ -1,6 +1,6 @@
 import actionNames from './actionNames';
 import Api from '../helpers/Api';
-import { handleError } from './Error/errorActions';
+import { sendMessageToBackend } from './Error/errorActions';
 const api = Api.getInstance();
 
 export const addDTD = (dtd) => {
@@ -18,7 +18,7 @@ export const getDTDByVersion = (version) => {
 			})
 			.catch(err => {
 				console.log(err);
-				dispatch(handleError());
+				dispatch(sendMessageToBackend(err));
 			});
 	}
 }

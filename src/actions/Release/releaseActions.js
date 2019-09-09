@@ -1,5 +1,5 @@
 import Api from "../../helpers/Api";
-import {handleError} from "../Error/errorActions";
+import { sendMessageToBackend } from "../Error/errorActions";
 import actionNames from "../actionNames";
 
 const api = Api.getInstance();
@@ -11,7 +11,7 @@ export const getReleases = () => {
                 dispatch(setReleases(res.data));
             })
             .catch(err => {
-                dispatch(handleError("Unable to connect to the Data Lake: " + err));
+                dispatch(sendMessageToBackend(err));
             });
     };
 };
