@@ -24,7 +24,6 @@ export const showLargeFileModal = (state = "", action) => {
 		case actionNames.CLEAR_SHOW_LARGE_FILE_MODAL:
 			return newState;
 		default:
-
 			return state;
 	}
 };
