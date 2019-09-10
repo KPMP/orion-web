@@ -11,7 +11,6 @@ import { sendMessageToBackend } from './Error/errorActions';
 				dispatch(setUserInformation(res.data));	
 			})	
 			.catch(err => {
-				console.log("couldn't get user information");
 				dispatch(sendMessageToBackend(err));	
 	        });	
 	};	
