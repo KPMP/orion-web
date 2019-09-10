@@ -29,7 +29,7 @@ export class DynamicFormGenerator {
 		let sectionJson = Object.assign({}, inputSectionJson);
 
 		return (
-			<section>
+			<section key={sectionJson.sectionHeader}>
 				<h4>{sectionJson.sectionHeader}</h4>
 				<Row>
 					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
@@ -55,6 +55,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.NUMERIC:
                 fieldComponent =
                     <NumericField label={fieldJson.label}
+                		key={fieldJson.label}
                 		form={form}
                 		additionalProps={fieldJson.additionalProps}
                 		isRequired={isRequired}
@@ -66,6 +67,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.DATE_FIELD:
                 fieldComponent =
 					<DateField label={fieldJson.label} 
+                		key={fieldJson.label}
 						form={form} 
 						additionalProps={fieldJson.additionalProps}
 					    isRequired={isRequired}
@@ -78,6 +80,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.DROP_DOWN:
 				fieldComponent =
 					<SelectBox
+						key={fieldJson.label}
                         form={form}
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
@@ -92,6 +95,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.MULTI_SELECT:
 				fieldComponent =
 					<SelectBox
+						key={fieldJson.label}
                         form={form}
                         isMultiple={true}
 						label={fieldJson.label} 
@@ -104,13 +108,14 @@ export class DynamicFormGenerator {
 				break;
 				
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
-				return <SubmitterInformation 
+				return <SubmitterInformation key="submitterInformation"
 				userInformation={userInformation} 
 				form={form} />;
 						
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 
 					<TextField
+						key={fieldJson.label}
                         form={form}
                         label={fieldJson.label}
 						fieldName={fieldJson.fieldName}
@@ -122,6 +127,7 @@ export class DynamicFormGenerator {
 				
 			case FIELD_TYPES.TEXT_AREA:
 				fieldComponent = <TextArea
+					key={fieldJson.label}
                     form={form}
                     label={fieldJson.label}
 					fieldName={fieldJson.fieldName}
@@ -140,7 +146,7 @@ export class DynamicFormGenerator {
 		}
 		
 		return (
-			<Col lg={colLg} md={colMd} sm={colSm}>
+			<Col lg={colLg} md={colMd} sm={colSm} key={fieldJson.label}>
 				{fieldComponent}
 			</Col>
 		);

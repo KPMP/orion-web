@@ -11,17 +11,13 @@ class SubmitterInformation extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = this.getDerivedStateFromProps(props);
+		this.state = {
+			submitterFirstNameDisabled: this.isFieldDisabled(FIRST_NAME, props),
+            submitterLastNameDisabled: this.isFieldDisabled(LAST_NAME, props),
+            submitterEmailDisabled: this.isFieldDisabled(EMAIL, props),
+            userInfoPopulated: this.isUserInfoPopulated(props)
+		}
 	}
-
-    getDerivedStateFromProps(nextProps) {
-        return {
-            submitterFirstNameDisabled: this.isFieldDisabled(FIRST_NAME, nextProps),
-            submitterLastNameDisabled: this.isFieldDisabled(LAST_NAME, nextProps),
-            submitterEmailDisabled: this.isFieldDisabled(EMAIL, nextProps),
-            userInfoPopulated: this.isUserInfoPopulated(nextProps)
-        };
-    }
 
 	isFieldDisabled(fieldName, props) {
         return props.userInformation.hasOwnProperty(fieldName)
