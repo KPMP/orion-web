@@ -16,9 +16,10 @@ class PackagePanel extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { showAttachments: false, showMetadata:false , showLargeFile:false};
+		this.state = { showAttachments: false, showMetadata: false, showLargeFile: props.showLargeFileModal === this.props.uploadPackage.packageInfo._id};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
+		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
 	}
 	
     handleAttachmentClick() {
@@ -34,6 +35,7 @@ class PackagePanel extends Component {
 	handleLargeFileClick() {
 		let show = !this.state.showLargeFile;
 		this.setState({ showLargeFile: show });
+		this.props.clearShowLargeFileModal();
 	}
 
 	handleDownloadClick(packageId, e) {

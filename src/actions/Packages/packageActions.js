@@ -57,6 +57,26 @@ export const finishPackage = (packageId) => {
 	}
 }
 
+export const setShowLargeFileModal = (packageId) => {
+	return {
+		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,
+		payload: packageId
+	}
+}
+
+export const clearShowLargeFileModal = () => {
+	return {
+		type: actionNames.CLEAR_SHOW_LARGE_FILE_MODAL,
+	}
+}
+
+export const processLargeFile = (packageId) => {
+	return (dispatch) => {
+		dispatch(setShowLargeFileModal(packageId));
+		window.location = '/';
+	}
+}
+
 export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
@@ -82,18 +102,23 @@ export const uploadPackage = (packageInfo, uploader) => {
 		.then(res=> {
 			let packageId = res.data;
 			let canceledFiles = uploader.methods.getUploads(
-					{ status: [qq.status.CANCELED] });
+				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
-			uploader.on('allComplete', function(succeeded, failed) {
-				if (succeeded.length === totalFiles) {
-					dispatch(finishPackage(packageId));
-				} else if (failed.length > 0){
-					alert("We were unable to upload all of your files. You will need to resubmit this package.");
-					dispatch(setIsUploading(false));
-					dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
-				}
-			});
+			if (packageInfo.largeFilesChecked) {
+				dispatch(setIsUploading(false));
+				dispatch(processLargeFile(packageId));
+			} else {
+				uploader.on('allComplete', function (succeeded, failed) {
+					if (succeeded.length === totalFiles) {
+						dispatch(finishPackage(packageId));
+					} else if (failed.length > 0) {
+						alert("We were unable to upload all of your files. You will need to resubmit this package.");
+						dispatch(setIsUploading(false));
+						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+					}
+				});
+			}
 			uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 			uploader.methods.uploadStoredFiles();
 		})

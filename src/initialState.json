@@ -14,5 +14,6 @@
   },
   "isUploading": false,
   "packageTypeIcons": [],
-  "userInformation": false
+  "userInformation": false,
+  "showLargeFileModal": ""
 }
