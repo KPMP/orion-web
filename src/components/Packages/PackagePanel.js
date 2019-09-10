@@ -11,6 +11,7 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
+import { stateToDisplayText } from './stateToDisplayText';
 
 class PackagePanel extends Component {
 
@@ -51,11 +52,13 @@ class PackagePanel extends Component {
 	}
 
     render() {
+    	
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
+		console.log(this.props.uploadPackage.state);
 		
     	return (
 			<section className="package">
@@ -87,6 +90,12 @@ class PackagePanel extends Component {
 										<span>&nbsp;Download</span>
 									</Button>
 								</Col>
+							}
+							{!packageInfo.downloadable && this.props.uploadPackage.state &&
+								<Col xs={4} md={12}>
+									<span>{stateToDisplayText(this.props.uploadPackage.state.state)}</span>
+								</Col>
+								
 							}
 	                   </Row>
                    </Col>
