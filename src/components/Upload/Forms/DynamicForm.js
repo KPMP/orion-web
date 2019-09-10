@@ -41,6 +41,10 @@ class DynamicForm extends Component {
 		uploader.on('submit', (id, name) => {
 			let files = uploader.methods.getUploads({
 			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+			
+			// The new version of react-scripts sees fileIndex as an unused variable, 
+			// though it is...adding a comment to disable erroneous warning
+			// eslint-disable-next-line
 			for(let fileIndex in files) {
 				let existingName = files[fileIndex].name;
 				if (existingName === name) {
