@@ -21,6 +21,7 @@ class PackagePanel extends Component {
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
+		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
 	}
 	
     handleAttachmentClick() {
@@ -39,6 +40,14 @@ class PackagePanel extends Component {
 		this.props.clearShowLargeFileModal();
 	}
 
+	handleStateInfoClick() {
+		if (this.props.uploadPackage.state.state === "METADATA_RECEIVED") {
+			let show = !this.state.showLargeFile;
+			this.setState({ showLargeFile: show });
+			this.props.clearShowLargeFileModal();
+		}
+	}
+	
 	handleDownloadClick(packageId, e) {
 		ReactGA.event({
 			category: 'Download',
@@ -93,7 +102,7 @@ class PackagePanel extends Component {
 							}
 							{!packageInfo.downloadable && this.props.uploadPackage.state &&
 								<Col xs={4} md={12}>
-									<span>{stateToDisplayText(this.props.uploadPackage.state.state)}</span>
+									<span onClick={this.handleStateInfoClick}>{stateToDisplayText(this.props.uploadPackage.state.state)}</span>
 								</Col>
 								
 							}

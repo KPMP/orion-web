@@ -7,7 +7,7 @@ describe("mapStateToDisplayText", () => {
 	});
 	
 	it("should return the correct display text for state METADAT_RECEIVED", () => {
-		expect(stateToDisplayText("METADATA_RECEIVED")).toEqual(<div className="alert alert-primary state-info">Waiting for files...</div>);
+		expect(stateToDisplayText("METADATA_RECEIVED")).toEqual(<div className="alert alert-primary state-info clickable">Waiting for files...</div>);
 	});
 	
 	it("should return undefined when unknown state", () => {
