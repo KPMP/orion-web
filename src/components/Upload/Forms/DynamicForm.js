@@ -96,7 +96,8 @@ class DynamicForm extends Component {
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
-			if(!err) {
+            newValues.largeFilesChecked = this.state.largeFilesChecked;
+            if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
 				console.log("Received err: ", err);
