@@ -67,7 +67,6 @@ class PackagePanel extends Component {
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-		console.log(this.props.uploadPackage.state);
 		
     	return (
 			<section className="package">
@@ -110,9 +109,10 @@ class PackagePanel extends Component {
 	                   </Row>
                    </Col>
     			</Row>
+    			
     			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
     			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
-    			<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} />
+    			<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
     		</section>
     	);
     }
