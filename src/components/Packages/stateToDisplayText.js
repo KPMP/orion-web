@@ -7,7 +7,7 @@ export const stateToDisplayText = (state) => {
 	
 	let states = new Map([ 
 		["FILES_RECEIVED", {text:"Finishing upload", classNames:"alert alert-success state-info"}],
-		["METADATA_RECEIVED", {text:"Waiting for files...", classNames:"alert alert-primary state-info clickable"}]
+		["METADATA_RECEIVED", {text:"Waiting for files...", classNames:"alert alert-primary state-info"}]
 	]);
 	
 	if (state === "FILES_RECEIVED") {
@@ -15,12 +15,16 @@ export const stateToDisplayText = (state) => {
 	}
 	
 	if (state === "METADATA_RECEIVED") {
-		return <span><div className={states.get(state).classNames}>{states.get(state).text}</div>
-			<div className="additional-icon"><FontAwesomeIcon className="float-right" icon={faClock} size="lg" inverse/>
-			</div></span>;
+		return <div className={states.get(state).classNames}>{states.get(state).text}</div>;
 	}
-	
 	
 	return "";
 	
+}
+
+export const getAdditionalIcon = (state) => {
+	if (state === "METADATA_RECEIVED") {
+		return <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={faClock} size="lg" inverse/></div>
+	}
+	return "";
 }

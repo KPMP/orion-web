@@ -11,7 +11,7 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
-import { stateToDisplayText } from './stateToDisplayText';
+import { stateToDisplayText, getAdditionalIcon } from './stateToDisplayText';
 
 class PackagePanel extends Component {
 
@@ -102,7 +102,8 @@ class PackagePanel extends Component {
 							}
 							{!packageInfo.downloadable && this.props.uploadPackage.state &&
 								<Col xs={4} md={12}>
-									<span onClick={this.handleStateInfoClick}>{stateToDisplayText(this.props.uploadPackage.state.state)}</span>
+									{stateToDisplayText(this.props.uploadPackage.state.state)}
+									<span onClick={this.handleStateInfoClick}>{getAdditionalIcon(this.props.uploadPackage.state.state)}</span>
 								</Col>
 								
 							}
