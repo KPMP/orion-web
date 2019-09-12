@@ -6,7 +6,6 @@ import {Button} from "antd";
 class LargeFileModal extends Component {
 
     render() {
-    	console.log(this.props);
         return (
             <div className="largeFileModal static-modal">
                 <Modal size="lg" isOpen={this.props.show}>
