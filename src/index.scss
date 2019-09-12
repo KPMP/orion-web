@@ -73,10 +73,6 @@ a {
 	justify-content: center;
 }
 
-.ant-select {
-	width: 100%;
-}
-
 #dynamicUploadForm {
 
 	.submitterInfo {
@@ -131,12 +127,36 @@ a {
 		
 }
 
+.ant-select {
+	width: 100%;
+}
+
 /*
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 PACKAGES
 */
 
 .metadataModalBody {
+
+	.ant-tree-title {
+		cursor: default !important;	
+	}
+	
+	.ant-tree-switcher-icon {
+		cursor: pointer;
+	}
+
+	.ant-tree-node-content-wrapper {
+		cursor: default !important;
+	}
+
+	.ant-tree li .ant-tree-node-content-wrapper:hover {
+		background-color: white !important;
+	}
+	
+	.ant-tree-switcher {
+		cursor: default !important;
+	}
 
 	.anticon {
 		vertical-align: 0.125em !important;
