@@ -18,7 +18,7 @@ class LargeFileModal extends Component {
                         <ol>
                             <li>Click this link to <a href={this.props.link}>open the destination folder</a> on Google Drive.</li>
                             <li>Upload your files to the Google Drive folder.</li>
-                            <li>Email <a href="mailto:datauploadersupport@kpmp.org">datauploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
+                            <li>Email <a target="_blank" href="mailto:datauploadersupport@kpmp.org">datauploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
                         </ol>
                     </ModalBody>
                     <ModalFooter>
