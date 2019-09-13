@@ -3,6 +3,7 @@ import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
+import LargeFileModal from '../../Packages/LargeFileModal';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
@@ -17,11 +18,12 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: false
+			largeFilesChecked: false,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
-		
+		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
+
 		uploader.methods.reset();
 		
 		uploader.on('submit', () => {
@@ -72,6 +74,12 @@ class DynamicForm extends Component {
 		this.setState({ largeFilesChecked: checked });
 	}
 
+	handleLargeFilesClick() {
+		let show = !this.state.showLargeFile;
+		this.setState({ showLargeFile: show });
+		this.props.clearShowLargeFileModal();
+	}
+
 	componentDidMount() {
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
@@ -99,6 +107,9 @@ class DynamicForm extends Component {
             newValues.largeFilesChecked = this.state.largeFilesChecked;
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
+				// if (this.state.largeFilesChecked) {
+				// 	this.setState({showLargeFileModal: true})
+				// }
 			} else {
 				console.log("Received err: ", err);
 				throw new Error("Unable to submit form: ", err);
@@ -246,6 +257,7 @@ class DynamicForm extends Component {
 						</div>
 					</Row>
 				</article>
+				<LargeFileModal show={this.props.codicil} close={this.handleLargeFilesClick} link={this.props.codicil}/>
 			</React.Fragment>
 		);
 	}
