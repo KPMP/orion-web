@@ -11,6 +11,7 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
+import { stateToDisplayText, getAdditionalIcon } from './stateToDisplayText';
 
 class PackagePanel extends Component {
 
@@ -20,6 +21,7 @@ class PackagePanel extends Component {
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
+		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
 	}
 	
     handleAttachmentClick() {
@@ -38,6 +40,14 @@ class PackagePanel extends Component {
 		this.props.clearShowLargeFileModal();
 	}
 
+	handleStateInfoClick() {
+		if (this.props.uploadPackage.state.state === "METADATA_RECEIVED") {
+			let show = !this.state.showLargeFile;
+			this.setState({ showLargeFile: show });
+			this.props.clearShowLargeFileModal();
+		}
+	}
+	
 	handleDownloadClick(packageId, e) {
 		ReactGA.event({
 			category: 'Download',
@@ -51,6 +61,7 @@ class PackagePanel extends Component {
 	}
 
     render() {
+    	
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
@@ -88,12 +99,20 @@ class PackagePanel extends Component {
 									</Button>
 								</Col>
 							}
+							{!packageInfo.downloadable && this.props.uploadPackage.state &&
+								<Col xs={4} md={12}>
+									{stateToDisplayText(this.props.uploadPackage.state.state)}
+									<span onClick={this.handleStateInfoClick}>{getAdditionalIcon(this.props.uploadPackage.state.state)}</span>
+								</Col>
+								
+							}
 	                   </Row>
                    </Col>
     			</Row>
+    			
     			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
     			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
-    			<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} />
+    			<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
     		</section>
     	);
     }
