@@ -70,9 +70,9 @@ export const clearShowLargeFileModal = () => {
 	}
 }
 
-export const processLargeFile = (packageId) => {
+export const processLargeFile = (packageId, gdriveId) => {
 	return (dispatch) => {
-		dispatch(setShowLargeFileModal(packageId));
+		dispatch(setShowLargeFileModal(packageId, gdriveId));
 		window.location = '/';
 	}
 }
@@ -100,14 +100,16 @@ export const uploadPackage = (packageInfo, uploader) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
-			let packageId = res.data;
+			let packageId = res.data.packageId;
+			let gdriveId = res.data.gdriveId;
+			console.log(gdriveId);
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
 			if (packageInfo.largeFilesChecked) {
 				dispatch(setIsUploading(false));
-				dispatch(processLargeFile(packageId));
+				dispatch(processLargeFile(packageId, gdriveId));
 			} else {
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
