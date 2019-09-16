@@ -14,8 +14,8 @@ export const dtds = ( state = {}, action ) => {
 	}
 };
 
-export const showLargeFileModal = (state = {}, action) => {
-	let newState = {};
+export const showLargeFileModal = (state = "", action) => {
+	let newState = "";
 	let showLargeFileModal = action.payload;
 	switch(action.type) {
 		case actionNames.SET_SHOW_LARGE_FILE_MODAL:
