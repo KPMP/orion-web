@@ -22,7 +22,7 @@ class LargeFileModal extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <article id="largeFileModalFooter" className="justify-content-right">
-                            <Button type="primary" onClick={this.props.close}>Ok</Button>
+                            <Button type="primary" id="largeFileButton" onClick={this.props.close}>OK</Button>
                         </article>
                     </ModalFooter>
                 </Modal>
