@@ -1,6 +1,5 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
-import axios from 'axios';
 import qq from 'fine-uploader/lib/core';
 import { sendMessageToBackend } from '../Error/errorActions';
 import { getDTDByVersion } from '../dtdActions';
