@@ -6,7 +6,6 @@ import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
 
-
 export const getPackages = () => {
 	return (dispatch) => {
 		api.get('/api/v1/packages')
@@ -24,7 +23,33 @@ export const getPackages = () => {
 			})
 			.catch(err => {
 				dispatch(sendMessageToBackend(err));
-            });
+			});
+	};
+};
+
+export const getPackageEvents = (callback) => {
+	return (dispatch) => {
+		api.get('/api/v1/state/events/' + new Date().getTime())
+			.then((data) => {
+				dispatch(getPackages());
+				callback.cancelTokenSource = null;
+				callback();
+			})
+			.catch(err => {
+				if(err.code === 502 ||
+					err.message.indexOf("502") >= 0 ||
+					err.message.indexOf("timeout") >= 0) {
+					callback();
+				}
+
+				else if(err.message.indexOf("aborted") >= 0) {
+					// Do nothing; this just means the client terminated long polling
+				}
+
+				else {
+					dispatch(sendMessageToBackend(err));
+				}
+			});
 	};
 };
 
