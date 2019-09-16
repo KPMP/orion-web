@@ -1,11 +1,11 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
+import axios from 'axios';
 import qq from 'fine-uploader/lib/core';
 import { sendMessageToBackend } from '../Error/errorActions';
 import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
-
 
 export const getPackages = () => {
 	return (dispatch) => {
@@ -24,7 +24,36 @@ export const getPackages = () => {
 			})
 			.catch(err => {
 				dispatch(sendMessageToBackend(err));
-            });
+			});
+	};
+};
+
+export const getPackageEvents = (callback) => {
+	return (dispatch) => {
+		api.get('/api/v1/state/events/' + new Date().getTime())
+			.then((data) => {
+				// console.log('+++ New state data', data.data);
+				dispatch(getPackages());
+				callback.cancelTokenSource = null;
+				callback();
+			})
+			.catch(err => {
+				// console.log(err);
+				if(err.code === 502 ||
+					err.message.indexOf("502") >= 0 ||
+					err.message.indexOf("timeout") >= 0) {
+					// console.log('+++ timeout; calling callback');
+					callback();
+				}
+
+				else if(err.message.indexOf("aborted") >= 0) {
+					// Do nothing; this just means the client terminated long polling
+				}
+
+				else {
+					dispatch(sendMessageToBackend(err));
+				}
+			});
 	};
 };
 

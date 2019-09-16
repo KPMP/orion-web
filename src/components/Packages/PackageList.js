@@ -5,9 +5,28 @@ import PropTypes from 'prop-types';
 
 class PackageList extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.pollIfMounted = this.pollIfMounted.bind(this);
+    }
+
     componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
             this.props.loadRemoteData();
+        }
+
+        this._isMounted = true;
+        this.pollIfMounted();
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    pollIfMounted() {
+        if(this._isMounted) {
+            this.props.poll(this.pollIfMounted);
         }
     }
 
