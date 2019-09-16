@@ -31,17 +31,14 @@ export const getPackageEvents = (callback) => {
 	return (dispatch) => {
 		api.get('/api/v1/state/events/' + new Date().getTime())
 			.then((data) => {
-				// console.log('+++ New state data', data.data);
 				dispatch(getPackages());
 				callback.cancelTokenSource = null;
 				callback();
 			})
 			.catch(err => {
-				// console.log(err);
 				if(err.code === 502 ||
 					err.message.indexOf("502") >= 0 ||
 					err.message.indexOf("timeout") >= 0) {
-					// console.log('+++ timeout; calling callback');
 					callback();
 				}
 
