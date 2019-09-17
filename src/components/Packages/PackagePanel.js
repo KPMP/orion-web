@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
-import { Col, Row, Button } from 'reactstrap';
+import { Col, Row, Button, Tooltip } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
@@ -11,7 +11,7 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
-import { stateToDisplayText, getAdditionalIcon } from './stateToDisplayText';
+import PackagePanelStateText from './PackagePanelStateText';
 
 class PackagePanel extends Component {
 
@@ -65,7 +65,7 @@ class PackagePanel extends Component {
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-		
+
     	return (
 			<section className="package">
     			<Row className={
@@ -98,11 +98,10 @@ class PackagePanel extends Component {
 								</Col>
 							}
 							{!packageInfo.downloadable && this.props.uploadPackage.state &&
-								<Col xs={4} md={12}>
-									{stateToDisplayText(this.props.uploadPackage.state.state)}
-									<span onClick={this.handleStateInfoClick}>{getAdditionalIcon(this.props.uploadPackage.state.state)}</span>
-								</Col>
-								
+								<PackagePanelStateText
+                                    handleStateInfoClick={this.handleStateInfoClick}
+									panelState={this.props.uploadPackage.state.state}
+								/>
 							}
 	                   </Row>
                    </Col>
