@@ -107,9 +107,6 @@ class DynamicForm extends Component {
             newValues.largeFilesChecked = this.state.largeFilesChecked;
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
-				// if (this.state.largeFilesChecked) {
-				// 	this.setState({showLargeFileModal: true})
-				// }
 			} else {
 				console.log("Received err: ", err);
 				throw new Error("Unable to submit form: ", err);
