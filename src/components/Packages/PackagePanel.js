@@ -98,10 +98,12 @@ class PackagePanel extends Component {
 								</Col>
 							}
 							{!packageInfo.downloadable && this.props.uploadPackage.state &&
+                            <Col xs={4} md={12}>
 								<PackagePanelStateText
                                     handleStateInfoClick={this.handleStateInfoClick}
-									panelState={this.props.uploadPackage.state.state}
+									panelState={this.props.uploadPackage.state}
 								/>
+							</Col>
 							}
 	                   </Row>
                    </Col>

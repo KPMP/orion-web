@@ -68,6 +68,10 @@ a {
 	cursor: pointer;
 }
 
+a.no-underline {
+	text-decoration: none !important;
+}
+
 #form-footer {
 	background: #CCCCCC;
 	justify-content: center;
@@ -243,7 +247,7 @@ PACKAGES
 			width: 100%;
 
 			a {
-				color: #337ab7 !important;
+				color: #337ab7;
 			}
 
 			a:hover {
@@ -294,6 +298,10 @@ PACKAGES
 	text-align: center;
 	float: left;
 	margin-bottom: 0px !important;
+}
+
+.arrow.panel-state-tooltip-arrow::before {
+	border-bottom-color: #343a40 !important;
 }
 
 .additional-icon {
