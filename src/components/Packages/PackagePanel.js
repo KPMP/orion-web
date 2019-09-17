@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
-import { Col, Row, Button, Tooltip } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
