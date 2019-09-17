@@ -31,17 +31,14 @@ export const getPackageEvents = (callback) => {
 	return (dispatch) => {
 		api.get('/api/v1/state/events/' + new Date().getTime())
 			.then((data) => {
-				// console.log('+++ New state data', data.data);
 				dispatch(getPackages());
 				callback.cancelTokenSource = null;
 				callback();
 			})
 			.catch(err => {
-				// console.log(err);
 				if(err.code === 502 ||
 					err.message.indexOf("502") >= 0 ||
 					err.message.indexOf("timeout") >= 0) {
-					// console.log('+++ timeout; calling callback');
 					callback();
 				}
 
@@ -85,10 +82,10 @@ export const finishPackage = (packageId) => {
 	}
 }
 
-export const setShowLargeFileModal = (packageId) => {
+export const setShowLargeFileModal = (gdriveId) => {
 	return {
 		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,
-		payload: packageId
+		payload: gdriveId
 	}
 }
 
@@ -98,10 +95,9 @@ export const clearShowLargeFileModal = () => {
 	}
 }
 
-export const processLargeFile = (packageId) => {
+export const processLargeFile = (gdriveId) => {
 	return (dispatch) => {
-		dispatch(setShowLargeFileModal(packageId));
-		window.location = '/';
+		dispatch(setShowLargeFileModal(gdriveId));
 	}
 }
 
@@ -128,14 +124,16 @@ export const uploadPackage = (packageInfo, uploader) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
-			let packageId = res.data;
+			let packageId = res.data.packageId;
+			let gdriveId = res.data.gdriveId;
+			console.log(gdriveId);
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
 			if (packageInfo.largeFilesChecked) {
 				dispatch(setIsUploading(false));
-				dispatch(processLargeFile(packageId));
+				dispatch(processLargeFile(gdriveId));
 			} else {
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
