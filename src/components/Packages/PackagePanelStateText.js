@@ -58,7 +58,7 @@ class PackagePanelStateText extends Component {
 
         return <React.Fragment>
             <Row className="no-gutters">
-                <Col xs={4} md={9}>
+                <Col xs={hasIcon ? 11 : 12} md={hasIcon ? 9 : 12}>
                     <div className={panelConfig.classNames} id={tooltipTargetId} >
                         <span>{panelConfig.text}</span>
                     </div>
@@ -77,7 +77,7 @@ class PackagePanelStateText extends Component {
                     }
                 </Col>
                 { hasIcon &&
-                    <Col xs={8} md={3}>
+                    <Col xs={1} md={3}>
                         <span onClick={this.props.handleStateInfoClick}>
                             <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={panelConfig.icon} size="lg" inverse/></div>
                         </span>
