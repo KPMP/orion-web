@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
-import { Row, Col, Tooltip } from 'reactstrap';
+import { Tooltip } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
+const TOOLTIP_CLASSES = {
+    classNames: "",
+    innerClassNames: "border rounded border-dark p-2 small bg-light text-secondary text-sm-left"
+};
+
 const PANEL_CONFIGS = {
     FILES_RECEIVED: {
         text: "Finishing upload",
-        classNames: "m-0 px-2 py-1 alert alert-success clickable text-dark",
-        tooltip: {
-            classNames: "",
-            innerClassNames: "border rounded border-dark p-2 small bg-light text-secondary text-sm-left",
-            arrowClassNames: "panel-state-tooltip-arrow",
-            text: "The file(s) in this package are being finalized.  Once completed, they will be available for download."
-        }
+        classNames: "alert-success",
+        tooltip: "The file(s) in this package are being finalized.  Once completed, they will be available for download."
     },
 
     METADATA_RECEIVED: {
         text: "Waiting for files...",
-        classNames: "m-0 px-2 py-1 alert alert-primary clickable text-dark",
+        classNames: "alert-primary",
         icon: faClock,
-        tooltip: {
-            classNames: "",
-            innerClassNames: "border rounded border-dark p-2 small bg-light text-secondary text-sm-left",
-            arrowClassNames: "panel-state-tooltip-arrow",
-            text: "Awaiting file(s) to be uploaded to the Google drive folder.  Click the clock icon for upload instructions."
-        }
+        tooltip: "Awaiting file(s) to be uploaded to the Google drive folder.  Click the clock icon for upload instructions."
     }
 };
 
@@ -57,33 +52,30 @@ class PackagePanelStateText extends Component {
         let hasIcon = panelConfig.icon && this.props.handleStateInfoClick;
 
         return <React.Fragment>
-            <Row className="no-gutters">
-                <Col xs={hasIcon ? 11 : 12} md={hasIcon ? 9 : 12}>
-                    <div className={panelConfig.classNames} id={tooltipTargetId} >
+            <div className="d-flex align-items-start">
+                <div className="w-75">
+                    <div className={"mr-2 my-0 px-2 py-1 alert clickable text-dark " + panelConfig.classNames} id={tooltipTargetId} >
                         <span>{panelConfig.text}</span>
                     </div>
                     { panelConfig.tooltip &&
                         <span>
-                            <Tooltip className={panelConfig.tooltip.classNames}
-                                     innerClassName={panelConfig.tooltip.innerClassNames}
+                            <Tooltip className={TOOLTIP_CLASSES.classNames}
+                                     innerClassName={TOOLTIP_CLASSES.innerClassNames}
                                      placement={"bottom"}
                                      delay={0}
                                      isOpen={this.state.tooltipOpen}
                                      toggle={this.toggle}
                                      target={tooltipTargetId}>
-                                {panelConfig.tooltip.text}
+                                {panelConfig.tooltip}
                             </Tooltip>
                         </span>
                     }
-                </Col>
-                { hasIcon &&
-                    <Col xs={1} md={3}>
-                        <span onClick={this.props.handleStateInfoClick}>
-                            <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={panelConfig.icon} size="lg" inverse/></div>
-                        </span>
-                    </Col>
+                </div>
+                { hasIcon && <span onClick={this.props.handleStateInfoClick}>
+                        <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={panelConfig.icon} size="lg" inverse/></div>
+                    </span>
                 }
-            </Row>
+            </div>
         </React.Fragment>;
     }
 }
