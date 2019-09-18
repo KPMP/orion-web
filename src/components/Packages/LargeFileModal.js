@@ -16,8 +16,8 @@ class LargeFileModal extends Component {
                         <p>This method requires you to do the following in order to upload your file(s) into the data lake:</p>
                         <ol>
                             <li>Click this link to <a rel="noopener noreferrer" href={"https://drive.google.com/drive/folders/" + this.props.link} target="_blank">open the destination folder</a> on Google Drive.</li>
-                            <li>Upload your files to the Google Drive folder.</li>
-                            <li>Email <a target="_blank" rel="noopener noreferrer" href="mailto:datauploadersupport@kpmp.org">datauploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
+                            <li>Upload your files to the Google Drive folder. <br/>(NOTE: You may need to sign in with a Google account)</li>
+                            <li>Email <a target="_blank" rel="noopener noreferrer" href="mailto:datalakeuploadsupport@kpmp.org">datalakeuploadsupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
                         </ol>
                     </ModalBody>
                     <ModalFooter>
