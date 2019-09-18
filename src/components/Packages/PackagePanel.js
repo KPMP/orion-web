@@ -71,7 +71,7 @@ class PackagePanel extends Component {
     			<Row className={
     					(shouldColorRow(this.props.index) ? "bg-light " : " ") +
     					"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
-    				<Col xs={12} md={10} className="media align-items-center">
+    				<Col xs={12} md={9} className="media align-items-center">
     					<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
     					<Row className="media-body mx-2 d-flex align-items-center">
     						<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
@@ -79,7 +79,7 @@ class PackagePanel extends Component {
     						<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
     					</Row>
     				</Col>
-    				<Col xs={12} md={2}>
+    				<Col xs={12} md={3}>
 						<Row>
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
@@ -98,9 +98,9 @@ class PackagePanel extends Component {
 								</Col>
 							}
 							{!packageInfo.downloadable && this.props.uploadPackage.state &&
-                            <Col xs={4} md={12}>
+                            <Col xs={12} className={this.props.uploadPackage.downloadable ? "pt-2" : ""}>
 								<PackagePanelStateText
-                                    handleStateInfoClick={this.handleStateInfoClick}
+									handleStateInfoClick={this.handleStateInfoClick}
 									panelState={this.props.uploadPackage.state}
 								/>
 							</Col>
