@@ -241,6 +241,19 @@ class DynamicForm extends Component {
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
+						
+					{this.props.isUploading &&
+						<Row>
+							<Col xs={12}>
+								<div className="d-flex align-items-center loading">
+									<span className="loading-message">
+										<strong>Processing request... </strong>
+										<div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+									</span>
+								</div>
+							</Col>
+						</Row>
+					}
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
@@ -253,6 +266,7 @@ class DynamicForm extends Component {
 							</Row>
 						</div>
 					</Row>
+					
 				</article>
 				<LargeFileModal show={this.props.codicil} close={this.handleLargeFilesClick} link={this.props.codicil}/>
 			</React.Fragment>
