@@ -31,19 +31,32 @@ export const getPackageEvents = (callback) => {
 	return (dispatch) => {
 		api.get('/api/v1/state/events/' + new Date().getTime())
 			.then((data) => {
-				dispatch(getPackages());
-				callback.cancelTokenSource = null;
+				// timeout: true will be sent by server if the server times out before the client
+				if(!data.data.hasOwnProperty('timeout')) {
+                    dispatch(getPackages());
+                }
+
+				callback.networkRetries = 0;
 				callback();
 			})
 			.catch(err => {
 				if(err.code === 502 ||
-					err.message.indexOf("502") >= 0 ||
-					err.message.indexOf("timeout") >= 0) {
+					err.message.match(RegExp('502')) ||
+					err.message.match(RegExp('timeout', 'gi'))) {
+					// Timeouts are typical and not limited
 					callback();
 				}
 
-				else if(err.message.indexOf("aborted") >= 0) {
-					// Do nothing; this just means the client terminated long polling
+				else if(err.message.match(RegExp('Network Error', 'gi')) &&
+					(callback.networkRetries === undefined || callback.networkRetries < 3)) {
+					// Network retries are limited
+					callback.networkRetries = callback.networkRetries || 0;
+                    callback.networkRetries++;
+					callback();
+				}
+
+				else if(err.message.match(RegExp('aborted', 'gi'))) {
+					// Client terminated polling; do nothing
 				}
 
 				else {

@@ -98,9 +98,7 @@ class PackagePanel extends Component {
 								</Col>
 							}
 							{!this.props.uploadPackage.downloadable && this.props.uploadPackage.state &&
-							<Col xs={this.props.uploadPackage.downloadable ? 6 : 4}
-								 md={12}
-								 className={this.props.uploadPackage.downloadable ? "pt-2" : ""}>
+							<Col xs={4} md={12} >
 								<PackagePanelStateText
 									handleStateInfoClick={this.handleStateInfoClick}
 									panelState={this.props.uploadPackage.state}
