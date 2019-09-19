@@ -48,7 +48,7 @@ export const getPackageEvents = (callback) => {
 				}
 
 				else if(err.message.match(RegExp('Network Error', 'gi')) &&
-                    callback.networkRetries === undefined || callback.networkRetries < 3) {
+					(callback.networkRetries === undefined || callback.networkRetries < 3)) {
 					// Network retries are limited
 					callback.networkRetries = callback.networkRetries || 0;
                     callback.networkRetries++;
