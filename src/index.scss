@@ -398,11 +398,12 @@ PACKAGES
  	.loading-message {
  		background-color: white;
  		width: 30%;
- 		height: 50px;
  		padding: 15px;
- 		text-align:center;
  		margin: auto;
- 		display: table;
+ 		
+ 		.spinner-border {
+ 			vertical-align: middle !important;
+ 		}
  	}
 }
 

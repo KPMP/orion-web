@@ -245,9 +245,9 @@ class DynamicForm extends Component {
 					{(this.props.isUploading && this.state.largeFilesChecked) &&
 						<Row>
 							<Col xs={12}>
-								<div className="d-flex align-items-center loading">
+								<div className="d-flex align-items-center text-center loading">
 									<span className="loading-message">
-										<strong>Processing request... </strong>
+										<strong>Processing request... &nbsp;&nbsp;&nbsp;&nbsp;</strong>
 										<div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
 									</span>
 								</div>
