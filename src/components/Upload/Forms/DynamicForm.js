@@ -242,7 +242,7 @@ class DynamicForm extends Component {
 							</Col>
 						</Row>
 						
-					{this.props.isUploading &&
+					{(this.props.isUploading && this.state.largeFilesChecked) &&
 						<Row>
 							<Col xs={12}>
 								<div className="d-flex align-items-center loading">
