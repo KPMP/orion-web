@@ -1,11 +1,10 @@
 import actionNames from '../actionNames';
 import Api from '../../helpers/Api';
 import qq from 'fine-uploader/lib/core';
-import { handleError, sendMessageToBackend } from '../Error/errorActions';
+import { sendMessageToBackend } from '../Error/errorActions';
 import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
-
 
 export const getPackages = () => {
 	return (dispatch) => {
@@ -23,8 +22,47 @@ export const getPackages = () => {
 				});
 			})
 			.catch(err => {
-				dispatch(handleError("Unable to connect to the Data Lake: " + err));
-            });
+				dispatch(sendMessageToBackend(err));
+			});
+	};
+};
+
+export const getPackageEvents = (callback) => {
+	return (dispatch) => {
+		api.get('/api/v1/state/events/' + new Date().getTime())
+			.then((data) => {
+				// timeout: true will be sent by server if the server times out before the client
+				if(!data.data.hasOwnProperty('timeout')) {
+                    dispatch(getPackages());
+                }
+
+				callback.networkRetries = 0;
+				callback();
+			})
+			.catch(err => {
+				if(err.code === 502 ||
+					err.message.match(RegExp('502')) ||
+					err.message.match(RegExp('timeout', 'gi'))) {
+					// Timeouts are typical and not limited
+					callback();
+				}
+
+				else if(err.message.match(RegExp('Network Error', 'gi')) &&
+					(callback.networkRetries === undefined || callback.networkRetries < 3)) {
+					// Network retries are limited
+					callback.networkRetries = callback.networkRetries || 0;
+                    callback.networkRetries++;
+					callback();
+				}
+
+				else if(err.message.match(RegExp('aborted', 'gi'))) {
+					// Client terminated polling; do nothing
+				}
+
+				else {
+					dispatch(sendMessageToBackend(err));
+				}
+			});
 	};
 };
 
@@ -57,6 +95,25 @@ export const finishPackage = (packageId) => {
 	}
 }
 
+export const setShowLargeFileModal = (gdriveId) => {
+	return {
+		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,
+		payload: gdriveId
+	}
+}
+
+export const clearShowLargeFileModal = () => {
+	return {
+		type: actionNames.CLEAR_SHOW_LARGE_FILE_MODAL,
+	}
+}
+
+export const processLargeFile = (gdriveId) => {
+	return (dispatch) => {
+		dispatch(setShowLargeFileModal(gdriveId));
+	}
+}
+
 export const uploadPackage = (packageInfo, uploader) => {
 	if (packageInfo.packageType === "Other") {
 		packageInfo.packageType = packageInfo.packageTypeOther;
@@ -80,27 +137,33 @@ export const uploadPackage = (packageInfo, uploader) => {
 		dispatch(setIsUploading(true));
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
-			let packageId = res.data;
+			let packageId = res.data.packageId;
+			let gdriveId = res.data.gdriveId;
+			console.log(gdriveId);
 			let canceledFiles = uploader.methods.getUploads(
-					{ status: [qq.status.CANCELED] });
+				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
-			uploader.on('allComplete', function(succeeded, failed) {
-				if (succeeded.length === totalFiles) {
-					dispatch(finishPackage(packageId));
-				} else if (failed.length > 0){
-					alert("We were unable to upload all of your files. You will need to resubmit this package.");
-					dispatch(setIsUploading(false));
-					dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
-				}
-			});
+			if (packageInfo.largeFilesChecked) {
+				dispatch(setIsUploading(false));
+				dispatch(processLargeFile(gdriveId));
+			} else {
+				uploader.on('allComplete', function (succeeded, failed) {
+					if (succeeded.length === totalFiles) {
+						dispatch(finishPackage(packageId));
+					} else if (failed.length > 0) {
+						alert("We were unable to upload all of your files. You will need to resubmit this package.");
+						dispatch(setIsUploading(false));
+						dispatch(sendMessageToBackend("Unable to upload all files in package.", "Total files: " + totalFiles + " succeeded: " + succeeded.length));
+					}
+				});
+			}
 			uploader.methods.setEndpoint(api.fixArguments(['/api/v1/packages/' + packageId + '/files']));
 			uploader.methods.uploadStoredFiles();
 		})
 		.catch(err => {
-			dispatch(handleError("Unable to upload package to the KPMP Data Lake File Repository: " + err));
+			dispatch(sendMessageToBackend(err));
 			dispatch(setIsUploading(false));
-			console.log(err);
 		});
 	};
 }

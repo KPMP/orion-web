@@ -12,7 +12,21 @@ export const dtds = ( state = {}, action ) => {
 			return state;
 	
 	}
-}
+};
+
+export const showLargeFileModal = (state = "", action) => {
+	let newState = "";
+	let showLargeFileModal = action.payload;
+	switch(action.type) {
+		case actionNames.SET_SHOW_LARGE_FILE_MODAL:
+			newState = showLargeFileModal;
+			return newState;
+		case actionNames.CLEAR_SHOW_LARGE_FILE_MODAL:
+			return newState;
+		default:
+			return state;
+	}
+};
 
 export const packages = (state = {}, action) => {
 	let newState = {}; 
@@ -101,11 +115,10 @@ export const packages = (state = {}, action) => {
 			newState.packageTypes = state.packageTypes;
 			newState.tisNames = state.tisNames;
 			return newState;
-
 		default:
 			return state;
 	}
-}
+};
 
 const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 
@@ -145,4 +158,4 @@ const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 		return filteredPackageList;
 	});
 	return filteredPackageList;
-}
+};

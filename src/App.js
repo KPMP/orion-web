@@ -17,11 +17,12 @@ import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
 
-window.sessionStorage.clear();
 const cacheStore = window.sessionStorage.getItem("redux-store");
-const initialState = cacheStore ?
-    JSON.parse(cacheStore) :
-    loadedState;
+let initialState = loadedState;
+if (cacheStore) {
+	initialState = JSON.parse(cacheStore);
+	initialState.filtering = loadedState.filtering;
+}
 const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const saveState = () => {
   window.sessionStorage.setItem("redux-store", JSON.stringify(store.getState()));
@@ -59,11 +60,11 @@ class App extends Component {
 					<ErrorBoundaryContainer>
 						<NavBarContainer />
 						<Switch>
-							<Route  exact path="/" component={PackagesPaneContainer} store={store} />
-							<Route  exact path="/packages" component={PackagesPaneContainer} store={store} />
-							<Route  exact path="/upload" component={DynamicFormContainer} store={store} />
-							<Route  exact path="/help" component={HelpPaneContainer} store={store} />
-							<Route  exact path="/oops" component={Oops} />
+							<Route exact path="/" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
+							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
+							<Route exact path="/help" component={HelpPaneContainer} store={store} />
+							<Route exact path="/oops" component={Oops} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>

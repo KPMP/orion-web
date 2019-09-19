@@ -9,6 +9,10 @@ class FilterControl extends Component {
 		this.state = { selectedOption: undefined }
 	}
 	
+	componentDidMount() {
+		this.props.removeFilter(this.props.type, this.state.selectedOption);
+	}
+	
 	addFilter = (value) => {
 		if (value === undefined) {
 			this.clearFilter();

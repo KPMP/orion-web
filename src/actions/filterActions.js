@@ -1,6 +1,6 @@
 import Api from '../helpers/Api';
 import actionNames from './actionNames';
-import { handleError } from './Error/errorActions';
+import { sendMessageToBackend } from './Error/errorActions';
 
 const api = Api.getInstance();
 
@@ -32,7 +32,7 @@ export const getUsers = () => {
 			})
 			.catch(err => {
 				console.log(err);
-				handleError();
+				dispatch(sendMessageToBackend(err));
 			});
 	}
 }

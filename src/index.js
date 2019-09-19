@@ -7,7 +7,7 @@ import 'react-fine-uploader/gallery/gallery.css';
 import 'react-tabs/style/react-tabs.css';
 import 'react-datetime/css/react-datetime.css';
 import 'react-toastify/dist/ReactToastify.css';
-import 'babel-polyfill';
+import 'react-app-polyfill/stable';
 import App from './App';
 import 'js-polyfills/polyfill.min.js';
 

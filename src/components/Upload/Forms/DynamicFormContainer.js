@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import DynamicForm from './DynamicForm';
-import { uploadPackage } from '../../../actions/Packages/packageActions';
+import {clearShowLargeFileModal, uploadPackage} from '../../../actions/Packages/packageActions';
 import {getFormDTD} from "../../../actions/Upload/uploadActions";
 
 const mapStateToProps = (state, props) =>
 ({
 	isUploading: state.isUploading,
 	formDTD: state.formDTD,
-	userInformation: state.userInformation
+	userInformation: state.userInformation,
+	codicil: state.showLargeFileModal
 });
 
 const mapDispatchToProps = (dispatch, props) =>
@@ -18,6 +19,11 @@ const mapDispatchToProps = (dispatch, props) =>
 
 	loadRemoteData() {
 		getFormDTD()(dispatch);
+	},
+
+	clearShowLargeFileModal() {
+		dispatch(clearShowLargeFileModal());
+		dispatch(() => window.location = '/');
 	}
 });
 

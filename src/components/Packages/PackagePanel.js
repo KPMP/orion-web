@@ -8,28 +8,44 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
+import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import Api from '../../helpers/Api';
+import PackagePanelStateText from './PackagePanelStateText';
 
 class PackagePanel extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { showAttachments: false, showMetadata:false };
+		this.state = { showAttachments: false, showMetadata: false, showLargeFile: false};
 		this.handleAttachmentClick = this.handleAttachmentClick.bind(this);
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
+		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
+		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
 	}
 	
-    handleAttachmentClick() {
+	handleAttachmentClick() {
 		let show = !this.state.showAttachments;
 		this.setState({ showAttachments: show });
-    }
+	}
 
 	handleMetadataClick() {
 		let show = !this.state.showMetadata;
 		this.setState({ showMetadata: show });
 	}
 
+	handleLargeFileClick() {
+		let show = !this.state.showLargeFile;
+		this.setState({ showLargeFile: show });
+	}
+
+	handleStateInfoClick() {
+		if (this.props.uploadPackage.state.state === "METADATA_RECEIVED") {
+			let show = !this.state.showLargeFile;
+			this.setState({ showLargeFile: show });
+		}
+	}
+	
 	handleDownloadClick(packageId, e) {
 		ReactGA.event({
 			category: 'Download',
@@ -42,33 +58,34 @@ class PackagePanel extends Component {
 		window.location.href=url;
 	}
 
-    render() {
+	render() {
+		
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-		
-    	return (
+
+		return (
 			<section className="package">
-    			<Row className={
-    					(shouldColorRow(this.props.index) ? "bg-light " : " ") +
-    					"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
-    				<Col xs={12} md={10} className="media align-items-center">
-    					<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
-    					<Row className="media-body mx-2 d-flex align-items-center">
-    						<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
-    						<Col xs={12} className="pb-1">{packageInfo.packageType}</Col>
-    						<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
-    					</Row>
-    				</Col>
-    				<Col xs={12} md={2}>
+				<Row className={
+						(shouldColorRow(this.props.index) ? "bg-light " : " ") +
+						"border rounded no-gutters px-2 py-2 mx-2 my-2"}>
+					<Col xs={12} md={9} className="media align-items-center">
+						<img src={"img/" + iconImage} alt={iconDataType} height="80px" />
+						<Row className="media-body mx-2 d-flex align-items-center">
+							<Col xs={12} className="pb-1"><b>{packageInfo.subjectId}</b></Col>
+							<Col xs={12} className="pb-1">{packageInfo.packageType}</Col>
+							<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.tisName}</Col>
+						</Row>
+					</Col>
+					<Col xs={12} md={3}>
 						<Row>
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
 								<a className="d-block" onClick={this.handleAttachmentClick}>{packageInfo.files.length} attachment(s)</a>
-	                        </Col>
-	                        <Col xs={4} md={12}>
+							</Col>
+							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
 								<a className="d-block pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 							</Col>
@@ -80,14 +97,24 @@ class PackagePanel extends Component {
 									</Button>
 								</Col>
 							}
-	                   </Row>
-                   </Col>
-    			</Row>
-    			<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
-    			<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
-    		</section>
-    	);
-    }
+							{!this.props.uploadPackage.downloadable && this.props.uploadPackage.state &&
+							<Col xs={4} md={12} >
+								<PackagePanelStateText
+									handleStateInfoClick={this.handleStateInfoClick}
+									panelState={this.props.uploadPackage.state}
+								/>
+							</Col>
+							}
+					   </Row>
+				   </Col>
+				</Row>
+				
+				<AttachmentsModal show={this.state.showAttachments} attachments={packageInfo.files} close={this.handleAttachmentClick}/>
+				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
+				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
+			</section>
+		);
+	}
 }
 
 PackagePanel.propTypes = {

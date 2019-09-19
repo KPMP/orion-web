@@ -3,10 +3,12 @@ import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
+import LargeFileModal from '../../Packages/LargeFileModal';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
@@ -15,9 +17,13 @@ class DynamicForm extends Component {
 		
 		this.state = {
 			filesAdded: 0,
-			submitClicked: false
-		}
-		
+			submitClicked: false,
+			largeFilesChecked: false,
+		};
+
+		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
+		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
+
 		uploader.methods.reset();
 		
 		uploader.on('submit', () => {
@@ -37,6 +43,10 @@ class DynamicForm extends Component {
 		uploader.on('submit', (id, name) => {
 			let files = uploader.methods.getUploads({
 			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+			
+			// The new version of react-scripts sees fileIndex as an unused variable, 
+			// though it is...adding a comment to disable erroneous warning
+			// eslint-disable-next-line
 			for(let fileIndex in files) {
 				let existingName = files[fileIndex].name;
 				if (existingName === name) {
@@ -47,10 +57,27 @@ class DynamicForm extends Component {
 			return true;
 		});
 		
+		uploader.on('validateBatch', () => {
+			if (this.state.submitClicked) {
+				return false;
+			}
+			return true;
+		})
+		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
 		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
+	}
+
+	handleLargeFilesToggle(checked) {
+		this.setState({ largeFilesChecked: checked });
+	}
+
+	handleLargeFilesClick() {
+		let show = !this.state.showLargeFile;
+		this.setState({ showLargeFile: show });
+		this.props.clearShowLargeFileModal();
 	}
 
 	componentDidMount() {
@@ -77,7 +104,8 @@ class DynamicForm extends Component {
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
-			if(!err) {
+            newValues.largeFilesChecked = this.state.largeFilesChecked;
+            if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
 				console.log("Received err: ", err);
@@ -150,12 +178,8 @@ class DynamicForm extends Component {
 				}
 			}
 		}
-		
-		if (!this.state.submitClicked && validForm && this.state.filesAdded > 0) {
-			return false;
-		}
 
-		return true;
+		return !(!this.state.submitClicked && validForm && (this.state.filesAdded > 0 || this.state.largeFilesChecked));
 	}
 	
 	render() {
@@ -180,21 +204,56 @@ class DynamicForm extends Component {
 				})
 			}
 		}
-		
+		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
 				<Prompt
 					when={true}
 					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
+				<article id="largeFileSupport" className="container justify-content-center pt-4">
+					<section>
+						<h4>The total size of all files in this package is:</h4>
+						<Row>
+							<Col md={12}>
+								<label>
+									<Switch
+										onChange={this.handleLargeFilesToggle}
+										checked={this.state.largeFilesChecked}
+										uncheckedIcon={false}
+										checkedIcon={false}
+										onColor="#08f"
+										height={25}
+										width={45}
+										className="react-switch"
+									/>
+									<span id="largeFileSupportLabel">Over 15 GB</span>
+								</label>
+							</Col>
+						</Row>
+					</section>
+				</article>
 				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-					<Row className="dropzone btn-sm">
-						<Col md={12}>
-							<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-						</Col>
-					</Row>
+						<Row className={"dropzone btn-sm" + dropzoneHidden}>
+							<Col md={12}>
+								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+							</Col>
+						</Row>
+						
+					{(this.props.isUploading && this.state.largeFilesChecked) &&
+						<Row>
+							<Col xs={12}>
+								<div className="d-flex align-items-center text-center loading">
+									<span className="loading-message">
+										<strong>Processing request... &nbsp;&nbsp;&nbsp;&nbsp;</strong>
+										<div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+									</span>
+								</div>
+							</Col>
+						</Row>
+					}
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
@@ -207,7 +266,9 @@ class DynamicForm extends Component {
 							</Row>
 						</div>
 					</Row>
+					
 				</article>
+				<LargeFileModal show={this.props.codicil} close={this.handleLargeFilesClick} link={this.props.codicil}/>
 			</React.Fragment>
 		);
 	}
