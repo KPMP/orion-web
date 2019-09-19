@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const TOOLTIP_CLASSES = {
     classNames: "",
-    innerClassNames: "border rounded border-dark p-2 small text-sm-left"
+    innerClassNames: "rounded p-2 small text-sm-left"
 };
 
 const PANEL_CONFIGS = {
