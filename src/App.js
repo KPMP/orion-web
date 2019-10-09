@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Oops from './components/Error/Oops';
+import PermissionDenied from './components/Error/PermissionDenied';
+import NotRegistered from './components/Error/NotRegistered';
 import PackagesPaneContainer from './components/Packages/PackagesPaneContainer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -65,6 +67,8 @@ class App extends Component {
 							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
 							<Route exact path="/help" component={HelpPaneContainer} store={store} />
 							<Route exact path="/oops" component={Oops} />
+							<Route exact path="/permissionDenied" component={PermissionDenied} />
+							<Route exact path="/notRegistered" component={NotRegistered} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>
