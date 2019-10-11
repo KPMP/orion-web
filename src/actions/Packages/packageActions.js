@@ -162,6 +162,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 			uploader.methods.uploadStoredFiles();
 		})
 		.catch(err => {
+			console.log(err)
 			dispatch(sendMessageToBackend(err));
 			dispatch(setIsUploading(false));
 		});

@@ -5,7 +5,7 @@ class NotRegistered extends Component {
 	
 	render() {
 		return (
-				<article className="container justify-content-center">
+				<article className="container justify-content-center pt-3">
 					<Row >
 						<Col xs={12} className="error-header pb-3">
 							We're sorry. You are not authorized to access this application.
