@@ -29,6 +29,9 @@ export class MetadataRenderer {
 				</TreeNode>
 			);
 		} else {
+			if (fieldJson.fieldName ==="tisName") {
+				return "";
+			}
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			if (fieldJson.fieldName === "experimentDate") {
 				let experimentDate = packageInfo[fieldJson.fieldName]?dateFormat(getIEFriendlyDate(packageInfo[fieldJson.fieldName]), 'yyyy-mm-dd', true):"N/A";
