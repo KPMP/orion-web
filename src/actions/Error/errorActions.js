@@ -18,7 +18,8 @@ export const sendMessageToBackend = (error) => {
 	
 	if (error.response && error.response.status && error.response.status >= 400) {
 		return (dispatch) => {
-			if (!window.location.href.includes("/oops")) {
+			let href = window.location.href;
+			if (!href.includes("/oops") && !href.includes("/permissionDenied") && !href.includes("/notRegistered")) {
 				dispatch(handleError(error.response.status));
 			}
 		}
