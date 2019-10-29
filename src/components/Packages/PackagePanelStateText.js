@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Tooltip } from 'reactstrap';
+import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-const TOOLTIP_CLASSES = {
+const POPOVER_CLASSES = {
     classNames: "",
     innerClassNames: "rounded p-2 small text-sm-left"
 };
@@ -13,14 +13,25 @@ const PANEL_CONFIGS = {
     FILES_RECEIVED: {
         text: "Finishing upload",
         classNames: "alert-success",
-        tooltip: "The file(s) in this package are being finalized.  Once completed, they will be available for download."
+        message: "The file(s) in this package are being finalized.  Once completed, they will be available for download."
     },
 
     METADATA_RECEIVED: {
         text: "Waiting for files...",
         classNames: "alert-primary",
         icon: faClock,
-        tooltip: "Awaiting file(s) to be uploaded to the Google drive folder.  Click the clock icon for upload instructions."
+        message: "Awaiting file(s) to be uploaded to the Google drive folder.  Click the clock icon for upload instructions."
+    },
+    
+    UPLOAD_FAILED: {
+    	text: "Upload failed",
+    	classNames: "alert-danger",
+    	message: <div>
+					<div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div>
+					<br/>
+					<div>For more information please contact KPMP support at <a target="_blank" rel="noopener noreferrer" href="mailto:datalakeuploadersupport@kpmp.org">datalakeuploadersupport@kpmp.org</a></div>
+				</div>
+    		
     }
 };
 
@@ -31,13 +42,13 @@ class PackagePanelStateText extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            tooltipOpen: false
+            popoverOpen: false
         };
     }
 
     toggle() {
         this.setState({
-            tooltipOpen: !this.state.tooltipOpen
+        	popoverOpen: !this.state.popoverOpen
         });
     }
 
@@ -48,26 +59,28 @@ class PackagePanelStateText extends Component {
             return null;
         }
 
-        let tooltipTargetId = 'tooltip-' + this.props.panelState.packageId;
+        let popoverTargetId = 'popover-' + this.props.panelState.packageId;
         let hasIcon = panelConfig.icon && this.props.handleStateInfoClick;
 
         return <React.Fragment>
             <div className="d-flex align-items-start">
                 <div className="w-75">
-                    <div className={"mr-2 my-0 px-2 py-1 alert clickable text-dark " + panelConfig.classNames} id={tooltipTargetId} >
+                    <div className={"mr-2 my-0 px-2 py-1 alert clickable text-dark " + panelConfig.classNames} id={popoverTargetId} >
                         <span>{panelConfig.text}</span>
                     </div>
-                    { panelConfig.tooltip &&
+                    { panelConfig.message &&
                         <span>
-                            <Tooltip className={TOOLTIP_CLASSES.classNames}
-                                     innerClassName={TOOLTIP_CLASSES.innerClassNames}
+                            <Popover className={POPOVER_CLASSES.classNames}
+                                     innerClassName={POPOVER_CLASSES.innerClassNames}
                                      placement={"bottom"}
-                                     delay={0}
-                                     isOpen={this.state.tooltipOpen}
+                                     delay={{"hide": 300}}
+                                     isOpen={this.state.popoverOpen}
                                      toggle={this.toggle}
-                                     target={tooltipTargetId}>
-                                {panelConfig.tooltip}
-                            </Tooltip>
+                                     target={popoverTargetId}
+                            		 html={true}
+                            		 trigger={"hover"}>
+                                <PopoverBody>{panelConfig.message}</PopoverBody>
+                            </Popover>
                         </span>
                     }
                 </div>
