@@ -89,7 +89,7 @@ class PackagePanel extends Component {
 								{/* eslint-disable-next-line */} 
 								<a className="d-block pb-1" onClick={this.handleMetadataClick}>Show package metadata</a>
 							</Col>
-							{this.props.uploadPackage.downloadable &&
+							{this.props.uploadPackage.state.state === "UPLOAD_SUCCEEDED" &&
 								<Col xs={4} md={12}>
 									<Button size="sm" color="primary" value={packageInfo._id} onClick={(e) => this.handleDownloadClick(packageInfo._id, e)}>
 										<FontAwesomeIcon icon={faDownload} />
@@ -97,7 +97,7 @@ class PackagePanel extends Component {
 									</Button>
 								</Col>
 							}
-							{!this.props.uploadPackage.downloadable && this.props.uploadPackage.state &&
+							{this.props.uploadPackage.state.state !== "UPLOAD_SUCCEEDED" && this.props.uploadPackage.state &&
 							<Col xs={4} md={12} >
 								<PackagePanelStateText
 									handleStateInfoClick={this.handleStateInfoClick}
