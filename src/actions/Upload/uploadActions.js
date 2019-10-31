@@ -20,7 +20,7 @@ export const getFormDTD = () => {
 				dispatch(setPackageTypesFromDTD(res.data));
 				dispatch(setTisNamesFromDTD(res.data));
 			})
-			.catch(err => {
+			.catch((err) => {
 				dispatch(sendMessageToBackend(err));
 			});
 	}
