@@ -49,7 +49,7 @@ body.modal-open {
 		- #{$footer-height-padded});
 }
 
-#root.with-route-help {
+#root.with-route-help, #root.with-route-oops, #root.with-route-notRegistered, #root.with-route-permissionDenied {
 	top: $header-height-padded;
 	height: calc(100vh + 10px
 	- #{$header-height-padded}
@@ -588,4 +588,14 @@ No media query since this is the default in Bootstrap because it is "mobile firs
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
+}
+
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Permission Denied Pages
+*/
+
+.error-header {
+	font-size: 20px;
 }
