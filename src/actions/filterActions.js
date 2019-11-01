@@ -13,14 +13,14 @@ export const filterTypes = {
 export const addFilter = (type, value) => {
 	return {
 		type: actionNames.ADD_FILTER,
-		payload: { filterType: type, value: value }
+		payload: { filterType: type, value }
 	}
 }
 
 export const removeFilter = (type, value) => {
 	return {
 		type: actionNames.REMOVE_FILTER,
-		payload: { filterType: type, value: value }
+		payload: { filterType: type, value }
 	}
 }
 
