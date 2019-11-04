@@ -95,10 +95,10 @@ export const finishPackage = (packageId) => {
 	}
 }
 
-export const setShowLargeFileModal = (gdriveId) => {
+export const setShowLargeFileModal = (globusURL) => {
 	return {
 		type: actionNames.SET_SHOW_LARGE_FILE_MODAL,
-		payload: gdriveId
+		payload: globusURL
 	}
 }
 
@@ -108,9 +108,9 @@ export const clearShowLargeFileModal = () => {
 	}
 }
 
-export const processLargeFile = (gdriveId) => {
+export const processLargeFile = (globusURL) => {
 	return (dispatch) => {
-		dispatch(setShowLargeFileModal(gdriveId));
+		dispatch(setShowLargeFileModal(globusURL));
 	}
 }
 
@@ -138,15 +138,14 @@ export const uploadPackage = (packageInfo, uploader) => {
 		api.post('/api/v1/packages', packageInfo)
 		.then(res=> {
 			let packageId = res.data.packageId;
-			let gdriveId = res.data.gdriveId;
-			console.log(gdriveId);
+			let globusURL = res.data.globusURL;
 			let canceledFiles = uploader.methods.getUploads(
 				{status: [qq.status.CANCELED]});
 			let allFiles = uploader.methods.getUploads();
 			let totalFiles = allFiles.length - canceledFiles.length;
 			if (packageInfo.largeFilesChecked) {
 				dispatch(setIsUploading(false));
-				dispatch(processLargeFile(gdriveId));
+				dispatch(processLargeFile(globusURL));
 			} else {
 				uploader.on('allComplete', function (succeeded, failed) {
 					if (succeeded.length === totalFiles) {
