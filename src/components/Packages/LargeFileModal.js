@@ -15,8 +15,8 @@ class LargeFileModal extends Component {
                     <ModalBody className="largeFileModalBody">
                         <p>This method requires you to do the following in order to upload your file(s) into the data lake:</p>
                         <ol>
-                            <li>Click this link to <a rel="noopener noreferrer" href={this.props.link} target="_blank">open the destination folder</a> on Google Drive.</li>
-                            <li>Upload your files to the Google Drive folder. <br/>(NOTE: You may need to sign in with a Google account)</li>
+                            <li>Click this link to <a rel="noopener noreferrer" href={this.props.link} target="_blank">open the destination folder</a> in the Globus File Manager</li>
+                            <li>Upload your files to the Globus folder. <br/>(NOTE: You will need to sign in with a Globus account)</li>
                             <li>Email <a target="_blank" rel="noopener noreferrer" href="mailto:datalakeuploadersupport@kpmp.org">datalakeuploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
                         </ol>
                     </ModalBody>
