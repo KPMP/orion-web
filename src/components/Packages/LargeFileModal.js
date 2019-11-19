@@ -18,6 +18,7 @@ class LargeFileModal extends Component {
                             <li>Upload your files using the Globus file manager. </li>
                             <li>Email <a target="_blank" rel="noopener noreferrer" href="mailto:datalakeuploadersupport@kpmp.org">datalakeuploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
                         </ol>
+                        <hr/>
                         <p><strong>PLEASE NOTE:</strong> This method requires you to <a href="https://www.globus.org/globus-connect-personal" target="_blank" rel="noopener noreferrer">install Globus Connect Personal</a> in order to upload your file(s) to the data lake.</p>
                         <p>You will need to log in to use the Globus Web App and create a collection for your data source. For help or more information, see: <a href="https://docs.globus.org/how-to/get-started/" target="_blank" rel="noopener noreferrer"> How To Log In and Transfer Files with Globus</a></p>
                     </ModalBody>
