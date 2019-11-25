@@ -41,6 +41,7 @@ class PackagePanelStateText extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.shouldShowIcon = this.shouldShowIcon.bind(this);
         this.state = {
             popoverOpen: false
         };
@@ -52,6 +53,20 @@ class PackagePanelStateText extends Component {
         });
     }
 
+    shouldShowIcon() {
+    	console.log(this.props.currentUser);
+    	console.log(this.props.packageSubmitter);
+    	
+    	if (this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
+    		console.log("shibIds equal");
+    		let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    		return panelConfig.icon && this.props.handleStateInfoClick;
+    	} else {
+    		console.log("Shibids not equal");
+    		return false;
+    	}
+    }
+    
     render() {
         let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
 
@@ -60,7 +75,7 @@ class PackagePanelStateText extends Component {
         }
 
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        let hasIcon = panelConfig.icon && this.props.handleStateInfoClick;
+        let hasIcon = this.shouldShowIcon();
 
         return <React.Fragment>
             <div className="d-flex align-items-start">

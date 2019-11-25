@@ -8,6 +8,7 @@ const mapStateToProps = (state, props) =>
 	packageTypeIcons: state.packageTypeIcons,
 	index: props.index,
 	uploadPackage: props.uploadPackage,
+	userInformation: state.userInformation
 });
     
 const mapDispatchToProps = (dispatch, props) =>
