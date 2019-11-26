@@ -55,17 +55,14 @@ class PackagePanelStateText extends Component {
 
     getIcon() {
     	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	if (panelConfig.icon && this.props.handleStateInfoClick && panelConfig.icon.isProtected) {
-    		if (this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
-        		return panelConfig.icon.type;
-    		} else {
-    			return undefined;
-    		}
+    	if (panelConfig.icon && this.props.handleStateInfoClick && panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
+       		return panelConfig.icon.type;
     	} else if (panelConfig.icon && this.props.handleStateInfoClick && !panelConfig.icon.isProtected){
     		return panelConfig.icon.type;
+    	} else {
+    		return '';  	
     	}
     	
-    	return undefined;  	
     }
     
     render() {
