@@ -56,12 +56,11 @@ class PackagePanelStateText extends Component {
 
     getIcon() {
     	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	if (this.hasIcon() && panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
+    	if (panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
        		return panelConfig.icon.type;
-    	} else if (this.hasIcon() && !panelConfig.icon.isProtected){
+    	} else {
     		return panelConfig.icon.type;
     	}
-    	return '';  	
     }
     
     hasIcon() {
@@ -77,7 +76,7 @@ class PackagePanelStateText extends Component {
         }
 
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        let icon = this.getIcon();
+        let icon = this.hasIcon() ? this.getIcon() : '';
 
         return <React.Fragment>
             <div className="d-flex align-items-start">
