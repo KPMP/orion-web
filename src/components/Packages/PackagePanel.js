@@ -102,6 +102,8 @@ class PackagePanel extends Component {
 								<PackagePanelStateText
 									handleStateInfoClick={this.handleStateInfoClick}
 									panelState={this.props.uploadPackage.state}
+									currentUser={this.props.userInformation}
+									packageSubmitter={packageInfo.submitter}
 								/>
 							</Col>
 							}
@@ -120,8 +122,8 @@ class PackagePanel extends Component {
 PackagePanel.propTypes = {
 	uploadPackage: PropTypes.object.isRequired,
 	packageTypeIcons: PropTypes.array.isRequired,
-	dtds: PropTypes.object.isRequired
-
+	dtds: PropTypes.object.isRequired,
+	userInformation: PropTypes.object.isRequired
 }
 
 export default PackagePanel;

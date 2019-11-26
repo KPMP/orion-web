@@ -19,7 +19,7 @@ const PANEL_CONFIGS = {
     METADATA_RECEIVED: {
         text: "Waiting for files...",
         classNames: "alert-primary",
-        icon: faClock,
+        icon: { type: faClock, isProtected: true },
         message: "Awaiting file(s) to be uploaded to the Google drive folder.  Click the clock icon for upload instructions."
     },
     
@@ -41,6 +41,8 @@ class PackagePanelStateText extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.getIcon = this.getIcon.bind(this);
+        this.hasIcon = this.hasIcon.bind(this);
         this.state = {
             popoverOpen: false
         };
@@ -52,15 +54,29 @@ class PackagePanelStateText extends Component {
         });
     }
 
+    getIcon() {
+    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    	if (panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
+       		return panelConfig.icon.type;
+    	} else {
+    		return panelConfig.icon.type;
+    	}
+    }
+    
+    hasIcon() {
+    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    	return (panelConfig.icon && this.props.handleStateInfoClick);
+    }
+    
     render() {
-        let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
 
         if(panelConfig === undefined) {
             return null;
         }
 
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        let hasIcon = panelConfig.icon && this.props.handleStateInfoClick;
+        let icon = this.hasIcon() ? this.getIcon() : '';
 
         return <React.Fragment>
             <div className="d-flex align-items-start">
@@ -84,8 +100,9 @@ class PackagePanelStateText extends Component {
                         </span>
                     }
                 </div>
-                { hasIcon && <span onClick={this.props.handleStateInfoClick}>
-                        <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={panelConfig.icon} size="lg" inverse/></div>
+                { icon && 
+                	<span onClick={this.props.handleStateInfoClick}>
+                        <div className="additional-icon clickable"><FontAwesomeIcon className="float-right" icon={icon} size="lg" inverse/></div>
                     </span>
                 }
             </div>
