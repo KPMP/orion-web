@@ -104,6 +104,7 @@ class PackagePanel extends Component {
 									panelState={this.props.uploadPackage.state}
 									currentUser={this.props.userInformation}
 									packageSubmitter={packageInfo.submitter}
+									largeFileUpload={packageInfo.largeFilesChecked}
 								/>
 							</Col>
 							}
