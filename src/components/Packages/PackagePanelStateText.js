@@ -42,6 +42,7 @@ class PackagePanelStateText extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.getIcon = this.getIcon.bind(this);
+        this.hasIcon = this.hasIcon.bind(this);
         this.state = {
             popoverOpen: false
         };
@@ -55,14 +56,17 @@ class PackagePanelStateText extends Component {
 
     getIcon() {
     	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	if (panelConfig.icon && this.props.handleStateInfoClick && panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
+    	if (this.hasIcon() && panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
        		return panelConfig.icon.type;
-    	} else if (panelConfig.icon && this.props.handleStateInfoClick && !panelConfig.icon.isProtected){
+    	} else if (this.hasIcon() && !panelConfig.icon.isProtected){
     		return panelConfig.icon.type;
-    	} else {
-    		return '';  	
     	}
-    	
+    	return '';  	
+    }
+    
+    hasIcon() {
+    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    	return (panelConfig.icon && this.props.handleStateInfoClick);
     }
     
     render() {
