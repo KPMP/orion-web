@@ -54,21 +54,16 @@ class PackagePanelStateText extends Component {
     }
 
     shouldShowIcon() {
-    	console.log(this.props.currentUser);
-    	console.log(this.props.packageSubmitter);
-    	
     	if (this.props.currentUser.shibId === this.props.packageSubmitter.shibId) {
-    		console.log("shibIds equal");
     		let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
     		return panelConfig.icon && this.props.handleStateInfoClick;
     	} else {
-    		console.log("Shibids not equal");
     		return false;
     	}
     }
     
     render() {
-        let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
+    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
 
         if(panelConfig === undefined) {
             return null;
