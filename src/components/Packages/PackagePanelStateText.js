@@ -45,6 +45,7 @@ class PackagePanelStateText extends Component {
         this.toggle = this.toggle.bind(this);
         this.isMine = this.isMine.bind(this);
         this.getIcon = this.getIcon.bind(this);
+        this.setMessage = this.setMessage.bind(this);
         this.configurePanelOptions = this.configurePanelOptions.bind(this);
         this.state = {
             popoverOpen: false
@@ -71,17 +72,21 @@ class PackagePanelStateText extends Component {
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
     	let panelConfig = { message: baseConfig.standardMessage };
-    	if (this.props.largeFileUpload && this.props.panelState.state ==='METADATA_RECEIVED' && this.isMine()) {
-    		panelConfig.message = baseConfig.myLargeFileUploadMessage;
-    	} else {
-    		panelConfig.message = baseConfig.notMyLargeFileUploadMessage;
-    	}
+    	this.setMessage();
     	panelConfig.text = baseConfig.text;
     	panelConfig.classNames = baseConfig.classNames;
     	if (baseConfig.icon && this.props.handleStateInfoClick) {
     		panelConfig.icon = this.getIcon();
     	}
     	return panelConfig;
+    }
+    
+    setMessage(panelConfig, baseConfig) {
+    	if (this.props.largeFileUpload && this.props.panelState.state ==='METADATA_RECEIVED' && this.isMine()) {
+    		panelConfig.message = baseConfig.myLargeFileUploadMessage;
+    	} else {
+    		panelConfig.message = baseConfig.notMyLargeFileUploadMessage;
+    	}
     }
     
     render() {
