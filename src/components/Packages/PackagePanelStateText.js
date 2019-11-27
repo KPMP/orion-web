@@ -20,7 +20,8 @@ const PANEL_CONFIGS = {
         text: 'Waiting for files...',
         classNames: 'alert-primary',
         icon: { type: faClock, isProtected: true },
-        largeFileMessage: 'Awaiting file(s) to be uploaded to the Globus folder.  Click the clock icon for upload instructions.',
+        myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded to the Globus folder.  Click the clock icon for upload instructions.',
+        notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
     },
     
@@ -42,6 +43,7 @@ class PackagePanelStateText extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.isMine = this.isMine.bind(this);
         this.getIcon = this.getIcon.bind(this);
         this.configurePanelOptions = this.configurePanelOptions.bind(this);
         this.state = {
@@ -57,17 +59,24 @@ class PackagePanelStateText extends Component {
 
     getIcon() {
     	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	if ((panelConfig.icon.isProtected && this.props.currentUser.shibId === this.props.packageSubmitter.shibId) || !panelConfig.icon.isProtected) {
+    	if ((panelConfig.icon.isProtected && this.isMine()) || !panelConfig.icon.isProtected) {
        		return panelConfig.icon.type;
     	} 
     }
    
+    isMine() {
+    	return this.props.currentUser.shibId === this.props.packageSubmitter.shibId;
+    }
     
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
     	let panelConfig = { message: baseConfig.standardMessage };
     	if (this.props.largeFileUpload && this.props.panelState.state ==='METADATA_RECEIVED' ) {
-    		panelConfig.message = baseConfig.largeFileMessage;
+    		if (this.isMine()) {
+    			panelConfig.message = baseConfig.myLargeFileUploadMessage;
+    		} else {
+    			panelConfig.message = baseConfig.notMyLargeFileUploadMessage;
+    		}
     	} 
     	panelConfig.text = baseConfig.text;
     	panelConfig.classNames = baseConfig.classNames;
