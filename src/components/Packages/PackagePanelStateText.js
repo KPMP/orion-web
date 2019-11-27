@@ -20,7 +20,7 @@ const PANEL_CONFIGS = {
         text: 'Waiting for files...',
         classNames: 'alert-primary',
         icon: { type: faClock, isProtected: true },
-        myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded to the Globus folder.  Click the clock icon for upload instructions.',
+        myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
     },
