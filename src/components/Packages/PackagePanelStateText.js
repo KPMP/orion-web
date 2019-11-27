@@ -72,7 +72,7 @@ class PackagePanelStateText extends Component {
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
     	let panelConfig = { message: baseConfig.standardMessage };
-    	this.setMessage();
+    	this.setMessage(panelConfig, baseConfig);
     	panelConfig.text = baseConfig.text;
     	panelConfig.classNames = baseConfig.classNames;
     	if (baseConfig.icon && this.props.handleStateInfoClick) {
@@ -82,9 +82,9 @@ class PackagePanelStateText extends Component {
     }
     
     setMessage(panelConfig, baseConfig) {
-    	if (this.props.largeFileUpload && this.props.panelState.state ==='METADATA_RECEIVED' && this.isMine()) {
+    	if (this.props.largeFileUpload && this.props.panelState.state === 'METADATA_RECEIVED' && this.isMine()) {
     		panelConfig.message = baseConfig.myLargeFileUploadMessage;
-    	} else {
+    	} else if ( this.props.largeFileUpload && this.props.panelState.state === "METADATA_RECEIVED" && !this.isMine()){
     		panelConfig.message = baseConfig.notMyLargeFileUploadMessage;
     	}
     }
