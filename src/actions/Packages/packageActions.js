@@ -135,7 +135,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 	});
 	return (dispatch) => {
 		dispatch(setIsUploading(true));
-		api.post('/api/v1/packages', packageInfo)
+		api.post('/api/v1/packages', packageInfo, { params: { hostname: window.location.hostname} })
 		.then(res=> {
 			let packageId = res.data.packageId;
 			let globusURL = res.data.globusURL;
