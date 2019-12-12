@@ -19,7 +19,7 @@ const PANEL_CONFIGS = {
     METADATA_RECEIVED: {
         text: 'Waiting for files...',
         classNames: 'alert-primary',
-        icon: { type: faClock, isProtected: true },
+        icon: { type: faClock, isProtected: true, isLargeFileOnly: true },
         myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
@@ -61,13 +61,16 @@ class PackagePanelStateText extends Component {
     getIcon() {
     	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
     	if ((panelConfig.icon.isProtected && this.isMine()) || !panelConfig.icon.isProtected) {
-       		return panelConfig.icon.type;
+    		if ((panelConfig.icon.isLargeFileOnly && this.props.largeFileUpload) || !panelConfig.icon.isLargeFileOnly) {
+    			return panelConfig.icon.type;
+    		}
     	} 
     }
    
     isMine() {
     	return this.props.currentUser.shibId === this.props.packageSubmitter.shibId;
     }
+
     
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
