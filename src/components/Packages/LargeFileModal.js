@@ -14,7 +14,7 @@ class LargeFileModal extends Component {
                     </ModalHeader>
                     <ModalBody className="largeFileModalBody">
                         <ol>
-                            <li>Click this link to <a href={this.props.link} target="_blank" rel="noopener noreferrer">open the destination folder</a> on the Globus endpoint</li>
+                            <li>Click this link to <a href={this.props.link} target="_blank" rel="noopener noreferrer">open the destination folder</a> on the Globus endpoint.</li>
                             <li>Upload your files using the Globus file manager. </li>
                             <li>Email <a target="_blank" rel="noopener noreferrer" href="mailto:datalakeuploadersupport@kpmp.org">datalakeuploadersupport@kpmp.org</a> to let us know you have finished uploading your file(s).</li>
                         </ol>
