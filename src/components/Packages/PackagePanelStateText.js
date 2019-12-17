@@ -85,6 +85,7 @@ class PackagePanelStateText extends Component {
     }
     
     setMessage(panelConfig, baseConfig) {
+    	panelConfig.message = baseConfig.message;
     	if (this.props.largeFileUpload && this.props.panelState.state === 'METADATA_RECEIVED' && this.isMine()) {
     		panelConfig.message = baseConfig.myLargeFileUploadMessage;
     	} else if ( this.props.largeFileUpload && this.props.panelState.state === "METADATA_RECEIVED" && !this.isMine()){
