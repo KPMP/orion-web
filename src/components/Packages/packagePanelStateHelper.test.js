@@ -117,7 +117,7 @@ describe('getMessage', () => {
 	it('should return the correct message for METADATA_RECEIVED when is large file and is mine', () => {
 		let baseConfig = PANEL_CONFIGS['METADATA_RECEIVED'];
 		let message = getMessage(baseConfig, 'METADATA_RECEIVED', true, 'abc', 'abc');
-		expect(message).toBe('Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.')
+		expect(message).toBe('Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.');
 	});
 	
 	it('should return the correct message for METADATA_RECEIVED when is not large file and is not mine', () => {
