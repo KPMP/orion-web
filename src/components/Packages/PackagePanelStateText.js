@@ -34,11 +34,6 @@ class PackagePanelStateText extends Component {
     	if (baseConfig.icon && this.props.handleStateInfoClick) {
     		panelConfig.icon = getIcon();
     	}
-    	
-    	if (this.props.panelState.packageId === 'f13f0207-a00b-43c7-b806-1acba330db25') {
-    		console.log(panelConfig);
-    		console.log(this.props.largeFileUpload)
-    	}
     	return panelConfig;
     }
     

@@ -33,9 +33,13 @@ const isMine = (currentShibId, packageShibId) => {
 	return currentShibId === packageShibId;
 }
 
+const panelConfigIconExists = (panelConfig) => {
+	return panelConfig && panelConfig.icon;
+}
+
 export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfig && panelConfig.icon && ((panelConfig.icon.isProtected && isMine(currentShibId, packageShibId)) || !panelConfig.icon.isProtected)) {
+	if (panelConfigIconExists(panelConfig) && ((panelConfig.icon.isProtected && isMine(currentShibId, packageShibId)) || !panelConfig.icon.isProtected)) {
 		if ((panelConfig.icon.isLargeFileOnly && isLargeFile) || !panelConfig.icon.isLargeFileOnly) {
 			return panelConfig.icon.type;
 		}
@@ -54,4 +58,4 @@ export const getMessage = (baseConfig, state, isLargeFile, currentShibId, packag
 		message = baseConfig.standardMessage;
 	}
 	return message;
-}
+};
