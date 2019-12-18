@@ -1,40 +1,12 @@
 import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import { getIcon, getMessage, PANEL_CONFIGS } from './packagePanelStateHelper';
 
 const POPOVER_CLASSES = {
     classNames: '',
     innerClassNames: 'rounded p-2 small text-sm-left'
-};
-
-const PANEL_CONFIGS = {
-    FILES_RECEIVED: {
-        text: 'Finishing upload',
-        classNames: 'alert-success',
-        message: 'The file(s) in this package are being finalized.  Once completed, they will be available for download.'
-    },
-
-    METADATA_RECEIVED: {
-        text: 'Waiting for files...',
-        classNames: 'alert-primary',
-        icon: { type: faClock, isProtected: true, isLargeFileOnly: true },
-        myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
-        notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
-        standardMessage: 'Waiting for file(s) to finish uploading.'
-    },
-    
-    UPLOAD_FAILED: {
-    	text: 'Upload failed',
-    	classNames: 'alert-danger',
-    	message: <div>
-					<div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div>
-					<br/>
-					<div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div>
-				</div>
-    		
-    }
 };
 
 class PackagePanelStateText extends Component {
@@ -43,9 +15,6 @@ class PackagePanelStateText extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
-        this.isMine = this.isMine.bind(this);
-        this.getIcon = this.getIcon.bind(this);
-        this.setMessage = this.setMessage.bind(this);
         this.configurePanelOptions = this.configurePanelOptions.bind(this);
         this.state = {
             popoverOpen: false
@@ -57,40 +26,20 @@ class PackagePanelStateText extends Component {
         	popoverOpen: !this.state.popoverOpen
         });
     }
-
-    getIcon() {
-    	let panelConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	if ((panelConfig.icon.isProtected && this.isMine()) || !panelConfig.icon.isProtected) {
-    		if ((panelConfig.icon.isLargeFileOnly && this.props.largeFileUpload) || !panelConfig.icon.isLargeFileOnly) {
-    			return panelConfig.icon.type;
-    		}
-    	} 
-    }
-   
-    isMine() {
-    	return this.props.currentUser.shibId === this.props.packageSubmitter.shibId;
-    }
-
     
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	let panelConfig = { message: baseConfig.standardMessage };
-    	this.setMessage(panelConfig, baseConfig);
-    	panelConfig.text = baseConfig.text;
-    	panelConfig.classNames = baseConfig.classNames;
+    	let panelConfig = baseConfig;
+    	panelConfig.message = getMessage(baseConfig, this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.shibId, this.props.packageSubmitter.shibId);
     	if (baseConfig.icon && this.props.handleStateInfoClick) {
-    		panelConfig.icon = this.getIcon();
+    		panelConfig.icon = getIcon();
+    	}
+    	
+    	if (this.props.panelState.packageId === 'f13f0207-a00b-43c7-b806-1acba330db25') {
+    		console.log(panelConfig);
+    		console.log(this.props.largeFileUpload)
     	}
     	return panelConfig;
-    }
-    
-    setMessage(panelConfig, baseConfig) {
-    	panelConfig.message = baseConfig.message;
-    	if (this.props.largeFileUpload && this.props.panelState.state === 'METADATA_RECEIVED' && this.isMine()) {
-    		panelConfig.message = baseConfig.myLargeFileUploadMessage;
-    	} else if ( this.props.largeFileUpload && this.props.panelState.state === "METADATA_RECEIVED" && !this.isMine()){
-    		panelConfig.message = baseConfig.notMyLargeFileUploadMessage;
-    	}
     }
     
     render() {
