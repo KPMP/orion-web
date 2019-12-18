@@ -31,15 +31,15 @@ export const PANEL_CONFIGS = {
 
 const isMine = (currentShibId, packageShibId) => {
 	return currentShibId === packageShibId;
-}
+};
 
 const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.icon;
-}
+};
 
 const protectedAndMine = (panelConfig, currentShibId, packageShibId) => {
 	return panelConfig.icon.isProtected && isMine(currentShibId, packageShibId);
-}
+};
 
 export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
 	let panelConfig = PANEL_CONFIGS[state];
@@ -48,7 +48,7 @@ export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
 			return panelConfig.icon.type;
 		}
 	} 
-}
+};
 
 export const getMessage = (baseConfig, state, isLargeFile, currentShibId, packageShibId) => {
 	let message = baseConfig.message;
