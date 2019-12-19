@@ -41,7 +41,7 @@ const protectedAndMine = (panelConfig, currentShibId, packageShibId) => {
 	return panelConfig.iconInfo.isProtected && isMine(currentShibId, packageShibId);
 };
 
-export const getIcon = (state, isLargeFile, currentShibId, packageShibId, packageId) => {
+export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
 	let panelConfig = PANEL_CONFIGS[state];
 	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentShibId, packageShibId) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
