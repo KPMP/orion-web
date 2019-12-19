@@ -11,7 +11,7 @@ export const PANEL_CONFIGS = {
     METADATA_RECEIVED: {
         text: 'Waiting for files...',
         classNames: 'alert-primary',
-        icon: { type: faClock, isProtected: true, isLargeFileOnly: true },
+        iconInfo: { type: faClock, isProtected: true, isLargeFileOnly: true },
         myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
@@ -34,18 +34,18 @@ const isMine = (currentShibId, packageShibId) => {
 };
 
 const panelConfigIconExists = (panelConfig) => {
-	return panelConfig && panelConfig.icon;
+	return panelConfig && panelConfig.iconInfo;
 };
 
 const protectedAndMine = (panelConfig, currentShibId, packageShibId) => {
-	return panelConfig.icon.isProtected && isMine(currentShibId, packageShibId);
+	return panelConfig.iconInfo.isProtected && isMine(currentShibId, packageShibId);
 };
 
 export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentShibId, packageShibId) || !panelConfig.icon.isProtected)) {
-		if ((panelConfig.icon.isLargeFileOnly && isLargeFile) || !panelConfig.icon.isLargeFileOnly) {
-			return panelConfig.icon.type;
+	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentShibId, packageShibId) || !panelConfig.iconInfo.isProtected)) {
+		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
+			return panelConfig.iconInfo.type;
 		}
 	} 
 };
