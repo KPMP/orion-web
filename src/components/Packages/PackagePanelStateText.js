@@ -32,7 +32,7 @@ class PackagePanelStateText extends Component {
     	let panelConfig = baseConfig;
     	panelConfig.message = getMessage(baseConfig, this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.shibId, this.props.packageSubmitter.shibId);
     	if (baseConfig.icon && this.props.handleStateInfoClick) {
-    		panelConfig.icon = getIcon();
+    		panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.shibId, this.props.packageSubmitter.shibId);
     	}
     	return panelConfig;
     }
