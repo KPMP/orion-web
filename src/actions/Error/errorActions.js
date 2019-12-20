@@ -5,11 +5,11 @@ const api = Api.getInstance();
 export const handleError = (statusCode) => {
     return (dispatch) => {
     	if (statusCode === 404) {
-    		window.location.href = "/notRegistered";
+    		window.location.href = '/notRegistered';
     	} else if (statusCode === 403) {
-    		window.location.href = "/permissionDenied"
+    		window.location.href = '/permissionDenied';
     	} else {
-    		window.location.href = "/oops";
+    		window.location.href = '/oops';
     	}
     }
 };
@@ -19,17 +19,17 @@ export const sendMessageToBackend = (error) => {
 	if (error.response && error.response.status && error.response.status >= 400) {
 		return (dispatch) => {
 			let href = window.location.href;
-			if (!href.includes("/oops") && !href.includes("/permissionDenied") && !href.includes("/notRegistered")) {
+			if (!href.includes('/oops') && !href.includes('/permissionDenied') && !href.includes('/notRegistered')) {
 				dispatch(handleError(error.response.status));
 			}
 		}
 	} else {
-		let errorMessage = { error: error.message , stackTrace: error.stack }
+		let errorMessage = { error: error.message , stackTrace: error.stack };
 		return (dispatch) => {
 			api.post('/api/v1/error', errorMessage)
-			.then(res=> {
+			.then((res) => {
 				dispatch(handleError(error.response.status));
 			});
 		};
 	}
-}
+};

@@ -25,6 +25,7 @@ class DynamicForm extends Component {
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
 
 		uploader.methods.reset();
+		uploader.params = { hostname: window.location.hostname }
 		
 		uploader.on('submit', () => {
 			let newCount = this.state.filesAdded + 1;
