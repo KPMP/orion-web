@@ -232,6 +232,16 @@ PACKAGES
 		}
 	}
 
+	.package-pane-header-stacked-button {
+		width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		.package-pane-header-stacked-button {
+			width: 75%;
+		}
+	}
+
 	#packages-list {
 		.bg-light {
 			background-color: rgb(230, 241, 255) !important;
@@ -547,6 +557,8 @@ PACKAGES
 	min-height: 400px;
 }
 
+
+
 /*
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 Bootstrap 4 breakpoints
@@ -559,21 +571,14 @@ Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap because it is "mobile first"
 */
 
-
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 
-	.package-pane-header-stacked-button {
-		width: 100%;
-	}
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
 
-	.package-pane-header-stacked-button {
-		width: 75%;
-	}
 }
 
 /* Large devices (desktops, 992px and up) */
