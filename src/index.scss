@@ -255,16 +255,6 @@ PACKAGES
 			}
 		}
 	}
-
-	#packages-button-add-new {
-		/* xs to sm */
-		width: 100%;
-
-		/* md and up */
-		@media (min-width: 768px) {
-			width: auto;
-		}
-	}
 }
 
 .search-glass {
