@@ -115,14 +115,16 @@ class PackagesPane extends Component {
 							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
     					<Col xs={12} md={"auto"} className="mx-sm-auto">
-                            <Link to="https://kpmp.org/metadata" target="_blank">
+                            <Link to="https://kpmp.org/metadata" target="_blank"
+								class="d-block">
                                 <Button id="button-metadata-template"
                                         color="secondary"
                                         outline={true}
                                         className="float-md-right btn-sm w-100"
                                 >Download metadata template</Button>
                             </Link>
-							<Link to="/upload">
+							<Link to="/upload"
+                                  class="d-block">
 								<Button id="packages-button-add-new"
 										color="primary"
 										className="float-md-right btn-sm w-100"
