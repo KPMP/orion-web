@@ -103,7 +103,7 @@ class PackagesPane extends Component {
 
         return (
     		<article id="packages-pane" className="container pb-2">
-    			<header id="packages-filter-controls" className="container-fluid fixed-top-subnav pt-3">
+    			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
 					<Row noGutters>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by TIS Name" options={tisNameOptions} type={filterActions.filterTypes.TIS_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>

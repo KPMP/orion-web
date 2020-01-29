@@ -3,7 +3,8 @@ $footer-height-padded: 32px;
 $filter-height: 37px;
 $filter-min-width: 195px;
 $packages-filter-controls-sm-height: 186px;
-$packages-filter-controls-md-height: 86px;
+$packages-filter-controls-md-height: 112px;
+$packages-filter-controls-lg-height: 86px;
 $packages-submit-footer-height: 87px;
 $kpmp-blue: rgba(40, 60, 94, 1);
 
@@ -31,13 +32,22 @@ body.modal-open {
 		- #{$packages-filter-controls-sm-height}
 		- #{$footer-height-padded});
 
-	/* md and up */
+	/* md */
 	@media (min-width: 768px) {
 		top: calc(#{$header-height-padded} + #{$packages-filter-controls-md-height});
 		height: calc(100vh + 10px
 			- #{$header-height-padded}
 			- #{$packages-filter-controls-md-height}
 			- #{$footer-height-padded});
+	}
+
+	/* lg and up */
+	@media (min-width: 992px) {
+		top: calc(#{$header-height-padded} + #{$packages-filter-controls-lg-height});
+		height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-filter-controls-lg-height}
+		- #{$footer-height-padded});
 	}
 }
 
