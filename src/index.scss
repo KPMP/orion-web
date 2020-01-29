@@ -232,16 +232,6 @@ PACKAGES
 		}
 	}
 
-	.package-pane-header-stacked-button {
-		width: 100%;
-	}
-
-	@media (min-width: 768px) {
-		.package-pane-header-stacked-button {
-			width: 75%;
-		}
-	}
-
 	#packages-list {
 		.bg-light {
 			background-color: rgb(230, 241, 255) !important;
