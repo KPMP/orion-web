@@ -120,14 +120,14 @@ class PackagesPane extends Component {
                                 <Button id="button-metadata-template"
                                         color="secondary"
                                         outline={true}
-                                        className="w-50 btn-sm"
+                                        className="btn-sm packages-pane-filter-button"
                                 		>Download template</Button>
                             </Link>
 							<Link to="/upload"
-                                  class="d-block-inline">
+                                  class="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
 										color="primary"
-										className="w-50 btn-sm"
+										className="btn-sm packages-pane-filter-button"
 										>Add new package</Button>
 							</Link>
 						</Col>

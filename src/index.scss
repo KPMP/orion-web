@@ -248,6 +248,10 @@ PACKAGES
 				height: $filter-height;
 			}
 		}
+
+		.packages-pane-filter-button {
+			width: 49%;
+		}
 	}
 
 	#packages-list {
