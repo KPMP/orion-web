@@ -222,9 +222,17 @@ PACKAGES
 			font-size: x-small;
 		}
 
-		/* md and up */
+		/* md */
 		@media (min-width: 768px) {
 			height: $packages-filter-controls-md-height;
+			i {
+				font-size: small;
+			}
+		}
+
+		/* lg and up */
+		@media (min-width: 992px) {
+			height: $packages-filter-controls-lg-height;
 			i {
 				font-size: small;
 			}
