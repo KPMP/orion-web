@@ -3,7 +3,8 @@ $footer-height-padded: 32px;
 $filter-height: 37px;
 $filter-min-width: 195px;
 $packages-filter-controls-sm-height: 186px;
-$packages-filter-controls-md-height: 86px;
+$packages-filter-controls-md-height: 112px;
+$packages-filter-controls-lg-height: 86px;
 $packages-submit-footer-height: 87px;
 $kpmp-blue: rgba(40, 60, 94, 1);
 
@@ -31,13 +32,22 @@ body.modal-open {
 		- #{$packages-filter-controls-sm-height}
 		- #{$footer-height-padded});
 
-	/* md and up */
+	/* md */
 	@media (min-width: 768px) {
 		top: calc(#{$header-height-padded} + #{$packages-filter-controls-md-height});
 		height: calc(100vh + 10px
 			- #{$header-height-padded}
 			- #{$packages-filter-controls-md-height}
 			- #{$footer-height-padded});
+	}
+
+	/* lg and up */
+	@media (min-width: 992px) {
+		top: calc(#{$header-height-padded} + #{$packages-filter-controls-lg-height});
+		height: calc(100vh + 10px
+		- #{$header-height-padded}
+		- #{$packages-filter-controls-lg-height}
+		- #{$footer-height-padded});
 	}
 }
 
@@ -212,9 +222,17 @@ PACKAGES
 			font-size: x-small;
 		}
 
-		/* md and up */
+		/* md */
 		@media (min-width: 768px) {
 			height: $packages-filter-controls-md-height;
+			i {
+				font-size: small;
+			}
+		}
+
+		/* lg and up */
+		@media (min-width: 992px) {
+			height: $packages-filter-controls-lg-height;
 			i {
 				font-size: small;
 			}
@@ -229,6 +247,10 @@ PACKAGES
 			.filter-control {
 				height: $filter-height;
 			}
+		}
+
+		.packages-pane-filter-button {
+			width: 49%;
 		}
 	}
 
@@ -253,16 +275,6 @@ PACKAGES
 			a:hover {
 				text-decoration: underline;
 			}
-		}
-	}
-
-	#packages-button-add-new {
-		/* xs to sm */
-		width: 100%;
-
-		/* md and up */
-		@media (min-width: 768px) {
-			width: auto;
 		}
 	}
 }
@@ -557,6 +569,8 @@ PACKAGES
 	min-height: 400px;
 }
 
+
+
 /*
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 Bootstrap 4 breakpoints
@@ -568,7 +582,6 @@ https://bootstrapcreative.com/bootstrap-4-media-queries/
 Extra small devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap because it is "mobile first"
 */
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {

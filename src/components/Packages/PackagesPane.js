@@ -103,7 +103,7 @@ class PackagesPane extends Component {
 
         return (
     		<article id="packages-pane" className="container pb-2">
-    			<header id="packages-filter-controls" className="container-fluid fixed-top-subnav pt-3">
+    			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
 					<Row noGutters>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by TIS Name" options={tisNameOptions} type={filterActions.filterTypes.TIS_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
@@ -114,11 +114,20 @@ class PackagesPane extends Component {
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
 							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-auto mr-md-0">
-							<Link to="/upload">
+    					<Col xs={12} lg={4} className="ml-auto mr-auto mr-lg-0">
+                            <Link to="https://kpmp.org/metadata" target="_blank"
+								class="d-block-inline">
+                                <Button id="button-metadata-template"
+                                        color="secondary"
+                                        outline={true}
+                                        className="btn-sm packages-pane-filter-button"
+                                		>Download template</Button>
+                            </Link>
+							<Link to="/upload"
+                                  class="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
 										color="primary"
-										className="float-md-right btn-sm"
+										className="btn-sm packages-pane-filter-button"
 										>Add new package</Button>
 							</Link>
 						</Col>
