@@ -115,7 +115,7 @@ class PackagesPane extends Component {
 							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
     					<Col xs={12} lg={4} className="ml-auto mr-auto mr-lg-0">
-                            <a href="https://kpmp.org/metadata" target="_blank"
+                            <a href="https://kpmp.org/metadata" target="_blank" rel="noopener noreferrer"
 								class="d-block-inline">
                                 <Button id="button-metadata-template"
                                         color="secondary"
