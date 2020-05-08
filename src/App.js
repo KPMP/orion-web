@@ -11,7 +11,6 @@ import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import ReactGA from 'react-ga';
-import HelpPaneContainer from "./components/Help/HelpPaneContainer";
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
@@ -65,7 +64,6 @@ class App extends Component {
 							<Route exact path="/" component={PackagesPaneContainer} store={store} />
 							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
 							<Route exact path="/upload" component={DynamicFormContainer} store={store} />
-							<Route exact path="/help" component={HelpPaneContainer} store={store} />
 							<Route exact path="/oops" component={Oops} />
 							<Route exact path="/permissionDenied" component={PermissionDenied} />
 							<Route exact path="/notRegistered" component={NotRegistered} />
