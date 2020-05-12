@@ -212,12 +212,14 @@ class DynamicForm extends Component {
 					when={true}
 					message={'Your data will be lost.  Press OK to continue or Cancel to stay.'}
 				/>
-				<article id="largeFileSupport" className="container justify-content-center pt-4">
+				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
-						<h4>The total size of all files in this package is:</h4>
+						<h4>STEP 1: Determine the size of all files in this package</h4>
+						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
 						<Row>
 							<Col md={12}>
 								<label>
+									<span className="largeFileSupportLabel">No</span>
 									<Switch
 										onChange={this.handleLargeFilesToggle}
 										checked={this.state.largeFilesChecked}
@@ -228,16 +230,18 @@ class DynamicForm extends Component {
 										width={45}
 										className="react-switch"
 									/>
-									<span id="largeFileSupportLabel">Over 15 GB</span>
+									<span className="largeFileSupportLabel">Yes</span>
 								</label>
 							</Col>
 						</Row>
 					</section>
 				</article>
-				<article id="dynamicUploadForm" className="container justify-content-center pt-4">
+				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
+					<h4>STEP 2: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-						<Row className={"dropzone btn-sm" + dropzoneHidden}>
+					{(!this.state.largeFilesChecked) && <h4>STEP 3: Add your files</h4>}
+                    <Row className={"dropzone btn-sm" + dropzoneHidden}>
 							<Col md={12}>
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
@@ -255,6 +259,7 @@ class DynamicForm extends Component {
 							</Col>
 						</Row>
 					}
+					{(this.state.largeFilesChecked)?<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">

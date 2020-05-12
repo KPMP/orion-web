@@ -302,6 +302,14 @@ PACKAGES
 	}
 }
 
+.upload-form-section {
+	h4 {
+		background-color: #cce5ff;
+		border-radius: 5px;
+		padding: 5px;
+	}
+}
+
 .arrow.panel-state-tooltip-arrow::before {
 	border-bottom-color: #343a40 !important;
 }
@@ -491,9 +499,10 @@ PACKAGES
 }
 
 #largeFileSupport {
-	#largeFileSupportLabel {
+	.largeFileSupportLabel {
 		font-size: larger;
 		margin-left: 10px;
+		margin-right: 10px;
 		font-weight: 500;
 	}
 }
