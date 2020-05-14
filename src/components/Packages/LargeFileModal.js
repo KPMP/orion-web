@@ -21,7 +21,7 @@ class LargeFileModal extends Component {
                         <Alert color="primary">
                             <span>
                                 <strong>TIP</strong>: To view this dialog again, click the clock icon next to the package status indicator.
-                                <img style={{marginLeft: "20px"}} src="img/clock_help.png" alt="package status indicator" height="70" width="170"/>
+                                <img style={{marginLeft: "20px"}} src="img/clock_help.png" alt="package status indicator"/>
                             </span>
                         </Alert>
                         <p><strong>PLEASE NOTE:</strong> This method requires you to <a href="https://www.globus.org/globus-connect-personal" target="_blank" rel="noopener noreferrer">install Globus Connect Personal</a> in order to upload your file(s) to the data lake.</p>
