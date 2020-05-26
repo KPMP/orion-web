@@ -5,6 +5,7 @@ import { packages as filtering, dtds, showLargeFileModal } from './components/Pa
 import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
+import { stateDisplayMap } from './components/Packages/stateDisplayMapReducer';
 
 const appReducer = combineReducers({
     filtering,
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
     formDTD,
     userInformation,
     packageTypeIcons,
+    stateDisplayMap,
     showLargeFileModal
 });
 
