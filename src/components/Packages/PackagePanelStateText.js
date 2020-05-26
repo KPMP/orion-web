@@ -49,10 +49,10 @@ class PackagePanelStateText extends Component {
         	if(stateDisplayItem.state === currentState) {
         		return stateDisplayItem;
         	} else {
-        		return "";
+        		return '';
         	}
         }, currentState);
-        let alertClass = "alert-" + stateDisplayText[0].apps.dlu.alertType;
+        let alertClass = 'alert-' + stateDisplayText[0].apps.dlu.alertType;
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
         
