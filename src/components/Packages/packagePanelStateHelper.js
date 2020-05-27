@@ -23,31 +23,31 @@ export const PANEL_CONFIGS = {
     }
 };
 
-const isMine = (currentShibId, packageShibId) => {
-	return currentShibId === packageShibId;
+const isMine = (currentEmail, packageEmail) => {
+	return currentEmail === packageEmail;
 };
 
 const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.iconInfo;
 };
 
-const protectedAndMine = (panelConfig, currentShibId, packageShibId) => {
-	return panelConfig.iconInfo.isProtected && isMine(currentShibId, packageShibId);
+const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
+	return panelConfig.iconInfo.isProtected && isMine(currentEmail, packageEmail);
 };
 
-export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
+export const getIcon = (state, isLargeFile, currentEmail, packageEmail) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentShibId, packageShibId) || !panelConfig.iconInfo.isProtected)) {
+	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentEmail, packageEmail) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
 	} 
 };
 
-export const getMessage = (baseConfig, state, isLargeFile, currentShibId, packageShibId) => {
+export const getMessage = (baseConfig, state, isLargeFile, currentEmail, packageEmail) => {
 	let message = baseConfig.message;
 	if (isLargeFile && state === 'METADATA_RECEIVED') {
-		if (isMine(currentShibId, packageShibId)) {
+		if (isMine(currentEmail, packageEmail)) {
 			message = baseConfig.myLargeFileUploadMessage;
 		} else {
 			message = baseConfig.notMyLargeFileUploadMessage;
