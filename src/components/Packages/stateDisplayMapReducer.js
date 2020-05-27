@@ -9,5 +9,5 @@ export const stateDisplayMap = (state = {}, action) => {
             return newState;
         default:
             return state;
-    }
-}
+    };
+};

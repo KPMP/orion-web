@@ -4,17 +4,17 @@ import { stateDisplayMap } from './stateDisplayMapReducer';
 describe('stateDisplayMap', () => {
 	it('should return the given state when not SET_STATE_DISPLAY_MAP', () => {
 		let action = {
-				type: "SOME_OTHER_ACTION",
-				payload: [{"key": "value"}]
+				type: 'SOME_OTHER_ACTION',
+				payload: [{'key': 'value'}]
 			};
-			let expectedState = [ {"stateKey": "stateValue"}];
+			let expectedState = [ {'stateKey': 'stateValue'}];
 			expect(stateDisplayMap(expectedState, action)).toEqual(expectedState);
 	});
 	
 	it('should return {} in state if state is undefined and not a covered action', () => {
 		let action = {
-			type: "SOME_OTHER_ACTION",
-			payload: [{"key": "value"}]
+			type: 'SOME_OTHER_ACTION',
+			payload: [{'key': 'value'}]
 		};
 		expect(stateDisplayMap(undefined, action)).toEqual({});
 	});

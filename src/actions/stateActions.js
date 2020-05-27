@@ -17,7 +17,7 @@ export const getStateEvents = (callback) => {
 				callback.networkRetries = 0;
 				callback();
 			})
-			.catch(err => {
+			.catch((err) => {
 				if(err.code === 502 ||
 					err.message.match(RegExp('502')) ||
 					err.message.match(RegExp('timeout', 'gi'))) {
@@ -44,21 +44,21 @@ export const getStateEvents = (callback) => {
 	};
 };
 
-export const getStateDisplayMap = () => {
-	return (dispatch) => {	
-		api.get('/api/v1/state/stateDisplayMap')	
-			.then(res => {	
-				dispatch(setStateDisplayMap(res.data));	
-			})	
-			.catch(err => {
-				dispatch(sendMessageToBackend(err));	
-	        });	
-	};	
-}
-
 export const setStateDisplayMap = (stateDisplaymap) => {	
 	return {	
 		type: actionNames.SET_STATE_DISPLAY_MAP,	
 		payload: stateDisplaymap	
 	}	
-} 
+};
+
+export const getStateDisplayMap = () => {
+	return (dispatch) => {	
+		api.get('/api/v1/state/stateDisplayMap')	
+			.then((res) => {	
+				dispatch(setStateDisplayMap(res.data));	
+			})	
+			.catch((err) => {
+				dispatch(sendMessageToBackend(err));	
+	        });	
+	};	
+};

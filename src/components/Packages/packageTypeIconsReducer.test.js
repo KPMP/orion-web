@@ -4,17 +4,17 @@ import { packageTypeIcons } from './packageTypeIconsReducer';
 describe('packageTypeIcons', () => {
 	it('should return the given state when not SET_PACKAGE_TYPE_ICONS', () => {
 		let action = {
-				type: "SOME_OTHER_ACTION",
-				payload: [{"key": "value"}]
+				type: 'SOME_OTHER_ACTION',
+				payload: [{'key': 'value'}]
 			};
-			let expectedState = [ {"stateKey": "stateValue"}];
+			let expectedState = [ {'stateKey': 'stateValue'}];
 			expect(packageTypeIcons(expectedState, action)).toEqual(expectedState);
 	});
 	
 	it('should return [] in state if state is undefined and not a covered action', () => {
 		let action = {
-			type: "SOME_OTHER_ACTION",
-			payload: [{"key": "value"}]
+			type: 'SOME_OTHER_ACTION',
+			payload: [{'key': 'value'}]
 		};
 		expect(packageTypeIcons(undefined, action)).toEqual([]);
 	});
