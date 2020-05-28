@@ -30,9 +30,9 @@ class PackagePanelStateText extends Component {
     configurePanelOptions() {
     	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
     	let panelConfig = baseConfig;
-    	panelConfig.message = getMessage(baseConfig, this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.shibId, this.props.packageSubmitter.shibId);
+    	panelConfig.message = getMessage(baseConfig, this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
     	if (this.props.handleStateInfoClick) {
-    		panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.shibId, this.props.packageSubmitter.shibId);
+    		panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
     	}
     	return panelConfig;
     }
