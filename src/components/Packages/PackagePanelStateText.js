@@ -43,14 +43,24 @@ class PackagePanelStateText extends Component {
         if(panelConfig === undefined) {
             return null;
         }
-
+        
+        let currentState = this.props.panelState.state;
+        let stateDisplayText = this.props.stateDisplayMap.filter(function(stateDisplayItem) {
+        	if(stateDisplayItem.state === currentState) {
+        		return stateDisplayItem;
+        	} else {
+        		return '';
+        	}
+        }, currentState);
+        let alertClass = 'alert-' + stateDisplayText[0].apps.dlu.alertType;
+        
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-
+        
         return <React.Fragment>
             <div className='d-flex align-items-start'>
                 <div className='w-75'>
-                    <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + panelConfig.classNames} id={popoverTargetId} >
-                        <span>{panelConfig.text}</span>
+                    <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + alertClass} id={popoverTargetId} >
+                        <span>{stateDisplayText[0].apps.dlu.text}</span>
                     </div>
                     { panelConfig.message &&
                         <span>

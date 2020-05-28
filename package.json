@@ -3,7 +3,7 @@
   "version": "2.8.0",
   "private": true,
   "devDependencies": {
-    "acorn": "7.1.0",
+    "acorn": "^7.2.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",
     "node-sass-chokidar": "1.4.0",

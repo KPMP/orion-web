@@ -105,6 +105,7 @@ class PackagePanel extends Component {
 									currentUser={this.props.userInformation}
 									packageSubmitter={packageInfo.submitter}
 									largeFileUpload={packageInfo.largeFilesChecked}
+									stateDisplayMap={this.props.stateDisplayMap}
 								/>
 							</Col>
 							}
@@ -124,7 +125,8 @@ PackagePanel.propTypes = {
 	uploadPackage: PropTypes.object.isRequired,
 	packageTypeIcons: PropTypes.array.isRequired,
 	dtds: PropTypes.object.isRequired,
-	userInformation: PropTypes.object.isRequired
+	userInformation: PropTypes.object.isRequired,
+	stateDisplayMap: PropTypes.object.isRequired
 }
 
 export default PackagePanel;

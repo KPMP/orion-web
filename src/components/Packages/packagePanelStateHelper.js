@@ -3,14 +3,10 @@ import React from 'react';
 
 export const PANEL_CONFIGS = {
     FILES_RECEIVED: {
-        text: 'Finishing upload',
-        classNames: 'alert-success',
         message: 'The file(s) in this package are being finalized.  Once completed, they will be available for download.'
     },
 
     METADATA_RECEIVED: {
-        text: 'Waiting for files...',
-        classNames: 'alert-primary',
         iconInfo: { type: faClock, isProtected: true, isLargeFileOnly: true },
         myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
@@ -18,8 +14,6 @@ export const PANEL_CONFIGS = {
     },
     
     UPLOAD_FAILED: {
-    	text: 'Upload failed',
-    	classNames: 'alert-danger',
     	message: <div>
 					<div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div>
 					<br/>
