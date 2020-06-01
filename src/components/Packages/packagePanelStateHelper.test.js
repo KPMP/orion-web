@@ -5,52 +5,52 @@ import React from 'react';
 describe('getIcon', () => {
 	
 	it('should not return an icon for a state not in PANEL_CONFIGS', () => {
-		let icon = getIcon('UPLOAD_SUCCESSFUL', false, 'xyz', 'xyz');
+		let icon = getIcon('UPLOAD_SUCCESSFUL', false, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state', () => {
-		let icon = getIcon('FILES_RECEIVED', false, 'xyz', 'xyz');
+		let icon = getIcon('FILES_RECEIVED', false, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when shibIds do not match', () => {
-		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'xyz');
+		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when large file upload', () => {
-		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'xyz');
+		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'xyz');
+		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state when shibIds do not match', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'xyz');
+		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state whenis large file', () => {
-		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'xyz');
+		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should return faclock when METADATA_RECEIVED and it is my large file upload', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'xyz');
+		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'xyz', []);
 		expect(icon).toBe(faClock);
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds match, but not large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'xyz');
+		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds do not match and is large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'xyz');
+		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'xyz', []);
 		expect(icon).toBe(undefined);
 	});
 });
