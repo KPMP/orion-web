@@ -1,56 +1,60 @@
-import { getIcon, getMessage, PANEL_CONFIGS } from './packagePanelStateHelper';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { getIcon, getMessage, getClickEvent } from './packagePanelStateHelper';
+import { faClock, faDownload } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 describe('getIcon', () => {
+	let stateDisplayMap;
+	beforeEach(() => {
+		stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}}];
+	});
 	
-	it('should not return an icon for a state not in PANEL_CONFIGS', () => {
-		let icon = getIcon('UPLOAD_SUCCESSFUL', false, 'xyz', 'xyz', []);
-		expect(icon).toBe(undefined);
+	it('should return faDownload for a state in stateDisplayMap with showDownload of true', () => {
+		let icon = getIcon('UPLOAD_SUCCEEDED', false, 'xyz', 'xyz', stateDisplayMap);
+		expect(icon).toBe(faDownload);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state', () => {
-		let icon = getIcon('FILES_RECEIVED', false, 'xyz', 'xyz', []);
+		let icon = getIcon('FILES_RECEIVED', false, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when shibIds do not match', () => {
-		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'xyz', []);
+		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when large file upload', () => {
-		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'xyz', []);
+		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'xyz', []);
+		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state when shibIds do not match', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'xyz', []);
+		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state whenis large file', () => {
-		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'xyz', []);
+		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should return faclock when METADATA_RECEIVED and it is my large file upload', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'xyz', []);
+		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(faClock);
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds match, but not large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'xyz', []);
+		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds do not match and is large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'xyz', []);
+		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'xyz', stateDisplayMap);
 		expect(icon).toBe(undefined);
 	});
 });
@@ -125,5 +129,25 @@ describe('getMessage', () => {
 		expect(message).toBe('');
 	})
 	
+});
+
+describe('getClickEvent', () => {
+	let stateDisplayMap;
+	let downloadClick;
+	let stateInfoClick;
+	beforeEach(() => {
+		stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}}];
+		downloadClick = function() { return 'hi' };
+		stateInfoClick = function() { return 'hola' };
+	});
 	
+	it('should return downloadClick when showDownload true for state', () => {
+		let method = getClickEvent('UPLOAD_SUCCEEDED', stateDisplayMap, stateInfoClick, downloadClick);
+		expect(method).toBe(downloadClick);
+	});
+	
+	it ('should return stateInfoClick when showDownload not true', () => {
+		let method = getClickEvent('OTHER_EVENT', stateDisplayMap, stateInfoClick, downloadClick);
+		expect(method).toBe(stateInfoClick);
+	});
 });

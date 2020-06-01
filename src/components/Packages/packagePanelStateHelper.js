@@ -58,12 +58,6 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
 	if (stateDisplay.length === 1) {
 		return faDownload;
 	}
-	//<Col xs={4} md={12}>
-	//<Button size='sm' color='primary' value={packageInfo._id} onClick={(e) => this.handleDownloadClick(packageInfo._id, e)}>
-//		<FontAwesomeIcon icon={faDownload} />
-//		<span>&nbsp;Download</span>
-	//</Button>
-	//</Col>
 };
 
 export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadClick) => {
