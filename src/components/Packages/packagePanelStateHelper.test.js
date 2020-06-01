@@ -58,81 +58,72 @@ describe('getIcon', () => {
 describe('getMessage', () => {
 	
 	it('should return the correct message for FILES_RECEIVED when large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['FILES_RECEIVED'];
-		let message = getMessage(baseConfig, 'FILES_RECEIVED', true, 'abc', 'abc');
+		let message = getMessage('FILES_RECEIVED', true, 'abc', 'abc');
 		expect(message).toBe('The file(s) in this package are being finalized.  Once completed, they will be available for download.');
 	});
 	
 	it('should return the correct message for FILES_RECEIVED when not large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['FILES_RECEIVED'];
-		let message = getMessage(baseConfig, 'FILES_RECEIVED', false, 'abc', 'abc');
+		let message = getMessage('FILES_RECEIVED', false, 'abc', 'abc');
 		expect(message).toBe('The file(s) in this package are being finalized.  Once completed, they will be available for download.');
 	});
 	it('should return the correct message for FILES_RECEIVED when large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['FILES_RECEIVED'];
-		let message = getMessage(baseConfig, 'FILES_RECEIVED', true, 'abc', 'def');
+		let message = getMessage('FILES_RECEIVED', true, 'abc', 'def');
 		expect(message).toBe('The file(s) in this package are being finalized.  Once completed, they will be available for download.');
 	});
 	
 	it('should return the correct message for FILES_RECEIVED when not large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['FILES_RECEIVED'];
-		let message = getMessage(baseConfig, 'FILES_RECEIVED', false, 'abc', 'def');
+		let message = getMessage('FILES_RECEIVED', false, 'abc', 'def');
 		expect(message).toBe('The file(s) in this package are being finalized.  Once completed, they will be available for download.');
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is not large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['UPLOAD_FAILED'];
-		let message = getMessage(baseConfig, 'UPLOAD_FAILED', false, 'abc', 'abc');
+		let message = getMessage('UPLOAD_FAILED', false, 'abc', 'abc');
 		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['UPLOAD_FAILED'];
-		let message = getMessage(baseConfig, 'UPLOAD_FAILED', true, 'abc', 'abc');
+		let message = getMessage('UPLOAD_FAILED', true, 'abc', 'abc');
 		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is not large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['UPLOAD_FAILED'];
-		let message = getMessage(baseConfig, 'UPLOAD_FAILED', false, 'def', 'abc');
+		let message = getMessage('UPLOAD_FAILED', false, 'def', 'abc');
 		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for UPLOAD_FAILED when is large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['UPLOAD_FAILED'];
-		let message = getMessage(baseConfig, 'UPLOAD_FAILED', true, 'def', 'abc');
+		let message = getMessage('UPLOAD_FAILED', true, 'def', 'abc');
 		let expectedMessage = <div><div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div><br/><div>For more information please contact KPMP support at <a target='_blank' rel='noopener noreferrer' href='mailto:datalakeuploadersupport@kpmp.org'>datalakeuploadersupport@kpmp.org</a></div></div>;
 		expect(message).toEqual(expectedMessage);
 	});
 	
 	it('should return the correct message for METADATA_RECEIVED when is not large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['METADATA_RECEIVED'];
-		let message = getMessage(baseConfig, 'METADATA_RECEIVED', false, 'abc', 'abc');
+		let message = getMessage('METADATA_RECEIVED', false, 'abc', 'abc');
 		expect(message).toBe('Waiting for file(s) to finish uploading.');
 	});
 	
 	it('should return the correct message for METADATA_RECEIVED when is large file and is mine', () => {
-		let baseConfig = PANEL_CONFIGS['METADATA_RECEIVED'];
-		let message = getMessage(baseConfig, 'METADATA_RECEIVED', true, 'abc', 'abc');
+		let message = getMessage('METADATA_RECEIVED', true, 'abc', 'abc');
 		expect(message).toBe('Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.');
 	});
 	
 	it('should return the correct message for METADATA_RECEIVED when is not large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['METADATA_RECEIVED'];
-		let message = getMessage(baseConfig, 'METADATA_RECEIVED', false, 'def', 'abc');
+		let message = getMessage('METADATA_RECEIVED', false, 'def', 'abc');
 		expect(message).toBe('Waiting for file(s) to finish uploading.');
 	});
 	
 	it('should return the correct message for METADATA_RECEIVED when is large file and is not mine', () => {
-		let baseConfig = PANEL_CONFIGS['METADATA_RECEIVED'];
-		let message = getMessage(baseConfig, 'METADATA_RECEIVED', true, 'def', 'abc');
+		let message = getMessage('METADATA_RECEIVED', true, 'def', 'abc');
 		expect(message).toBe('Awaiting file(s) to be uploaded.');
 	});
 	
-
+	it('should return a blank string for state without message', () => {
+		let message = getMessage('ANOTHER_STATE', true, 'def', 'def');
+		expect(message).toBe('');
+	})
 	
 	
 });
