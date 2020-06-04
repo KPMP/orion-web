@@ -15,32 +15,32 @@ describe('getIcon', () => {
 	
 	it('should not return an icon for FILES_RECEIVED state', () => {
 		let icon = getIcon('FILES_RECEIVED', false, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when shibIds do not match', () => {
 		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when large file upload', () => {
 		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state', () => {
 		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state when shibIds do not match', () => {
 		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state whenis large file', () => {
 		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should return faclock when METADATA_RECEIVED and it is my large file upload', () => {
@@ -50,12 +50,12 @@ describe('getIcon', () => {
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds match, but not large file', () => {
 		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds do not match and is large file', () => {
 		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'xyz', stateDisplayMap);
-		expect(icon).toBe(undefined);
+		expect(icon).toBeUndefined();
 	});
 });
 
@@ -127,7 +127,7 @@ describe('getMessage', () => {
 	it('should return a blank string for state without message', () => {
 		let message = getMessage('ANOTHER_STATE', true, 'def', 'def');
 		expect(message).toBe('');
-	})
+	});
 	
 });
 
@@ -137,8 +137,8 @@ describe('getClickEvent', () => {
 	let stateInfoClick;
 	beforeEach(() => {
 		stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}}];
-		downloadClick = function() { return 'hi' };
-		stateInfoClick = function() { return 'hola' };
+		downloadClick = function() { return 'hi'; };
+		stateInfoClick = function() { return 'hola'; };
 	});
 	
 	it('should return downloadClick when showDownload true for state', () => {
@@ -163,6 +163,6 @@ describe('getDisplayInfo', () => {
 		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
 			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
 		let stateInfo = getDisplayInfo('UNKNOWN_STATE', stateDisplayMap);
-		expect(stateInfo).toBe(undefined);
+		expect(stateInfo).toBeUndefined();
 	});
 });

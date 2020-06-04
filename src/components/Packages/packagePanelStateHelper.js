@@ -78,17 +78,16 @@ export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadCl
 }
 
 export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
-	let baseConfig = PANEL_CONFIGS[state];
 	let message = '';
 	if (isLargeFile && state === 'METADATA_RECEIVED') {
 		if (isMine(currentEmail, packageEmail)) {
-			message = baseConfig.myLargeFileUploadMessage;
+			message = PANEL_CONFIGS[state].myLargeFileUploadMessage;
 		} else {
-			message = baseConfig.notMyLargeFileUploadMessage;
+			message = PANEL_CONFIGS[state].notMyLargeFileUploadMessage;
 		}
 	} else if (!isLargeFile && state === 'METADATA_RECEIVED') {
-		message = baseConfig.standardMessage;
-	} else if (PANEL_CONFIGS[state]) {
+		message = PANEL_CONFIGS[state].standardMessage;
+	} else if (state in PANEL_CONFIGS) {
 		message = PANEL_CONFIGS[state].message;
 	}
 	return message;
@@ -98,13 +97,9 @@ export const getDisplayInfo = (state, stateDisplayMap) => {
     let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
     	if(stateDisplayItem.state === state) {
     		return stateDisplayItem;
-    	} else {
-    		return undefined;
-    	}
+    	} 
     }, state);
     if (stateDisplayText) {
     	return stateDisplayText[0];
-    } else {
-    	return undefined;
-    }
-}
+    } 
+};
