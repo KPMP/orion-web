@@ -74,19 +74,23 @@ export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadCl
 		return downloadClick;
 	} else {
 		return stateInfoClick;
-	};
-}
+	}
+};
 
 export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
 	if (isLargeFile && state === 'METADATA_RECEIVED') {
 		if (isMine(currentEmail, packageEmail)) {
+			// eslint-disable-next-line
 			return PANEL_CONFIGS[state].myLargeFileUploadMessage;
 		} else {
+			// eslint-disable-next-line
 			return PANEL_CONFIGS[state].notMyLargeFileUploadMessage;
 		}
 	} else if (!isLargeFile && state === 'METADATA_RECEIVED') {
+		// eslint-disable-next-line
 		return PANEL_CONFIGS[state].standardMessage;
 	} else if (state in PANEL_CONFIGS) {
+		// eslint-disable-next-line
 		return PANEL_CONFIGS[state].message;
 	}
 	return '';
@@ -97,6 +101,7 @@ export const getDisplayInfo = (state, stateDisplayMap) => {
     	if(stateDisplayItem.state === state) {
     		return stateDisplayItem;
     	} else {
+    		// eslint-disable-next-line
     		return undefined;
     	}
     }, state);
