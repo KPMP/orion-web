@@ -96,9 +96,12 @@ export const getDisplayInfo = (state, stateDisplayMap) => {
     let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
     	if(stateDisplayItem.state === state) {
     		return stateDisplayItem;
-    	} 
+    	} else {
+    		return undefined;
+    	}
     }, state);
     if (stateDisplayText) {
     	return stateDisplayText[0];
     } 
+    return undefined;
 };
