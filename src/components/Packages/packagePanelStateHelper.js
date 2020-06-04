@@ -108,5 +108,6 @@ export const getDisplayInfo = (state, stateDisplayMap) => {
     if (stateDisplayText) {
     	return stateDisplayText[0];
     } 
+    // eslint-disable-next-line
     return undefined;
 };
