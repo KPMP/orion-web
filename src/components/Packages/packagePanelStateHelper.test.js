@@ -1,4 +1,4 @@
-import { getIcon, getMessage, getClickEvent } from './packagePanelStateHelper';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
 import { faClock, faDownload } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
@@ -149,5 +149,20 @@ describe('getClickEvent', () => {
 	it ('should return stateInfoClick when showDownload not true', () => {
 		let method = getClickEvent('OTHER_EVENT', stateDisplayMap, stateInfoClick, downloadClick);
 		expect(method).toBe(stateInfoClick);
+	});
+});
+
+describe('getDisplayInfo', () => {
+	it('should return the correct info object for the given state', () => {
+		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
+			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
+		let stateInfo = getDisplayInfo('UPLOAD_SUCCEEDED', stateDisplayMap);
+		expect(stateInfo).toStrictEqual({state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}});
+	});
+	it('should return undefined if the given state is not found', () => {
+		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
+			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
+		let stateInfo = getDisplayInfo('UNKNOWN_STATE', stateDisplayMap);
+		expect(stateInfo).toBe(undefined);
 	});
 });

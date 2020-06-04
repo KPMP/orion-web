@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { getIcon, getMessage, getClickEvent } from './packagePanelStateHelper';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -45,16 +45,14 @@ class PackagePanelStateText extends Component {
         
         let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick, this.props.handleDownloadClick);
         
-        let currentState = this.props.panelState.state;
-        let stateDisplayText = this.props.stateDisplayMap.filter(function(stateDisplayItem) {
-        	if(stateDisplayItem.state === currentState) {
-        		return stateDisplayItem;
-        	} else {
-        		return '';
-        	}
-        }, currentState);
+        let stateDisplayInfo = getDisplayInfo(this.props.panelState.state, this.props.stateDisplayMap);
         
-        let alertClass = 'alert-' + stateDisplayText[0].apps.dlu.alertType;
+        let alertClass = '';
+        let stateText = '';
+        if (stateDisplayInfo) {
+        	alertClass = 'alert-' + stateDisplayInfo.apps.dlu.alertType;
+        	stateText = stateDisplayInfo.apps.dlu.text;
+        }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
         
@@ -62,7 +60,7 @@ class PackagePanelStateText extends Component {
             <div className='d-flex align-items-start'>
                 <div className='w-75'>
                     <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + alertClass} id={popoverTargetId} >
-                        <span>{stateDisplayText[0].apps.dlu.text}</span>
+                        <span>{stateText}</span>
                     </div>
                     { panelConfig.message &&
                         <span>
