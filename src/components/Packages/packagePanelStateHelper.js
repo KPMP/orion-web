@@ -1,4 +1,4 @@
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faDownload } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 export const PANEL_CONFIGS = {
@@ -21,7 +21,10 @@ export const PANEL_CONFIGS = {
 				</div>
     		
     }
+    
 };
+
+
 
 const isMine = (currentEmail, packageEmail) => {
 	return currentEmail === packageEmail;
@@ -35,25 +38,76 @@ const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
 	return panelConfig.iconInfo.isProtected && isMine(currentEmail, packageEmail);
 };
 
-export const getIcon = (state, isLargeFile, currentEmail, packageEmail) => {
+export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDisplayMap) => {
 	let panelConfig = PANEL_CONFIGS[state];
 	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentEmail, packageEmail) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
 	} 
+	
+	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
+		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
+			return stateDisplayItem;
+		} else {
+			return null;
+		}
+    	
+    }, state);
+	
+	if (stateDisplay.length === 1) {
+		return faDownload;
+	}
 };
 
-export const getMessage = (baseConfig, state, isLargeFile, currentEmail, packageEmail) => {
-	let message = baseConfig.message;
+export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadClick) => {
+	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
+		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
+			return stateDisplayItem;
+		} else {
+			return null;
+		}
+    	
+    }, state);
+	
+	if (stateDisplay.length === 1) {
+		return downloadClick;
+	} else {
+		return stateInfoClick;
+	}
+};
+
+export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
 	if (isLargeFile && state === 'METADATA_RECEIVED') {
 		if (isMine(currentEmail, packageEmail)) {
-			message = baseConfig.myLargeFileUploadMessage;
+			// eslint-disable-next-line
+			return PANEL_CONFIGS[state].myLargeFileUploadMessage;
 		} else {
-			message = baseConfig.notMyLargeFileUploadMessage;
+			// eslint-disable-next-line
+			return PANEL_CONFIGS[state].notMyLargeFileUploadMessage;
 		}
 	} else if (!isLargeFile && state === 'METADATA_RECEIVED') {
-		message = baseConfig.standardMessage;
+		// eslint-disable-next-line
+		return PANEL_CONFIGS[state].standardMessage;
+	} else if (state in PANEL_CONFIGS) {
+		// eslint-disable-next-line
+		return PANEL_CONFIGS[state].message;
 	}
-	return message;
+	return '';
+};
+
+export const getDisplayInfo = (state, stateDisplayMap) => {
+    let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
+    	if(stateDisplayItem.state === state) {
+    		return stateDisplayItem;
+    	} else {
+    		// eslint-disable-next-line
+    		return undefined;
+    	}
+    }, state);
+    if (stateDisplayText) {
+    	return stateDisplayText[0];
+    } 
+    // eslint-disable-next-line
+    return undefined;
 };

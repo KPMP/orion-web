@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { getIcon, getMessage, PANEL_CONFIGS } from './packagePanelStateHelper';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -28,31 +28,31 @@ class PackagePanelStateText extends Component {
     }
     
     configurePanelOptions() {
-    	let baseConfig = PANEL_CONFIGS[this.props.panelState.state];
-    	let panelConfig = baseConfig;
-    	panelConfig.message = getMessage(baseConfig, this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
-    	if (this.props.handleStateInfoClick) {
-    		panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
-    	}
-    	return panelConfig;
+		let panelConfig = {};
+		panelConfig.message = getMessage(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
+		if (this.props.handleStateInfoClick) {
+			panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email, this.props.stateDisplayMap);
+		}
+		return panelConfig;
     }
     
     render() {
     	let panelConfig = this.configurePanelOptions();
 
-        if(panelConfig === undefined) {
+        if(!panelConfig) {
             return null;
         }
         
-        let currentState = this.props.panelState.state;
-        let stateDisplayText = this.props.stateDisplayMap.filter(function(stateDisplayItem) {
-        	if(stateDisplayItem.state === currentState) {
-        		return stateDisplayItem;
-        	} else {
-        		return '';
-        	}
-        }, currentState);
-        let alertClass = 'alert-' + stateDisplayText[0].apps.dlu.alertType;
+        let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick, this.props.handleDownloadClick);
+        
+        let stateDisplayInfo = getDisplayInfo(this.props.panelState.state, this.props.stateDisplayMap);
+        
+        let alertClass = '';
+        let stateText = '';
+        if (stateDisplayInfo) {
+        	alertClass = 'alert-' + stateDisplayInfo.apps.dlu.alertType;
+        	stateText = stateDisplayInfo.apps.dlu.text;
+        }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
         
@@ -60,7 +60,7 @@ class PackagePanelStateText extends Component {
             <div className='d-flex align-items-start'>
                 <div className='w-75'>
                     <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + alertClass} id={popoverTargetId} >
-                        <span>{stateDisplayText[0].apps.dlu.text}</span>
+                        <span>{stateText}</span>
                     </div>
                     { panelConfig.message &&
                         <span>
@@ -79,7 +79,7 @@ class PackagePanelStateText extends Component {
                     }
                 </div>
                 { panelConfig.icon && 
-                	<span onClick={this.props.handleStateInfoClick}>
+                	<span onClick={clickEvent}>
                         <div className='additional-icon clickable'><FontAwesomeIcon className='float-right' icon={panelConfig.icon} size='lg' inverse/></div>
                     </span>
                 }
