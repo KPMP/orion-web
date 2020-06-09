@@ -50,7 +50,6 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
 };
 
 export const getDownloadButton = (state, stateDisplayMap, packageId, handleDownloadClick) => {
-	console.log(stateDisplayMap);
 	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
 		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
 			return stateDisplayItem;
@@ -63,7 +62,7 @@ export const getDownloadButton = (state, stateDisplayMap, packageId, handleDownl
 	if (stateDisplay.length === 1) {
 		return true;
 	}
-}
+};
 
 export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadClick) => {
 	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
