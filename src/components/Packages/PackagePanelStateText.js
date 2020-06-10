@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo, getDownloadButton } from './packagePanelStateHelper';
+import { Col, Button } from 'reactstrap';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -48,42 +50,51 @@ class PackagePanelStateText extends Component {
         let stateDisplayInfo = getDisplayInfo(this.props.panelState.state, this.props.stateDisplayMap);
         
         let alertClass = '';
-        let stateText = '';
         if (stateDisplayInfo) {
         	alertClass = 'alert-' + stateDisplayInfo.apps.dlu.alertType;
-        	stateText = stateDisplayInfo.apps.dlu.text;
         }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
+        let downloadButton = getDownloadButton(this.props.panelState.state, this.props.stateDisplayMap, this.props.panelState.packageId, this.props.handleDownloadClick);
         
         return <React.Fragment>
             <div className='d-flex align-items-start'>
-                <div className='w-75'>
-                    <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + alertClass} id={popoverTargetId} >
-                        <span>{stateText}</span>
-                    </div>
-                    { panelConfig.message &&
-                        <span>
-                            <Popover className={POPOVER_CLASSES.classNames}
-                                     innerClassName={POPOVER_CLASSES.innerClassNames}
-                                     placement={'bottom'}
-                                     delay={{'hide': 300}}
-                                     isOpen={this.state.popoverOpen}
-                                     toggle={this.toggle}
-                                     target={popoverTargetId}
-                            		 html={true}
-                            		 trigger={'hover'}>
-                                <PopoverBody>{panelConfig.message}</PopoverBody>
-                            </Popover>
-                        </span>
-                    }
-                </div>
+            	{ stateDisplayInfo &&
+	                <div className='w-75'>
+	                    <div className={'mr-2 my-0 px-2 py-1 alert clickable text-dark ' + alertClass} id={popoverTargetId} >
+	                        <span>{ stateDisplayInfo.apps.dlu.text }</span>
+	                    </div>
+	                    { panelConfig.message &&
+	                        <span>
+	                            <Popover className={POPOVER_CLASSES.classNames}
+	                                     innerClassName={POPOVER_CLASSES.innerClassNames}
+	                                     placement={'bottom'}
+	                                     delay={{'hide': 300}}
+	                                     isOpen={this.state.popoverOpen}
+	                                     toggle={this.toggle}
+	                                     target={popoverTargetId}
+	                            		 html={true}
+	                            		 trigger={'hover'}>
+	                                <PopoverBody>{panelConfig.message}</PopoverBody>
+	                            </Popover>
+	                        </span>
+	                    }
+	                </div>
+            	}
                 { panelConfig.icon && 
                 	<span onClick={clickEvent}>
                         <div className='additional-icon clickable'><FontAwesomeIcon className='float-right' icon={panelConfig.icon} size='lg' inverse/></div>
                     </span>
                 }
             </div>
+            { downloadButton === true &&
+            	<Col xs={4} md={12} style={{'paddingLeft': '0'}}>
+					<Button size='sm' color='primary' value={this.props.panelState.packageId} onClick={(e) => this.handleDownloadClick(this.props.panelState.packageId, e)}>
+						<FontAwesomeIcon icon={faDownload} />
+						<span>&nbsp;Download</span>
+					</Button>
+				</Col>
+            }
         </React.Fragment>;
     }
 }

@@ -1,5 +1,6 @@
-import { faClock, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
+
 
 export const PANEL_CONFIGS = {
     FILES_RECEIVED: {
@@ -46,6 +47,9 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
 		}
 	} 
 	
+};
+
+export const getDownloadButton = (state, stateDisplayMap, packageId, handleDownloadClick) => {
 	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
 		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
 			return stateDisplayItem;
@@ -56,7 +60,7 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
     }, state);
 	
 	if (stateDisplay.length === 1) {
-		return faDownload;
+		return true;
 	}
 };
 
@@ -98,7 +102,7 @@ export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
 
 export const getDisplayInfo = (state, stateDisplayMap) => {
     let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
-    	if(stateDisplayItem.state === state) {
+    	if(stateDisplayItem.state === state && stateDisplayItem.apps.dlu.showDownload !== true) {
     		return stateDisplayItem;
     	} else {
     		// eslint-disable-next-line

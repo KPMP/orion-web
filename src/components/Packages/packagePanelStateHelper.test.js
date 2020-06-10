@@ -1,16 +1,11 @@
 import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
-import { faClock, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
 describe('getIcon', () => {
 	let stateDisplayMap;
 	beforeEach(() => {
 		stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}}];
-	});
-	
-	it('should return faDownload for a state in stateDisplayMap with showDownload of true', () => {
-		let icon = getIcon('UPLOAD_SUCCEEDED', false, 'xyz', 'xyz', stateDisplayMap);
-		expect(icon).toBe(faDownload);
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state', () => {
@@ -153,16 +148,25 @@ describe('getClickEvent', () => {
 });
 
 describe('getDisplayInfo', () => {
+	
 	it('should return the correct info object for the given state', () => {
 		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
 			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
-		let stateInfo = getDisplayInfo('UPLOAD_SUCCEEDED', stateDisplayMap);
-		expect(stateInfo).toStrictEqual({state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}});
+		let stateInfo = getDisplayInfo('UPLOAD_FAILED', stateDisplayMap);
+		expect(stateInfo).toStrictEqual({state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}});
 	});
+	
 	it('should return undefined if the given state is not found', () => {
 		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
 			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
 		let stateInfo = getDisplayInfo('UNKNOWN_STATE', stateDisplayMap);
+		expect(stateInfo).toBeUndefined();
+	});
+	
+	it('should return undefined if the given state is downloadable', () => {
+		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
+			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
+		let stateInfo = getDisplayInfo('UPLOAD_SUCCEEDED', stateDisplayMap);
 		expect(stateInfo).toBeUndefined();
 	});
 });
