@@ -4,6 +4,7 @@ import { addFilter, getUsers, removeFilter } from '../../actions/filterActions';
 import { getUserInformation } from "../../actions/userActions";
 import { getFormDTD } from "../../actions/Upload/uploadActions";
 import { getPackageTypeIcons } from '../../actions/packageTypeIconsActions';
+import { getStateDisplayMap } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch, props) =>
 		dispatch(getUsers());
 		dispatch(getFormDTD());
 		dispatch(getPackageTypeIcons());
+		dispatch(getStateDisplayMap());
 	}
 });
     

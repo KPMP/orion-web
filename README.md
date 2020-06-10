@@ -4,6 +4,9 @@
 # orion-web
 Repo for the KPMP upload tool front-end
 
+## Documentation
+Visit [kpmp.github.io/dlu](http://kpmp.io.github.io/dlu)
+
 ## Development Environment
 *   Create an environment file (.env) in the root of this project. See .env.example for referece.
 

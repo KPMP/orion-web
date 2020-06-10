@@ -30,7 +30,7 @@ export class DynamicFormGenerator {
 
 		return (
 			<section key={sectionJson.sectionHeader}>
-				<h4>{sectionJson.sectionHeader}</h4>
+				<h5>{sectionJson.sectionHeader}</h5>
 				<Row>
 					{ sectionJson.fields.map((fieldJson) => this.renderField(fieldJson, form, userInformation)) }
 				</Row>

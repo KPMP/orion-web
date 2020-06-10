@@ -1,16 +1,13 @@
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
+
 export const PANEL_CONFIGS = {
     FILES_RECEIVED: {
-        text: 'Finishing upload',
-        classNames: 'alert-success',
         message: 'The file(s) in this package are being finalized.  Once completed, they will be available for download.'
     },
 
     METADATA_RECEIVED: {
-        text: 'Waiting for files...',
-        classNames: 'alert-primary',
         iconInfo: { type: faClock, isProtected: true, isLargeFileOnly: true },
         myLargeFileUploadMessage: 'Awaiting file(s) to be uploaded. Click the clock icon for upload instructions.',
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
@@ -18,8 +15,6 @@ export const PANEL_CONFIGS = {
     },
     
     UPLOAD_FAILED: {
-    	text: 'Upload failed',
-    	classNames: 'alert-danger',
     	message: <div>
 					<div>The file(s) in this package could not be processed. It is recommended that you re-upload this package.</div>
 					<br/>
@@ -27,39 +22,96 @@ export const PANEL_CONFIGS = {
 				</div>
     		
     }
+    
 };
 
-const isMine = (currentShibId, packageShibId) => {
-	return currentShibId === packageShibId;
+
+
+const isMine = (currentEmail, packageEmail) => {
+	return currentEmail === packageEmail;
 };
 
 const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.iconInfo;
 };
 
-const protectedAndMine = (panelConfig, currentShibId, packageShibId) => {
-	return panelConfig.iconInfo.isProtected && isMine(currentShibId, packageShibId);
+const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
+	return panelConfig.iconInfo.isProtected && isMine(currentEmail, packageEmail);
 };
 
-export const getIcon = (state, isLargeFile, currentShibId, packageShibId) => {
+export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDisplayMap) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentShibId, packageShibId) || !panelConfig.iconInfo.isProtected)) {
+	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentEmail, packageEmail) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
 	} 
+	
 };
 
-export const getMessage = (baseConfig, state, isLargeFile, currentShibId, packageShibId) => {
-	let message = baseConfig.message;
-	if (isLargeFile && state === 'METADATA_RECEIVED') {
-		if (isMine(currentShibId, packageShibId)) {
-			message = baseConfig.myLargeFileUploadMessage;
+export const getDownloadButton = (state, stateDisplayMap, packageId, handleDownloadClick) => {
+	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
+		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
+			return stateDisplayItem;
 		} else {
-			message = baseConfig.notMyLargeFileUploadMessage;
+			return null;
+		}
+    	
+    }, state);
+	
+	if (stateDisplay.length === 1) {
+		return true;
+	}
+};
+
+export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadClick) => {
+	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
+		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
+			return stateDisplayItem;
+		} else {
+			return null;
+		}
+    	
+    }, state);
+	
+	if (stateDisplay.length === 1) {
+		return downloadClick;
+	} else {
+		return stateInfoClick;
+	}
+};
+
+export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
+	if (isLargeFile && state === 'METADATA_RECEIVED') {
+		if (isMine(currentEmail, packageEmail)) {
+			// eslint-disable-next-line
+			return PANEL_CONFIGS[state].myLargeFileUploadMessage;
+		} else {
+			// eslint-disable-next-line
+			return PANEL_CONFIGS[state].notMyLargeFileUploadMessage;
 		}
 	} else if (!isLargeFile && state === 'METADATA_RECEIVED') {
-		message = baseConfig.standardMessage;
+		// eslint-disable-next-line
+		return PANEL_CONFIGS[state].standardMessage;
+	} else if (state in PANEL_CONFIGS) {
+		// eslint-disable-next-line
+		return PANEL_CONFIGS[state].message;
 	}
-	return message;
+	return '';
+};
+
+export const getDisplayInfo = (state, stateDisplayMap) => {
+    let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
+    	if(stateDisplayItem.state === state && stateDisplayItem.apps.dlu.showDownload !== true) {
+    		return stateDisplayItem;
+    	} else {
+    		// eslint-disable-next-line
+    		return undefined;
+    	}
+    }, state);
+    if (stateDisplayText) {
+    	return stateDisplayText[0];
+    } 
+    // eslint-disable-next-line
+    return undefined;
 };

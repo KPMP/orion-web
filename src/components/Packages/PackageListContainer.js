@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
-import { getPackages, getPackageEvents } from '../../actions/Packages/packageActions';
+import { getPackages } from '../../actions/Packages/packageActions';
+import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
 ({
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch, props) =>
 	},
 
 	poll(callback) {
-		dispatch(getPackageEvents(callback));
+		dispatch(getStateEvents(callback));
 	}
 });
 	
