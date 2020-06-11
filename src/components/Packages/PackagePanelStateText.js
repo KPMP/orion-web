@@ -89,7 +89,7 @@ class PackagePanelStateText extends Component {
             </div>
             { downloadButton === true &&
             	<Col xs={4} md={12} style={{'paddingLeft': '0'}}>
-					<Button size='sm' color='primary' value={this.props.panelState.packageId} onClick={(e) => this.handleDownloadClick(this.props.panelState.packageId, e)}>
+					<Button size='sm' color='primary' value={this.props.panelState.packageId} onClick={(e) => this.props.handleDownloadClick(this.props.panelState.packageId, e)}>
 						<FontAwesomeIcon icon={faDownload} />
 						<span>&nbsp;Download</span>
 					</Button>
