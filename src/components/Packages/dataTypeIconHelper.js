@@ -30,6 +30,12 @@ export const iconDataTypes = new Map(
                 iconImage: 'icon_transcriptomics_132x132.png'
             }
         ],
+        ['Epigenetics',
+            {
+                iconDataType: 'Epigenetics',
+                iconImage: 'icon_epigenetics.png'
+            }
+        ],
         ['Pilot 3',
         	{
         		iconDataType: 'Pilot3',
