@@ -83,12 +83,5 @@ describe('getDataTypeIconInfo', () => {
 	    		expect(getDataTypeIconInfo(packageTypeIcons, "Sub-segmental RNA-Seq").iconDataType).toBe("Transcriptomics");
 	    	});
     });
-
-	describe("Epigenetics types", () => {
-		it('should return Metabolomics when Spatial Metabolomics', () => {
-			let iconInfo = getDataTypeIconInfo(iconDataTypes, "Epigenetics");
-			expect(iconInfo.iconDataType).toBe("Epigenetics");
-			expect(iconInfo.iconImage).toBe("icon_epigenetics.png");
-		});
-	});
+    
 });
