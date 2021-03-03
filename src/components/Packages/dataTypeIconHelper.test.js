@@ -8,7 +8,8 @@ describe('getDataTypeIconInfo', () => {
 		{"iconType":"Imaging","packageTypes":["3-D Tissue Imaging","Multiplex ISH","CODEX","Whole Slide Images"]},
 		{"iconType":"Proteomics","packageTypes":["Bulk Proteomics","Sub-segmental Proteomics","Near-single-cell Proteomics"]},
 		{"iconType":"Pilot 3","packageTypes":["Pilot 3 Receipt Picture"]},
-		{"iconType":"Other","packageTypes":["DNA Methylation","Other"]}];
+		{"iconType":"Epigenetics","packageTypes":["ATAC-seq"]},
+		{"iconType":"Other","packageTypes":["Other"]}];
 
 	describe("Other types", () => {
 		it('should return Other when not in list', () => {
@@ -18,9 +19,6 @@ describe('getDataTypeIconInfo', () => {
 	    	});
 	    	it('should return Other when Other', () => {
 	    		expect(getDataTypeIconInfo(packageTypeIcons, "Other").iconDataType).toBe("Other");
-	    	});
-	    	it('should return Other when DNA Methylation', () => {
-	    		expect(getDataTypeIconInfo(packageTypeIcons, "DNA Methylation").iconDataType).toBe("Other");
 	    	});
     });
     
@@ -84,5 +82,6 @@ describe('getDataTypeIconInfo', () => {
 	    	it('should return Transcriptomics when Sub-segment RNA-Seq', () => {
 	    		expect(getDataTypeIconInfo(packageTypeIcons, "Sub-segmental RNA-Seq").iconDataType).toBe("Transcriptomics");
 	    	});
-    })
+    });
+    
 });
