@@ -6,13 +6,8 @@ import { sendMessageToBackend } from './Error/errorActions';
 
  export const getUserInformation = () => {	
 	return (dispatch) => {
-		const userInfoURL = '/api/v1/userInformation';
-		api.get(userInfoURL)
+		api.get('/api/v1/userInformation')
 			.then(res => {
-				console.log(res.request.responseURL + " " + userInfoURL)
-				if (res.request.responseURL != userInfoURL) {
-					console.log("blah")
-				}
 				dispatch(setUserInformation(res.data));	
 			})	
 			.catch(err => {
