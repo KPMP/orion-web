@@ -15,11 +15,6 @@ export const handleError = (statusCode) => {
 };
 
 export const sendMessageToBackend = (error) => {
-	if (!error.status) {
-		return (dispatch) => {
-			dispatch(window.location.reload());
-		}
-	}
 	if (error.response && error.response.status && error.response.status >= 400) {
 		return (dispatch) => {
 			let href = window.location.href;
