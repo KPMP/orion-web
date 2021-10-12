@@ -14,10 +14,16 @@ class SessionTimeoutModal extends Component {
         }
     };
 
+    minutesToMilliseconds = (minutes) => {
+        return minutes * 60 * 1000;
+    };
+
     render() {
-        let countdown = <Countdown date={Date.now() + 60} renderer={this.renderer}/>
+        let countdown = <Countdown date={Date.now() + this.minutesToMilliseconds(1)} renderer={this.renderer}/>
         return(
-            <Countdown date={Date.now() + 30}>
+            <React.Fragment>
+            <Countdown date={Date.now() + this.minutesToMilliseconds(1)} renderer={this.renderer}/>
+            <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)}>
                 <Modal zIndex={9999} isOpen={true} >
                     <ModalHeader>Session timeout</ModalHeader>
                     <ModalBody>
@@ -28,6 +34,7 @@ class SessionTimeoutModal extends Component {
                     </ModalFooter>
                 </Modal>
             </Countdown>
+            </React.Fragment>
         );
     }
 }
