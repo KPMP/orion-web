@@ -39,6 +39,7 @@ class SessionTimeoutModal extends Component {
     rendererRedirect = ({hours, minutes, seconds, completed}) => {
         if (completed) {
             window.location = this.welcomeURL;
+        } else {
             return (null);
         }
     };
