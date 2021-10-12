@@ -17,6 +17,7 @@ import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
+import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
 
 const cacheStore = window.sessionStorage.getItem("redux-store");
 let initialState = loadedState;
@@ -60,6 +61,7 @@ class App extends Component {
 				<Router history={history}>
 					<ErrorBoundaryContainer>
 						<NavBarContainer />
+						<SessionTimeoutModalContainer/>
 						<Switch>
 							<Route exact path="/" component={PackagesPaneContainer} store={store} />
 							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
