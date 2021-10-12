@@ -10,7 +10,7 @@ class SessionTimeoutModal extends Component {
 
     renderer = ({hours, minutes, seconds, completed}) => {
         if (completed) {
-            window.location='https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fupload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F'
+            window.location='https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F'
         }
     };
 
@@ -24,7 +24,7 @@ class SessionTimeoutModal extends Component {
                         Your session is about to expire. Please login again.
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={() => window.location='https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fupload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F'}>SIGN IN AGAIN</Button>{' '}
+                        <Button color="secondary" onClick={() => window.location='https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F'}>SIGN IN AGAIN</Button>{' '}
                     </ModalFooter>
                 </Modal>
             </Countdown>
