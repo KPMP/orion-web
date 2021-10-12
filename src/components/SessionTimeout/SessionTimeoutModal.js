@@ -36,7 +36,7 @@ class SessionTimeoutModal extends Component {
                 </ModalFooter>
             </Modal>)
         } else {
-            return "";
+            return (null);
         }
     };
 
