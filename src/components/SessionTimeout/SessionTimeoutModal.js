@@ -4,6 +4,11 @@ import Countdown from 'react-countdown';
 
 class SessionTimeoutModal extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { showModal: false };
+    }
+
     componentDidMount() {
         console.log(document.referrer);
     }
@@ -18,13 +23,18 @@ class SessionTimeoutModal extends Component {
         return minutes * 60 * 1000;
     };
 
+    renderer2 = ({hours, minutes, seconds, completed}) => {
+        if (completed) {
+            this.setState({showModal: true})
+        }
+    };
+
     render() {
-        let countdown = <Countdown date={Date.now() + this.minutesToMilliseconds(1)} renderer={this.renderer}/>
         return(
             <React.Fragment>
             <Countdown date={Date.now() + this.minutesToMilliseconds(1)} renderer={this.renderer}/>
-            <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)}>
-                <Modal zIndex={9999} isOpen={true} >
+            <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)} renderer={this.renderer2}>
+                <Modal zIndex={9999} isOpen={this.state.showModal} >
                     <ModalHeader>Session timeout</ModalHeader>
                     <ModalBody>
                         Your session is about to expire. Please login again.
