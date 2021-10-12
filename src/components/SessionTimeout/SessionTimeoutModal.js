@@ -23,7 +23,7 @@ class SessionTimeoutModal extends Component {
         return minutes * 60 * 1000;
     };
 
-    renderer2 = ({hours, minutes, seconds, completed}) => {
+    rendererModal = ({hours, minutes, seconds, completed}) => {
         if (completed) {
             return (
             <Modal zIndex={9999} isOpen={true} >
@@ -40,9 +40,20 @@ class SessionTimeoutModal extends Component {
         }
     };
 
+    rendererRedirect = ({hours, minutes, seconds, completed}) => {
+        if (completed) {
+            window.location='https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F'
+        } else {
+            return (null);
+        }
+    };
+
     render() {
         return(
-            <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)} renderer={this.renderer2}/>
+            <React.Fragment>
+                <Countdown date={Date.now() + this.minutesToMilliseconds(1)} renderer={this.rendererRedirect}/>
+                <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)} renderer={this.rendererModal}/>
+            </React.Fragment>
         );
     }
 }
