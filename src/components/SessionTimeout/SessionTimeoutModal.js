@@ -36,18 +36,9 @@ class SessionTimeoutModal extends Component {
         }
     };
 
-    rendererRedirect = ({hours, minutes, seconds, completed}) => {
-        if (completed) {
-            window.location = this.welcomeURL;
-        } else {
-            return (null);
-        }
-    };
-
     render() {
         return(
             <React.Fragment>
-                <Countdown date={Date.now() + this.minutesToMilliseconds(0.5)} renderer={this.rendererRedirect}/>
                 <Countdown date={Date.now() + this.minutesToMilliseconds(0.25)} renderer={this.rendererModal}/>
             </React.Fragment>
         );
