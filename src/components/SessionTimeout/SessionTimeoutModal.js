@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Countdown from 'react-countdown';
-
+import { minutesToMilliseconds, getSessionLength } from "./sessionTimeoutHelpers";
 class SessionTimeoutModal extends Component {
+
+    welcomeURL = 'https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F';
+    //timeoutInMinutes = 450; // minutes or 7.5 hours
+    timeoutInMinutes = 4; // minutes or 7.5 hours
 
     constructor(props) {
         super(props);
         this.state = { showModal: false };
     }
 
-    welcomeURL = 'https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F';
+    handleSignin = () => {
+        this.props.setSessionStart("");
+        window.location = this.welcomeURL;
+    };
+
+    getTimeoutTime = () => {
+        let sessionLength = getSessionLength(this.props.sessionStart);
+        let timeLeft = minutesToMilliseconds(this.timeoutInMinutes) - sessionLength;
+        return Date.now() + timeLeft;
+    };
 
     componentDidMount() {
-        console.log(document.referrer);
+        if (!this.props.sessionStart) {
+            this.props.setSessionStart(Date.now());
+        }
     }
-
-    minutesToMilliseconds = (minutes) => {
-        return minutes * 60 * 1000;
-    };
 
     rendererModal = ({hours, minutes, seconds, completed}) => {
         if (completed) {
@@ -28,7 +39,7 @@ class SessionTimeoutModal extends Component {
                     Your session is about to expire. Please login again.
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="secondary" onClick={() => window.location = this.welcomeURL}>SIGN IN AGAIN</Button>{' '}
+                    <Button color="secondary" onClick={() => this.handleSignin()}>SIGN IN AGAIN</Button>{' '}
                 </ModalFooter>
             </Modal>)
         } else {
@@ -39,7 +50,7 @@ class SessionTimeoutModal extends Component {
     render() {
         return(
             <React.Fragment>
-                <Countdown date={Date.now() + this.minutesToMilliseconds(0.25)} renderer={this.rendererModal}/>
+                <Countdown date={ this.getTimeoutTime() } renderer={this.rendererModal}/>
             </React.Fragment>
         );
     }

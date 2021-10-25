@@ -6,7 +6,7 @@ import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer'
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
 import { stateDisplayMap } from './components/Packages/stateDisplayMapReducer';
-import { sessionTimedOut } from './components/SessionTimeout/sessionTimeoutReducer';
+import { sessionStart } from './components/SessionTimeout/sessionTimeoutReducer';
 
 const appReducer = combineReducers({
     filtering,
@@ -17,7 +17,7 @@ const appReducer = combineReducers({
     packageTypeIcons,
     stateDisplayMap,
     showLargeFileModal,
-    sessionTimedOut
+    sessionStart
 });
 
 const rootReducer = (state, action) => {

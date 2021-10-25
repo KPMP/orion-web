@@ -1,21 +1,17 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import SessionTimeoutModal from './SessionTimeoutModal';
-import { sessionTimedOut, startTimer } from '../../actions/SessionTimeout/sessionTimeoutAction';
+import { setSessionStart } from '../../actions/SessionTimeout/sessionTimeoutAction';
 
 const mapStateToProps = (state, props) =>
     ({
-        sessionIsTimedOut: state.sessionTimedOut
+        sessionStart: state.sessionStart
     });
 
 const mapDispatchToProps = (dispatch, props) =>
     ({
-        restartTimer() {
-            dispatch(sessionTimedOut(false));
-            startTimer(dispatch);
-        },
-        sessionTimedOut(isTimedOut) {
-            dispatch(sessionTimedOut(isTimedOut));
+        setSessionStart(time) {
+            dispatch(setSessionStart(time));
         }
     });
 

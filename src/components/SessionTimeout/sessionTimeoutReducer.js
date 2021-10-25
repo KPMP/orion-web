@@ -1,8 +1,8 @@
 import actionNames from '../../actions/actionNames';
 
-export const sessionTimedOut = (state = false, action) => {
+export const sessionStart = (state = '', action) => {
     switch(action.type) {
-        case actionNames.SET_SESSION_TIMED_OUT:
+        case actionNames.SET_SESSION_START:
             return action.payload;
         default:
             return state;
