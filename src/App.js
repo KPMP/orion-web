@@ -23,6 +23,9 @@ const cacheStore = window.sessionStorage.getItem("redux-store");
 let initialState = loadedState;
 if (cacheStore) {
 	initialState = JSON.parse(cacheStore);
+	if (!initialState.sessionStart) {
+		initialState.sessionStart = Date.now();
+	}
 	initialState.filtering = loadedState.filtering;
 }
 const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
