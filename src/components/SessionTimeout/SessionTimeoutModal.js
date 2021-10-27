@@ -5,13 +5,7 @@ import { minutesToMilliseconds, getSessionLength } from "./sessionTimeoutHelpers
 class SessionTimeoutModal extends Component {
 
     welcomeURL = 'https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2Fqa-upload.kpmp.org%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fqa-upload.kpmp.org%252F';
-    //timeoutInMinutes = 450; // minutes or 7.5 hours
-    timeoutInMinutes = 0.25; // minutes or 7.5 hours
-
-    constructor(props) {
-        super(props);
-        this.state = { showModal: false };
-    }
+    timeoutInMinutes = 450; // minutes or 7.5 hours
 
     handleSignin = () => {
         this.props.setSessionStart("");
@@ -19,9 +13,10 @@ class SessionTimeoutModal extends Component {
     };
 
     getTimeoutTime = () => {
-        let sessionLength = getSessionLength(this.props.sessionStart);
-        let timeLeft = minutesToMilliseconds(this.timeoutInMinutes) - sessionLength;
-        return Date.now() + timeLeft;
+	let sessionStart = this.props.sessionStart > 0 ? this.props.sessionStart : Date.now();
+        let sessionLength = getSessionLength(sessionStart);
+	let timeLeft = minutesToMilliseconds(this.timeoutInMinutes) - sessionLength;
+	return Date.now() + timeLeft;
     };
 
     rendererModal = ({hours, minutes, seconds, completed}) => {
