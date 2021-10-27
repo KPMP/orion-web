@@ -5,7 +5,7 @@ import { minutesToMilliseconds, getSessionLength } from "./sessionTimeoutHelpers
 class SessionTimeoutModal extends Component {
 
     welcomeURL = 'https://welcome.kpmp.org/shibds/?entityID=https%3A%2F%2Fqa-upload.kpmp.org%2Fshibboleth&return=https%3A%2F%2F' + window.location.hostname + '%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252F' + window.location.hostname + '%252F';
-    timeoutInMinutes = .25; // minutes or 7.5 hours
+    timeoutInMinutes = 450; // minutes or 7.5 hours
 
     handleSignin = () => {
         this.props.setSessionStart("");
