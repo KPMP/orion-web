@@ -17,5 +17,6 @@
   "stateDisplayMap": {},
   "userInformation": false,
   "showLargeFileModal": "",
-  "sessionStart": ""
+  "sessionStart": "",
+  "underMaintenance": false
 }
