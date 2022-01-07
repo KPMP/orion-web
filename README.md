@@ -6,6 +6,10 @@ Repo for the KPMP upload tool front-end
 ## Documentation
 Visit [kpmp.github.io/dlu](http://kpmp.io.github.io/dlu)
 
+## Enable System Downtime message
+Edit src/initialState.json and set "underMaintenance" to true
+run 'npm run build'
+
 ## Development Environment
 *   Create an environment file (.env) in the root of this project. See .env.example for referece.
 
