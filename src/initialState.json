@@ -16,5 +16,7 @@
   "packageTypeIcons": [],
   "stateDisplayMap": {},
   "userInformation": false,
-  "showLargeFileModal": ""
+  "showLargeFileModal": "",
+  "sessionStart": "",
+  "underMaintenance": false
 }
