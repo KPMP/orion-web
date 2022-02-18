@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
-import { getPackages } from '../../actions/Packages/packageActions';
+import { getPackages, setDtds } from '../../actions/Packages/packageActions';
 import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
 ({
-	packages: state.filtering,
+	//packages: state.filtering,
 	formDTD: state.formDTD,
 	packageTypeIcons: state.packageTypeIcons
 });
 
 const mapDispatchToProps = (dispatch, props) =>
 ({
-	loadRemoteData() {
-		dispatch(getPackages());
+	setDtds(packages) {
+		dispatch(setDtds(packages));
 	},
 
 	poll(callback) {

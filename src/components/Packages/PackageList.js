@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
+import { getPackagesStateless } from '../../actions/Packages/packageActions'
 
 class PackageList extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+            packages: {}
+        };
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
 
     componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
+            let packages = this.getPackagesStateless();
+            this.setState({packages: packages});
+            this.props.setDtds(packages);
             this.props.loadRemoteData();
         }
 

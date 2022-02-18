@@ -6,6 +6,32 @@ import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
 
+export const getPackagesStateless = () => {
+	return (dispatch) => {
+		api.get('/api/v1/packages')
+			.then(res => {
+				return res.data
+			})
+			.catch(err => {
+				dispatch(sendMessageToBackend(err));
+			});
+	};
+};
+
+export const setDtds = (packages) => {
+	return (dispatch) => {
+		let versions = [];
+		packages.forEach(function(packageItem) {
+		if (!versions.includes(packageItem.packageInfo.version)) {
+			versions.push(packageItem.packageInfo.version);
+		}
+		});
+		versions.forEach(function(version) {
+			dispatch(getDTDByVersion(version));
+		});
+	};
+};
+
 export const getPackages = () => {
 	return (dispatch) => {
 		api.get('/api/v1/packages')
