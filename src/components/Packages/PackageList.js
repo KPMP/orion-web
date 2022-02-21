@@ -4,13 +4,14 @@ import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { packages as packageReducer } from "./packagePanelReducer";
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
+import { filtering } from '../../initialState';
 
 class PackageList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            packages: {}
+            packages: filtering
         };
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
