@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
+import { packages as packageReducer } from "./packagePanelReducer";
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
 
 class PackageList extends Component {
@@ -17,8 +18,9 @@ class PackageList extends Component {
     componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
             let packages = this.getPackagesStateless();
-            this.setState({packages: packages});
             this.props.setDtds(packages);
+            let packagesFiltered = packageReducer(packages);
+            this.setState({packages: packagesFiltered});
             //this.props.loadRemoteData();
         }
 
