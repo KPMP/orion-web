@@ -20,6 +20,7 @@ class PackageList extends Component {
             let packages = getPackagesStateless();
             this.props.setDtds(packages);
             let packagesFiltered = packageReducer(packages, 'SET_PACKAGES');
+            console.log(packagesFiltered)
             this.setState({packages: packagesFiltered});
             //this.props.loadRemoteData();
         }

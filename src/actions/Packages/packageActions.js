@@ -7,15 +7,13 @@ import { getDTDByVersion } from '../dtdActions';
 const api = Api.getInstance();
 
 export const getPackagesStateless = () => {
-	return (dispatch) => {
 		api.get('/api/v1/packages')
 			.then(res => {
 				return res.data
 			})
 			.catch(err => {
-				dispatch(sendMessageToBackend(err));
+				console.log(err)
 			});
-	};
 };
 
 export const setDtds = (packages) => {
