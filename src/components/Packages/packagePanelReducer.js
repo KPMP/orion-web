@@ -120,7 +120,7 @@ export const packages = (state = {}, action) => {
 	}
 };
 
-const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
+export const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 
 	let packageTypesLower = predefinedPackageTypes.map(packageType => {
 		return packageType.toLowerCase();

@@ -5,7 +5,7 @@ import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
 ({
-	//packages: state.filtering,
+	filtering: state.filtering,
 	formDTD: state.formDTD,
 	packageTypeIcons: state.packageTypeIcons
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
-import { packages as packageReducer } from "./packagePanelReducer";
+import { packages as packageReducer, applyFilters } from "./packagePanelReducer";
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
 import initialState from '../../initialState';
 import actionNames from '../../actions/actionNames'
@@ -12,7 +12,7 @@ class PackageList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            packages: initialState.filtering
+            packages: [],
         };
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
@@ -21,10 +21,8 @@ class PackageList extends Component {
         if(!this.isRemoteDataLoaded()) {
             let packages = await getPackagesStateless();
             this.props.setDtds(packages);
-            let packagesFiltered = packageReducer(this.state.packages, {type: actionNames.SET_PACKAGES, payload: packages});
-            console.log(packagesFiltered);
-            this.setState({packages: packagesFiltered});
-            //this.props.loadRemoteData();
+            //let packagesFiltered = packageReducer(this.state.packages, {type: actionNames.SET_PACKAGES, payload: packages});
+            this.setState({ packages: packages });
         }
 
         this._isMounted = true;
@@ -35,6 +33,12 @@ class PackageList extends Component {
         this._isMounted = false;
     }
 
+    componentDidUpdate(prevProps, prevState, snapShot) {
+        if (this.props.filtering !== prevProps.filtering) {
+            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.packages, this.props.filtering.packageTypes)});
+        }
+    }
+
     pollIfMounted() {
         if(this._isMounted) {
             this.props.poll(this.pollIfMounted);
@@ -42,13 +46,13 @@ class PackageList extends Component {
     }
 
     isRemoteDataLoaded() {
-        return Object.keys(this.state.packages.unfiltered).length !== 0
-            && this.state.packages.unfiltered.constructor === Array;
+        return Object.keys(this.state.packages).length !== 0
+            && this.state.packages === Array;
     }
 
     hasFilteredResults() {
-        return Object.keys(this.state.packages.filtered).length !== 0
-            && this.state.packages.filtered.constructor === Array;
+        return Object.keys(this.state.packages).length !== 0
+            && this.state.packages.constructor === Array;
     }
 
     render() {
@@ -64,7 +68,7 @@ class PackageList extends Component {
         }
 
         else {
-            panels = this.state.packages.filtered.map((uploadPackage, index) => {
+            panels = this.state.packages.map((uploadPackage, index) => {
                 return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
@@ -85,7 +89,7 @@ class PackageList extends Component {
 }
 
 PackageList.propTypes = {
-    packages: PropTypes.object,
-}
+    filtering: PropTypes.object,
+};
 
 export default PackageList;
