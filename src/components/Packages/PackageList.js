@@ -19,7 +19,7 @@ class PackageList extends Component {
             let packages = this.getPackagesStateless();
             this.setState({packages: packages});
             this.props.setDtds(packages);
-            this.props.loadRemoteData();
+            //this.props.loadRemoteData();
         }
 
         this._isMounted = true;
@@ -81,7 +81,6 @@ class PackageList extends Component {
 
 PackageList.propTypes = {
     packages: PropTypes.object,
-    loadRemoteData: PropTypes.func.isRequired
 }
 
 export default PackageList;
