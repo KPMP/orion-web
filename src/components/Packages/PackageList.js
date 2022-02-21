@@ -15,9 +15,9 @@ class PackageList extends Component {
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
-            let packages = getPackagesStateless();
+            let packages = await getPackagesStateless();
             this.props.setDtds(packages);
             let packagesFiltered = packageReducer(packages, 'SET_PACKAGES');
             console.log(packagesFiltered)
