@@ -42,12 +42,12 @@ class PackageList extends Component {
 
     isRemoteDataLoaded() {
         return Object.keys(this.state.packages.unfiltered).length !== 0
-            && this.props.packages.unfiltered.constructor === Array;
+            && this.state.packages.unfiltered.constructor === Array;
     }
 
     hasFilteredResults() {
         return Object.keys(this.state.packages.filtered).length !== 0
-            && this.props.packages.filtered.constructor === Array;
+            && this.state.packages.filtered.constructor === Array;
     }
 
     render() {
