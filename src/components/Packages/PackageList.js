@@ -13,6 +13,7 @@ class PackageList extends Component {
         super(props);
         this.state = {
             packages: [],
+            unfilteredPackages: []
         };
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
@@ -22,7 +23,7 @@ class PackageList extends Component {
             let packages = await getPackagesStateless();
             this.props.setDtds(packages);
             //let packagesFiltered = packageReducer(this.state.packages, {type: actionNames.SET_PACKAGES, payload: packages});
-            this.setState({ packages: packages });
+            this.setState({ packages: packages, unfilteredPackages: packages });
         }
 
         this._isMounted = true;
@@ -35,7 +36,7 @@ class PackageList extends Component {
 
     componentDidUpdate(prevProps, prevState, snapShot) {
         if (this.props.filtering !== prevProps.filtering) {
-            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.packages, this.props.filtering.packageTypes)});
+            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
         }
     }
 
