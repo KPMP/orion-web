@@ -21,8 +21,8 @@ class PackageList extends Component {
         if(!this.isRemoteDataLoaded()) {
             let packages = await getPackagesStateless();
             this.props.setDtds(packages);
-            let packagesFiltered = packageReducer(packages, actionNames.SET_PACKAGES);
-            console.log(packagesFiltered)
+            let packagesFiltered = packageReducer(this.state.packages, {type: actionNames.SET_PACKAGES, payload: packages});
+            console.log(packagesFiltered);
             this.setState({packages: packagesFiltered});
             //this.props.loadRemoteData();
         }
