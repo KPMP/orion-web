@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { packages as packageReducer } from "./packagePanelReducer";
 import { getPackagesStateless } from '../../actions/Packages/packageActions'
 import initialState from '../../initialState';
+import actionNames from '../../actions/actionNames'
 
 class PackageList extends Component {
 
@@ -20,7 +21,7 @@ class PackageList extends Component {
         if(!this.isRemoteDataLoaded()) {
             let packages = await getPackagesStateless();
             this.props.setDtds(packages);
-            let packagesFiltered = packageReducer(packages, 'SET_PACKAGES');
+            let packagesFiltered = packageReducer(packages, actionNames.SET_PACKAGES);
             console.log(packagesFiltered)
             this.setState({packages: packagesFiltered});
             //this.props.loadRemoteData();
