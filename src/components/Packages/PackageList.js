@@ -41,12 +41,12 @@ class PackageList extends Component {
     }
 
     isRemoteDataLoaded() {
-        return Object.keys(this.props.packages.unfiltered).length !== 0
+        return Object.keys(this.state.packages.unfiltered).length !== 0
             && this.props.packages.unfiltered.constructor === Array;
     }
 
     hasFilteredResults() {
-        return Object.keys(this.props.packages.filtered).length !== 0
+        return Object.keys(this.state.packages.filtered).length !== 0
             && this.props.packages.filtered.constructor === Array;
     }
 
@@ -63,7 +63,7 @@ class PackageList extends Component {
         }
 
         else {
-            panels = this.props.packages.filtered.map((uploadPackage, index) => {
+            panels = this.state.packages.filtered.map((uploadPackage, index) => {
                 return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
