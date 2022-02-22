@@ -30,34 +30,6 @@ export const setDtds = (packages) => {
 	};
 };
 
-export const getPackages = () => {
-	return (dispatch) => {
-		api.get('/api/v1/packages')
-			.then(res => {
-				dispatch(setPackages(res.data));
-				let versions = [];
-				res.data.forEach(function(packageItem) {
-					if (!versions.includes(packageItem.packageInfo.version)) {
-						versions.push(packageItem.packageInfo.version);
-					}
-				});
-				versions.forEach(function(version) {
-					dispatch(getDTDByVersion(version));
-				});
-			})
-			.catch(err => {
-				dispatch(sendMessageToBackend(err));
-			});
-	};
-};
-
-export const setPackages = (packages) => {
-	return {
-		type: actionNames.SET_PACKAGES,
-		payload: packages
-	}
-}
-
 export const setIsUploading = (isUploading) => {
 	return {
 		type: actionNames.SET_IS_UPLOADING,

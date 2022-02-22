@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
-import { getPackages, setDtds } from '../../actions/Packages/packageActions';
+import { setDtds } from '../../actions/Packages/packageActions';
 import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
