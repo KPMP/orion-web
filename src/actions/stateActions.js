@@ -11,7 +11,7 @@ export const getStateEvents = (callback) => {
 			.then((data) => {
 				// timeout: true will be sent by server if the server times out before the client
 				if(!data.data.hasOwnProperty('timeout')) {
-                    dispatch(getPackages());
+                    dispatch(location.reload());
                 }
 
 				callback.networkRetries = 0;
