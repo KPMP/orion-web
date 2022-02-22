@@ -57,7 +57,7 @@ class PackageList extends Component {
         let message = null,
             panels = [];
 
-        if (this.state.packages.length == 0) {
+        if (this.state.packages.length === 0) {
             message = "Loading packages...";
         }
 

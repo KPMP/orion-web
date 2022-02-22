@@ -17,7 +17,7 @@ import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
-import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
+//import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
 import DowntimeNotice from './components/DowntimeNotice/DowntimeNotice';
 
 const cacheStore = window.sessionStorage.getItem("redux-store");

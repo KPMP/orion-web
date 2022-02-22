@@ -1,5 +1,4 @@
 import Api from '../helpers/Api';
-import { getPackages } from './Packages/packageActions';
 import { sendMessageToBackend } from './Error/errorActions';
 import actionNames from './actionNames';	
 
