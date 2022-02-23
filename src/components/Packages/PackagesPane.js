@@ -134,11 +134,6 @@ class PackagesPane extends Component {
 					</Row>
 					<Row>
 						<Col xs={12}>
-							<div className="alert alert-primary"><b>Notice:</b> We are currently experiencing issues with uploading new packages. Therefore, we are limiting results to the past 365 days to ensure you can upload packages in a timely manner. We will address the underlying issue soon. All previously uploaded packages are still safe in the Data Lake.</div>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
 							<i className="text-secondary">Search results are displayed in reverse chronological order</i>
 						</Col>
 					</Row>
