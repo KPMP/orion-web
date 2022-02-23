@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import PackagePanelContainer from './PackagePanelContainer';
 import {Row} from 'reactstrap';
 import PropTypes from 'prop-types';
+import { applyFilters } from "./packagePanelReducer";
+import { getPackagesStateless } from '../../actions/Packages/packageActions'
 
 class PackageList extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+            packages: [],
+            unfilteredPackages: []
+        };
         this.pollIfMounted = this.pollIfMounted.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
-            this.props.loadRemoteData();
+            let packages = await getPackagesStateless();
+            this.props.setDtds(packages);
+            this.setState({ packages: packages, unfilteredPackages: packages });
         }
 
         this._isMounted = true;
@@ -24,6 +31,12 @@ class PackageList extends Component {
         this._isMounted = false;
     }
 
+    componentDidUpdate(prevProps, prevState, snapShot) {
+        if (this.props.filtering !== prevProps.filtering) {
+            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
+        }
+    }
+
     pollIfMounted() {
         if(this._isMounted) {
             this.props.poll(this.pollIfMounted);
@@ -31,20 +44,20 @@ class PackageList extends Component {
     }
 
     isRemoteDataLoaded() {
-        return Object.keys(this.props.packages.unfiltered).length !== 0
-            && this.props.packages.unfiltered.constructor === Array;
+        return Object.keys(this.state.packages).length !== 0
+            && this.state.packages === Array;
     }
 
     hasFilteredResults() {
-        return Object.keys(this.props.packages.filtered).length !== 0
-            && this.props.packages.filtered.constructor === Array;
+        return Object.keys(this.state.packages).length !== 0
+            && this.state.packages.constructor === Array;
     }
 
     render() {
         let message = null,
             panels = [];
 
-        if (!this.isRemoteDataLoaded()) {
+        if (this.state.packages.length === 0) {
             message = "Loading packages...";
         }
 
@@ -53,7 +66,7 @@ class PackageList extends Component {
         }
 
         else {
-            panels = this.props.packages.filtered.map((uploadPackage, index) => {
+            panels = this.state.packages.map((uploadPackage, index) => {
                 return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
             });
         }
@@ -74,8 +87,7 @@ class PackageList extends Component {
 }
 
 PackageList.propTypes = {
-    packages: PropTypes.object,
-    loadRemoteData: PropTypes.func.isRequired
-}
+    filtering: PropTypes.object,
+};
 
 export default PackageList;

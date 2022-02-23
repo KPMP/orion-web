@@ -1,11 +1,9 @@
 {
   "dtds": {},
   "filtering": {
-  	"filtered": [],
   	"filters": [],
 	"packageTypes": [],
 	"tisNames": [],
-  	"unfiltered": [],
   	"userList": []
   },
   "formDTD": {},
