@@ -37,14 +37,12 @@ class PackageList extends Component {
 
     async componentDidUpdate(prevProps, prevState, snapShot) {
         if (this.props.filtering !== prevProps.filtering) {
-            if (this.props.filtering.filters !== prevProps.filtering.filters) {
                 this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
-            }
-            if (this.props.filtering.refresh) {
-                console.log("refresh!");
-                await this.getPackages();
-                this.props.setRefresh(false);
-            }
+            // if (this.props.filtering.refresh) {
+            //     console.log("refresh!");
+            //     await this.getPackages();
+            //     this.props.setRefresh(false);
+            // }
         }
     }
 
