@@ -1,6 +1,6 @@
 import Api from '../helpers/Api';
 import { sendMessageToBackend } from './Error/errorActions';
-import { setRefresh } from "./Packages/packageActions";
+import { setRefreshPackages } from "./Packages/packageActions";
 import actionNames from './actionNames';	
 
 const api = Api.getInstance();
@@ -11,7 +11,7 @@ export const getStateEvents = (callback) => {
 			.then((data) => {
 				// timeout: true will be sent by server if the server times out before the client
 				if(!data.data.hasOwnProperty('timeout')) {
-                    dispatch(setRefresh(true));
+                    dispatch(setRefreshPackages(true));
                 }
 				callback.networkRetries = 0;
 				callback();
