@@ -18,22 +18,32 @@ class PackageList extends Component {
 
     async componentDidMount() {
         if(!this.isRemoteDataLoaded()) {
-            let packages = await getPackagesStateless();
-            this.props.setDtds(packages);
-            this.setState({ packages: packages, unfilteredPackages: packages });
+            await this.getPackages()
         }
-
         this._isMounted = true;
         this.pollIfMounted();
+    }
+
+    async getPackages() {
+        console.log("get packages!")
+        let packages = await getPackagesStateless();
+        this.props.setDtds(packages);
+        this.setState({ packages: packages, unfilteredPackages: packages });
     }
 
     componentWillUnmount() {
         this._isMounted = false;
     }
 
-    componentDidUpdate(prevProps, prevState, snapShot) {
-        if (this.props.filtering !== prevProps.filtering) {
-            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
+    async componentDidUpdate(prevProps, prevState, snapShot) {
+        if (this.props !== prevProps) {
+            if (this.props.filtering !== prevProps.filtering) {
+                this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
+            }
+            if (this.props.refreshPackages) {
+                await this.getPackages();
+                this.setRefreshPackages(false)
+            }
         }
     }
 
@@ -88,6 +98,11 @@ class PackageList extends Component {
 
 PackageList.propTypes = {
     filtering: PropTypes.object,
+    setDtds: PropTypes.func,
+    poll: PropTypes.func,
+    setRefresh: PropTypes.func,
+    formDTD: PropTypes.object,
+    packageTypeIcons: PropTypes.array
 };
 
 export default PackageList;

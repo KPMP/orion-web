@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import actionNames from './actions/actionNames';
 import loadedState from './initialState';
-import { filtering, dtds, showLargeFileModal } from './components/Packages/packagePanelReducer';
+import { filtering, dtds, showLargeFileModal, refreshPackages } from './components/Packages/packagePanelReducer';
 import { packageTypeIcons } from './components/Packages/packageTypeIconsReducer';
 import { isUploading, formDTD } from './components/Upload/uploadFormReducer';
 import { userInformation } from './components/userInformationReducer';
@@ -17,7 +17,8 @@ const appReducer = combineReducers({
     packageTypeIcons,
     stateDisplayMap,
     showLargeFileModal,
-    sessionStart
+    sessionStart,
+    refreshPackages
 });
 
 const rootReducer = (state, action) => {

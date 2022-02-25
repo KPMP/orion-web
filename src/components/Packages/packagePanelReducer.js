@@ -28,6 +28,19 @@ export const showLargeFileModal = (state = "", action) => {
 	}
 };
 
+export const refreshPackages = (state = false, action) => {
+
+	let newState = {...state};
+	switch(action.type) {
+		case actionNames.SET_REFRESH_PACKAGES:
+			newState = action.payload;
+			return newState;
+		default:
+			return state;
+	}
+
+};
+
 export const filtering = (state = {}, action) => {
 	let newState = {}; 
 	let filters = state.filters;
@@ -35,6 +48,7 @@ export const filtering = (state = {}, action) => {
 	let packageTypes = state.packageTypes;
 
 	switch(action.type) {
+
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;

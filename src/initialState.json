@@ -16,5 +16,6 @@
   "userInformation": false,
   "showLargeFileModal": "",
   "sessionStart": "",
-  "underMaintenance": false
+  "underMaintenance": false,
+  "refreshPackages": false
 }
