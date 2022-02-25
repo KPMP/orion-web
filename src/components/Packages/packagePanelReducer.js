@@ -28,6 +28,19 @@ export const showLargeFileModal = (state = "", action) => {
 	}
 };
 
+export const refreshPackages = (state = false, action) => {
+
+	let newState = {...state};
+	switch(action.type) {
+		case actionNames.SET_REFRESH_PACKAGES:
+			newState = action.payload;
+			return newState;
+		default:
+			return state;
+	}
+
+};
+
 export const filtering = (state = {}, action) => {
 	let newState = {}; 
 	let filters = state.filters;
@@ -41,7 +54,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = packageTypes;
-			newState.refresh = action.payload;
 			return newState;
 
 		case actionNames.SET_USERS:
@@ -49,7 +61,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = action.payload;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = state.packageTypes;
-			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
@@ -57,7 +68,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = action.payload;
-			newState.refresh = state.refresh;
 			return newState;
 			
 		case actionNames.SET_TIS_NAMES:
@@ -65,7 +75,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
 			newState.tisNames = action.payload;
-			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -82,7 +91,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.tisNames = state.tisNames;
-			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -105,7 +113,6 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.tisNames = state.tisNames;
-			newState.refresh = state.refresh;
 			return newState;
 		default:
 			return state;

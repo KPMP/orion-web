@@ -37,10 +37,10 @@ export const setIsUploading = (isUploading) => {
 	}
 };
 
-export const setRefresh = (refresh) => {
+export const setRefreshPackages = (refreshPackages) => {
 	return {
-		type: actionNames.SET_REFRESH,
-		payload: refresh
+		type: actionNames.SET_REFRESH_PACKAGES,
+		payload: refreshPackages
 	}
 };
 
