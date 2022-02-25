@@ -25,6 +25,7 @@ class PackageList extends Component {
     }
 
     async getPackages() {
+        console.log("get packages!")
         let packages = await getPackagesStateless();
         this.props.setDtds(packages);
         this.setState({ packages: packages, unfilteredPackages: packages });
@@ -38,7 +39,8 @@ class PackageList extends Component {
         if (this.props.filtering.filters !== prevProps.filtering.filters) {
             this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
         }
-        if (this.props.filtering.refresh === true) {
+        if (this.props.filtering.refresh) {
+            console.log("refresh!");
             await this.getPackages();
             this.props.setRefresh(false);
         }
