@@ -41,7 +41,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = state.users;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = state.packageTypes;
-			newState.refresh = state.payload;
+			newState.refresh = action.payload;
 			return newState;
 
 		case actionNames.SET_USERS:
