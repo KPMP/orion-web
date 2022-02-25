@@ -38,9 +38,9 @@ export const filtering = (state = {}, action) => {
 
 		case actionNames.SET_REFRESH:
 			newState.filters = state.filters;
-			newState.userList = state.users;
+			newState.userList = users;
 			newState.tisNames = state.tisNames;
-			newState.packageTypes = state.packageTypes;
+			newState.packageTypes = packageTypes;
 			newState.refresh = action.payload;
 			return newState;
 
