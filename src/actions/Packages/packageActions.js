@@ -35,7 +35,14 @@ export const setIsUploading = (isUploading) => {
 		type: actionNames.SET_IS_UPLOADING,
 		payload: isUploading
 	}
-}
+};
+
+export const setRefresh = (refresh) => {
+	return {
+		type: actionNames.SET_REFRESH,
+		payload: refresh
+	}
+};
 
 export const finishPackage = (packageId) => {
 	return (dispatch) => {

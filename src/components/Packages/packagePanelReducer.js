@@ -35,11 +35,21 @@ export const filtering = (state = {}, action) => {
 	let packageTypes = state.packageTypes;
 
 	switch(action.type) {
+
+		case actionNames.SET_REFRESH:
+			newState.filters = state.filters;
+			newState.userList = state.users;
+			newState.tisNames = state.tisNames;
+			newState.packageTypes = state.packageTypes;
+			newState.refresh = state.payload;
+			return newState;
+
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = state.packageTypes;
+			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
@@ -47,6 +57,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.tisNames = state.tisNames;
 			newState.packageTypes = action.payload;
+			newState.refresh = state.refresh;
 			return newState;
 			
 		case actionNames.SET_TIS_NAMES:
@@ -54,6 +65,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
 			newState.tisNames = action.payload;
+			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -70,6 +82,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.tisNames = state.tisNames;
+			newState.refresh = state.refresh;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -92,6 +105,7 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.tisNames = state.tisNames;
+			newState.refresh = state.refresh;
 			return newState;
 		default:
 			return state;

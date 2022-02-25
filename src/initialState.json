@@ -4,7 +4,8 @@
   	"filters": [],
 	"packageTypes": [],
 	"tisNames": [],
-  	"userList": []
+  	"userList": [],
+    "refresh": false
   },
   "formDTD": {},
   "help": {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PackageList from './PackageList';
-import { setDtds } from '../../actions/Packages/packageActions';
+import { setDtds, setRefresh } from '../../actions/Packages/packageActions';
 import { getStateEvents } from '../../actions/stateActions';
 
 const mapStateToProps = (state, props) =>
@@ -18,6 +18,10 @@ const mapDispatchToProps = (dispatch, props) =>
 
 	poll(callback) {
 		dispatch(getStateEvents(callback));
+	},
+
+	setRefresh(refresh) {
+		dispatch(setRefresh(refresh));
 	}
 });
 	
