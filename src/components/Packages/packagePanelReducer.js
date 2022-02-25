@@ -49,13 +49,6 @@ export const filtering = (state = {}, action) => {
 
 	switch(action.type) {
 
-		case actionNames.SET_REFRESH:
-			newState.filters = state.filters;
-			newState.userList = users;
-			newState.tisNames = state.tisNames;
-			newState.packageTypes = packageTypes;
-			return newState;
-
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;
