@@ -54,13 +54,13 @@ class PackageList extends Component {
     }
 
     isRemoteDataLoaded() {
-        return Object.keys(this.state.packages).length !== 0
-            && this.state.packages === Array;
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.unfilteredPackages === Array;
     }
 
-    hasFilteredResults() {
-        return Object.keys(this.state.packages).length !== 0
-            && this.state.packages.constructor === Array;
+    hasNoFilteredResults() {
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.packages.constructor === Array && Object.keys(this.state.packages).length === 0;
     }
 
     render() {
@@ -71,7 +71,7 @@ class PackageList extends Component {
             message = "Loading packages...";
         }
 
-        else if (!this.hasFilteredResults()) {
+        else if (this.hasNoFilteredResults()) {
             message = "No packages returned for the selected criteria.";
         }
 
