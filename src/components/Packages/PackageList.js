@@ -25,7 +25,6 @@ class PackageList extends Component {
     }
 
     async getPackages() {
-        console.log("get packages!")
         let packages = await getPackagesStateless();
         this.props.setDtds(packages);
         this.setState({ packages: packages, unfilteredPackages: packages });
@@ -42,7 +41,7 @@ class PackageList extends Component {
             }
             if (this.props.refreshPackages) {
                 await this.getPackages();
-                this.setRefreshPackages(false)
+                this.props.setRefreshPackages(false)
             }
         }
     }
@@ -54,24 +53,24 @@ class PackageList extends Component {
     }
 
     isRemoteDataLoaded() {
-        return Object.keys(this.state.packages).length !== 0
-            && this.state.packages === Array;
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.unfilteredPackages === Array;
     }
 
-    hasFilteredResults() {
-        return Object.keys(this.state.packages).length !== 0
-            && this.state.packages.constructor === Array;
+    hasNoFilteredResults() {
+        return Object.keys(this.state.unfilteredPackages).length !== 0
+            && this.state.packages.constructor === Array && Object.keys(this.state.packages).length === 0;
     }
 
     render() {
         let message = null,
             panels = [];
 
-        if (this.state.packages.length === 0) {
+        if (this.state.unfilteredPackages.length === 0) {
             message = "Loading packages...";
         }
 
-        else if (!this.hasFilteredResults()) {
+        else if (this.hasNoFilteredResults()) {
             message = "No packages returned for the selected criteria.";
         }
 
