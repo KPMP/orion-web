@@ -42,7 +42,7 @@ class PackageList extends Component {
             }
             if (this.props.refreshPackages) {
                 await this.getPackages();
-                this.setRefreshPackages(false)
+                this.props.setRefreshPackages(false)
             }
         }
     }
