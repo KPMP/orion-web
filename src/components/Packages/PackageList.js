@@ -25,7 +25,6 @@ class PackageList extends Component {
     }
 
     async getPackages() {
-        console.log("get packages!")
         let packages = await getPackagesStateless();
         this.props.setDtds(packages);
         this.setState({ packages: packages, unfilteredPackages: packages });
