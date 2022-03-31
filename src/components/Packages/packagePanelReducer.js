@@ -28,17 +28,28 @@ export const showLargeFileModal = (state = "", action) => {
 	}
 };
 
-export const packages = (state = {}, action) => {
+export const refreshPackages = (state = false, action) => {
+
+	let newState = {...state};
+	switch(action.type) {
+		case actionNames.SET_REFRESH_PACKAGES:
+			newState = action.payload;
+			return newState;
+		default:
+			return state;
+	}
+
+};
+
+export const filtering = (state = {}, action) => {
 	let newState = {}; 
-	let filteredPackageList = state.unfiltered;
 	let filters = state.filters;
 	let users = state.userList;
 	let packageTypes = state.packageTypes;
 
 	switch(action.type) {
+
 		case actionNames.SET_USERS:
-			newState.filtered = state.filtered;
-			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = action.payload;
 			newState.tisNames = state.tisNames;
@@ -46,8 +57,6 @@ export const packages = (state = {}, action) => {
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
-			newState.filtered = state.filtered;
-			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = users;
 			newState.tisNames = state.tisNames;
@@ -55,21 +64,10 @@ export const packages = (state = {}, action) => {
 			return newState;
 			
 		case actionNames.SET_TIS_NAMES:
-			newState.filtered = state.filtered;
-			newState.unfiltered = state.unfiltered;
 			newState.filters = state.filters;
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
 			newState.tisNames = action.payload;
-			return newState;
-
-		case actionNames.SET_PACKAGES:
-			newState.filtered = action.payload;
-			newState.unfiltered = action.payload;
-			newState.filters = [];
-			newState.userList = users;
-			newState.packageTypes = state.packageTypes;
-			newState.tisNames = state.tisNames;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -81,10 +79,7 @@ export const packages = (state = {}, action) => {
 					return filters;
 				});
 			}
-        
-			filteredPackageList = applyFilters(filters, filteredPackageList, packageTypes);
-			newState.unfiltered = state.unfiltered;
-			newState.filtered = filteredPackageList;
+
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
@@ -106,10 +101,7 @@ export const packages = (state = {}, action) => {
 			if (!filterAdded) {
 				filters.push(action.payload);
 			}
-			
-			filteredPackageList = applyFilters(filters, filteredPackageList, packageTypes);
-			newState.unfiltered = state.unfiltered;
-			newState.filtered = filteredPackageList;
+
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
@@ -120,7 +112,7 @@ export const packages = (state = {}, action) => {
 	}
 };
 
-const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
+export const applyFilters = (filters, filteredPackageList, predefinedPackageTypes) => {
 
 	let packageTypesLower = predefinedPackageTypes.map(packageType => {
 		return packageType.toLowerCase();

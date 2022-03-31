@@ -1,11 +1,9 @@
 {
   "dtds": {},
   "filtering": {
-  	"filtered": [],
   	"filters": [],
 	"packageTypes": [],
 	"tisNames": [],
-  	"unfiltered": [],
   	"userList": []
   },
   "formDTD": {},
@@ -18,5 +16,6 @@
   "userInformation": false,
   "showLargeFileModal": "",
   "sessionStart": "",
-  "underMaintenance": false
+  "underMaintenance": false,
+  "refreshPackages": false
 }
