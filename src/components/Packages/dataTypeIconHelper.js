@@ -42,6 +42,13 @@ export const iconDataTypes = new Map(
         		iconImage: 'icon_pilot3_132x132.png',
         		dataTypes: ['Pilot 3 Receipt Picture']
         	}
+        ],
+        ['Biomarker',
+            {
+                iconDataType: 'Biomarker',
+                iconImage: 'icon_biomarker_132x132.png'
+            }
+
         ]
     ]
 );
