@@ -70,7 +70,7 @@ class App extends Component {
 								<Route path="/" component={DowntimeNotice} store={store} />
 								<Route exact path="/permissionDenied" component={PermissionDenied} />
 								<Route exact path="/notRegistered" component={NotRegistered} />
-								<Route exact path="*" component={NotFoundPage} />
+								<Route path="*" component={NotFoundPage} />
 							</Switch>
 						<NavFooter />
 					</Router>
@@ -90,7 +90,7 @@ class App extends Component {
 							<Route exact path="/oops" component={Oops} />
 							<Route exact path="/permissionDenied" component={PermissionDenied} />
 							<Route exact path="/notRegistered" component={NotRegistered} />
-							<Route exact path="/*" component={NotFoundPage} />
+							<Route path='*' component={NotFoundPage} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>
