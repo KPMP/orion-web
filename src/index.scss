@@ -1,3 +1,4 @@
+@import "common-values.scss";
 $header-height-padded: 59px;
 $footer-height-padded: 32px;
 $filter-height: 37px;
@@ -377,7 +378,7 @@ PACKAGES
 	padding-bottom: 15px;
 	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
 		min-height: 120px;
-		border: 1px dashed darkgrey;
+		//border: 1px dashed darkgrey;
 	}
 
 	.react-fine-uploader-gallery-file-input-container {
@@ -533,7 +534,74 @@ PACKAGES
 		height: 330px;
 	}
 }
+#not-found-page {
+  padding: 20px;
+  background-color: $kpmp-gray;
 
+  .not-found-image {
+    max-width: 90%;
+    margin-top: 30px;
+    margin-right: 40px;
+  }
+
+  .not-found-container {
+    max-width: 60%;
+    margin: auto;
+  }
+
+  .not-found-text {
+    padding-top: 30px;
+
+    .not-found-regular {
+      font-size: 32px;
+    }
+
+    .not-found-small {
+      font-size: 24px;
+    }
+  }
+}
+@media (max-width: 764px) {
+
+  .MuiTableRow-root.MuiTableRow-head th:nth-child(5) {
+    display: none;
+  }
+
+  .MuiTableBody-root tr td:nth-child(5) {
+    display: none;
+  }
+}
+
+body #homepage {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
+  p,h1,h2,h3,h4,h5,h6,a {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
+  }
+}
+#root #homepage {
+  .row {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .btn-primary {
+    background-color: $kpmp-button;
+  }
+
+  #summary-plot .row {
+    margin: 0px
+  }
+
+  #summary-plot .col-12 {
+    padding: 0px
+  }
+
+  .samples-plot-header {
+    margin-left: 305px;
+    font-size: 16px;
+  }
+}
 #form-footer {
 	background: #CCCCCC;
 	justify-content: center;
