@@ -13,7 +13,7 @@ $footer-color: #283C5E;
 
 body {
 	font-size: 14px;
-
+	background-color:$kpmp-gray;
 	/** Windows fix: Bootstrap 4 scrollbar disappears when modal shows */
 	padding-right: 0px !important;
 }
@@ -339,10 +339,6 @@ PACKAGES
 		}
 	}
 
-	a.dropdown-toggle {
-
-	}
-
 	#nav-user-dropdown-menu {
 		a:hover {
 			text-decoration: none !important;
@@ -378,7 +374,6 @@ PACKAGES
 	padding-bottom: 15px;
 	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
 		min-height: 120px;
-		//border: 1px dashed darkgrey;
 	}
 
 	.react-fine-uploader-gallery-file-input-container {
@@ -561,16 +556,6 @@ PACKAGES
     }
   }
 }
-@media (max-width: 764px) {
-
-  .MuiTableRow-root.MuiTableRow-head th:nth-child(5) {
-    display: none;
-  }
-
-  .MuiTableBody-root tr td:nth-child(5) {
-    display: none;
-  }
-}
 
 body #homepage {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -578,28 +563,6 @@ body #homepage {
   p,h1,h2,h3,h4,h5,h6,a {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue";
-  }
-}
-#root #homepage {
-  .row {
-    margin-right: 15px;
-    margin-left: 15px;
-  }
-  .btn-primary {
-    background-color: $kpmp-button;
-  }
-
-  #summary-plot .row {
-    margin: 0px
-  }
-
-  #summary-plot .col-12 {
-    padding: 0px
-  }
-
-  .samples-plot-header {
-    margin-left: 305px;
-    font-size: 16px;
   }
 }
 #form-footer {
