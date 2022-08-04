@@ -96,7 +96,7 @@ class DynamicForm extends Component {
 		this.setState({submitClicked: true});
 		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
-			let newValues = values;
+			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
 			if (!this.needUserInfo()) {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
 				newValues.submitterLastName = this.props.userInformation.lastName;
