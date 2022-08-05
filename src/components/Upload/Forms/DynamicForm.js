@@ -149,7 +149,7 @@ class DynamicForm extends Component {
 			let fieldName = field.fieldName;
 			if ( field.type !== 'Submitter Information' ) {
 				if ( field.required && !this.isFieldDisabled(field, form) 
-						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined )) {
+						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined) || getFieldValue(fieldName) === "") {
 					return false;
 				}
 			}
