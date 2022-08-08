@@ -96,7 +96,7 @@ class DynamicForm extends Component {
 		this.setState({submitClicked: true});
 		let { validateFields } = this.props.form;
 		validateFields((err, values) => {
-			let newValues = values;
+			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
 			if (!this.needUserInfo()) {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
 				newValues.submitterLastName = this.props.userInformation.lastName;
@@ -149,7 +149,10 @@ class DynamicForm extends Component {
 			let fieldName = field.fieldName;
 			if ( field.type !== 'Submitter Information' ) {
 				if ( field.required && !this.isFieldDisabled(field, form) 
-						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined )) {
+						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined)) {
+					return false;
+				}
+				if (getFieldValue(fieldName).length() === 0){
 					return false;
 				}
 			}
