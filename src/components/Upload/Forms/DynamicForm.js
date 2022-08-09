@@ -152,8 +152,11 @@ class DynamicForm extends Component {
 						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined)) {
 					return false;
 				}
-				if (getFieldValue(fieldName).length === 0){
-					return false;
+				if (getFieldValue(fieldName)){
+					let length = JSON.stringify(getFieldValue(fieldName)).length;
+					if(length === 0){
+						return false;
+					}
 				}
 			}
 		}
