@@ -148,13 +148,12 @@ class DynamicForm extends Component {
 			let field = fields[i];
 			let fieldName = field.fieldName;
 			if ( field.type !== 'Submitter Information' ) {
-				if ( field.required && !this.isFieldDisabled(field, form) 
-						&& ( getFieldError(fieldName) !== undefined || getFieldValue(fieldName) === undefined)) {
-					return false;
-				}
-				if (getFieldValue(fieldName)){
-					let length = JSON.stringify(getFieldValue(fieldName)).length;
-					if(length === 0){
+				if ( field.required && !this.isFieldDisabled(field, form)) {
+				const fieldValue = getFieldValue(fieldName);
+					if(getFieldError(fieldName) !== undefined){
+						return false;
+					}
+					if(fieldValue == undefined || fieldValue.length === 0){
 						return false;
 					}
 				}
