@@ -153,7 +153,7 @@ class DynamicForm extends Component {
 					if(getFieldError(fieldName) !== undefined){
 						return false;
 					}
-					if(fieldValue == undefined || fieldValue.length === 0){
+					if(fieldValue === undefined || fieldValue.length === 0){
 						return false;
 					}
 				}
