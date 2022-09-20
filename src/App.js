@@ -45,11 +45,6 @@ function logPageView(location, action) {
 	ReactGA.set({ page: location.pathname + location.search });
 	ReactGA.pageview(location.pathname + location.search);
 }
-ReactGA4.initialize(GA_TRACKING_ID);
-function loggingPageView(location, action) {
-	ReactGA4.set({ page: location.pathname + location.search });
-	ReactGA4.send(location.pathname + location.search);
-}
 const history = createHistory();
 history.listen((location, action) => {
 	logPageView(location, action);
