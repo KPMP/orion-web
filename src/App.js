@@ -48,7 +48,6 @@ function logPageView(location, action) {
 const history = createHistory();
 history.listen((location, action) => {
 	logPageView(location, action);
-	loggingPageView(location, action);
     window.scrollTo(0, 0);
 	applyRouteClass();
 });
