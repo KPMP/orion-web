@@ -10,7 +10,8 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import ReactGA from 'react-ga4';
+import ReactGA4 from 'react-ga4';
+import ReactGA from 'react-ga';
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
@@ -43,6 +44,11 @@ ReactGA.initialize(GA_TRACKING_ID);
 function logPageView(location, action) {
 	ReactGA.set({ page: location.pathname + location.search });
 	ReactGA.pageview(location.pathname + location.search);
+}
+ReactGA4.initialize(GA_TRACKING_ID);
+function logPageView(location, action) {
+	ReactGA4.set({ page: location.pathname + location.search });
+	ReactGA4.send(location.pathname + location.search);
 }
 const history = createHistory();
 history.listen((location, action) => {
