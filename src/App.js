@@ -46,13 +46,14 @@ function logPageView(location, action) {
 	ReactGA.pageview(location.pathname + location.search);
 }
 ReactGA4.initialize(GA_TRACKING_ID);
-function logPageView(location, action) {
+function loggingPageView(location, action) {
 	ReactGA4.set({ page: location.pathname + location.search });
 	ReactGA4.send(location.pathname + location.search);
 }
 const history = createHistory();
 history.listen((location, action) => {
 	logPageView(location, action);
+	loggingPageView(location, action);
     window.scrollTo(0, 0);
 	applyRouteClass();
 });
@@ -63,6 +64,7 @@ class App extends Component {
 
 	componentDidMount() {
 		logPageView(window.location, "");
+		loggingPageView(window.location, "");
 		applyRouteClass();
 	}
 
