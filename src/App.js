@@ -58,7 +58,6 @@ class App extends Component {
 
 	componentDidMount() {
 		logPageView(window.location, "");
-		loggingPageView(window.location, "");
 		applyRouteClass();
 	}
 
