@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import ReactGA4 from 'react-ga4';
 import ReactGA from 'react-ga';
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
@@ -19,6 +20,7 @@ import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
 //import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
 import DowntimeNotice from './components/DowntimeNotice/DowntimeNotice';
+import NotFoundPage from './components/Error/NotFoundPage'
 
 const cacheStore = window.sessionStorage.getItem("redux-store");
 let initialState = loadedState;
@@ -69,6 +71,7 @@ class App extends Component {
 								<Route path="/" component={DowntimeNotice} store={store} />
 								<Route exact path="/permissionDenied" component={PermissionDenied} />
 								<Route exact path="/notRegistered" component={NotRegistered} />
+								<Route path='/*' component={NotFoundPage} />
 							</Switch>
 						<NavFooter />
 					</Router>
@@ -88,6 +91,7 @@ class App extends Component {
 							<Route exact path="/oops" component={Oops} />
 							<Route exact path="/permissionDenied" component={PermissionDenied} />
 							<Route exact path="/notRegistered" component={NotRegistered} />
+							<Route path='/*' component={NotFoundPage} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>
