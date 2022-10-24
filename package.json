@@ -1,6 +1,6 @@
 {
   "name": "orion-web",
-  "version": "2.8.4",
+  "version": "2.10",
   "private": true,
   "devDependencies": {
     "acorn": "7.2.0",
