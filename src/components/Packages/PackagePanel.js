@@ -20,7 +20,6 @@ class PackagePanel extends Component {
 		this.handleMetadataClick = this.handleMetadataClick.bind(this);
 		this.handleLargeFileClick = this.handleLargeFileClick.bind(this);
 		this.handleStateInfoClick = this.handleStateInfoClick.bind(this);
-		this.handleDownloadClick = this.handleDownloadClick.bind(this);
 	}
 	
 	handleAttachmentClick() {
@@ -43,18 +42,6 @@ class PackagePanel extends Component {
 			let show = !this.state.showLargeFile;
 			this.setState({ showLargeFile: show });
 		}
-	}
-	
-	handleDownloadClick(e) {
-		ReactGA.event({
-			category: 'Download',
-			action: 'File Package',
-			label: this.props.uploadPackage.packageInfo._id
-		});
-		let api = Api.getInstance();
-		let url = api.getBaseURL() + api.fixArguments(['api/v1/packages/']) + this.props.uploadPackage.packageInfo._id + '/files';
-		
-		window.location.href=url;
 	}
 
 	render() {
@@ -98,7 +85,6 @@ class PackagePanel extends Component {
 									packageSubmitter={packageInfo.submitter}
 									largeFileUpload={packageInfo.largeFilesChecked}
 									stateDisplayMap={this.props.stateDisplayMap}
-									handleDownloadClick={this.handleDownloadClick}
 								/>
 							</Col>
 							}

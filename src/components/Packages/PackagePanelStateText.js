@@ -55,8 +55,7 @@ class PackagePanelStateText extends Component {
         }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        let downloadButton = getDownloadButton(this.props.panelState.state, this.props.stateDisplayMap, this.props.panelState.packageId, this.props.handleDownloadClick);
-        
+
         return <React.Fragment>
             <div className='d-flex align-items-start'>
             	{ stateDisplayInfo &&
@@ -87,14 +86,6 @@ class PackagePanelStateText extends Component {
                     </span>
                 }
             </div>
-            { downloadButton === true &&
-            	<Col xs={4} md={12} style={{'paddingLeft': '0'}}>
-					<Button size='sm' color='primary' value={this.props.panelState.packageId} onClick={(e) => this.props.handleDownloadClick(this.props.panelState.packageId, e)}>
-						<FontAwesomeIcon icon={faDownload} />
-						<span>&nbsp;Download</span>
-					</Button>
-				</Col>
-            }
         </React.Fragment>;
     }
 }
