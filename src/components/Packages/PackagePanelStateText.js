@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { getIcon, getMessage, getClickEvent, getDisplayInfo, getDownloadButton } from './packagePanelStateHelper';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
 import { Col, Button } from 'reactstrap';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -45,7 +44,7 @@ class PackagePanelStateText extends Component {
             return null;
         }
         
-        let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick, this.props.handleDownloadClick);
+        let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick);
         
         let stateDisplayInfo = getDisplayInfo(this.props.panelState.state, this.props.stateDisplayMap);
         
