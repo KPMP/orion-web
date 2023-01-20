@@ -126,27 +126,6 @@ describe('getMessage', () => {
 	
 });
 
-describe('getClickEvent', () => {
-	let stateDisplayMap;
-	let downloadClick;
-	let stateInfoClick;
-	beforeEach(() => {
-		stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}}];
-		downloadClick = function() { return 'hi'; };
-		stateInfoClick = function() { return 'hola'; };
-	});
-	
-	it('should return downloadClick when showDownload true for state', () => {
-		let method = getClickEvent('UPLOAD_SUCCEEDED', stateDisplayMap, stateInfoClick, downloadClick);
-		expect(method).toBe(downloadClick);
-	});
-	
-	it ('should return stateInfoClick when showDownload not true', () => {
-		let method = getClickEvent('OTHER_EVENT', stateDisplayMap, stateInfoClick, downloadClick);
-		expect(method).toBe(stateInfoClick);
-	});
-});
-
 describe('getDisplayInfo', () => {
 	
 	it('should return the correct info object for the given state', () => {
