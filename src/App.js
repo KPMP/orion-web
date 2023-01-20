@@ -10,7 +10,6 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { Route, Switch, Router } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import ReactGA4 from 'react-ga4';
 import ReactGA from 'react-ga';
 import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer";
 import NavBarContainer from "./components/Nav/NavBarContainer";
