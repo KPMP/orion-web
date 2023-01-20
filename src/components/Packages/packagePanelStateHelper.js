@@ -50,7 +50,7 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
 };
 
 export const getClickEvent = (state, stateDisplayMap, stateInfoClick) => {
-	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
+	stateDisplayMap.filter(function(stateDisplayItem) {
 		if (stateDisplayItem.state === state) {
 			return stateDisplayItem;
 		} else {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 import { Col, Row } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
@@ -8,7 +7,6 @@ import AttachmentsModal from './AttachmentsModal';
 import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
-import Api from '../../helpers/Api';
 import PackagePanelStateText from './PackagePanelStateText';
 
 class PackagePanel extends Component {
