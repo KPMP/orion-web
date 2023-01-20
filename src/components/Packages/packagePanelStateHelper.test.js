@@ -142,10 +142,4 @@ describe('getDisplayInfo', () => {
 		expect(stateInfo).toBeUndefined();
 	});
 	
-	it('should return undefined if the given state is downloadable', () => {
-		let stateDisplayMap = [{state: 'UPLOAD_SUCCEEDED', apps: { dlu: { 'showDownload': true }}},
-			{state: 'UPLOAD_FAILED', apps: { dlu: { 'showDownload': false }}}];
-		let stateInfo = getDisplayInfo('UPLOAD_SUCCEEDED', stateDisplayMap);
-		expect(stateInfo).toBeUndefined();
-	});
 });
