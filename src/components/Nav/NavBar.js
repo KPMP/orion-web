@@ -50,7 +50,7 @@ class NavBar extends Component {
                 <Col sm={6}>
                     <Link to="/" className="navbar-header">
                         <NavbarBrand tag="span" className="d-flex align-items-center">
-                            <img src="img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
+                            <img src="/img/logo.png" alt="Kidney Precision Medicine Project Data Lake Uploader" className="logo" />
                             <span className="ml-2 text-dark">Data Lake Uploader</span>
                         </NavbarBrand>
                     </Link>

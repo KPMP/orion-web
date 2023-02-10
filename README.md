@@ -1,11 +1,14 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7c3c2e2642c4f6780de82e1ee6aef50)](https://www.codacy.com/manual/rlreamy/orion-web?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=KPMP/orion-web&amp;utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/KPMP/orion-web.svg?branch=develop)](https://travis-ci.org/KPMP/orion-web)
+[![Node.js CI](https://github.com/KPMP/orion-web/actions/workflows/node.js.yml/badge.svg)](https://github.com/KPMP/orion-web/actions/workflows/node.js.yml)
 
 # orion-web
 Repo for the KPMP upload tool front-end
 
 ## Documentation
 Visit [kpmp.github.io/dlu](http://kpmp.io.github.io/dlu)
+
+## Enable System Downtime message
+Edit src/initialState.json and set "underMaintenance" to true
+run 'npm run build'
 
 ## Development Environment
 *   Create an environment file (.env) in the root of this project. See .env.example for referece.

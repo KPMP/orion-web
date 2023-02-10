@@ -6,40 +6,43 @@ import { getDTDByVersion } from '../dtdActions';
 
 const api = Api.getInstance();
 
-export const getPackages = () => {
-	return (dispatch) => {
-		api.get('/api/v1/packages')
+export const getPackagesStateless = () => {
+		return api.get('/api/v1/packages')
 			.then(res => {
-				dispatch(setPackages(res.data));
-				let versions = [];
-				res.data.forEach(function(packageItem) {
-					if (!versions.includes(packageItem.packageInfo.version)) {
-						versions.push(packageItem.packageInfo.version);
-					}
-				});
-				versions.forEach(function(version) {
-					dispatch(getDTDByVersion(version));
-				});
+				return res.data
 			})
 			.catch(err => {
-				dispatch(sendMessageToBackend(err));
+				console.log(err)
 			});
-	};
 };
 
-export const setPackages = (packages) => {
-	return {
-		type: actionNames.SET_PACKAGES,
-		payload: packages
-	}
-}
+export const setDtds = (packages) => {
+	return (dispatch) => {
+		let versions = [];
+		packages.forEach(function(packageItem) {
+		if (!versions.includes(packageItem.packageInfo.version)) {
+			versions.push(packageItem.packageInfo.version);
+		}
+		});
+		versions.forEach(function(version) {
+			dispatch(getDTDByVersion(version));
+		});
+	};
+};
 
 export const setIsUploading = (isUploading) => {
 	return {
 		type: actionNames.SET_IS_UPLOADING,
 		payload: isUploading
 	}
-}
+};
+
+export const setRefreshPackages = (refreshPackages) => {
+	return {
+		type: actionNames.SET_REFRESH_PACKAGES,
+		payload: refreshPackages
+	}
+};
 
 export const finishPackage = (packageId) => {
 	return (dispatch) => {
