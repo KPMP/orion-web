@@ -17,15 +17,17 @@ import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
-import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
+//import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
+import DowntimeNotice from './components/DowntimeNotice/DowntimeNotice';
+import NotFoundPage from './components/Error/NotFoundPage'
 
 const cacheStore = window.sessionStorage.getItem("redux-store");
 let initialState = loadedState;
 if (cacheStore) {
 	initialState = JSON.parse(cacheStore);
-	if (!initialState.sessionStart) {
-		initialState.sessionStart = Date.now();
-	}
+// 	if (!initialState.sessionStart) {
+// 		initialState.sessionStart = Date.now();
+// 	}
 	initialState.filtering = loadedState.filtering;
 }
 const store = applyMiddleware(thunk)(createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -59,12 +61,28 @@ class App extends Component {
 	}
 
     render() {
+		if (loadedState.underMaintenance) {
+			return (
+				<Provider store={store}>
+					<Router history={history}>
+						<NavBarContainer />
+						<Switch>
+								<Route path="/" component={DowntimeNotice} store={store} />
+								<Route exact path="/permissionDenied" component={PermissionDenied} />
+								<Route exact path="/notRegistered" component={NotRegistered} />
+								<Route path='/*' component={NotFoundPage} />
+							</Switch>
+						<NavFooter />
+					</Router>
+				</Provider>
+			)
+		} else {
 	    return (
 			<Provider store={store}>
 				<Router history={history}>
 					<ErrorBoundaryContainer>
 						<NavBarContainer />
-						<SessionTimeoutModalContainer/>
+						{/* <SessionTimeoutModalContainer/> */}
 						<Switch>
 							<Route exact path="/" component={PackagesPaneContainer} store={store} />
 							<Route exact path="/packages" component={PackagesPaneContainer} store={store} />
@@ -72,12 +90,14 @@ class App extends Component {
 							<Route exact path="/oops" component={Oops} />
 							<Route exact path="/permissionDenied" component={PermissionDenied} />
 							<Route exact path="/notRegistered" component={NotRegistered} />
+							<Route path='/*' component={NotFoundPage} />
 						</Switch>
 						<NavFooter />
 					</ErrorBoundaryContainer>
 				</Router>
 			</Provider>
 	    );
+		}
 	  }
 }
 

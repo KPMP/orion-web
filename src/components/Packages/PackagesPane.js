@@ -138,6 +138,7 @@ class PackagesPane extends Component {
 						</Col>
 					</Row>
 				</header>
+
 				<Row>
 					<PackageListContainer />
 				</Row>

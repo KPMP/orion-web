@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import { getIcon, getMessage, getClickEvent, getDisplayInfo, getDownloadButton } from './packagePanelStateHelper';
-import { Col, Button } from 'reactstrap';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -45,7 +43,7 @@ class PackagePanelStateText extends Component {
             return null;
         }
         
-        let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick, this.props.handleDownloadClick);
+        let clickEvent = getClickEvent(this.props.panelState.state, this.props.stateDisplayMap, this.props.handleStateInfoClick);
         
         let stateDisplayInfo = getDisplayInfo(this.props.panelState.state, this.props.stateDisplayMap);
         
@@ -55,8 +53,7 @@ class PackagePanelStateText extends Component {
         }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        let downloadButton = getDownloadButton(this.props.panelState.state, this.props.stateDisplayMap, this.props.panelState.packageId, this.props.handleDownloadClick);
-        
+
         return <React.Fragment>
             <div className='d-flex align-items-start'>
             	{ stateDisplayInfo &&
@@ -87,14 +84,6 @@ class PackagePanelStateText extends Component {
                     </span>
                 }
             </div>
-            { downloadButton === true &&
-            	<Col xs={4} md={12} style={{'paddingLeft': '0'}}>
-					<Button size='sm' color='primary' value={this.props.panelState.packageId} onClick={(e) => this.props.handleDownloadClick(this.props.panelState.packageId, e)}>
-						<FontAwesomeIcon icon={faDownload} />
-						<span>&nbsp;Download</span>
-					</Button>
-				</Col>
-            }
         </React.Fragment>;
     }
 }
