@@ -49,36 +49,17 @@ export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDis
 	
 };
 
-export const getDownloadButton = (state, stateDisplayMap, packageId, handleDownloadClick) => {
-	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
-		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
+export const getClickEvent = (state, stateDisplayMap, stateInfoClick) => {
+	stateDisplayMap.filter(function(stateDisplayItem) {
+		if (stateDisplayItem.state === state) {
 			return stateDisplayItem;
 		} else {
 			return null;
 		}
     	
     }, state);
-	
-	if (stateDisplay.length === 1) {
-		return true;
-	}
-};
 
-export const getClickEvent = (state, stateDisplayMap, stateInfoClick, downloadClick) => {
-	let stateDisplay = stateDisplayMap.filter(function(stateDisplayItem) {
-		if (stateDisplayItem.apps.dlu.showDownload === true && stateDisplayItem.state === state) {
-			return stateDisplayItem;
-		} else {
-			return null;
-		}
-    	
-    }, state);
-	
-	if (stateDisplay.length === 1) {
-		return downloadClick;
-	} else {
-		return stateInfoClick;
-	}
+	return stateInfoClick;
 };
 
 export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
@@ -102,7 +83,7 @@ export const getMessage = (state, isLargeFile, currentEmail, packageEmail) => {
 
 export const getDisplayInfo = (state, stateDisplayMap) => {
     let stateDisplayText = stateDisplayMap.filter(function(stateDisplayItem) {
-    	if(stateDisplayItem.state === state && stateDisplayItem.apps.dlu.showDownload !== true) {
+    	if(stateDisplayItem.state === state) {
     		return stateDisplayItem;
     	} else {
     		// eslint-disable-next-line
