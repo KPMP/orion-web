@@ -5,37 +5,37 @@
   "devDependencies": {
     "acorn": "7.2.0",
     "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
-    "node-sass": "8.0.0",
+    "enzyme-adapter-react-16": "1.15.7",
+    "sass": "1.63.6",
     "npm-run-all": "4.1.5",
-    "react-scripts": "3.4.4"
+    "react-scripts": "5.0.0",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.25",
     "@fortawesome/free-brands-svg-icons": "5.11.2",
     "@fortawesome/free-regular-svg-icons": "5.11.2",
     "@fortawesome/free-solid-svg-icons": "5.11.2",
-    "@fortawesome/react-fontawesome": "0.1.7",
-    "antd": "3.26.0",
+    "@fortawesome/react-fontawesome": "0.2.0",
+    "antd": "5.0.0",
     "axios": "0.21.2",
     "bootstrap-css-only": "4.3.1",
     "bowser": "2.7.0",
     "braces": "3.0.2",
     "dateformat": "3.0.3",
     "detect-browser": "4.8.0",
-    "eslint": "6.7.2",
+    "eslint": "7.11.0",
     "filesize": "6.0.1",
     "fine-uploader": "5.16.2",
     "js-polyfills": "0.1.42",
     "kpmp-common-components": "1.1.10",
     "moment": "2.29.4",
-    "node-sass": "8.0.0",
     "popper.js": "1.16.0",
     "prop-types": "15.7.2",
-    "react": "16.12.0",
+    "react": "17.0.2",
     "react-countdown": "2.3.2",
     "react-datetime": "2.16.3",
-    "react-dom": "16.12.0",
+    "react-dom": "17.0.2",
     "react-fine-uploader": "1.1.1",
     "react-ga": "2.7.0",
     "react-ga4": "^1.4.1",
@@ -43,7 +43,7 @@
     "react-router-dom": "5.1.2",
     "react-switch": "5.0.1",
     "react-toastify": "5.4.1",
-    "reactstrap": "8.1.1",
+    "reactstrap": "8.9.0",
     "redux": "4.0.4",
     "redux-thunk": "2.3.0"
   },
@@ -52,16 +52,21 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "build-css": "node-sass src/ -o src/",
-    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "build-css": "sass -I ./src -I ./node_modules  src/:src/",
+    "watch-css": "npm run build-css && sass -I ./src -I ./node_modules src/:src/ --watch",
     "test": "react-scripts test --env=jsdom --verbose=false",
     "eject": "react-scripts eject"
+  },
+  "overrides": {
+    "react-scripts": {
+      "@svgr/webpack": "6.0.0"
+    },
+    "semver": "7.5.2"
   },
   "eslintConfig": {
     "env": {
       "browser": true,
-      "node": true,
-      "cache": true
+      "node": true
     }
   },
   "proxy": "http://localhost:3030",
