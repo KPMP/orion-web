@@ -9,6 +9,7 @@ import SelectBox from './FormComponents/SelectBox';
 import NumericField from './FormComponents/NumericField';
 import DateField from './FormComponents/DateField';
 import SubmitterInformation from './FormComponents/SubmitterInformation';
+import { Input } from 'antd';
 
 Enzyme.configure({adapter: new Adapter()});
 
