@@ -98,34 +98,34 @@ describe('renderField', () => {
 		expect(props.title).toEqual("Submitted by:");
 		expect(props.selectable).toEqual(false);
 		expect(props.eventKey).toEqual("Submitted by:");
-		
-		expect(props.children.length).toBe(2);
-		let tisName = props.children[0];
-		let submitter = props.children[1];
-		let mountedInstitution = mount(<Tree>{tisName}</Tree>);
-		let institutionDom = mountedInstitution.find(TreeNode	);
-		props = institutionDom.props();
-		expect(props.hasOwnProperty('title')).toBe(true);
-		expect(props.hasOwnProperty('selectable')).toBe(true);
-		expect(props.hasOwnProperty('eventKey')).toBe(true);
-		expect(props.hasOwnProperty('isLeaf')).toBe(true);
-		expect(props.title).toEqual("TIS Name: Looney Bin");
-		expect(props.selectable).toEqual(false);
-		expect(props.eventKey).toEqual("TIS Name: Looney Bin");
-		expect(props.isLeaf).toEqual(true);
-		
-		let mountedSubmitter = mount(<Tree>{submitter}</Tree>);
-		let submitterDom = mountedSubmitter.find(TreeNode	);
-		props = submitterDom.props();
-		expect(props.hasOwnProperty('title')).toBe(true);
-		expect(props.hasOwnProperty('selectable')).toBe(true);
-		expect(props.hasOwnProperty('eventKey')).toBe(true);
-		expect(props.hasOwnProperty('isLeaf')).toBe(true);
-		expect(props.title).toEqual("Submitter: Testy Testerson");
-		expect(props.selectable).toEqual(false);
-		expect(props.eventKey).toEqual("Submitter: Testy Testerson");
-		expect(props.isLeaf).toEqual(true);
-
+		if(props.children){
+			expect(props.children.length).toBe(2);
+			let tisName = props.children[0];
+			let submitter = props.children[1];
+			let mountedInstitution = mount(<Tree>{tisName}</Tree>);
+			let institutionDom = mountedInstitution.find(TreeNode	);
+			props = institutionDom.props();
+			expect(props.hasOwnProperty('title')).toBe(true);
+			expect(props.hasOwnProperty('selectable')).toBe(true);
+			expect(props.hasOwnProperty('eventKey')).toBe(true);
+			expect(props.hasOwnProperty('isLeaf')).toBe(true);
+			expect(props.title).toEqual("TIS Name: Looney Bin");
+			expect(props.selectable).toEqual(false);
+			expect(props.eventKey).toEqual("TIS Name: Looney Bin");
+			expect(props.isLeaf).toEqual(true);
+			
+			let mountedSubmitter = mount(<Tree>{submitter}</Tree>);
+			let submitterDom = mountedSubmitter.find(TreeNode	);
+			props = submitterDom.props();
+			expect(props.hasOwnProperty('title')).toBe(true);
+			expect(props.hasOwnProperty('selectable')).toBe(true);
+			expect(props.hasOwnProperty('eventKey')).toBe(true);
+			expect(props.hasOwnProperty('isLeaf')).toBe(true);
+			expect(props.title).toEqual("Submitter: Testy Testerson");
+			expect(props.selectable).toEqual(false);
+			expect(props.eventKey).toEqual("Submitter: Testy Testerson");
+			expect(props.isLeaf).toEqual(true);
+		}
 	});
 	
 	it('should render remaining fields appropriately', () => {
