@@ -154,6 +154,7 @@ class DynamicForm extends Component {
 		}
 
 		let { getFieldValue } = this.props.form;
+        console.log(this.props);
 		let dynamicFormElements = [];
 		let dynamicSections = null;
 		if (getFieldValue('packageType') !== undefined) {
