@@ -14,7 +14,7 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: true,
+			largeFilesChecked: false,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
@@ -161,7 +161,7 @@ class DynamicForm extends Component {
 			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
-				dynamicSections = dynamicFormElements.sections.map((section) => {
+				dynamicSections = dynamicFormElements.sections``.map((section) => {
 					return this.renderSection(section, this.props.form, this.props.userInformation);
 				})
 			}
