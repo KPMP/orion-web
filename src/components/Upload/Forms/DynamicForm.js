@@ -207,7 +207,7 @@ DynamicForm.propTypes = {
 	loadRemoteData: PropTypes.func.isRequired,
 	formDTD: PropTypes.object,
 	isUploading: PropTypes.bool.isRequired,
-	form: PropTypes.object.isRequired,
+	// form: PropTypes.object.isRequired,
 	userInformation: PropTypes.any,
 }
 
