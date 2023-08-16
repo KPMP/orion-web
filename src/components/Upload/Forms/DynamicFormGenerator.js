@@ -124,6 +124,21 @@ export class DynamicFormGenerator {
 						isFieldDisabled={this.isFieldDisabled}
 						additionalProps={fieldJson.additionalProps}/>;
 				break;
+
+      case FIELD_TYPES.DROP_DOWN:
+        fieldComponent =
+          <SelectBox
+            key={fieldJson.label}
+            form={form}
+            isMultiple={true}
+            label={fieldJson.label}
+            fieldName={fieldJson.fieldName}
+            isRequired={isRequired}
+            json={fieldJson}
+        				isFieldDisabled={this.isFieldDisabled}
+						options={this.parseOptions(fieldJson, form)}
+						additionalProps={fieldJson.additionalProps}/>;
+            break;
 				
 			case FIELD_TYPES.TEXT_AREA:
 				fieldComponent = <TextArea
