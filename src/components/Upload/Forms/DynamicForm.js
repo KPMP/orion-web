@@ -207,9 +207,11 @@ DynamicForm.propTypes = {
 	loadRemoteData: PropTypes.func.isRequired,
 	formDTD: PropTypes.object,
 	isUploading: PropTypes.bool.isRequired,
-	// form: PropTypes.object.isRequired,
+	form: PropTypes.object.isRequired,
 	userInformation: PropTypes.any,
 }
 
 
-export default DynamicForm;
+const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
+
+export default WrappedUniversalHeaderForm;
