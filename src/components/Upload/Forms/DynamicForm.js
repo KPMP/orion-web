@@ -94,8 +94,8 @@ class DynamicForm extends Component {
 		let formValid = true;
 
 		if (this.needUserInfo() && (form.current.getFieldValue('submitterFirstName') === undefined 
-				|| form.current.getFieldValue('submitterLastName') === undefined 
-				|| form.current.getFieldValue('submitterEmail') === undefined)) {
+				|| form.current?.getFieldValue('submitterLastName') === undefined 
+				|| form.current?.getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
 		}
@@ -121,20 +121,19 @@ class DynamicForm extends Component {
 	}
 	
 	isSubmitDisabled() {
-    ;
-		let validForm = this.isFormValid(this.props.formDTD.standardFields, formRef);
+		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.formRef);
 
 		if (this.formRef.current?.getFieldValue('packageType') !== undefined) {
 			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(
 				function(element) {
-					return element.hasOwnProperty(getFieldValue('packageType'))
+					return element.hasOwnProperty(this.formRef.current?.getFieldValue('packageType'))
 				});
 
 			if (dynamicFormElements.length > 0) {
 				dynamicFormElements = dynamicFormElements[0][this.formRef.current?.getFieldValue('packageType')];
 				let sections = dynamicFormElements.sections;
 				for (let i =0; i< sections.length; i++) {
-					if (!this.isFormValid(sections[i], formRef)) {
+					if (!this.isFormValid(sections[i], this.formRef)) {
 						validForm = false;
 						break;
 					}
