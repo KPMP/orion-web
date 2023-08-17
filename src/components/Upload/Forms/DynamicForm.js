@@ -89,13 +89,13 @@ class DynamicForm extends Component {
 		return submitterFirstBlank && submitterLastNameBlank && submitterEmailBlank;
 	}
 	
-	isFormValid(section, form) {
+	isFormValid(section, formRef) {
 		// let { getFieldError, getFieldValue } = form;
 		let formValid = true;
 
 		if (this.needUserInfo() && (form.current.getFieldValue('submitterFirstName') === undefined 
-				|| form.current?.getFieldValue('submitterLastName') === undefined 
-				|| form.current?.getFieldValue('submitterEmail') === undefined)) {
+				|| formRef.current?.getFieldValue('submitterLastName') === undefined 
+				|| formRef.current?.getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
 		}
@@ -105,8 +105,8 @@ class DynamicForm extends Component {
 			let field = fields[i];
 			let fieldName = field.fieldName;
 			if ( field.type !== 'Submitter Information' ) {
-				if ( field.required && !this.isFieldDisabled(field, form)) {
-				const fieldValue = form.getFieldValue(fieldName);
+				if ( field.required && !this.isFieldDisabled(field, formRef)) {
+				const fieldValue = formRef.current?.getFieldValue(fieldName);
 					if(getFieldError(fieldName) !== undefined){
 						return false;
 					}
