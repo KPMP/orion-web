@@ -5,6 +5,7 @@ import { Row, Col } from 'reactstrap';
 import LargeFileModal from '../../Packages/LargeFileModal';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 class DynamicForm extends Component {
 	
@@ -41,7 +42,9 @@ class DynamicForm extends Component {
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
 		}
-    console.log(formRef);
+    useEffect(() =>{
+      console.log(this.formRef.current);
+    })
 	}
 
 	isRemoteDataLoaded() {
