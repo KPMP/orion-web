@@ -157,19 +157,19 @@ class DynamicForm extends Component {
 				</h4>
 			);
 		}
-
-		// let { getFieldValue } = this.props.form;
-		let dynamicFormElements = [];
+    let dynamicFormElements = [];
 		let dynamicSections = null;
-		if (formRef.current?.getFieldValue('packageType') !== undefined) {
-			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current?.getFieldValue('packageType')) });
-			if (dynamicFormElements.length > 0) {
-				dynamicFormElements = dynamicFormElements[0][formRef.current?.getFieldValue('packageType')];
-				dynamicSections = dynamicFormElements.sections.map((section) => {
-					return this.renderSection(section, formRef, this.props.userInformation);
-				})
-			}
-		}
+    ({ getFieldValue }) =>
+          getFieldValue('packageType') !== undefined ? (
+            dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) })
+          )
+           : dynamicFormElements.length > 0 ? (
+              dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')], 
+              dynamicSections = dynamicFormElements.sections.map((section) => {
+                return this.renderSection(section, formRef, this.props.userInformation);
+              })
+           ): null
+		// let { getFieldValue } = this.props.form;
 		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
