@@ -14,8 +14,12 @@ class DateField extends Component {
 			opened: false,
 			touched: false
 		}
-    this.formRef = React.createRef(null);
+    this.formRef = React.useRef(null);
 	}
+
+  componentDidMount(){
+    console.log(this.formRef.current);
+  }
 	
 	disabledDate(current) {
 	  return  current > moment().endOf('day');

@@ -5,7 +5,6 @@ import { Row, Col } from 'reactstrap';
 import LargeFileModal from '../../Packages/LargeFileModal';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 class DynamicForm extends Component {
 	
@@ -17,7 +16,7 @@ class DynamicForm extends Component {
 			submitClicked: false,
 			largeFilesChecked: true,
 		};
-    this.formRef = React.createRef(null)
+    this.formRef = React.useRef(null)
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);

@@ -10,7 +10,7 @@ const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 class TextAreaComponent extends Component {
 
   constructor(){
-    this.formRef = React.createRef(null);
+    this.formRef = React.useRef(null);
   }
 	
 	isFieldDisabled = () => {
