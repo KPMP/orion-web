@@ -24,7 +24,7 @@
     "braces": "3.0.2",
     "dateformat": "3.0.3",
     "detect-browser": "4.8.0",
-    "eslint": "7.11.0",
+    "eslint": "6.7.2",
     "filesize": "6.0.1",
     "fine-uploader": "5.16.2",
     "js-polyfills": "0.1.42",
