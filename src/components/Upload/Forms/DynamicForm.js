@@ -177,11 +177,11 @@ class DynamicForm extends Component {
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
 					<h4>STEP 2: Provide the dataset information</h4>
-          {/* <Form
-            {...Layout} ref={this.formRef}> */}
+          <Form
+            {...Layout} ref={this.formRef}> 
               {this.renderSection(this.props.formDTD.standardFields, this.formRef, this.props.userInformation)}
 					    {dynamicSections}
-          {/* </Form> */}
+          </Form>
 					
 					{<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>}
 					<Row className="fixed-bottom pt-4" id="form-footer">
