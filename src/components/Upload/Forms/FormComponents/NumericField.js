@@ -8,7 +8,7 @@ const optionalFieldNumericOptions = {validateTrigger: [ 'onChange', 'onBlur' ], 
 class NumericField extends Component {
 
   constructor(){
-    this.formRef = React.useRef(null);
+    this.formRef = React.createRef(null));
   }
 
 	isFieldDisabled = () => {
