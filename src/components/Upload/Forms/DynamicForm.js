@@ -146,10 +146,28 @@ class DynamicForm extends Component {
 
 		return !(!this.state.submitClicked && validForm && (this.state.filesAdded > 0 || this.state.largeFilesChecked));
 	}
+
+  handleFieldValue(fieldValue){
+    const formRef = React.useRef(null);
+    let dynamicFormElements = [];
+		let dynamicSections = null;
+    if (formRef.current?.getFieldValue(fieldValue) !== undefined){
+      dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current?.getFieldValue(fieldValue)) })
+      if (dynamicFormElements.length >0){
+        dynamicFormElements = dynamicFormElements[0][formRef.current?.getFieldValue(fieldValue)];
+        dynamicSections = dynamicFormElements.sections.map((section) => {
+          return this.renderSection(section, React.useRef(null), this.props.userInformation)});
+      }
+    } 
+  }
+
+  handleRef() {
+    const formRef = React.useRef(null);
+    return formRef;
+  }
 	
 	render() {
-    // const formRef = React.useRef(null);
-
+    this.handleFieldValue("packageType");
 		if(!this.isRemoteDataLoaded()) {
 			return (
 				<h4 className="text-center pt-3">
@@ -157,18 +175,6 @@ class DynamicForm extends Component {
 				</h4>
 			);
 		}
-    let dynamicFormElements = [];
-		let dynamicSections = null;
-    ({ getFieldValue }) =>
-          getFieldValue('packageType') !== undefined ? (
-            dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) })
-          )
-           : dynamicFormElements.length > 0 ? (
-              dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')], 
-              dynamicSections = dynamicFormElements.sections.map((section) => {
-                return this.renderSection(section, formRef, this.props.userInformation);
-              })
-           ): null
 		// let { getFieldValue } = this.props.form;
 		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
@@ -186,8 +192,8 @@ class DynamicForm extends Component {
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
 					<h4>STEP 2: Provide the dataset information</h4>
           <Form
-            {...Layout} form={formRef}>
-              {this.renderSection(this.props.formDTD.standardFields, formRef, this.props.userInformation)}
+            {...Layout} ref={this.handleRef}>
+              {this.renderSection(this.props.formDTD.standardFields, React.useRef(null), this.props.userInformation)}
 					    {dynamicSections}
           </Form>
 					
