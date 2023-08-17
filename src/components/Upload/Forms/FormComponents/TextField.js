@@ -8,7 +8,7 @@ const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 class TextField extends Component {
 	
   constructor(){
-    this.formRef = React.useRef(null);
+    this.formRef = React.createRef(null);
   }
 
   componentDidMount(){

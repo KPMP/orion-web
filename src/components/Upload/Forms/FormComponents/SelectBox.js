@@ -7,7 +7,7 @@ const Option = Select.Option;
 class SelectBox extends Component {
 
   constructor(){
-    this.formRef = React.useRef(null);
+    this.formRef = React.createRef(null);
   }
 
   componentDidMount(){
