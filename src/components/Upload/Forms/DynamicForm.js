@@ -6,7 +6,7 @@ import LargeFileModal from '../../Packages/LargeFileModal';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const formRef = React.useRef(null)
+
 
 class DynamicForm extends Component {
 	
@@ -50,9 +50,10 @@ class DynamicForm extends Component {
 	}
 	
 	handleSubmit = (e) => {
+    const formRef = React.useRef(null)
 		this.setState({submitClicked: true});
 		// let { validateFields } = this.props.form;
-		formRef.current.validateFields((err, values) => {
+		formRef.current?.validateFields((err, values) => {
 			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
 			if (!this.needUserInfo()) {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
@@ -73,10 +74,11 @@ class DynamicForm extends Component {
 	}
 	
 	determinePackageTypeMetadataVersion= () => {
+    const formRef = React.useRef(null)
 		// let { getFieldValue } = this.props.form; 
-		let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current.getFieldValue('packageType')) });
+		let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current?.getFieldValue('packageType')) });
 		if (dynamicFormElements.length > 0) {
-			dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
+			dynamicFormElements = dynamicFormElements[0][formRef.current?.getFieldValue('packageType')];
 			return dynamicFormElements.version;
 		}
 		return undefined;
@@ -94,8 +96,8 @@ class DynamicForm extends Component {
 		let formValid = true;
 
 		if (this.needUserInfo() && (form.current.getFieldValue('submitterFirstName') === undefined 
-				|| form.getFieldValue('submitterLastName') === undefined 
-				|| form.getFieldValue('submitterEmail') === undefined)) {
+				|| form.current.getFieldValue('submitterLastName') === undefined 
+				|| form.current.getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
 		}
@@ -106,7 +108,7 @@ class DynamicForm extends Component {
 			let fieldName = field.fieldName;
 			if ( field.type !== 'Submitter Information' ) {
 				if ( field.required && !this.isFieldDisabled(field, form)) {
-				const fieldValue = getFieldValue(fieldName);
+				const fieldValue = form.getFieldValue(fieldName);
 					if(getFieldError(fieldName) !== undefined){
 						return false;
 					}
@@ -121,16 +123,17 @@ class DynamicForm extends Component {
 	}
 	
 	isSubmitDisabled() {
+    const formRef = React.useRef(null);
 		let validForm = this.isFormValid(this.props.formDTD.standardFields, formRef);
 
-		if (formRef.current.getFieldValue('packageType') !== undefined) {
+		if (formRef.current?.getFieldValue('packageType') !== undefined) {
 			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(
 				function(element) {
 					return element.hasOwnProperty(getFieldValue('packageType'))
 				});
 
 			if (dynamicFormElements.length > 0) {
-				dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
+				dynamicFormElements = dynamicFormElements[0][formRef.current?.getFieldValue('packageType')];
 				let sections = dynamicFormElements.sections;
 				for (let i =0; i< sections.length; i++) {
 					if (!this.isFormValid(sections[i], formRef)) {
@@ -145,6 +148,7 @@ class DynamicForm extends Component {
 	}
 	
 	render() {
+    const formRef = React.useRef(null);
 
 		if(!this.isRemoteDataLoaded()) {
 			return (
@@ -158,9 +162,9 @@ class DynamicForm extends Component {
 		let dynamicFormElements = [];
 		let dynamicSections = null;
 		if (formRef.current?.getFieldValue('packageType') !== undefined) {
-			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current.getFieldValue('packageType')) });
+			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current?.getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
-				dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
+				dynamicFormElements = dynamicFormElements[0][formRef.current?.getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
 					return this.renderSection(section, formRef, this.props.userInformation);
 				})

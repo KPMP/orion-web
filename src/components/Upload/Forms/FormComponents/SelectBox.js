@@ -3,27 +3,30 @@ import { Form, Select } from 'antd';
 import PropTypes from "prop-types";
 
 const Option = Select.Option;
-const formRef = React.useRef(null);;
+
 class SelectBox extends Component {
 
 	isFieldDisabled = () => {
+    const formRef = React.useRef(null);
 		if (this.props.isFieldDisabled !== undefined) {
-			return this.props.isFieldDisabled(this.props.json, form);
+			return this.props.isFieldDisabled(this.props.json, formRef);
 		} else {
 			return this.props.isDisabled;
 		}
 	}
 	
 	clearContents = () => {
-		formRef.current.resetFields(this.props.fieldName);
+    const formRef = React.useRef(null);
+		formRef.current?.resetFields(this.props.fieldName);
 	}
 	
 	render() {
+    const formRef = React.useRef(null);
 		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
 		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 		let mode = "default";
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
-		let error = formRef.current.isFieldTouched(this.props.fieldName) && formRef.getFieldError(this.props.fieldName);
+		let error = formRef.current?.isFieldTouched(this.props.fieldName) && formRef.getFieldError(this.props.fieldName);
 
 		if(this.props.isMultiple) {
 			fieldOptions.rules[0].type = 'array';
@@ -37,7 +40,7 @@ class SelectBox extends Component {
 		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
-				{formRef.current.getFieldDecorator(this.props.fieldName, fieldOptions)(
+				{formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
 					<Select
 						disabled={isDisabled}
 						showSearch mode={mode}
@@ -58,7 +61,7 @@ SelectBox.propTypes = {
     isRequired: PropTypes.bool.isRequired,
     isDisabled: PropTypes.bool,
     isMultiple: PropTypes.bool.isRequired,
-    form: PropTypes.object.isRequired,
+    // form: PropTypes.object.isRequired,
     additionalProps: PropTypes.object
 };
 
