@@ -15,7 +15,7 @@ class TextAreaComponent extends Component {
 	
 	isFieldDisabled = () => {
 		if (this.props.isFieldDisabled !== undefined) {
-			return this.props.isFieldDisabled(this.props.json, formRef);
+			return this.props.isFieldDisabled(this.props.json, this.formRef);
 		} else {
 			return this.props.isDisabled;
 		}

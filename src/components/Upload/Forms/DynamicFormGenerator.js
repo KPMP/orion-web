@@ -154,7 +154,7 @@ export class DynamicFormGenerator {
 	isFieldDisabled = function(fieldJson, form) {
 		if(fieldJson !== undefined && fieldJson.hasOwnProperty(LINKED_WITH)) {
 			let {linkedWith, displayWhen} = fieldJson;
-			let linkedValue = form.getFieldValue(linkedWith);
+			let linkedValue = form.current?.getFieldValue(linkedWith);
 			return displayWhen !== linkedValue;
 		}
 		return false;

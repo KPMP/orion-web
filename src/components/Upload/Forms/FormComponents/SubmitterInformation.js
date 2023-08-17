@@ -50,17 +50,17 @@ class SubmitterInformation extends Component {
                 <div className="row w-100 ml-0">
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="First Name" fieldName="submitterFirstName"
-                                   isDisabled={this.state.submitterLastNameDisabled} form={formRef}
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.formRef}
                                    isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Last Name" fieldName="submitterLastName"
-                                   isDisabled={this.state.submitterLastNameDisabled} form={formRef}
+                                   isDisabled={this.state.submitterLastNameDisabled} form={this.formRef}
                                    isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Email" fieldName="submitterEmail"
-                                   isDisabled={this.state.submitterEmailDisabled} form={formRef}
+                                   isDisabled={this.state.submitterEmailDisabled} form={this.formRef}
                                    isRequired={true}/>
                     </Col>
                 </div>
