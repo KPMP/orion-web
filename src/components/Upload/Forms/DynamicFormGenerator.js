@@ -56,7 +56,7 @@ export class DynamicFormGenerator {
                 fieldComponent =
                     <NumericField label={fieldJson.label}
                 		key={fieldJson.label}
-                		form={form}
+                		ref={form}
                 		additionalProps={fieldJson.additionalProps}
                 		isRequired={isRequired}
                 		json={fieldJson}
@@ -68,7 +68,7 @@ export class DynamicFormGenerator {
                 fieldComponent =
 					<DateField label={fieldJson.label} 
                 		key={fieldJson.label}
-						form={form} 
+						ref={form} 
 						additionalProps={fieldJson.additionalProps}
 					    isRequired={isRequired}
 					    json={fieldJson}
@@ -81,7 +81,7 @@ export class DynamicFormGenerator {
 				fieldComponent =
 					<SelectBox
 						key={fieldJson.label}
-                        form={form}
+                        ref={form}
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
 						isMultiple={false}
@@ -96,7 +96,7 @@ export class DynamicFormGenerator {
 				fieldComponent =
 					<SelectBox
 						key={fieldJson.label}
-                        form={form}
+                        ref={form}
                         isMultiple={true}
 						label={fieldJson.label} 
 						fieldName={fieldJson.fieldName}
@@ -110,13 +110,13 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.SUBMITTER_INFORMATION:
 				return <SubmitterInformation key="submitterInformation"
 				userInformation={userInformation} 
-				form={form} />;
+				ref={form} />;
 						
 			case FIELD_TYPES.TEXT_FIELD:
 				fieldComponent = 
 					<TextField
 						key={fieldJson.label}
-                        form={form}
+                        ref={form}
                         label={fieldJson.label}
 						fieldName={fieldJson.fieldName}
 						isRequired={isRequired}
@@ -128,7 +128,7 @@ export class DynamicFormGenerator {
 			case FIELD_TYPES.TEXT_AREA:
 				fieldComponent = <TextArea
 					key={fieldJson.label}
-                    form={form}
+                    ref={form}
                     label={fieldJson.label}
 					fieldName={fieldJson.fieldName}
 					isRequired={isRequired}
