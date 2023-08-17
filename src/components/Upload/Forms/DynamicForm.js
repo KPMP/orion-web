@@ -148,7 +148,7 @@ class DynamicForm extends Component {
 	}
 	
 	render() {
-    const formRef = React.useRef(null);
+    // const formRef = React.useRef(null);
 
 		if(!this.isRemoteDataLoaded()) {
 			return (
