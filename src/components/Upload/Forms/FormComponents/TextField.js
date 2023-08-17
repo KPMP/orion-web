@@ -11,6 +11,10 @@ class TextField extends Component {
     this.formRef = React.createRef(null);
   }
 
+  componentDidMount(){
+    console.log(this.formRef.current);
+  }
+
 	isFieldDisabled = () => {
 		if (this.props.isFieldDisabled !== undefined) {
 			return this.props.isFieldDisabled(this.props.json, this.formRef);

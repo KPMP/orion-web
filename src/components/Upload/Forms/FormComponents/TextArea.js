@@ -20,6 +20,10 @@ class TextAreaComponent extends Component {
 			return this.props.isDisabled;
 		}
 	}
+
+  componentDidMount(){
+    console.log(this.formRef.current);
+  }
 	
 	clearContents = () => {
     ;

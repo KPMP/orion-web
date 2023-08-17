@@ -42,10 +42,7 @@ class DynamicForm extends Component {
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
 		}
-    useEffect(() =>{
-      console.log(this.formRef);
-    })
-    console.log(this.formRef)
+    console.log(this.formRef.current);
 	}
 
 	isRemoteDataLoaded() {

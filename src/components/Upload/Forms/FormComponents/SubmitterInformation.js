@@ -19,6 +19,10 @@ class SubmitterInformation extends Component {
     this.formRef = React.createRef(null);
 	}
 
+  componentDidMount(){
+    console.log(this.formRef.current);
+  }
+
 	isFieldDisabled(fieldName, props) {
         return props.userInformation.hasOwnProperty(fieldName)
             && props.userInformation[fieldName] !== "";
