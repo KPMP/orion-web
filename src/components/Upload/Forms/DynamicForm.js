@@ -41,6 +41,7 @@ class DynamicForm extends Component {
 		if(!this.isRemoteDataLoaded()) {
 			this.props.loadRemoteData();
 		}
+    console.log(formRef);
 	}
 
 	isRemoteDataLoaded() {
