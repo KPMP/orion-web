@@ -16,6 +16,7 @@ class SubmitterInformation extends Component {
             submitterEmailDisabled: this.isFieldDisabled(EMAIL, props),
             userInfoPopulated: this.isUserInfoPopulated(props)
 		};
+    this.formRef = React.useForm(null);
 	}
 
 	isFieldDisabled(fieldName, props) {
@@ -30,7 +31,7 @@ class SubmitterInformation extends Component {
 	}
 
 	render() {
-        const formRef = React.useRef(null);
+        ;
         if (this.state.userInfoPopulated) {
             return (
                 <Col sm={12} md={12} lg={12} className="ant-form-item submitterInfo">

@@ -7,6 +7,10 @@ const optionalFieldNumericOptions = {validateTrigger: [ 'onChange', 'onBlur' ], 
 
 class NumericField extends Component {
 
+  constructor(){
+    this.formRef = React.useRef(null);
+  }
+
 	isFieldDisabled = () => {
 		if (this.props.isFieldDisabled !== undefined) {
 			return this.props.isFieldDisabled(this.props.json, formRef);
@@ -16,13 +20,13 @@ class NumericField extends Component {
 	}
 	
 	clearContents = () => {
-    const formRef = React.useRef(null);
-		formRef.current?.resetFields(this.props.fieldName);
+    ;
+		this.formRef.current?.resetFields(this.props.fieldName);
 	}
 	
     render() {
-      const formRef = React.useRef(null);
-        let error = formRef.current?.isFieldTouched(this.props.fieldName) && formRef.current?.getFieldError(this.props.fieldName);
+      ;
+        let error = this.formRef.current?.isFieldTouched(this.props.fieldName) && this.formRef.current?.getFieldError(this.props.fieldName);
         let fieldOptions = this.props.isRequired ? requiredFieldNumericOptions : optionalFieldNumericOptions;
         let isDisabled = this.isFieldDisabled();
         if (isDisabled) {
@@ -35,7 +39,7 @@ class NumericField extends Component {
         
         return (
             <Form.Item label={this.props.label} validateStatus={error ? 'error' : ''}>
-                {formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
+                {this.formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
                     <Input type="number" name={this.props.fieldName} placeholder={placeholderText} disabled={isDisabled}/>
                 )}
             </Form.Item>

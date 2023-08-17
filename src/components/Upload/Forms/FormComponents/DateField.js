@@ -14,6 +14,7 @@ class DateField extends Component {
 			opened: false,
 			touched: false
 		}
+    this.formRef = React.useRef(null);
 	}
 	
 	disabledDate(current) {
@@ -41,8 +42,8 @@ class DateField extends Component {
 	}
 	
 	clearContents = () => {
-    const formRef = React.useRef(null);
-		formRef.current?.resetFields(this.props.fieldName);
+    ;
+		this.formRef.current?.resetFields(this.props.fieldName);
 	}
 
 	convertStringValueToMoment = value => {
@@ -54,7 +55,7 @@ class DateField extends Component {
 	}
 	
 	render() {
-    const formRef = React.useRef(null);
+    ;
 		const dateFormatOptions = { getValueProps: this.convertStringValueToMoment, getValueFromEvent: this.convertMomentToStringValue};
 		let fieldOptions = this.props.isRequired ? Object.assign(dateFormatOptions, requiredFieldDateOptions) : Object.assign(dateFormatOptions, optionalFieldDateOptions);
 		let placeholderText = undefined;
@@ -63,7 +64,7 @@ class DateField extends Component {
 		}
 		let error = false;
 		
-		if (this.state.opened && this.state.touched && formRef.current?.getFieldValue(this.props.fieldName) === undefined) {
+		if (this.state.opened && this.state.touched && this.formRef.current?.getFieldValue(this.props.fieldName) === undefined) {
 			error = true;
 		} else {
 			error = false;
@@ -76,7 +77,7 @@ class DateField extends Component {
 
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
-				{formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
+				{this.formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
 					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format='YYYY-MM-DD' placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		

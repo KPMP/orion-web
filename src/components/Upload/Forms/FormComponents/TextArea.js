@@ -8,6 +8,10 @@ const requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [
 const optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 
 class TextAreaComponent extends Component {
+
+  constructor(){
+    this.formRef = React.useRef(null);
+  }
 	
 	isFieldDisabled = () => {
 		if (this.props.isFieldDisabled !== undefined) {
@@ -18,13 +22,13 @@ class TextAreaComponent extends Component {
 	}
 	
 	clearContents = () => {
-    const formRef = React.useRef(null);
-		formRef.current?.resetFields(this.props.fieldName);
+    ;
+		this.formRef.current?.resetFields(this.props.fieldName);
 	}
 	
 	render() {
-    const formRef = React.useRef(null);
-		let error = formRef.current?.isFieldTouched(this.props.fieldName) && formRef.current?.getFieldError(this.props.fieldName);
+    ;
+		let error = this.formRef.current?.isFieldTouched(this.props.fieldName) && this.formRef.current?.getFieldError(this.props.fieldName);
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
 		let placeholderText = undefined;
 		if (this.props.additionalProps !== undefined) {
@@ -37,7 +41,7 @@ class TextAreaComponent extends Component {
 		
 		return(
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} className="textArea">
-				{formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
+				{this.formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
 					<TextArea disabled={isDisabled} name={this.props.fieldName} rows={3} placeholder={placeholderText}/>
 				)}
 			</Form.Item>		

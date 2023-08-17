@@ -6,8 +6,12 @@ const Option = Select.Option;
 
 class SelectBox extends Component {
 
+  constructor(){
+    this.formRef = React.useRef(null);
+  }
+
 	isFieldDisabled = () => {
-    const formRef = React.useRef(null);
+    ;
 		if (this.props.isFieldDisabled !== undefined) {
 			return this.props.isFieldDisabled(this.props.json, formRef);
 		} else {
@@ -16,17 +20,17 @@ class SelectBox extends Component {
 	}
 	
 	clearContents = () => {
-    const formRef = React.useRef(null);
-		formRef.current?.resetFields(this.props.fieldName);
+    ;
+		this.formRef.current?.resetFields(this.props.fieldName);
 	}
 	
 	render() {
-    const formRef = React.useRef(null);
+    ;
 		let requiredFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: true, message: 'Required', whitespace: true}]};
 		let optionalFieldOptions = {validateTrigger: ['onBlur', 'onChange' ], rules: [{required: false}]};
 		let mode = "default";
 		let fieldOptions = this.props.isRequired ? requiredFieldOptions : optionalFieldOptions;
-		let error = formRef.current?.isFieldTouched(this.props.fieldName) && formRef.getFieldError(this.props.fieldName);
+		let error = this.formRef.current?.isFieldTouched(this.props.fieldName) && formRef.getFieldError(this.props.fieldName);
 
 		if(this.props.isMultiple) {
 			fieldOptions.rules[0].type = 'array';
@@ -40,7 +44,7 @@ class SelectBox extends Component {
 		
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} >
-				{formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
+				{this.formRef.current?.getFieldDecorator(this.props.fieldName, fieldOptions)(
 					<Select
 						disabled={isDisabled}
 						showSearch mode={mode}
