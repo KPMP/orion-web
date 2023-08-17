@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 const FIRST_NAME = "firstName";
 const LAST_NAME = "lastName";
 const EMAIL = "email";
-const formRef = React.useRef(null);
 class SubmitterInformation extends Component {
 
 	constructor(props) {
