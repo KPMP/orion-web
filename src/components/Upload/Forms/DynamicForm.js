@@ -145,6 +145,8 @@ class DynamicForm extends Component {
 	}
 
 	render() {
+    let dynamicFormElements = [];
+		let dynamicSections = null;
     if (this.formRef.current?.getFieldValue("packageType") !== undefined){
       dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(this.formRef.current?.getFieldValue("packageType")) })
       if (dynamicFormElements.length >0){
