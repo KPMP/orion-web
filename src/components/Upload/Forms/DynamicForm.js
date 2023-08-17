@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'antd';
+import { Form, Button, Layout } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import LargeFileModal from '../../Packages/LargeFileModal';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+const formRef = React.useRef(null)
 
 class DynamicForm extends Component {
 	
@@ -49,8 +51,8 @@ class DynamicForm extends Component {
 	
 	handleSubmit = (e) => {
 		this.setState({submitClicked: true});
-		let { validateFields } = this.props.form;
-		validateFields((err, values) => {
+		// let { validateFields } = this.props.form;
+		formRef.current.validateFields((err, values) => {
 			let newValues = JSON.parse(JSON.stringify(values).replace(/"\s+|\s+"/g,'"'));
 			if (!this.needUserInfo()) {
 				newValues.submitterFirstName = this.props.userInformation.firstName;
@@ -71,10 +73,10 @@ class DynamicForm extends Component {
 	}
 	
 	determinePackageTypeMetadataVersion= () => {
-		let { getFieldValue } = this.props.form; 
-		let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+		// let { getFieldValue } = this.props.form; 
+		let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current.getFieldValue('packageType')) });
 		if (dynamicFormElements.length > 0) {
-			dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
+			dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
 			return dynamicFormElements.version;
 		}
 		return undefined;
@@ -88,12 +90,12 @@ class DynamicForm extends Component {
 	}
 	
 	isFormValid(section, form) {
-		let { getFieldError, getFieldValue } = form;
+		// let { getFieldError, getFieldValue } = form;
 		let formValid = true;
 
-		if (this.needUserInfo() && (getFieldValue('submitterFirstName') === undefined 
-				|| getFieldValue('submitterLastName') === undefined 
-				|| getFieldValue('submitterEmail') === undefined)) {
+		if (this.needUserInfo() && (form.current.getFieldValue('submitterFirstName') === undefined 
+				|| form.getFieldValue('submitterLastName') === undefined 
+				|| form.getFieldValue('submitterEmail') === undefined)) {
 			
 			return false;
 		}
@@ -119,20 +121,19 @@ class DynamicForm extends Component {
 	}
 	
 	isSubmitDisabled() {
-		let validForm = this.isFormValid(this.props.formDTD.standardFields, this.props.form);
-		let { getFieldValue } = this.props.form;
+		let validForm = this.isFormValid(this.props.formDTD.standardFields, formRef);
 
-		if (getFieldValue('packageType') !== undefined) {
+		if (formRef.current.getFieldValue('packageType') !== undefined) {
 			let dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(
 				function(element) {
 					return element.hasOwnProperty(getFieldValue('packageType'))
 				});
 
 			if (dynamicFormElements.length > 0) {
-				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
+				dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
 				let sections = dynamicFormElements.sections;
 				for (let i =0; i< sections.length; i++) {
-					if (!this.isFormValid(sections[i], this.props.form)) {
+					if (!this.isFormValid(sections[i], formRef)) {
 						validForm = false;
 						break;
 					}
@@ -153,15 +154,15 @@ class DynamicForm extends Component {
 			);
 		}
 
-		let { getFieldValue } = this.props.form;
+		// let { getFieldValue } = this.props.form;
 		let dynamicFormElements = [];
 		let dynamicSections = null;
-		if (getFieldValue('packageType') !== undefined) {
-			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(getFieldValue('packageType')) });
+		if (formRef.current?.getFieldValue('packageType') !== undefined) {
+			dynamicFormElements = this.props.formDTD.typeSpecificElements.filter(function(element) { return element.hasOwnProperty(formRef.current.getFieldValue('packageType')) });
 			if (dynamicFormElements.length > 0) {
-				dynamicFormElements = dynamicFormElements[0][getFieldValue('packageType')];
+				dynamicFormElements = dynamicFormElements[0][formRef.current.getFieldValue('packageType')];
 				dynamicSections = dynamicFormElements.sections.map((section) => {
-					return this.renderSection(section, this.props.form, this.props.userInformation);
+					return this.renderSection(section, formRef, this.props.userInformation);
 				})
 			}
 		}
@@ -180,8 +181,12 @@ class DynamicForm extends Component {
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
 					<h4>STEP 2: Provide the dataset information</h4>
-					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
-					{dynamicSections}
+          <Form
+            {...Layout} form={formRef}>
+              {this.renderSection(this.props.formDTD.standardFields, formRef, this.props.userInformation)}
+					    {dynamicSections}
+          </Form>
+					
 					{<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>}
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
@@ -212,6 +217,4 @@ DynamicForm.propTypes = {
 }
 
 
-const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
-
-export default WrappedUniversalHeaderForm;
+export default DynamicForm;

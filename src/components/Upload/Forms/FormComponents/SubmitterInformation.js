@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const FIRST_NAME = "firstName";
 const LAST_NAME = "lastName";
 const EMAIL = "email";
-
+const formRef = React.useRef(null);
 class SubmitterInformation extends Component {
 
 	constructor(props) {
@@ -49,17 +49,17 @@ class SubmitterInformation extends Component {
                 <div className="row w-100 ml-0">
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="First Name" fieldName="submitterFirstName"
-                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isDisabled={this.state.submitterLastNameDisabled} form={formRef}
                                    isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Last Name" fieldName="submitterLastName"
-                                   isDisabled={this.state.submitterLastNameDisabled} form={this.props.form}
+                                   isDisabled={this.state.submitterLastNameDisabled} form={formRef}
                                    isRequired={true}/>
                     </Col>
                     <Col sm={12} md={6} lg={4}>
                         <TextField label="Email" fieldName="submitterEmail"
-                                   isDisabled={this.state.submitterEmailDisabled} form={this.props.form}
+                                   isDisabled={this.state.submitterEmailDisabled} form={formRef}
                                    isRequired={true}/>
                     </Col>
                 </div>
@@ -69,7 +69,7 @@ class SubmitterInformation extends Component {
 }
 
 SubmitterInformation.propTypes = {
-    form: PropTypes.object.isRequired,
+    // form: PropTypes.object.isRequired,
     userInformation: PropTypes.object
 }
 

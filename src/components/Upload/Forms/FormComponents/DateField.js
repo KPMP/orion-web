@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const requiredFieldDateOptions = { rules: [{required: true, message: 'Required' }] } ;
 const optionalFieldDateOptions = { rules: [{required: false}]};
-
+const formRef = React.useRef(null);
 class DateField extends Component {
 	
 	constructor(props) {
@@ -34,15 +34,14 @@ class DateField extends Component {
 	
 	isFieldDisabled = () => {
 		if (this.props.isFieldDisabled !== undefined) {
-			return this.props.isFieldDisabled(this.props.json, this.props.form);
+			return this.props.isFieldDisabled(this.props.json, formRef);
 		} else {
 			return this.props.isDisabled;
 		}
 	}
 	
 	clearContents = () => {
-		let { resetFields } = this.props.form;
-		resetFields(this.props.fieldName);
+		formRef.current.resetFields(this.props.fieldName);
 	}
 
 	convertStringValueToMoment = value => {
@@ -55,7 +54,6 @@ class DateField extends Component {
 	
 	render() {
 		const dateFormatOptions = { getValueProps: this.convertStringValueToMoment, getValueFromEvent: this.convertMomentToStringValue};
-		let { getFieldDecorator, getFieldValue } = this.props.form;
 		let fieldOptions = this.props.isRequired ? Object.assign(dateFormatOptions, requiredFieldDateOptions) : Object.assign(dateFormatOptions, optionalFieldDateOptions);
 		let placeholderText = undefined;
 		if (this.props.additionalProps !== undefined) {
@@ -63,7 +61,7 @@ class DateField extends Component {
 		}
 		let error = false;
 		
-		if (this.state.opened && this.state.touched && getFieldValue(this.props.fieldName) === undefined) {
+		if (this.state.opened && this.state.touched && formRef.current.getFieldValue(this.props.fieldName) === undefined) {
 			error = true;
 		} else {
 			error = false;
@@ -76,7 +74,7 @@ class DateField extends Component {
 
 		return (
 			<Form.Item label={this.props.label} validateStatus={error ? 'error' : ''} help={error ? 'Required' : ''} >
-				{getFieldDecorator(this.props.fieldName, fieldOptions)(
+				{formRef.current.getFieldDecorator(this.props.fieldName, fieldOptions)(
 					<DatePicker disabled={isDisabled} onFocus={this.focus} disabledDate={this.disabledDate} onOpenChange={this.openChange} mode='date' format='YYYY-MM-DD' placeholder={placeholderText} name={this.props.fieldName}/>
 				)}
 			</Form.Item>		
@@ -87,10 +85,10 @@ class DateField extends Component {
 
 DateField.propTypes = {
     fieldName: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
+	  label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool.isRequired,
     isDisabled: PropTypes.bool,
-    form: PropTypes.object.isRequired,
+    // form: PropTypes.object.isRequired,
     additionalProps: PropTypes.object
 };
 
