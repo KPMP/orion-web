@@ -16,7 +16,7 @@ class SubmitterInformation extends Component {
             submitterEmailDisabled: this.isFieldDisabled(EMAIL, props),
             userInfoPopulated: this.isUserInfoPopulated(props)
 		};
-    this.formRef = React.useForm(null);
+    this.formRef = React.createRef(null);
 	}
 
 	isFieldDisabled(fieldName, props) {
