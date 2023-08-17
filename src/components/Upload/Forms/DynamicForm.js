@@ -16,7 +16,7 @@ class DynamicForm extends Component {
 			submitClicked: false,
 			largeFilesChecked: true,
 		};
-    this.formRef = React.createRef(null))
+    this.formRef = React.createRef(null)
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);

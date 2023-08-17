@@ -14,7 +14,7 @@ class DateField extends Component {
 			opened: false,
 			touched: false
 		}
-    this.formRef = React.createRef(null));
+    this.formRef = React.createRef(null);
 	}
 	
 	disabledDate(current) {

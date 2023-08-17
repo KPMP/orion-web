@@ -7,7 +7,7 @@ const Option = Select.Option;
 class SelectBox extends Component {
 
   constructor(){
-    this.formRef = React.createRef(null));
+    this.formRef = React.createRef(null);
   }
 
 	isFieldDisabled = () => {
