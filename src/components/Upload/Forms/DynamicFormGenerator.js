@@ -164,7 +164,7 @@ export class DynamicFormGenerator {
         let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
 
         if(fieldJson.hasOwnProperty('constrainedBy')) {
-        	let constrainedValue = form.getFieldValue(constrainedBy);
+        	let constrainedValue = form.current?.getFieldValue(constrainedBy);
         	if(constraints.hasOwnProperty(constrainedValue)) {
                 values = constraints[constrainedValue];
 			}
