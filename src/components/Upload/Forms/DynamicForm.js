@@ -210,7 +210,6 @@ class DynamicForm extends Component {
 				})
 			}
 		}
-		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
 				<Prompt
