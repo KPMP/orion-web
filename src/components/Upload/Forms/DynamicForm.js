@@ -16,7 +16,7 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: false,
+			largeFilesChecked: true,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
