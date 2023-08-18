@@ -220,25 +220,7 @@ class DynamicForm extends Component {
 				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
 						<h4>STEP 1: Determine the size of all files in this package</h4>
-						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
-						<Row>
-							<Col md={12}>
-								<label>
-									<span className="largeFileSupportLabel">No</span>
-									<Switch
-										onChange={this.handleLargeFilesToggle}
-										checked={this.state.largeFilesChecked}
-										uncheckedIcon={false}
-										checkedIcon={false}
-										onColor="#08f"
-										height={25}
-										width={45}
-										className="react-switch"
-									/>
-									<span className="largeFileSupportLabel">Yes</span>
-								</label>
-							</Col>
-						</Row>
+						<p>It is important that you submit the metadata for your experiment using the most recent <a href='https://kpmp.org/metadata' target='_blank'>metadata template</a></p>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
