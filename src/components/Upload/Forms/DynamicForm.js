@@ -18,7 +18,7 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: false,
+			largeFilesChecked: true,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
@@ -221,35 +221,14 @@ class DynamicForm extends Component {
 					<section>
 						<h4>STEP 1: Determine the size of all files in this package</h4>
 						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
-						<Row>
-							<Col md={12}>
-								<label>
-									<span className="largeFileSupportLabel">No</span>
-									<Switch
-										onChange={this.handleLargeFilesToggle}
-										checked={this.state.largeFilesChecked}
-										uncheckedIcon={false}
-										checkedIcon={false}
-										onColor="#08f"
-										height={25}
-										width={45}
-										className="react-switch"
-									/>
-									<span className="largeFileSupportLabel">Yes</span>
-								</label>
-							</Col>
-						</Row>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
-					<h4>STEP 2: Provide the dataset information</h4>
+					{/* <h4>STEP 2: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
 					{(!this.state.largeFilesChecked) && <h4>STEP 3: Add your files</h4>}
                     <Row className={"dropzone btn-sm" + dropzoneHidden}>
-							<Col md={12}>
-								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
-							</Col>
 						</Row>
 						
 					{(this.props.isUploading && this.state.largeFilesChecked) &&
@@ -263,7 +242,7 @@ class DynamicForm extends Component {
 								</div>
 							</Col>
 						</Row>
-					}
+					} */}
 					{(this.state.largeFilesChecked)?<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">

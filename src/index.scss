@@ -370,34 +370,6 @@ PACKAGES
 	color: rgb(2, 117, 216);
 }
 
-.dropzone {
-	padding-bottom: 15px;
-	.react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
-		min-height: 120px;
-	}
-
-	.react-fine-uploader-gallery-file-input-container {
-		background-color: #0275d8;
-		border: 1px solid #0275d8;
-	}
-
-	.react-fine-uploader-gallery-file-input-container:hover {
-		background-color: #286090;
-		border: 1px solid #204d74;
-	}
-	.react-fine-uploader-gallery-retry-button {
-		display: none;
-	}
-	.react-fine-uploader-gallery-pause-resume-button {
-		display: none;
-	}
-	.react-fine-uploader-gallery-cancel-button {
-		&.cancel-disabled {
-			display: none;
-		}
-	}
-}
-
 
 .loading {
  	position: fixed;
@@ -508,9 +480,6 @@ PACKAGES
 	padding-right: 50px;
 }
 
-.react-fine-uploader-gallery-file  {
-	margin-top: 30px !important;
-}
 
 #oops-content {
 
