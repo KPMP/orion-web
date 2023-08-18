@@ -18,7 +18,7 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: true,
+			largeFilesChecked: false,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
@@ -221,6 +221,24 @@ class DynamicForm extends Component {
 					<section>
 						<h4>STEP 1: Determine the size of all files in this package</h4>
 						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
+						<Row>
+							<Col md={12}>
+								<label>
+									<span className="largeFileSupportLabel">No</span>
+									<Switch
+										onChange={this.handleLargeFilesToggle}
+										checked={this.state.largeFilesChecked}
+										uncheckedIcon={false}
+										checkedIcon={false}
+										onColor="#08f"
+										height={25}
+										width={45}
+										className="react-switch"
+									/>
+									<span className="largeFileSupportLabel">Yes</span>
+								</label>
+							</Col>
+						</Row>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
