@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
-import FileDropzone from './FileDropzone';
 import LargeFileModal from '../../Packages/LargeFileModal';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
@@ -18,7 +16,7 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: true,
+			largeFilesChecked: false,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
