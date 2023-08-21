@@ -18,7 +18,7 @@ describe('getLocalTimeString', () => {
 		let offset = new Date().getTimezoneOffset();
 		let localHour = 11 - offset / 60;
 		if (new Date().isDstObserved()) {
-			localHour = 10 - offset / 60;
+			localHour = 11 - offset / 60;
 		}
 		expect(getLocalTimeString('1969-07-20T11:30:00.000+0000')).toEqual(localHour + ':30 AM');
 	});
@@ -27,7 +27,7 @@ describe('getLocalTimeString', () => {
 		let offset = new Date().getTimezoneOffset();
 		let localHour = 9 - offset / 60;
 		if (new Date().isDstObserved()) {
-			localHour = 8 - offset / 60;
+			localHour = 9 - offset / 60;
 		}
 		expect(getLocalTimeString('1969-07-20T09:30:00.000+0000')).toEqual(localHour + ':30 AM');
 	});
