@@ -3,7 +3,6 @@ import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import LargeFileModal from '../../Packages/LargeFileModal';
-import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -21,47 +20,6 @@ class DynamicForm extends Component {
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
-
-		// uploader.methods.reset();
-		// uploader.params = { hostname: window.location.hostname }
-		
-		// uploader.on('submit', () => {
-		// 	let newCount = this.state.filesAdded + 1;
-		// 	this.setState( { filesAdded: newCount } );
-		// 	this.isSubmitDisabled();
-		// 	return true;
-		// });
-		
-		// uploader.on('cancel', () => {
-		// 	let newCount = this.state.filesAdded - 1;
-		// 	this.setState( { filesAdded: newCount });
-		// 	this.isSubmitDisabled();
-		// 	return true;
-		// });
-		
-		// uploader.on('submit', (id, name) => {
-		// 	let files = uploader.methods.getUploads({
-		// 	status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
-			
-		// 	// The new version of react-scripts sees fileIndex as an unused variable, 
-		// 	// though it is...adding a comment to disable erroneous warning
-		// 	// eslint-disable-next-line
-		// 	for(let fileIndex in files) {
-		// 		let existingName = files[fileIndex].name;
-		// 		if (existingName === name) {
-		// 			alert("You have already selected " + existingName + " to upload.");
-		// 			return false;
-		// 		}
-		// 	}
-		// 	return true;
-		// });
-		
-		// uploader.on('validateBatch', () => {
-		// 	if (this.state.submitClicked) {
-		// 		return false;
-		// 	}
-		// 	return true;
-		// })
 		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
