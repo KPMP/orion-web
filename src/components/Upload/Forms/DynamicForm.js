@@ -236,7 +236,7 @@ class DynamicForm extends Component {
 							</Col>
 						</Row>
 					}
-					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
+					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
