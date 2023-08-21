@@ -224,7 +224,19 @@ class DynamicForm extends Component {
 					<h4>STEP 2: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-					{(this.state.largeFilesChecked)?<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
+          {(this.props.isUploading && this.state.largeFilesChecked) &&
+						<Row>
+							<Col xs={12}>
+								<div className="d-flex align-items-center text-center loading">
+									<span className="loading-message">
+										<strong>Processing request... &nbsp;&nbsp;&nbsp;&nbsp;</strong>
+										<div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+									</span>
+								</div>
+							</Col>
+						</Row>
+					}
+					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
