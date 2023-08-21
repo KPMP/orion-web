@@ -22,46 +22,46 @@ class DynamicForm extends Component {
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
 
-		uploader.methods.reset();
-		uploader.params = { hostname: window.location.hostname }
+		// uploader.methods.reset();
+		// uploader.params = { hostname: window.location.hostname }
 		
-		uploader.on('submit', () => {
-			let newCount = this.state.filesAdded + 1;
-			this.setState( { filesAdded: newCount } );
-			this.isSubmitDisabled();
-			return true;
-		});
+		// uploader.on('submit', () => {
+		// 	let newCount = this.state.filesAdded + 1;
+		// 	this.setState( { filesAdded: newCount } );
+		// 	this.isSubmitDisabled();
+		// 	return true;
+		// });
 		
-		uploader.on('cancel', () => {
-			let newCount = this.state.filesAdded - 1;
-			this.setState( { filesAdded: newCount });
-			this.isSubmitDisabled();
-			return true;
-		});
+		// uploader.on('cancel', () => {
+		// 	let newCount = this.state.filesAdded - 1;
+		// 	this.setState( { filesAdded: newCount });
+		// 	this.isSubmitDisabled();
+		// 	return true;
+		// });
 		
-		uploader.on('submit', (id, name) => {
-			let files = uploader.methods.getUploads({
-			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+		// uploader.on('submit', (id, name) => {
+		// 	let files = uploader.methods.getUploads({
+		// 	status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
 			
-			// The new version of react-scripts sees fileIndex as an unused variable, 
-			// though it is...adding a comment to disable erroneous warning
-			// eslint-disable-next-line
-			for(let fileIndex in files) {
-				let existingName = files[fileIndex].name;
-				if (existingName === name) {
-					alert("You have already selected " + existingName + " to upload.");
-					return false;
-				}
-			}
-			return true;
-		});
+		// 	// The new version of react-scripts sees fileIndex as an unused variable, 
+		// 	// though it is...adding a comment to disable erroneous warning
+		// 	// eslint-disable-next-line
+		// 	for(let fileIndex in files) {
+		// 		let existingName = files[fileIndex].name;
+		// 		if (existingName === name) {
+		// 			alert("You have already selected " + existingName + " to upload.");
+		// 			return false;
+		// 		}
+		// 	}
+		// 	return true;
+		// });
 		
-		uploader.on('validateBatch', () => {
-			if (this.state.submitClicked) {
-				return false;
-			}
-			return true;
-		})
+		// uploader.on('validateBatch', () => {
+		// 	if (this.state.submitClicked) {
+		// 		return false;
+		// 	}
+		// 	return true;
+		// })
 		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
