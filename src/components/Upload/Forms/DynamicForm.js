@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
+import FileDropzone from './FileDropzone';
 import LargeFileModal from '../../Packages/LargeFileModal';
+import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
@@ -15,11 +18,52 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: true,
+			largeFilesChecked: false,
 		};
 
 		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
 		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
+
+		uploader.methods.reset();
+		uploader.params = { hostname: window.location.hostname }
+		
+		uploader.on('submit', () => {
+			let newCount = this.state.filesAdded + 1;
+			this.setState( { filesAdded: newCount } );
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('cancel', () => {
+			let newCount = this.state.filesAdded - 1;
+			this.setState( { filesAdded: newCount });
+			this.isSubmitDisabled();
+			return true;
+		});
+		
+		uploader.on('submit', (id, name) => {
+			let files = uploader.methods.getUploads({
+			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+			
+			// The new version of react-scripts sees fileIndex as an unused variable, 
+			// though it is...adding a comment to disable erroneous warning
+			// eslint-disable-next-line
+			for(let fileIndex in files) {
+				let existingName = files[fileIndex].name;
+				if (existingName === name) {
+					alert("You have already selected " + existingName + " to upload.");
+					return false;
+				}
+			}
+			return true;
+		});
+		
+		uploader.on('validateBatch', () => {
+			if (this.state.submitClicked) {
+				return false;
+			}
+			return true;
+		})
 		
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
@@ -166,6 +210,7 @@ class DynamicForm extends Component {
 				})
 			}
 		}
+		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
 				<Prompt
@@ -175,14 +220,39 @@ class DynamicForm extends Component {
 				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
 						<h4>STEP 1: Determine the size of all files in this package</h4>
-						<p>It is important that you submit the metadata for your experiment using the most recent <a href='https://kpmp.org/metadata' target='_blank'>metadata template</a></p>
+						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
+						<Row>
+							<Col md={12}>
+								<label>
+									<span className="largeFileSupportLabel">No</span>
+									<Switch
+										onChange={this.handleLargeFilesToggle}
+										checked={this.state.largeFilesChecked}
+										uncheckedIcon={false}
+										checkedIcon={false}
+										onColor="#08f"
+										height={25}
+										width={45}
+										className="react-switch"
+									/>
+									<span className="largeFileSupportLabel">Yes</span>
+								</label>
+							</Col>
+						</Row>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
 					<h4>STEP 2: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-          {(this.props.isUploading && this.state.largeFilesChecked) &&
+					{(!this.state.largeFilesChecked) && <h4>STEP 3: Add your files</h4>}
+                    <Row className={"dropzone btn-sm" + dropzoneHidden}>
+							<Col md={12}>
+								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
+							</Col>
+						</Row>
+						
+					{(this.props.isUploading && this.state.largeFilesChecked) &&
 						<Row>
 							<Col xs={12}>
 								<div className="d-flex align-items-center text-center loading">
@@ -194,7 +264,7 @@ class DynamicForm extends Component {
 							</Col>
 						</Row>
 					}
-					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
+					{(this.state.largeFilesChecked)?<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>:<h4>STEP 4: Click upload</h4> }
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
@@ -222,7 +292,6 @@ DynamicForm.propTypes = {
 	form: PropTypes.object.isRequired,
 	userInformation: PropTypes.any,
 }
-
 
 const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
 
