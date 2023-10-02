@@ -49,6 +49,12 @@ export const iconDataTypes = new Map(
                 iconImage: 'icon_biomarker_132x132.png'
             }
 
+        ],
+        ["Imaging Derived",
+            {
+                iconDataType:"ImagingDerived",
+                iconImage: "icon_imaging-derived.png"
+            }
         ]
     ]
 );
