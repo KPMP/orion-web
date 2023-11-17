@@ -176,9 +176,8 @@ class DynamicForm extends Component {
 					<section>
 						<h4>STEP 1: Verify you have completed the following required to upload your data: </h4>
             <h6>1. Globus is installed and your local endpoint is set up</h6>
-            <h6>2. You have downloaded and filled out the current version of the metadata spreadsheet for your technology</h6>
+            <h6>2. You have downloaded and filled out the current version of the <a href='https://kpmp.org/metadata' target='_blank'>metadata template</a> for your technology </h6>
             <h6>3. Your data is organized in your Globus endpoint and ready for upload</h6>
-						<p>It is important that you submit the metadata for your experiment using the most recent <a href='https://kpmp.org/metadata' target='_blank'>metadata template</a></p>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
