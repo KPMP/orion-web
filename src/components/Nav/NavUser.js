@@ -29,7 +29,7 @@ class NavUser extends Component {
                 <DropdownToggle caret tag="a" className="text-dark"
                 >{this.props.displayName}</DropdownToggle>
                 <DropdownMenu id="nav-user-dropdown-menu">
-                        <DropdownItem tag="a" target="_blank" href="https://kpmp.org/data-uploader-help/">
+                        <DropdownItem tag="a" target="_blank" rel="noopener noreferrer" href="https://kpmp.org/data-uploader-help/">
                             Help
                         </DropdownItem>
                     <DropdownItem divider />
