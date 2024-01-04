@@ -8,7 +8,6 @@ import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
