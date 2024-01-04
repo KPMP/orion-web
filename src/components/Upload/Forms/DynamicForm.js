@@ -218,26 +218,10 @@ class DynamicForm extends Component {
 				/>
 				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
-						<h4>STEP 1: Determine the size of all files in this package</h4>
-						<p>Is the total size of all files you are uploading <strong>MORE THAN</strong> 15 gigabytes?</p>
-						<Row>
-							<Col md={12}>
-								<label>
-									<span className="largeFileSupportLabel">No</span>
-									<Switch
-										onChange={this.handleLargeFilesToggle}
-										checked={this.state.largeFilesChecked}
-										uncheckedIcon={false}
-										checkedIcon={false}
-										onColor="#08f"
-										height={25}
-										width={45}
-										className="react-switch"
-									/>
-									<span className="largeFileSupportLabel">Yes</span>
-								</label>
-							</Col>
-						</Row>
+						<h4>STEP 1: Verify you have completed the following required to upload your data: </h4>
+            <h6>1. Globus is installed and your local endpoint is set up</h6>
+            <h6>2. You have downloaded and filled out the current version of the <a href='https://kpmp.org/metadata' target='_blank' rel="noopener noreferrer">metadata template</a> for your technology </h6>
+            <h6>3. Your data is organized in your Globus endpoint and ready for upload</h6>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
