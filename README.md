@@ -1,10 +1,7 @@
-[![Node.js CI](https://github.com/KPMP/orion-web/actions/workflows/node.js.yml/badge.svg)](https://github.com/KPMP/orion-web/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/Kretzler-Lab/miktmc-uploader-web/blob/develop/.github/workflows/node.js.yml/badge.svg)](https://github.com/Kretzler-Lab/miktmc-uploader-web/blob/develop/.github/workflows/node.js.yml)
 
-# orion-web
-Repo for the KPMP upload tool front-end
-
-## Documentation
-Visit [kpmp.github.io/dlu](http://kpmp.io.github.io/dlu)
+# miktmc-uploader-web
+Repo for the CureGN upload tool front-end
 
 ## Enable System Downtime message
 Edit src/initialState.json and set "underMaintenance" to true

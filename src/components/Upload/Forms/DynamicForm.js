@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
-import LargeFileModal from '../../Packages/LargeFileModal';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FileDropzone from './FileDropzone';
+import qq from 'fine-uploader/lib/core';
 
 class DynamicForm extends Component {
 	
@@ -15,26 +16,53 @@ class DynamicForm extends Component {
 		this.state = {
 			filesAdded: 0,
 			submitClicked: false,
-			largeFilesChecked: true,
 		};
-
-		this.handleLargeFilesToggle = this.handleLargeFilesToggle.bind(this);
-		this.handleLargeFilesClick= this.handleLargeFilesClick.bind(this);
 		
+		uploader.methods.reset();
+		uploader.params = { hostname: window.location.hostname }
+
+		uploader.on('submit', () => {
+			let newCount = this.state.filesAdded + 1;
+			this.setState( { filesAdded: newCount } );
+			this.isSubmitDisabled();
+			return true;
+		});
+
+		uploader.on('cancel', () => {
+			let newCount = this.state.filesAdded - 1;
+			this.setState( { filesAdded: newCount });
+			this.isSubmitDisabled();
+			return true;
+		});
+
+		uploader.on('submit', (id, name) => {
+			let files = uploader.methods.getUploads({
+			status: [ qq.status.SUBMITTED, qq.status.PAUSED ]});
+
+			// The new version of react-scripts sees fileIndex as an unused variable, 
+			// though it is...adding a comment to disable erroneous warning
+			// eslint-disable-next-line
+			for(let fileIndex in files) {
+				let existingName = files[fileIndex].name;
+				if (existingName === name) {
+					alert("You have already selected " + existingName + " to upload.");
+					return false;
+				}
+			}
+			return true;
+		});
+
+		uploader.on('validateBatch', () => {
+			if (this.state.submitClicked) {
+				return false;
+			}
+			return true;
+		})
+
 		let formGenerator = new DynamicFormGenerator();
 		this.renderSection = formGenerator.renderSection.bind(this);
 		this.renderField = formGenerator.renderField.bind(this);
 		this.isFieldDisabled = formGenerator.isFieldDisabled.bind(this);
-	}
-
-	handleLargeFilesToggle(checked) {
-		this.setState({ largeFilesChecked: checked });
-	}
-
-	handleLargeFilesClick() {
-		let show = !this.state.showLargeFile;
-		this.setState({ showLargeFile: show });
-		this.props.clearShowLargeFileModal();
 	}
 
 	componentDidMount() {
@@ -61,7 +89,6 @@ class DynamicForm extends Component {
 			newValues.version = this.props.formDTD.version;
 			newValues.datasetInformationVersion = this.props.formDTD.standardFields.version;
 			newValues.packageTypeMetadataVersion = this.determinePackageTypeMetadataVersion();
-            newValues.largeFilesChecked = this.state.largeFilesChecked;
             if(!err) {
 				this.props.postPackageInformation(newValues, uploader);
 			} else {
@@ -141,7 +168,7 @@ class DynamicForm extends Component {
 			}
 		}
 
-		return !(!this.state.submitClicked && validForm && (this.state.filesAdded > 0 || this.state.largeFilesChecked));
+		return !(!this.state.submitClicked && validForm && (this.state.filesAdded > 0));
 	}
 	
 	render() {
@@ -174,28 +201,19 @@ class DynamicForm extends Component {
 				/>
 				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
-						<h4>STEP 1: Verify you have completed the following required to upload your data: </h4>
-            <h6>1. Globus is installed and your local endpoint is set up</h6>
-            <h6>2. You have downloaded and filled out the current version of the <a href='https://kpmp.org/metadata' target='_blank' rel="noopener noreferrer">metadata template</a> for your technology </h6>
-            <h6>3. Your data is organized in your Globus endpoint and ready for upload</h6>
+						<h4>STEP 1: Determine the size of all files in this package</h4>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
 					<h4>STEP 2: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-          {(this.props.isUploading && this.state.largeFilesChecked) &&
-						<Row>
-							<Col xs={12}>
-								<div className="d-flex align-items-center text-center loading">
-									<span className="loading-message">
-										<strong>Processing request... &nbsp;&nbsp;&nbsp;&nbsp;</strong>
-										<div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
-									</span>
-								</div>
+          <h4>STEP 3: Add your files</h4>
+            <Row className={"dropzone btn-sm"}>
+							<Col md={12}>
+								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
-					}
 					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
@@ -211,7 +229,6 @@ class DynamicForm extends Component {
 					</Row>
 					
 				</article>
-				<LargeFileModal show={this.props.codicil} close={this.handleLargeFilesClick} link={this.props.codicil}/>
 			</React.Fragment>
 		);
 	}
@@ -225,7 +242,4 @@ DynamicForm.propTypes = {
 	userInformation: PropTypes.any,
 }
 
-
-const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
-
-export default WrappedUniversalHeaderForm;
+export default DynamicForm
