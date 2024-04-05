@@ -274,4 +274,6 @@ DynamicForm.propTypes = {
 }
 
 
-export default DynamicForm;
+const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
+
+export default WrappedUniversalHeaderForm;
