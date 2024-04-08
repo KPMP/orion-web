@@ -17,7 +17,6 @@ const FIELD_TYPES = {
 		NUMERIC: "NUMERIC"
 };
 
-const OTHER_AVAILABLE_LABEL = 'Other';
 const LINKED_WITH = 'linkedWith';
 const COLUMNS = 'cols';
 const ADDITIONAL_PROPS = 'additionalProps';
@@ -161,7 +160,7 @@ export class DynamicFormGenerator {
 	}
 
 	parseOptions = function(fieldJson, form) {
-        let {values, otherAvailable, constrainedBy, constraints} = fieldJson;
+        let {values, constrainedBy, constraints} = fieldJson;
 
         if(fieldJson.hasOwnProperty('constrainedBy')) {
         	let constrainedValue = form.getFieldValue(constrainedBy);
@@ -177,10 +176,6 @@ export class DynamicFormGenerator {
         values = values.map((element) => {
             return {label: element, value: element};
         });
-
-        if(otherAvailable) {
-            values.push({label: OTHER_AVAILABLE_LABEL, value: OTHER_AVAILABLE_LABEL});
-        }
 
         return values;
 	}
