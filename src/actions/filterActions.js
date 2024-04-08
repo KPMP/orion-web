@@ -56,7 +56,7 @@ export const setPackageTypesFromDTD = (formDTD) => {
 }
 
 export const setSiteNamesFromDTD = (formDTD) => {
-	let tisNameFieldArray = formDTD.standardFields.fields.filter(field => {
+	let siteNameFieldArray = formDTD.standardFields.fields.filter(field => {
 		return field.hasOwnProperty("fieldName") && field.fieldName === "siteName"
 	});
 	let siteNames = siteNameFieldArray[0].values;
