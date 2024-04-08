@@ -7,7 +7,7 @@ import { getDTDByVersion } from '../dtdActions';
 const api = Api.getInstance();
 
 export const getPackagesStateless = () => {
-		return api.get('/api/v1/packages?shouldExclude=true')
+		return api.get('/api/v1/packages?shouldExclude=false')
 			.then(res => {
 				return res.data
 			})
