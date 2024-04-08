@@ -72,12 +72,12 @@ describe('packages', () => {
 		
 		it('should remove filter', () => {
 			let state = {
-					filters: [{filterType: filterActions.filterTypes.TIS_NAME, value: 'UW'}],
+					filters: [{filterType: filterActions.filterTypes.SITE_NAME, value: 'UW'}],
 					userList: [], packageTypes: []
 			};
 			let action = {
 					type: actionNames.REMOVE_FILTER,
-					payload: { filterType: filterActions.filterTypes.TIS_NAME, value: 'UW' }
+					payload: { filterType: filterActions.filterTypes.SITE_NAME, value: 'UW' }
 			};
 			expect(filtering(state, action)).toEqual({
 				filters: [],
@@ -85,12 +85,12 @@ describe('packages', () => {
 		});
 		it('should remove filter', () => {
 			let state = {
-					filters: [{filterType: filterActions.filterTypes.TIS_NAME, value: 'UW'}, {filterType: filterActions.filterTypes.SUBMITTER, value: '345'}],
+					filters: [{filterType: filterActions.filterTypes.SITE_NAME, value: 'UW'}, {filterType: filterActions.filterTypes.SUBMITTER, value: '345'}],
 					userList: [], packageTypes: []
 			};
 			let action = {
 					type: actionNames.REMOVE_FILTER,
-					payload: { filterType: filterActions.filterTypes.TIS_NAME, value: 'UW' }
+					payload: { filterType: filterActions.filterTypes.SITE_NAME, value: 'UW' }
 			};
 			expect(filtering(state, action)).toEqual(
 				{
@@ -131,23 +131,23 @@ describe('packages', () => {
 			})
 		});
 	});
-	describe("set_tis_names action", () => {
-		it('should add tisNames', () => {
+	describe("set_site_names action", () => {
+		it('should add siteNames', () => {
 			let state = {
 					filters: [],
 					userList: [], 
 					packageTypes: ["Type 1", "Type 2"], 
-					tisNames: []
+					siteNames: []
 			};
 			let action = {
-					type: actionNames.SET_TIS_NAMES,
+					type: actionNames.SET_SITE_NAMES,
 					payload: ["Name 1", "Name 2"]
 			};
 			expect(filtering(state, action)).toEqual({
 				filters: [],
 				userList: [],
 				packageTypes: ["Type 1", "Type 2"],
-				tisNames: ["Name 1", "Name 2"]
+				siteNames: ["Name 1", "Name 2"]
 			})
 		});
 	});

@@ -66,12 +66,12 @@ class PackagesPane extends Component {
 		return userOptions;
 	}
 	
-	tisNamesToOptions = (tisNames) => {
-		let tisNameOptions = tisNames.map(value => {
+	siteNamesToOptions = (siteNames) => {
+		let siteNameOptions = siteNames.map(value => {
 			return { value: value, label: value }
 		});
 
-		tisNameOptions.sort((option1, option2) => {
+		siteNameOptions.sort((option1, option2) => {
 			let returnVal = 0;
 			let label1 = option1.label.toUpperCase();
 			let label2 = option2.label.toUpperCase();
@@ -87,7 +87,7 @@ class PackagesPane extends Component {
 			return returnVal;
 		});
 
-		return tisNameOptions;
+		return siteNameOptions;
 	}
 	
     render() {
@@ -96,9 +96,9 @@ class PackagesPane extends Component {
 		if (this.props.packageTypes.length) {
 			packageTypeOptions = this.packageTypesToOptions(this.props.packageTypes);
 		}
-		let tisNameOptions = [];
-		if (this.props.tisNames.length) {
-			tisNameOptions = this.tisNamesToOptions(this.props.tisNames);
+		let siteNameOptions = [];
+		if (this.props.siteNames.length) {
+			siteNameOptions = this.siteNamesToOptions(this.props.siteNames);
 		}
 
         return (
@@ -106,7 +106,7 @@ class PackagesPane extends Component {
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
 					<Row noGutters>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by TIS Name" options={tisNameOptions} type={filterActions.filterTypes.TIS_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+							<FilterControl className="filter-control" placeholder="Filter by Site Name" options={siteNameOptions} type={filterActions.filterTypes.SITE_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
@@ -151,7 +151,7 @@ PackagesPane.propTypes = {
 	loadRemoteData: PropTypes.func.isRequired,
 	users: PropTypes.array,
 	packageTypes: PropTypes.array,
-	tisNames: PropTypes.array,
+	siteNames: PropTypes.array,
 }
 
 export default PackagesPane;
