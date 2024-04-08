@@ -30,7 +30,7 @@ describe('renderSection', () => {
 						'label': 'TIS Internal Experiment ID',
 						'type': 'Text Field',
 						'required': true,
-						'fieldName': 'tisInternalExperimentID'
+						'fieldName': 'siteInternalExperimentID'
 					},
 					{
 						'label': 'More stuff',

@@ -21,7 +21,7 @@ export class MetadataRenderer {
 		if (fieldJson.type === "Submitter Information") {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
-			let institutionField = "TIS Name: " + packageInfo.tisName;
+			let institutionField = "Site Name: " + packageInfo.siteName;
 			return (
 				<TreeNode title="Submitted by:" key="Submitted by:" selectable={false}>
 					<TreeNode title={institutionField} key={institutionField} isLeaf selectable={false}/>
@@ -29,7 +29,7 @@ export class MetadataRenderer {
 				</TreeNode>
 			);
 		} else {
-			if (fieldJson.fieldName ==="tisName") {
+			if (fieldJson.fieldName ==="siteName") {
 				return "";
 			}
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
