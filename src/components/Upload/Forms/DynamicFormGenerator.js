@@ -24,6 +24,8 @@ const ADDITIONAL_PROPS = 'additionalProps';
 export class DynamicFormGenerator {
 	
 	renderSection = (inputSectionJson, form, userInformation) => {
+    console.log(inputSectionJson)
+    console.log(form)
 
 		let sectionJson = Object.assign({}, inputSectionJson);
 
