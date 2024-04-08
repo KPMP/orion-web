@@ -216,7 +216,6 @@ class DynamicForm extends Component {
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
-					}
 					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
