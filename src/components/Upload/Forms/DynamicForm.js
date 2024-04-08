@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
+import FileDropzone from './FileDropzone';
+import LargeFileModal from '../../Packages/LargeFileModal';
+import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FileDropzone from './FileDropzone';
-import qq from 'fine-uploader/lib/core';
+import Switch from "react-switch";
 
 class DynamicForm extends Component {
 	
@@ -193,6 +195,7 @@ class DynamicForm extends Component {
 				})
 			}
 		}
+		let dropzoneHidden = this.state.largeFilesChecked?" hidden":"";
 		return (
 			<React.Fragment>
 				<Prompt
@@ -201,7 +204,6 @@ class DynamicForm extends Component {
 				/>
 				<article id="largeFileSupport" className="upload-form-section container justify-content-center pt-4">
 					<section>
-						<h4>STEP 1: Determine the size of all files in this package</h4>
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
@@ -214,6 +216,7 @@ class DynamicForm extends Component {
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
+					}
 					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
@@ -242,4 +245,7 @@ DynamicForm.propTypes = {
 	userInformation: PropTypes.any,
 }
 
-export default DynamicForm
+
+const WrappedUniversalHeaderForm = Form.create({ name: 'universalHeader', validateMessage: "Required" })(DynamicForm);
+
+export default WrappedUniversalHeaderForm;
