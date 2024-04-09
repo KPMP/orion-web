@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'reactstrap';
 class NotFoundPage extends Component {
     
     render() {
-        document.title = 'KPMP Data Lake Uploader'
+        document.title = 'CureGn Data Lake Uploader'
         return (
             <article className="container" id='not-found-page'>
                 <Row id="not-found-container" className='mr-5 p-5'>
