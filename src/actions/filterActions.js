@@ -6,6 +6,7 @@ const api = Api.getInstance();
 
 export const filterTypes = {
 	TIS_NAME: "TIS_NAME",
+  PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
 }
 
