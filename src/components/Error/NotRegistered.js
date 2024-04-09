@@ -14,7 +14,7 @@ class NotRegistered extends Component {
 					<Row>
 						<Col xs={12}>
 							<div  className="alert alert-danger">
-							You must be a registered user in order to use this KPMP application. If you would like to register or believe you received this page in error, please contact: &nbsp;
+							You must be a registered user in order to use this CureGN application. If you would like to register or believe you received this page in error, please contact: &nbsp;
 								<a href="mailto:admin@kpmp.org">admin@kpmp.org</a>
 							</div>
 						</Col>
