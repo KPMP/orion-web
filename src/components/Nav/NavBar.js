@@ -51,7 +51,7 @@ class NavBar extends Component {
                     <Link to="/" className="navbar-header">
                         <NavbarBrand tag="span" className="d-flex align-items-center">
                             <img src="/img/logo.png" alt="Cure Glomerulonephropathy Data Lake Uploader" className="logo" />
-                            <span className="ml-2 text-white">Data Lake Uploader</span>
+                            <span className="ml-2 text-light">Data Lake Uploader</span>
                         </NavbarBrand>
                     </Link>
                 </Col>
