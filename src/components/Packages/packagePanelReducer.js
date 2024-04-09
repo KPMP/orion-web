@@ -52,22 +52,22 @@ export const filtering = (state = {}, action) => {
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
 			newState.packageTypes = state.packageTypes;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
 			newState.filters = state.filters;
 			newState.userList = users;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
 			newState.packageTypes = action.payload;
 			return newState;
 			
-		case actionNames.SET_TIS_NAMES:
+		case actionNames.SET_SITE_NAMES:
 			newState.filters = state.filters;
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
-			newState.tisNames = action.payload;
+			newState.siteNames = action.payload;
 			return newState;
 
 		case actionNames.REMOVE_FILTER:
@@ -83,7 +83,7 @@ export const filtering = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -105,7 +105,7 @@ export const filtering = (state = {}, action) => {
 			newState.filters = filters;
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
-			newState.tisNames = state.tisNames;
+			newState.siteNames = state.siteNames;
 			return newState;
 		default:
 			return state;
@@ -118,9 +118,9 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
-		if (filter.filterType === filterActions.filterTypes.TIS_NAME) {
+		if (filter.filterType === filterActions.filterTypes.SITE_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.tisName === filter.value) {
+				if(packageItem.packageInfo.siteName === filter.value) {
 					return packageItem;
 				}
 				return null;

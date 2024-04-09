@@ -6,7 +6,8 @@ const api = Api.getInstance();
 
 export const filterTypes = {
 	TIS_NAME: "TIS_NAME",
-  PACKAGE_TYPE: "PACKAGE_TYPE",
+	SITE_NAME: "SITE_NAME",
+	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
 }
 
@@ -55,14 +56,14 @@ export const setPackageTypesFromDTD = (formDTD) => {
 	}
 }
 
-export const setTisNamesFromDTD = (formDTD) => {
-	let tisNameFieldArray = formDTD.standardFields.fields.filter(field => {
-		return field.hasOwnProperty("fieldName") && field.fieldName === "tisName"
+export const setSiteNamesFromDTD = (formDTD) => {
+	let siteNameFieldArray = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "siteName"
 	});
-	let tisNames = tisNameFieldArray[0].values;
+	let siteNames = siteNameFieldArray[0].values;
 	return {
-		type: actionNames.SET_TIS_NAMES,
-		payload: tisNames
+		type: actionNames.SET_SITE_NAMES,
+		payload: siteNames
 	}
 }
 

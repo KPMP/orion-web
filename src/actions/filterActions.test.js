@@ -62,15 +62,15 @@ describe('setPackageTypesFromDTD', () => {
 	})
 });
 
-describe('setTisNamesFromDTD', () => {
+describe('setSiteNamesFromDTD', () => {
 	it('should create the correct action', () => {
-		let tisNames = ["Type 1", "Type 2"];
+		let siteNames = ["Type 1", "Type 2"];
 		let payload = {
 			"standardFields": {
 				"fields": [
 					{
-						fieldName: "tisName",
-						values: tisNames
+						fieldName: "siteName",
+						values: siteNames
 					},
 					{
 						fieldName: "dummyField"
@@ -79,10 +79,10 @@ describe('setTisNamesFromDTD', () => {
 			}
 		};
 		let expectedAction = {
-			type: actionNames.SET_TIS_NAMES,
-			payload: tisNames
+			type: actionNames.SET_SITE_NAMES,
+			payload: siteNames
 		}
-		let action = filterActions.setTisNamesFromDTD(payload);
+		let action = filterActions.setSiteNamesFromDTD(payload);
 		expect(action).toEqual(expectedAction);
 	})
 });
