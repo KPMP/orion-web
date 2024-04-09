@@ -5,6 +5,7 @@ import { sendMessageToBackend } from './Error/errorActions';
 const api = Api.getInstance();
 
 export const filterTypes = {
+	TIS_NAME: "TIS_NAME",
 	SITE_NAME: "SITE_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER"
