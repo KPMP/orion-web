@@ -26,7 +26,7 @@ class NavUser extends Component {
                       inNavbar
                       direction="down"
                       className="float-right col-sm-0">
-                <DropdownToggle caret tag="a" className="text-dark"
+                <DropdownToggle caret tag="a" className="text-light"
                 >{this.props.displayName}</DropdownToggle>
                 <DropdownMenu id="nav-user-dropdown-menu">
                         <DropdownItem tag="a" target="_blank" rel="noopener noreferrer" href="https://kpmp.org/data-uploader-help/">
