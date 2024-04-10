@@ -206,16 +206,16 @@ class DynamicForm extends Component {
 					</section>
 				</article>
 				<article id="dynamicUploadForm" className="upload-form-section container justify-content-center pt-4">
-					<h4>STEP 2: Provide the dataset information</h4>
+					<h4>STEP 1: Provide the dataset information</h4>
 					{this.renderSection(this.props.formDTD.standardFields, this.props.form, this.props.userInformation)}
 					{dynamicSections}
-          <h4>STEP 3: Add your files</h4>
+          <h4>STEP 2: Add your files</h4>
             <Row className={"dropzone btn-sm"}>
 							<Col md={12}>
 								<FileDropzone uploader={uploader} isUploading={this.props.isUploading}/>
 							</Col>
 						</Row>
-					<h4>STEP 3: Click upload and add your files with the upload instructions that follow</h4>
+					<h4>STEP 3: Click upload</h4>
 					<Row className="fixed-bottom pt-4" id="form-footer">
 						<div className="container justify-content-center">
 							<Row className="text-center">
