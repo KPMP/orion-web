@@ -69,6 +69,8 @@ body.modal-open {
 
 #footer {
 	background: $footer-color;
+	display: flex;
+	justify-content: space-between;
 }
 
 .clickable {

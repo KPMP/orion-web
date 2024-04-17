@@ -15,6 +15,7 @@ import DynamicFormContainer from "./components/Upload/Forms/DynamicFormContainer
 import NavBarContainer from "./components/Nav/NavBarContainer";
 import NavFooter from "./components/Nav/NavFooter";
 import ErrorBoundaryContainer from "./components/Error/ErrorBoundaryContainer";
+import PrivacyStatement from "./components/Privacy/Privacy";
 import { applyRouteClass } from './helpers/routeClassUtil';
 import detectIEAndNotify from './helpers/detectBrowser';
 //import SessionTimeoutModalContainer from './components/SessionTimeout/SessionTimeoutModalContainer';
@@ -90,6 +91,7 @@ class App extends Component {
 							<Route exact path="/oops" component={Oops} />
 							<Route exact path="/permissionDenied" component={PermissionDenied} />
 							<Route exact path="/notRegistered" component={NotRegistered} />
+							<Route exact path="/privacy" component={PrivacyStatement} />
 							<Route path='/*' component={NotFoundPage} />
 						</Switch>
 						<NavFooter />
