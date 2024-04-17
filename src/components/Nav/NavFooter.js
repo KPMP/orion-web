@@ -7,6 +7,9 @@ class NavFooter extends Component {
                 <a className="text-light small"
                    href="https://kpmp.org" target="_blank"  rel="noopener noreferrer"
                 >&copy; Cure Glomerulonephropathy Network</a>
+                <a className="text-light small text-right"
+                   href="/privacy"
+                >Privacy Statement</a>
             </div>
         );
     }

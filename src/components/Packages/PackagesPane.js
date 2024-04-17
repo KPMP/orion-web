@@ -120,7 +120,7 @@ class PackagesPane extends Component {
 								<Button id="packages-button-add-new"
 										color="primary"
 										className="btn-sm packages-pane-filter-button"
-										>Add new package</Button>
+										>Add new upload</Button>
 							</Link>
 						</Col>
 					</Row>
