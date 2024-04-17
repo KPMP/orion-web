@@ -16,7 +16,7 @@ class PrivacyStatement extends Component {
                             curegn.org domain.</p>
 
                         <p>For questions or concerns about this policy, please email our website administrator:
-                            miktmc-devs@umich.edu</p>
+                            <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a></p>
                         <h2>Collection</h2>
                         <p>MiKTMC collects personal information in the following ways:</p>
                         <p>Automatically by your institution, when you authenticate using your institution’s login
@@ -42,7 +42,7 @@ class PrivacyStatement extends Component {
                             Consortium, The Neptune Consortium, or by law, including sharing with government agencies to
                             aid in an investigation.</p>
                         <h2>Contact</h2>
-                        <p>Please contact miktmc-devs@umich.edu for questions regarding this privacy notice.</p>
+                        <p>Please contact <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a> for questions regarding this privacy notice.</p>
                     </Col>
                 </Row>
             </article>

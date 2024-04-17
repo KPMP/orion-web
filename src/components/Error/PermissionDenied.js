@@ -15,7 +15,7 @@ class PermissionDenied extends Component {
 						<Col xs={12}>
 							<div  className="alert alert-danger">
 							Your account does not have permission to use this CureGN application. If you believe you received this page in error, please contact: &nbsp;
-								<a href="mailto:admin@kpmp.org">admin@kpmp.org</a>
+								<a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a>
 							</div>
 						</Col>
 					</Row>

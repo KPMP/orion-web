@@ -9,7 +9,7 @@ class DowntimeNotice extends Component {
                 <Col xs={0} md={2}>&nbsp;</Col>
                 <Col xs={12} md={6}>
                     <p className="oops-big">System Unavailable</p>
-                    <p className="oops-small">We’re sorry. The Data Lake Uploader is currently undergoing system maintenance and is unavailable at this time. Please try again later.</p>
+                    <p className="oops-small">We’re sorry. The Uploader is currently undergoing system maintenance and is unavailable at this time. Please try again later.</p>
                     
                 </Col>
             </Row>
