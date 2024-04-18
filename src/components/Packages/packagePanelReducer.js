@@ -48,6 +48,7 @@ export const filtering = (state = {}, action) => {
 	let packageTypes = state.packageTypes;
     let studyNames = state.studyNames;
     let biopsyIds = state.biopsyIds;
+    let siteNames = state.siteNames;
 
 	switch(action.type) {
 
