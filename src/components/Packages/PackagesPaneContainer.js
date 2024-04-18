@@ -10,7 +10,9 @@ const mapStateToProps = (state, props) =>
 ({
 	users: state.filtering.userList,
 	packageTypes: state.filtering.packageTypes,
-	siteNames: state.filtering.siteNames
+	siteNames: state.filtering.siteNames,
+    studyNames: state.filtering.studyNames,
+    biopsyIds: state.filtering.biopsyIds
 });
     
 const mapDispatchToProps = (dispatch, props) =>

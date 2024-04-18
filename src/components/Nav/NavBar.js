@@ -50,7 +50,8 @@ class NavBar extends Component {
                 <Col sm={6}>
                     <Link to="/" className="navbar-header">
                         <NavbarBrand tag="span" className="d-flex align-items-center">
-                            <img src="/img/logo.png" alt="Cure Glomerulonephropathy Data Lake Uploader" className="logo" />
+                            <img src="https://assets-global.website-files.com/64db6b3309b258ad58d1172d/64db9634146e92d83f5db7d2_logo_MIKTMC_long_color.svg" 
+                            alt="MiKTMC Data Lake Uploader" className="logo" />
                             <span className="ml-2 text-light">Data Lake Uploader</span>
                         </NavbarBrand>
                     </Link>
