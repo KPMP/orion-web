@@ -178,6 +178,24 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 				return null;
 			});
 		}
+
+        else if (filter.filterType === filterActions.filterTypes.STUDY) {
+			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+				if(packageItem.packageInfo.submitter.id === filter.value) {
+					return packageItem;
+				}
+				return null;
+			});
+		}
+
+        else if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
+			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+				if(packageItem.packageInfo.submitter.id === filter.value) {
+					return packageItem;
+				}
+				return null;
+			});
+		}
 		return filteredPackageList;
 	});
 	return filteredPackageList;
