@@ -4,7 +4,9 @@
   	"filters": [],
 	"packageTypes": [],
 	"siteNames": [],
-  	"userList": []
+  	"userList": [],
+    "studyNames": [],
+    "biopsyIds": []
   },
   "formDTD": {},
   "isUploading": false,

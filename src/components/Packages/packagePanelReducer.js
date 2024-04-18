@@ -46,29 +46,55 @@ export const filtering = (state = {}, action) => {
 	let filters = state.filters;
 	let users = state.userList;
 	let packageTypes = state.packageTypes;
+    let studyNames = state.studyNames;
+    let biopsyIds = state.biopsyIds;
 
 	switch(action.type) {
 
 		case actionNames.SET_USERS:
 			newState.filters = state.filters;
 			newState.userList = action.payload;
-			newState.siteNames = state.siteNames;
+			newState.siteNames = siteNames;
 			newState.packageTypes = state.packageTypes;
+            newState.studyNames = studyNames;
+            newState.biopsyIds = state.biopsyIds;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
 			newState.filters = state.filters;
 			newState.userList = users;
-			newState.siteNames = state.siteNames;
+			newState.siteNames = siteNames;
 			newState.packageTypes = action.payload;
+            newState.studyNames = studyNames;
+            newState.biopsyIds = state.biopsyIds;
 			return newState;
 			
 		case actionNames.SET_SITE_NAMES:
 			newState.filters = state.filters;
 			newState.userList = users;
 			newState.packageTypes = packageTypes;
-			newState.siteNames = action.payload;
+            newState.siteNames = action.payload
+            newState.studyNames = studyNames;
+            newState.biopsyIds = biopsyIds;
 			return newState;
+        
+        case actionNames.SET_STUDY_NAMES:
+			newState.filters = state.filters;
+			newState.userList = users;
+			newState.packageTypes = packageTypes;
+			newState.siteNames = siteNames;
+            newState.studyNames = action.payload;
+            newState.biopsyIds = state.biopsyIds;
+			return newState;
+
+        case actionNames.SET_BIOPSY_IDS:
+            newState.filters = state.filters;
+            newState.userList = users;
+            newState.packageTypes = packageTypes;
+            newState.siteNames = siteNames;
+            newState.studyNames = studyNames;
+            newState.biopsyIds = action.payload;
+            return newState;
 
 		case actionNames.REMOVE_FILTER:
 			if (filters.length > 0) {
@@ -84,6 +110,8 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
+            newState.studyNames = state.studyNames;
+            newState.biopsyIds = state.biopsyIds;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -106,6 +134,8 @@ export const filtering = (state = {}, action) => {
 			newState.userList = users;
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
+            newState.studyNames = state.studyNames;
+            newState.biopsyIds = state.biopsyIds;
 			return newState;
 		default:
 			return state;
