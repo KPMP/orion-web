@@ -152,7 +152,8 @@ class PackagesPane extends Component {
         if (this.props.biopsyIds.length){
             biopsyIdOptions = this.bioposyIdsToOptions(this.props.biopsyIds)
         }
-
+        console.log("props")
+        console.log(this.props)
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
