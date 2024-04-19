@@ -47,6 +47,7 @@ class PackageList extends Component {
             // }
             console.log("setting state of packages to see what happens")
             this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)})
+            console.log(this.state.packages)
             console.log("filters")
             console.log(this.props.filtering.filters)
             console.log("unfiltered packages: ")
