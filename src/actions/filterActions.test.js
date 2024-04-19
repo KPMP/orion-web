@@ -94,8 +94,8 @@ describe('setStudyNamesFromDTD', () => {
 			"standardFields": {
 				"fields": [
 					{
-						fieldName: "siteName",
-						values: siteNames
+						fieldName: "study",
+						values: studyNames
 					},
 					{
 						fieldName: "dummyField"
@@ -105,9 +105,9 @@ describe('setStudyNamesFromDTD', () => {
 		};
 		let expectedAction = {
 			type: actionNames.SET_STUDY_NAMES,
-			payload: studyNamesNames
+			payload: studyNames
 		}
-		let action = filterActions.setSiteNamesFromDTD(payload);
+		let action = filterActions.setStudyNamesFromDTD(payload);
 		expect(action).toEqual(expectedAction);
 	})
 });
