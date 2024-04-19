@@ -39,6 +39,12 @@ class PackageList extends Component {
             if (this.props.filtering !== prevProps.filtering) {
                 this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
             }
+            console.log("filters")
+            console.log(this.props.filtering.filters)
+            console.log("unfiltered packages: ")
+            console.log(this.state.unfilteredPackages)
+            console.log("package Types")
+            console.log(this.props.filtering.packageTypes)
             if (this.props.refreshPackages) {
                 await this.getPackages();
                 this.props.setRefreshPackages(false)
