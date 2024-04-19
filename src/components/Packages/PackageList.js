@@ -36,7 +36,9 @@ class PackageList extends Component {
 
     async componentDidUpdate(prevProps, prevState, snapShot) {
         if (this.props !== prevProps) {
+            console.log("inside of component did update if statement")
             if (this.props.filtering !== prevProps.filtering) {
+                console.log("in nested if statement in side of component did update")
                 this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
             }
             console.log("filters")
