@@ -56,9 +56,9 @@ export const filtering = (state = {}, action) => {
 			newState.filters = state.filters;
 			newState.userList = action.payload;
 			newState.siteNames = siteNames;
-			newState.packageTypes = state.packageTypes;
+			newState.packageTypes = packageTypes;
             newState.studyNames = studyNames;
-            newState.biopsyIds = state.biopsyIds;
+            newState.biopsyIds = biopsyIds;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
@@ -181,7 +181,7 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 
         else if (filter.filterType === filterActions.filterTypes.STUDY) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.submitter.id === filter.value) {
+				if(packageItem.packageInfo.studyName === filter.value) {
 					return packageItem;
 				}
 				return null;
@@ -190,7 +190,7 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 
         else if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.submitter.id === filter.value) {
+				if(packageItem.packageInfo.biopsyIds === filter.value) {
 					return packageItem;
 				}
 				return null;
