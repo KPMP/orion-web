@@ -6,8 +6,8 @@ class NavFooter extends Component {
             <div id="footer" className="fixed-bottom px-1 py-1">
                 <div>
                 <a className="text-light small"
-                   href="https://curegn.org" target="_blank"  rel="noopener noreferrer"
-                >&copy; Cure Glomerulonephropathy Network</a>
+                   href="https://miktmc.org" target="_blank"  rel="noopener noreferrer"
+                >&copy; Michigan Kidney Translational Medicine Center (MiKTMC)</a>
                 </div>
                 <div>
                 <a className="text-light small"
