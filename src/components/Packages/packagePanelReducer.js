@@ -149,6 +149,8 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 		return packageType.toLowerCase();
 	});
 	filters.map((filter, index) => {
+        console.log("Filter type")
+        console.log(filter.filterType)
 		if (filter.filterType === filterActions.filterTypes.SITE_NAME) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 				if(packageItem.packageInfo.siteName === filter.value) {
@@ -181,7 +183,7 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 
         else if (filter.filterType === filterActions.filterTypes.STUDY) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.studyName === filter.value) {
+				if(packageItem.packageInfo.study === filter.value) {
 					return packageItem;
 				}
 				return null;
@@ -190,7 +192,7 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 
         else if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.biopsyIds === filter.value) {
+				if(packageItem.packageInfo.biopsyId === filter.value) {
 					return packageItem;
 				}
 				return null;
