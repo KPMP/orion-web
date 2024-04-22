@@ -41,13 +41,10 @@ class PackageList extends Component {
             console.log(this.props.filtering)
             console.log("prevProps filtering props")
             console.log(prevProps.filtering)
-            // if (this.props.filtering !== prevProps.filtering) {
-            //     console.log("in nested if statement in side of component did update")
-            //     this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
-            // }
-            console.log("setting state of packages to see what happens")
-            this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)})
-            console.log(this.state.packages)
+            if (this.props.filtering !== prevProps.filtering) {
+                console.log("in nested if statement in side of component did update")
+                this.setState({packages: applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes)});
+            }
             console.log("filters")
             console.log(this.props.filtering.filters)
             console.log("unfiltered packages: ")
