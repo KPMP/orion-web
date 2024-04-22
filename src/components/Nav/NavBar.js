@@ -52,7 +52,7 @@ class NavBar extends Component {
                         <NavbarBrand tag="span" className="d-flex align-items-center">
                             <img src="/img/logo.jpg" 
                             alt="MiKTMC Data Lake Uploader" className="logo" />
-                            <span className="ml-2 text-dark">MITMC Uploader</span>
+                            <span className="ml-2 text-dark">MIKTMC Uploader</span>
                         </NavbarBrand>
                     </Link>
                 </Col>
