@@ -14,7 +14,7 @@ class NotFoundPage extends Component {
                     <Col xs={12} md={8} className='not-found-text'>
                         <p className="not-found-regular">Sorry. We couldn't find the page you're looking for.</p>
                         <p className="not-found-small">
-                            If you're still having problems, please contact <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a>
+                            If you're still having problems, please contact <a href="mailto: miktmc-help@umich.edu">miktmc-help@umich.edu</a>
                         </p>
                         <p className="oops-button-container">
                         <Button color='primary'
