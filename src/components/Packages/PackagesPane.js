@@ -143,7 +143,7 @@ class PackagesPane extends Component {
 							<FilterControl className="filter-control" placeholder="Filter by site name" options={siteNameOptions} type={filterActions.filterTypes.SITE_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
                         
-    					<Col xs={12} md={"auto"} className="ml-auto mr-auto mr-lg-0 text-right">
+    					<Col lg={4} className="ml-auto mr-auto mr-lg-0 text-right">
 							<Link to="/upload"
                                   class="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
