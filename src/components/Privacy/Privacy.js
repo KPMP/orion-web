@@ -7,13 +7,13 @@ class PrivacyStatement extends Component {
             <article className="container justify-content-center pt-3">
                 <Row>
                     <Col xs={12}>
-                        <h1>CureGN / Neptune Uploader Privacy Notice</h1>
+                        <h1>MiKTMC Data Lake Uploader Privacy Notice</h1>
                         <p>[Updated: April 16, 2024]</p>
                         <h2>Overview</h2>
-                        <p>The CureGN / Neptune Uploader is administered by the Michigan Kidney Translational Medicine
-                            Core (miktmc.org) and maintains the content under the upload.curegn.org domain. This policy
-                            applies to site content at upload.curegn.org, but not necessarily to additional sites in the
-                            curegn.org domain.</p>
+                        <p>The MiKTMC Data Lake Uploader is administered by the Michigan Kidney Translational Medicine
+                            Core (miktmc.org) and maintains the content under the upload.miktmc.org domain. This policy
+                            applies to site content at upload.miktmc.org, but not necessarily to additional sites in the
+                            miktmc.org domain.</p>
 
                         <p>For questions or concerns about this policy, please email our website administrator:
                             <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a></p>

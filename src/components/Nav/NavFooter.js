@@ -7,7 +7,7 @@ class NavFooter extends Component {
                 <div>
                 <a className="text-light small"
                    href="https://miktmc.org" target="_blank"  rel="noopener noreferrer"
-                >&copy; miktmc.org</a>
+                >&copy; Michigan Kidney Translational Medicine Center (MiKTMC)</a>
                 </div>
                 <div>
                 <a className="text-light small"
