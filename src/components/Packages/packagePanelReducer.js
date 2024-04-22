@@ -47,7 +47,6 @@ export const filtering = (state = {}, action) => {
 	let users = state.userList;
 	let packageTypes = state.packageTypes;
     let studyNames = state.studyNames;
-    let biopsyIds = state.biopsyIds;
     let siteNames = state.siteNames;
 
 	switch(action.type) {
@@ -58,7 +57,6 @@ export const filtering = (state = {}, action) => {
 			newState.siteNames = siteNames;
 			newState.packageTypes = packageTypes;
             newState.studyNames = studyNames;
-            newState.biopsyIds = biopsyIds;
 			return newState;
 
 		case actionNames.SET_PACKAGE_TYPES:
@@ -67,7 +65,6 @@ export const filtering = (state = {}, action) => {
 			newState.siteNames = siteNames;
 			newState.packageTypes = action.payload;
             newState.studyNames = studyNames;
-            newState.biopsyIds = state.biopsyIds;
 			return newState;
 			
 		case actionNames.SET_SITE_NAMES:
@@ -76,7 +73,6 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = packageTypes;
             newState.siteNames = action.payload
             newState.studyNames = studyNames;
-            newState.biopsyIds = biopsyIds;
 			return newState;
         
         case actionNames.SET_STUDY_NAMES:
@@ -85,17 +81,7 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = packageTypes;
 			newState.siteNames = siteNames;
             newState.studyNames = action.payload;
-            newState.biopsyIds = state.biopsyIds;
 			return newState;
-
-        case actionNames.SET_BIOPSY_IDS:
-            newState.filters = state.filters;
-            newState.userList = users;
-            newState.packageTypes = packageTypes;
-            newState.siteNames = siteNames;
-            newState.studyNames = studyNames;
-            newState.biopsyIds = action.payload;
-            return newState;
 
 		case actionNames.REMOVE_FILTER:
 			if (filters.length > 0) {
@@ -112,7 +98,6 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
             newState.studyNames = state.studyNames;
-            newState.biopsyIds = state.biopsyIds;
 			return newState;
 
 		case actionNames.ADD_FILTER:
@@ -136,7 +121,6 @@ export const filtering = (state = {}, action) => {
 			newState.packageTypes = state.packageTypes;
 			newState.siteNames = state.siteNames;
             newState.studyNames = state.studyNames;
-            newState.biopsyIds = state.biopsyIds;
 			return newState;
 		default:
 			return state;
@@ -184,15 +168,6 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
         else if (filter.filterType === filterActions.filterTypes.STUDY) {
 			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
 				if(packageItem.packageInfo.study === filter.value) {
-					return packageItem;
-				}
-				return null;
-			});
-		}
-
-        else if (filter.filterType === filterActions.filterTypes.BIOPSY_ID) {
-			filteredPackageList = filteredPackageList.filter((packageItem, index) => {
-				if(packageItem.packageInfo.biopsyId === filter.value) {
 					return packageItem;
 				}
 				return null;
