@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'reactstrap';
 class NotFoundPage extends Component {
     
     render() {
-        document.title = 'CureGn Data Lake Uploader'
+        document.title = 'MiKTMC Uploader'
         return (
             <article className="container" id='not-found-page'>
                 <Row id="not-found-container" className='mr-5 p-5'>
@@ -14,7 +14,7 @@ class NotFoundPage extends Component {
                     <Col xs={12} md={8} className='not-found-text'>
                         <p className="not-found-regular">Sorry. We couldn't find the page you're looking for.</p>
                         <p className="not-found-small">
-                            If you're still having problems, please contact <a href='mailto:admin@kpmp.org'>admin@kpmp.org</a>
+                            If you're still having problems, please contact <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a>
                         </p>
                         <p className="oops-button-container">
                         <Button color='primary'

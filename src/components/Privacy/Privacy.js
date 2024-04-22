@@ -7,10 +7,10 @@ class PrivacyStatement extends Component {
             <article className="container justify-content-center pt-3">
                 <Row>
                     <Col xs={12}>
-                        <h1>MiKTMC Data Lake Uploader Privacy Notice</h1>
+                        <h1>MiKTMC Uploader Privacy Notice</h1>
                         <p>[Updated: April 16, 2024]</p>
                         <h2>Overview</h2>
-                        <p>The MiKTMC Data Lake Uploader is administered by the Michigan Kidney Translational Medicine
+                        <p>The MiKTMC Uploader is administered by the Michigan Kidney Translational Medicine
                             Core (miktmc.org) and maintains the content under the upload.miktmc.org domain. This policy
                             applies to site content at upload.miktmc.org, but not necessarily to additional sites in the
                             miktmc.org domain.</p>
