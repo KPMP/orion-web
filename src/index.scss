@@ -7,7 +7,7 @@ $packages-filter-controls-sm-height: 186px;
 $packages-filter-controls-md-height: 112px;
 $packages-filter-controls-lg-height: 86px;
 $packages-submit-footer-height: 87px;
-$curegn-purple: #643790;
+$nav-header-color: #fff;
 
 $footer-color: #1d224e;
 
@@ -328,7 +328,7 @@ PACKAGES
 }
 
 #navbar {
-	background-color: #643790;
+	background-color: $nav-header-color;
 	border-bottom: 1px solid #e7e7e7;
 
 	.navbar-header {
@@ -336,8 +336,7 @@ PACKAGES
 		text-decoration: none !important;
 
 		.navbar-brand img.logo {
-			width: 80px;
-			min-width: 80px;
+			width: 40px;
 		}
 	}
 

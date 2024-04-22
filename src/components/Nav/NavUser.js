@@ -26,7 +26,7 @@ class NavUser extends Component {
                       inNavbar
                       direction="down"
                       className="float-right col-sm-0">
-                <DropdownToggle caret tag="a" className="text-light"
+                <DropdownToggle caret tag="a" className="text-dark"
                 >{this.props.displayName}</DropdownToggle>
                 <DropdownMenu id="nav-user-dropdown-menu">
                         <DropdownItem tag="a" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/document/d/1wVW_gR2qBxLAvTPnmk4bOn-Axo7vClCj7MwyRwF6CTQ/edit">

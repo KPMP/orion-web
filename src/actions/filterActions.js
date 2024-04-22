@@ -8,7 +8,8 @@ export const filterTypes = {
 	TIS_NAME: "TIS_NAME",
 	SITE_NAME: "SITE_NAME",
 	PACKAGE_TYPE: "PACKAGE_TYPE",
-	SUBMITTER: "SUBMITTER"
+	SUBMITTER: "SUBMITTER",
+    STUDY: "STUDY"
 }
 
 export const addFilter = (type, value) => {
@@ -58,7 +59,18 @@ export const setPackageTypesFromDTD = (formDTD) => {
 
 export const setSiteNamesFromDTD = (formDTD) => {
 	let siteNameFieldArray = formDTD.standardFields.fields.filter(field => {
-		return field.hasOwnProperty("fieldName") && field.fieldName === "siteName"
+        let site = ""
+        if (field.fieldName === "siteNeptune"){
+            site = "siteNeptune";
+        }else if (field.fieldName === "siteCuregn" ){
+            site = "siteCuregn"
+        }else if (field.fieldName === "siteCuregnDiabetes"){
+            site = "siteCuregnDiabetes"
+        }else if (field.fieldName === "siteNeptune"){
+            site = "siteNeptune"
+        }
+
+		return field.hasOwnProperty("fieldName") && field.fieldName === site
 	});
 	let siteNames = siteNameFieldArray[0].values;
 	return {
@@ -67,3 +79,13 @@ export const setSiteNamesFromDTD = (formDTD) => {
 	}
 }
 
+export const setStudyNamesFromDTD = (formDTD) => {
+	let studyNameFieldArray = formDTD.standardFields.fields.filter(field => {
+		return field.hasOwnProperty("fieldName") && field.fieldName === "study"
+	});
+	let studyNames = studyNameFieldArray[0].values;
+	return {
+		type: actionNames.SET_STUDY_NAMES,
+		payload: studyNames
+	}
+}

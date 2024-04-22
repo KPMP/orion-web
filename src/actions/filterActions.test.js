@@ -86,3 +86,28 @@ describe('setSiteNamesFromDTD', () => {
 		expect(action).toEqual(expectedAction);
 	})
 });
+
+describe('setStudyNamesFromDTD', () => {
+	it('should create the correct action', () => {
+		let studyNames = ["Type 1", "Type 2"];
+		let payload = {
+			"standardFields": {
+				"fields": [
+					{
+						fieldName: "study",
+						values: studyNames
+					},
+					{
+						fieldName: "dummyField"
+					}
+				]
+			}
+		};
+		let expectedAction = {
+			type: actionNames.SET_STUDY_NAMES,
+			payload: studyNames
+		}
+		let action = filterActions.setStudyNamesFromDTD(payload);
+		expect(action).toEqual(expectedAction);
+	})
+});

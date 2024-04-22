@@ -89,6 +89,28 @@ class PackagesPane extends Component {
 
 		return siteNameOptions;
 	}
+
+    studyNamesToOptions = (studyNames) => {
+        let studyNameOptions = studyNames.map(value => {
+            return {value: value, label: value}
+        });
+        studyNameOptions.sort((option1, option2) => {
+            let returnVal = 0;
+            let label1 = option1.label.toUpperCase();
+            let label2 = option2.label.toUpperCase();
+
+            if (label1 < label2) {
+				returnVal = -1;
+			}
+
+			if (label1 > label2) {
+				returnVal = 1;
+			}
+
+			return returnVal;
+        });
+        return studyNameOptions;
+    }
 	
     render() {
     	let userOptions = this.usersToOptions(this.props.users);
@@ -100,21 +122,28 @@ class PackagesPane extends Component {
 		if (this.props.siteNames.length) {
 			siteNameOptions = this.siteNamesToOptions(this.props.siteNames);
 		}
-
+        let studyNameOptions = []
+        if (this.props.studyNames.length) {
+            studyNameOptions = this.studyNamesToOptions(this.props.studyNames);
+        }
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="container fixed-top-subnav pt-3">
 					<Row noGutters>
+                    <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
+							<FilterControl className="filter-control" placeholder="Filter by study" options={studyNameOptions} type={filterActions.filterTypes.STUDY} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						</Col>
+                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
+							<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						</Col>
+                        <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
+							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+						</Col>
 						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Filter by site name" options={siteNameOptions} type={filterActions.filterTypes.SITE_NAME} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 						</Col>
-            <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-							<FilterControl className="filter-control" placeholder="Filter by package type" options={packageTypeOptions} type={filterActions.filterTypes.PACKAGE_TYPE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
-						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-0">
-							<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
-						</Col>
-    					<Col xs={12} lg={4} className="ml-auto mr-auto mr-lg-0 text-right">
+                        
+    					<Col xs={3} className="ml-auto mr-auto mr-lg-0 text-right">
 							<Link to="/upload"
                                   class="d-block-inline ml-1">
 								<Button id="packages-button-add-new"
