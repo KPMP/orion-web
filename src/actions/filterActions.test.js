@@ -64,15 +64,21 @@ describe('setPackageTypesFromDTD', () => {
 
 describe('setSiteNamesFromDTD', () => {
 	it('should create the correct action', () => {
-		let siteNames = ["siteNeptune", "siteCuregn"];
+		let siteNames = ["Columbia", "Michigan"];
+		let siteNames2 = ["Johns Hopkins", "Indiana"];
 		let payload = {
 			"standardFields": {
 				"fields": [
 					{
 						fieldName: "siteNeptune",
+						values: siteNames
 					},
 					{
-						fieldName: "siteCuregn"
+						fieldName: "siteCuregn",
+						values: siteNames2
+					},
+					{
+						fieldName: "dummyField"
 					}
 				]
 			}
