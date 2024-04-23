@@ -64,7 +64,7 @@ describe('setPackageTypesFromDTD', () => {
 
 describe('setSiteNamesFromDTD', () => {
 	it('should create the correct action', () => {
-		let siteNames = ["Type 1", "Type 2"];
+		let siteNames = ["siteNeptune", "siteCuregn"];
 		let payload = {
 			"standardFields": {
 				"fields": [
