@@ -3,7 +3,6 @@ import { Form, Button } from 'antd';
 import { DynamicFormGenerator } from './DynamicFormGenerator';
 import { Row, Col } from 'reactstrap';
 import FileDropzone from './FileDropzone';
-import LargeFileModal from '../../Packages/LargeFileModal';
 import qq from 'fine-uploader/lib/core';
 import { uploader } from '../fineUploader';
 import { Link, Prompt } from 'react-router-dom';
