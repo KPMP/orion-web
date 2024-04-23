@@ -69,11 +69,10 @@ describe('setSiteNamesFromDTD', () => {
 			"standardFields": {
 				"fields": [
 					{
-						fieldName: "siteName",
-						values: siteNames
+						fieldName: "siteNeptune",
 					},
 					{
-						fieldName: "dummyField"
+						fieldName: "siteCuregn"
 					}
 				]
 			}
