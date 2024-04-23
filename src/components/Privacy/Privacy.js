@@ -7,16 +7,16 @@ class PrivacyStatement extends Component {
             <article className="container justify-content-center pt-3">
                 <Row>
                     <Col xs={12}>
-                        <h1>MiKTMC Data Lake Uploader Privacy Notice</h1>
+                        <h1>MiKTMC Uploader Privacy Notice</h1>
                         <p>[Updated: April 16, 2024]</p>
                         <h2>Overview</h2>
-                        <p>The MiKTMC Data Lake Uploader is administered by the Michigan Kidney Translational Medicine
+                        <p>The MiKTMC Uploader is administered by the Michigan Kidney Translational Medicine
                             Core (miktmc.org) and maintains the content under the upload.miktmc.org domain. This policy
                             applies to site content at upload.miktmc.org, but not necessarily to additional sites in the
                             miktmc.org domain.</p>
 
                         <p>For questions or concerns about this policy, please email our website administrator:
-                            <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a></p>
+                            <a href="mailto: miktmc-help@umich.edu">miktmc-help@umich.edu</a></p>
                         <h2>Collection</h2>
                         <p>MiKTMC collects personal information in the following ways:</p>
                         <p>Automatically by your institution, when you authenticate using your institution’s login
@@ -42,7 +42,7 @@ class PrivacyStatement extends Component {
                             Consortium, The Neptune Consortium, or by law, including sharing with government agencies to
                             aid in an investigation.</p>
                         <h2>Contact</h2>
-                        <p>Please contact <a href="mailto: curegn-redcap@med.umich.edu">curegn-redcap@med.umich.edu</a> for questions regarding this privacy notice.</p>
+                        <p>Please contact <a href="mailto: miktmc-help@umich.edu">miktmc-help@umich.edu</a> for questions regarding this privacy notice.</p>
                     </Col>
                 </Row>
             </article>
