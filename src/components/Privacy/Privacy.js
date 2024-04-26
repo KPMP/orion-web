@@ -13,9 +13,11 @@ class PrivacyStatement extends Component {
                         <p>The MiKTMC Uploader and its content is administered by the Michigan Kidney Translational Medicine Center (miktmc.org) under the upload.miktmc.org domain. This policy only applies to site content under upload.miktmc.org, but not necessarily to additional sites under the miktmc.org domain.</p>
                         <h2>How we collect information</h2>
                         <p>MiKTMC collects personal information in the following ways:</p>
-                        <p>Automatically by your institution, when you authenticate using your institution’s login credentials.</p>
-                        <p>Automatically by our partner, InCommon Discovery Service, or other third-party identity providers contracted by us to authenticate and collect data.</p>
-                        <h2>What type of information do we collect</h2>
+                        <ul>
+                        <li>Automatically by your institution, when you authenticate using your institution’s login credentials.</li>
+                        <li>Automatically by our partner, InCommon Discovery Service, or other third-party identity providers contracted by us to authenticate and collect data.</li>
+                        </ul>
+                            <h2>What type of information do we collect</h2>
                         <p>MiKTMC collects or has access to the following information from use of the Uploader:</p>
                         <ul>
                             <li>Email address</li>
