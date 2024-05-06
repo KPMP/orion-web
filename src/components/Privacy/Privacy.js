@@ -8,7 +8,7 @@ class PrivacyStatement extends Component {
                 <Row>
                     <Col xs={12}>
                         <h1>MiKTMC Uploader Privacy Statement</h1>
-                        <p>Updated: April 16, 2024</p>
+                        <p>Updated: May 6, 2024</p>
                         <p>&nbsp;</p>
                         <p>The MiKTMC Uploader and its content is administered by the Michigan Kidney Translational Medicine Center (miktmc.org) under the upload.miktmc.org domain. This policy only applies to site content under upload.miktmc.org, but not necessarily to additional sites under the miktmc.org domain.</p>
                         <h2>How we collect information</h2>
