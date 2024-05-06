@@ -62,6 +62,7 @@ class PackagePanel extends Component {
 							<Col xs={12} className='pb-1'>{packageInfo.packageType}</Col>
 							<Col xs={12}>Submitted <b>{submittedDate}</b> at {submittedTime} by {packageInfo.submitter.firstName} {packageInfo.submitter.lastName}, {packageInfo.siteName}</Col>
 							<Col xs={12} className='pb-1'>Upload ID: {packageInfo._id}</Col>
+							<Col xs={12} className='pb-1'>Biopsy ID: {packageInfo.biopsyId}</Col>
 						</Row>
 					</Col>
 					<Col xs={12} md={3}>
