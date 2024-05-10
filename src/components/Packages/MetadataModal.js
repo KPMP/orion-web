@@ -17,7 +17,7 @@ class MetadataModal extends Component {
 	isRemoteDataLoaded() {
 		return this.props.dtds && this.props.uploadPackage && this.props.dtds[this.props.uploadPackage.version];
 	}
-	
+
     render() {
 		if(!this.isRemoteDataLoaded()) {
 			return <div className="metadataModal static-modal" />;
@@ -54,6 +54,7 @@ class MetadataModal extends Component {
                             <p>ID: {this.props.uploadPackage._id}</p>
                             <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
                                 {standardSection}
+                                {summarizedFields}
                                 {remainingSections}
                             </Tree>
                         </ModalBody>

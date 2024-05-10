@@ -6,30 +6,54 @@ import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 const { TreeNode } = Tree;
 
 export class MetadataRenderer {
+
+	collapseSummarySections = (fields) => {
+		let fieldsSeen = [];
+		let list = [];
+		fields.forEach((field) => {
+			if (!fieldsSeen.includes(field.summarize.label)) {
+				fieldsSeen.push(field.summarize.label);
+				list.push(field);
+			}
+		});
+		return list;
+	}
 	
 	renderSection = (section, metadata) => {
 		let header = section.sectionHeader;
 		let fields = section.fields;
+		let summaryFields = fields.filter(function(field){
+			return field.summarize !== undefined;
+		});
+		let summarySections = this.collapseSummarySections(summaryFields);
 		return (
 			<TreeNode title={header} key={header} selectable={false}>
 				{ fields.map((fieldJson) => this.renderField(fieldJson, metadata)) }
+				{ summarySections.map((fieldJson) => this.renderSummaryFields(fieldJson, metadata))}
 			</TreeNode>
 		);
+
 	}
+
+	renderSummaryFields = (fieldJson, packageInfo) => {
+		let fieldLabel = fieldJson.summarize.label;
+		let value = packageInfo[fieldJson.summarize.field];
+		let summaryField = fieldLabel + ": " + value;
+		return <TreeNode title={summaryField} key={summaryField} isLeaf selectable={false}/>
+}
 	
 	renderField = (fieldJson, packageInfo) => {
 		if (fieldJson.type === "Submitter Information") {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
-			let institutionField = "Site Name: " + packageInfo.siteName;
 			return (
-				<TreeNode title="Submitted by:" key="Submitted by:" selectable={false}>
-					<TreeNode title={institutionField} key={institutionField} isLeaf selectable={false}/>
-					<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
-				</TreeNode>
+				<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
 			);
+		} else if (fieldJson.summarize !== undefined) {
+			let field = fieldJson.summarize.label + ": " + packageInfo[fieldJson.summarize.site];
+			return <TreeNode title={field} key={field} isLeaf selectable={false}/>
 		} else {
-			if (fieldJson.fieldName ==="siteName") {
+			if (fieldJson.displayInSummary !== undefined && fieldJson.displayInSummary === false) {
 				return "";
 			}
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
