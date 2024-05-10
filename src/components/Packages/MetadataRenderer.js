@@ -50,12 +50,8 @@ export class MetadataRenderer {
 				<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
 			);
 		} else if (fieldJson.summarize !== undefined) {
-			let field = fieldJson.summarize.label + ": " + packageInfo[fieldJson.summarize.site];
-			return <TreeNode title={field} key={field} isLeaf selectable={false}/>
-		} else {
-			if (fieldJson.displayInSummary !== undefined && fieldJson.displayInSummary === false) {
 				return "";
-			}
+		} else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			if (fieldJson.fieldName === "experimentDate") {
 				let experimentDate = packageInfo[fieldJson.fieldName]?dateFormat(getIEFriendlyDate(packageInfo[fieldJson.fieldName]), 'yyyy-mm-dd', true):"N/A";
