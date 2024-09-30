@@ -2,7 +2,7 @@
 
 ## Release 4.1 [unreleased]
 Brief summary of what's in this release:
-
+- Fixed an issue where the filters would not be applied when another user uploads a package
 
 ### Breaking changes
 
