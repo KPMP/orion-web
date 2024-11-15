@@ -49,7 +49,6 @@ class PackagePanel extends Component {
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-        console.log(this.props.userInformation)
 		return (
 			<section className='package'>
 				<Row className={
