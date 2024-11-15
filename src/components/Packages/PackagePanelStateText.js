@@ -78,7 +78,7 @@ class PackagePanelStateText extends Component {
 	                    }
 	                </div>
             	}
-                { panelConfig.icon && 
+                { this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer") && panelConfig.icon && 
                 	<span onClick={clickEvent}>
                         <div className='additional-icon clickable'><FontAwesomeIcon className='float-right' icon={panelConfig.icon} size='lg' inverse/></div>
                     </span>
