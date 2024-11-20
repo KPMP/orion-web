@@ -53,6 +53,8 @@ class PackagePanelStateText extends Component {
         }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
+        console.log(this.props.currentUser)
+        console.log(this.props.packageSubmitter);
 
         return <React.Fragment>
             <div className='d-flex align-items-start'>
