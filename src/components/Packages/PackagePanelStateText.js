@@ -53,6 +53,11 @@ class PackagePanelStateText extends Component {
         }
         
         let popoverTargetId = 'popover-' + this.props.panelState.packageId;
+        if(this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer")){
+            console.log("Current user should see clock icon for all packages")
+        }else if(this.props.packageSubmitter.email === this.props.currentUser.email){
+            console.log("Package submitter email is equal to current user email")
+        }
         console.log(this.props.currentUser)
         console.log(this.props.packageSubmitter);
 
