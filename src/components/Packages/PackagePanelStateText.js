@@ -31,7 +31,7 @@ class PackagePanelStateText extends Component {
 		let panelConfig = {};
 		panelConfig.message = getMessage(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
 		if (this.props.handleStateInfoClick) {
-			panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser, this.props.packageSubmitter.email, this.props.stateDisplayMap);
+			panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.currentUser.roles ,this.props.packageSubmitter.email, this.props.stateDisplayMap);
 		}
 		return panelConfig;
     }
