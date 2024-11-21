@@ -3,6 +3,7 @@ import { Popover, PopoverBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { getIcon, getMessage, getClickEvent, getDisplayInfo } from './packagePanelStateHelper';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 const POPOVER_CLASSES = {
     classNames: '',
@@ -87,11 +88,10 @@ class PackagePanelStateText extends Component {
             	}
                 {
                    (this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer") || 
-                    this.props.packageSubmitter.email === this.props.currentUser.email) && 
-                    panelConfig.icon && (
+                    this.props.packageSubmitter.email === this.props.currentUser.email) (
                        <span onClick={clickEvent}>
                           <div className='additional-icon clickable'>
-                             <FontAwesomeIcon className='float-right' icon={panelConfig.icon} size='lg' inverse />
+                             <FontAwesomeIcon className='float-right' icon={faClock} size='lg' inverse />
                           </div>
                        </span>
                     )
