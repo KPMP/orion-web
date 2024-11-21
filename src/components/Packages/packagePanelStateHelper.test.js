@@ -9,52 +9,52 @@ describe('getIcon', () => {
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state', () => {
-		let icon = getIcon('FILES_RECEIVED', false,'xyz', 'role' ,'xyz', stateDisplayMap);
+		let icon = getIcon('FILES_RECEIVED', false,'xyz', ['role'] ,'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when shibIds do not match', () => {
-		let icon = getIcon('FILES_RECEIVED', false, 'abc', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('FILES_RECEIVED', false, 'abc', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for FILES_RECEIVED state, when large file upload', () => {
-		let icon = getIcon('FILES_RECEIVED', true, 'xyz', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('FILES_RECEIVED', true, 'xyz', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('UPLOAD_FAILED', false, 'xyz', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state when shibIds do not match', () => {
-		let icon = getIcon('UPLOAD_FAILED', false, 'abc', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('UPLOAD_FAILED', false, 'abc', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should not return an icon for UPLOAD_FAILED state whenis large file', () => {
-		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('UPLOAD_FAILED', true, 'xyz', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should return faclock when METADATA_RECEIVED and it is my large file upload', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBe(faClock);
 	});
 
     it('should return faclock when METADATA_RECIEVED and role is uw_rit_kpmp_role_developer and package email does not match', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'uw_rit_kpmp_role_developer', 'xyz', stateDisplayMap);
+		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', ['uw_rit_kpmp_role_developer'], 'xyz', stateDisplayMap);
 		expect(icon).toBe(faClock);
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds match, but not large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds do not match and is large file', () => {
-		let icon = getIcon('METADATA_RECEIVED', true, 'abc', 'role', 'xyz', stateDisplayMap);
+		let icon = getIcon('METADATA_RECEIVED', true, 'abc', ['role'], 'xyz', stateDisplayMap);
 		expect(icon).toBeUndefined();
 	});
 

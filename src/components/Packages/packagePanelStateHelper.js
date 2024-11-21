@@ -36,7 +36,7 @@ const panelConfigIconExists = (panelConfig) => {
 };
 
 const checkForAdmin = (currentUserEmail, currentUserRoles, packageEmail) => {
-    if(currentUserRoles === "uw_rit_kpmp_role_developer" || currentUserEmail === packageEmail){
+    if(currentUserRoles.includes("uw_rit_kpmp_role_developer")  || currentUserEmail === packageEmail){
         return true;
     }else {
         return false;
