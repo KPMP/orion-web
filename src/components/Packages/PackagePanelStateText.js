@@ -86,8 +86,9 @@ class PackagePanelStateText extends Component {
 	                    }
 	                </div>
             	}
-                {this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer") || 
-                    this.props.packageSubmitter.email === this.props.currentUser.email ?
+                {
+                (this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer") || 
+                    this.props.packageSubmitter.email === this.props.currentUser.email) && panelConfig.icon ?
                        <span onClick={clickEvent}>
                           <div className='additional-icon clickable'>
                              <FontAwesomeIcon className='float-right' icon={faClock} size='lg' inverse />
