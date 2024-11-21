@@ -58,7 +58,7 @@ class PackagePanelStateText extends Component {
             roles: this.props.currentUser?.roles,
             isDeveloper: this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer"),
             isSubmitter: this.props.packageSubmitter.email === this.props.currentUser.email,
-            icon: panelConfig.icon,
+            panelConfig: panelConfig
          });
          
 
