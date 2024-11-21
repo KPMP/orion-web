@@ -41,7 +41,7 @@ const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
 
 export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDisplayMap) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentEmail, packageEmail) || !panelConfig.iconInfo.isProtected)) {
+	if (panelConfigIconExists(panelConfig) || !panelConfig.iconInfo.isProtected) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
