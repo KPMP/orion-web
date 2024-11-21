@@ -35,13 +35,21 @@ const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.iconInfo;
 };
 
+const checkForAdmin = (currentUser, packageEmail) => {
+    if(currentUser.roles = "uw_rit_kpmp_role_developer" || currentUser.email == packageEmail){
+        return true;
+    }else {
+        return false;
+    }
+}
+
 const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
 	return panelConfig.iconInfo.isProtected && isMine(currentEmail, packageEmail);
 };
 
-export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDisplayMap) => {
+export const getIcon = (state, isLargeFile, currentUser, packageEmail, stateDisplayMap) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) || !panelConfig.iconInfo.isProtected) {
+	if (panelConfigIconExists(panelConfig) && (checkForAdmin(currentUser, packageEmail) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
