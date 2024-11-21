@@ -43,10 +43,10 @@ describe('getIcon', () => {
 		expect(icon).toBe(faClock);
 	});
 
-    it('should return faclock when METADATA_RECIEVED and role is uw_rit_kpmp_role_developer and package email does not match'), () => {
-        let icon = getIcon('METADATA_RECIEVED', true, 'xyz', 'uw_rit_kpmp_role_developer', 'abc', stateDisplayMap)
-        expect(icon).toBe(faClock);
-    }
+    it('should return faclock when METADATA_RECIEVED and role is uw_rit_kpmp_role_developer and package email does not match', () => {
+		let icon = getIcon('METADATA_RECEIVED', true, 'xyz', 'uw_rit_kpmp_role_developer', 'xyz', stateDisplayMap);
+		expect(icon).toBe(faClock);
+	});
 	
 	it('should return undefined when METADATA_RECEIVED and shibIds match, but not large file', () => {
 		let icon = getIcon('METADATA_RECEIVED', false, 'xyz', 'role', 'xyz', stateDisplayMap);

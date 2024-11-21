@@ -52,14 +52,7 @@ class PackagePanelStateText extends Component {
         	alertClass = 'alert-' + stateDisplayInfo.apps.dlu.alertType;
         }
         
-        let popoverTargetId = 'popover-' + this.props.panelState.packageId;
-        console.log({
-            roles: this.props.currentUser?.roles,
-            isDeveloper: this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer"),
-            isSubmitter: this.props.packageSubmitter.email === this.props.currentUser.email,
-            panelConfig: panelConfig
-         });
-         
+        let popoverTargetId = 'popover-' + this.props.panelState.packageId;         
 
         return <React.Fragment>
             <div className='d-flex align-items-start'>
