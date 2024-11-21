@@ -31,7 +31,7 @@ class PackagePanelStateText extends Component {
 		let panelConfig = {};
 		panelConfig.message = getMessage(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email);
 		if (this.props.handleStateInfoClick) {
-			panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.packageSubmitter.email, this.props.stateDisplayMap);
+			panelConfig.icon = getIcon(this.props.panelState.state, this.props.largeFileUpload, this.props.currentUser.email, this.props.currentUser.roles ,this.props.packageSubmitter.email, this.props.stateDisplayMap);
 		}
 		return panelConfig;
     }
@@ -52,7 +52,7 @@ class PackagePanelStateText extends Component {
         	alertClass = 'alert-' + stateDisplayInfo.apps.dlu.alertType;
         }
         
-        let popoverTargetId = 'popover-' + this.props.panelState.packageId;
+        let popoverTargetId = 'popover-' + this.props.panelState.packageId;         
 
         return <React.Fragment>
             <div className='d-flex align-items-start'>
@@ -78,7 +78,7 @@ class PackagePanelStateText extends Component {
 	                    }
 	                </div>
             	}
-                { this.props.currentUser?.roles.includes("uw_rit_kpmp_role_developer") && panelConfig.icon && 
+                { panelConfig.icon && 
                 	<span onClick={clickEvent}>
                         <div className='additional-icon clickable'><FontAwesomeIcon className='float-right' icon={panelConfig.icon} size='lg' inverse/></div>
                     </span>
