@@ -35,7 +35,7 @@ const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.iconInfo;
 };
 
-const checkForAdmin = (currentUserEmail, currentUserRoles, packageEmail) => {
+export const checkForAdmin = (currentUserEmail, currentUserRoles, packageEmail) => {
     if(currentUserRoles.includes("uw_rit_kpmp_role_developer")  || currentUserEmail === packageEmail){
         return true;
     }else {
