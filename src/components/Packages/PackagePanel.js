@@ -8,6 +8,7 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import PackagePanelStateText from './PackagePanelStateText';
+import { checkForAdmin } from './packagePanelStateHelper';
 
 class PackagePanel extends Component {
 
@@ -73,6 +74,14 @@ class PackagePanel extends Component {
 								{/* eslint-disable-next-line */} 
 								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show package metadata</a>
 							</Col>
+							{	
+								(this.props.uploadPackage.state && 
+								this.props.uploadPackage.state.state == "UPLOAD_SUCCEEDED" && 
+								checkForAdmin(this.props.userInformation.email, this.props.userInformation.roles, packageInfo.submitter.email)) &&
+								<Col xs={4} md={12} >
+									<Button color="primary" className="btn-sm recall-button mt-1">Recall</Button>
+								</Col>
+							}
 							{this.props.uploadPackage.state &&
 							<Col xs={4} md={12} >
 								<PackagePanelStateText
