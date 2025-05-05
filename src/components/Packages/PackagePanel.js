@@ -77,7 +77,7 @@ class PackagePanel extends Component {
 							{	
 								(this.props.uploadPackage.state && 
 								this.props.uploadPackage.state.state == "UPLOAD_SUCCEEDED" && 
-								checkForAdmin(this.props.userInformation.email, this.props.userInformation.roles, packageInfo.submitter.email)) &&
+								this.props.userInformation.roles.includes("uw_rit_kpmp_role_developer")) &&
 								<Col xs={4} md={12} >
 									<Button color="primary" className="btn-sm recall-button mt-1">Recall</Button>
 								</Col>
