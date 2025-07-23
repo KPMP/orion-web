@@ -13,6 +13,11 @@ export const PANEL_CONFIGS = {
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
     },
+
+    RECALLED: {
+        iconInfo: { type: faClock, isProtected: true, isLargeFileOnly: true },
+		message: ''
+    },
     
     UPLOAD_FAILED: {
     	message: <div>

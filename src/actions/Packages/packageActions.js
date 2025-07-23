@@ -132,3 +132,14 @@ export const uploadPackage = (packageInfo, uploader) => {
 	};
 }
 
+export const recallPackage = (packageId) => {
+	return api.post('/api/v1/packages/' + packageId + '/recall', window.location.hostname)
+		.then(response => {
+			return response?.status;
+		})
+		.catch(err => {
+			alert("There was a problem recalling the package.");
+			console.log(err);
+			return err?.response?.status;
+		})
+}

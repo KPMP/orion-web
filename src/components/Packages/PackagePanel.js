@@ -9,6 +9,7 @@ import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import PackagePanelStateText from './PackagePanelStateText';
 import { checkForAdmin } from './packagePanelStateHelper';
+import { recallPackage } from '../../actions/Packages/packageActions';
 
 class PackagePanel extends Component {
 
@@ -24,6 +25,13 @@ class PackagePanel extends Component {
 	handleAttachmentClick() {
 		let show = !this.state.showAttachments;
 		this.setState({ showAttachments: show });
+	}
+
+	async handleRecallPackageClick(packageId) {
+		let status = await recallPackage(packageId); 
+		if (status === 200) {
+			this.props.recallPackage(this.props.index);
+		}
 	}
 
 	handleMetadataClick() {
@@ -79,7 +87,7 @@ class PackagePanel extends Component {
 								this.props.uploadPackage.state.state == "UPLOAD_SUCCEEDED" && 
 								this.props.userInformation.roles.includes("uw_rit_kpmp_role_developer")) &&
 								<Col xs={4} md={12} >
-									<Button color="primary" className="btn-sm recall-button mt-1">Recall</Button>
+									<Button color="primary" className="btn-sm recall-button mt-1" onClick={() => {this.handleRecallPackageClick(packageInfo._id)}}>Recall</Button>
 								</Col>
 							}
 							{this.props.uploadPackage.state &&
