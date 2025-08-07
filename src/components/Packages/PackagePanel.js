@@ -49,6 +49,9 @@ class PackagePanel extends Component {
 			let show = !this.state.showLargeFile;
 			this.setState({ showLargeFile: show });
 		}
+		else if (this.props.uploadPackage.state.state === 'RECALLED') {
+			window.open(this.props.uploadPackage.state?.codicil, '_blank');
+		}
 	}
 
 	render() {
