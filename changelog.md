@@ -1,6 +1,6 @@
 # Changelog
 
-## Release 1.3 (unreleased)
+## Release 1.3
 Brief summary of what's in this release:
 
 * Warnings if duplicate study, biopsy, and data type entry is made
