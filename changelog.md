@@ -4,12 +4,13 @@
 Brief summary of what's in this release:
 
 * Warnings if duplicate study, biopsy, and data type entry is made
+* Notifications routed based on study name
+* Close button not working on file attachment edit page
+* Locked uploads still have the "Open Folder" link
 
 ### Breaking changes
 
-Breaking changes include any database updates needed, if we need to edit any files on system (like .env or certs, etc). Things that are outside of the code itself that need changed for the system to work.
-
-### Non-breaking changes
+* The notification email addresses must be in a comma-separated list in the ENV_SMTP_RECIPIENT .env var
 
 ## Release 1.2
 
