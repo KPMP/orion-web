@@ -62,6 +62,12 @@ class PackageList extends Component {
             && this.state.packages.constructor === Array && Object.keys(this.state.packages).length === 0;
     }
 
+    setPackageRecalled(index) {
+        let newPackageList = [...this.state.packages];
+        newPackageList[index].state.state = "RECALLED";
+        this.setState({ packages: newPackageList });
+    }
+
     render() {
         let message = null,
             panels = [];
@@ -76,7 +82,11 @@ class PackageList extends Component {
 
         else {
             panels = applyFilters(this.props.filtering.filters, this.state.unfilteredPackages, this.props.filtering.packageTypes).map((uploadPackage, index) => {
-                return <PackagePanelContainer key={index} index={index} uploadPackage={uploadPackage}/>;
+                return <PackagePanelContainer 
+                        key={index} 
+                        index={index} 
+                        uploadPackage={uploadPackage}
+                        recallPackage={(index) => {this.setPackageRecalled(index)}}/>;
             });
         }
 

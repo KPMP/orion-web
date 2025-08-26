@@ -8,6 +8,7 @@ const mapStateToProps = (state, props) =>
 	packageTypeIcons: state.packageTypeIcons,
 	index: props.index,
 	uploadPackage: props.uploadPackage,
+	recallPackage: props.recallPackage,
 	userInformation: state.userInformation,
 	stateDisplayMap: state.stateDisplayMap
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import { getLocalDateString, getLocalTimeString } from '../../helpers/timezoneUtil';
 import { shouldColorRow } from './attachmentsModalRowHelper.js';
 import { getDataTypeIconInfo } from './dataTypeIconHelper.js';
@@ -8,6 +8,8 @@ import MetadataModal from './MetadataModal';
 import LargeFileModal from './LargeFileModal';
 import PropTypes from 'prop-types';
 import PackagePanelStateText from './PackagePanelStateText';
+import { checkForAdmin } from './packagePanelStateHelper';
+import { recallPackage } from '../../actions/Packages/packageActions';
 
 class PackagePanel extends Component {
 
@@ -25,6 +27,13 @@ class PackagePanel extends Component {
 		this.setState({ showAttachments: show });
 	}
 
+	async handleRecallPackageClick(packageId) {
+		let status = await recallPackage(packageId); 
+		if (status === 200) {
+			this.props.recallPackage(this.props.index);
+		}
+	}
+
 	handleMetadataClick() {
 		let show = !this.state.showMetadata;
 		this.setState({ showMetadata: show });
@@ -40,6 +49,9 @@ class PackagePanel extends Component {
 			let show = !this.state.showLargeFile;
 			this.setState({ showLargeFile: show });
 		}
+		else if (this.props.uploadPackage.state.state === 'RECALLED') {
+			window.open(this.props.uploadPackage.state?.codicil, '_blank');
+		}
 	}
 
 	render() {
@@ -49,7 +61,6 @@ class PackagePanel extends Component {
 		let submittedDate = getLocalDateString(packageInfo.createdAt);
 		let submittedTime = getLocalTimeString(packageInfo.createdAt);
 		let { iconDataType, iconImage } = getDataTypeIconInfo(packageTypeIcons, packageInfo.packageType);
-
 		return (
 			<section className='package'>
 				<Row className={
@@ -74,6 +85,14 @@ class PackagePanel extends Component {
 								{/* eslint-disable-next-line */} 
 								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show package metadata</a>
 							</Col>
+							{	
+								(this.props.uploadPackage.state && 
+								this.props.uploadPackage.state.state == "UPLOAD_SUCCEEDED" && 
+								this.props.userInformation.roles.includes("uw_rit_kpmp_role_developer")) &&
+								<Col xs={4} md={12} >
+									<Button color="primary" className="btn-sm recall-button mt-1" onClick={() => {this.handleRecallPackageClick(packageInfo._id)}}>Recall</Button>
+								</Col>
+							}
 							{this.props.uploadPackage.state &&
 							<Col xs={4} md={12} >
 								<PackagePanelStateText

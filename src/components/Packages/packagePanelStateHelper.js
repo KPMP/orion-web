@@ -13,6 +13,11 @@ export const PANEL_CONFIGS = {
         notMyLargeFileUploadMessage: 'Awaiting file(s) to be uploaded.',
         standardMessage: 'Waiting for file(s) to finish uploading.'
     },
+
+    RECALLED: {
+        iconInfo: { type: faClock, isProtected: true, isLargeFileOnly: true },
+		message: ''
+    },
     
     UPLOAD_FAILED: {
     	message: <div>
@@ -35,13 +40,21 @@ const panelConfigIconExists = (panelConfig) => {
 	return panelConfig && panelConfig.iconInfo;
 };
 
+export const checkForAdmin = (currentUserEmail, currentUserRoles, packageEmail) => {
+    if(currentUserRoles.includes("uw_rit_kpmp_role_developer")  || currentUserEmail === packageEmail){
+        return true;
+    }else {
+        return false;
+    }
+}
+
 const protectedAndMine = (panelConfig, currentEmail, packageEmail) => {
 	return panelConfig.iconInfo.isProtected && isMine(currentEmail, packageEmail);
 };
 
-export const getIcon = (state, isLargeFile, currentEmail, packageEmail, stateDisplayMap) => {
+export const getIcon = (state, isLargeFile, currentUserEmail, currentUserRoles, packageEmail, stateDisplayMap) => {
 	let panelConfig = PANEL_CONFIGS[state];
-	if (panelConfigIconExists(panelConfig) && (protectedAndMine(panelConfig ,currentEmail, packageEmail) || !panelConfig.iconInfo.isProtected)) {
+	if (panelConfigIconExists(panelConfig) && (checkForAdmin(currentUserEmail, currentUserRoles, packageEmail) || !panelConfig.iconInfo.isProtected)) {
 		if ((panelConfig.iconInfo.isLargeFileOnly && isLargeFile) || !panelConfig.iconInfo.isLargeFileOnly) {
 			return panelConfig.iconInfo.type;
 		}
