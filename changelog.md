@@ -2,6 +2,7 @@
 
 ## Release 4.2 [Unreleased]
 Brief summary of what's in this release:
+- added a recall button for packages
 
 ### Breaking changes
 
