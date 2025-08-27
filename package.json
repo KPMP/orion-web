@@ -1,6 +1,6 @@
 {
   "name": "miktmc-uploader-web",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": true,
   "devDependencies": {
     "acorn": "7.2.0",
