@@ -1,6 +1,15 @@
 # Changelog
 
-## Release 4.2 [Unreleased]
+## Release 4.3 [Unreleased]
+Brief summary of what's in this release:
+
+### Breaking Changes
+
+### Other changes
+
+---
+
+## Release 4.2 [Released 9/2/2025]
 Brief summary of what's in this release:
 - added a recall button for packages
 
