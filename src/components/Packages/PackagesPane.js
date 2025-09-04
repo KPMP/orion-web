@@ -121,11 +121,6 @@ class PackagesPane extends Component {
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="fixed-top-subnav pt-3">
 					<div className='container'>
-                        <Row noGutters>
-                            <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-                                Filter by:
-                            </Col>
-                        </Row>
 						<Row noGutters>
               						<Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
 							<FilterControl className="filter-control" placeholder="Biopsy ID" options={biopsyIdOptions} type={filterActions.filterTypes.BIOPSY_ID} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
