@@ -71,7 +71,7 @@ class PackageList extends Component {
     }
 
     render() {
-        console.log(this.state.packages);
+        console.log(this.state.packages.state.packageId);
         let message = null,
             panels = [];
 
