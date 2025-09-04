@@ -10,7 +10,8 @@ export const filterTypes = {
 	PACKAGE_TYPE: "PACKAGE_TYPE",
 	SUBMITTER: "SUBMITTER",
     STUDY: "STUDY",
-	BIOPSY_ID: "BIOPSY_ID"
+	BIOPSY_ID: "BIOPSY_ID",
+    UPLOAD_STATE: "UPLOAD_STATE"
 }
 
 export const addFilter = (type, value) => {

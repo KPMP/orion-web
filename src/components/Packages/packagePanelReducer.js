@@ -196,6 +196,14 @@ export const applyFilters = (filters, filteredPackageList, predefinedPackageType
 				return null;
 			});
 		}
+        else if (filter.filterType === filterActions.filterTypes.UPLOAD_STATE){
+            filteredPackageList = filteredPackageList.filter((packageItem, index) => {
+                if(packageItem.state.state === filter.value){
+                    return packageItem;
+                }
+                return null;
+            });
+        }
 		return filteredPackageList;
 	});
 	return filteredPackageList;
