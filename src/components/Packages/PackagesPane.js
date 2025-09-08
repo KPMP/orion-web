@@ -117,7 +117,6 @@ class PackagesPane extends Component {
             {value: "UPLOAD_LOCKED", label: "Upload Locked"},
             {value: "ALL", label: "Show All Packages"}
         ];
-        console.log(packageTypeOptions);
         return (
     		<article id="packages-pane" className="container pb-2">
     			<header id="packages-filter-controls" className="fixed-top-subnav pt-3">
