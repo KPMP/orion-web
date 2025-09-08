@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class FilterControl extends Component {
 	
 	constructor() {
-		super();
+		super(props);
 		this.state = { selectedOption: props.defaultFilter || undefined }
 	}
 	
