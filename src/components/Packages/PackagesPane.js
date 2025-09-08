@@ -115,7 +115,7 @@ class PackagesPane extends Component {
         let uploadStateOptions = [
             {value: "UPLOAD_SUCCEEDED", label: "Upload Unlocked"},
             {value: "UPLOAD_LOCKED", label: "Upload Locked"},
-            {value: "ALL", label: "Show All Packages"}
+            {value: "ALL", label: "Show All Uploads"}
         ];
         return (
     		<article id="packages-pane" className="container pb-2">
