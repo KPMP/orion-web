@@ -11,7 +11,7 @@ class FilterControl extends Component {
 	
 	componentDidMount() {
         if (this.props.defaultFilter){
-            this.setState({selectedOption: this.props.defaultFilter});
+            this.addFilter(this.props.defaultFilter);
         }
 		this.props.removeFilter(this.props.type, this.state.selectedOption);
 	}
