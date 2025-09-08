@@ -4,27 +4,35 @@ import PropTypes from 'prop-types';
 
 class FilterControl extends Component {
 	
-	constructor() {
-		super();
-		this.state = { selectedOption: undefined }
+	constructor(props) {
+		super(props);
+		this.state = { selectedOption: this.props.defaultFilter || undefined }
 	}
 	
-	componentDidMount() {
-		this.props.removeFilter(this.props.type, this.state.selectedOption);
-	}
-	
-	addFilter = (value) => {
-		if (value === undefined) {
-			this.clearFilter();
-		} else {
-			this.props.addFilter(this.props.type, value.key);
-			this.setState({selectedOption: value});
-		}
-	}
+    componentDidMount() {
+        if (this.props.defaultFilter) {
+            // Convert {value, label} to {key, label} if needed
+            const defaultOption = this.props.defaultFilter.value
+                ? { key: this.props.defaultFilter.value, label: this.props.defaultFilter.label }
+                : this.props.defaultFilter;
+            this.addFilter(defaultOption);
+        }
+    }
+
+    addFilter = (value) => {
+        if (value === undefined || value === null) {
+            this.clearFilter();
+        } else {
+            // Use value.key if present, otherwise value.value
+            const filterValue = value.key || value.value;
+            this.props.addFilter(this.props.type, filterValue);
+            this.setState({ selectedOption: value });
+        }
+    }
 	
 	clearFilter = () => {
+		this.setState({ selectedOption: undefined });
 		this.props.removeFilter(this.props.type, this.state.selectedOption);
-		this.setState({ selectedOption: null });
 	}
 	
 	render() {
@@ -38,6 +46,7 @@ class FilterControl extends Component {
 					className={this.props.className}
 					onSearch={this.handleSearch}
 					labelInValue
+                    value={this.state.selectedOption}
 					filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     getPopupContainer={() => document.getElementById('packages-filter-controls')}>
 				 {this.props.options.map(option => <Option key={option.value} value={option.value}>{option.label}</Option>)}
@@ -52,7 +61,8 @@ FilterControl.propTypes = {
 	placeholder: PropTypes.string.isRequired,
 	className: PropTypes.string.isRequired,
 	handleSearch: PropTypes.func,
-	options: PropTypes.array.isRequired
+	options: PropTypes.array.isRequired,
+    defaultFilter: PropTypes.object
 }
 
 
