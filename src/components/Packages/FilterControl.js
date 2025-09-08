@@ -16,6 +16,7 @@ class FilterControl extends Component {
 	}
 	
 	addFilter = (value) => {
+        console.log(value)
 		if (value === undefined) {
 			this.clearFilter();
 		} else {
