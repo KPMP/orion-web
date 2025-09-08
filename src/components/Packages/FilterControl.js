@@ -18,9 +18,9 @@ class FilterControl extends Component {
             this.addFilter(defaultOption);
         }
     }
-    
+
     addFilter = (value) => {
-        if (value === undefined) {
+        if (value === undefined || value === null) {
             this.clearFilter();
         } else {
             // Use value.key if present, otherwise value.value
