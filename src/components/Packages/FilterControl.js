@@ -9,21 +9,26 @@ class FilterControl extends Component {
 		this.state = { selectedOption: this.props.defaultFilter || undefined }
 	}
 	
-	componentDidMount() {
-        if (this.props.defaultFilter){
-            this.addFilter(this.props.defaultFilter);
+    componentDidMount() {
+        if (this.props.defaultFilter) {
+            // Convert {value, label} to {key, label} if needed
+            const defaultOption = this.props.defaultFilter.value
+                ? { key: this.props.defaultFilter.value, label: this.props.defaultFilter.label }
+                : this.props.defaultFilter;
+            this.addFilter(defaultOption);
         }
-	}
-	
-	addFilter = (value) => {
-        console.log(value)
-		if (value === undefined) {
-			this.clearFilter();
-		} else {
-			this.props.addFilter(this.props.type, value.key);
-			this.setState({selectedOption: value});
-		}
-	}
+    }
+    
+    addFilter = (value) => {
+        if (value === undefined) {
+            this.clearFilter();
+        } else {
+            // Use value.key if present, otherwise value.value
+            const filterValue = value.key || value.value;
+            this.props.addFilter(this.props.type, filterValue);
+            this.setState({ selectedOption: value });
+        }
+    }
 	
 	clearFilter = () => {
 		this.props.removeFilter(this.props.type, this.state.selectedOption);
