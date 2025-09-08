@@ -10,6 +10,9 @@ class FilterControl extends Component {
 	}
 	
 	componentDidMount() {
+        if (this.props.defaultFilter){
+            this.setState({selectedOption: this.props.defaultFilter});
+        }
 		this.props.removeFilter(this.props.type, this.state.selectedOption);
 	}
 	
@@ -38,6 +41,7 @@ class FilterControl extends Component {
 					className={this.props.className}
 					onSearch={this.handleSearch}
 					labelInValue
+                    value={this.state.selectedOption}
 					filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     getPopupContainer={() => document.getElementById('packages-filter-controls')}>
 				 {this.props.options.map(option => <Option key={option.value} value={option.value}>{option.label}</Option>)}

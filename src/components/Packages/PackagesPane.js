@@ -113,8 +113,8 @@ class PackagesPane extends Component {
 			biopsyIdOptions = this.biopsyIdsToOptions(this.props.biopsyIds);
 		}
         let uploadStateOptions = [
-            {value: "UPLOAD_LOCKED", label: "Upload Locked"},
             {value: "UPLOAD_SUCCEEDED", label: "Upload Unlocked"},
+            {value: "UPLOAD_LOCKED", label: "Upload Locked"},
             {value: "ALL", label: "Show All Packages"}
         ];
         console.log(packageTypeOptions);
@@ -136,7 +136,7 @@ class PackagesPane extends Component {
 								<FilterControl className="filter-control" placeholder="Filter by submitter" options={userOptions} type={filterActions.filterTypes.SUBMITTER} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 							</Col>
                             <Col xs={12} md={"auto"} className="mx-sm-auto ml-md-0 mr-md-1">
-								<FilterControl className="filter-control" placeholder="Filter by upload state" options={uploadStateOptions} type={filterActions.filterTypes.UPLOAD_STATE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
+								<FilterControl className="filter-control" placeholder="Filter by upload state" defaultFilter={uploadStateOptions[0]} options={uploadStateOptions} type={filterActions.filterTypes.UPLOAD_STATE} addFilter={this.props.addFilter} removeFilter={this.props.removeFilter}/>
 							</Col>
 							<Col className="ml-auto mr-auto mr-lg-0 text-right">
 								<Link to="/upload"
