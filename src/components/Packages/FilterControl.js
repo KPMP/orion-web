@@ -6,7 +6,7 @@ class FilterControl extends Component {
 	
 	constructor() {
 		super(props);
-		this.state = { selectedOption: props.defaultFilter || undefined }
+		this.state = { selectedOption: this.props.defaultFilter || undefined }
 	}
 	
 	componentDidMount() {
