@@ -6,7 +6,7 @@ class FilterControl extends Component {
 	
 	constructor() {
 		super();
-		this.state = { selectedOption: undefined }
+		this.state = { selectedOption: props || undefined }
 	}
 	
 	componentDidMount() {
@@ -55,7 +55,8 @@ FilterControl.propTypes = {
 	placeholder: PropTypes.string.isRequired,
 	className: PropTypes.string.isRequired,
 	handleSearch: PropTypes.func,
-	options: PropTypes.array.isRequired
+	options: PropTypes.array.isRequired,
+    defaultFilter: PropTypes.object
 }
 
 
