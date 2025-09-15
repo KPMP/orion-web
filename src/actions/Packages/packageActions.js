@@ -133,7 +133,8 @@ export const uploadPackage = (packageInfo, uploader) => {
 }
 
 export const recallPackage = (packageId) => {
-	return api.post('/api/v1/packages/' + packageId + '/recall', packageId, { params: { hostname: window.location.hostname} })
+	// this is a long running request, we want to give it a long timeout
+	return api.post('/api/v1/packages/' + packageId + '/recall', packageId, { params: { hostname: window.location.hostname} }, { timeout: 10 * 60 * 1000 })
 		.then(response => {
 			return response?.status;
 		})
