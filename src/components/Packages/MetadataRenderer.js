@@ -72,7 +72,8 @@ export class MetadataRenderer {
 		// 	    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
         //     }
 
-        // } else {
+        // }
+         else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			if (fieldJson.fieldName === "experimentDate") {
 				let experimentDate = packageInfo[fieldJson.fieldName]?dateFormat(getIEFriendlyDate(packageInfo[fieldJson.fieldName]), 'yyyy-mm-dd', true):"N/A";
