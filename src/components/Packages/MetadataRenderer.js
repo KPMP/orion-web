@@ -61,7 +61,7 @@ export class MetadataRenderer {
 				return "";
 		}
         else if (fieldJson.type === "Biopsy ID"){
-            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
+            if (this.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
 
                 return <TreeNode title={"Biopsy ID: " + packageInfo.biopsyId + <FontAwesomeIcon className="text-primary clickable" icon={faEdit}/>} key={packageInfo.biopsyId} isLeaf selectable={false}/>;
             }else{
