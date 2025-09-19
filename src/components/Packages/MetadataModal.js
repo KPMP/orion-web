@@ -9,7 +9,7 @@ class MetadataModal extends Component {
 	constructor(props) {
 		super(props);
 
-		let renderer = new MetadataRenderer();
+		let renderer = new MetadataRenderer({userInformation: this.props.userInformation});
 		this.renderSection = renderer.renderSection.bind(this);
 		this.renderField = renderer.renderField.bind(this);
 	}
