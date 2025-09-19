@@ -8,8 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { TreeNode } = Tree;
 
 export class MetadataRenderer {
-    constructor(props) {
-        super(props);
+    constructor(userInformation) {
+        this.userInformation = userInformation;
+
     }
 
 
@@ -49,7 +50,7 @@ export class MetadataRenderer {
 }
 	
 	renderField = (fieldJson, packageInfo) => {
-        console.log(this.props)
+        console.log(this.userInformation);
 		if (fieldJson.type === "Submitter Information") {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
