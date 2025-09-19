@@ -51,6 +51,7 @@ export class MetadataRenderer {
 	
 	renderField = (fieldJson, packageInfo) => {
         console.log(this.userInformation);
+        console.log(this.userInformation.roles);
         console.log(fieldJson)
 		if (fieldJson.type === "Submitter Information") {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
