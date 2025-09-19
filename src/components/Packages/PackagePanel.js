@@ -185,7 +185,7 @@ class PackagePanel extends Component {
 					close={this.handleAttachmentClick}
 				    uploadFiles={this.props.uploadFiles}
 					replaceFile={this.props.replaceFile}/>
-				<MetadataModal show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
+				<MetadataModal userInformation={this.props.userInformation} show={this.state.showMetadata} uploadPackage={packageInfo} close={this.handleMetadataClick} dtds={this.props.dtds}/>
 				<LargeFileModal show={this.state.showLargeFile} close={this.handleLargeFileClick} link={this.props.uploadPackage.state ? this.props.uploadPackage.state.codicil: ''}/>
 			</section>
 		);

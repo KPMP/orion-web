@@ -2,6 +2,8 @@ import React from 'react';
 import { Tree } from 'antd';
 import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { TreeNode } = Tree;
 
@@ -51,7 +53,19 @@ export class MetadataRenderer {
 			);
 		} else if (fieldJson.summarize !== undefined) {
 				return "";
-		} else {
+		}
+        else if (fieldJson.type === "Biopsy ID"){
+            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
+
+                return <TreeNode title={"Biopsy ID: " + packageInfo.biopsyId + <FontAwesomeIcon className="text-primary clickable" icon={faEdit}/>} key={packageInfo.biopsyId} isLeaf selectable={false}/>;
+            }else{
+                let titleText = fieldJson.label +": " + fieldValue;
+			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
+			    let eventKey = fieldJson.label + ": " + fieldValue;
+			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
+            }
+
+        } else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
 			if (fieldJson.fieldName === "experimentDate") {
 				let experimentDate = packageInfo[fieldJson.fieldName]?dateFormat(getIEFriendlyDate(packageInfo[fieldJson.fieldName]), 'yyyy-mm-dd', true):"N/A";
