@@ -50,9 +50,6 @@ export class MetadataRenderer {
 }
 	
 	renderField = (fieldJson, packageInfo) => {
-        console.log(this.userInformation);
-        console.log(this.userInformation.userInformation);
-        console.log(fieldJson)
 		if (fieldJson.type === "Submitter Information") {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
@@ -64,7 +61,6 @@ export class MetadataRenderer {
 		}
         else if (fieldJson.fieldName === "biopsyId"){
             if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
-                console.log("rendering editable biopsy id");
                 return <TreeNode title={
                     <span>
                         Biopsy ID: {packageInfo.biopsyId} {" "}
@@ -72,6 +68,26 @@ export class MetadataRenderer {
                     </span>
                     }
                         key={packageInfo.biopsyId}
+                        isLeaf
+                        selectable={false}
+                    />
+            }else{
+                let titleText = fieldJson.label +": " + fieldValue;
+			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
+			    let eventKey = fieldJson.label + ": " + fieldValue;
+			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
+            }
+
+        }
+        else if (fieldJson.fieldName === "studyId"){
+            if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
+                return <TreeNode title={
+                    <span>
+                        Biopsy ID: {packageInfo.studyId} {" "}
+                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} />
+                    </span>
+                    }
+                        key={packageInfo.studyId}
                         isLeaf
                         selectable={false}
                     />
