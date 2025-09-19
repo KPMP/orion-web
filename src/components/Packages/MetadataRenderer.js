@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const { TreeNode } = Tree;
 
 export class MetadataRenderer {
+    constructor(props) {
+        super(props);
+    }
+
 
 	collapseSummarySections = (fields) => {
 		let fieldsSeen = [];
