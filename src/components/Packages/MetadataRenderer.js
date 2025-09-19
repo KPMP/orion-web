@@ -62,7 +62,7 @@ export class MetadataRenderer {
 		}
         else if (fieldJson.type === "Biopsy ID"){
             if (this.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
-
+                console.log("rendering editable biopsy id");
                 return <TreeNode title={"Biopsy ID: " + packageInfo.biopsyId + <FontAwesomeIcon className="text-primary clickable" icon={faEdit}/>} key={packageInfo.biopsyId} isLeaf selectable={false}/>;
             }else{
                 let titleText = fieldJson.label +": " + fieldValue;
