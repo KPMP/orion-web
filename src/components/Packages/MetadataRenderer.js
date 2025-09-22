@@ -89,6 +89,7 @@ class MetadataRenderer extends Component{
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
+            console.log(this.state)
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode className="metadataItem" title={
                     <span>

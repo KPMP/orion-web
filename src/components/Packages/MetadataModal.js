@@ -24,19 +24,6 @@ class MetadataModal extends Component {
                 dtd.standardFields !== undefined ?
                 dtd.standardFields.sectionHeader :
                 null;
-            // let remainingSections = "";
-            // let packageType = this.props.uploadPackage.packageType;
-            // if (packageType !== undefined) {
-            //     remainingSections = dtd.typeSpecificElements.filter(function (element) {
-            //         return element.hasOwnProperty(packageType)
-            //     });
-            //     if (remainingSections.length > 0) {
-            //         remainingSections = remainingSections[0][packageType];
-            //         remainingSections = remainingSections.sections.map((section) => {
-            //             return this.renderSection(section, this.props.uploadPackage);
-            //         });
-            //     }
-            // }
 
             return (
                 <div className="metadataModal static-modal">
