@@ -97,8 +97,8 @@ class MetadataRenderer extends Component{
                             <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
+                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss}/>
                                 </Col>
 
                             </Row>
