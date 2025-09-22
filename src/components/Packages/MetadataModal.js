@@ -54,8 +54,6 @@ class MetadataModal extends Component {
                                     userInformation={this.props.userInformation}
                                     uploadPackage={this.props.uploadPackage}
                                 />
-                                {/* {standardSection}
-                                {remainingSections} */}
                             </Tree>
                         </ModalBody>
                     </Modal>

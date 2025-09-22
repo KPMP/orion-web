@@ -10,6 +10,7 @@ const { TreeNode } = Tree;
 class MetadataRenderer extends Component{
     constructor(props) {
         super(props);
+        console.log(this.props)
         this.state = {
             checkClicked: false,
             xClicked: false,
@@ -19,6 +20,8 @@ class MetadataRenderer extends Component{
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
         this.handleDismiss = this.handleDismiss.bind(this);
+        this.renderField = this.renderField.bind(this);
+        this.renderSection = this.renderSection.bind(this);
     }
 
     handleDismiss() {
