@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Input, Tree } from 'antd';
 import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
@@ -7,17 +7,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { TreeNode } = Tree;
 
-export class MetadataRenderer {
-    constructor(userInformation) {
+export class MetadataRenderer extends Component{
+    constructor(props) {
+        super(props);
         this.state = {
             checkClicked: false,
             xClicked: false,
             editBiopsyId: false,
             editStudyId: false,
         }
-        this.userInformation = userInformation;
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handleDismiss = this.handleDismiss.bind(this);
     }
 
     handleDismiss() {
@@ -85,7 +86,7 @@ export class MetadataRenderer {
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
-            if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
+            if (this.props.userInformation.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
                         {
@@ -116,7 +117,7 @@ export class MetadataRenderer {
 
         }
         else if (fieldJson.fieldName === "studyId"){
-            if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
+            if (this.props.userInformation.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
                         {
