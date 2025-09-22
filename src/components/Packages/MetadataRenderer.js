@@ -108,12 +108,14 @@ class MetadataRenderer extends Component{
 
                             </Row>
                             :
-                            <span>
-                                Biopsy ID: {packageInfo.biopsyId} {" "}
-                                <span class="editWrapper">
-                                    <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Biopsy ID")}/>
-                                </span>
-                            </span>     
+                            <Row style={{maxWidth: "10rem"}}>
+                                <Col>
+                                    Biopsy ID: {packageInfo.biopsyId} {" "}
+                                    <span class="editWrapper">
+                                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Biopsy ID")}/>
+                                    </span>
+                                </Col>
+                            </Row>
                         }
                     </span>
                     }
@@ -138,10 +140,14 @@ class MetadataRenderer extends Component{
                                 </Col>
                             </Row>
                             : 
-                            <span class="editWrapper">
-                                Study ID: {packageInfo.studyId} {" "}
-                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Study ID")}/>
-                            </span>
+                            <Row style={{maxWidth: "10rem"}}>
+                                <Col>
+                                    <span class="editWrapper">
+                                        Study ID: {packageInfo.studyId} {" "}
+                                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Study ID")}/>
+                                    </span>
+                                </Col>
+                            </Row>
                         }
                     </span>
                     }
