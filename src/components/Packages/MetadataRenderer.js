@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Col } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 const { TreeNode } = Tree;
 
