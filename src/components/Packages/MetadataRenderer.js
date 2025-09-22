@@ -166,7 +166,6 @@ class MetadataRenderer extends Component{
 	}
     render() {
             console.log("MetedataRenderer render");
-            return <TreeNode title="Test" key="test" />;
             console.log(this.props)
             let dtd = this.props.dtd[this.props.uploadPackage.version];
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);

@@ -3,6 +3,7 @@ import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
 import MetadataRenderer from './MetadataRenderer';
 import { Tree } from 'antd';
+import TestChild from './TestChild';
 
 class MetadataModal extends Component {
 
@@ -59,6 +60,7 @@ class MetadataModal extends Component {
                                     userInformation={this.props.userInformation}
                                     uploadPackage={this.props.uploadPackage}
                                 />
+                                <TestChild />
                             </Tree>
                         </ModalBody>
                     </Modal>
