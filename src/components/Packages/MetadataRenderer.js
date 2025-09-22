@@ -101,7 +101,7 @@ class MetadataRenderer extends Component{
                     <TreeNode
                     className="metadataItem"
                     title={
-                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "10rem" }}>
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "20rem" }}>
                         {this.state.editBiopsyId ? (
                             <>
                             <span>Biopsy ID:</span>
@@ -148,7 +148,7 @@ class MetadataRenderer extends Component{
                     <TreeNode
                     className="metadataItem"
                     title={
-                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "10rem" }}>
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "20rem" }}>
                         {this.state.editStudyId ? (
                             <>
                             <span>Study ID:</span>
