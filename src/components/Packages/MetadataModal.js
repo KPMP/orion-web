@@ -55,7 +55,7 @@ class MetadataModal extends Component {
                             <p>ID: {this.props.uploadPackage._id}</p>
                             <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
                                 <MetadataRenderer
-                                    dtds={dtd}
+                                    dtd={dtd}
                                     userInformation={this.props.userInformation}
                                     uploadPackage={this.props.uploadPackage}
                                 />
