@@ -154,7 +154,7 @@ class MetadataRenderer extends Component{
     render() {
             let dtd = this.props.dtd;
             console.log("MetadataRenderer render");
-            console.log(dtd);
+            console.log(this.props)
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let remainingSections = "";
             let packageType = this.props.uploadPackage.packageType;
