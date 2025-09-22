@@ -63,7 +63,7 @@ class MetadataRenderer extends Component{
 		});
 		let summarySections = this.collapseSummarySections(summaryFields);
 		return (
-			<TreeNode title={header} key={header} selectable={false}>
+			<TreeNode className="metadataItem" title={header} key={header} selectable={false}>
 				{ fields.map((fieldJson) => this.renderField(fieldJson, metadata)) }
 				{ summarySections.map((fieldJson) => this.renderSummaryFields(fieldJson, metadata))}
 			</TreeNode>
@@ -75,7 +75,7 @@ class MetadataRenderer extends Component{
 		let fieldLabel = fieldJson.summarize.label;
 		let value = packageInfo[fieldJson.summarize.field];
 		let summaryField = fieldLabel + ": " + value;
-		return <TreeNode title={summaryField} key={summaryField} isLeaf selectable={false}/>
+		return <TreeNode className="metadataItem" title={summaryField} key={summaryField} isLeaf selectable={false}/>
 }
 	
 	renderField = (fieldJson, packageInfo) => {
@@ -83,14 +83,14 @@ class MetadataRenderer extends Component{
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
 			return (
-				<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
+				<TreeNode className="metadataItem" title={nameField} key={nameField} isLeaf selectable={false}/>
 			);
 		} else if (fieldJson.summarize !== undefined) {
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode title={
+                return <TreeNode className="metadataItem" title={
                     <span>
                         {
                             this.state.editBiopsyId ? 
@@ -119,7 +119,7 @@ class MetadataRenderer extends Component{
         }
         else if (fieldJson.fieldName === "studyId"){
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode title={
+                return <TreeNode className="metadataItem" title={
                     <span>
                         {
                             this.state.editStudyId ? 
@@ -154,7 +154,7 @@ class MetadataRenderer extends Component{
 			let titleText = fieldJson.label +": " + fieldValue;
 			let title = <span className='tree-title' title={titleText}>{titleText} </span>;
 			let eventKey = fieldJson.label + ": " + fieldValue;
-			return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
+			return <TreeNode className="metadataItem" title={title} key={eventKey} selectable={false} isLeaf/>;
 		}
 	}
     render() {
