@@ -94,7 +94,7 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editBiopsyId ? 
-                            <Row xs={4}>
+                            <Row style={{maxWidth: "5rem"}}>
                                 <Col>
                                     Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
                                     <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
@@ -123,7 +123,7 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editStudyId ? 
-                            <Row xs={4}>
+                            <Row style={{maxWidth: "5rem"}}>
                                 <Col>
                                     Study ID: <Input placeholder ={"Edit Study ID"}/> 
                                     <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
