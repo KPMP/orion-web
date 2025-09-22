@@ -4,6 +4,7 @@ import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Col } from 'reactstrap';
 
 const { TreeNode } = Tree;
 
@@ -93,11 +94,14 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editBiopsyId ? 
-                            <span>
-                                Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
-                                <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
-                                <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
-                            </span>
+                            <Row>
+                                <Col xs= {12}>
+                                    Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
+                                    <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
+                                </Col>
+
+                            </Row>
                             :
                             <span>
                                 Biopsy ID: {packageInfo.biopsyId} {" "}
@@ -119,11 +123,13 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editStudyId ? 
-                            <span>
-                                Study ID: <Input placeholder ={"Edit Study ID"}/> 
-                                <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
-                                <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
-                            </span>
+                            <Row>
+                                <Col xs= {12}>
+                                    Study ID: <Input placeholder ={"Edit Study ID"}/> 
+                                    <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
+                                </Col>
+                            </Row>
                             : 
                             <span>
                                 Study ID: {packageInfo.studyId} {" "}
