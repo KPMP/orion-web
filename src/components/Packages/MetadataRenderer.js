@@ -88,7 +88,7 @@ class MetadataRenderer extends Component{
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
-            if (this.props.userInformation.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
+            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
                         {
@@ -114,7 +114,7 @@ class MetadataRenderer extends Component{
 
         }
         else if (fieldJson.fieldName === "studyId"){
-            if (this.props.userInformation.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
+            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
                         {
