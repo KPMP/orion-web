@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { TreeNode } = Tree;
 
-export default class MetadataRenderer extends Component{
+class MetadataRenderer extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -192,3 +192,5 @@ export default class MetadataRenderer extends Component{
     }
 	
 }
+
+export default MetadataRenderer;

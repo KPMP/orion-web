@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { MetadataRenderer } from './MetadataRenderer';
+import MetadataRenderer from './MetadataRenderer';
 import { Tree } from 'antd';
 
 class MetadataModal extends Component {
 
 	constructor(props) {
 		super(props);
-
-		let renderer = new MetadataRenderer({userInformation: this.props.userInformation});
-		this.renderSection = renderer.renderSection.bind(this);
-		this.renderField = renderer.renderField.bind(this);
 	}
 	
 	isRemoteDataLoaded() {
