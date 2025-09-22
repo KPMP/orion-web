@@ -62,6 +62,7 @@ class MetadataModal extends Component {
                                 />
                                 <TestChild />
                             </Tree>
+                            <TestChild />
                         </ModalBody>
                     </Modal>
                 </div>
