@@ -102,8 +102,8 @@ class MetadataRenderer extends Component{
                             <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick("Biopsy ID")}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss("Biopsy ID")}/>
+                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={() => this.handleCheckClick("Biopsy ID")}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={() => this.handleDismiss("Biopsy ID")}/>
                                 </Col>
 
                             </Row>
@@ -131,14 +131,14 @@ class MetadataRenderer extends Component{
                             <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Study ID: <Input placeholder ={"Edit Study ID"}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick("Study ID")}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss("Study ID")}/>
+                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={() => this.handleCheckClick("Study ID")}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={() => this.handleDismiss("Study ID")}/>
                                 </Col>
                             </Row>
                             : 
                             <span>
                                 Study ID: {packageInfo.studyId} {" "}
-                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Study ID")}/>
+                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Study ID")}/>
                             </span>
                         }
                     </span>
