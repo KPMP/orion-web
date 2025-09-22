@@ -110,11 +110,6 @@ class MetadataRenderer extends Component{
                         isLeaf
                         selectable={false}
                     />
-            }else{
-                let titleText = fieldJson.label +": " + fieldValue;
-			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
-			    let eventKey = fieldJson.label + ": " + fieldValue;
-			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
             }
 
         }
@@ -141,13 +136,7 @@ class MetadataRenderer extends Component{
                         isLeaf
                         selectable={false}
                     />
-            }else{
-                let titleText = fieldJson.label +": " + fieldValue;
-			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
-			    let eventKey = fieldJson.label + ": " + fieldValue;
-			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
             }
-
         }
          else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
@@ -164,6 +153,8 @@ class MetadataRenderer extends Component{
 	}
     render() {
             let dtd = this.props.dtd;
+            console.log("MetadataRenderer render");
+            console.log(dtd);
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let remainingSections = "";
             let packageType = this.props.uploadPackage.packageType;
