@@ -16,8 +16,10 @@ class MetadataModal extends Component {
 
     render() {
 		if(!this.isRemoteDataLoaded()) {
+            console.log("MetadataModal: Remote data not loaded yet.");
 			return <div className="metadataModal static-modal" />;
 		} else {
+            console.log("MetadataModal: Remote data loaded, rendering modal.");
 			let dtd = this.props.dtds[this.props.uploadPackage.version];
             // let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
@@ -25,7 +27,10 @@ class MetadataModal extends Component {
                 dtd.standardFields !== undefined ?
                 dtd.standardFields.sectionHeader :
                 null;
-
+            console.log("Default Expanded Keys:", defaultExpandedKeys);
+            console.log("DTD:", dtd);
+            console.log("Upload Package:", this.props.uploadPackage);
+            console.log("User Information:", this.props.userInformation);
             // let remainingSections = "";
             // let packageType = this.props.uploadPackage.packageType;
             // if (packageType !== undefined) {
