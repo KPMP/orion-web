@@ -24,11 +24,11 @@ class MetadataModal extends Component {
 		} else {
 			// let dtd = this.props.dtds[this.props.uploadPackage.version];
             // let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
-            // let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
-            //     dtd.standardFields !== null &&
-            //     dtd.standardFields !== undefined ?
-            //     dtd.standardFields.sectionHeader :
-            //     null;
+            let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
+                dtd.standardFields !== null &&
+                dtd.standardFields !== undefined ?
+                dtd.standardFields.sectionHeader :
+                null;
 
             // let remainingSections = "";
             // let packageType = this.props.uploadPackage.packageType;
