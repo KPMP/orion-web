@@ -55,11 +55,14 @@ class MetadataModal extends Component {
                         <ModalBody className="metadataModalBody">
                             <p>ID: {this.props.uploadPackage._id}</p>
                             <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
-                                <MetadataRenderer
-                                    dtd={dtd}
-                                    userInformation={this.props.userInformation}
-                                    uploadPackage={this.props.uploadPackage}
-                                />
+                                {
+                                    <MetadataRenderer
+                                        dtd={dtd}
+                                        userInformation={this.props.userInformation}
+                                        uploadPackage={this.props.uploadPackage}
+                                    />
+
+                                }
                                 <TestChild />
                             </Tree>
                             <TestChild />
