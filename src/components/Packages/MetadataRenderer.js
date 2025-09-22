@@ -24,17 +24,21 @@ class MetadataRenderer extends Component{
         this.renderSection = this.renderSection.bind(this);
     }
 
-    handleDismiss() {
-        return null;
-    }
-
-    handleCheckClick() {
+    handleCheckClick = () => {
         this.setState({checkClicked: true})
         alert("You Clicked the check icon!");
         return null;
     }   
 
-    handleEditClick(identifier) {
+    handleDismiss = (identifier) => {
+        if (identifier === "Biopsy ID") {
+            this.setState({editBiopsyId: false})
+        } else if (identifier === "Study ID") {
+            this.setState({editStudyId: false})
+        }
+    }
+
+    handleEditClick = (identifier) => {
         if (identifier === "Biopsy ID") {
             this.setState({editBiopsyId: true})
         } else if (identifier === "Study ID") {
@@ -98,15 +102,15 @@ class MetadataRenderer extends Component{
                             <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss}/>
+                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick("Biopsy ID")}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss("Biopsy ID")}/>
                                 </Col>
 
                             </Row>
                             :
                             <span>
                                 Biopsy ID: {packageInfo.biopsyId} {" "}
-                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Biopsy ID")}/>
+                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Biopsy ID")}/>
                             </span>     
                         }
                     </span>
@@ -127,8 +131,8 @@ class MetadataRenderer extends Component{
                             <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Study ID: <Input placeholder ={"Edit Study ID"}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss}/>
+                                    <FontAwesomeIcon icon={faSquareCheck} className='text-danger xMark clickable' onClick={this.handleCheckClick("Study ID")}/> 
+                                    <FontAwesomeIcon icon={faSquareXmark} className='text-success checkMark clickable' onClick={this.handleDismiss("Study ID")}/>
                                 </Col>
                             </Row>
                             : 
