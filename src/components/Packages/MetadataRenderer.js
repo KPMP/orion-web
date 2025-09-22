@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { TreeNode } = Tree;
 
-export class MetadataRenderer extends Component{
+export default class MetadataRenderer extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -161,7 +161,7 @@ export class MetadataRenderer extends Component{
 		}
 	}
     render() {
-        console.log(this.props)
+            console.log(this.props)
             let dtd = this.props.dtds[this.props.uploadPackage.version];
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
