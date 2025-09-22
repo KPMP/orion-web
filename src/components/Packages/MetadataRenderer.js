@@ -94,36 +94,53 @@ class MetadataRenderer extends Component{
 		}
         else if (fieldJson.fieldName === "biopsyId"){
             console.log(this.state)
-            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode className="metadataItem" title={
-                    <span className='tree-title'>
-                        {
-                            this.state.editBiopsyId ? 
-                            <Row style={{maxWidth: "10rem"}}>
-                                <Col>
-                                    Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-danger xMark clickable' onClick={() => this.handleDismiss("Biopsy ID")}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-success checkMark clickable' onClick={() => this.handleCheckClick("Biopsy ID")}/>
-                                </Col>
-
-                            </Row>
-                            :
-                            <Row style={{maxWidth: "10rem"}}>
-                                <Col>
-                                    Biopsy ID: {packageInfo.biopsyId} {" "}
-                                    <span class="editWrapper">
-                                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Biopsy ID")}/>
-                                    </span>
-                                </Col>
-                            </Row>
-                        }
-                    </span>
+            if (
+                this.props.userInformation?.roles.includes("uploader_admin") ||
+                this.props.userInformation?.email === packageInfo.submitter.email
+                ) {
+                return (
+                    <TreeNode
+                    className="metadataItem"
+                    title={
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "10rem" }}>
+                        {this.state.editBiopsyId ? (
+                            <>
+                            <span>Biopsy ID:</span>
+                            <Input
+                                placeholder="Edit BiopsyID"
+                                style={{ marginLeft: "0.5rem", flex: 1 }}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareXmark}
+                                className="text-danger xMark clickable"
+                                onClick={() => this.handleDismiss("Biopsy ID")}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareCheck}
+                                className="text-success checkMark clickable"
+                                onClick={() => this.handleCheckClick("Biopsy ID")}
+                            />
+                            </>
+                        ) : (
+                            <>
+                            <span>Biopsy ID: {packageInfo.biopsyId}</span>
+                            <FontAwesomeIcon
+                                className="text-primary clickable"
+                                icon={faEdit}
+                                style={{ marginLeft: "0.5rem" }}
+                                onClick={() => this.handleEditClick("Biopsy ID")}
+                            />
+                            </>
+                        )}
+                        </div>
                     }
-                        key={packageInfo.biopsyId}
-                        isLeaf
-                        selectable={false}
+                    key={packageInfo.biopsyId}
+                    isLeaf
+                    selectable={false}
                     />
-            }
+                );
+                }
+
 
         }
         else if (fieldJson.fieldName === "studyId"){
