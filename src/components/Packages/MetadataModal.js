@@ -22,7 +22,7 @@ class MetadataModal extends Component {
 		if(!this.isRemoteDataLoaded()) {
 			return <div className="metadataModal static-modal" />;
 		} else {
-			// let dtd = this.props.dtds[this.props.uploadPackage.version];
+			let dtd = this.props.dtds[this.props.uploadPackage.version];
             // let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
                 dtd.standardFields !== null &&
@@ -54,7 +54,7 @@ class MetadataModal extends Component {
                             <p>ID: {this.props.uploadPackage._id}</p>
                             <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
                                 <MetadataRenderer
-                                    dtds={this.props.dtds[this.props.uploadPackage.version]}
+                                    dtds={dtd}
                                     userInformation={this.props.userInformation}
                                     uploadPackage={this.props.uploadPackage}
                                 />
