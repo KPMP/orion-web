@@ -96,7 +96,7 @@ class MetadataRenderer extends Component{
             console.log(this.state)
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode className="metadataItem" title={
-                    <span>
+                    <span className='tree-title'>
                         {
                             this.state.editBiopsyId ? 
                             <Row style={{maxWidth: "10rem"}}>
@@ -129,7 +129,7 @@ class MetadataRenderer extends Component{
         else if (fieldJson.fieldName === "studyId"){
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode className="metadataItem" title={
-                    <span>
+                    <span className='tree-title'>
                         {
                             this.state.editStudyId ? 
                             <Row style={{maxWidth: "10rem"}}>
