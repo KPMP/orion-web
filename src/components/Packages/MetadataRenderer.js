@@ -91,15 +91,18 @@ export class MetadataRenderer {
                     <span>
                         Biopsy ID: 
                         {
-                            this.state.editBiopsyId ? packageInfo.biopsyId : 
+                            this.state.editBiopsyId ? 
                             <div>
                                 <Input placeholder ={"Edit BiopsyID"}/> 
                                 <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
                                 <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
                             </div>
+                            :
+                            <div>
+                                {packageInfo.biopsyId} {" "}
+                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Biopsy ID")}/>
+                            </div>     
                         }
-                        {packageInfo.studyId} {" "}
-                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Study ID")}/>
                     </span>
                     }
                         key={packageInfo.biopsyId}
@@ -118,17 +121,20 @@ export class MetadataRenderer {
             if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
-                        Biopsy ID: 
+                        Study ID: 
                         {
-                            this.state.editStudyId ? packageInfo.studyId : 
+                            this.state.editStudyId ? 
                             <div>
                                 <Input placeholder ={"Edit Study ID"}/> 
                                 <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
                                 <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
                             </div>
+                            : 
+                            <div>
+                                {packageInfo.studyId} {" "}
+                                <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Study ID")}/>
+                            </div>
                         }
-                        {packageInfo.studyId} {" "}
-                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Study ID")}/>
                     </span>
                     }
                         key={packageInfo.studyId}
