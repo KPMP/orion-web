@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
 import MetadataRenderer from './MetadataRenderer';
-import { Tree } from 'antd';
 import TestChild from './TestChild';
 
 class MetadataModal extends Component {
@@ -54,18 +53,13 @@ class MetadataModal extends Component {
                         </ModalHeader>
                         <ModalBody className="metadataModalBody">
                             <p>ID: {this.props.uploadPackage._id}</p>
-                            <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
-                                {
-                                    <MetadataRenderer
-                                        dtd={dtd}
-                                        userInformation={this.props.userInformation}
-                                        uploadPackage={this.props.uploadPackage}
-                                    />
-
-                                }
+                                <MetadataRenderer
+                                    dtd={dtd}
+                                    userInformation={this.props.userInformation}
+                                    uploadPackage={this.props.uploadPackage}
+                                    defaultExpandedKeys={defaultExpandedKeys}
+                                />
                                 <TestChild />
-                            </Tree>
-                            <TestChild />
                         </ModalBody>
                     </Modal>
                 </div>

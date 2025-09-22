@@ -183,10 +183,10 @@ class MetadataRenderer extends Component{
                 }
             }
             return (
-                <div>
+                <Tree blockNode={true} defaultExpandedKeys={[this.props.defaultExpandedKeys]}>
                     {standardSection}
                     {remainingSections}
-                </div>
+                </Tree>
             )
     }
 	
