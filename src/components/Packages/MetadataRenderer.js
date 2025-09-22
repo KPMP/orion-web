@@ -93,7 +93,6 @@ class MetadataRenderer extends Component{
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
-            console.log(this.state)
             if (
                 this.props.userInformation?.roles.includes("uploader_admin") ||
                 this.props.userInformation?.email === packageInfo.submitter.email
@@ -107,7 +106,7 @@ class MetadataRenderer extends Component{
                             <>
                             <span>Biopsy ID:</span>
                             <Input
-                                placeholder="Edit BiopsyID"
+                                placeholder="Edit Biopsy ID"
                                 style={{ marginLeft: "0.5rem", flex: 1 }}
                             />
                             <FontAwesomeIcon
@@ -145,33 +144,47 @@ class MetadataRenderer extends Component{
         }
         else if (fieldJson.fieldName === "studyId"){
             if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode className="metadataItem" title={
-                    <span className='tree-title'>
-                        {
-                            this.state.editStudyId ? 
-                            <Row style={{maxWidth: "10rem"}}>
-                                <Col>
-                                    Study ID: <Input placeholder ={"Edit Study ID"}/> 
-                                    <FontAwesomeIcon icon={faSquareXmark} className='text-danger xMark clickable' onClick={() => this.handleDismiss("Study ID")}/> 
-                                    <FontAwesomeIcon icon={faSquareCheck} className='text-success checkMark clickable' onClick={() => this.handleCheckClick("Study ID")}/>
-                                </Col>
-                            </Row>
-                            : 
-                            <Row style={{maxWidth: "10rem"}}>
-                                <Col>
-                                    <span class="editWrapper">
-                                        Study ID: {packageInfo.studyId} {" "}
-                                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={() => this.handleEditClick("Study ID")}/>
-                                    </span>
-                                </Col>
-                            </Row>
-                        }
-                    </span>
+                return (
+                    <TreeNode
+                    className="metadataItem"
+                    title={
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "10rem" }}>
+                        {this.state.editStudyId ? (
+                            <>
+                            <span>Study ID:</span>
+                            <Input
+                                placeholder="Edit Study ID"
+                                style={{ marginLeft: "0.5rem", flex: 1 }}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareXmark}
+                                className="text-danger xMark clickable"
+                                onClick={() => this.handleDismiss("Study ID")}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareCheck}
+                                className="text-success checkMark clickable"
+                                onClick={() => this.handleCheckClick("Study ID")}
+                            />
+                            </>
+                        ) : (
+                            <>
+                            <span>Biopsy ID: {packageInfo.studyId}</span>
+                            <FontAwesomeIcon
+                                className="text-primary clickable"
+                                icon={faEdit}
+                                style={{ marginLeft: "0.5rem" }}
+                                onClick={() => this.handleEditClick("Study ID")}
+                            />
+                            </>
+                        )}
+                        </div>
                     }
-                        key={packageInfo.studyId}
-                        isLeaf
-                        selectable={false}
+                    key={packageInfo.biopsyId}
+                    isLeaf
+                    selectable={false}
                     />
+                );
             }
         }
          else {
