@@ -94,7 +94,7 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editBiopsyId ? 
-                            <Row style={{maxWidth: "5rem"}}>
+                            <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
                                     <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
@@ -123,7 +123,7 @@ class MetadataRenderer extends Component{
                     <span>
                         {
                             this.state.editStudyId ? 
-                            <Row style={{maxWidth: "5rem"}}>
+                            <Row style={{maxWidth: "10rem"}}>
                                 <Col>
                                     Study ID: <Input placeholder ={"Edit Study ID"}/> 
                                     <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
@@ -159,8 +159,6 @@ class MetadataRenderer extends Component{
 	}
     render() {
             let dtd = this.props.dtd;
-            console.log("MetadataRenderer render");
-            console.log(this.props)
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let remainingSections = "";
             let packageType = this.props.uploadPackage.packageType;
