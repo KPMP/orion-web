@@ -107,7 +107,7 @@ class MetadataRenderer extends Component{
                             <span>Biopsy ID:</span>
                             <Input
                                 placeholder="Edit Biopsy ID"
-                                style={{ marginLeft: "0.5rem", flex: 1 }}
+                                style={{ marginLeft: "0.5rem", width: "10rem"}}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
@@ -154,7 +154,7 @@ class MetadataRenderer extends Component{
                             <span>Study ID:</span>
                             <Input
                                 placeholder="Edit Study ID"
-                                style={{ marginLeft: "0.5rem", flex: 1 }}
+                                style={{ marginLeft: "0.5rem", width: "10rem" }}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
@@ -169,7 +169,7 @@ class MetadataRenderer extends Component{
                             </>
                         ) : (
                             <>
-                            <span>Biopsy ID: {packageInfo.studyId}</span>
+                            <span>Study ID: {packageInfo.studyId}</span>
                             <FontAwesomeIcon
                                 className="text-primary clickable"
                                 icon={faEdit}
@@ -180,7 +180,7 @@ class MetadataRenderer extends Component{
                         )}
                         </div>
                     }
-                    key={packageInfo.biopsyId}
+                    key={packageInfo.studyId}
                     isLeaf
                     selectable={false}
                     />
