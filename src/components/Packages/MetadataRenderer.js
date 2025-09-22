@@ -10,6 +10,7 @@ const { TreeNode } = Tree;
 class MetadataRenderer extends Component{
     constructor(props) {
         super(props);
+        console.log("MetadataRenderer Constructor");
         console.log(this.props)
         this.state = {
             checkClicked: false,
