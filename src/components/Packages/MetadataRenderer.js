@@ -1,16 +1,49 @@
-import React from 'react';
-import { Tree } from 'antd';
+import React, { Component } from 'react';
+import { Input, Tree } from 'antd';
 import dateFormat from 'dateformat';
 import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Col, Row } from 'reactstrap';
 
 const { TreeNode } = Tree;
 
-export class MetadataRenderer {
-    constructor(userInformation) {
-        this.userInformation = userInformation;
+class MetadataRenderer extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            checkClicked: false,
+            xClicked: false,
+            editBiopsyId: false,
+            editStudyId: false,
+        }
+        this.handleEditClick = this.handleEditClick.bind(this);
+        this.handleCheckClick = this.handleCheckClick.bind(this);
+        this.handleDismiss = this.handleDismiss.bind(this);
+        this.renderField = this.renderField.bind(this);
+        this.renderSection = this.renderSection.bind(this);
+    }
 
+    handleCheckClick = () => {
+        this.setState({checkClicked: true})
+        alert("You Clicked the check icon!");
+        return null;
+    }   
+
+    handleDismiss = (identifier) => {
+        if (identifier === "Biopsy ID") {
+            this.setState({editBiopsyId: false})
+        } else if (identifier === "Study ID") {
+            this.setState({editStudyId: false})
+        }
+    }
+
+    handleEditClick = (identifier) => {
+        if (identifier === "Biopsy ID") {
+            this.setState({editBiopsyId: true})
+        } else if (identifier === "Study ID") {
+            this.setState({editStudyId: true})
+        }
     }
 
 
@@ -34,7 +67,7 @@ export class MetadataRenderer {
 		});
 		let summarySections = this.collapseSummarySections(summaryFields);
 		return (
-			<TreeNode title={header} key={header} selectable={false}>
+			<TreeNode className="metadataItem" title={header} key={header} selectable={false}>
 				{ fields.map((fieldJson) => this.renderField(fieldJson, metadata)) }
 				{ summarySections.map((fieldJson) => this.renderSummaryFields(fieldJson, metadata))}
 			</TreeNode>
@@ -46,7 +79,7 @@ export class MetadataRenderer {
 		let fieldLabel = fieldJson.summarize.label;
 		let value = packageInfo[fieldJson.summarize.field];
 		let summaryField = fieldLabel + ": " + value;
-		return <TreeNode title={summaryField} key={summaryField} isLeaf selectable={false}/>
+		return <TreeNode className="metadataItem" title={summaryField} key={summaryField} isLeaf selectable={false}/>
 }
 	
 	renderField = (fieldJson, packageInfo) => {
@@ -54,50 +87,105 @@ export class MetadataRenderer {
 			let name= packageInfo.submitter.firstName + " " + packageInfo.submitter.lastName;
 			let nameField = "Submitter: " + name;
 			return (
-				<TreeNode title={nameField} key={nameField} isLeaf selectable={false}/>
+				<TreeNode className="metadataItem" title={nameField} key={nameField} isLeaf selectable={false}/>
 			);
 		} else if (fieldJson.summarize !== undefined) {
 				return "";
 		}
         else if (fieldJson.fieldName === "biopsyId"){
-            if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode title={
-                    <span>
-                        Biopsy ID: {packageInfo.biopsyId} {" "}
-                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} />
-                    </span>
+            if (
+                this.props.userInformation?.roles.includes("uploader_admin") ||
+                this.props.userInformation?.email === packageInfo.submitter.email
+                ) {
+                return (
+                    <TreeNode
+                    className="metadataItem"
+                    title={
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "20rem" }}>
+                        {this.state.editBiopsyId ? (
+                            <>
+                            <span>Biopsy ID:</span>
+                            <Input
+                                placeholder="Edit Biopsy ID"
+                                style={{ marginLeft: "0.5rem", width: "10rem"}}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareXmark}
+                                className="text-danger xMark clickable"
+                                onClick={() => this.handleDismiss("Biopsy ID")}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareCheck}
+                                className="text-success checkMark clickable"
+                                onClick={() => this.handleCheckClick("Biopsy ID")}
+                            />
+                            </>
+                        ) : (
+                            <>
+                            <span>Biopsy ID: {packageInfo.biopsyId}</span>
+                            <FontAwesomeIcon
+                                className="text-primary clickable"
+                                icon={faEdit}
+                                style={{ marginLeft: "0.5rem" }}
+                                onClick={() => this.handleEditClick("Biopsy ID")}
+                            />
+                            </>
+                        )}
+                        </div>
                     }
-                        key={packageInfo.biopsyId}
-                        isLeaf
-                        selectable={false}
+                    key={packageInfo.biopsyId}
+                    isLeaf
+                    selectable={false}
                     />
-            }else{
-                let titleText = fieldJson.label +": " + fieldValue;
-			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
-			    let eventKey = fieldJson.label + ": " + fieldValue;
-			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
-            }
+                );
+                }
+
 
         }
         else if (fieldJson.fieldName === "studyId"){
-            if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
-                return <TreeNode title={
-                    <span>
-                        Biopsy ID: {packageInfo.studyId} {" "}
-                        <FontAwesomeIcon className='text-primary clickable' icon={faEdit} />
-                    </span>
+            if (this.props.userInformation?.roles.includes("uploader_admin") || this.props.userInformation?.email === packageInfo.submitter.email) {
+                return (
+                    <TreeNode
+                    className="metadataItem"
+                    title={
+                        <div className="tree-title" style={{ display: "flex", alignItems: "center", maxWidth: "20rem" }}>
+                        {this.state.editStudyId ? (
+                            <>
+                            <span>Study ID:</span>
+                            <Input
+                                placeholder="Edit Study ID"
+                                style={{ marginLeft: "0.5rem", width: "10rem" }}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareXmark}
+                                className="text-danger xMark clickable"
+                                onClick={() => this.handleDismiss("Study ID")}
+                            />
+                            <FontAwesomeIcon
+                                icon={faSquareCheck}
+                                className="text-success checkMark clickable"
+                                onClick={() => this.handleCheckClick("Study ID")}
+                            />
+                            </>
+                        ) : (
+                            <>
+                            <span>Study ID: {packageInfo.studyId}</span>
+                            <FontAwesomeIcon
+                                className="text-primary clickable"
+                                icon={faEdit}
+                                style={{ marginLeft: "0.5rem" }}
+                                onClick={() => this.handleEditClick("Study ID")}
+                            />
+                            </>
+                        )}
+                        </div>
                     }
-                        key={packageInfo.studyId}
-                        isLeaf
-                        selectable={false}
+                    key={packageInfo.studyId}
+                    isLeaf
+                    selectable={false}
                     />
-            }else{
-                let titleText = fieldJson.label +": " + fieldValue;
-			    let title = <span className='tree-title' title={titleText}>{titleText} </span>;
-			    let eventKey = fieldJson.label + ": " + fieldValue;
-			    return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
+                );
             }
-
         }
          else {
 			let fieldValue = packageInfo[fieldJson.fieldName] === undefined ? "" : packageInfo[fieldJson.fieldName];
@@ -109,8 +197,33 @@ export class MetadataRenderer {
 			let titleText = fieldJson.label +": " + fieldValue;
 			let title = <span className='tree-title' title={titleText}>{titleText} </span>;
 			let eventKey = fieldJson.label + ": " + fieldValue;
-			return <TreeNode title={title} key={eventKey} selectable={false} isLeaf/>;
+			return <TreeNode className="metadataItem" title={title} key={eventKey} selectable={false} isLeaf/>;
 		}
 	}
+    render() {
+            let dtd = this.props.dtd;
+            let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
+            let remainingSections = "";
+            let packageType = this.props.uploadPackage.packageType;
+            if (packageType !== undefined) {
+                remainingSections = dtd.typeSpecificElements.filter(function (element) {
+                    return element.hasOwnProperty(packageType)
+                });
+                if (remainingSections.length > 0) {
+                    remainingSections = remainingSections[0][packageType];
+                    remainingSections = remainingSections.sections.map((section) => {
+                        return this.renderSection(section, this.props.uploadPackage);
+                    });
+                }
+            }
+            return (
+                <Tree blockNode={true} defaultExpandedKeys={[this.props.defaultExpandedKeys]}>
+                    {standardSection}
+                    {remainingSections}
+                </Tree>
+            )
+    }
 	
 }
+
+export default MetadataRenderer;

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { MetadataRenderer } from './MetadataRenderer';
-import { Tree } from 'antd';
+import MetadataRenderer from './MetadataRenderer';
 
 class MetadataModal extends Component {
 
 	constructor(props) {
 		super(props);
-
-		let renderer = new MetadataRenderer({userInformation: this.props.userInformation});
-		this.renderSection = renderer.renderSection.bind(this);
-		this.renderField = renderer.renderField.bind(this);
 	}
 	
 	isRemoteDataLoaded() {
@@ -23,26 +18,12 @@ class MetadataModal extends Component {
 			return <div className="metadataModal static-modal" />;
 		} else {
 			let dtd = this.props.dtds[this.props.uploadPackage.version];
-            let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
+            // let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
                 dtd.standardFields !== null &&
                 dtd.standardFields !== undefined ?
                 dtd.standardFields.sectionHeader :
                 null;
-
-            let remainingSections = "";
-            let packageType = this.props.uploadPackage.packageType;
-            if (packageType !== undefined) {
-                remainingSections = dtd.typeSpecificElements.filter(function (element) {
-                    return element.hasOwnProperty(packageType)
-                });
-                if (remainingSections.length > 0) {
-                    remainingSections = remainingSections[0][packageType];
-                    remainingSections = remainingSections.sections.map((section) => {
-                        return this.renderSection(section, this.props.uploadPackage);
-                    });
-                }
-            }
 
             return (
                 <div className="metadataModal static-modal">
@@ -52,10 +33,12 @@ class MetadataModal extends Component {
                         </ModalHeader>
                         <ModalBody className="metadataModalBody">
                             <p>ID: {this.props.uploadPackage._id}</p>
-                            <Tree blockNode={true} defaultExpandedKeys={[defaultExpandedKeys]}>
-                                {standardSection}
-                                {remainingSections}
-                            </Tree>
+                                <MetadataRenderer
+                                    dtd={dtd}
+                                    userInformation={this.props.userInformation}
+                                    uploadPackage={this.props.uploadPackage}
+                                    defaultExpandedKeys={defaultExpandedKeys}
+                                />
                         </ModalBody>
                     </Modal>
                 </div>
