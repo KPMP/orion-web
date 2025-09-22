@@ -161,7 +161,8 @@ export class MetadataRenderer extends Component{
 		}
 	}
     render() {
-        let dtd = this.props.dtds[this.props.uploadPackage.version];
+        console.log(this.props)
+            let dtd = this.props.dtds[this.props.uploadPackage.version];
             let standardSection = this.renderSection(dtd.standardFields, this.props.uploadPackage);
             let defaultExpandedKeys = dtd.standardFields.hasOwnProperty('sectionHeader') &&
                 dtd.standardFields !== null &&
