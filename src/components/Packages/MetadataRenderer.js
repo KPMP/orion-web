@@ -25,18 +25,17 @@ export class MetadataRenderer {
     }
 
     handleCheckClick() {
+        this.setState({checkClicked: true})
         alert("You Clicked the check icon!");
         return null;
     }   
 
     handleEditClick(identifier) {
-        return (
-            <div>
-                <Input placeholder ={"Edit " + identifier}/> 
-                <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
-                <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
-            </div>
-        )
+        if (identifier === "Biopsy ID") {
+            this.setState({editBiopsyId: true})
+        } else if (identifier === "Study ID") {
+            this.setState({editStudyId: true})
+        }
     }
 
 
@@ -89,19 +88,18 @@ export class MetadataRenderer {
             if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
-                        Biopsy ID: 
                         {
                             this.state.editBiopsyId ? 
-                            <div>
-                                <Input placeholder ={"Edit BiopsyID"}/> 
+                            <span>
+                                Biopsy ID: <Input placeholder ={"Edit BiopsyID"}/> 
                                 <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
                                 <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
-                            </div>
+                            </span>
                             :
-                            <div>
-                                {packageInfo.biopsyId} {" "}
+                            <span>
+                                Biopsy ID: {packageInfo.biopsyId} {" "}
                                 <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Biopsy ID")}/>
-                            </div>     
+                            </span>     
                         }
                     </span>
                     }
@@ -121,19 +119,18 @@ export class MetadataRenderer {
             if (this.userInformation.userInformation?.roles.includes("uploader_admin") || this.userInformation?.email === packageInfo.submitter.email) {
                 return <TreeNode title={
                     <span>
-                        Study ID: 
                         {
                             this.state.editStudyId ? 
-                            <div>
-                                <Input placeholder ={"Edit Study ID"}/> 
+                            <span>
+                                Study ID: <Input placeholder ={"Edit Study ID"}/> 
                                 <FontAwesomeIcon icon={faSquareCheck} className="text-success clickable" onClick={this.handleCheckClick}/> 
                                 <FontAwesomeIcon icon={faSquareXmark} className="text-danger clickable" onClick={this.handleDismiss}/>
-                            </div>
+                            </span>
                             : 
-                            <div>
-                                {packageInfo.studyId} {" "}
+                            <span>
+                                Study ID: {packageInfo.studyId} {" "}
                                 <FontAwesomeIcon className='text-primary clickable' icon={faEdit} onClick={this.handleEditClick("Study ID")}/>
-                            </div>
+                            </span>
                         }
                     </span>
                     }
