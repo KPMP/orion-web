@@ -133,7 +133,7 @@ export const uploadPackage = (packageInfo, uploader) => {
 }
 
 export const recallPackage = (packageId) => {
-	return api.post('/api/v1/packages/' + packageId + '/recall', packageId, { params: { hostname: window.location.hostname} })
+	return api.post('/api/v1/packages/' + packageId + '/recall', packageId, { params: { hostname: window.location.hostname} }, { timeout: 10 * 60 * 1000 })
 		.then(response => {
 			return response?.status;
 		})
