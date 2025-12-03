@@ -102,6 +102,18 @@ export const lockPackage = (packageId) => {
 		})
 }
 
+export const editPackage = (packageId, packageEdits) => {
+	return api.post('/api/v1/packages/' + packageId + '/edit', packageEdits)
+        .then(response => {
+            return response?.status;
+        })
+        .catch(err => {
+            alert("There was a problem editing the file.");
+            console.log(err);
+            return err?.response?.status;
+        });
+}
+
 export const deleteFile = (packageId, fileId) => {
     return api.post("/api/v1/packages/" + packageId + "/files/delete/" + fileId)
         .then(response => {

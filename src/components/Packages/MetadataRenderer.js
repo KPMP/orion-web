@@ -5,6 +5,7 @@ import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col, Row } from 'reactstrap';
+import { editPackage } from '../../actions/Packages/packageActions';
 
 const { TreeNode } = Tree;
 
@@ -16,6 +17,8 @@ class MetadataRenderer extends Component{
             xClicked: false,
             editBiopsyId: false,
             editStudyId: false,
+            biopsyId: this.props.uploadPackage.biopsyId,
+            studyId: this.props.uploadPackage.studyId,
         }
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -24,17 +27,30 @@ class MetadataRenderer extends Component{
         this.renderSection = this.renderSection.bind(this);
     }
 
-    handleCheckClick = () => {
-        this.setState({checkClicked: true})
-        alert("You Clicked the check icon!");
+    handleCheckClick = async (identifier) => {
+        this.setState({checkClicked: true});
+        if (identifier == "biopsyId" && this.state.biopsyId?.length > 0) {
+            packageEdits = {"biopsyId": this.state.biopsyId};
+        }
+        else if (identifier == "studyId" && this.state.studyId?.length > 0) {
+            packageEdits = {"studyId": this.state.studyId};
+        }
+        else {
+            alert("Field cannot be blank");
+            return null;
+        }
+        let status = await editPackage(packageId, packageEdits);
+        if (status == 200) {
+            this.handleDismiss(identifier);
+        }
         return null;
     }   
 
     handleDismiss = (identifier) => {
         if (identifier === "Biopsy ID") {
-            this.setState({editBiopsyId: false})
+            this.setState({editBiopsyId: false, biopsyId: this.props.uploadPackage.biopsyId})
         } else if (identifier === "Study ID") {
-            this.setState({editStudyId: false})
+            this.setState({editStudyId: false, studyId: this.props.uploadPackage.studyId})
         }
     }
 
@@ -106,7 +122,7 @@ class MetadataRenderer extends Component{
                             <>
                             <span>Biopsy ID:</span>
                             <Input
-                                placeholder="Edit Biopsy ID"
+                                placeholder="Edit Biopsy ID" value={this.state.biopsyId}
                                 style={{ marginLeft: "0.5rem", width: "10rem"}}
                             />
                             <FontAwesomeIcon
@@ -117,7 +133,7 @@ class MetadataRenderer extends Component{
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
                                 className="text-success checkMark clickable"
-                                onClick={() => this.handleCheckClick("Biopsy ID")}
+                                onClick={() => this.handleCheckClick(packageInfo._id, "biopsyId")}
                             />
                             </>
                         ) : (
@@ -153,7 +169,7 @@ class MetadataRenderer extends Component{
                             <>
                             <span>Study ID:</span>
                             <Input
-                                placeholder="Edit Study ID"
+                                placeholder="Edit Study ID" value={this.state.studyId}
                                 style={{ marginLeft: "0.5rem", width: "10rem" }}
                             />
                             <FontAwesomeIcon
@@ -164,7 +180,7 @@ class MetadataRenderer extends Component{
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
                                 className="text-success checkMark clickable"
-                                onClick={() => this.handleCheckClick("Study ID")}
+                                onClick={() => this.handleCheckClick(packageInfo._id, "studyId")}
                             />
                             </>
                         ) : (
