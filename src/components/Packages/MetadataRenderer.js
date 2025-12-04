@@ -17,8 +17,8 @@ class MetadataRenderer extends Component{
             xClicked: false,
             editBiopsyId: false,
             editStudyId: false,
-            biopsyId: this.props.uploadPackage.biopsyId,
-            studyId: this.props.uploadPackage.studyId,
+            biopsyId: "",
+            studyId: "",
         }
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -27,8 +27,9 @@ class MetadataRenderer extends Component{
         this.renderSection = this.renderSection.bind(this);
     }
 
-    handleCheckClick = async (identifier) => {
+    handleCheckClick = async (packageId, identifier) => {
         this.setState({checkClicked: true});
+        let packageEdits = {};
         if (identifier == "biopsyId" && this.state.biopsyId?.length > 0) {
             packageEdits = {"biopsyId": this.state.biopsyId};
         }
@@ -122,7 +123,9 @@ class MetadataRenderer extends Component{
                             <>
                             <span>Biopsy ID:</span>
                             <Input
-                                placeholder="Edit Biopsy ID" value={this.state.biopsyId}
+                                placeholder="Edit Biopsy ID"
+                                value={this.state.biopsyId}
+                                onChange={e => this.setState({biopsyId: e.target.value})}
                                 style={{ marginLeft: "0.5rem", width: "10rem"}}
                             />
                             <FontAwesomeIcon
@@ -169,7 +172,9 @@ class MetadataRenderer extends Component{
                             <>
                             <span>Study ID:</span>
                             <Input
-                                placeholder="Edit Study ID" value={this.state.studyId}
+                                placeholder="Edit Study ID"
+                                value={this.state.studyId}
+                                onChange={e => this.setState({studyId: e.target.value})}
                                 style={{ marginLeft: "0.5rem", width: "10rem" }}
                             />
                             <FontAwesomeIcon
