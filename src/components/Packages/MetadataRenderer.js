@@ -37,28 +37,27 @@ class MetadataRenderer extends Component{
             packageEdits = {"studyId": this.state.studyId};
         }
         else {
-            alert("Field cannot be blank");
-            return null;
+            alert("Error: Field cannot be blank.");
+            return;
         }
         let status = await editPackage(packageId, packageEdits);
         if (status == 200) {
             this.handleDismiss(identifier);
         }
-        return null;
     }   
 
     handleDismiss = (identifier) => {
-        if (identifier === "Biopsy ID") {
+        if (identifier === "biopsyId") {
             this.setState({editBiopsyId: false, biopsyId: this.props.uploadPackage.biopsyId})
-        } else if (identifier === "Study ID") {
+        } else if (identifier === "studyId") {
             this.setState({editStudyId: false, studyId: this.props.uploadPackage.studyId})
         }
     }
 
     handleEditClick = (identifier) => {
-        if (identifier === "Biopsy ID") {
+        if (identifier === "biopsyId") {
             this.setState({editBiopsyId: true})
-        } else if (identifier === "Study ID") {
+        } else if (identifier === "studyId") {
             this.setState({editStudyId: true})
         }
     }
@@ -131,7 +130,7 @@ class MetadataRenderer extends Component{
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
                                 className="text-danger xMark clickable"
-                                onClick={() => this.handleDismiss("Biopsy ID")}
+                                onClick={() => this.handleDismiss("biopsyId")}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
@@ -146,7 +145,7 @@ class MetadataRenderer extends Component{
                                 className="text-primary clickable"
                                 icon={faEdit}
                                 style={{ marginLeft: "0.5rem" }}
-                                onClick={() => this.handleEditClick("Biopsy ID")}
+                                onClick={() => this.handleEditClick("biopsyId")}
                             />
                             </>
                         )}
@@ -180,7 +179,7 @@ class MetadataRenderer extends Component{
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
                                 className="text-danger xMark clickable"
-                                onClick={() => this.handleDismiss("Study ID")}
+                                onClick={() => this.handleDismiss("studyId")}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
@@ -195,7 +194,7 @@ class MetadataRenderer extends Component{
                                 className="text-primary clickable"
                                 icon={faEdit}
                                 style={{ marginLeft: "0.5rem" }}
-                                onClick={() => this.handleEditClick("Study ID")}
+                                onClick={() => this.handleEditClick("studyId")}
                             />
                             </>
                         )}
