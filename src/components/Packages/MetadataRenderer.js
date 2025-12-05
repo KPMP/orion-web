@@ -29,12 +29,15 @@ class MetadataRenderer extends Component{
 
     handleCheckClick = async (packageId, identifier) => {
         this.setState({checkClicked: true});
-        let packageEdits = {};
+        let packageEdits = {
+            "biopsyId": this.props.uploadPackage.biopsyId,
+            "studyId": this.props.uploadPackage.studyId
+        };
         if (identifier == "biopsyId" && this.state.biopsyId?.length > 0) {
-            packageEdits = {"biopsyId": this.state.biopsyId};
+            packageEdits["biopsyId"] = this.state.biopsyId;
         }
         else if (identifier == "studyId" && this.state.studyId?.length > 0) {
-            packageEdits = {"studyId": this.state.studyId};
+            packageEdits["studyId"] = this.state.studyId;
         }
         else {
             alert("Error: Field cannot be blank.");
@@ -42,6 +45,7 @@ class MetadataRenderer extends Component{
         }
         let status = await editPackage(packageId, packageEdits);
         if (status == 200) {
+            this.props.updatePackageMetadata(this.props.index, packageEdits);
             this.handleDismiss(identifier);
         }
     }   

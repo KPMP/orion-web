@@ -10,6 +10,7 @@ const mapStateToProps = (state, props) =>
 	index: props.index,
 	uploadPackage: props.uploadPackage,
 	lockPackage: props.lockPackage,
+	updatePackageMetadata: props.updatePackageMetadata,
 	userInformation: state.userInformation,
 	stateDisplayMap: state.stateDisplayMap
 });

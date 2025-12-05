@@ -70,6 +70,13 @@ class PackageList extends Component {
         this.setState({ packages: newPackageList });
     }
 
+    updatePackageMetadata(index, metadata) {
+        let newPackageList = [...this.state.packages];
+        newPackageList[index].packageInfo.biopsyId = metadata["biopsyId"];
+        newPackageList[index].packageInfo.studyId = metadata["studyId"];
+        this.setState({ packages: newPackageList });
+    }
+
     render() {
         let message = null,
             panels = [];
@@ -89,7 +96,8 @@ class PackageList extends Component {
                         key={index} 
                         index={index} 
                         uploadPackage={uploadPackage} 
-                        lockPackage={(index) => {this.setPackageLocked(index)}}/>;
+                        lockPackage={(index) => {this.setPackageLocked(index)}}
+                        updatePackageMetadata={(index, metadata) => {this.updatePackageMetadata(index, metadata)}}/>;
             });
         }
 

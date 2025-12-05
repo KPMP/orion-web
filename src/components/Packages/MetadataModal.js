@@ -34,10 +34,11 @@ class MetadataModal extends Component {
                         <ModalBody className="metadataModalBody">
                             <p>ID: {this.props.uploadPackage._id}</p>
                                 <MetadataRenderer
-                                    dtd={dtd}
+                                    dtd={dtd} index={this.props.index}
                                     userInformation={this.props.userInformation}
                                     uploadPackage={this.props.uploadPackage}
                                     defaultExpandedKeys={defaultExpandedKeys}
+                                    updatePackageMetadata={this.props.updatePackageMetadata}
                                 />
                         </ModalBody>
                     </Modal>
