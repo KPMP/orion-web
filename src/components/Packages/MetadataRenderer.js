@@ -5,6 +5,7 @@ import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col, Row } from 'reactstrap';
+import { editPackage } from '../../actions/Packages/packageActions';
 
 const { TreeNode } = Tree;
 
@@ -16,6 +17,8 @@ class MetadataRenderer extends Component{
             xClicked: false,
             editBiopsyId: false,
             editStudyId: false,
+            biopsyId: "",
+            studyId: "",
         }
         this.handleEditClick = this.handleEditClick.bind(this);
         this.handleCheckClick = this.handleCheckClick.bind(this);
@@ -24,24 +27,41 @@ class MetadataRenderer extends Component{
         this.renderSection = this.renderSection.bind(this);
     }
 
-    handleCheckClick = () => {
-        this.setState({checkClicked: true})
-        alert("You Clicked the check icon!");
-        return null;
+    handleCheckClick = async (packageId, identifier) => {
+        this.setState({checkClicked: true});
+        let packageEdits = {
+            "biopsyId": this.props.uploadPackage.biopsyId,
+            "studyId": this.props.uploadPackage.studyId
+        };
+        if (identifier == "biopsyId" && this.state.biopsyId?.length > 0) {
+            packageEdits["biopsyId"] = this.state.biopsyId;
+        }
+        else if (identifier == "studyId" && this.state.studyId?.length > 0) {
+            packageEdits["studyId"] = this.state.studyId;
+        }
+        else {
+            alert("Error: Field cannot be blank.");
+            return;
+        }
+        let status = await editPackage(packageId, packageEdits);
+        if (status == 200) {
+            this.props.updatePackageMetadata(this.props.index, packageEdits);
+            this.handleDismiss(identifier);
+        }
     }   
 
     handleDismiss = (identifier) => {
-        if (identifier === "Biopsy ID") {
-            this.setState({editBiopsyId: false})
-        } else if (identifier === "Study ID") {
-            this.setState({editStudyId: false})
+        if (identifier === "biopsyId") {
+            this.setState({editBiopsyId: false, biopsyId: this.props.uploadPackage.biopsyId})
+        } else if (identifier === "studyId") {
+            this.setState({editStudyId: false, studyId: this.props.uploadPackage.studyId})
         }
     }
 
     handleEditClick = (identifier) => {
-        if (identifier === "Biopsy ID") {
+        if (identifier === "biopsyId") {
             this.setState({editBiopsyId: true})
-        } else if (identifier === "Study ID") {
+        } else if (identifier === "studyId") {
             this.setState({editStudyId: true})
         }
     }
@@ -107,17 +127,19 @@ class MetadataRenderer extends Component{
                             <span>Biopsy ID:</span>
                             <Input
                                 placeholder="Edit Biopsy ID"
+                                value={this.state.biopsyId}
+                                onChange={e => this.setState({biopsyId: e.target.value})}
                                 style={{ marginLeft: "0.5rem", width: "10rem"}}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
                                 className="text-danger xMark clickable"
-                                onClick={() => this.handleDismiss("Biopsy ID")}
+                                onClick={() => this.handleDismiss("biopsyId")}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
                                 className="text-success checkMark clickable"
-                                onClick={() => this.handleCheckClick("Biopsy ID")}
+                                onClick={() => this.handleCheckClick(packageInfo._id, "biopsyId")}
                             />
                             </>
                         ) : (
@@ -127,7 +149,7 @@ class MetadataRenderer extends Component{
                                 className="text-primary clickable"
                                 icon={faEdit}
                                 style={{ marginLeft: "0.5rem" }}
-                                onClick={() => this.handleEditClick("Biopsy ID")}
+                                onClick={() => this.handleEditClick("biopsyId")}
                             />
                             </>
                         )}
@@ -154,17 +176,19 @@ class MetadataRenderer extends Component{
                             <span>Study ID:</span>
                             <Input
                                 placeholder="Edit Study ID"
+                                value={this.state.studyId}
+                                onChange={e => this.setState({studyId: e.target.value})}
                                 style={{ marginLeft: "0.5rem", width: "10rem" }}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareXmark}
                                 className="text-danger xMark clickable"
-                                onClick={() => this.handleDismiss("Study ID")}
+                                onClick={() => this.handleDismiss("studyId")}
                             />
                             <FontAwesomeIcon
                                 icon={faSquareCheck}
                                 className="text-success checkMark clickable"
-                                onClick={() => this.handleCheckClick("Study ID")}
+                                onClick={() => this.handleCheckClick(packageInfo._id, "studyId")}
                             />
                             </>
                         ) : (
@@ -174,7 +198,7 @@ class MetadataRenderer extends Component{
                                 className="text-primary clickable"
                                 icon={faEdit}
                                 style={{ marginLeft: "0.5rem" }}
-                                onClick={() => this.handleEditClick("Study ID")}
+                                onClick={() => this.handleEditClick("studyId")}
                             />
                             </>
                         )}
