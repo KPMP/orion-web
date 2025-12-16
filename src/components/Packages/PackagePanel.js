@@ -145,7 +145,12 @@ class PackagePanel extends Component {
 							}
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
-								<a className='d-block pb-1' onClick={this.handleMetadataClick}>Show upload metadata</a>
+								<a className='d-block pb-1' onClick={this.handleMetadataClick}>
+									{(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED" && 
+									(this.props.userInformation?.email == packageInfo.submitter.email || 
+									this.props.userInformation?.roles.includes("uploader_admin"))) ?
+									("View/edit metadata") : ("Show upload metadata")}
+								</a>
 							</Col>
 							{this.props.uploadPackage.state &&
 							<Col xs={4} md={12} className='mb-1'>
