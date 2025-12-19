@@ -5,7 +5,7 @@ import { getIEFriendlyDate } from '../../helpers/timezoneUtil';
 import { faEdit, faSquareXmark, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col, Row } from 'reactstrap';
-import { editPackage } from '../../actions/Packages/packageActions';
+import { editPackage, clearCache } from '../../actions/Packages/packageActions';
 
 const { TreeNode } = Tree;
 
@@ -46,6 +46,7 @@ class MetadataRenderer extends Component{
         let status = await editPackage(packageId, packageEdits);
         if (status == 200) {
             this.props.updatePackageMetadata(this.props.index, packageEdits);
+            await clearCache();
             this.handleDismiss(identifier);
         }
     }   

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import PackagePanelStateText from './PackagePanelStateText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faLock, faLockOpen, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
-import { lockPackage } from '../../actions/Packages/packageActions';
+import { clearCache, lockPackage } from '../../actions/Packages/packageActions';
 
 class PackagePanel extends Component {
 
@@ -57,6 +57,8 @@ class PackagePanel extends Component {
 		let status = await lockPackage(packageId); 
 		if (status === 200) {
 			this.props.lockPackage(this.props.index);
+			await clearCache();
+			this.showHidePopover();
 		}
 	}
 
