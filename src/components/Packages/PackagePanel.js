@@ -72,6 +72,15 @@ class PackagePanel extends Component {
 		}); 
 	}
 
+    handlePackageMetadata(packageState, packageSubmitter, currentUser, userRoles) {
+        if (packageState !== "UPLOAD_LOCKED" && (userRoles.includes("uploader_admin") || currentUser === packageSubmitter)) {
+            return "View/edit metadata";
+
+        }else{
+            return "Show upload metadata";
+        }
+    }
+
 	render() {
 		let packageInfo = this.props.uploadPackage.packageInfo;
 		let packageTypeIcons = this.props.packageTypeIcons;
@@ -148,10 +157,10 @@ class PackagePanel extends Component {
 							<Col xs={4} md={12}>
 								{/* eslint-disable-next-line */} 
 								<a className='d-block pb-1' onClick={this.handleMetadataClick}>
-									{(this.props.uploadPackage.state.state !== "UPLOAD_LOCKED" && 
-									(this.props.userInformation?.email == packageInfo.submitter.email || 
-									this.props.userInformation?.roles.includes("uploader_admin"))) ?
-									("View/edit metadata") : ("Show upload metadata")}
+									{
+                                    // (this.props.uploadPackage.state.state !== "UPLOAD_LOCKED" && 
+									// (this.props.userInformation?.email == packageInfo.submitter.email ||  this.props.userInformation?.roles.includes("uploader_admin"))) ? ("View/edit metadata") : ("Show upload metadata")
+                                    this.handlePackageMetadata(this.props.uploadPackage.state.state, packageInfo.submitter.email, this.props.userInformation.email, this.props.userInformation.roles)}
 								</a>
 							</Col>
 							{this.props.uploadPackage.state &&
