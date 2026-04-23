@@ -1,6 +1,18 @@
 # Changelog
 
-## Release 4.2 [Unreleased]
+## Release 4.3 
+Brief summary of what's in this release:
+- Increased timeout for file recall endpoint
+- Added helper text and email to the Large File Modal
+- Upgraded Axios
+
+### Breaking Changes
+
+### Other changes
+
+---
+
+## Release 4.2 [Released 9/2/2025]
 Brief summary of what's in this release:
 - added a recall button for packages
 
