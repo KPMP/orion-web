@@ -1,7 +1,10 @@
 # Changelog
 
-## Release 4.3 [Unreleased]
+## Release 4.3 
 Brief summary of what's in this release:
+- Increased timeout for file recall endpoint
+- Added helper text and email to the Large File Modal
+- Upgraded Axios
 
 ### Breaking Changes
 
