@@ -27,8 +27,11 @@ class PackagePanel extends Component {
 		this.setState({ showAttachments: show });
 	}
 
-	async handleRecallPackageClick(packageId) {
-		let status = await recallPackage(packageId); 
+	async handleRecallPackageClick(packageId, shibId) {
+		let status = await recallPackage(packageId, shibId);
+        if (status === 403) {
+            alert("You do not have permission to recall this package.");
+        }
 		if (status === 200) {
 			this.props.recallPackage(this.props.index);
 		}
@@ -90,7 +93,7 @@ class PackagePanel extends Component {
 								this.props.uploadPackage.state.state == "UPLOAD_SUCCEEDED" && 
 								this.props.userInformation.roles.includes("uw_rit_kpmp_role_developer")) &&
 								<Col xs={4} md={12} >
-									<Button color="primary" className="btn-sm recall-button mt-1" onClick={() => {this.handleRecallPackageClick(packageInfo._id)}}>Recall</Button>
+									<Button color="primary" className="btn-sm recall-button mt-1" onClick={() => {this.handleRecallPackageClick(packageInfo._id, this.props.userInformation.shibId)}}>Recall</Button>
 								</Col>
 							}
 							{this.props.uploadPackage.state &&
