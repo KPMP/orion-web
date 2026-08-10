@@ -139,8 +139,13 @@ export const recallPackage = (packageId, shibId) => {
 			return response?.status;
 		})
 		.catch(err => {
-			alert("There was a problem recalling the package.");
-			console.log(err);
+            if (err?.response?.status === 403) {
+                alert("You do not have permission to recall this package.");
+            }else {
+
+                alert("There was a problem recalling the package.");
+                console.log(err);
+            }
 			return err?.response?.status;
 		})
 }
