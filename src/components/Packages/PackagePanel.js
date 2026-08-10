@@ -29,9 +29,6 @@ class PackagePanel extends Component {
 
 	async handleRecallPackageClick(packageId, shibId) {
 		let status = await recallPackage(packageId, shibId);
-        if (status === 403) {
-            alert("You do not have permission to recall this package.");
-        }
 		if (status === 200) {
 			this.props.recallPackage(this.props.index);
 		}
